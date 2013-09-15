@@ -3,15 +3,10 @@ ulaval-sports-tickets
 
 Projet de session en GLO-4003
 
-Alain	Marc-Olivier	<marc-olivier.alain.1@ulaval.ca>
-
-B仕ard	Pierre-Olivier	<pierre-olivier.bedard.3@ulaval.ca> <pobed2@gmail.com>
-
-B四and-Lachance	Mathieu	<mathieu.beland-lachance.1@ulaval.ca>
-
-B四anger	Carl	<carl.belanger.2@ulaval.ca>
-
-Nivelles	Mathieu	<mathieu.nivelles.1@ulaval.ca>
-
-Pothier	Dominique	<dominique.pothier.1@ulaval.ca>
+Alain	Marc-Olivier	<marc-olivier.alain.1@ulaval.ca>  
+B仕ard	Pierre-Olivier	<pierre-olivier.bedard.3@ulaval.ca> <pobed2@gmail.com>  
+B四and-Lachance	Mathieu	<mathieu.beland-lachance.1@ulaval.ca>   
+B四anger	Carl	<carl.belanger.2@ulaval.ca>  
+Nivelles	Mathieu	<mathieu.nivelles.1@ulaval.ca>  
+Pothier	Dominique	<dominique.pothier.1@ulaval.ca>  
 
