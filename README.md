@@ -10,3 +10,5 @@ Bélanger	Carl	<carl.belanger.2@ulaval.ca>
 Nivelles	Mathieu	<mathieu.nivelles.1@ulaval.ca>  
 Pothier	Dominique	<dominique.pothier.1@ulaval.ca>   
 
+[Documents d'architecture](https://drive.google.com/folderview?id=0B6L1IrGcf14raUk5LURGVnNyTlk&usp=sharing)
+
