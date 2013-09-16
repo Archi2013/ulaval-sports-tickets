@@ -10,3 +10,4 @@ import ca.ulaval.glo4003.domain.Sport;
 public interface SportDao {
 	public List<Sport> getAll();
 }
+
