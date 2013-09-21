@@ -52,10 +52,12 @@ public class SportController {
 	}
 
 	@RequestMapping(value = "/{sportName}/games", method = RequestMethod.GET)
-	public @ResponseBody
-	List<GameDto> getSportGames(@PathVariable String sportName) {
+	public String getSportGames(@PathVariable String sportName, Model model) {
 		logger.info("Getting games for sport: " + sportName);
 
-		return gameDao.getGamesForSport(sportName);
+		model.addAttribute("games", gameDao.getGamesForSport(sportName));
+		model.addAttribute("sportName", sportName);
+		
+		return "sport/games";
 	}
 }

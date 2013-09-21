@@ -6,24 +6,24 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Liste des sports disponibles</title>
+    <title>Liste des jeux disponibles pour : ${sportName}</title>
 </head>
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <h2>Liste des sports disponibles</h2>
+    <h2>Liste des jeux disponibles pour : ${sportName}</h2>
     
     <div>
         <table>
             <thead>
                 <tr>
-                    <th>Nom</th>
+                    <th>Identifiant</th>
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${sports}" var="sport">
+                <c:forEach items="${games}" var="game">
                     <tr>
-                        <td><a href="${sport.name}/games">${sport.name}</a></td>
+                        <td>${game.id}</td>
                     </tr>
                 </c:forEach>
             </tbody>
