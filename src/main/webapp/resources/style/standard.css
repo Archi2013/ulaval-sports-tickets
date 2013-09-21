@@ -73,8 +73,12 @@ h1 {
 	font-family: "Ubuntu", sans-serif;
 	color: #cc0033;
 	font-weight: 700;
-	font-size: 4.0em;
+	font-size: 4.5em;
 	padding: 15px 15px 30px 15px;
+}
+
+h1 em {
+	color: #fecc09;
 }
 
 h2 {
@@ -99,14 +103,14 @@ table {
 }
 
 thead tr {
-	border-bottom: 5px solid #ff0066;
+	border-bottom: 4px solid #4b5b6e;
 }
 
 thead th {
 	padding: 10px 10px;
 	
 	font-family: "Lato", sans-serif;
-    color: #343434;
+    color: #4b5b6e;
     font-size: 2em;
     font-weight: 400;
 }
@@ -130,7 +134,7 @@ tbody td a:hover, tbody td a:active {
 
 footer {
 	font-size: 1.3em;
-	font-color: #4d4d4d;
+	color: #0077db;
 	font-family: Ubuntu, sans-serif;
 	text-align: center;
 	padding-top: 10px;
