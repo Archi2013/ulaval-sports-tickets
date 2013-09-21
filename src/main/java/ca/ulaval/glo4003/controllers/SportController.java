@@ -19,32 +19,32 @@ import ca.ulaval.glo4003.dtos.GameDto;
 import ca.ulaval.glo4003.dtos.SportDto;
 
 @Controller
-@RequestMapping(value = "/sports", method = RequestMethod.GET)
+@RequestMapping(value = "/sport", method = RequestMethod.GET)
 public class SportController {
 
-	private static final Logger logger = LoggerFactory.getLogger(SportController.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(SportController.class);
 
 	@Inject
 	private SportDao dao;
 
 	@Inject
 	private GameDao gameDao;
-	
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public @ResponseBody
-	List<SportDto> getSports(Model model) {
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String getSports(Model model) {
 		logger.info("Getting all sports");
 
 		List<SportDto> sports = dao.getAll();
 		model.addAttribute("sports", sports);
 		
-		return sports;
+		return "sport";
 	}
-	
+
 	@RequestMapping(value = "/{sportName}", method = RequestMethod.GET)
 	public @ResponseBody
 	SportDto getSport(@PathVariable String sportName, Model model) {
-		logger.info("Getting sport: "+ sportName);
+		logger.info("Getting sport: " + sportName);
 
 		SportDto sport = dao.get(sportName);
 		model.addAttribute("sport", sport);
@@ -52,9 +52,10 @@ public class SportController {
 	}
 
 	@RequestMapping(value = "/{sportName}/games", method = RequestMethod.GET)
-	public @ResponseBody List<GameDto> getSportGames(@PathVariable String sportName) {
-		logger.info("Getting games for sport: "+ sportName);
-		
-		return gameDao.getGamesForSport(sportName);		
+	public @ResponseBody
+	List<GameDto> getSportGames(@PathVariable String sportName) {
+		logger.info("Getting games for sport: " + sportName);
+
+		return gameDao.getGamesForSport(sportName);
 	}
 }
