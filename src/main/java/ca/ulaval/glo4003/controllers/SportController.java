@@ -31,7 +31,7 @@ public class SportController {
 	@Inject
 	private GameDao gameDao;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getSports(Model model) {
 		logger.info("Getting all sports");
 
@@ -55,7 +55,9 @@ public class SportController {
 	public String getSportGames(@PathVariable String sportName, Model model) {
 		logger.info("Getting games for sport: " + sportName);
 
-		model.addAttribute("games", gameDao.getGamesForSport(sportName));
+		List<GameDto> games = gameDao.getGamesForSport(sportName);
+		
+		model.addAttribute("games", games);
 		model.addAttribute("sportName", sportName);
 		
 		return "sport/games";
