@@ -20,7 +20,7 @@ import ca.ulaval.glo4003.dtos.GameDto;
 import ca.ulaval.glo4003.dtos.SportDto;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SportsControllerTest {
+public class SportControllerTest {
 
 	private static final String SPORT_NAME = "SPORT_NAME";
 
