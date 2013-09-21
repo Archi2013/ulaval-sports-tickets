@@ -38,7 +38,7 @@ public class SportController {
 		List<SportDto> sports = dao.getAll();
 		model.addAttribute("sports", sports);
 		
-		return "sport";
+		return "sport/list";
 	}
 
 	@RequestMapping(value = "/{sportName}", method = RequestMethod.GET)

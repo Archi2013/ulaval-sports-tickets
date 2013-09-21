@@ -9,7 +9,7 @@
     <title>Liste des sports disponibles</title>
 </head>
 <body>
-    <%@include file="layout/header.jsp" %>
+    <%@include file="../layout/header.jsp" %>
     
     <h2>Liste des sports disponibles</h2>
     
@@ -31,6 +31,6 @@
     </div>
     ${serverTime}
     
-    <%@include file="layout/footer.jsp" %>
+    <%@include file="../layout/footer.jsp" %>
 </body>
 </html>
