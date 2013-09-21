@@ -7,6 +7,7 @@
 <head>
     <meta charset="utf-8">
     <title>Liste des sports disponibles</title>
+    <link href="/ressouces/style/standard.css" title="standard" media="screen" rel="stylesheet">
 </head>
 <body>
     <%@include file="../layout/header.jsp" %>
