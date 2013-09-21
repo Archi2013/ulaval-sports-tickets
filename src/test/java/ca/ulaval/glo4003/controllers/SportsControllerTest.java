@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 
 import ca.ulaval.glo4003.data_access.GameDao;
 import ca.ulaval.glo4003.data_access.SportDao;
+import ca.ulaval.glo4003.dtos.GameDto;
 import ca.ulaval.glo4003.dtos.SportDto;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -75,8 +76,18 @@ public class SportsControllerTest {
 	}
 	
 	@Test
-	public void getSportGames_should_get_sport_games_from_games_dao(){
-		controller.getSportGames(SPORT_NAME);
+	public void getSportGames_should_add_sport_games_to_model(){
+		List<GameDto> games = new ArrayList<GameDto>();
+		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(games);
+		
+		controller.getSportGames(SPORT_NAME, modelMock);
+		
+		verify(modelMock).addAttribute("games", games);
+	}
+	
+	@Test
+	public void getSportGames_should_get_sport_games_from_games_dao() {
+		controller.getSportGames(SPORT_NAME, modelMock);
 		
 		verify(gameDaoMock).getGamesForSport(SPORT_NAME);
 	}
