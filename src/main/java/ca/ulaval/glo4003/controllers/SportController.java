@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,19 +32,22 @@ public class SportController {
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public @ResponseBody
-	List<SportDto> getSports() {
+	List<SportDto> getSports(Model model) {
 		logger.info("Getting all sports");
 
 		List<SportDto> sports = dao.getAll();
+		model.addAttribute("sports", sports);
+		
 		return sports;
 	}
 	
 	@RequestMapping(value = "/{sportName}", method = RequestMethod.GET)
 	public @ResponseBody
-	SportDto getSport(@PathVariable String sportName) {
+	SportDto getSport(@PathVariable String sportName, Model model) {
 		logger.info("Getting sport: "+ sportName);
 
 		SportDto sport = dao.get(sportName);
+		model.addAttribute("sport", sport);
 		return sport;
 	}
 
