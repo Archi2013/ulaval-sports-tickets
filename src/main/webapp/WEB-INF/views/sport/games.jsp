@@ -2,11 +2,14 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<c:set var="pageTitle" value="Liste des matchs disponibles pour : ${sportName}" />
+    
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Liste des jeux disponibles pour : ${sportName}</title>
+    <title>${pageTitle} | UL Sport</title>
     <link href="/resources/style/standard.css" title="standard" media="screen" rel="stylesheet">
 </head>
 <body>

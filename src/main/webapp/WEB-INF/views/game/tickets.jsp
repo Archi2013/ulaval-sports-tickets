@@ -2,17 +2,20 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<c:set var="pageTitle" value="Liste des billets disponibles pour le match: ${gameId}" />
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Liste des billets disponibles pour le match: ${gameId}</title>
+    <title>${pageTitle} | UL Sport</title>
     <link href="/resources/style/standard.css" title="standard" media="screen" rel="stylesheet">
 </head>
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <h2>Liste des billets disponibles pour le match: ${gameId}</h2>
+    <h2>${pageTitle}</h2>
     
     <div>
         <table>

@@ -6,7 +6,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Liste des sports disponibles</title>
+    <title>Accueil | UL Sport</title>
     <link href="/resources/style/standard.css" title="standard" media="screen" rel="stylesheet">
 </head>
 <body>
