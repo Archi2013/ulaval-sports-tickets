@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import ca.ulaval.glo4003.data_access.TicketDao;
 import ca.ulaval.glo4003.dtos.TicketDto;
@@ -24,12 +23,12 @@ public class GameController {
 	@Inject
 	private TicketDao dao;
 
-	@RequestMapping(value = "/{GameId}/tickets", method = RequestMethod.GET)
-	public @ResponseBody
-	List<TicketDto> getTicketsForGame(@PathVariable int GameId, Model model) {
-		List<TicketDto> tickets = dao.getTicketsForGame(GameId);
+	@RequestMapping(value = "/{gameId}/tickets", method = RequestMethod.GET)
+	public String getTicketsForGame(@PathVariable int gameId, Model model) {
+		List<TicketDto> tickets = dao.getTicketsForGame(gameId);
+		model.addAttribute("GameId", gameId);
 		model.addAttribute("tickets", tickets);
 
-		return tickets;// "games/tickets";
+		return "games/tickets";
 	}
 }

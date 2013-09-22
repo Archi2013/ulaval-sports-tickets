@@ -3,7 +3,7 @@ package ca.ulaval.glo4003.dtos;
 import java.util.GregorianCalendar;
 
 public class TicketDto {
-	public int ticketID;
+	public int ticketId;
 
 	public double price;
 	public String opponents;
@@ -11,9 +11,9 @@ public class TicketDto {
 	public String admissionType;
 	public String section;
 
-	public TicketDto(int ticketID, double price, String opponents, GregorianCalendar gameDate, String admissionType,
+	public TicketDto(int ticketId, double price, String opponents, GregorianCalendar gameDate, String admissionType,
 			String section) {
-		this.ticketID = ticketID;
+		this.ticketId = ticketId;
 		this.price = price;
 		this.opponents = opponents;
 		this.gameDate = gameDate;
@@ -21,12 +21,12 @@ public class TicketDto {
 		this.section = section;
 	}
 
-	public int getID() {
-		return ticketID;
+	public int getTicketId() {
+		return ticketId;
 	}
 
 	public void setID(int ticketID) {
-		this.ticketID = ticketID;
+		this.ticketId = ticketID;
 	}
 
 	public double getPrice() {
