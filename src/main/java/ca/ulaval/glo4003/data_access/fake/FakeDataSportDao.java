@@ -1,10 +1,11 @@
-package ca.ulaval.glo4003.data_access;
+package ca.ulaval.glo4003.data_access.fake;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import ca.ulaval.glo4003.data_access.SportDao;
 import ca.ulaval.glo4003.dtos.SportDto;
 
 @Repository
