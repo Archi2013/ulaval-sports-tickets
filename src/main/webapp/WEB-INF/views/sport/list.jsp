@@ -16,11 +16,6 @@
     
     <div>
         <table>
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                </tr>
-            </thead>
             <tbody>
                 <c:forEach items="${sports}" var="sport">
                     <tr>
