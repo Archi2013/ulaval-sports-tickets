@@ -1,6 +1,5 @@
 package ca.ulaval.glo4003.dtos;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class TicketDto {
@@ -46,11 +45,11 @@ public class TicketDto {
 		this.opponents = opponents;
 	}
 
-	public Date getGameDate() {
+	public GregorianCalendar getGameDate() {
 		return gameDate;
 	}
 
-	public void setDate(Date gameDate) {
+	public void setDate(GregorianCalendar gameDate) {
 		this.gameDate = gameDate;
 	}
 
