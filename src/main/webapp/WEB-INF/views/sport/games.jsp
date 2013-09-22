@@ -12,7 +12,7 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <h2>Liste des jeux disponibles pour : ${sportName}</h2>
+    <h2>Liste des matchs disponibles pour : ${sportName}</h2>
     
     <div>
         <table>
