@@ -19,7 +19,7 @@
             <tbody>
                 <c:forEach items="${sports}" var="sport">
                     <tr>
-                        <td><a href="/sport/${sport.name}/games">${sport.name}</a></td>
+                        <td><a href="/sport/${sport.name}/matchs">${sport.name}</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

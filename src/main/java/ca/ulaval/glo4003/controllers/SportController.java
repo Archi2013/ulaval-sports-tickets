@@ -51,7 +51,7 @@ public class SportController {
 		return sport;
 	}
 
-	@RequestMapping(value = "/{sportName}/games", method = RequestMethod.GET)
+	@RequestMapping(value = "/{sportName}/matchs", method = RequestMethod.GET)
 	public String getSportGames(@PathVariable String sportName, Model model) {
 		logger.info("Getting games for sport: " + sportName);
 		
