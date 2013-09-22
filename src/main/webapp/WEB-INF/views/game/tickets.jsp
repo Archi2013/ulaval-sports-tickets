@@ -15,7 +15,7 @@
     <h2>Liste des billets disponibles pour le match: ${gameId}</h2>
     
     <div>
-        <table border = "1">
+        <table>
             <thead>
                 <tr>
                     	<th>Identifiant</th>

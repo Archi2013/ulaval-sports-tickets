@@ -137,6 +137,14 @@ tbody td a:hover, tbody td a:active {
     color: #cc0033;
 }
 
+thead th, tbody td {
+    padding-right: 10px;
+}
+
+thead th:last-child, tbody td:last-child {
+    padding-right: 0;
+}
+
 footer {
 	font-size: 1.3em;
 	color: #0077db;

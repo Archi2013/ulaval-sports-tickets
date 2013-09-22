@@ -16,7 +16,7 @@ import ca.ulaval.glo4003.data_access.TicketDao;
 import ca.ulaval.glo4003.dtos.TicketDto;
 
 @Controller
-@RequestMapping(value = "/Game", method = RequestMethod.GET)
+@RequestMapping(value = "/match", method = RequestMethod.GET)
 public class GameController {
 	private static final Logger logger = LoggerFactory.getLogger(SportController.class);
 
@@ -29,6 +29,6 @@ public class GameController {
 		model.addAttribute("GameId", gameId);
 		model.addAttribute("tickets", tickets);
 
-		return "games/tickets";
+		return "game/tickets";
 	}
 }
