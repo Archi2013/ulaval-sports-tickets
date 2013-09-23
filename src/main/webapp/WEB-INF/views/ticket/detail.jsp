@@ -15,6 +15,8 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
+    <h2>Fiche du billet</h2>
+    
     <div class="fiche">
         <ul>
             <li>ID : ${ticketId}</li>
