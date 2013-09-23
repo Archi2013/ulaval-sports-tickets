@@ -24,7 +24,7 @@ public class TicketController {
 	private TicketDao dao;
 	
 	@RequestMapping(value = "/{ticketId}", method = RequestMethod.GET)
-	public String getTicketsForGame(@PathVariable int ticketId, Model model) {
+	public String getTicket(@PathVariable int ticketId, Model model) {
 		TicketDto ticket = dao.getTicket(ticketId);
 		model.addAttribute("ticketId", ticketId);
 		model.addAttribute("ticket", ticket);
