@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.dtos;
 
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 public class TicketDto {
@@ -32,6 +33,12 @@ public class TicketDto {
 	public double getPrice() {
 		return price;
 	}
+	
+	public String getPriceFormatted() {
+		String formatted = new Double(price).toString();
+		formatted = formatted.replace('.', ',');
+		return formatted;
+	}
 
 	public void setPrice(double price) {
 		this.price = price;
@@ -47,6 +54,12 @@ public class TicketDto {
 
 	public GregorianCalendar getGameDate() {
 		return gameDate;
+	}
+	
+	public String getGameDateFormatted() {
+		SimpleDateFormat fmt = new SimpleDateFormat("dd MMMM yyyy HH:MM");
+		fmt.setCalendar(gameDate);
+		return fmt.format(gameDate.getTime());
 	}
 
 	public void setDate(GregorianCalendar gameDate) {

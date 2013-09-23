@@ -16,19 +16,19 @@ import ca.ulaval.glo4003.data_access.TicketDao;
 import ca.ulaval.glo4003.dtos.TicketDto;
 
 @Controller
-@RequestMapping(value = "/match", method = RequestMethod.GET)
-public class GameController {
-	private static final Logger logger = LoggerFactory.getLogger(GameController.class);
-
+@RequestMapping(value = "/billet", method = RequestMethod.GET)
+public class TicketController {
+	private static final Logger logger = LoggerFactory.getLogger(TicketController.class);
+	
 	@Inject
 	private TicketDao dao;
+	
+	@RequestMapping(value = "/{ticketId}", method = RequestMethod.GET)
+	public String getTicketsForGame(@PathVariable int ticketId, Model model) {
+		TicketDto ticket = dao.getTicket(ticketId);
+		model.addAttribute("ticketId", ticketId);
+		model.addAttribute("ticket", ticket);
 
-	@RequestMapping(value = "/{gameId}/billets", method = RequestMethod.GET)
-	public String getTicketsForGame(@PathVariable int gameId, Model model) {
-		List<TicketDto> tickets = dao.getTicketsForGame(gameId);
-		model.addAttribute("GameId", gameId);
-		model.addAttribute("tickets", tickets);
-
-		return "game/tickets";
+		return "ticket/detail";
 	}
 }

@@ -27,7 +27,7 @@
             <tbody>
                 <c:forEach items="${games}" var="game">
                     <tr>
-                        <td><a href="/match/${game.id}/tickets">${game.id}</a></td>
+                        <td><a href="/match/${game.id}/billets">${game.id}</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

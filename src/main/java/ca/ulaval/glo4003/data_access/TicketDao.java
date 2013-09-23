@@ -10,4 +10,6 @@ import ca.ulaval.glo4003.dtos.TicketDto;
 public interface TicketDao {
 
 	List<TicketDto> getTicketsForGame(int gameID);
+
+	TicketDto getTicket(int ticketId);
 }

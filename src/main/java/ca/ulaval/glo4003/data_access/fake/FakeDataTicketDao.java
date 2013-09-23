@@ -24,4 +24,9 @@ public class FakeDataTicketDao implements TicketDao {
 		return toReturn;
 	}
 
+	@Override
+	public TicketDto getTicket(int ticketId) {
+		TicketDto ticket = new TicketDto(1, 26.95, "Pharetra", new GregorianCalendar(2013, 8, 29), "Général", "Rouge");
+		return ticket;
+	}
 }
