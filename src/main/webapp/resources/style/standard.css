@@ -104,6 +104,12 @@ h2 {
 	border-bottom: 5px solid #cc0033;
 }
 
+h3{
+	font-family: "Lato", sans-serif;
+	font-size: 2em;
+	margin-bottom: 10px;
+}
+
 a, a:visited {
 	color: #ff0066;
 	text-decoration: none;
@@ -172,4 +178,29 @@ footer {
 .fiche li {
 	padding: 10px 0;
 	font-size: 1.5em;
+}
+
+.billet{
+	margin: 20px auto 20px auto;
+	width: 500px;
+	border: solid 2px black;
+	border-radius: 8px;
+}
+
+.ticketAdminInfo{
+	margin: 3px;
+}
+
+.ticketGameInfo{
+	text-align: center;
+	margin: 20px 0 30px 0;
+}
+
+.ticketPlaceInfo{
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#lavalLogo{
+	height: 80px;
 }

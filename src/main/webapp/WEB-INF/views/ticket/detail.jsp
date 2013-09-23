@@ -17,6 +17,21 @@
     
     <h2>Fiche du billet</h2>
     
+    <div class="billet">
+        <div class="ticketAdminInfo">
+            <span>ID: ${ticketId} </span></br>
+            <span>Prix : ${ticket.getPriceFormatted()} $</span>
+        </div>
+        <div class="ticketGameInfo">
+            <h3>    <img id="lavalLogo" alt="picture1" src="http://www.plongeon.qc.ca/images/content/logos/clubs/Rouge_et_Or.jpg"> VS  ${ticket.opponents}</h3>
+            <span>Date et heure : ${ticket.getGameDateFormatted()}</span>
+        </div>
+        <div class="ticketPlaceInfo">
+            <span>Type d'admission : ${ticket.admissionType}</span></br>
+            <span>Section : ${ticket.section}</span>
+        </div>
+    </div>
+   <!--
     <div class="fiche">
         <ul>
             <li>ID : ${ticketId}</li>
@@ -27,6 +42,7 @@
             <li>Prix : ${ticket.getPriceFormatted()} $</li>
         </ul>
     </div>
+    -->
     
     <%@include file="../layout/footer.jsp" %>
 </body>
