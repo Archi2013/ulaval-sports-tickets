@@ -135,6 +135,13 @@
 			<artifactId>mockito-all</artifactId>
 			<version>1.9.5</version>
 		</dependency>
+    
+        <!-- Date and Time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.3</version>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>

@@ -111,7 +111,7 @@ h3{
 }
 
 a, a:visited {
-	color: #ff0066;
+	color: #ff0033;
 	text-decoration: none;
 }
 
@@ -139,11 +139,14 @@ thead th {
 tbody td {
 	padding: 15px 0;
 	border-bottom: 1px solid #ccc;
-	text-align: center;
 	font-family: "Open Sans", sans-serif;
 	font-weight: 300;
 	color: #343434;
 	font-size: 1.5em;
+}
+
+tbody td:first-child {
+	text-align: center;
 }
 
 tbody td a, tbody td a:visited {
@@ -164,11 +167,32 @@ thead th:last-child, tbody td:last-child {
 
 footer {
 	font-size: 1.3em;
-	color: #0077db;
+	color: #555;
 	font-family: Ubuntu, sans-serif;
 	text-align: center;
 	padding-top: 10px;
 	padding-bottom: 10px;
+}
+
+.vertical-normal-list ul {
+	margin: 25px;
+}
+
+.vertical-normal-list li {
+	margin: 15px 0;
+	font-size: 1.5em;
+}
+
+.vertical-normal-list li a, .vertical-normal-list li a:visited {
+	color: #0077db;
+}
+
+.vertical-normal-list li a:hover, .vertical-normal-list li a:active {
+	color: #cc0033
+}
+
+.vertical-normal-list li a:after {
+	content: " ▷";
 }
 
 .fiche {

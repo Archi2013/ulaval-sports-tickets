@@ -17,16 +17,12 @@
     
     <h2>Liste des sports disponibles</h2>
     
-    <div>
-        <table>
-            <tbody>
-                <c:forEach items="${sports}" var="sport">
-                    <tr>
-                        <td><a href="/sport/${sport.name}/matchs">${sport.name}</a></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+    <div class="vertical-normal-list">
+        <ul>
+            <c:forEach items="${sports}" var="sport">
+                <li><a href="/sport/${sport.name}/matchs">${sport.name}</a></li>
+            </c:forEach>
+        </ul>
     </div>
     
     <%@include file="../layout/footer.jsp" %>
