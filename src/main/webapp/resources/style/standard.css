@@ -139,7 +139,7 @@ thead th {
 tbody td {
 	padding: 15px 0;
 	border-bottom: 1px solid #ccc;
-	
+	text-align: center;
 	font-family: "Open Sans", sans-serif;
 	font-weight: 300;
 	color: #343434;
@@ -187,20 +187,20 @@ footer {
 	border-radius: 8px;
 }
 
-.ticketAdminInfo{
+.ticket-admin-info{
 	margin: 3px;
 }
 
-.ticketGameInfo{
+.ticket-game-info{
 	text-align: center;
 	margin: 20px 0 30px 0;
 }
 
-.ticketPlaceInfo{
+.ticket-place-info{
 	text-align: center;
 	margin-bottom: 10px;
 }
 
-#lavalLogo{
+#laval-logo{
 	height: 80px;
 }

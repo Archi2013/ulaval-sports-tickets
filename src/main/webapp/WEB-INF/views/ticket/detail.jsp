@@ -18,18 +18,18 @@
     <h2>Fiche du billet</h2>
     
     <div class="billet">
-        <div class="ticketAdminInfo">
+        <section class="ticket-admin-info">
             <span>ID: ${ticketId} </span></br>
             <span>Prix : ${ticket.getPriceFormatted()} $</span>
-        </div>
-        <div class="ticketGameInfo">
-            <h3>    <img id="lavalLogo" alt="picture1" src="http://www.plongeon.qc.ca/images/content/logos/clubs/Rouge_et_Or.jpg"> VS  ${ticket.opponents}</h3>
+        </section>
+        <section class="ticket-game-info">
+            <h3>    <img id="laval-logo" alt="picture1" src="http://www.plongeon.qc.ca/images/content/logos/clubs/Rouge_et_Or.jpg"> VS  ${ticket.opponents}</h3>
             <span>Date et heure : ${ticket.getGameDateFormatted()}</span>
-        </div>
-        <div class="ticketPlaceInfo">
+        </section>
+        <section class="ticket-place-info">
             <span>Type d'admission : ${ticket.admissionType}</span></br>
             <span>Section : ${ticket.section}</span>
-        </div>
+        </section>
     </div>
    <!--
     <div class="fiche">
