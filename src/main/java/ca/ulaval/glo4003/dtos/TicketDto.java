@@ -1,18 +1,18 @@
 package ca.ulaval.glo4003.dtos;
 
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 public class TicketDto {
 	public int ticketId;
 
 	public double price;
 	public String opponents;
-	public GregorianCalendar gameDate;
+	public DateTime gameDate;
 	public String admissionType;
 	public String section;
 
-	public TicketDto(int ticketId, double price, String opponents, GregorianCalendar gameDate, String admissionType,
+	public TicketDto(int ticketId, double price, String opponents, DateTime gameDate, String admissionType,
 			String section) {
 		this.ticketId = ticketId;
 		this.price = price;
@@ -52,17 +52,15 @@ public class TicketDto {
 		this.opponents = opponents;
 	}
 
-	public GregorianCalendar getGameDate() {
+	public DateTime getGameDate() {
 		return gameDate;
 	}
 	
 	public String getGameDateFormatted() {
-		SimpleDateFormat fmt = new SimpleDateFormat("dd MMMM yyyy HH:MM");
-		fmt.setCalendar(gameDate);
-		return fmt.format(gameDate.getTime());
+		return gameDate.toString(DateTimeFormat.longDateTime());
 	}
 
-	public void setDate(GregorianCalendar gameDate) {
+	public void setDate(DateTime gameDate) {
 		this.gameDate = gameDate;
 	}
 
