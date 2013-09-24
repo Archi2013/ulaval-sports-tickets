@@ -1,7 +1,5 @@
 package ca.ulaval.glo4003.controllers;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -25,6 +23,8 @@ public class TicketController {
 	
 	@RequestMapping(value = "/{ticketId}", method = RequestMethod.GET)
 	public String getTicket(@PathVariable int ticketId, Model model) {
+		logger.info("Getting ticket : " + ticketId);
+		
 		TicketDto ticket = dao.getTicket(ticketId);
 		model.addAttribute("ticketId", ticketId);
 		model.addAttribute("ticket", ticket);
