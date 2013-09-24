@@ -1,7 +1,8 @@
 package ca.ulaval.glo4003.data_access.fake;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,19 +12,17 @@ import ca.ulaval.glo4003.dtos.SportDto;
 @Repository
 public class FakeDataSportDao implements SportDao {
 
+	@Inject
+	private FakeDatabase database;
+
 	@Override
 	public List<SportDto> getAll() {
-		List<SportDto> sports = new ArrayList<SportDto>();
-		SportDto hockey = new SportDto("Hockey");
-		SportDto baseball = new SportDto("Baseball");
-		sports.add(hockey);
-		sports.add(baseball);
-		return sports;
+		return database.getSports();
 	}
 
 	@Override
 	public SportDto get(String sportName) {
-		return new SportDto("Baseball");
+		return database.getSport(sportName);
 	}
 
 }
