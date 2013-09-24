@@ -22,12 +22,14 @@
             <thead>
                 <tr>
                     <th>Identifiant</th>
+                    <th>Billets disponibles</th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach items="${games}" var="game">
                     <tr>
                         <td><a href="/match/${game.id}/billets">${game.id}</a></td>
+                        <td>${game.numberOfTickets}</td>
                     </tr>
                 </c:forEach>
             </tbody>
