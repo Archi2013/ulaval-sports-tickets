@@ -248,3 +248,32 @@ footer {
 #laval-logo{
 	height: 80px;
 }
+
+.error-page-background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent url("http://upload.wikimedia.org/wikipedia/commons/0/06/Bonneville_Salt_Flats.jpg") 50% 0 no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+
+.error-page-content {
+	font-family: Ubuntu, sans-serif;
+	color: #ddd;
+	font-size: 2em;
+	text-shadow: 1px 1px 1px #777;
+	line-height: 1.3em;
+	text-align: center;
+	font-weight: 700;
+	margin-top: 300px;
+	margin-bottom: 50px;
+	padding: 25px;
+}
+
+.error-page-content strong {
+	font-size: 75px;
+	color: #494949;
+}
