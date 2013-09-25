@@ -1,24 +1,22 @@
 package ca.ulaval.glo4003.dtos;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 
 public class TicketDto {
 
+	private GameDto game;
 	private int ticketId;
 	private double price;
-	private String opponents;
-	private DateTime gameDate;
+
 	private String admissionType;
 	private String section;
 
-	public TicketDto(int ticketId, double price, String opponents, DateTime gameDate, String admissionType, String section) {
+	public TicketDto(GameDto game, int ticketId, double price, String admissionType, String section) {
 		this.ticketId = ticketId;
 		this.price = price;
-		this.opponents = opponents;
-		this.gameDate = gameDate;
 		this.admissionType = admissionType;
 		this.section = section;
+		this.game = game;
 	}
 
 	public int getTicketId() {
@@ -44,23 +42,15 @@ public class TicketDto {
 	}
 
 	public String getOpponents() {
-		return opponents;
-	}
-
-	public void setOpponents(String opponents) {
-		this.opponents = opponents;
+		return game.getOpponents();
 	}
 
 	public DateTime getGameDate() {
-		return gameDate;
+		return game.getGameDate();
 	}
 
 	public String getGameDateFormatted() {
-		return gameDate.toString(DateTimeFormat.longDateTime());
-	}
-
-	public void setDate(DateTime gameDate) {
-		this.gameDate = gameDate;
+		return game.getGameDateFormatted();
 	}
 
 	public String getAdmissionType() {
@@ -77,5 +67,13 @@ public class TicketDto {
 
 	public void setSection(String section) {
 		this.section = section;
+	}
+
+	public GameDto getGame() {
+		return game;
+	}
+
+	public void setGame(GameDto game) {
+		this.game = game;
 	}
 }

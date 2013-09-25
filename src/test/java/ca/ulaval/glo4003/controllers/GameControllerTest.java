@@ -55,7 +55,7 @@ public class GameControllerTest {
 	}
 
 	@Test
-	public void getTicketsForGame_should_return_home_path_when_ticket_dao_throws_game_doesnt_exist_exception() throws GameDoesntExistException {
+	public void getTicketsForGame_should_return_home_path_when_game_id_doesnt_exist() throws GameDoesntExistException {
 		when(ticketDao.getTicketsForGame(AN_ID)).thenThrow(GameDoesntExistException.class);
 
 		String path = gameController.getTicketsForGame(AN_ID, model);

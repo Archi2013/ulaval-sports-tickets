@@ -22,6 +22,8 @@
             <thead>
                 <tr>
                     <th>Identifiant</th>
+                    <th>Date</th>
+                    <th>Opposants</th>
                     <th>Billets disponibles</th>
                 </tr>
             </thead>
@@ -29,6 +31,8 @@
                 <c:forEach items="${games}" var="game">
                     <tr>
                         <td><a href="/match/${game.id}/billets">${game.id}</a></td>
+                        <td>${game.gameDateFormatted}</td>
+                        <td>${game.opponents}</td>
                         <td>${game.numberOfTickets}</td>
                     </tr>
                 </c:forEach>

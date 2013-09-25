@@ -1,10 +1,8 @@
 package ca.ulaval.glo4003.controllers;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.util.LinkedList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
 import ca.ulaval.glo4003.data_access.TicketDao;
+import ca.ulaval.glo4003.data_access.TicketDoesntExistException;
 import ca.ulaval.glo4003.dtos.TicketDto;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,26 +23,41 @@ public class TicketControllerTest {
 
 	@Mock
 	private TicketDto ticketDto;
-	
+
 	@Mock
 	private TicketDao ticketDao;
 
 	@Mock
 	private Model model;
-	
+
 	@InjectMocks
 	private TicketController ticketController;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws TicketDoesntExistException {
+		when(ticketDao.getTicket(UN_ID)).thenReturn(ticketDto);
 	}
 
 	@Test
-	public void getTicket_add_ticket_specified_to_model() {
-		when(ticketDao.getTicket(UN_ID)).thenReturn(ticketDto);
-
+	public void getTicket_should_add_ticket_to_model() {
 		ticketController.getTicket(UN_ID, model);
 
 		verify(model).addAttribute("ticket", ticketDto);
+	}
+
+	@Test
+	public void getTicket_should_return_right_path() {
+		String path = ticketController.getTicket(UN_ID, model);
+
+		assertEquals("ticket/detail", path);
+	}
+
+	@Test
+	public void getTicket_should_return_home_path_when_ticket_id_doesnt_exist() throws TicketDoesntExistException {
+		when(ticketDao.getTicket(UN_ID)).thenThrow(TicketDoesntExistException.class);
+
+		String path = ticketController.getTicket(UN_ID, model);
+
+		assertEquals("home", path);
 	}
 }

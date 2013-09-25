@@ -47,22 +47,18 @@ public class FakeDatabase {
 	}
 
 	private List<GameDto> createHockeyGames() {
-		GameDto firstGame = new GameDto(1);
-		String firstOpponents = "Carabins";
-		DateTime firstDate = DateTime.now();
-		firstGame.getTickets().addAll(createGeneralAdmissionTickets(15.50, firstOpponents, firstDate, "Bleus", 2));
-		firstGame.getTickets().addAll(createGeneralAdmissionTickets(20.00, firstOpponents, firstDate, "Rouges", 5));
-		firstGame.getTickets().add(new TicketDto(ticketid++, 35.00, firstOpponents, firstDate, "VIP", "Front Row"));
-		firstGame.getTickets().add(new TicketDto(ticketid++, 35.00, firstOpponents, firstDate, "VIP", "Front Row"));
+		GameDto firstGame = new GameDto(1, "Carabins", DateTime.now());
+		firstGame.getTickets().addAll(createGeneralAdmissionTickets(firstGame, 15.50, "Bleus", 2));
+		firstGame.getTickets().addAll(createGeneralAdmissionTickets(firstGame, 20.00, "Rouges", 5));
+		firstGame.getTickets().add(new TicketDto(firstGame, ticketid++, 35.00, "VIP", "Front Row"));
+		firstGame.getTickets().add(new TicketDto(firstGame, ticketid++, 35.00, "VIP", "Front Row"));
 
-		GameDto secondGame = new GameDto(2);
-		String secondOpponents = "Carabins";
-		DateTime secondDate = DateTime.now();
-		secondGame.getTickets().addAll(createGeneralAdmissionTickets(15.50, secondOpponents, secondDate, "Bleus", 0));
-		secondGame.getTickets().addAll(createGeneralAdmissionTickets(20.00, secondOpponents, secondDate, "Rouges", 3));
-		secondGame.getTickets().add(new TicketDto(ticketid++, 35.00, secondOpponents, secondDate, "VIP", "Front Row"));
-		secondGame.getTickets().add(new TicketDto(ticketid++, 35.00, secondOpponents, secondDate, "VIP", "Front Row"));
-		secondGame.getTickets().add(new TicketDto(ticketid++, 35.00, secondOpponents, secondDate, "VIP", "Front Row"));
+		GameDto secondGame = new GameDto(2, "Redmen", DateTime.now());
+		secondGame.getTickets().addAll(createGeneralAdmissionTickets(secondGame, 15.50, "Bleus", 0));
+		secondGame.getTickets().addAll(createGeneralAdmissionTickets(secondGame, 20.00, "Rouges", 3));
+		secondGame.getTickets().add(new TicketDto(secondGame, ticketid++, 35.00, "VIP", "Front Row"));
+		secondGame.getTickets().add(new TicketDto(secondGame, ticketid++, 35.00, "VIP", "Front Row"));
+		secondGame.getTickets().add(new TicketDto(secondGame, ticketid++, 35.00, "VIP", "Front Row"));
 
 		List<GameDto> games = new ArrayList<GameDto>();
 		games.add(firstGame);
@@ -71,10 +67,10 @@ public class FakeDatabase {
 		return games;
 	}
 
-	private List<TicketDto> createGeneralAdmissionTickets(double price, String opponents, DateTime date, String section, int number) {
+	private List<TicketDto> createGeneralAdmissionTickets(GameDto game, double price, String section, int number) {
 		List<TicketDto> tickets = new ArrayList<TicketDto>();
 		for (int i = 0; i < number; i++) {
-			TicketDto fakeTicket = new TicketDto(ticketid, price, opponents, date, "General", section);
+			TicketDto fakeTicket = new TicketDto(game, ticketid, price, "General", section);
 			tickets.add(fakeTicket);
 			ticketid++;
 		}

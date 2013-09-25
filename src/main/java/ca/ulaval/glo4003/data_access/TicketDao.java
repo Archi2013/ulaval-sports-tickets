@@ -11,5 +11,5 @@ public interface TicketDao {
 
 	List<TicketDto> getTicketsForGame(int gameID) throws GameDoesntExistException;
 
-	TicketDto getTicket(int ticketId);
+	TicketDto getTicket(int ticketId) throws TicketDoesntExistException;
 }
