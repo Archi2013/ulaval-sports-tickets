@@ -255,7 +255,7 @@ footer {
   top: 0;
   right: 0;
   bottom: 0;
-  background: transparent url("http://upload.wikimedia.org/wikipedia/commons/0/06/Bonneville_Salt_Flats.jpg") 50% 0 no-repeat;
+  background: transparent url("/resources/image/error-page-background.jpg") 50% 0 no-repeat;
   background-size: cover;
   z-index: -1;
 }
