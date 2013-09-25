@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 
 import ca.ulaval.glo4003.data_access.GameDao;
 import ca.ulaval.glo4003.data_access.SportDao;
+import ca.ulaval.glo4003.data_access.SportDoesntExistException;
 import ca.ulaval.glo4003.dtos.GameDto;
 import ca.ulaval.glo4003.dtos.SportDto;
 
@@ -59,24 +60,7 @@ public class SportControllerTest {
 	}
 	
 	@Test
-	public void getSport_should_get_sport_with_right_name_from_dao(){
-		controller.getSport(SPORT_NAME, modelMock);
-		
-		verify(sportDaoMock).get(SPORT_NAME);
-	}
-	
-	@Test
-	public void getSport_should_add_sport_to_model(){
-		SportDto sport = new SportDto();
-		when(sportDaoMock.get(SPORT_NAME)).thenReturn(sport);
-		
-		controller.getSport(SPORT_NAME, modelMock);
-				
-		verify(modelMock).addAttribute("sport", sport);
-	}
-	
-	@Test
-	public void getSportGames_should_add_sport_games_to_model(){
+	public void getSportGames_should_add_sport_games_to_model() throws SportDoesntExistException{
 		List<GameDto> games = new ArrayList<GameDto>();
 		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(games);
 		
@@ -86,7 +70,7 @@ public class SportControllerTest {
 	}
 	
 	@Test
-	public void getSportGames_should_get_sport_games_from_games_dao() {
+	public void getSportGames_should_get_sport_games_from_games_dao() throws SportDoesntExistException {
 		controller.getSportGames(SPORT_NAME, modelMock);
 		
 		verify(gameDaoMock).getGamesForSport(SPORT_NAME);

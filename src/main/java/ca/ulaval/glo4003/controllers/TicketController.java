@@ -33,6 +33,7 @@ public class TicketController {
 
 			return "ticket/detail";
 		} catch (TicketDoesntExistException e) {
+			logger.info("==> Impossible to get ticket : " + ticketId);
 			return "home";
 		}
 	}

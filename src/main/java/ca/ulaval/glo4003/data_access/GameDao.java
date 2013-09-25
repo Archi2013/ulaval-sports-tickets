@@ -9,6 +9,6 @@ import ca.ulaval.glo4003.dtos.GameDto;
 @Repository
 public interface GameDao {
 
-	List<GameDto> getGamesForSport(String sportName);
+	List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException;
 
 }

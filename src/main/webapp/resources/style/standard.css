@@ -145,10 +145,6 @@ tbody td {
 	font-size: 1.5em;
 }
 
-tbody td:first-child {
-	text-align: center;
-}
-
 tbody td a, tbody td a:visited {
 	color: #343434;
 }
@@ -193,6 +189,30 @@ footer {
 
 .vertical-normal-list li a:after {
 	content: " ▷";
+}
+
+.information-block {
+	padding: 10px 15px;
+    -webkit-border-radius: 0.3em;
+    -moz-border-radius: 0.3em;
+    -ms-border-radius: 0.3em;
+    -o-border-radius: 0.3em;
+    border-radius: 0.3em;
+    font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 1.3em;
+	margin: 25px 50px;
+}
+
+.information-block-error-skin {
+	background-color: #f2dede;
+    border: 2px solid #edd5d8;
+    color: #cd594c;
+}
+
+.information-block-succes-skin {
+	background-color: #dff0d8;
+    border: 2px solid #d6e9c6;
+    color: #468847;
 }
 
 .fiche {

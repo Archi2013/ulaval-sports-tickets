@@ -35,6 +35,7 @@ public class GameController {
 
 			return "game/tickets";
 		} catch (GameDoesntExistException e) {
+			logger.info("==> Impossible to Get all tickets for game : " + gameId);
 			return "home";
 		}
 	}

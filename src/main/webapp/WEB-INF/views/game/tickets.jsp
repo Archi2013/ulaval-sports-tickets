@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<c:set var="pageTitle" value="Liste des billets disponibles pour le match: ${gameId}" />
+<c:set var="pageTitle" value="Match ${gameId} : liste des billets disponibles" />
 
 <!DOCTYPE html>
 <html lang="fr">

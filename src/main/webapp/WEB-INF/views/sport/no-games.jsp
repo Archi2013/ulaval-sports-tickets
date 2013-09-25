@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<c:set var="pageTitle" value="Liste des sports disponibles" />
+<c:set var="pageTitle" value="${sportName} : Aucun match disponible" />
     
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,14 +15,10 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <h2>${pageTitle}</h2>
+    <h2>${sportName}</h2>
     
-    <div class="vertical-normal-list">
-        <ul>
-            <c:forEach items="${sports}" var="sport">
-                <li><a href="/sport/${sport.name}/matchs">${sport.name}</a></li>
-            </c:forEach>
-        </ul>
+    <div class="information-block information-block-error-skin">
+        Aucun match n'est disponible pour ce sport. Vous pouvez cependant rechercher des matchs pour un autre sport en retournant à la <a href="/sport">liste des sports</a>.
     </div>
     
     <%@include file="../layout/footer.jsp" %>

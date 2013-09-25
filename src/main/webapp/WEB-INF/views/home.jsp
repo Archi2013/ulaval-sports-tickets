@@ -14,7 +14,7 @@
     
     <nav>
         <ul>
-            <li><a href="/sport">Liste des sports disponibles</a></li>
+            <li><a href="/sport">Liste des sports disponibles ▷</a></li>
         </ul>
     </nav>
     

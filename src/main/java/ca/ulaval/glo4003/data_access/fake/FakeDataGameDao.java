@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Repository;
 
 import ca.ulaval.glo4003.data_access.GameDao;
+import ca.ulaval.glo4003.data_access.SportDoesntExistException;
 import ca.ulaval.glo4003.dtos.GameDto;
 import ca.ulaval.glo4003.dtos.SportDto;
 
@@ -17,8 +18,12 @@ public class FakeDataGameDao implements GameDao {
 	private FakeDatabase database;
 
 	@Override
-	public List<GameDto> getGamesForSport(String sportName) {
+	public List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException {
 		SportDto sport = database.getSport(sportName);
-		return sport.getGames();
+		if (sport == null) {
+			throw new SportDoesntExistException();
+		} else {
+			return sport.getGames();
+		}
 	}
 }

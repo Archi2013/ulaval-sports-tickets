@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<c:set var="pageTitle" value="Liste des matchs disponibles pour : ${sportName}" />
+<c:set var="pageTitle" value="${sportName} : liste des matchs disponibles" />
     
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,7 +15,7 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <h2>Liste des matchs disponibles pour : ${sportName}</h2>
+    <h2>${pageTitle}</h2>
     
     <div>
         <table>

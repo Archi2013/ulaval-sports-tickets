@@ -11,10 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import ca.ulaval.glo4003.data_access.GameDao;
 import ca.ulaval.glo4003.data_access.SportDao;
+import ca.ulaval.glo4003.data_access.SportDoesntExistException;
 import ca.ulaval.glo4003.dtos.GameDto;
 import ca.ulaval.glo4003.dtos.SportDto;
 
@@ -41,25 +41,17 @@ public class SportController {
 		return "sport/list";
 	}
 
-	@RequestMapping(value = "/{sportName}", method = RequestMethod.GET)
-	public @ResponseBody
-	SportDto getSport(@PathVariable String sportName, Model model) {
-		logger.info("Getting sport: " + sportName);
-
-		SportDto sport = dao.get(sportName);
-		model.addAttribute("sport", sport);
-		return sport;
-	}
-
 	@RequestMapping(value = "/{sportName}/matchs", method = RequestMethod.GET)
 	public String getSportGames(@PathVariable String sportName, Model model) {
 		logger.info("Getting games for sport: " + sportName);
-		
-		List<GameDto> games = gameDao.getGamesForSport(sportName);
-		
-		model.addAttribute("games", games);
 		model.addAttribute("sportName", sportName);
 		
-		return "sport/games";
+		try {
+			List<GameDto> games = gameDao.getGamesForSport(sportName);
+			model.addAttribute("games", games);
+			return "sport/games";
+		} catch (SportDoesntExistException e) {
+			return "sport/no-games";
+		}
 	}
 }
