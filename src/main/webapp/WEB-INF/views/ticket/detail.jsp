@@ -21,7 +21,7 @@
 
 	<div class="billet">
 		<section class="ticket-admin-info">
-			<span>ID: ${ticketId} </span></br> <span>Prix :
+			<span>ID: ${ticketId} </span><br> <span>Prix :
 				${ticket.getPriceFormatted()} $</span>
 		</section>
 		<section class="ticket-game-info">
@@ -33,7 +33,7 @@
 			<span>Date et heure : ${ticket.getGameDateFormatted()}</span>
 		</section>
 		<section class="ticket-place-info">
-			<span>Type d'admission : ${ticket.admissionType}</span></br> <span>Section
+			<span>Type d'admission : ${ticket.admissionType}</span><br> <span>Section
 				: ${ticket.section}</span>
 		</section>
 	</div>
