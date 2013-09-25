@@ -1,11 +1,13 @@
 package ca.ulaval.glo4003.controllers;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,19 +29,23 @@ public class SportControllerTest {
 
 	@Mock
 	private SportDao sportDaoMock;
-	
+
 	@Mock
 	private GameDao gameDaoMock;
-	
+
 	@Mock
 	private Model modelMock;
 
 	@InjectMocks
 	private SportController controller;
 
-	@Before
-	public void setUp() {
+	private List<GameDto> games;
 
+	@Before
+	public void setUp() throws SportDoesntExistException {
+		games = new ArrayList<GameDto>();
+		games.add(new GameDto(1, "", DateTime.now()));
+		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(games);
 	}
 
 	@Test
@@ -48,32 +54,56 @@ public class SportControllerTest {
 
 		verify(sportDaoMock).getAll();
 	}
-	
+
 	@Test
-	public void getSports_should_add_sports_list_to_model(){
+	public void getSports_should_add_sports_list_to_model() {
 		List<SportDto> sports = new ArrayList<SportDto>();
 		when(sportDaoMock.getAll()).thenReturn(sports);
-		
+
 		controller.getSports(modelMock);
-		
+
 		verify(modelMock).addAttribute("sports", sports);
 	}
-	
+
 	@Test
-	public void getSportGames_should_add_sport_games_to_model() throws SportDoesntExistException{
-		List<GameDto> games = new ArrayList<GameDto>();
-		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(games);
-		
+	public void getSportGames_should_add_sport_games_to_model() {
 		controller.getSportGames(SPORT_NAME, modelMock);
-		
+
 		verify(modelMock).addAttribute("games", games);
 	}
-	
+
 	@Test
 	public void getSportGames_should_get_sport_games_from_games_dao() throws SportDoesntExistException {
 		controller.getSportGames(SPORT_NAME, modelMock);
-		
+
 		verify(gameDaoMock).getGamesForSport(SPORT_NAME);
+	}
+
+	@Test
+	public void getSportGames_should_return_correct_path() {
+
+		String path = controller.getSportGames(SPORT_NAME, modelMock);
+
+		assertEquals("sport/games", path);
+	}
+
+	@Test
+	public void getSportGames_should_redirect_to_home_path_when_sport_doesnt_exist() throws SportDoesntExistException {
+		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenThrow(SportDoesntExistException.class);
+
+		String path = controller.getSportGames(SPORT_NAME, modelMock);
+
+		assertEquals("redirect:/", path);
+	}
+
+	@Test
+	public void getSportsGames_should_return_no_games_path_when_sport_doesnt_have_any_game() throws SportDoesntExistException {
+		List<GameDto> games = new ArrayList<GameDto>();
+		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(games);
+
+		String path = controller.getSportGames(SPORT_NAME, modelMock);
+
+		assertEquals("sport/no-games", path);
 	}
 
 }

@@ -37,7 +37,13 @@ public class FakeDatabase {
 	private Map<String, SportDto> createSports() {
 		Map<String, SportDto> sports = new HashMap<String, SportDto>();
 		sports.put("Hockey", createHockey());
+		sports.put("Baseball", createBaseballWithoutGames());
 		return sports;
+	}
+
+	private SportDto createBaseballWithoutGames() {
+		SportDto baseball = new SportDto("Baseball");
+		return baseball;
 	}
 
 	private SportDto createHockey() {

@@ -22,8 +22,7 @@ import ca.ulaval.glo4003.dtos.SportDto;
 @RequestMapping(value = "/sport", method = RequestMethod.GET)
 public class SportController {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(SportController.class);
+	private static final Logger logger = LoggerFactory.getLogger(SportController.class);
 
 	@Inject
 	private SportDao dao;
@@ -37,7 +36,7 @@ public class SportController {
 
 		List<SportDto> sports = dao.getAll();
 		model.addAttribute("sports", sports);
-		
+
 		return "sport/list";
 	}
 
@@ -45,13 +44,18 @@ public class SportController {
 	public String getSportGames(@PathVariable String sportName, Model model) {
 		logger.info("Getting games for sport: " + sportName);
 		model.addAttribute("sportName", sportName);
-		
+
 		try {
 			List<GameDto> games = gameDao.getGamesForSport(sportName);
-			model.addAttribute("games", games);
-			return "sport/games";
+			if (games.isEmpty()) {
+				return "sport/no-games";
+			} else {
+				model.addAttribute("games", games);
+				return "sport/games";
+			}
 		} catch (SportDoesntExistException e) {
-			return "sport/no-games";
+			logger.info("Impossible to get games for sport: " + sportName);
+			return "redirect:/";
 		}
 	}
 }

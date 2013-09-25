@@ -53,11 +53,11 @@ public class TicketControllerTest {
 	}
 
 	@Test
-	public void getTicket_should_return_home_path_when_ticket_id_doesnt_exist() throws TicketDoesntExistException {
+	public void getTicket_should_redirect_to_home_path_when_ticket_id_doesnt_exist() throws TicketDoesntExistException {
 		when(ticketDao.getTicket(UN_ID)).thenThrow(TicketDoesntExistException.class);
 
 		String path = ticketController.getTicket(UN_ID, model);
 
-		assertEquals("home", path);
+		assertEquals("redirect:/", path);
 	}
 }
