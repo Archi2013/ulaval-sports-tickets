@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import ca.ulaval.glo4003.data_access.GameDoesntExistException;
 import ca.ulaval.glo4003.data_access.TicketDao;
 import ca.ulaval.glo4003.dtos.TicketDto;
 
@@ -25,12 +26,16 @@ public class GameController {
 
 	@RequestMapping(value = "/{gameId}/billets", method = RequestMethod.GET)
 	public String getTicketsForGame(@PathVariable int gameId, Model model) {
-		logger.info("Getting all tickets for game : " + gameId);
-		
-		List<TicketDto> tickets = dao.getTicketsForGame(gameId);
-		model.addAttribute("GameId", gameId);
-		model.addAttribute("tickets", tickets);
+		try {
+			logger.info("Getting all tickets for game : " + gameId);
 
-		return "game/tickets";
+			List<TicketDto> tickets = dao.getTicketsForGame(gameId);
+			model.addAttribute("GameId", gameId);
+			model.addAttribute("tickets", tickets);
+
+			return "game/tickets";
+		} catch (GameDoesntExistException e) {
+			return "home";
+		}
 	}
 }

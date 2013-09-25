@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameDto {
-	public long id;
-	public List<TicketDto> tickets;
-	
-	public GameDto(long id){
+	private long id;
+	private List<TicketDto> tickets;
+
+	public GameDto(long id) {
 		this.id = id;
 		this.tickets = new ArrayList<TicketDto>();
 	}
@@ -23,8 +23,8 @@ public class GameDto {
 	public List<TicketDto> getTickets() {
 		return tickets;
 	}
-	
-	public int getNumberOfTickets(){
+
+	public int getNumberOfTickets() {
 		return tickets.size();
 	}
 }

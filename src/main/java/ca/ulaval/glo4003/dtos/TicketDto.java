@@ -4,16 +4,15 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
 public class TicketDto {
-	public int ticketId;
 
-	public double price;
-	public String opponents;
-	public DateTime gameDate;
-	public String admissionType;
-	public String section;
+	private int ticketId;
+	private double price;
+	private String opponents;
+	private DateTime gameDate;
+	private String admissionType;
+	private String section;
 
-	public TicketDto(int ticketId, double price, String opponents, DateTime gameDate, String admissionType,
-			String section) {
+	public TicketDto(int ticketId, double price, String opponents, DateTime gameDate, String admissionType, String section) {
 		this.ticketId = ticketId;
 		this.price = price;
 		this.opponents = opponents;
@@ -33,7 +32,7 @@ public class TicketDto {
 	public double getPrice() {
 		return price;
 	}
-	
+
 	public String getPriceFormatted() {
 		String formatted = new Double(price).toString();
 		formatted = formatted.replace('.', ',');
@@ -55,7 +54,7 @@ public class TicketDto {
 	public DateTime getGameDate() {
 		return gameDate;
 	}
-	
+
 	public String getGameDateFormatted() {
 		return gameDate.toString(DateTimeFormat.longDateTime());
 	}

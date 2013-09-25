@@ -9,7 +9,7 @@ import ca.ulaval.glo4003.dtos.TicketDto;
 @Repository
 public interface TicketDao {
 
-	List<TicketDto> getTicketsForGame(int gameID);
+	List<TicketDto> getTicketsForGame(int gameID) throws GameDoesntExistException;
 
 	TicketDto getTicket(int ticketId);
 }

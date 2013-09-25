@@ -1,27 +1,36 @@
 package ca.ulaval.glo4003.data_access.fake;
 
-import java.util.LinkedList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 
+import ca.ulaval.glo4003.data_access.GameDoesntExistException;
 import ca.ulaval.glo4003.data_access.TicketDao;
+import ca.ulaval.glo4003.dtos.GameDto;
+import ca.ulaval.glo4003.dtos.SportDto;
 import ca.ulaval.glo4003.dtos.TicketDto;
 
 @Repository
 public class FakeDataTicketDao implements TicketDao {
 
+	@Inject
+	private FakeDatabase database;
+
 	@Override
-	public List<TicketDto> getTicketsForGame(int gameID) {
-		TicketDto ticket1 = new TicketDto(1, 10, "Les Pros", new DateTime(2013, 9, 29, 18, 30), "General", "Bleus");
-		TicketDto ticket2 = new TicketDto(2, 10, "Les N00bz", new DateTime(2013, 9, 30, 18, 30), "General", "Rouges");
-
-		List<TicketDto> toReturn = new LinkedList<TicketDto>();
-		toReturn.add(ticket1);
-		toReturn.add(ticket2);
-
-		return toReturn;
+	public List<TicketDto> getTicketsForGame(int gameId) throws GameDoesntExistException {
+		List<SportDto> sports = database.getSports();
+		for (SportDto sport : sports) {
+			List<GameDto> games = sport.getGames();
+			for (GameDto game : games) {
+				if (gameId == game.getId()) {
+					return game.getTickets();
+				}
+			}
+		}
+		throw new GameDoesntExistException();
 	}
 
 	@Override
