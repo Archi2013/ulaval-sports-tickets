@@ -20,7 +20,7 @@
     <div class="vertical-normal-list">
         <ul>
             <c:forEach items="${sports}" var="sport">
-                <li><a href="/sport/${sport.name}/matchs">${sport.name}</a></li>
+                <li><a href="/sport/${sport.name}/matchs">${sport.name} ▷</a></li>
             </c:forEach>
         </ul>
     </div>

@@ -26,16 +26,18 @@
                     	<th>Opposants</th>
                     	<th>Type d'admission</th>
                     	<th>Section</th>
+                    	<th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach items="${tickets}" var="ticket">
                     <tr>
-                        <td><a href="/billet/${ticket.ticketId}">${ticket.ticketId}</a></td>
+                        <td>${ticket.ticketId}</td>
                         <td>${ticket.price}</td>
                         <td>${ticket.opponents}</td>
                         <td>${ticket.admissionType}</td>
                         <td>${ticket.section}</td>
+                        <td><a href="/billet/${ticket.ticketId}" class="standard-button-round orange-button">Consulter</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
