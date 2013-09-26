@@ -54,7 +54,7 @@ public class SportController {
 				return "sport/games";
 			}
 		} catch (SportDoesntExistException e) {
-			logger.info("Impossible to get games for sport: " + sportName);
+			logger.info("==> Impossible to get games for sport: " + sportName);
 			return "error/404";
 		}
 	}

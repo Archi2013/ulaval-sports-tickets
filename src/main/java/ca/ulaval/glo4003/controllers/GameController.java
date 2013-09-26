@@ -36,7 +36,7 @@ public class GameController {
 			return "game/tickets";
 		} catch (GameDoesntExistException e) {
 			logger.info("==> Impossible to get all tickets for game : " + gameId);
-			return "redirect:/";
+			return "error/404";
 		}
 	}
 }
