@@ -11,15 +11,14 @@
 <head>
 <meta charset="utf-8">
 <title>${pageTitle}| UL Sport</title>
-<link href="/resources/style/standard.css" title="standard"
-	media="screen" rel="stylesheet">
+<%@include file="../utility/css-import.jsp" %>
 </head>
 <body>
 	<%@include file="../layout/header.jsp"%>
 
 	<h2>Fiche du billet</h2>
 
-	<div class="billet">
+	<div class="ticket">
 		<section class="ticket-admin-info">
 			<span>ID: ${ticketId} </span><br> <span>Prix :
 				${ticket.getPriceFormatted()} $</span>
@@ -38,22 +37,7 @@
 		</section>
 	</div>
 
-	<a href="/match/${ticket.game.id}/billets">Retour au
-			match</a>
-
-
-	<!--
-    <div class="fiche">
-        <ul>
-            <li>ID : ${ticketId}</li>
-            <li>Opposants : ${ticket.opponents}</li>
-            <li>Date et heure : ${ticket.getGameDateFormatted()}</li>
-            <li>Type d'admission : ${ticket.admissionType}</li>
-            <li>Section : ${ticket.section}</li>
-            <li>Prix : ${ticket.getPriceFormatted()} $</li>
-        </ul>
-    </div>
-    -->
+	<a href="/match/${ticket.game.id}/billets">Retour au match</a>
 
 	<%@include file="../layout/footer.jsp"%>
 </body>

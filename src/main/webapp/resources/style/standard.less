@@ -1,6 +1,6 @@
-@CHARSET "UTF-8";
+//@CHARSET "UTF-8";
 
-/* line 17, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -22,45 +22,37 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: center;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -69,8 +61,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,300italic,400italic,700italic);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700);
 
+@standard-red-color: #cc0033;
+@standard-orange-color: #ff3300;
+@standard-gold-yellow-color: #fecc09;
+@standard-blue-gray-color: #4b5b6e;
+@standard-black-gray-color: #343434;
+@standard-dark-gray-color: #4d4d4d;
+
 body {
-	color: #343434;
+	color: @standard-black-gray-color;
 	font-family: "Open Sans", sans-serif;
 	font-weight: 300;
 }
@@ -82,71 +81,65 @@ nav {
 
 h1 {
 	font-family: "Ubuntu", sans-serif;
-	color: #cc0033;
+	color: @standard-red-color;
 	font-weight: 700;
 	font-size: 5em;
 	padding: 15px 25px 30px 25px;
-}
-
-h1 em {
-	color: #fecc09;
+	
+	em {
+        color: @standard-gold-yellow-color;
+    }
 }
 
 h2 {
 	font-family: "Lato", sans-serif;
-	color: #4d4d4d;
+	color: @standard-dark-gray-color;
 	font-weight: 400;
 	font-size: 2.5em;
 	padding: 15px 0;
 	margin: 0 25px;
 	text-transform: uppercase;
 	
-	border-bottom: 5px solid #cc0033;
-}
-
-h3{
-	font-family: "Lato", sans-serif;
-	font-size: 2em;
-	margin-bottom: 10px;
+	border-bottom: 5px solid @standard-red-color;
 }
 
 a, a:visited {
-	color: #ff0033;
+	color: @standard-orange-color;
 	text-decoration: none;
 }
 
 a:hover, a:active {
-	color: #cc0033;
+	color: @standard-red-color;
 }
 
 table {
 	margin: 15px 25px;
-}
-
-thead tr {
-	border-bottom: 3px solid #4b5b6e;
-}
-
-thead th {
-	padding: 10px 0;
 	
-	font-family: "Lato", sans-serif;
-    color: #4b5b6e;
-    font-size: 2em;
-    font-weight: 400;
-}
-
-tbody td {
-	padding: 15px 0;
-	border-bottom: 1px solid #ccc;
-	font-family: "Open Sans", sans-serif;
-	font-weight: 300;
-	color: #343434;
-	font-size: 1.5em;
-}
-
-tbody td a, tbody td a:visited {
-	color: #343434;
+	thead tr {
+        border-bottom: 3px solid @standard-blue-gray-color;
+        
+        th {
+            padding: 10px 0;
+            
+            font-family: "Lato", sans-serif;
+            color: @standard-blue-gray-color;
+            font-size: 2em;
+            font-weight: 400;
+        }
+    }
+    
+    tbody tr {
+        td {
+            padding: 15px 0;
+            border-bottom: 1px solid #ccc;
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+    }
+    
+    tbody td a, tbody td a:visited {
+        color: #343434;
+    }
 }
 
 tbody td a:hover, tbody td a:active {
@@ -215,20 +208,17 @@ footer {
     color: #468847;
 }
 
-.fiche {
-	margin: 25px;
-}
-
-.fiche li {
-	padding: 10px 0;
-	font-size: 1.5em;
-}
-
-.billet{
+.ticket{
 	margin: 20px auto 20px auto;
 	width: 500px;
 	border: solid 2px black;
 	border-radius: 8px;
+	
+	h3{
+        font-family: "Lato", sans-serif;
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
 }
 
 .ticket-admin-info{

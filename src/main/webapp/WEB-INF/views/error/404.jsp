@@ -7,14 +7,14 @@
 <head>
     <meta charset="utf-8">
     <title>Page d'erreur | UL Sport</title>
-    <link href="/resources/style/standard.css" title="standard" media="screen" rel="stylesheet">
+    <%@include file="../utility/css-import.jsp" %>
 </head>
 <body>
     <%@include file="../layout/header.jsp" %>
     
     <div class="error-page-background"></div>
     
-    <div class="error-page-content"><strong>404 : Pigiste en grève</strong><br>Pourquoi ne pas retourner à l'<a href="/">accueil</a>.</div>
+    <div class="error-page-content"><strong>404 : stagiaire en pause</strong><br>Pourquoi ne pas retourner à l'<a href="/">accueil</a>.</div>
     
     <%@include file="../layout/footer.jsp" %>
 </body>

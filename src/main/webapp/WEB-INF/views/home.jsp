@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <title>Accueil | UL Sport</title>
-    <link href="/resources/style/standard.css" title="standard" media="screen" rel="stylesheet">
+    <%@include file="utility/css-import.jsp" %>
 </head>
 <body>
     <%@include file="layout/header.jsp" %>
