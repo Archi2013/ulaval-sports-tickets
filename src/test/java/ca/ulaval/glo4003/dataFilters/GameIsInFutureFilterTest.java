@@ -34,9 +34,9 @@ public class GameIsInFutureFilterTest {
 	public void if_list_empty_FilterOnDate_return_empty_list() {
 		List<GameDto> list = new ArrayList<GameDto>();
 
-		List<GameDto> listReturned = filter.applyFilter(list);
+		filter.applyFilterOnList(list);
 
-		Assert.assertEquals(0, listReturned.size());
+		Assert.assertEquals(0, list.size());
 	}
 
 	@Test
@@ -44,9 +44,9 @@ public class GameIsInFutureFilterTest {
 		List<GameDto> list = new ArrayList<GameDto>();
 		list.add(A_GAME_BEFORE);
 
-		List<GameDto> listReturned = filter.applyFilter(list);
+		filter.applyFilterOnList(list);
 
-		Assert.assertEquals(0, listReturned.size());
+		Assert.assertEquals(0, list.size());
 	}
 
 	@Test
@@ -54,10 +54,10 @@ public class GameIsInFutureFilterTest {
 		List<GameDto> list = new ArrayList<GameDto>();
 		list.add(A_GAME_AFTER);
 
-		List<GameDto> listReturned = filter.applyFilter(list);
+		filter.applyFilterOnList(list);
 
-		Assert.assertEquals(1, listReturned.size());
-		Assert.assertSame(A_GAME_AFTER, listReturned.get(0));
+		Assert.assertEquals(1, list.size());
+		Assert.assertSame(A_GAME_AFTER, list.get(0));
 	}
 
 	@Test
@@ -66,9 +66,9 @@ public class GameIsInFutureFilterTest {
 		list.add(A_GAME_BEFORE);
 		list.add(A_GAME_AFTER);
 
-		List<GameDto> listReturned = filter.applyFilter(list);
+		filter.applyFilterOnList(list);
 
-		Assert.assertEquals(1, listReturned.size());
-		Assert.assertSame(A_GAME_AFTER, listReturned.get(0));
+		Assert.assertEquals(1, list.size());
+		Assert.assertSame(A_GAME_AFTER, list.get(0));
 	}
 }

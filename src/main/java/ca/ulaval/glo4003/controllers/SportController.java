@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import ca.ulaval.glo4003.dataFilters.DataFilter;
 import ca.ulaval.glo4003.data_access.GameDao;
 import ca.ulaval.glo4003.data_access.SportDao;
 import ca.ulaval.glo4003.data_access.SportDoesntExistException;
@@ -30,6 +31,9 @@ public class SportController {
 	@Inject
 	private GameDao gameDao;
 
+	@Inject
+	private DataFilter<GameDto> filter;
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getSports(Model model) {
 		logger.info("Getting all sports");
@@ -47,6 +51,7 @@ public class SportController {
 
 		try {
 			List<GameDto> games = gameDao.getGamesForSport(sportName);
+			filter.applyFilterOnList(games);
 			if (games.isEmpty()) {
 				return "sport/no-games";
 			} else {

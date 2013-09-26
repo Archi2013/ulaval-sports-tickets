@@ -61,6 +61,6 @@ public class GameControllerTest {
 
 		String path = gameController.getTicketsForGame(AN_ID, model);
 
-		assertEquals("redirect:/", path);
+		assertEquals("error/404", path);
 	}
 }

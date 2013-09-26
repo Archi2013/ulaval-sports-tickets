@@ -58,6 +58,6 @@ public class TicketControllerTest {
 
 		String path = ticketController.getTicket(UN_ID, model);
 
-		assertEquals("redirect:/", path);
+		assertEquals("error/404", path);
 	}
 }

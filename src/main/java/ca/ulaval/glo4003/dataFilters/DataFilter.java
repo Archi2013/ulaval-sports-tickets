@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface DataFilter<T> {
 
-	List<T> applyFilter(List<T> originalList);
+	void applyFilterOnList(List<T> originalList);
 }
