@@ -31,9 +31,7 @@ public class GameIsInFutureFilter implements DataFilter<GameDto> {
 				toRemove.add(originalList.get(i));
 			}
 		}
-		for (int i = 0; i < toRemove.size(); i++) {
-			originalList.removeAll(toRemove);
-		}
+		originalList.removeAll(toRemove);
 	}
 
 }
