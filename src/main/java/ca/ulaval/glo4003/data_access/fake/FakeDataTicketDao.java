@@ -22,6 +22,7 @@ public class FakeDataTicketDao implements TicketDao {
 	@Override
 	public List<TicketDto> getTicketsForGame(int gameId) throws GameDoesntExistException {
 		List<SportDto> sports = database.getSports();
+		SportDto goodSport;
 		for (SportDto sport : sports) {
 			for (GameDto game : sport.getGames()) {
 				if (gameId == game.getId()) {

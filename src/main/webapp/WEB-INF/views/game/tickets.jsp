@@ -31,7 +31,7 @@
             <tbody>
                 <c:forEach items="${tickets}" var="ticket">
                     <tr>
-                        <td><a href="/billet/${ticket.ticketId}">${ticket.ticketId}</a></td>
+                        <td><a href="billet/${ticket.ticketId}">${ticket.ticketId}</a></td>
                         <td>${ticket.price}</td>
                         <td>${ticket.opponents}</td>
                         <td>${ticket.admissionType}</td>

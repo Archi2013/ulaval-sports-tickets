@@ -15,7 +15,7 @@ import ca.ulaval.glo4003.data_access.TicketDoesntExistException;
 import ca.ulaval.glo4003.dtos.TicketDto;
 
 @Controller
-@RequestMapping(value = "/billet", method = RequestMethod.GET)
+@RequestMapping(value = "/sport/{sportName}/match/{matchId}/billet", method = RequestMethod.GET)
 public class TicketController {
 	private static final Logger logger = LoggerFactory.getLogger(TicketController.class);
 

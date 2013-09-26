@@ -30,7 +30,7 @@
             <tbody>
                 <c:forEach items="${games}" var="game">
                     <tr>
-                        <td><a href="/match/${game.id}/billets">${game.id}</a></td>
+                        <td><a href="match/${game.id}/billets">${game.id}</a></td>
                         <td>${game.gameDateFormatted}</td>
                         <td>${game.opponents}</td>
                         <td>${game.numberOfTickets}</td>
