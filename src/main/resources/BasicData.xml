@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+    <sports>
+        <sport>
+            <name>Hockey-Masculin</name>
+        </sport>
+        <sport>
+            <name>Baseball-Masculin</name>
+        </sport>
+        <sport>
+            <name>Volleyball-Feminin</name>
+        </sport>
+    </sports>
+</base>
