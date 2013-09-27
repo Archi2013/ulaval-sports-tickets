@@ -11,4 +11,1211 @@
             <name>Volleyball-Feminin</name>
         </sport>
     </sports>
+    <sport-games>
+        <sport-game name="Hockey-Masculin">
+            <games>
+                <game id="1" />
+                <game id="2" />
+            </games>
+        </sport-game>
+        <sport-game name="Volleyball-Feminin">
+            <games>
+                <game id="40" />
+                <game id="41" />
+                <game id="42" />
+            </games>
+        </sport-game>
+    </sport-games>
+    <games>
+        <game>
+            <id>1</id>
+            <oponents>Carabins</oponents>
+            <date>20131212</date>
+        </game>
+        <game>
+            <id>2</id>
+            <oponents>Redmen</oponents>
+            <date>20131212</date>
+        </game>
+        <game>
+            <id>40</id>
+            <oponents>Blue Dragoon</oponents>
+            <date>20131212</date>
+        </game>
+        <game>
+            <id>41</id>
+            <oponents>Phoenix rouge</oponents>
+            <date>20131212</date>
+        </game>
+        <game>
+            <id>42</id>
+            <oponents>Emeraude vif</oponents>
+            <date>20131212</date>
+        </game>
+    </games>
+    <games-tickets>
+        <game-tickets gameID="1">
+            <tickets>
+                <ticket ticketID="1" />
+                <ticket ticketID="2" />
+                <ticket ticketID="6" />
+                <ticket ticketID="7" />
+                <ticket ticketID="8" />
+                <ticket ticketID="9" />
+                <ticket ticketID="10" />
+                <ticket ticketID="11" />
+                <ticket ticketID="12" />
+            </tickets>
+        </game-tickets>
+        <game-tickets gameID="2">
+            <tickets>
+                <ticket ticketID="3" />
+                <ticket ticketID="4" />
+                <ticket ticketID="5" />
+                <ticket ticketID="13" />
+                <ticket ticketID="14" />
+                <ticket ticketID="15" />
+            </tickets>
+        </game-tickets>
+        <game-tickets gameID="40">
+            <tickets>
+                <ticket ticketID="16" />
+                <ticket ticketID="17" />
+                <ticket ticketID="18" />
+                <ticket ticketID="19" />
+                <ticket ticketID="20" />
+                <ticket ticketID="21" />
+                <ticket ticketID="22" />
+                <ticket ticketID="23" />
+                <ticket ticketID="24" />
+                <ticket ticketID="25" />
+                <ticket ticketID="26" />
+                <ticket ticketID="27" />
+                <ticket ticketID="28" />
+                <ticket ticketID="29" />
+                <ticket ticketID="30" />
+                <ticket ticketID="31" />
+                <ticket ticketID="32" />
+                <ticket ticketID="33" />
+                <ticket ticketID="34" />
+                <ticket ticketID="35" />
+                <ticket ticketID="36" />
+                <ticket ticketID="37" />
+                <ticket ticketID="38" />
+                <ticket ticketID="39" />
+                <ticket ticketID="40" />
+                <ticket ticketID="41" />
+                <ticket ticketID="42" />
+                <ticket ticketID="43" />
+                <ticket ticketID="44" />
+                <ticket ticketID="45" />
+                <ticket ticketID="46" />
+                <ticket ticketID="47" />
+                <ticket ticketID="48" />
+                <ticket ticketID="49" />
+                <ticket ticketID="50" />
+                <ticket ticketID="51" />
+                <ticket ticketID="52" />
+                <ticket ticketID="53" />
+                <ticket ticketID="54" />
+                <ticket ticketID="55" />
+                <ticket ticketID="56" />
+                <ticket ticketID="57" />
+                <ticket ticketID="58" />
+                <ticket ticketID="59" />
+                <ticket ticketID="60" />
+                <ticket ticketID="61" />
+                <ticket ticketID="62" />
+                <ticket ticketID="63" />
+                <ticket ticketID="64" />
+                <ticket ticketID="65" />
+                <ticket ticketID="66" />
+                <ticket ticketID="67" />
+                <ticket ticketID="68" />
+                <ticket ticketID="69" />
+                <ticket ticketID="70" />
+                <ticket ticketID="71" />
+                <ticket ticketID="72" />
+                <ticket ticketID="73" />
+                <ticket ticketID="74" />
+                <ticket ticketID="75" />
+                <ticket ticketID="76" />
+                <ticket ticketID="77" />
+                <ticket ticketID="78" />
+                <ticket ticketID="79" />
+                <ticket ticketID="152" />
+                <ticket ticketID="153" />
+            </tickets>
+        </game-tickets>
+        <game-tickets gameID="41">
+            <tickets>
+                <ticket ticketID="80" />
+                <ticket ticketID="81" />
+                <ticket ticketID="82" />
+                <ticket ticketID="83" />
+                <ticket ticketID="84" />
+                <ticket ticketID="85" />
+                <ticket ticketID="86" />
+                <ticket ticketID="87" />
+                <ticket ticketID="88" />
+                <ticket ticketID="89" />
+                <ticket ticketID="90" />
+                <ticket ticketID="91" />
+                <ticket ticketID="92" />
+                <ticket ticketID="93" />
+                <ticket ticketID="94" />
+                <ticket ticketID="95" />
+                <ticket ticketID="96" />
+                <ticket ticketID="97" />
+                <ticket ticketID="98" />
+                <ticket ticketID="99" />
+                <ticket ticketID="100" />
+                <ticket ticketID="101" />
+                <ticket ticketID="102" />
+                <ticket ticketID="103" />
+                <ticket ticketID="104" />
+                <ticket ticketID="105" />
+                <ticket ticketID="106" />
+                <ticket ticketID="107" />
+                <ticket ticketID="108" />
+                <ticket ticketID="109" />
+                <ticket ticketID="110" />
+                <ticket ticketID="154" />
+                <ticket ticketID="155" />
+                <ticket ticketID="156" />
+                <ticket ticketID="157" />
+                <ticket ticketID="158" />
+            </tickets>
+        </game-tickets>
+        <game-tickets gameID="42">
+            <tickets>
+                <ticket ticketID="111" />
+                <ticket ticketID="112" />
+                <ticket ticketID="113" />
+                <ticket ticketID="114" />
+                <ticket ticketID="115" />
+                <ticket ticketID="116" />
+                <ticket ticketID="117" />
+                <ticket ticketID="118" />
+                <ticket ticketID="119" />
+                <ticket ticketID="120" />
+                <ticket ticketID="121" />
+                <ticket ticketID="122" />
+                <ticket ticketID="123" />
+                <ticket ticketID="124" />
+                <ticket ticketID="125" />
+                <ticket ticketID="126" />
+                <ticket ticketID="127" />
+                <ticket ticketID="128" />
+                <ticket ticketID="129" />
+                <ticket ticketID="130" />
+                <ticket ticketID="131" />
+                <ticket ticketID="132" />
+                <ticket ticketID="133" />
+                <ticket ticketID="134" />
+                <ticket ticketID="135" />
+                <ticket ticketID="136" />
+                <ticket ticketID="137" />
+                <ticket ticketID="138" />
+                <ticket ticketID="139" />
+                <ticket ticketID="140" />
+                <ticket ticketID="141" />
+                <ticket ticketID="142" />
+                <ticket ticketID="143" />
+                <ticket ticketID="144" />
+                <ticket ticketID="145" />
+                <ticket ticketID="146" />
+                <ticket ticketID="147" />
+                <ticket ticketID="148" />
+                <ticket ticketID="149" />
+                <ticket ticketID="150" />
+                <ticket ticketID="151" />
+                <ticket ticketID="159" />
+                <ticket ticketID="160" />
+                <ticket ticketID="161" />
+                <ticket ticketID="162" />
+                <ticket ticketID="163" />
+            </tickets>
+        </game-tickets>
+    </games-tickets>
+    <tickets>
+        <ticket>
+            <id>1</id>
+            <price>35.00</price>
+            <type>VIP</type>
+            <section>Front Row</section>
+        </ticket>
+        <ticket>
+            <id>2</id>
+            <price>35.00</price>
+            <type>VIP</type>
+            <section>Front Row</section>
+        </ticket>
+        <ticket>
+            <id>3</id>
+            <price>35.00</price>
+            <type>VIP</type>
+            <section>Front Row</section>
+        </ticket>
+        <ticket>
+            <id>4</id>
+            <price>35.00</price>
+            <type>VIP</type>
+            <section>Front Row</section>
+        </ticket>
+        <ticket>
+            <id>5</id>
+            <price>35.00</price>
+            <type>VIP</type>
+            <section>Front Row</section>
+        </ticket>
+        <ticket>
+            <id>6</id>
+            <price>15.50</price>
+            <type>Général</type>
+            <section>Bleus</section>
+        </ticket>
+        <ticket>
+            <id>7</id>
+            <price>15.50</price>
+            <type>Général</type>
+            <section>Bleus</section>
+        </ticket>
+        <ticket>
+            <id>8</id>
+            <price>20.00</price>
+            <type>Général</type>
+            <section>Rouges</section>
+        </ticket>
+        <ticket>
+            <id>9</id>
+            <price>20.00</price>
+            <type>Général</type>
+            <section>Rouges</section>
+        </ticket>
+        <ticket>
+            <id>10</id>
+            <price>20.00</price>
+            <type>Général</type>
+            <section>Rouges</section>
+        </ticket>
+        <ticket>
+            <id>11</id>
+            <price>20.00</price>
+            <type>Général</type>
+            <section>Rouges</section>
+        </ticket>
+        <ticket>
+            <id>12</id>
+            <price>20.00</price>
+            <type>Général</type>
+            <section>Rouges</section>
+        </ticket>
+        <ticket>
+            <id>13</id>
+            <price>20.00</price>
+            <type>Général</type>
+            <section>Rouges</section>
+        </ticket>
+        <ticket>
+            <id>14</id>
+            <price>20.00</price>
+            <type>Général</type>
+            <section>Rouges</section>
+        </ticket>
+        <ticket>
+            <id>15</id>
+            <price>20.00</price>
+            <type>Général</type>
+            <section>Rouges</section>
+        </ticket>
+        <ticket>
+            <id>16</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>17</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>18</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>19</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>20</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>21</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>22</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>23</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>24</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>25</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>26</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>27</id>
+            <price>5.95</price>
+            <type>Général</type>
+            <section>Indigo</section>
+        </ticket>
+        <ticket>
+            <id>28</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>29</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>30</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>31</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>32</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>33</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>34</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>35</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>36</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>37</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>38</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>39</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>40</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>41</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>42</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>43</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>44</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>45</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>46</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>47</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>48</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>49</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>50</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>51</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>52</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>53</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>54</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>55</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>56</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>57</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>58</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>59</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>60</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>61</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>62</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>63</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>64</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>65</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>66</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>67</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>68</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>69</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>70</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>71</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>72</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>73</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>74</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>75</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>76</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>77</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>78</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>79</id>
+            <price>6.95</price>
+            <type>Général</type>
+            <section>Cyan</section>
+        </ticket>
+        <ticket>
+            <id>80</id>
+            <price>25.95</price>
+            <type>Général</type>
+            <section>Poupres</section>
+        </ticket>
+        <ticket>
+            <id>81</id>
+            <price>25.95</price>
+            <type>Général</type>
+            <section>Poupres</section>
+        </ticket>
+        <ticket>
+            <id>82</id>
+            <price>25.95</price>
+            <type>Général</type>
+            <section>Poupres</section>
+        </ticket>
+        <ticket>
+            <id>83</id>
+            <price>25.95</price>
+            <type>Général</type>
+            <section>Poupres</section>
+        </ticket>
+        <ticket>
+            <id>84</id>
+            <price>25.95</price>
+            <type>Général</type>
+            <section>Poupres</section>
+        </ticket>
+        <ticket>
+            <id>85</id>
+            <price>25.95</price>
+            <type>Général</type>
+            <section>Poupres</section>
+        </ticket>
+        <ticket>
+            <id>86</id>
+            <price>25.95</price>
+            <type>Général</type>
+            <section>Poupres</section>
+        </ticket>
+        <ticket>
+            <id>87</id>
+            <price>25.95</price>
+            <type>Général</type>
+            <section>Poupres</section>
+        </ticket>
+        <ticket>
+            <id>88</id>
+            <price>25.95</price>
+            <type>Général</type>
+            <section>Poupres</section>
+        </ticket>
+        <ticket>
+            <id>89</id>
+            <price>25.95</price>
+            <type>Général</type>
+            <section>Poupres</section>
+        </ticket>
+        <ticket>
+            <id>90</id>
+            <price>25.95</price>
+            <type>Général</type>
+            <section>Poupres</section>
+        </ticket>
+        <ticket>
+            <id>91</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Bordeaux</section>
+        </ticket>
+        <ticket>
+            <id>92</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Bordeaux</section>
+        </ticket>
+        <ticket>
+            <id>93</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Bordeaux</section>
+        </ticket>
+        <ticket>
+            <id>94</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Bordeaux</section>
+        </ticket>
+        <ticket>
+            <id>95</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Bordeaux</section>
+        </ticket>
+        <ticket>
+            <id>96</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Bordeaux</section>
+        </ticket>
+        <ticket>
+            <id>97</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Bordeaux</section>
+        </ticket>
+        <ticket>
+            <id>98</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Bordeaux</section>
+        </ticket>
+        <ticket>
+            <id>99</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>100</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>101</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>102</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>103</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>104</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>105</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>106</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>107</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>108</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>109</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>110</id>
+            <price>15.45</price>
+            <type>Général</type>
+            <section>Mauves</section>
+        </ticket>
+        <ticket>
+            <id>111</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>112</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>113</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>114</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>115</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>116</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>117</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>118</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>119</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>120</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>121</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>122</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>123</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>124</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>125</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>126</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>127</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>128</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>129</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>130</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>131</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>132</id>
+            <price>15.95</price>
+            <type>Général</type>
+            <section>Olive</section>
+        </ticket>
+        <ticket>
+            <id>133</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>134</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>135</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>136</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>137</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>138</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>139</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>140</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>141</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>142</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>143</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>144</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>145</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>46</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>147</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>148</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>149</id>
+            <price>20.05</price>
+            <type>Général</type>
+            <section>Turquoise</section>
+        </ticket>
+        <ticket>
+            <id>150</id>
+            <price>5.45</price>
+            <type>Général</type>
+            <section>Basilic</section>
+        </ticket>
+        <ticket>
+            <id>151</id>
+            <price>5.45</price>
+            <type>Général</type>
+            <section>Basilic</section>
+        </ticket>
+        <ticket>
+            <id>152</id>
+            <price>15.50</price>
+            <type>VIP</type>
+            <section>Loge Sud-Est</section>
+        </ticket>
+        <ticket>
+            <id>153</id>
+            <price>15.50</price>
+            <type>VIP</type>
+            <section>Loge Nord-Est</section>
+        </ticket>
+        <ticket>
+            <id>154</id>
+            <price>30.70</price>
+            <type>VIP</type>
+            <section>Loge A</section>
+        </ticket>
+        <ticket>
+            <id>155</id>
+            <price>30.70</price>
+            <type>VIP</type>
+            <section>Loge A</section>
+        </ticket>
+        <ticket>
+            <id>156</id>
+            <price>30.70</price>
+            <type>VIP</type>
+            <section>Loge B</section>
+        </ticket>
+        <ticket>
+            <id>157</id>
+            <price>30.70</price>
+            <type>VIP</type>
+            <section>Loge C</section>
+        </ticket>
+        <ticket>
+            <id>158</id>
+            <price>30.70</price>
+            <type>VIP</type>
+            <section>Loge E</section>
+        </ticket>
+        <ticket>
+            <id>159</id>
+            <price>30.70</price>
+            <type>VIP</type>
+            <section>Loge 3C</section>
+        </ticket>
+        <ticket>
+            <id>160</id>
+            <price>30.70</price>
+            <type>VIP</type>
+            <section>Loge 1A</section>
+        </ticket>
+        <ticket>
+            <id>161</id>
+            <price>30.70</price>
+            <type>VIP</type>
+            <section>Loge 4D</section>
+        </ticket>
+        <ticket>
+            <id>162</id>
+            <price>30.70</price>
+            <type>VIP</type>
+            <section>Loge 1A</section>
+        </ticket>
+        <ticket>
+            <id>163</id>
+            <price>30.70</price>
+            <type>VIP</type>
+            <section>Loge 5E</section>
+        </ticket>
+    </tickets>
 </base>
