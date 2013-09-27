@@ -22,7 +22,7 @@
             <thead>
                 <tr>
                     	<th>Identifiant</th>
-                    	<th>Prix</th>
+                    	<th>Prix (CDN$)</th>
                     	<th>Opposants</th>
                     	<th>Type d'admission</th>
                     	<th>Section</th>
@@ -33,7 +33,7 @@
                 <c:forEach items="${tickets}" var="ticket">
                     <tr>
                         <td>${ticket.ticketId}</td>
-                        <td>${ticket.price}</td>
+                        <td>${ticket.getPriceFormatted()}</td>
                         <td>${ticket.opponents}</td>
                         <td>${ticket.admissionType}</td>
                         <td>${ticket.section}</td>

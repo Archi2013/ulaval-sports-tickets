@@ -22,7 +22,7 @@
 		<div class="ticket-card">
 			<div class="ticket-admin-info">
 			<span class="half-admin-info">No : <strong>${ticketId}</strong></span><!-- important
-			--><span class="half-admin-info text-align-right">Prix : <strong>${ticket.getPriceFormatted()} $</strong></span>
+			--><span class="half-admin-info text-align-right">Prix : <strong>${ticket.getPriceFormatted()} CDN$</strong></span>
 			</div>
 			<h3>
 			    <img class="rouge-et-or-logo" alt="Logo du Rouge et Or" src="/resources/image/rouge-et-or-logo.gif"/> <strong>VS</strong> ${ticket.opponents}
