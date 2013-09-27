@@ -25,15 +25,17 @@
                     <th>Date</th>
                     <th>Opposants</th>
                     <th>Billets disponibles</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach items="${games}" var="game">
                     <tr>
-                        <td><a href="match/${game.id}/billets">${game.id}</a></td>
+                        <td>${game.id}</td>
                         <td>${game.gameDateFormatted}</td>
                         <td>${game.opponents}</td>
                         <td>${game.numberOfTickets}</td>
+                        <td><a href="match/${game.id}/billets" class="standard-button-round orange-button">Consulter</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

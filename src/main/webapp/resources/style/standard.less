@@ -5,7 +5,7 @@ html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
+small, strike, strong, sub, /*sup, */tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
@@ -64,9 +64,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 @standard-red-color: #cc0033;
 @standard-orange-color: #ff3300;
 @standard-gold-yellow-color: #fecc09;
+@standard-blue-color: #0077db;
 @standard-blue-gray-color: #4b5b6e;
 @standard-black-gray-color: #343434;
 @standard-dark-gray-color: #4d4d4d;
+@standard-medium-gray-color: #707070;
 
 body {
 	color: @standard-black-gray-color;
@@ -77,6 +79,13 @@ body {
 nav {
 	margin: 25px;
 	font-size: 1.3em;
+	
+	a, a:visited {
+	    color: @standard-orange-color;
+	}
+	a:hover, a:active {
+	   color: @standard-red-color;
+	}
 }
 
 h1 {
@@ -85,6 +94,10 @@ h1 {
 	font-weight: 700;
 	font-size: 5em;
 	padding: 15px 25px 30px 25px;
+	
+	a {
+	    color: @standard-red-color;
+	}
 	
 	em {
         color: @standard-gold-yellow-color;
@@ -104,87 +117,151 @@ h2 {
 }
 
 a, a:visited {
-	color: @standard-orange-color;
 	text-decoration: none;
 }
 
-a:hover, a:active {
-	color: @standard-red-color;
+.border-radius(@taille) {
+    -webkit-border-radius: @taille;
+    -moz-border-radius: @taille;
+    -ms-border-radius: @taille;
+    -o-border-radius: @taille;
+    border-radius: @taille;
+}
+
+.box-shadow(@color, @hoff, @voff, @blur) {
+    -webkit-box-shadow: @hoff @voff @blur @color;
+    -moz-box-shadow: @hoff @voff @blur @color;
+    box-shadow: @hoff @voff @blur @color;
+}
+
+.box-shadow-inset(@color, @hoff, @voff, @blur) {
+    -webkit-box-shadow: @hoff @voff @blur @color inset;
+    -moz-box-shadow: @hoff @voff @blur @color inset;
+    box-shadow: @hoff @voff @blur @color inset;
+}
+
+.inline-block(@position) {
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: @position;
+    *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
+}
+
+.standard-button {
+    cursor: pointer;
+    .inline-block(middle);
+    -webkit-appearance: none;
+}
+
+.standard-button-round {
+    padding: 15px 30px 15px 30px;
+    .border-radius(3em);
+    .standard-button;
+}
+
+.standard-button-rounded-border {
+    padding: 15px 20px 15px 20px;
+    .border-radius(0.4em);
+    .standard-button;
+}
+
+.orange-button {
+    background-color: @standard-orange-color;
+    border: 0;
+    color: white;
+    text-transform: uppercase;
+    font-family: "Lato", Helvetica, Arial, "Lucida Grande";
+    font-weight: 300;
+    font-size: 0.9em;
+
+    a, a:link, a:visited, a:active, a:hover {
+        color: white;
+    }
+
+    &:hover {
+        background-color: @standard-red-color;
+    }
+}
+
+.button-red-border {
+    border: @standard-red-color 2px solid;
+    color: @standard-red-color;
+    text-transform: uppercase;
+    font-family: "Lato", Helvetica, Arial, "Lucida Grande";
+    font-weight: normal;
+    font-size: 0.9em;
+
+    a, a:link, a:visited, a:active{
+        color: @standard-red-color;
+    }
+
+    &:hover, &:hover a {
+        color: @standard-red-color;
+        border-color: red;
+    }
+
 }
 
 table {
-	margin: 15px 25px;
-	
-	thead tr {
-        border-bottom: 3px solid @standard-blue-gray-color;
+    margin: 25px;
+    
+    thead tr {
+        border-bottom: 4px solid @standard-blue-gray-color;
+    }
+    
+    th {
+        padding: 7px 15px;
         
-        th {
-            padding: 10px 0;
-            
-            font-family: "Lato", sans-serif;
-            color: @standard-blue-gray-color;
-            font-size: 2em;
-            font-weight: 400;
-        }
+        color: @standard-blue-gray-color;
+        font-size: 1.5em;
+        
     }
     
     tbody tr {
-        td {
-            padding: 15px 0;
-            border-bottom: 1px solid #ccc;
-            font-size: 1.5em;
-            font-weight: 300;
-        }
+        border-bottom: 1px solid #ddd;
     }
     
-    tbody td a, tbody td a:visited {
-        color: #343434;
+    td {
+        font-size: 1.3em;
+        font-weight: 300;
+        
+        padding: 15px;
     }
-}
-
-tbody td a:hover, tbody td a:active {
-    color: #cc0033;
-}
-
-thead th, tbody td {
-    padding-right: 15px;
-}
-
-thead th:last-child, tbody td:last-child {
-    padding-right: 0;
 }
 
 footer {
 	font-size: 1.3em;
 	color: #555;
-	font-family: Ubuntu, sans-serif;
+	font-family: "Ubuntu", sans-serif;
 	text-align: center;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
-.vertical-normal-list ul {
+.vertical-normal-list {
 	margin: 25px;
+	
+	li {
+	    margin: 15px 0;
+        font-size: 1.5em;
+        
+        a, a:visited {
+            color: @standard-blue-color;
+        }
+        
+        a:hover, a:active {
+            color: @standard-red-color;
+        }
+	}
 }
 
-.vertical-normal-list li {
-	margin: 15px 0;
-	font-size: 1.5em;
-}
-
-.vertical-normal-list li a, .vertical-normal-list li a:visited {
-	color: #0077db;
-}
-
-.vertical-normal-list li a:hover, .vertical-normal-list li a:active {
-	color: #cc0033
-}
-
-.vertical-normal-list li a:after {
-	content: " ▷";
-}
-
-.information-block {
+.information-block(@background-color, @border-color, @text-color) {
+    background-color: @background-color;
+    border: 2px solid @border-color;
+    color: @text-color;
+    
 	padding: 10px 15px;
     -webkit-border-radius: 0.3em;
     -moz-border-radius: 0.3em;
@@ -197,46 +274,79 @@ footer {
 }
 
 .information-block-error-skin {
-	background-color: #f2dede;
-    border: 2px solid #edd5d8;
-    color: #cd594c;
+    .information-block(#f2dede, #edd5d8, #cd594c);
 }
 
 .information-block-succes-skin {
-	background-color: #dff0d8;
-    border: 2px solid #d6e9c6;
-    color: #468847;
+    .information-block(#dff0d8, #d6e9c6, #468847);
 }
 
-.ticket{
-	margin: 20px auto 20px auto;
-	width: 500px;
-	border: solid 2px black;
-	border-radius: 8px;
-	
-	h3{
-        font-family: "Lato", sans-serif;
-        font-size: 2em;
-        margin-bottom: 10px;
+.wrapper-ticket-card {
+    text-align: center;
+}
+
+.ticket-card {
+    .inline-block(middle);
+    padding: 20px 30px;
+    margin: 25px auto;
+    .box-shadow(#777, 0, 0, 5px);
+    
+    .rouge-et-or-logo{
+        height: 100px;
+        padding-left: 40px;
+        padding-right: 40px;
     }
-}
-
-.ticket-admin-info{
-	margin: 3px;
-}
-
-.ticket-game-info{
-	text-align: center;
-	margin: 20px 0 30px 0;
-}
-
-.ticket-place-info{
-	text-align: center;
-	margin-bottom: 10px;
-}
-
-#laval-logo{
-	height: 80px;
+    
+    .ticket-admin-info {
+        font-size: 1.5em;
+        text-align: left;
+        margin-bottom: 25px;
+        color: @standard-medium-gray-color;
+        
+        strong {
+            color: @standard-black-gray-color;
+            font-size: 1.2em;
+        }
+        
+        .half-admin-info {
+            .inline-block(top);
+            width: 50%;
+        }
+        
+        .text-align-right {
+            text-align: right;
+        }
+    }
+    
+    h3 {
+        font-size: 2.0em;
+        
+        strong {
+            font-family: "Lato", sans-serif;
+            font-size: 6.0em;
+            font-weight: 100;
+            color: @standard-red-color;
+        }
+    }
+    
+    .ticket-date-info {
+        font-size: 1.5em;
+        padding: 25px;
+    }
+    
+    .ticket-seat-info {
+        font-size: 1.4em;
+        text-align: left;
+        
+        color: @standard-medium-gray-color;
+        
+        strong {
+            color: @standard-black-gray-color;
+            font-size: 1.2em;
+        }
+        
+        .inline-block(middle);
+    }
 }
 
 .error-page-background {
@@ -261,9 +371,17 @@ footer {
 	margin-top: 300px;
 	margin-bottom: 50px;
 	padding: 25px;
-}
-
-.error-page-content strong {
-	font-size: 75px;
-	color: #494949;
+	
+	strong {
+	    font-size: 75px;
+        color: #494949;
+	}
+	
+	a, a:visited {
+	    color: @standard-red-color;
+	}
+	
+	a:hover, a:active {
+	    color: @standard-blue-color;
+	}
 }
