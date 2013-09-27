@@ -17,7 +17,7 @@ import ca.ulaval.glo4003.data_access.TicketDao;
 import ca.ulaval.glo4003.dtos.TicketDto;
 
 @Controller
-@RequestMapping(value = "/match", method = RequestMethod.GET)
+@RequestMapping(value = "/sport/{sportName}/match", method = RequestMethod.GET)
 public class GameController {
 	private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
@@ -25,7 +25,7 @@ public class GameController {
 	private TicketDao dao;
 
 	@RequestMapping(value = "/{gameId}/billets", method = RequestMethod.GET)
-	public String getTicketsForGame(@PathVariable int gameId, Model model) {
+	public String getTicketsForGame(@PathVariable int gameId, @PathVariable String sportName, Model model) {
 		try {
 			logger.info("Getting all tickets for game : " + gameId);
 

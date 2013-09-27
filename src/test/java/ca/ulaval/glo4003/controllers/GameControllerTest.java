@@ -23,6 +23,7 @@ import ca.ulaval.glo4003.dtos.TicketDto;
 public class GameControllerTest {
 
 	public static final int AN_ID = 123;
+	public static final String A_SPORT_NAME = "SportName";
 
 	@Mock
 	private TicketDao ticketDao;
@@ -42,14 +43,14 @@ public class GameControllerTest {
 		List<TicketDto> tickets = new LinkedList<TicketDto>();
 		when(ticketDao.getTicketsForGame(AN_ID)).thenReturn(tickets);
 
-		gameController.getTicketsForGame(AN_ID, model);
+		gameController.getTicketsForGame(AN_ID, A_SPORT_NAME, model);
 
 		verify(model).addAttribute("tickets", tickets);
 	}
 
 	@Test
 	public void getTicketsForGame_should_return_correct_view_path() {
-		String path = gameController.getTicketsForGame(AN_ID, model);
+		String path = gameController.getTicketsForGame(AN_ID, A_SPORT_NAME, model);
 
 		assertEquals("game/tickets", path);
 	}
@@ -59,7 +60,7 @@ public class GameControllerTest {
 			throws GameDoesntExistException {
 		when(ticketDao.getTicketsForGame(AN_ID)).thenThrow(GameDoesntExistException.class);
 
-		String path = gameController.getTicketsForGame(AN_ID, model);
+		String path = gameController.getTicketsForGame(AN_ID, A_SPORT_NAME, model);
 
 		assertEquals("error/404", path);
 	}
