@@ -35,7 +35,7 @@
                         <td>${game.gameDateFormatted}</td>
                         <td>${game.opponents}</td>
                         <td>${game.numberOfTickets}</td>
-                        <td><a href="/match/${game.id}/billets" class="standard-button-round orange-button">Consulter</a></td>
+                        <td><a href="match/${game.id}/billets" class="standard-button-round orange-button">Consulter</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

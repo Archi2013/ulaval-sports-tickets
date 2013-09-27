@@ -37,7 +37,7 @@
                         <td>${ticket.opponents}</td>
                         <td>${ticket.admissionType}</td>
                         <td>${ticket.section}</td>
-                        <td><a href="/billet/${ticket.ticketId}" class="standard-button-round orange-button">Consulter</a></td>
+                        <td><a href="billet/${ticket.ticketId}" class="standard-button-round orange-button">Consulter</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
