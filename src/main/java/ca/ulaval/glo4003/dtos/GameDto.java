@@ -49,7 +49,7 @@ public class GameDto {
 	}
 
 	public String getGameDateFormatted() {
-		return gameDate.toString(DateTimeFormat.longDateTime());
+		return gameDate.toString("dd MMMM yyyy à HH'h'mm z");
 	}
 
 	public void setGameDate(DateTime gameDate) {
