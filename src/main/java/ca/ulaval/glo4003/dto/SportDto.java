@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.dtos;
+package ca.ulaval.glo4003.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -9,10 +9,10 @@ import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import ca.ulaval.glo4003.data_access.GameDoesntExistException;
-import ca.ulaval.glo4003.data_access.TicketDao;
-import ca.ulaval.glo4003.data_access.TicketDoesntExistException;
-import ca.ulaval.glo4003.dtos.TicketDto;
+import ca.ulaval.glo4003.dao.GameDoesntExistException;
+import ca.ulaval.glo4003.dao.TicketDao;
+import ca.ulaval.glo4003.dao.TicketDoesntExistException;
+import ca.ulaval.glo4003.dto.TicketDto;
 
 
 public class XmlTicketDao implements TicketDao {

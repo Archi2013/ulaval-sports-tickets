@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.controllers;
+package ca.ulaval.glo4003.controller;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ca.ulaval.glo4003.dataFilters.DataFilter;
-import ca.ulaval.glo4003.data_access.GameDao;
-import ca.ulaval.glo4003.data_access.SportDao;
-import ca.ulaval.glo4003.data_access.SportDoesntExistException;
-import ca.ulaval.glo4003.dtos.GameDto;
-import ca.ulaval.glo4003.dtos.SportDto;
+import ca.ulaval.glo4003.dao.GameDao;
+import ca.ulaval.glo4003.dao.SportDao;
+import ca.ulaval.glo4003.dao.SportDoesntExistException;
+import ca.ulaval.glo4003.datafilter.DataFilter;
+import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.dto.SportDto;
 
 @Controller
 @RequestMapping(value = "/sport", method = RequestMethod.GET)

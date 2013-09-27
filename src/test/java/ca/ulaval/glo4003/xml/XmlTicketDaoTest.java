@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ca.ulaval.glo4003.dtos.TicketDto;
+import ca.ulaval.glo4003.dto.TicketDto;
 
 public class XmlTicketDaoTest {
 	

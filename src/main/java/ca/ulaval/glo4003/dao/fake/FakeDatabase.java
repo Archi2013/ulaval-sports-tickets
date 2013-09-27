@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.data_access.fake;
+package ca.ulaval.glo4003.dao.fake;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,9 +10,9 @@ import javax.inject.Singleton;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
-import ca.ulaval.glo4003.dtos.GameDto;
-import ca.ulaval.glo4003.dtos.SportDto;
-import ca.ulaval.glo4003.dtos.TicketDto;
+import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.dto.SportDto;
+import ca.ulaval.glo4003.dto.TicketDto;
 
 @Service
 @Singleton

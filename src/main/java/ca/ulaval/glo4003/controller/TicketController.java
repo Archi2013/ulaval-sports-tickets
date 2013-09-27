@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.controllers;
+package ca.ulaval.glo4003.controller;
 
 import javax.inject.Inject;
 
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ca.ulaval.glo4003.data_access.TicketDao;
-import ca.ulaval.glo4003.data_access.TicketDoesntExistException;
-import ca.ulaval.glo4003.dtos.TicketDto;
+import ca.ulaval.glo4003.dao.TicketDao;
+import ca.ulaval.glo4003.dao.TicketDoesntExistException;
+import ca.ulaval.glo4003.dto.TicketDto;
 
 @Controller
 @RequestMapping(value = "/sport/{sportName}/match/{matchId}/billet", method = RequestMethod.GET)

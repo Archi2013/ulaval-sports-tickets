@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.controllers;
+package ca.ulaval.glo4003.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyString;
@@ -19,12 +19,13 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
-import ca.ulaval.glo4003.dataFilters.DataFilter;
-import ca.ulaval.glo4003.data_access.GameDao;
-import ca.ulaval.glo4003.data_access.SportDao;
-import ca.ulaval.glo4003.data_access.SportDoesntExistException;
-import ca.ulaval.glo4003.dtos.GameDto;
-import ca.ulaval.glo4003.dtos.SportDto;
+import ca.ulaval.glo4003.controller.SportController;
+import ca.ulaval.glo4003.dao.GameDao;
+import ca.ulaval.glo4003.dao.SportDao;
+import ca.ulaval.glo4003.dao.SportDoesntExistException;
+import ca.ulaval.glo4003.datafilter.DataFilter;
+import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.dto.SportDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportControllerTest {

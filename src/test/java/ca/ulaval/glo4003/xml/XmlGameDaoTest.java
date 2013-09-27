@@ -8,7 +8,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ca.ulaval.glo4003.dtos.GameDto;
+import ca.ulaval.glo4003.dto.GameDto;
 
 public class XmlGameDaoTest {
 

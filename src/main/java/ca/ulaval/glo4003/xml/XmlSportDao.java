@@ -9,8 +9,8 @@ import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import ca.ulaval.glo4003.data_access.SportDao;
-import ca.ulaval.glo4003.dtos.SportDto;
+import ca.ulaval.glo4003.dao.SportDao;
+import ca.ulaval.glo4003.dto.SportDto;
 
 public class XmlSportDao implements SportDao {
 	

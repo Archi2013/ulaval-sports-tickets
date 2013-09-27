@@ -12,9 +12,9 @@ import org.joda.time.format.DateTimeFormatter;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import ca.ulaval.glo4003.data_access.GameDao;
-import ca.ulaval.glo4003.data_access.SportDoesntExistException;
-import ca.ulaval.glo4003.dtos.GameDto;
+import ca.ulaval.glo4003.dao.GameDao;
+import ca.ulaval.glo4003.dao.SportDoesntExistException;
+import ca.ulaval.glo4003.dto.GameDto;
 
 public class XmlGameDao implements GameDao {
 

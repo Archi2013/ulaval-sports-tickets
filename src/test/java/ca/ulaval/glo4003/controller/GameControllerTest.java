@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.controllers;
+package ca.ulaval.glo4003.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -15,9 +15,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
-import ca.ulaval.glo4003.data_access.GameDoesntExistException;
-import ca.ulaval.glo4003.data_access.TicketDao;
-import ca.ulaval.glo4003.dtos.TicketDto;
+import ca.ulaval.glo4003.controller.GameController;
+import ca.ulaval.glo4003.dao.GameDoesntExistException;
+import ca.ulaval.glo4003.dao.TicketDao;
+import ca.ulaval.glo4003.dto.TicketDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameControllerTest {

@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ca.ulaval.glo4003.dtos.SportDto;
+import ca.ulaval.glo4003.dto.SportDto;
 
 public class XmlSportDaoTest {
 	private XmlSportDao sportDao = new XmlSportDao();

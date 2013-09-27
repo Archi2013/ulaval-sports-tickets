@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.dataFilters;
+package ca.ulaval.glo4003.datafilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.dtos.GameDto;
+import ca.ulaval.glo4003.datafilter.GameIsInFutureFilter;
+import ca.ulaval.glo4003.dto.GameDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameIsInFutureFilterTest {

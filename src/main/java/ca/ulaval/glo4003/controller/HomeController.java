@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.controllers;
+package ca.ulaval.glo4003.controller;
 
 import java.util.Locale;
 

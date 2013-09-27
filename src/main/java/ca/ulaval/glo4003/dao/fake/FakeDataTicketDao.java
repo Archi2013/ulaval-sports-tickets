@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.data_access.fake;
+package ca.ulaval.glo4003.dao.fake;
 
 import java.util.List;
 
@@ -6,12 +6,12 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Repository;
 
-import ca.ulaval.glo4003.data_access.GameDoesntExistException;
-import ca.ulaval.glo4003.data_access.TicketDao;
-import ca.ulaval.glo4003.data_access.TicketDoesntExistException;
-import ca.ulaval.glo4003.dtos.GameDto;
-import ca.ulaval.glo4003.dtos.SportDto;
-import ca.ulaval.glo4003.dtos.TicketDto;
+import ca.ulaval.glo4003.dao.GameDoesntExistException;
+import ca.ulaval.glo4003.dao.TicketDao;
+import ca.ulaval.glo4003.dao.TicketDoesntExistException;
+import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.dto.SportDto;
+import ca.ulaval.glo4003.dto.TicketDto;
 
 @Repository
 public class FakeDataTicketDao implements TicketDao {
