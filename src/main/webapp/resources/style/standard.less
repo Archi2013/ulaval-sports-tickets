@@ -257,6 +257,10 @@ footer {
 	}
 }
 
+.margin-25-50 {
+    margin: 25px 50px;
+}
+
 .information-block(@background-color, @border-color, @text-color) {
     background-color: @background-color;
     border: 2px solid @border-color;
@@ -270,11 +274,18 @@ footer {
     border-radius: 0.3em;
     font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
     font-size: 1.3em;
-	margin: 25px 50px;
 }
 
 .information-block-error-skin {
     .information-block(#f2dede, #edd5d8, #cd594c);
+    
+    a, a:visited {
+        color: @standard-orange-color;
+    }
+    
+    a:hover, a:active {
+        color: @standard-red-color;
+    }
 }
 
 .information-block-succes-skin {

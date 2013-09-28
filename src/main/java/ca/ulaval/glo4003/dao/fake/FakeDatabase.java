@@ -36,24 +36,24 @@ public class FakeDatabase {
 
 	private Map<String, SportDto> createSports() {
 		Map<String, SportDto> sports = new HashMap<String, SportDto>();
-		sports.put("Hockey-Masculin", createHockey());
-		sports.put("Baseball-Masculin", createBaseballWithoutGames());
-		sports.put("Volleyball-Feminin", createVolleyballFeminin());
+		sports.put("Basketball Masculin", createBasketball());
+		sports.put("Baseball Masculin", createBaseballWithoutGames());
+		sports.put("Volleyball Féminin", createVolleyballFeminin());
 		return sports;
 	}
 
 	private SportDto createBaseballWithoutGames() {
-		SportDto baseball = new SportDto("Baseball-Masculin");
+		SportDto baseball = new SportDto("Baseball Masculin");
 		return baseball;
 	}
 
-	private SportDto createHockey() {
-		SportDto hockey = new SportDto("Hockey-Masculin");
-		hockey.getGames().addAll(createHockeyGames());
-		return hockey;
+	private SportDto createBasketball() {
+		SportDto basketball = new SportDto("Basketball Masculin");
+		basketball.getGames().addAll(createBasketballGames());
+		return basketball;
 	}
 
-	private List<GameDto> createHockeyGames() {
+	private List<GameDto> createBasketballGames() {
 		GameDto firstGame = new GameDto(1, "Carabins", DateTime.now().plusDays(1));
 		firstGame.getTickets().addAll(createGeneralAdmissionTickets(firstGame, 15.50, "Bleus", 2));
 		firstGame.getTickets().addAll(createGeneralAdmissionTickets(firstGame, 20.00, "Rouges", 5));
@@ -75,7 +75,7 @@ public class FakeDatabase {
 	}
 
 	private SportDto createVolleyballFeminin() {
-		SportDto volley = new SportDto("Volleyball-Feminin");
+		SportDto volley = new SportDto("Volleyball Féminin");
 		volley.getGames().addAll(createVolleyballFemininGames());
 		return volley;
 	}

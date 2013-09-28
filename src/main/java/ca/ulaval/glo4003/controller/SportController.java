@@ -1,6 +1,8 @@
 package ca.ulaval.glo4003.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -18,6 +20,7 @@ import ca.ulaval.glo4003.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.datafilter.DataFilter;
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.SportDto;
+import ca.ulaval.glo4003.utility.SportUrlMapper;
 
 @Controller
 @RequestMapping(value = "/sport", method = RequestMethod.GET)
@@ -39,13 +42,20 @@ public class SportController {
 		logger.info("Getting all sports");
 
 		List<SportDto> sports = dao.getAll();
-		model.addAttribute("sports", sports);
-
+		
+		Map<SportDto, String> sportUrls = new HashMap<>();
+		for(SportDto sport : sports) {
+			sportUrls.put(sport, SportUrlMapper.getSportUrl(sport.getName()));
+		}
+		
+		model.addAttribute("sportUrls", sportUrls);
+		
 		return "sport/list";
 	}
 
-	@RequestMapping(value = "/{sportName}/matchs", method = RequestMethod.GET)
-	public String getSportGames(@PathVariable String sportName, Model model) {
+	@RequestMapping(value = "/{sportUrl}/matchs", method = RequestMethod.GET)
+	public String getSportGames(@PathVariable String sportUrl, Model model) {
+		String sportName = SportUrlMapper.getSportName(sportUrl);
 		logger.info("Getting games for sport: " + sportName);
 		model.addAttribute("sportName", sportName);
 
