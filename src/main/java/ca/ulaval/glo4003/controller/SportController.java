@@ -20,6 +20,7 @@ import ca.ulaval.glo4003.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.datafilter.DataFilter;
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.SportDto;
+import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.utility.SportUrlMapper;
 
 @Controller
@@ -45,7 +46,12 @@ public class SportController {
 		
 		Map<SportDto, String> sportUrls = new HashMap<>();
 		for(SportDto sport : sports) {
-			sportUrls.put(sport, SportUrlMapper.getSportUrl(sport.getName()));
+			try {
+				sportUrls.put(sport, SportUrlMapper.getSportUrl(sport.getName()));
+			} catch (RuntimeException | SportDoesntExistInPropertieFileException e) {
+				e.printStackTrace();
+				logger.info("==> Impossible to get url of sport: " + sport.getName());
+			}
 		}
 		
 		model.addAttribute("sportUrls", sportUrls);
@@ -55,11 +61,11 @@ public class SportController {
 
 	@RequestMapping(value = "/{sportUrl}/matchs", method = RequestMethod.GET)
 	public String getSportGames(@PathVariable String sportUrl, Model model) {
-		String sportName = SportUrlMapper.getSportName(sportUrl);
-		logger.info("Getting games for sport: " + sportName);
-		model.addAttribute("sportName", sportName);
-
 		try {
+			String sportName = SportUrlMapper.getSportName(sportUrl);
+			logger.info("Getting games for sport: " + sportName);
+			model.addAttribute("sportName", sportName);
+
 			List<GameDto> games = gameDao.getGamesForSport(sportName);
 			filter.applyFilterOnList(games);
 			if (games.isEmpty()) {
@@ -68,8 +74,8 @@ public class SportController {
 				model.addAttribute("games", games);
 				return "sport/games";
 			}
-		} catch (SportDoesntExistException e) {
-			logger.info("==> Impossible to get games for sport: " + sportName);
+		} catch (SportDoesntExistException | RuntimeException | SportDoesntExistInPropertieFileException e) {
+			logger.info("==> Impossible to get games for sport: " + sportUrl);
 			return "error/404";
 		}
 	}

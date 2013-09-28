@@ -8,7 +8,7 @@ import java.util.Set;
 public class SportUrlMapper {
 	public static String sport_properties_file = "/sport-url.properties";
 	
-	public static String getSportUrl(String sportName) throws RuntimeException{
+	public static String getSportUrl(String sportName) throws RuntimeException, SportDoesntExistInPropertieFileException{
 		Properties properties = new Properties();
 		try(InputStream input = SportUrlMapper.class.getResourceAsStream(sport_properties_file);) {
 			properties.load(input);
@@ -18,14 +18,14 @@ public class SportUrlMapper {
 					return key.toString();
 				}
 			}
-			throw new RuntimeException();
+			throw new SportDoesntExistInPropertieFileException();
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException();
 		}
 	}
 	
-	public static String getSportName(String sportUrl) throws RuntimeException{
+	public static String getSportName(String sportUrl) throws RuntimeException, SportDoesntExistInPropertieFileException{
 		Properties properties = new Properties();
 		try(InputStream input = SportUrlMapper.class.getResourceAsStream(sport_properties_file);) {
 			properties.load(input);
@@ -33,7 +33,7 @@ public class SportUrlMapper {
 			if (sportName != null) {
 				return sportName;
 			}
-			throw new RuntimeException();
+			throw new SportDoesntExistInPropertieFileException();
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException();
