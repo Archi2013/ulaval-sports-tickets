@@ -29,14 +29,6 @@ public class GameIsInFutureFilter implements DataFilter<GameDto> {
 
 	@Override
 	public void applyFilterOnList(List<GameDto> originalList) {
-		/*List<GameDto> result = newArrayList(Iterables.filter(originalList,
-				new Predicate<GameDto>() {
-			public boolean apply(GameDto game) {
-				return game.getGameDate().isAfter(currentDate);
-			}
-		}));
-		return result;*/
-		
 		List<GameDto> toRemove = new ArrayList<>();
 		for (int i = 0; i < originalList.size(); i++) {
 			if (originalList.get(i).getGameDate().isBefore(currentDate)) {
