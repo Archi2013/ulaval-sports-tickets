@@ -50,20 +50,20 @@ public class SportControllerTest {
 	@InjectMocks
 	private SportController controller;
 
-	private List<GameDto> non_empty_games;
-	private List<SportDto> non_empty_sports;
-	private SportDto a_sport_dto;
+	private List<GameDto> nonEmptyGames;
+	private List<SportDto> nonEmptySports;
+	private SportDto ASportDto;
 
 	@Before
 	public void setUp() throws SportDoesntExistException {
-		non_empty_games = new ArrayList<>();
-		non_empty_games.add(new GameDto(1, "", DateTime.now().plusDays(1)));
-		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(non_empty_games);
+		nonEmptyGames = new ArrayList<>();
+		nonEmptyGames.add(new GameDto(1, "", DateTime.now().plusDays(1)));
+		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(nonEmptyGames);
 		
-		non_empty_sports = new ArrayList<>();
-		a_sport_dto = new SportDto(SPORT_NAME);
-		non_empty_sports.add(a_sport_dto);
-		when(sportDaoMock.getAll()).thenReturn(non_empty_sports);
+		nonEmptySports = new ArrayList<>();
+		ASportDto = new SportDto(SPORT_NAME);
+		nonEmptySports.add(ASportDto);
+		when(sportDaoMock.getAll()).thenReturn(nonEmptySports);
 	}
 
 	@Test
@@ -85,13 +85,13 @@ public class SportControllerTest {
 	
 	@Test
 	public void with_a_sport_list_getSports_should_add_a_map_to_model() throws RuntimeException, SportDoesntExistInPropertieFileException {
-		when(sportDaoMock.getAll()).thenReturn(non_empty_sports);
+		when(sportDaoMock.getAll()).thenReturn(nonEmptySports);
 		when(sportUrlMapperMock.getSportUrl(SPORT_NAME)).thenReturn(SPORT_URL);
 
 		controller.getSports(modelMock);
 		
 		Map<SportDto, String> map = new HashMap<>();
-		map.put(a_sport_dto, SPORT_URL);
+		map.put(ASportDto, SPORT_URL);
 		verify(modelMock).addAttribute("sportUrls", map);
 	}
 
@@ -106,23 +106,23 @@ public class SportControllerTest {
 
 	@Test
 	public void getSportGames_should_use_filter_on_list_returned_by_dao() throws SportDoesntExistException, RuntimeException, SportDoesntExistInPropertieFileException {
-		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(non_empty_games);
+		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(nonEmptyGames);
 		when(sportUrlMapperMock.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 
 		controller.getSportGames(SPORT_URL, modelMock);
 
-		verify(filterMock).applyFilterOnList(non_empty_games);
+		verify(filterMock).applyFilterOnList(nonEmptyGames);
 	}
 
 	@Test
 	public void getSportGames_should_add_sport_games_to_model_when_dao_return_a_non_empty_list()
 			throws SportDoesntExistException, RuntimeException, SportDoesntExistInPropertieFileException {
-		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(non_empty_games);
+		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(nonEmptyGames);
 		when(sportUrlMapperMock.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 		
 		controller.getSportGames(SPORT_URL, modelMock);
 
-		verify(modelMock).addAttribute("games", non_empty_games);
+		verify(modelMock).addAttribute("games", nonEmptyGames);
 	}
 
 	@Test
