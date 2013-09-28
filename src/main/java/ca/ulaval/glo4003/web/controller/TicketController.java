@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.controller;
+package ca.ulaval.glo4003.web.controller;
 
 import javax.inject.Inject;
 

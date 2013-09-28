@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.controller;
+package ca.ulaval.glo4003.web.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -12,10 +12,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
-import ca.ulaval.glo4003.controller.TicketController;
 import ca.ulaval.glo4003.dao.TicketDao;
 import ca.ulaval.glo4003.dao.TicketDoesntExistException;
 import ca.ulaval.glo4003.dto.TicketDto;
+import ca.ulaval.glo4003.web.controller.TicketController;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TicketControllerTest {

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.controller;
+package ca.ulaval.glo4003.web.controller;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -25,6 +25,7 @@ import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.SportDto;
 import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.utility.SportUrlMapper;
+import ca.ulaval.glo4003.web.controller.SportController;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportControllerTest {

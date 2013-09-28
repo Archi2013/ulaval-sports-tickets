@@ -5,9 +5,9 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.annotation.Resource;
+import org.springframework.stereotype.Component;
 
-@Resource
+@Component
 public class SportUrlMapper {
 	private String propertiesFileName = "sport-url.properties";
 	private Properties properties = new Properties();
