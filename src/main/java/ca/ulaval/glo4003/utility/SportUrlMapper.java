@@ -19,7 +19,7 @@ public class SportUrlMapper {
 			try(InputStream input = getClass().getResourceAsStream("/" + propertiesFileName);) {
 				properties.load(input);
 				return getSportUrlFromProperties(sportName);
-			} catch (IOException e) {
+			} catch (NullPointerException | IOException e) {
 				e.printStackTrace();
 				throw new RuntimeException();
 			}
@@ -43,7 +43,7 @@ public class SportUrlMapper {
 			try(InputStream input = getClass().getResourceAsStream("/" + propertiesFileName);) {
 				properties.load(input);
 				return getSportNameFromProperties(sportUrl);
-			} catch (IOException e) {
+			} catch (NullPointerException | IOException e) {
 				e.printStackTrace();
 				throw new RuntimeException();
 			}
