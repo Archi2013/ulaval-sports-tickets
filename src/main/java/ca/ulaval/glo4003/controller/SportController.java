@@ -37,6 +37,9 @@ public class SportController {
 
 	@Inject
 	private DataFilter<GameDto> filter;
+	
+	@Inject
+	private SportUrlMapper sportUrlMapper;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getSports(Model model) {
@@ -47,7 +50,7 @@ public class SportController {
 		Map<SportDto, String> sportUrls = new HashMap<>();
 		for(SportDto sport : sports) {
 			try {
-				sportUrls.put(sport, SportUrlMapper.getSportUrl(sport.getName()));
+				sportUrls.put(sport, sportUrlMapper.getSportUrl(sport.getName()));
 			} catch (RuntimeException | SportDoesntExistInPropertieFileException e) {
 				e.printStackTrace();
 				logger.info("==> Impossible to get url of sport: " + sport.getName());
@@ -62,7 +65,7 @@ public class SportController {
 	@RequestMapping(value = "/{sportUrl}/matchs", method = RequestMethod.GET)
 	public String getSportGames(@PathVariable String sportUrl, Model model) {
 		try {
-			String sportName = SportUrlMapper.getSportName(sportUrl);
+			String sportName = sportUrlMapper.getSportName(sportUrl);
 			logger.info("Getting games for sport: " + sportName);
 			model.addAttribute("sportName", sportName);
 
