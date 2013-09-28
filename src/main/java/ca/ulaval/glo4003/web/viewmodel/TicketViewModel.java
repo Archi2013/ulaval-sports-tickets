@@ -1,10 +1,10 @@
 package ca.ulaval.glo4003.web.viewmodel;
 
 public class TicketViewModel {
-	private Long id;
-	private String price;
-	private String admissionType;
-	private String section;
+	public Long id;
+	public String price;
+	public String admissionType;
+	public String section;
 	
 	public TicketViewModel(Long id, String price,
 			String admissionType, String section) {

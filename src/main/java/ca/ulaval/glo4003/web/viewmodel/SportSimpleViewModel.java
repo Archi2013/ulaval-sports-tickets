@@ -2,8 +2,8 @@ package ca.ulaval.glo4003.web.viewmodel;
 
 
 public class SportSimpleViewModel {
-	private String name;
-	private String url;
+	public String name;
+	public String url;
 
 	public SportSimpleViewModel(String name, String url) {
 		this.name = name;

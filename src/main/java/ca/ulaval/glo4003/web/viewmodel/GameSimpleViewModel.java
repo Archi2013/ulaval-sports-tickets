@@ -2,9 +2,9 @@ package ca.ulaval.glo4003.web.viewmodel;
 
 
 public class GameSimpleViewModel {
-	private Long id;
-	private String opponents;
-	private String date;
+	public Long id;
+	public String opponents;
+	public String date;
 	
 	public GameSimpleViewModel(Long id, String opponents, String date) {
 		this.id = id;

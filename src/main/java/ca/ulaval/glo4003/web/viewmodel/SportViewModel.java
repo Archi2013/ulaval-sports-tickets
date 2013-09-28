@@ -3,8 +3,8 @@ package ca.ulaval.glo4003.web.viewmodel;
 import java.util.List;
 
 public class SportViewModel {
-	private String name;
-	private List<GameSimpleViewModel> games;
+	public String name;
+	public List<GameSimpleViewModel> games;
 	
 	public SportViewModel(String name, List<GameSimpleViewModel> games) {
 		this.name = name;

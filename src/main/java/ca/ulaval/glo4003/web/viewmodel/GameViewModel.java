@@ -4,10 +4,10 @@ import java.util.List;
 
 
 public class GameViewModel {
-	private Long id;
-	private String opponents;
-	private String date;
-	private List<TicketViewModel> tickets;
+	public Long id;
+	public String opponents;
+	public String date;
+	public List<TicketViewModel> tickets;
 	
 	public GameViewModel(Long id, String opponents, String date, List<TicketViewModel> tickets) {
 		this.id = id;
