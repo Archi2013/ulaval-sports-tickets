@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Singleton;
 
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
+import ca.ulaval.glo4003.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.SportDto;
 import ca.ulaval.glo4003.dto.TicketDto;
@@ -26,6 +28,17 @@ public class FakeDatabase {
 		this.sports = createSports();
 	}
 
+	public GameDto getGame(long id) throws GameDoesntExistException {
+		for (Entry<String, SportDto> entry : sports.entrySet()) {
+			for (GameDto game : entry.getValue().getGames()) {
+				if (game.getId() == id) {
+					return game;
+				}
+			}
+		}
+		throw new GameDoesntExistException();
+	}
+	
 	public List<SportDto> getSports() {
 		return new ArrayList<SportDto>(sports.values());
 	}

@@ -1,7 +1,5 @@
 package ca.ulaval.glo4003.web.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -12,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import ca.ulaval.glo4003.dao.GameDao;
 import ca.ulaval.glo4003.dao.GameDoesntExistException;
-import ca.ulaval.glo4003.dao.TicketDao;
-import ca.ulaval.glo4003.dto.TicketDto;
+import ca.ulaval.glo4003.web.converter.GameConverter;
 
 @Controller
 @RequestMapping(value = "/sport/{sportName}/match", method = RequestMethod.GET)
@@ -22,16 +20,16 @@ public class GameController {
 	private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
 	@Inject
-	private TicketDao dao;
+	private GameConverter gameConverter;
+	
+	@Inject
+	private GameDao dao;
 
 	@RequestMapping(value = "/{gameId}/billets", method = RequestMethod.GET)
 	public String getTicketsForGame(@PathVariable int gameId, @PathVariable String sportName, Model model) {
 		try {
 			logger.info("Getting all tickets for game : " + gameId);
-
-			List<TicketDto> tickets = dao.getTicketsForGame(gameId);
-			model.addAttribute("GameId", gameId);
-			model.addAttribute("tickets", tickets);
+			model.addAttribute("game", gameConverter.convert(dao.get(gameId)));
 
 			return "game/tickets";
 		} catch (GameDoesntExistException e) {
