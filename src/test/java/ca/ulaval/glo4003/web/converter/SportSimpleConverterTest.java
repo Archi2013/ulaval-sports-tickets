@@ -90,7 +90,7 @@ public class SportSimpleConverterTest {
 		
 		List<SportSimpleViewModel> sportSVMs = sportSimpleConverter.convert(sportDtos);
 		
-		for(int i = 0; i < sportDtos.size() ; i++) {
+		for(int i = 0 ; i < sportDtos.size() ; i++) {
 			assertEquals(sportDtos.get(i).getName(), sportSVMs.get(i).name);
 		}
 	}

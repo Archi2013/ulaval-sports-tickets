@@ -16,7 +16,6 @@ import com.google.common.base.Function;
 
 @Component
 public class SportConverter {
-	SportUrlMapper sportUrlMapper = new SportUrlMapper();
 	GameSimpleConverter gameSimpleConverter = new GameSimpleConverter();
 	
 	public List<SportViewModel> convert(List<SportDto> sportDtos) {
@@ -33,5 +32,9 @@ public class SportConverter {
 
 	private List<GameSimpleViewModel> convertListGameDto(List<GameDto> gameDtos) {
 		return gameSimpleConverter.convert(gameDtos);
+	}
+	
+	public void setGameSimpleConverter(GameSimpleConverter gameSimpleConverter) {
+		this.gameSimpleConverter = gameSimpleConverter;
 	}
 }

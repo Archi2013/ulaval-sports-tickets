@@ -18,6 +18,10 @@ import com.google.common.base.Function;
 public class GameConverter {
 	TicketConverter ticketConverter = new TicketConverter();
 	
+	public void setTicketConverter(TicketConverter ticketConverter) {
+		this.ticketConverter = ticketConverter;
+	}
+
 	public List<GameViewModel> convert(List<GameDto> gameDtos) {
 		return transform(gameDtos, new Function<GameDto, GameViewModel>() {
 			public GameViewModel apply(GameDto gameDto) {
