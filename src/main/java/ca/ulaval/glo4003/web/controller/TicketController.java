@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ca.ulaval.glo4003.dao.TicketDao;
 import ca.ulaval.glo4003.dao.TicketDoesntExistException;
-import ca.ulaval.glo4003.dto.TicketDto;
 import ca.ulaval.glo4003.web.converter.TicketConverter;
 
 @Controller

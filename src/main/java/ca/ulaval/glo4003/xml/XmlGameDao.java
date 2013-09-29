@@ -13,6 +13,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ca.ulaval.glo4003.dao.GameDao;
+import ca.ulaval.glo4003.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.dto.GameDto;
 
@@ -31,6 +32,12 @@ public class XmlGameDao implements GameDao {
 			games.add(get(id));
 		}
 		return games;
+	}
+	
+	@Override
+	public GameDto get(long id) throws GameDoesntExistException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	List<String> getIdForSport(String sportName) {

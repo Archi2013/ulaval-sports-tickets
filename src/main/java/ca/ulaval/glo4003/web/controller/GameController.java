@@ -15,7 +15,7 @@ import ca.ulaval.glo4003.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.web.converter.GameConverter;
 
 @Controller
-@RequestMapping(value = "/sport/{sportName}/match", method = RequestMethod.GET)
+@RequestMapping(value = "/sport/{sportNameUrl}/match", method = RequestMethod.GET)
 public class GameController {
 	private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
@@ -26,7 +26,7 @@ public class GameController {
 	private GameDao dao;
 
 	@RequestMapping(value = "/{gameId}/billets", method = RequestMethod.GET)
-	public String getTicketsForGame(@PathVariable int gameId, @PathVariable String sportName, Model model) {
+	public String getTicketsForGame(@PathVariable int gameId, @PathVariable String sportNameUrl, Model model) {
 		try {
 			logger.info("Getting all tickets for game : " + gameId);
 			model.addAttribute("game", gameConverter.convert(dao.get(gameId)));

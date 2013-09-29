@@ -1,8 +1,8 @@
 package ca.ulaval.glo4003.web.controller;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static com.google.common.collect.Lists.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,10 +15,13 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
+import ca.ulaval.glo4003.dao.GameDao;
 import ca.ulaval.glo4003.dao.GameDoesntExistException;
-import ca.ulaval.glo4003.dao.TicketDao;
+import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.TicketDto;
-import ca.ulaval.glo4003.web.controller.GameController;
+import ca.ulaval.glo4003.web.converter.GameConverter;
+import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
+import ca.ulaval.glo4003.web.viewmodel.TicketViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameControllerTest {
@@ -27,10 +30,16 @@ public class GameControllerTest {
 	public static final String A_SPORT_NAME = "SportName";
 
 	@Mock
-	private TicketDao ticketDao;
+	private GameDao gameDao;
+	
+	@Mock
+	private GameDto gameDto;
 
 	@Mock
 	private Model model;
+	
+	@Mock
+	private GameConverter gameConverter;
 
 	@InjectMocks
 	private GameController gameController;
@@ -40,13 +49,12 @@ public class GameControllerTest {
 	}
 
 	@Test
-	public void getTicketsForGame_should_add_tickets_of_the_specified_game_to_model() throws GameDoesntExistException {
-		List<TicketDto> tickets = new LinkedList<TicketDto>();
-		when(ticketDao.getTicketsForGame(AN_ID)).thenReturn(tickets);
-
+	public void getTicketsForGame_should_add_the_specified_game_to_model() throws GameDoesntExistException {
+		GameViewModel gameVM = addToConverter(gameDto);
+		
 		gameController.getTicketsForGame(AN_ID, A_SPORT_NAME, model);
 
-		verify(model).addAttribute("tickets", tickets);
+		verify(model).addAttribute("game", gameVM);
 	}
 
 	@Test
@@ -57,12 +65,20 @@ public class GameControllerTest {
 	}
 
 	@Test
-	public void getTicketsForGame_should_redirect_to_home_path_when_game_id_doesnt_exist()
+	public void getTicketsForGame_should_redirect_to_404_page_when_game_id_doesnt_exist()
 			throws GameDoesntExistException {
-		when(ticketDao.getTicketsForGame(AN_ID)).thenThrow(GameDoesntExistException.class);
+		when(gameDao.get(AN_ID)).thenThrow(GameDoesntExistException.class);
 
 		String path = gameController.getTicketsForGame(AN_ID, A_SPORT_NAME, model);
 
 		assertEquals("error/404", path);
+	}
+	
+	private GameViewModel addToConverter(GameDto gameDto) throws GameDoesntExistException {
+		List<TicketViewModel> ticketDtos = newArrayList();
+		GameViewModel viewModel = new GameViewModel(new Long(123), "Furets rouges", "14 septembre 2013", ticketDtos);
+		when(gameDao.get(AN_ID)).thenReturn(gameDto);
+		when(gameConverter.convert(gameDto)).thenReturn(viewModel);
+		return viewModel;
 	}
 }

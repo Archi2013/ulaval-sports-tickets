@@ -1,11 +1,11 @@
 package ca.ulaval.glo4003.utility;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Reader;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
