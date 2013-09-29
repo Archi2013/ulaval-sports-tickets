@@ -5,13 +5,16 @@ public class GameSimpleViewModel {
 	public Long id;
 	public String opponents;
 	public String date;
+	public Integer numberOfTickets;
 	
-	public GameSimpleViewModel(Long id, String opponents, String date) {
+	public GameSimpleViewModel(Long id, String opponents, String date,
+			Integer numberOfTickets) {
 		this.id = id;
 		this.opponents = opponents;
 		this.date = date;
+		this.numberOfTickets = numberOfTickets;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -34,6 +37,14 @@ public class GameSimpleViewModel {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public Integer getNumberOfTickets() {
+		return numberOfTickets;
+	}
+
+	public void setNumberOfTickets(Integer numberOfTickets) {
+		this.numberOfTickets = numberOfTickets;
 	}
 	
 	

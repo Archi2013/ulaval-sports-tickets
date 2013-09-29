@@ -48,5 +48,4 @@ public class GameViewModel {
 		this.tickets = tickets;
 	}
 	
-	
 }

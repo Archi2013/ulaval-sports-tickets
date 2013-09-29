@@ -15,8 +15,8 @@
     
     <div class="vertical-normal-list">
         <ul>
-            <c:forEach items="${sportUrls}" var="sport">
-                <li><a href="/sport/${sport.value}/matchs">${sport.key.name} ▷</a></li>
+            <c:forEach items="${sports}" var="sport">
+                <li><a href="/sport/${sport.url}/matchs">${sport.name} ▷</a></li>
             </c:forEach>
         </ul>
     </div>

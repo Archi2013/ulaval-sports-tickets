@@ -10,7 +10,6 @@ public class TicketViewModel {
 
 	public TicketViewModel(Long id, String price, String admissionType,
 			String section, String opponents, String date) {
-		super();
 		this.id = id;
 		this.price = price;
 		this.admissionType = admissionType;

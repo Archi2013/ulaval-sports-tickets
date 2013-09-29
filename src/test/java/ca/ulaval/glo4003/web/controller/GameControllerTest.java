@@ -50,6 +50,7 @@ public class GameControllerTest {
 
 	@Test
 	public void getTicketsForGame_should_add_the_specified_game_to_model() throws GameDoesntExistException {
+		when(gameDao.get(AN_ID)).thenReturn(gameDto);
 		GameViewModel gameVM = addToConverter(gameDto);
 		
 		gameController.getTicketsForGame(AN_ID, A_SPORT_NAME, model);
@@ -77,7 +78,6 @@ public class GameControllerTest {
 	private GameViewModel addToConverter(GameDto gameDto) throws GameDoesntExistException {
 		List<TicketViewModel> ticketDtos = newArrayList();
 		GameViewModel viewModel = new GameViewModel(new Long(123), "Furets rouges", "14 septembre 2013", ticketDtos);
-		when(gameDao.get(AN_ID)).thenReturn(gameDto);
 		when(gameConverter.convert(gameDto)).thenReturn(viewModel);
 		return viewModel;
 	}

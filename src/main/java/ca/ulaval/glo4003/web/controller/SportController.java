@@ -1,9 +1,5 @@
 package ca.ulaval.glo4003.web.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -14,14 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ca.ulaval.glo4003.dao.GameDao;
 import ca.ulaval.glo4003.dao.SportDao;
-import ca.ulaval.glo4003.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.datafilter.DataFilter;
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.SportDto;
 import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.utility.SportUrlMapper;
+import ca.ulaval.glo4003.web.converter.SportConverter;
+import ca.ulaval.glo4003.web.converter.SportSimpleConverter;
 
 @Controller
 @RequestMapping(value = "/sport", method = RequestMethod.GET)
@@ -30,13 +26,16 @@ public class SportController {
 	private static final Logger logger = LoggerFactory.getLogger(SportController.class);
 
 	@Inject
-	private SportDao dao;
-
-	@Inject
-	private GameDao gameDao;
+	private SportDao sportDao;
 
 	@Inject
 	private DataFilter<GameDto> filter;
+	
+	@Inject
+	private SportSimpleConverter sportSimpleConverter;
+	
+	@Inject
+	private SportConverter sportConverter;
 	
 	@Inject
 	private SportUrlMapper sportUrlMapper;
@@ -44,20 +43,8 @@ public class SportController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getSports(Model model) {
 		logger.info("Getting all sports");
-
-		List<SportDto> sports = dao.getAll();
 		
-		Map<SportDto, String> sportUrls = new HashMap<>();
-		for(SportDto sport : sports) {
-			try {
-				sportUrls.put(sport, sportUrlMapper.getSportUrl(sport.getName()));
-			} catch (RuntimeException | SportDoesntExistInPropertieFileException e) {
-				e.printStackTrace();
-				logger.info("==> Impossible to get url of sport: " + sport.getName());
-			}
-		}
-		
-		model.addAttribute("sportUrls", sportUrls);
+		model.addAttribute("sports", sportSimpleConverter.convert(sportDao.getAll()));
 		
 		return "sport/list";
 	}
@@ -67,18 +54,19 @@ public class SportController {
 		try {
 			String sportName = sportUrlMapper.getSportName(sportUrl);
 			logger.info("Getting games for sport: " + sportName);
-			model.addAttribute("sportName", sportName);
 
-			List<GameDto> games = gameDao.getGamesForSport(sportName);
-			filter.applyFilterOnList(games);
-			if (games.isEmpty()) {
+			SportDto sportDto = sportDao.get(sportName);
+			filter.applyFilterOnList(sportDto.getGames());
+			
+			if (sportDto.getGames().isEmpty()) {
 				return "sport/no-games";
 			} else {
-				model.addAttribute("games", games);
+				model.addAttribute("sport", sportConverter.convert(sportDto));
 				return "sport/games";
 			}
-		} catch (SportDoesntExistException | RuntimeException | SportDoesntExistInPropertieFileException e) {
+		} catch (RuntimeException | SportDoesntExistInPropertieFileException e) {
 			logger.info("==> Impossible to get games for sport: " + sportUrl);
+			e.printStackTrace();
 			return "error/404";
 		}
 	}

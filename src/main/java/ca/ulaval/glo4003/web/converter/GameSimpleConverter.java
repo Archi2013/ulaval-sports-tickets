@@ -24,6 +24,7 @@ public class GameSimpleConverter {
 	
 	public GameSimpleViewModel convert(GameDto gameDto) {
 		return new GameSimpleViewModel(gameDto.getId(), gameDto.getOpponents(),
-				gameDto.getGameDate().toString("dd MMMM yyyy à HH'h'mm z"));
+				gameDto.getGameDate().toString("dd MMMM yyyy à HH'h'mm z"),
+				gameDto.getNumberOfTickets());
 	}
 }
