@@ -2,13 +2,13 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<c:set var="pageTitle"
+    value="Page d'erreur" />
+
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <title>Page d'erreur | UL Sport</title>
-    <%@include file="../utility/css-import.jsp" %>
-</head>
+<%@include file="../layout/head.jsp"%>
 <body>
     <%@include file="../layout/header.jsp" %>
     

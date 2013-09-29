@@ -8,11 +8,7 @@
 
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-<meta charset="utf-8">
-<title>${pageTitle}| UL Sport</title>
-<%@include file="../utility/css-import.jsp" %>
-</head>
+<%@include file="../layout/head.jsp"%>
 <body>
 	<%@include file="../layout/header.jsp"%>
 
