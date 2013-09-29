@@ -4,6 +4,8 @@ import static com.google.common.collect.Lists.*;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.dto.SportDto;
@@ -15,7 +17,9 @@ import com.google.common.base.Function;
 
 @Component
 public class SportSimpleConverter {
-	SportUrlMapper sportUrlMapper = new SportUrlMapper();
+	
+	@Inject
+	SportUrlMapper sportUrlMapper;
 	
 	public List<SportSimpleViewModel> convert(List<SportDto> sportDtos) {
 		return transform(sportDtos, new Function<SportDto, SportSimpleViewModel>() {
@@ -33,5 +37,9 @@ public class SportSimpleConverter {
 			url = "erreur";
 		}
 		return new SportSimpleViewModel(sportDto.getName(), url);
+	}
+
+	public void setSportUrlMapper(SportUrlMapper sportUrlMapper) {
+		this.sportUrlMapper = sportUrlMapper;
 	}
 }

@@ -62,4 +62,8 @@ public class SportUrlMapper {
 	public void setPropertiesFileName(String propertiesFileName) {
 		this.propertiesFileName = propertiesFileName;
 	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
 }
