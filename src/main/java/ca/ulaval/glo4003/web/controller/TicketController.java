@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ca.ulaval.glo4003.dao.TicketDao;
 import ca.ulaval.glo4003.dao.TicketDoesntExistException;
 import ca.ulaval.glo4003.dto.TicketDto;
+import ca.ulaval.glo4003.web.converter.TicketConverter;
 
 @Controller
 @RequestMapping(value = "/sport/{sportName}/match/{matchId}/billet", method = RequestMethod.GET)
 public class TicketController {
 	private static final Logger logger = LoggerFactory.getLogger(TicketController.class);
+	
+	@Inject
+	private TicketConverter ticketConverter;
 
 	@Inject
 	private TicketDao dao;
@@ -26,10 +30,7 @@ public class TicketController {
 	public String getTicket(@PathVariable int ticketId, Model model) {
 		try {
 			logger.info("Getting ticket : " + ticketId);
-
-			TicketDto ticket = dao.getTicket(ticketId);
-			model.addAttribute("ticketId", ticketId);
-			model.addAttribute("ticket", ticket);
+			model.addAttribute("ticket", ticketConverter.convert(dao.getTicket(ticketId)));
 
 			return "ticket/detail";
 		} catch (TicketDoesntExistException e) {

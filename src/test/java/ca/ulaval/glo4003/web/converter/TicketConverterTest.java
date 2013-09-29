@@ -2,9 +2,11 @@ package ca.ulaval.glo4003.web.converter;
 
 import static com.google.common.collect.Lists.*;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +16,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.TicketDto;
-import ca.ulaval.glo4003.web.viewmodel.SportViewModel;
 import ca.ulaval.glo4003.web.viewmodel.TicketViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,6 +39,9 @@ public class TicketConverterTest {
 		ticketDtos = newArrayList();
 		ticketDtos.add(ticketDto1);
 		ticketDtos.add(ticketDto2);
+		
+		when(gameDto.getOpponents()).thenReturn("Blanc Astral");
+		when(gameDto.getGameDate()).thenReturn(DateTime.now().plusDays(7));
 	}
 	
 	@Test
