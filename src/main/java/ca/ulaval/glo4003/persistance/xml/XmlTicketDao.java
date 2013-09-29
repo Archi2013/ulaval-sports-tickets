@@ -1,13 +1,10 @@
-package ca.ulaval.glo4003.xml;
+package ca.ulaval.glo4003.persistance.xml;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.xml.xpath.XPathExpressionException;
-
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import ca.ulaval.glo4003.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.dao.TicketDao;
@@ -41,7 +38,7 @@ public class XmlTicketDao implements TicketDao {
     public TicketDto getTicket(int ticketId) throws TicketDoesntExistException {
 		String xPath = basePath + "[id=\"" + ticketId + "\"]";
 		try {
-			Node node = database.extractNode(xPath);
+			SimpleNode node = database.extractNode(xPath);
 			return createFromNode(node);
 		} catch (XPathExpressionException e) {
 			e.printStackTrace();
@@ -53,12 +50,11 @@ public class XmlTicketDao implements TicketDao {
 		List<Integer> ids = new ArrayList<>();
 		String xPath = mappingPath + "[@gameID=\"" + gameID + "\"]/tickets/ticket";
 		try {
-			NodeList nodes = database.extractNodeSet(xPath);
-			for (int i = 0; i < nodes.getLength(); i++) {
-				Node node = nodes.item(i);
-				Node attribute = node.getAttributes().item(0);
-				if ("ticketID".equals(attribute.getNodeName())) {
-					ids.add(Integer.parseInt(attribute.getTextContent()));
+			List<SimpleNode> nodes = database.extractNodeSet(xPath);
+			for (SimpleNode node : nodes) {
+				if (node.hasNode("ticketID")) {
+					int id = Integer.parseInt(node.getNodeValue("ticketID"));
+					ids.add(id);
 				}
 			}
 		} catch (XPathExpressionException e) {
@@ -68,18 +64,12 @@ public class XmlTicketDao implements TicketDao {
 		return ids;
 	}
 
-	private TicketDto createFromNode(Node parent) {
-		Node idNode = parent.getChildNodes().item(1);
-		Node priceNode = parent.getChildNodes().item(3);
-		Node typeNode = parent.getChildNodes().item(5);
-		Node sectionNode = parent.getChildNodes().item(7);
-
-		if ("id".equals(idNode.getNodeName()) && "price".equals(priceNode.getNodeName())
-		        && "type".equals(typeNode.getNodeName()) && "section".equals(sectionNode.getNodeName())) {
-			int ticketId = Integer.parseInt(idNode.getTextContent());
-			Double price = Double.parseDouble(priceNode.getTextContent());
-			String admissionType = typeNode.getTextContent();
-			String section = sectionNode.getTextContent();
+	private TicketDto createFromNode(SimpleNode parent) {
+		if (parent.hasNode("id", "price", "type", "section")) {
+			int ticketId = Integer.parseInt(parent.getNodeValue("id"));
+			Double price = Double.parseDouble(parent.getNodeValue("price"));
+			String admissionType = parent.getNodeValue("type");
+			String section =parent.getNodeValue("section");
 			return new TicketDto(null, ticketId, price, admissionType, section);
 		}
 		return null;

@@ -1,13 +1,10 @@
-package ca.ulaval.glo4003.xml;
+package ca.ulaval.glo4003.persistance.xml;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.xml.xpath.XPathExpressionException;
-
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import ca.ulaval.glo4003.dao.SportDao;
 import ca.ulaval.glo4003.dto.SportDto;
@@ -22,11 +19,10 @@ public class XmlSportDao implements SportDao {
 	@Override
 	public List<SportDto> getAll() {
 		try {
-			NodeList nodes = database.extractNodeSet(basePath);
+			List<SimpleNode> nodes = database.extractNodeSet(basePath);
 	        
 	        List<SportDto> sports = new ArrayList<>();
-	        for (int i = 0 ; i < nodes.getLength() ; i++) {
-	        	Node node = nodes.item(i);
+	        for (SimpleNode node : nodes) {
 	        	sports.add(createFromNode(node));
 	        }
 	        return sports;
@@ -40,7 +36,7 @@ public class XmlSportDao implements SportDao {
 	public SportDto get(String sportName) {
 		try {
 			String xPath = basePath + "[name=\"" + sportName + "\"]";
-	        Node node = database.extractNode(xPath);
+			SimpleNode node = database.extractNode(xPath);
 	        return createFromNode(node);
         } catch (XPathExpressionException e) {
 	        e.printStackTrace();
@@ -48,10 +44,9 @@ public class XmlSportDao implements SportDao {
 		return null;
 	}
 	
-	private SportDto createFromNode(Node parent) {
-		Node nameNode = parent.getChildNodes().item(1);
-		if ("name".equals(nameNode.getNodeName()))
-				return new SportDto(nameNode.getTextContent());
+	private SportDto createFromNode(SimpleNode parent) {
+		if (parent.hasNode("name"))
+			return new SportDto(parent.getNodeValue("name"));
 		return null;
 	}
 

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.xml;
+package ca.ulaval.glo4003.persistance.xml;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.dto.SportDto;
+import ca.ulaval.glo4003.persistance.xml.XmlSportDao;
 
 public class XmlSportDaoTest {
 	private XmlSportDao sportDao = new XmlSportDao();

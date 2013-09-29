@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.xml;
+package ca.ulaval.glo4003.persistance.xml;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +26,7 @@ public class XmlExtractor {
 
 	public XmlExtractor(InputStream xml) throws Exception {
 		this.xPathfactory = XPathFactory.newInstance();
-		
+
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
@@ -39,17 +39,17 @@ public class XmlExtractor {
 	}
 
 	public String extractPath(String xPath) throws XPathExpressionException {
-		return (String)extract(xPath, XPathConstants.STRING);
+		return (String) extract(xPath, XPathConstants.STRING);
 	}
 
 	public Node extractNode(String xPath) throws XPathExpressionException {
-		return (Node)extract(xPath, XPathConstants.NODE);
-    }
+		return (Node) extract(xPath, XPathConstants.NODE);
+	}
 
 	public NodeList extractNodeSet(String xPath) throws XPathExpressionException {
-		return (NodeList)extract(xPath, XPathConstants.NODESET);
+		return (NodeList) extract(xPath, XPathConstants.NODESET);
 	}
-	
+
 	private Object extract(String xPath, QName qName) throws XPathExpressionException {
 		XPath xpath = xPathfactory.newXPath();
 		XPathExpression expr = xpath.compile(xPath);

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.xml;
+package ca.ulaval.glo4003.persistance.xml;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.persistance.xml.XmlGameDao;
 
 public class XmlGameDaoTest {
 
@@ -17,10 +18,10 @@ public class XmlGameDaoTest {
 	@Test
 	public void testGetIdForSport() throws Exception {
 		String sportName = "Hockey-Masculin";
-		List<String> ids = gameDao.getIdForSport(sportName);
+		List<Long> ids = gameDao.getIdForSport(sportName);
 		Assert.assertEquals(2, ids.size());
-		Assert.assertEquals("1", ids.get(0));
-		Assert.assertEquals("2", ids.get(1));
+		Assert.assertEquals(new Long(1), ids.get(0));
+		Assert.assertEquals(new Long(2), ids.get(1));
 	}
 	
 	@Test

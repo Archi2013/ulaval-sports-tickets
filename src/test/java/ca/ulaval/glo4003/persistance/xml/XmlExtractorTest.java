@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.xml;
+package ca.ulaval.glo4003.persistance.xml;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,6 +8,8 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ca.ulaval.glo4003.persistance.xml.XmlExtractor;
 
 public class XmlExtractorTest {
 
