@@ -8,7 +8,7 @@ import org.junit.Test;
 import ca.ulaval.glo4003.dto.SportDto;
 import ca.ulaval.glo4003.persistance.xml.XmlSportDao;
 
-public class XmlSportDaoTest {
+public class XmlSportDaoIT {
 	private XmlSportDao sportDao = new XmlSportDao();
 	
 	@Test

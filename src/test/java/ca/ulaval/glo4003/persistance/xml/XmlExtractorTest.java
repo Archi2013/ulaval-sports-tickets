@@ -2,14 +2,13 @@ package ca.ulaval.glo4003.persistance.xml;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import javax.xml.xpath.XPathExpressionException;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import ca.ulaval.glo4003.persistance.xml.XmlExtractor;
 
 public class XmlExtractorTest {
 
@@ -18,9 +17,10 @@ public class XmlExtractorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		String fileName = "BasicXmlForUnitTesting.xml";
-		InputStream xml = this.getClass().getResourceAsStream("/" + fileName);
-		this.extractor = new XmlExtractor(xml);
+		String xml = "<Magasin><Items<Item><Nom>Chemise</Nom><Prix>9,99</Prix></Item>" + 
+				"<Item><Nom>Pantalon</Nom><Prix>12,99</Prix></Item></Items></Magasin>";
+		InputStream stream = new ByteArrayInputStream(xml.getBytes("UTF-8"));
+		extractor = new XmlExtractor(stream);
 	}
 
 	@Test(expected = XPathExpressionException.class)

@@ -11,7 +11,7 @@ import org.junit.Test;
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.persistance.xml.XmlGameDao;
 
-public class XmlGameDaoTest {
+public class XmlGameDaoIT {
 
 	private XmlGameDao gameDao = new XmlGameDao();
 	

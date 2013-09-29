@@ -8,7 +8,7 @@ import org.junit.Test;
 import ca.ulaval.glo4003.dto.TicketDto;
 import ca.ulaval.glo4003.persistance.xml.XmlTicketDao;
 
-public class XmlTicketDaoTest {
+public class XmlTicketDaoIT {
 	
 	private XmlTicketDao ticketDao = new XmlTicketDao();
 	
