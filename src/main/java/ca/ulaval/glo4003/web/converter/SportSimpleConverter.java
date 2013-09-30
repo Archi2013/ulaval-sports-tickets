@@ -24,6 +24,7 @@ public class SportSimpleConverter {
 	
 	public List<SportSimpleViewModel> convert(List<SportDto> sportDtos) {
 		return transform(sportDtos, new Function<SportDto, SportSimpleViewModel>() {
+			@Override
 			public SportSimpleViewModel apply(SportDto sportDto) {
 				return convert(sportDto);
 			}

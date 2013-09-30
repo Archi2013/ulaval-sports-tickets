@@ -1,15 +1,10 @@
 package ca.ulaval.glo4003.datafilter;
 
-import static com.google.common.collect.Lists.newArrayList; 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 import ca.ulaval.glo4003.dto.GameDto;
 

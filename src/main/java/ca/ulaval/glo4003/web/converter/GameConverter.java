@@ -2,7 +2,6 @@ package ca.ulaval.glo4003.web.converter;
 
 import static com.google.common.collect.Lists.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -24,6 +23,7 @@ public class GameConverter {
 
 	public List<GameViewModel> convert(List<GameDto> gameDtos) {
 		return transform(gameDtos, new Function<GameDto, GameViewModel>() {
+			@Override
 			public GameViewModel apply(GameDto gameDto) {
 				return convert(gameDto);
 			}

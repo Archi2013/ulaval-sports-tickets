@@ -16,6 +16,7 @@ public class TicketConverter {
 	
 	public List<TicketViewModel> convert(List<TicketDto> ticketDtos) {
 		return transform(ticketDtos, new Function<TicketDto, TicketViewModel>() {
+			@Override
 			public TicketViewModel apply(TicketDto ticketDto) {
 				return convert(ticketDto);
 			}

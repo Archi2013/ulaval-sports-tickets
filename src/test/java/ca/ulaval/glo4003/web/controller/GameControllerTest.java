@@ -4,7 +4,6 @@ import static com.google.common.collect.Lists.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
@@ -16,7 +15,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
 import ca.ulaval.glo4003.dto.GameDto;
-import ca.ulaval.glo4003.dto.TicketDto;
 import ca.ulaval.glo4003.persistence.dao.GameDao;
 import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.web.converter.GameConverter;

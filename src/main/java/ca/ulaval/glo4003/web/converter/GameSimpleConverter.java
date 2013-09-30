@@ -16,6 +16,7 @@ public class GameSimpleConverter {
 	
 	public List<GameSimpleViewModel> convert(List<GameDto> gameDtos) {
 		return transform(gameDtos, new Function<GameDto, GameSimpleViewModel>() {
+			@Override
 			public GameSimpleViewModel apply(GameDto gameDto) {
 				return convert(gameDto);
 			}

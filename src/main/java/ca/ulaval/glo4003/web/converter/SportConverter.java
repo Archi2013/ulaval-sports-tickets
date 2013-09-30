@@ -19,6 +19,7 @@ public class SportConverter {
 	
 	public List<SportViewModel> convert(List<SportDto> sportDtos) {
 		return transform(sportDtos, new Function<SportDto, SportViewModel>() {
+			@Override
 			public SportViewModel apply(SportDto sportDto) {
 				return convert(sportDto);
 			}
