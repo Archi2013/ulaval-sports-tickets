@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.persistance.xml;
+package ca.ulaval.glo4003.persistence.xml;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.dto.GameDto;
-import ca.ulaval.glo4003.persistance.xml.XmlGameDao;
+import ca.ulaval.glo4003.persistence.xml.XmlGameDao;
 
 public class XmlGameDaoIT {
 

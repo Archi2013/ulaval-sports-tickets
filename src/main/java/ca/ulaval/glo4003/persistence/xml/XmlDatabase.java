@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.persistance.xml;
+package ca.ulaval.glo4003.persistence.xml;
 
 import java.io.InputStream;
 import java.util.ArrayList;

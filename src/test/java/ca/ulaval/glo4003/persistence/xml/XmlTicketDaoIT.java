@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.persistance.xml;
+package ca.ulaval.glo4003.persistence.xml;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.dto.TicketDto;
-import ca.ulaval.glo4003.persistance.xml.XmlTicketDao;
+import ca.ulaval.glo4003.persistence.xml.XmlTicketDao;
 
 public class XmlTicketDaoIT {
 	

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.persistance.xml;
+package ca.ulaval.glo4003.persistence.xml;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -10,6 +10,9 @@ import java.io.InputStream;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Node;
+
+import ca.ulaval.glo4003.persistence.xml.SimpleNode;
+import ca.ulaval.glo4003.persistence.xml.XmlExtractor;
 
 public class SimpleNodeTest {
 	
