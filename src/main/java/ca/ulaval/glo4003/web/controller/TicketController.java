@@ -15,7 +15,7 @@ import ca.ulaval.glo4003.dao.TicketDoesntExistException;
 import ca.ulaval.glo4003.web.converter.TicketConverter;
 
 @Controller
-@RequestMapping(value = "/sport/{sportName}/match/{matchId}/billet", method = RequestMethod.GET)
+@RequestMapping(value = "/sport/{sportNameUrl}/match/{matchId}/billet", method = RequestMethod.GET)
 public class TicketController {
 	private static final Logger logger = LoggerFactory.getLogger(TicketController.class);
 	
