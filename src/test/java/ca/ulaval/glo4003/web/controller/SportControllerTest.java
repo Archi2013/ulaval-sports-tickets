@@ -16,11 +16,11 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
-import ca.ulaval.glo4003.dao.SportDao;
-import ca.ulaval.glo4003.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.datafilter.DataFilter;
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.SportDto;
+import ca.ulaval.glo4003.persistence.dao.SportDao;
+import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.utility.SportUrlMapperPropertieFile;
 import ca.ulaval.glo4003.web.converter.SportConverter;

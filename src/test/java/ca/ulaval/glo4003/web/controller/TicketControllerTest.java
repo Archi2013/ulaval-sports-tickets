@@ -11,9 +11,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
-import ca.ulaval.glo4003.dao.TicketDao;
-import ca.ulaval.glo4003.dao.TicketDoesntExistException;
 import ca.ulaval.glo4003.dto.TicketDto;
+import ca.ulaval.glo4003.persistence.dao.TicketDao;
+import ca.ulaval.glo4003.persistence.dao.TicketDoesntExistException;
 import ca.ulaval.glo4003.web.converter.TicketConverter;
 import ca.ulaval.glo4003.web.viewmodel.TicketViewModel;
 

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.dao;
+package ca.ulaval.glo4003.persistence.dao;
 
 public class TicketDoesntExistException extends Exception {
 

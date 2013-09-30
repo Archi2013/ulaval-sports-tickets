@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.dao.fake;
+package ca.ulaval.glo4003.persistence.dao.fake;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,10 +11,10 @@ import javax.inject.Singleton;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
-import ca.ulaval.glo4003.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.SportDto;
 import ca.ulaval.glo4003.dto.TicketDto;
+import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
 
 @Service
 @Singleton

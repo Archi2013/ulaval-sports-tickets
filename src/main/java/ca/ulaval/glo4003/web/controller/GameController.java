@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ca.ulaval.glo4003.dao.GameDao;
-import ca.ulaval.glo4003.dao.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.dao.GameDao;
+import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.web.converter.GameConverter;
 
 @Controller
