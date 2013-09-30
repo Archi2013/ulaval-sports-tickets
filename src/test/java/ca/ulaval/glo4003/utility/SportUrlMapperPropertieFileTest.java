@@ -18,7 +18,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SportUrlMapperTest {
+public class SportUrlMapperPropertieFileTest {
 	private static final String SPORT_NAME = "Basketball";
 	private static final String SPORT_URL = "basketball";
 	private static final String SPORT_NAME_SPACES = "Tennis de table";
@@ -32,7 +32,7 @@ public class SportUrlMapperTest {
 	Properties properties;
 	
 	@InjectMocks
-	SportUrlMapper sportUrlMapper;
+	SportUrlMapperPropertieFile sportUrlMapper;
 	
 	Set<Object> keySet;
 	

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.SportDto;
-import ca.ulaval.glo4003.utility.SportUrlMapper;
 import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SportViewModel;
 

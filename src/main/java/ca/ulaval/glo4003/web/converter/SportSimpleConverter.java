@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import ca.ulaval.glo4003.dto.SportDto;
 import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.utility.SportUrlMapper;
+import ca.ulaval.glo4003.utility.SportUrlMapperPropertieFile;
 import ca.ulaval.glo4003.web.viewmodel.SportSimpleViewModel;
 
 import com.google.common.base.Function;
@@ -39,7 +40,7 @@ public class SportSimpleConverter {
 		return new SportSimpleViewModel(sportDto.getName(), url);
 	}
 
-	public void setSportUrlMapper(SportUrlMapper sportUrlMapper) {
+	public void setSportUrlMapper(SportUrlMapperPropertieFile sportUrlMapper) {
 		this.sportUrlMapper = sportUrlMapper;
 	}
 }

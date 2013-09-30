@@ -22,7 +22,7 @@ import ca.ulaval.glo4003.datafilter.DataFilter;
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.SportDto;
 import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
-import ca.ulaval.glo4003.utility.SportUrlMapper;
+import ca.ulaval.glo4003.utility.SportUrlMapperPropertieFile;
 import ca.ulaval.glo4003.web.converter.SportConverter;
 import ca.ulaval.glo4003.web.converter.SportSimpleConverter;
 import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
@@ -45,7 +45,7 @@ public class SportControllerTest {
 	private DataFilter<GameDto> dataFilter;
 
 	@Mock
-	private SportUrlMapper sportUrlMapper;
+	private SportUrlMapperPropertieFile sportUrlMapper;
 	
 	@Mock
 	private SportSimpleConverter sportSimpleConverter;
