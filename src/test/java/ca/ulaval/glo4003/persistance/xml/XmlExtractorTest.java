@@ -17,7 +17,7 @@ public class XmlExtractorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		String xml = "<Magasin><Items<Item><Nom>Chemise</Nom><Prix>9,99</Prix></Item>" + 
+		String xml = "<Magasin><Items><Item><Nom>Chemise</Nom><Prix>9,99</Prix></Item>" + 
 				"<Item><Nom>Pantalon</Nom><Prix>12,99</Prix></Item></Items></Magasin>";
 		InputStream stream = new ByteArrayInputStream(xml.getBytes("UTF-8"));
 		extractor = new XmlExtractor(stream);
