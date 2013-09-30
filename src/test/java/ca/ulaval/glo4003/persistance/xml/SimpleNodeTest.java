@@ -1,16 +1,15 @@
 package ca.ulaval.glo4003.persistance.xml;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-
-import javax.xml.xpath.XPathExpressionException;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Node;
-
-import static org.junit.Assert.assertFalse;
 
 public class SimpleNodeTest {
 	
@@ -25,7 +24,7 @@ public class SimpleNodeTest {
 
 	@Test
 	public void testEmptyHasNoNode() throws Exception {
-		boolean actual = emptyNode.hasNode("test");
+		boolean actual = emptyNode.hasNode("Nom");
 		assertFalse(actual);
 	}
 	
@@ -37,15 +36,33 @@ public class SimpleNodeTest {
 	
 	@Test
 	public void testHasNodeWithValideName() throws Exception {
-		boolean actual = someNode.hasNode("name");
-		assertFalse(actual);
+		boolean actual = someNode.hasNode("Nom");
+		assertTrue(actual);
 	}
 	
-	private Node createBasicNode() throws UnsupportedEncodingException, Exception, XPathExpressionException {
-	    String xml = "<base><name>somename</name></base>";
+	@Test
+	public void testHasNodeWithValideAttribute() throws Exception {
+		boolean actual = someNode.hasNode("Id");
+		assertTrue(actual);
+	}
+	
+	@Test
+	public void testGetNodeValue() throws Exception {
+		String actual = someNode.getNodeValue("Nom");
+		String expected = "Chemise";
+		assertEquals(expected, actual);
+	}
+	
+	@Test(expected=RuntimeException.class)
+	public void testGetNodeValueThrowException() throws Exception {
+		someNode.getNodeValue("test");
+	}
+	
+	private Node createBasicNode() throws Exception {
+		String xml = "<Magasin><Items><Item Id=\"1\"><Nom>Chemise</Nom></Item></Items></Magasin>";
 		InputStream stream = new ByteArrayInputStream(xml.getBytes("UTF-8"));
 		XmlExtractor extractor = new XmlExtractor(stream);
-		String xPath = "/base";
+		String xPath = "/Magasin/Items/Item[Nom=\"Chemise\"]";
 		return extractor.extractNode(xPath);
     }
 }

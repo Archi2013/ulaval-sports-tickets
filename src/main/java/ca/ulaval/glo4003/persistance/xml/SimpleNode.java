@@ -21,7 +21,7 @@ public class SimpleNode {
 			map.put(attribute.getNodeName(), attribute.getTextContent());
 		}
 		NodeList children = parent.getChildNodes();
-		for (int i = 1 ; i < children.getLength() - 1 ; i+=2) {
+		for (int i = 0 ; i < children.getLength() ; i++) {
 			Node child = children.item(i);
 			map.put(child.getNodeName(), child.getTextContent());
 		}
