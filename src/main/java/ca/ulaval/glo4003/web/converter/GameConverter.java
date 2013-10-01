@@ -1,8 +1,8 @@
 package ca.ulaval.glo4003.web.converter;
 
-import static com.google.common.collect.Lists.transform;
-
 import java.util.List;
+
+import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
@@ -12,26 +12,14 @@ import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SectionViewModel;
 import ca.ulaval.glo4003.web.viewmodel.TicketViewModel;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 
 @Component
-public class GameConverter {
-	TicketConverter ticketConverter = new TicketConverter();
+public class GameConverter extends AbstractConverter<GameDto, GameViewModel> {
 
-	public void setTicketConverter(TicketConverter ticketConverter) {
-		this.ticketConverter = ticketConverter;
-	}
-
-	public List<GameViewModel> convert(List<GameDto> gameDtos) {
-		return transform(gameDtos, new Function<GameDto, GameViewModel>() {
-			@Override
-			public GameViewModel apply(GameDto gameDto) {
-				return convert(gameDto);
-			}
-		});
-	}
+	@Inject
+	private TicketConverter ticketConverter;
 
 	public GameViewModel convert(GameDto gameDto) {
 		return new GameViewModel(gameDto.getId(), gameDto.getOpponents(), gameDto.getGameDate().toString(
