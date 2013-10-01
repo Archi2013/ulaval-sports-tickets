@@ -68,7 +68,7 @@ public class SportControllerTest {
 	List<GameSimpleViewModel> gameViewModelsNonEmpty;
 
 	@Before
-	public void setUp() throws SportDoesntExistException {
+	public void setUp() throws SportDoesntExistException, RuntimeException, SportDoesntExistInPropertieFileException {
 		gameDtos = newArrayList();
 		gameViewModels = newArrayList();
 
@@ -76,6 +76,8 @@ public class SportControllerTest {
 		gameDtosNonEmpty.add(gameDto);
 		gameViewModelsNonEmpty = newArrayList();
 		gameViewModelsNonEmpty.add(gameViewModel);
+
+		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 	}
 
 	@Test
@@ -103,20 +105,16 @@ public class SportControllerTest {
 	}
 
 	@Test
-	public void getSportGames_should_get_sports_from_service() throws RuntimeException, SportDoesntExistInPropertieFileException {
-		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
+	public void getSportGames_should_get_games_from_service() throws SportDoesntExistException {
 
 		controller.getSportGames(SPORT_URL, model);
 
-		verify(sportService).getSport(SPORT_NAME);
+		verify(sportService).getGamesForSport(SPORT_NAME);
 	}
 
 	@Test
-	public void getSportsGames_should_return_no_games_path_when_sport_doesnt_have_any_game() throws SportDoesntExistException,
-			SportDoesntExistInPropertieFileException {
-		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
-		when(sportService.getSport(SPORT_NAME)).thenReturn(sportViewModel);
-		when(sportViewModel.getGames()).thenReturn(gameViewModels);
+	public void getSportsGames_should_return_no_games_path_when_sport_doesnt_have_any_game() throws SportDoesntExistException {
+		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gameViewModels);
 
 		String path = controller.getSportGames(SPORT_URL, model);
 
@@ -125,22 +123,17 @@ public class SportControllerTest {
 
 	@Test
 	public void getSportsGames_should_not_add_sport_games_to_model_when_game_doesnt_have_any_game()
-			throws SportDoesntExistException, RuntimeException, SportDoesntExistInPropertieFileException {
-		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
-		when(sportService.getSport(SPORT_NAME)).thenReturn(sportViewModel);
-		when(sportViewModel.getGames()).thenReturn(gameViewModels);
+			throws SportDoesntExistException {
+		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gameViewModels);
 
 		controller.getSportGames(SPORT_URL, model);
 
-		verify(model, never()).addAttribute(eq("sport"), any());
+		verify(model, never()).addAttribute(eq("games"), any());
 	}
 
 	@Test
-	public void getSportGames_should_return_correct_path_when_dao_return_a_non_empty_list() throws RuntimeException,
-			SportDoesntExistInPropertieFileException {
-		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
-		when(sportService.getSport(SPORT_NAME)).thenReturn(sportViewModel);
-		when(sportViewModel.getGames()).thenReturn(gameViewModelsNonEmpty);
+	public void getSportGames_should_return_correct_path_when_dao_return_a_non_empty_list() throws SportDoesntExistException {
+		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gameViewModelsNonEmpty);
 
 		String path = controller.getSportGames(SPORT_URL, model);
 
@@ -150,19 +143,17 @@ public class SportControllerTest {
 	@Test
 	public void getSportGames_should_add_sport_to_model_when_dao_returns_a_non_empty_list() throws SportDoesntExistException,
 			RuntimeException, SportDoesntExistInPropertieFileException {
-		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
-		when(sportService.getSport(SPORT_NAME)).thenReturn(sportViewModel);
-		when(sportViewModel.getGames()).thenReturn(gameViewModelsNonEmpty);
+		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gameViewModelsNonEmpty);
 
 		controller.getSportGames(SPORT_URL, model);
 
-		verify(model).addAttribute("sport", sportViewModel);
+		verify(model).addAttribute("games", gameViewModelsNonEmpty);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void getSportGames_should_redirect_to_404_path_when_sport_doesnt_exist_in_propertie_file()
-			throws SportDoesntExistException, SportDoesntExistInPropertieFileException {
+	public void getSportGames_should_redirect_to_404_path_when_sport_doesnt_exist_in_propertie_file() throws RuntimeException,
+			SportDoesntExistInPropertieFileException {
 		when(sportUrlMapper.getSportName(SPORT_URL)).thenThrow(SportDoesntExistInPropertieFileException.class);
 
 		String path = controller.getSportGames(SPORT_URL, model);

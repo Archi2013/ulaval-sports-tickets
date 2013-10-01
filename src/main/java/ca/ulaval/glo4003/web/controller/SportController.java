@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ca.ulaval.glo4003.domain.services.SportService;
+import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.utility.SportUrlMapper;
+import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SportSimpleViewModel;
-import ca.ulaval.glo4003.web.viewmodel.SportViewModel;
 
 @Controller
 @RequestMapping(value = "/sport", method = RequestMethod.GET)
@@ -45,15 +46,16 @@ public class SportController {
 			String sportName = sportUrlMapper.getSportName(sportUrl);
 			logger.info("Getting games for sport: " + sportName);
 
-			SportViewModel sportViewModel = service.getSport(sportName);
+			List<GameSimpleViewModel> gameViewModels = service.getGamesForSport(sportName);
 
-			if (sportViewModel.getGames().isEmpty()) {
+			if (gameViewModels.isEmpty()) {
 				return "sport/no-games";
 			} else {
-				model.addAttribute("sport", sportViewModel);
+				model.addAttribute("sportName", sportName);
+				model.addAttribute("games", gameViewModels);
 				return "sport/games";
 			}
-		} catch (RuntimeException | SportDoesntExistInPropertieFileException e) {
+		} catch (RuntimeException | SportDoesntExistInPropertieFileException | SportDoesntExistException e) {
 			logger.info("==> Impossible to get games for sport: " + sportUrl);
 			e.printStackTrace();
 			return "error/404";

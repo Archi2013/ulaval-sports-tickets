@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 import ca.ulaval.glo4003.datafilter.DataFilter;
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.dto.SportDto;
+import ca.ulaval.glo4003.persistence.dao.GameDao;
 import ca.ulaval.glo4003.persistence.dao.SportDao;
-import ca.ulaval.glo4003.web.converter.SportConverter;
+import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
+import ca.ulaval.glo4003.web.converter.GameSimpleConverter;
 import ca.ulaval.glo4003.web.converter.SportSimpleConverter;
+import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SportSimpleViewModel;
-import ca.ulaval.glo4003.web.viewmodel.SportViewModel;
 
 @Service
 public class SportService {
@@ -21,23 +23,26 @@ public class SportService {
 	private SportDao sportDao;
 
 	@Inject
+	private GameDao gameDao;
+
+	@Inject
 	private DataFilter<GameDto> filter;
 
 	@Inject
-	private SportConverter sportConverter;
+	private SportSimpleConverter sportSimpleConverter;
 
 	@Inject
-	private SportSimpleConverter sportSimpleConverter;
+	private GameSimpleConverter gameConverter;
 
 	public List<SportSimpleViewModel> getSports() {
 		List<SportDto> sports = sportDao.getAll();
 		return sportSimpleConverter.convert(sports);
 	}
 
-	public SportViewModel getSport(String sportName) {
-		SportDto sport = sportDao.get(sportName);
-		filter.applyFilterOnList(sport.getGames());
-		return sportConverter.convert(sport);
+	public List<GameSimpleViewModel> getGamesForSport(String sportName) throws SportDoesntExistException {
+		List<GameDto> games = gameDao.getGamesForSport(sportName);
+		filter.applyFilterOnList(games);
+		return gameConverter.convert(games);
 	}
 
 }
