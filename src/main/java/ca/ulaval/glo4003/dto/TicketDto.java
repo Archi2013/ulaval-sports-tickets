@@ -4,12 +4,11 @@ import org.joda.time.DateTime;
 
 public class TicketDto {
 
-	private GameDto game;
-	private int ticketId;
-	private double price;
-
-	private String admissionType;
-	private String section;
+	public GameDto game;
+	public int ticketId;
+	public double price;
+	public String admissionType;
+	public String section;
 
 	public TicketDto(GameDto game, int ticketId, double price, String admissionType, String section) {
 		this.ticketId = ticketId;

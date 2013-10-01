@@ -2,50 +2,33 @@ package ca.ulaval.glo4003.web.viewmodel;
 
 import java.util.List;
 
-
 public class GameViewModel {
 	public Long id;
 	public String opponents;
 	public String date;
-	public List<TicketViewModel> tickets;
-	
-	public GameViewModel(Long id, String opponents, String date, List<TicketViewModel> tickets) {
+	public List<SectionViewModel> sections;
+
+	public GameViewModel(Long id, String opponents, String date, List<SectionViewModel> sections) {
 		this.id = id;
 		this.opponents = opponents;
 		this.date = date;
-		this.tickets = tickets;
-	}
-	
-	public Long getId() {
-		return id;
+		this.sections = sections;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public Long getId() {
+		return id;
 	}
 
 	public String getOpponents() {
 		return opponents;
 	}
 
-	public void setOpponents(String opponents) {
-		this.opponents = opponents;
-	}
-
 	public String getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public List<SectionViewModel> getSections() {
+		return sections;
 	}
 
-	public List<TicketViewModel> getTickets() {
-		return tickets;
-	}
-
-	public void setTickets(List<TicketViewModel> tickets) {
-		this.tickets = tickets;
-	}
-	
 }
