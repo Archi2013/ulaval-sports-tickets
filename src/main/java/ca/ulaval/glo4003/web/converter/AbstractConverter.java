@@ -8,11 +8,11 @@ import com.google.common.base.Function;
 
 public abstract class AbstractConverter<Dto, ViewModel> {
 
-	public List<ViewModel> convert(List<Dto> gameDtos) {
-		return transform(gameDtos, new Function<Dto, ViewModel>() {
+	public List<ViewModel> convert(List<Dto> dtos) {
+		return transform(dtos, new Function<Dto, ViewModel>() {
 			@Override
-			public ViewModel apply(Dto gameDto) {
-				return convert(gameDto);
+			public ViewModel apply(Dto dto) {
+				return convert(dto);
 			}
 		});
 	}
