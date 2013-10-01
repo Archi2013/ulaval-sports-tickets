@@ -1,8 +1,8 @@
 package ca.ulaval.glo4003.web.converter;
 
-import static com.google.common.collect.Lists.*;
-
 import java.util.List;
+
+import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
@@ -11,30 +11,17 @@ import ca.ulaval.glo4003.dto.SportDto;
 import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SportViewModel;
 
-import com.google.common.base.Function;
-
 @Component
-public class SportConverter {
-	GameSimpleConverter gameSimpleConverter = new GameSimpleConverter();
-	
-	public List<SportViewModel> convert(List<SportDto> sportDtos) {
-		return transform(sportDtos, new Function<SportDto, SportViewModel>() {
-			@Override
-			public SportViewModel apply(SportDto sportDto) {
-				return convert(sportDto);
-			}
-		});
-	}
-	
+public class SportConverter extends AbstractConverter<SportDto, SportViewModel> {
+	@Inject
+	GameSimpleConverter gameSimpleConverter;
+
+	@Override
 	public SportViewModel convert(SportDto sportDto) {
 		return new SportViewModel(sportDto.getName(), convertListGameDto(sportDto.getGames()));
 	}
 
 	private List<GameSimpleViewModel> convertListGameDto(List<GameDto> gameDtos) {
 		return gameSimpleConverter.convert(gameDtos);
-	}
-	
-	public void setGameSimpleConverter(GameSimpleConverter gameSimpleConverter) {
-		this.gameSimpleConverter = gameSimpleConverter;
 	}
 }

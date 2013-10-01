@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<c:set var="pageTitle" value="${sport.name} : liste des matchs disponibles" />
+<c:set var="pageTitle" value="${sportName} : liste des matchs disponibles" />
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${sport.games}" var="game">
+                <c:forEach items="${games}" var="game">
                     <tr>
                         <td>${game.id}</td>
                         <td>${game.date}</td>

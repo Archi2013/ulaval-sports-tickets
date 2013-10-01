@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 public class SportUrlMapperPropertieFile implements SportUrlMapper {
 	private String propertiesFileName = "sport-url.properties";
 	private Properties properties = new Properties();
-	
+
 	@Override
 	public String getSportUrl(String sportName) throws RuntimeException, SportDoesntExistInPropertieFileException {
-		if ( !properties.isEmpty() ) {
+		if (!properties.isEmpty()) {
 			return getSportUrlFromProperties(sportName);
 		} else {
-			try(InputStream input = getClass().getResourceAsStream("/" + propertiesFileName);) {
+			try (InputStream input = getClass().getResourceAsStream("/" + propertiesFileName);) {
 				properties.load(input);
 				return getSportUrlFromProperties(sportName);
 			} catch (NullPointerException | IOException e) {
@@ -29,20 +29,20 @@ public class SportUrlMapperPropertieFile implements SportUrlMapper {
 
 	private String getSportUrlFromProperties(String sportName) throws SportDoesntExistInPropertieFileException {
 		Set<Object> keySet = properties.keySet();
-		for(Object key : keySet) {
+		for (Object key : keySet) {
 			if (properties.getProperty(key.toString()).equals(sportName)) {
 				return key.toString();
 			}
 		}
 		throw new SportDoesntExistInPropertieFileException();
 	}
-	
+
 	@Override
 	public String getSportName(String sportUrl) throws RuntimeException, SportDoesntExistInPropertieFileException {
-		if ( !properties.isEmpty() ) {
+		if (!properties.isEmpty()) {
 			return getSportNameFromProperties(sportUrl);
 		} else {
-			try(InputStream input = getClass().getResourceAsStream("/" + propertiesFileName);) {
+			try (InputStream input = getClass().getResourceAsStream("/" + propertiesFileName);) {
 				properties.load(input);
 				return getSportNameFromProperties(sportUrl);
 			} catch (NullPointerException | IOException e) {
@@ -52,8 +52,7 @@ public class SportUrlMapperPropertieFile implements SportUrlMapper {
 		}
 	}
 
-	private String getSportNameFromProperties(String sportUrl)
-			throws SportDoesntExistInPropertieFileException {
+	private String getSportNameFromProperties(String sportUrl) throws SportDoesntExistInPropertieFileException {
 		String sportName = properties.getProperty(sportUrl);
 		if (sportName != null) {
 			return sportName;
