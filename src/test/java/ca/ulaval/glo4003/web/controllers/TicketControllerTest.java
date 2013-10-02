@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.web.controller;
+package ca.ulaval.glo4003.web.controllers;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import ca.ulaval.glo4003.dto.TicketDto;
 import ca.ulaval.glo4003.persistence.dao.TicketDao;
 import ca.ulaval.glo4003.persistence.dao.TicketDoesntExistException;
+import ca.ulaval.glo4003.web.controllers.TicketController;
 import ca.ulaval.glo4003.web.converter.TicketConverter;
 import ca.ulaval.glo4003.web.viewmodel.TicketViewModel;
 

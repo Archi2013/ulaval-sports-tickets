@@ -6,7 +6,6 @@ import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -25,8 +24,9 @@ import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.web.converter.GameSimpleConverter;
 import ca.ulaval.glo4003.web.converter.SportConverter;
 import ca.ulaval.glo4003.web.converter.SportSimpleConverter;
-import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
+import ca.ulaval.glo4003.web.viewmodel.GamesViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;
+import ca.ulaval.glo4003.web.viewmodel.factories.GamesViewModelFactory;
 import ca.ulaval.glo4003.web.viewmodel.factories.SportsViewModelFactory;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -53,7 +53,10 @@ public class SportServiceTest {
 	private GameSimpleConverter gameConverterMock;
 
 	@Mock
-	private SportsViewModelFactory sportsViewModelFactory;
+	private SportsViewModelFactory sportsViewModelFactoryMock;
+
+	@Mock
+	private GamesViewModelFactory gamesViewModelFactoryMock;
 
 	@InjectMocks
 	private SportService service = new SportService();
@@ -81,13 +84,13 @@ public class SportServiceTest {
 	public void getSports_should_create_view_model() {
 		service.getSports();
 
-		verify(sportsViewModelFactory).createViewModel(sports);
+		verify(sportsViewModelFactoryMock).createViewModel(sports);
 	}
 
 	@Test
-	public void getSports_should_return_converted_view_models() {
+	public void getSports_should_return_created_view_model() {
 		SportsViewModel sportsViewModels = new SportsViewModel();
-		when(sportsViewModelFactory.createViewModel(sports)).thenReturn(sportsViewModels);
+		when(sportsViewModelFactoryMock.createViewModel(sports)).thenReturn(sportsViewModels);
 		SportsViewModel response = service.getSports();
 
 		assertEquals(sportsViewModels, response);
@@ -108,18 +111,18 @@ public class SportServiceTest {
 	}
 
 	@Test
-	public void getGamesForSport_should_convert_games_to_view_models() throws SportDoesntExistException {
+	public void getGamesForSport_should_create_view_model() throws SportDoesntExistException {
 		service.getGamesForSport(SPORT_NAME);
 
-		verify(gameConverterMock).convert(games);
+		verify(gamesViewModelFactoryMock).createViewModel(SPORT_NAME, games);
 	}
 
 	@Test
-	public void getGamesForSport_should_return_converted_view_models() throws SportDoesntExistException {
-		List<GameSimpleViewModel> viewModels = new ArrayList<GameSimpleViewModel>(5);
-		when(gameConverterMock.convert(games)).thenReturn(viewModels);
-		List<GameSimpleViewModel> response = service.getGamesForSport(SPORT_NAME);
+	public void getGamesForSport_should_return_created_view_model() throws SportDoesntExistException {
+		GamesViewModel viewModel = new GamesViewModel();
+		when(gamesViewModelFactoryMock.createViewModel(SPORT_NAME, games)).thenReturn(viewModel);
+		GamesViewModel response = service.getGamesForSport(SPORT_NAME);
 
-		assertSame(viewModels, response);
+		assertSame(viewModel, response);
 	}
 }

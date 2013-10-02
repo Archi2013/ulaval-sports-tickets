@@ -1,6 +1,4 @@
-package ca.ulaval.glo4003.web.controller;
-
-import java.util.List;
+package ca.ulaval.glo4003.web.controllers;
 
 import javax.inject.Inject;
 
@@ -16,7 +14,7 @@ import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.utility.SportUrlMapper;
-import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
+import ca.ulaval.glo4003.web.viewmodel.GamesViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;
 
 @Controller
@@ -34,9 +32,9 @@ public class SportController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getSports(Model model) {
 		logger.info("Getting all sports");
+
 		SportsViewModel sports = service.getSports();
 		model.addAttribute("sports", sports);
-
 		return "sport/list";
 	}
 
@@ -46,14 +44,13 @@ public class SportController {
 			String sportName = sportUrlMapper.getSportName(sportUrl);
 			logger.info("Getting games for sport: " + sportName);
 
-			List<GameSimpleViewModel> gameViewModels = service.getGamesForSport(sportName);
+			GamesViewModel games = service.getGamesForSport(sportName);
+			model.addAttribute("games", games);
 
-			if (gameViewModels.isEmpty()) {
-				return "sport/no-games";
-			} else {
-				model.addAttribute("sportName", sportName);
-				model.addAttribute("games", gameViewModels);
+			if (games.hasGames()) {
 				return "sport/games";
+			} else {
+				return "sport/no-games";
 			}
 		} catch (RuntimeException | SportDoesntExistInPropertieFileException | SportDoesntExistException e) {
 			logger.info("==> Impossible to get games for sport: " + sportUrl);

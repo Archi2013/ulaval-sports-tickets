@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.web.controller;
+package ca.ulaval.glo4003.web.controllers;
 
 import java.util.Locale;
 

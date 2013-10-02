@@ -1,10 +1,6 @@
-package ca.ulaval.glo4003.web.controller;
+package ca.ulaval.glo4003.web.controllers;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +20,7 @@ import ca.ulaval.glo4003.dto.SportDto;
 import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.utility.SportUrlMapperPropertieFile;
-import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
+import ca.ulaval.glo4003.web.viewmodel.GamesViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SportViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;
 
@@ -53,7 +49,7 @@ public class SportControllerTest {
 	private SportViewModel sportViewModel;
 
 	@Mock
-	private GameSimpleViewModel gameViewModel;
+	private GamesViewModel gamesViewModel;
 
 	@Mock
 	List<GameDto> gameDtosEmpty;
@@ -64,20 +60,10 @@ public class SportControllerTest {
 	List<GameDto> gameDtos;
 	List<GameDto> gameDtosNonEmpty;
 
-	List<GameSimpleViewModel> gameViewModels;
-	List<GameSimpleViewModel> gameViewModelsNonEmpty;
-
 	@Before
 	public void setUp() throws SportDoesntExistException, RuntimeException, SportDoesntExistInPropertieFileException {
-		gameDtos = newArrayList();
-		gameViewModels = newArrayList();
-
-		gameDtosNonEmpty = newArrayList();
-		gameDtosNonEmpty.add(gameDto);
-		gameViewModelsNonEmpty = newArrayList();
-		gameViewModelsNonEmpty.add(gameViewModel);
-
 		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
+		when(gamesViewModel.hasGames()).thenReturn(true);
 	}
 
 	@Test
@@ -114,7 +100,8 @@ public class SportControllerTest {
 
 	@Test
 	public void getSportsGames_should_return_no_games_path_when_sport_doesnt_have_any_game() throws SportDoesntExistException {
-		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gameViewModels);
+		when(gamesViewModel.hasGames()).thenReturn(false);
+		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gamesViewModel);
 
 		String path = controller.getSportGames(SPORT_URL, model);
 
@@ -122,18 +109,18 @@ public class SportControllerTest {
 	}
 
 	@Test
-	public void getSportsGames_should_not_add_sport_games_to_model_when_game_doesnt_have_any_game()
-			throws SportDoesntExistException {
-		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gameViewModels);
+	public void getSportsGames_should_add_view_model_to_model_when_game_doesnt_have_any_game() throws SportDoesntExistException {
+		when(gamesViewModel.hasGames()).thenReturn(false);
+		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gamesViewModel);
 
 		controller.getSportGames(SPORT_URL, model);
 
-		verify(model, never()).addAttribute(eq("games"), any());
+		verify(model).addAttribute("games", gamesViewModel);
 	}
 
 	@Test
-	public void getSportGames_should_return_correct_path_when_dao_return_a_non_empty_list() throws SportDoesntExistException {
-		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gameViewModelsNonEmpty);
+	public void getSportGames_should_return_correct_path_when_games_exist() throws SportDoesntExistException {
+		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gamesViewModel);
 
 		String path = controller.getSportGames(SPORT_URL, model);
 
@@ -141,13 +128,13 @@ public class SportControllerTest {
 	}
 
 	@Test
-	public void getSportGames_should_add_sport_to_model_when_dao_returns_a_non_empty_list() throws SportDoesntExistException,
-			RuntimeException, SportDoesntExistInPropertieFileException {
-		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gameViewModelsNonEmpty);
+	public void getSportGames_should_add_sport_to_model_when_games_exist() throws SportDoesntExistException {
+
+		when(sportService.getGamesForSport(SPORT_NAME)).thenReturn(gamesViewModel);
 
 		controller.getSportGames(SPORT_URL, model);
 
-		verify(model).addAttribute("games", gameViewModelsNonEmpty);
+		verify(model).addAttribute("games", gamesViewModel);
 	}
 
 	@SuppressWarnings("unchecked")

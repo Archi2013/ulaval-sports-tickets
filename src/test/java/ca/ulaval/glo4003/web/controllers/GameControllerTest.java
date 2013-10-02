@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.web.controller;
+package ca.ulaval.glo4003.web.controllers;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertEquals;
@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import ca.ulaval.glo4003.dto.GameDto;
 import ca.ulaval.glo4003.persistence.dao.GameDao;
 import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
+import ca.ulaval.glo4003.web.controllers.GameController;
 import ca.ulaval.glo4003.web.converter.GameConverter;
 import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SectionViewModel;
