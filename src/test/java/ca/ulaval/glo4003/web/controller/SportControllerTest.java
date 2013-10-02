@@ -25,8 +25,8 @@ import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.utility.SportUrlMapperPropertieFile;
 import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
-import ca.ulaval.glo4003.web.viewmodel.SportSimpleViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SportViewModel;
+import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportControllerTest {
@@ -89,12 +89,12 @@ public class SportControllerTest {
 
 	@Test
 	public void getSports_should_add_the_sports_to_model() {
-		List<SportSimpleViewModel> viewModels = newArrayList();
-		when(sportService.getSports()).thenReturn(viewModels);
+		SportsViewModel viewModel = new SportsViewModel();
+		when(sportService.getSports()).thenReturn(viewModel);
 
 		controller.getSports(model);
 
-		verify(model).addAttribute("sports", viewModels);
+		verify(model).addAttribute("sports", viewModel);
 	}
 
 	@Test

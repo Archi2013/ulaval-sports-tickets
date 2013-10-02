@@ -26,7 +26,8 @@ import ca.ulaval.glo4003.web.converter.GameSimpleConverter;
 import ca.ulaval.glo4003.web.converter.SportConverter;
 import ca.ulaval.glo4003.web.converter.SportSimpleConverter;
 import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
-import ca.ulaval.glo4003.web.viewmodel.SportSimpleViewModel;
+import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;
+import ca.ulaval.glo4003.web.viewmodel.factories.SportsViewModelFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportServiceTest {
@@ -51,6 +52,9 @@ public class SportServiceTest {
 	@Mock
 	private GameSimpleConverter gameConverterMock;
 
+	@Mock
+	private SportsViewModelFactory sportsViewModelFactory;
+
 	@InjectMocks
 	private SportService service = new SportService();
 
@@ -74,17 +78,17 @@ public class SportServiceTest {
 	}
 
 	@Test
-	public void getSports_should_convert_dtos_to_view_models() {
+	public void getSports_should_create_view_model() {
 		service.getSports();
 
-		verify(simpleSportConverterMock).convert(sports);
+		verify(sportsViewModelFactory).createViewModel(sports);
 	}
 
 	@Test
 	public void getSports_should_return_converted_view_models() {
-		List<SportSimpleViewModel> sportsViewModels = newArrayList();
-		when(simpleSportConverterMock.convert(sports)).thenReturn(sportsViewModels);
-		List<SportSimpleViewModel> response = service.getSports();
+		SportsViewModel sportsViewModels = new SportsViewModel();
+		when(sportsViewModelFactory.createViewModel(sports)).thenReturn(sportsViewModels);
+		SportsViewModel response = service.getSports();
 
 		assertEquals(sportsViewModels, response);
 	}

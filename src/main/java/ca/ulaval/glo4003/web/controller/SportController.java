@@ -17,7 +17,7 @@ import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.utility.SportUrlMapper;
 import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
-import ca.ulaval.glo4003.web.viewmodel.SportSimpleViewModel;
+import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;
 
 @Controller
 @RequestMapping(value = "/sport", method = RequestMethod.GET)
@@ -34,7 +34,7 @@ public class SportController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getSports(Model model) {
 		logger.info("Getting all sports");
-		List<SportSimpleViewModel> sports = service.getSports();
+		SportsViewModel sports = service.getSports();
 		model.addAttribute("sports", sports);
 
 		return "sport/list";

@@ -13,9 +13,9 @@ import ca.ulaval.glo4003.persistence.dao.GameDao;
 import ca.ulaval.glo4003.persistence.dao.SportDao;
 import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
 import ca.ulaval.glo4003.web.converter.GameSimpleConverter;
-import ca.ulaval.glo4003.web.converter.SportSimpleConverter;
 import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
-import ca.ulaval.glo4003.web.viewmodel.SportSimpleViewModel;
+import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;
+import ca.ulaval.glo4003.web.viewmodel.factories.SportsViewModelFactory;
 
 @Service
 public class SportService {
@@ -29,14 +29,14 @@ public class SportService {
 	private DataFilter<GameDto> filter;
 
 	@Inject
-	private SportSimpleConverter sportSimpleConverter;
+	private SportsViewModelFactory sportsViewModelFactory;
 
 	@Inject
 	private GameSimpleConverter gameConverter;
 
-	public List<SportSimpleViewModel> getSports() {
+	public SportsViewModel getSports() {
 		List<SportDto> sports = sportDao.getAll();
-		return sportSimpleConverter.convert(sports);
+		return sportsViewModelFactory.createViewModel(sports);
 	}
 
 	public List<GameSimpleViewModel> getGamesForSport(String sportName) throws SportDoesntExistException {
