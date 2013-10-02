@@ -1,12 +1,10 @@
 package ca.ulaval.glo4003.web.converter;
 
-import static com.google.common.collect.Lists.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,15 +31,12 @@ public class TicketConverterTest {
 	
 	@Before
 	public void setUp() {
-		ticketDto1 = new TicketDto(gameDto, 123456789, 26.95, "Général", "Ocre");
-		ticketDto2 = new TicketDto(gameDto, 987654321, 59.62, "VIP", "Champagne");
+		ticketDto1 = new TicketDto(1, 123456789, 26.95, "Général", "Ocre");
+		ticketDto2 = new TicketDto(1, 987654321, 59.62, "VIP", "Champagne");
 		
 		ticketDtos = newArrayList();
 		ticketDtos.add(ticketDto1);
 		ticketDtos.add(ticketDto2);
-		
-		when(gameDto.getOpponents()).thenReturn("Blanc Astral");
-		when(gameDto.getGameDate()).thenReturn(DateTime.now().plusDays(7));
 	}
 	
 	@Test

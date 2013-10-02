@@ -5,17 +5,12 @@ public class TicketViewModel {
 	public String price;
 	public String admissionType;
 	public String section;
-	public String opponents;
-	public String date;
 
-	public TicketViewModel(Long id, String price, String admissionType,
-			String section, String opponents, String date) {
+	public TicketViewModel(Long id, String price, String admissionType, String section) {
 		this.id = id;
 		this.price = price;
 		this.admissionType = admissionType;
 		this.section = section;
-		this.opponents = opponents;
-		this.date = date;
 	}
 
 	public Long getId() {
@@ -48,21 +43,5 @@ public class TicketViewModel {
 
 	public void setSection(String section) {
 		this.section = section;
-	}
-
-	public String getOpponents() {
-		return opponents;
-	}
-
-	public void setOpponents(String opponents) {
-		this.opponents = opponents;
-	}
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
 	}
 }

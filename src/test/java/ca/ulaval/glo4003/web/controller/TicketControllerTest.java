@@ -1,7 +1,8 @@
 package ca.ulaval.glo4003.web.controller;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -68,7 +69,7 @@ public class TicketControllerTest {
 	}
 	
 	private TicketViewModel addToConverter(TicketDto ticketDto) {
-		TicketViewModel viewModel = new TicketViewModel(new Long(123), "45,67", "VIP", "section", "opposant", "30 août 2013");
+		TicketViewModel viewModel = new TicketViewModel(new Long(123), "45,67", "VIP", "section");
 		when(ticketConverter.convert(ticketDto)).thenReturn(viewModel);
 		return viewModel;
 	}

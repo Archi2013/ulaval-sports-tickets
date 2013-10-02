@@ -70,7 +70,7 @@ public class XmlTicketDao implements TicketDao {
 			Double price = Double.parseDouble(parent.getNodeValue("price"));
 			String admissionType = parent.getNodeValue("type");
 			String section =parent.getNodeValue("section");
-			return new TicketDto(null, ticketId, price, admissionType, section);
+			return new TicketDto(0, ticketId, price, admissionType, section);
 		}
 		return null;
 	}

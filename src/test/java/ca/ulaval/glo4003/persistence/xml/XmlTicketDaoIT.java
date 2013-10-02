@@ -16,7 +16,7 @@ public class XmlTicketDaoIT {
 	public void testGetTicket() throws Exception {
 		TicketDto actual = ticketDao.getTicket(1);
 		
-		TicketDto expected = new TicketDto(null, 1, 35.00f, "VIP", "Front Row");
+		TicketDto expected = new TicketDto(1, 1, 35.00f, "VIP", "Front Row");
 		assertTicket(expected, actual);
 	}
 	
@@ -24,12 +24,12 @@ public class XmlTicketDaoIT {
 	public void testGetTicketsForGame() throws Exception {
 		List<TicketDto> tickets = ticketDao.getTicketsForGame(2);
 		
-		TicketDto expected0 = new TicketDto(null, 3, 35.00f, "VIP", "Front Row");
-		TicketDto expected1 = new TicketDto(null, 4, 35.00f, "VIP", "Front Row");
-		TicketDto expected2 = new TicketDto(null, 5, 35.00f, "VIP", "Front Row");
-		TicketDto expected3 = new TicketDto(null, 13, 20.00f, "Général", "Rouges");
-		TicketDto expected4 = new TicketDto(null, 14, 20.00f, "Général", "Rouges");
-		TicketDto expected5 = new TicketDto(null, 15, 20.00f, "Général", "Rouges");
+		TicketDto expected0 = new TicketDto(1, 3, 35.00f, "VIP", "Front Row");
+		TicketDto expected1 = new TicketDto(1, 4, 35.00f, "VIP", "Front Row");
+		TicketDto expected2 = new TicketDto(1, 5, 35.00f, "VIP", "Front Row");
+		TicketDto expected3 = new TicketDto(1, 13, 20.00f, "Général", "Rouges");
+		TicketDto expected4 = new TicketDto(1, 14, 20.00f, "Général", "Rouges");
+		TicketDto expected5 = new TicketDto(1, 15, 20.00f, "Général", "Rouges");
 		
 		assertTicket(expected0, tickets.get(0));
 		assertTicket(expected1, tickets.get(1));
