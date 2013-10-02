@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ca.ulaval.glo4003.dto.GameDto;
-import ca.ulaval.glo4003.persistence.dao.GameDao;
+import ca.ulaval.glo4003.domain.services.GameService;
 import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
-import ca.ulaval.glo4003.web.converter.GameConverter;
 import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
 
 @Controller
@@ -22,21 +20,17 @@ public class GameController {
 	private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
 	@Inject
-	private GameConverter gameConverter;
-
-	@Inject
-	private GameDao dao;
+	private GameService gameService;
 
 	@RequestMapping(value = "/{gameId}/billets", method = RequestMethod.GET)
 	public String getTicketsForGame(@PathVariable int gameId, @PathVariable String sportNameUrl, Model model) {
 		try {
 			logger.info("Getting all tickets for game : " + gameId);
 
-			GameDto game = dao.get(gameId);
-			GameViewModel gameViewModel = gameConverter.convert(game);
+			GameViewModel gameViewModel = gameService.getGame(gameId);
 			model.addAttribute("game", gameViewModel);
-
 			return "game/sections";
+
 		} catch (GameDoesntExistException e) {
 			logger.info("==> Impossible to get all tickets for game : " + gameId);
 			return "error/404";
