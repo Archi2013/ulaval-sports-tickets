@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.repositories;
 
-import ca.ulaval.glo4003.pocos.Sport;
+import ca.ulaval.glo4003.pojos.Sport;
 
 public interface ISportRepository {
 

@@ -3,8 +3,8 @@ package ca.ulaval.glo4003.domain.services;
 import org.joda.time.DateTime;
 
 import ca.ulaval.glo4003.factories.IGameFactory;
-import ca.ulaval.glo4003.pocos.Game;
-import ca.ulaval.glo4003.pocos.Sport;
+import ca.ulaval.glo4003.pojos.Game;
+import ca.ulaval.glo4003.pojos.Sport;
 import ca.ulaval.glo4003.repositories.ISportRepository;
 
 public class CommandGameService {
@@ -18,7 +18,7 @@ public class CommandGameService {
 	}
 
 	public void createNewGame(String sportName, String opponent, DateTime date) {
-		Game game = gameFactory.createNewGame(opponent, date);
+		Game game = gameFactory.instantiateGame(opponent, date);
 		Sport sport = sportRepository.getSportByName(sportName);
 		sport.addGameToCalendar(game);
 	}
