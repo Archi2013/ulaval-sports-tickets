@@ -11,7 +11,7 @@ import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
 import ca.ulaval.glo4003.web.viewmodel.factories.GameViewModelFactory;
 
 @Service
-public class GameService {
+public class QueryGameService {
 
 	@Inject
 	private GameDao gameDao;

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.services;
+package ca.ulaval.glo4003.domain.services;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -11,13 +11,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.domain.services.CommandGameService;
 import ca.ulaval.glo4003.factories.IGameFactory;
 import ca.ulaval.glo4003.pocos.Game;
-import ca.ulaval.glo4003.pocos.Sport;
+import ca.ulaval.glo4003.pocos.Spimport ca.ulaval.glo4003.services.CommandGameService;
+ort;
 import ca.ulaval.glo4003.repositories.ISportRepository;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GameServiceTest {
+public class CommandGameServiceTest {
 	private static final String A_OPPONENT = "Oppenent";
 	private static final String A_SPORT_NAME = "Sport";
 	private static final DateTime A_DATE = new DateTime(100);
@@ -34,7 +36,7 @@ public class GameServiceTest {
 	private ISportRepository sportRepositoryMock;
 
 	@InjectMocks
-	private GameService gameService;
+	private CommandGameService gameService;
 
 	@Before
 	public void setUp() {

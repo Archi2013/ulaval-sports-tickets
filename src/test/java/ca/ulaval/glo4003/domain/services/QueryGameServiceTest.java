@@ -16,7 +16,7 @@ import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
 import ca.ulaval.glo4003.web.viewmodel.factories.GameViewModelFactory;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GameServiceTest {
+public class QueryGameServiceTest {
 
 	private static final long GAME_ID = 12;
 
@@ -27,7 +27,7 @@ public class GameServiceTest {
 	private GameViewModelFactory gameViewModelFactory;
 
 	@InjectMocks
-	private GameService service;
+	private QueryGameService service;
 
 	@Test
 	public void getGame_should_get_game_from_dao() throws GameDoesntExistException {

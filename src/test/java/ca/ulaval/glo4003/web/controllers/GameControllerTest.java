@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
-import ca.ulaval.glo4003.domain.services.GameService;
+import ca.ulaval.glo4003.domain.services.QueryGameService;
 import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
 
@@ -25,7 +25,7 @@ public class GameControllerTest {
 	private Model model;
 
 	@Mock
-	private GameService gameService;
+	private QueryGameService gameService;
 
 	@InjectMocks
 	private GameController gameController;

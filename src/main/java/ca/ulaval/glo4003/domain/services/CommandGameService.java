@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.services;
+package ca.ulaval.glo4003.domain.services;
 
 import org.joda.time.DateTime;
 
@@ -7,12 +7,12 @@ import ca.ulaval.glo4003.pocos.Game;
 import ca.ulaval.glo4003.pocos.Sport;
 import ca.ulaval.glo4003.repositories.ISportRepository;
 
-public class GameService {
+public class CommandGameService {
 
 	private IGameFactory gameFactory;
 	private ISportRepository sportRepository;
 
-	public GameService(IGameFactory gameFactory, ISportRepository sportRepository) {
+	public CommandGameService(IGameFactory gameFactory, ISportRepository sportRepository) {
 		this.gameFactory = gameFactory;
 		this.sportRepository = sportRepository;
 	}

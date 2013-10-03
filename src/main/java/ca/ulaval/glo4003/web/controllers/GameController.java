@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ca.ulaval.glo4003.domain.services.GameService;
+import ca.ulaval.glo4003.domain.services.QueryGameService;
 import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
 
@@ -20,7 +20,7 @@ public class GameController {
 	private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
 	@Inject
-	private GameService gameService;
+	private QueryGameService gameService;
 
 	@RequestMapping(value = "/{gameId}/billets", method = RequestMethod.GET)
 	public String getTicketsForGame(@PathVariable int gameId, @PathVariable String sportNameUrl, Model model) {
