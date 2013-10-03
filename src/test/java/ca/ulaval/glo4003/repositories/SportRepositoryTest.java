@@ -22,6 +22,8 @@ public class SportRepositoryTest {
 	private static final String DTO_SPORT = "Another Sport";
 
 	private SportDto sportDto;
+
+	@Mock
 	private Sport sport;
 
 	@Mock
@@ -36,7 +38,6 @@ public class SportRepositoryTest {
 	@Before()
 	public void setUp() {
 		sportDto = new SportDto(DTO_SPORT);
-		sport = new Sport(DTO_SPORT);
 		when(sportDao.get(PARAMETER_SPORT)).thenReturn(sportDto);
 		when(sportFactory.instantiateSport(DTO_SPORT)).thenReturn(sport);
 	}
