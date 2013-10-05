@@ -9,22 +9,22 @@ import org.springframework.stereotype.Component;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.web.converter.TicketConverter;
-import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SectionViewModel;
+import ca.ulaval.glo4003.web.viewmodel.SectionsViewModel;
 import ca.ulaval.glo4003.web.viewmodel.TicketViewModel;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 
 @Component
-public class GameViewModelFactory {
+public class SectionsViewModelFactory {
 
 	@Inject
 	private TicketConverter ticketConverter;
 
-	public GameViewModel createViewModel(GameDto gameDto) {
-		return new GameViewModel(gameDto.getId(), gameDto.getOpponents(), gameDto.getGameDate().toString(
-				"dd MMMM yyyy à HH'h'mm z"), convertListTicketDtoToListOfSections(gameDto.getTickets()));
+	public SectionsViewModel createViewModel(GameDto gameDto) {
+		return new SectionsViewModel(gameDto.getOpponents(), gameDto.getGameDate().toString("dd MMMM yyyy à HH'h'mm z"),
+				convertListTicketDtoToListOfSections(gameDto.getTickets()));
 	}
 
 	// TODO PUT THIS SOMEWHERE ELSE. CLEAN THIS UP.

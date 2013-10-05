@@ -12,8 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.persistence.dao.GameDao;
 import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
-import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
-import ca.ulaval.glo4003.web.viewmodel.factories.GameViewModelFactory;
+import ca.ulaval.glo4003.web.viewmodel.SectionsViewModel;
+import ca.ulaval.glo4003.web.viewmodel.factories.SectionsViewModelFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class QueryGameServiceTest {
@@ -24,7 +24,7 @@ public class QueryGameServiceTest {
 	private GameDao gameDaoMock;
 
 	@Mock
-	private GameViewModelFactory gameViewModelFactory;
+	private SectionsViewModelFactory gameViewModelFactory;
 
 	@InjectMocks
 	private QueryGameService service;
@@ -50,10 +50,10 @@ public class QueryGameServiceTest {
 	public void getGame_should_return_view_model() throws GameDoesntExistException {
 		GameDto gameDto = mock(GameDto.class);
 		when(gameDaoMock.get(GAME_ID)).thenReturn(gameDto);
-		GameViewModel expectedViewModel = mock(GameViewModel.class);
+		SectionsViewModel expectedViewModel = mock(SectionsViewModel.class);
 		when(gameViewModelFactory.createViewModel(gameDto)).thenReturn(expectedViewModel);
 
-		GameViewModel gameViewModel = service.getGame(GAME_ID);
+		SectionsViewModel gameViewModel = service.getGame(GAME_ID);
 
 		assertEquals(expectedViewModel, gameViewModel);
 	}
