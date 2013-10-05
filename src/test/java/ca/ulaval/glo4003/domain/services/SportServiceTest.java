@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.datafilters.DataFilter;
+import ca.ulaval.glo4003.domain.datafilters.GameIsInFutureFilter;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
@@ -36,7 +36,7 @@ public class SportServiceTest {
 	private GameDao gameDaoMock;
 
 	@Mock
-	private DataFilter<GameDto> filterMock;
+	private GameIsInFutureFilter filterMock;
 
 	@Mock
 	private SportsViewModelFactory sportsViewModelFactoryMock;
