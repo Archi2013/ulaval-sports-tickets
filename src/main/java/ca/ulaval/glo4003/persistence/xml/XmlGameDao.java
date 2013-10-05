@@ -11,9 +11,9 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.persistence.dao.GameDao;
-import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.GameDao;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 public class XmlGameDao implements GameDao {
 

@@ -7,9 +7,9 @@ import javax.inject.Inject;
 import javax.xml.xpath.XPathExpressionException;
 
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
-import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.dao.TicketDao;
-import ca.ulaval.glo4003.persistence.dao.TicketDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketDao;
+import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 
 public class XmlTicketDao implements TicketDao {

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ca.ulaval.glo4003.domain.services.QueryGameService;
-import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
-import ca.ulaval.glo4003.web.viewmodel.SectionsViewModel;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.web.viewmodels.SectionsViewModel;
 
 @Controller
 @RequestMapping(value = "/sport/{sportNameUrl}/match", method = RequestMethod.GET)
@@ -27,7 +27,7 @@ public class GameController {
 		try {
 			logger.info("Getting all tickets for game : " + gameId);
 
-			SectionsViewModel gameViewModel = gameService.getGame(gameId);
+			SectionsViewModel gameViewModel = gameService.getSectionsForGame(gameId);
 			model.addAttribute("gameSections", gameViewModel);
 			return "game/sections";
 

@@ -18,7 +18,8 @@ import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertieFile;
-import ca.ulaval.glo4003.web.viewmodel.SportSimpleViewModel;
+import ca.ulaval.glo4003.web.converters.SportConverter;
+import ca.ulaval.glo4003.web.viewmodels.SportViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportSimpleConverterTest {
@@ -30,67 +31,71 @@ public class SportSimpleConverterTest {
 
 	@Mock
 	SportUrlMapperPropertieFile sportUrlMapper;
-	
+
 	@InjectMocks
-	SportSimpleConverter sportSimpleConverter;
-	
+	SportConverter sportConverter;
+
 	SportDto sportDto1;
 	SportDto sportDto2;
 	List<SportDto> sportDtos;
-	
+
 	@Before
 	public void setUp() {
 		sportDto1 = new SportDto(SPORT_NAME1);
 		sportDto1.getGames().add(new GameDto(1, "", DateTime.now()));
 		sportDto1.getGames().add(new GameDto(2, "", DateTime.now().plusDays(3)));
-		
+
 		sportDto2 = new SportDto(SPORT_NAME2);
 		sportDto2.getGames().add(new GameDto(1, "", DateTime.now().plusDays(10)));
 		sportDto2.getGames().add(new GameDto(2, "", DateTime.now().plusDays(1)));
-		
+
 		sportDtos = newArrayList();
 		sportDtos.add(sportDto1);
 		sportDtos.add(sportDto2);
 	}
 
 	@Test
-	public void given_a_SportDto_convert_should_return_a_SportSimpleViewModel() throws RuntimeException, SportDoesntExistInPropertieFileException {
+	public void given_a_SportDto_convert_should_return_a_SportSimpleViewModel() throws RuntimeException,
+			SportDoesntExistInPropertieFileException {
 		when(sportUrlMapper.getSportUrl(SPORT_NAME1)).thenReturn(SPORT_URL1);
-		
-		SportSimpleViewModel sportSVM = sportSimpleConverter.convert(sportDto1);
-		
+
+		SportViewModel sportSVM = sportConverter.convert(sportDto1);
+
 		assertEquals(sportSVM.name, SPORT_NAME1);
 		assertEquals(sportSVM.url, SPORT_URL1);
 	}
-	
+
 	@Test
-	public void when_url_mapping_throw_SportDoesntExistInPropertieFileException_convert_should_return_a_SportSimpleViewModel_with_erreur_as_url() throws RuntimeException, SportDoesntExistInPropertieFileException {
+	public void when_url_mapping_throw_SportDoesntExistInPropertieFileException_convert_should_return_a_SportSimpleViewModel_with_erreur_as_url()
+			throws RuntimeException, SportDoesntExistInPropertieFileException {
 		when(sportUrlMapper.getSportUrl(SPORT_NAME1)).thenThrow(SportDoesntExistInPropertieFileException.class);
-		
-		SportSimpleViewModel sportSVM = sportSimpleConverter.convert(sportDto1);
-		
-		assertEquals(sportSVM.name, SPORT_NAME1);
-		assertEquals(sportSVM.url, ERROR_URL);
-	}
-	
-	@Test
-	public void when_url_mapping_throw_RuntimeException_convert_should_return_a_SportSimpleViewModel_with_erreur_as_url() throws RuntimeException, SportDoesntExistInPropertieFileException {
-		when(sportUrlMapper.getSportUrl(SPORT_NAME1)).thenThrow(RuntimeException.class);
-		
-		SportSimpleViewModel sportSVM = sportSimpleConverter.convert(sportDto1);
-		
+
+		SportViewModel sportSVM = sportConverter.convert(sportDto1);
+
 		assertEquals(sportSVM.name, SPORT_NAME1);
 		assertEquals(sportSVM.url, ERROR_URL);
 	}
 
 	@Test
-	public void given_sportDtoList_convert_should_return_a_SportSimpleViewList() throws RuntimeException, SportDoesntExistInPropertieFileException {
+	public void when_url_mapping_throw_RuntimeException_convert_should_return_a_SportSimpleViewModel_with_erreur_as_url()
+			throws RuntimeException, SportDoesntExistInPropertieFileException {
+		when(sportUrlMapper.getSportUrl(SPORT_NAME1)).thenThrow(RuntimeException.class);
+
+		SportViewModel sportSVM = sportConverter.convert(sportDto1);
+
+		assertEquals(sportSVM.name, SPORT_NAME1);
+		assertEquals(sportSVM.url, ERROR_URL);
+	}
+
+	@Test
+	public void given_sportDtoList_convert_should_return_a_SportSimpleViewList() throws RuntimeException,
+			SportDoesntExistInPropertieFileException {
 		when(sportUrlMapper.getSportUrl(SPORT_NAME1)).thenReturn(SPORT_URL1);
 		when(sportUrlMapper.getSportUrl(SPORT_NAME2)).thenReturn(SPORT_URL2);
-		
-		List<SportSimpleViewModel> sportSVMs = sportSimpleConverter.convert(sportDtos);
-		
-		for(int i = 0 ; i < sportDtos.size() ; i++) {
+
+		List<SportViewModel> sportSVMs = sportConverter.convert(sportDtos);
+
+		for (int i = 0; i < sportDtos.size(); i++) {
 			assertEquals(sportDtos.get(i).getName(), sportSVMs.get(i).name);
 		}
 	}

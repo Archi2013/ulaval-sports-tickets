@@ -1,14 +1,12 @@
-package ca.ulaval.glo4003.web.viewmodel;
+package ca.ulaval.glo4003.web.viewmodels;
 
-
-public class GameSimpleViewModel {
+public class GameViewModel {
 	public Long id;
 	public String opponents;
 	public String date;
 	public Integer numberOfTickets;
-	
-	public GameSimpleViewModel(Long id, String opponents, String date,
-			Integer numberOfTickets) {
+
+	public GameViewModel(Long id, String opponents, String date, Integer numberOfTickets) {
 		this.id = id;
 		this.opponents = opponents;
 		this.date = date;
@@ -46,6 +44,5 @@ public class GameSimpleViewModel {
 	public void setNumberOfTickets(Integer numberOfTickets) {
 		this.numberOfTickets = numberOfTickets;
 	}
-	
-	
+
 }

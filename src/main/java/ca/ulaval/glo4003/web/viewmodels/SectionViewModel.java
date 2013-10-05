@@ -1,7 +1,7 @@
-package ca.ulaval.glo4003.web.viewmodel;
+package ca.ulaval.glo4003.web.viewmodels;
 
 public class SectionViewModel {
-	
+
 	public String admissionType;
 	public String sectionName;
 	public int numberOfTickets;

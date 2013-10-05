@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.web.viewmodel;
+package ca.ulaval.glo4003.web.viewmodels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,19 +6,19 @@ import java.util.List;
 public class GamesViewModel {
 
 	private String sportName;
-	private List<GameSimpleViewModel> games;
+	private List<GameViewModel> games;
 
 	public GamesViewModel() {
 		this.sportName = "";
-		this.games = new ArrayList<GameSimpleViewModel>();
+		this.games = new ArrayList<GameViewModel>();
 	}
 
 	public GamesViewModel(String sportName) {
 		this.sportName = sportName;
-		this.games = new ArrayList<GameSimpleViewModel>();
+		this.games = new ArrayList<GameViewModel>();
 	}
 
-	public List<GameSimpleViewModel> getGames() {
+	public List<GameViewModel> getGames() {
 		return games;
 	}
 

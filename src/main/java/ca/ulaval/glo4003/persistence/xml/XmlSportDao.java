@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.xml.xpath.XPathExpressionException;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
-import ca.ulaval.glo4003.persistence.dao.SportDao;
+import ca.ulaval.glo4003.persistence.daos.SportDao;
 
 public class XmlSportDao implements SportDao {
 	

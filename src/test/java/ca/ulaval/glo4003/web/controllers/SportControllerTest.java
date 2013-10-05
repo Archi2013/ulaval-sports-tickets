@@ -1,8 +1,7 @@
 package ca.ulaval.glo4003.web.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 
@@ -19,10 +18,9 @@ import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertieFile;
-import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
-import ca.ulaval.glo4003.web.viewmodel.GamesViewModel;
-import ca.ulaval.glo4003.web.viewmodel.SportViewModel;
-import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;
+import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
+import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportControllerTest {
@@ -44,9 +42,6 @@ public class SportControllerTest {
 
 	@Mock
 	private GameDto gameDto;
-
-	@Mock
-	private SportViewModel sportViewModel;
 
 	@Mock
 	private GamesViewModel gamesViewModel;

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.web.viewmodel;
+package ca.ulaval.glo4003.web.viewmodels;
 
 import java.util.List;
 

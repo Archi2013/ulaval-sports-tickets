@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.web.converter;
+package ca.ulaval.glo4003.web.converters;
 
 import static com.google.common.collect.Lists.transform;
 

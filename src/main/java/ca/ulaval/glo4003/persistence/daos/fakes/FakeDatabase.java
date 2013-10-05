@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.persistence.dao.fake;
+package ca.ulaval.glo4003.persistence.daos.fakes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
-import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 
 @Service
 @Singleton

@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
-import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
-import ca.ulaval.glo4003.web.viewmodel.GamesViewModel;
-import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;
+import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
+import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
 
 @Controller
 @RequestMapping(value = "/sport", method = RequestMethod.GET)

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.persistence.dao.fake;
+package ca.ulaval.glo4003.persistence.daos.fakes;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
-import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.dao.TicketDao;
-import ca.ulaval.glo4003.persistence.dao.TicketDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketDao;
+import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @Repository
 public class FakeDataTicketDao implements TicketDao {

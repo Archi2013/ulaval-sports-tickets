@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import ca.ulaval.glo4003.domain.datafilters.DataFilter;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
-import ca.ulaval.glo4003.persistence.dao.GameDao;
-import ca.ulaval.glo4003.persistence.dao.SportDao;
-import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
-import ca.ulaval.glo4003.web.viewmodel.GamesViewModel;
-import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;
-import ca.ulaval.glo4003.web.viewmodel.factories.GamesViewModelFactory;
-import ca.ulaval.glo4003.web.viewmodel.factories.SportsViewModelFactory;
+import ca.ulaval.glo4003.persistence.daos.GameDao;
+import ca.ulaval.glo4003.persistence.daos.SportDao;
+import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
+import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
+import ca.ulaval.glo4003.web.viewmodels.factories.GamesViewModelFactory;
+import ca.ulaval.glo4003.web.viewmodels.factories.SportsViewModelFactory;
 
 @Service
 public class SportService {

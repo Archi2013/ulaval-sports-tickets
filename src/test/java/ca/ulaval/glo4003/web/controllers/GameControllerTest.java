@@ -12,8 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
 import ca.ulaval.glo4003.domain.services.QueryGameService;
-import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
-import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.web.viewmodels.SectionsViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameControllerTest {
@@ -38,17 +38,17 @@ public class GameControllerTest {
 	public void getTicketsForGame_should_get_games() throws GameDoesntExistException {
 		gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME, model);
 
-		verify(gameService).getGame(GAME_ID);
+		verify(gameService).getSectionsForGame(GAME_ID);
 	}
 
 	@Test
-	public void getTicketsForGame_should_add_the_specified_game_to_model() throws GameDoesntExistException {
-		GameViewModel gameViewModel = mock(GameViewModel.class);
-		when(gameService.getGame(GAME_ID)).thenReturn(gameViewModel);
+	public void getTicketsForGame_should_add_the_specified_sections_to_model() throws GameDoesntExistException {
+		SectionsViewModel sectionsViewModel = mock(SectionsViewModel.class);
+		when(gameService.getSectionsForGame(GAME_ID)).thenReturn(sectionsViewModel);
 
 		gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME, model);
 
-		verify(model).addAttribute("game", gameViewModel);
+		verify(model).addAttribute("gameSections", sectionsViewModel);
 	}
 
 	@Test
@@ -61,7 +61,7 @@ public class GameControllerTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void getTicketsForGame_should_redirect_to_404_page_when_game_id_doesnt_exist() throws GameDoesntExistException {
-		when(gameService.getGame(GAME_ID)).thenThrow(GameDoesntExistException.class);
+		when(gameService.getSectionsForGame(GAME_ID)).thenThrow(GameDoesntExistException.class);
 
 		String path = gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME, model);
 

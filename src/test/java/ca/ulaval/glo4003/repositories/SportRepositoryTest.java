@@ -15,7 +15,7 @@ import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.factories.SportFactory;
 import ca.ulaval.glo4003.domain.pojos.Sport;
 import ca.ulaval.glo4003.domain.repositories.SportRepository;
-import ca.ulaval.glo4003.persistence.dao.SportDao;
+import ca.ulaval.glo4003.persistence.daos.SportDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportRepositoryTest {

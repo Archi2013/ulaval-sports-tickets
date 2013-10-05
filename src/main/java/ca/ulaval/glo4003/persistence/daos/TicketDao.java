@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.persistence.dao;
+package ca.ulaval.glo4003.persistence.daos;
 
 import java.util.List;
 

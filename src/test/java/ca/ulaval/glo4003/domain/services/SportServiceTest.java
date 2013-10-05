@@ -1,10 +1,8 @@
 package ca.ulaval.glo4003.domain.services;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static com.google.common.collect.Lists.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 
@@ -18,16 +16,15 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4003.domain.datafilters.DataFilter;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
-import ca.ulaval.glo4003.persistence.dao.GameDao;
-import ca.ulaval.glo4003.persistence.dao.SportDao;
-import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
-import ca.ulaval.glo4003.web.converter.GameSimpleConverter;
-import ca.ulaval.glo4003.web.converter.SportConverter;
-import ca.ulaval.glo4003.web.converter.SportSimpleConverter;
-import ca.ulaval.glo4003.web.viewmodel.GamesViewModel;
-import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;
-import ca.ulaval.glo4003.web.viewmodel.factories.GamesViewModelFactory;
-import ca.ulaval.glo4003.web.viewmodel.factories.SportsViewModelFactory;
+import ca.ulaval.glo4003.persistence.daos.GameDao;
+import ca.ulaval.glo4003.persistence.daos.SportDao;
+import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.web.converters.GameConverter;
+import ca.ulaval.glo4003.web.converters.SportConverter;
+import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
+import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
+import ca.ulaval.glo4003.web.viewmodels.factories.GamesViewModelFactory;
+import ca.ulaval.glo4003.web.viewmodels.factories.SportsViewModelFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportServiceTest {
@@ -44,13 +41,10 @@ public class SportServiceTest {
 	private DataFilter<GameDto> filterMock;
 
 	@Mock
-	private SportConverter sportConverterMock;
+	private SportConverter simpleSportConverterMock;
 
 	@Mock
-	private SportSimpleConverter simpleSportConverterMock;
-
-	@Mock
-	private GameSimpleConverter gameConverterMock;
+	private GameConverter gameConverterMock;
 
 	@Mock
 	private SportsViewModelFactory sportsViewModelFactoryMock;
