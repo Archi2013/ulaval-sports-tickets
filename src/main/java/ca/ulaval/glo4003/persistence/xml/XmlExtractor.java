@@ -2,11 +2,18 @@ package ca.ulaval.glo4003.persistence.xml;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -42,12 +49,20 @@ public class XmlExtractor {
 		return (String) extract(xPath, XPathConstants.STRING);
 	}
 
-	public Node extractNode(String xPath) throws XPathExpressionException {
-		return (Node) extract(xPath, XPathConstants.NODE);
+	public SimpleNode extractNode(String xPath) throws XPathExpressionException {
+		Node node = (Node) extract(xPath, XPathConstants.NODE);
+		return new SimpleNode(node);
 	}
 
-	public NodeList extractNodeSet(String xPath) throws XPathExpressionException {
-		return (NodeList) extract(xPath, XPathConstants.NODESET);
+	public List<SimpleNode> extractNodeSet(String xPath) throws XPathExpressionException {
+
+		List<SimpleNode> simpleNodes = new ArrayList<>();
+		NodeList nodes = (NodeList) extract(xPath, XPathConstants.NODESET);
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node node = nodes.item(i);
+			simpleNodes.add(new SimpleNode(node));
+		}
+		return simpleNodes;
 	}
 
 	private Object extract(String xPath, QName qName) throws XPathExpressionException {
@@ -55,4 +70,23 @@ public class XmlExtractor {
 		XPathExpression expr = xpath.compile(xPath);
 		return expr.evaluate(document, qName);
 	}
+
+	public void createNode(String xPath, SimpleNode simpleNode) throws XPathExpressionException {
+
+		Node parent = (Node) extract(xPath, XPathConstants.NODE);
+		Document dom = parent.getOwnerDocument();
+		Node child = simpleNode.toNode(dom);
+
+		parent.appendChild(child);
+	}
+
+	public void commit(String filename) throws TransformerException {
+		DOMSource source = new DOMSource(document);
+
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		StreamResult result = new StreamResult(filename);
+		transformer.transform(source, result);
+	}
+
 }

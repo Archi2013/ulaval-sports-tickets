@@ -9,10 +9,6 @@ import java.io.InputStream;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.w3c.dom.Node;
-
-import ca.ulaval.glo4003.persistence.xml.SimpleNode;
-import ca.ulaval.glo4003.persistence.xml.XmlExtractor;
 
 public class SimpleNodeTest {
 	
@@ -21,8 +17,7 @@ public class SimpleNodeTest {
 	
 	@Before
 	public void setup() throws Exception {
-		Node node = createBasicNode();
-		someNode = new SimpleNode(node);
+		someNode = createBasicNode();
 	}
 
 	@Test
@@ -61,7 +56,7 @@ public class SimpleNodeTest {
 		someNode.getNodeValue("test");
 	}
 	
-	private Node createBasicNode() throws Exception {
+	private SimpleNode createBasicNode() throws Exception {
 		String xml = "<Magasin><Items><Item Id=\"1\"><Nom>Chemise</Nom></Item></Items></Magasin>";
 		InputStream stream = new ByteArrayInputStream(xml.getBytes("UTF-8"));
 		XmlExtractor extractor = new XmlExtractor(stream);

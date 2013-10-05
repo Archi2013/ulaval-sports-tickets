@@ -1,19 +1,19 @@
 package ca.ulaval.glo4003.persistence.xml;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 public class XmlDatabase {
+
+	private String filename;
 	private XmlExtractor extractor;
 	private static XmlDatabase instance;
 
 	private XmlDatabase(String filename) {
+		this.filename = filename;
 		try {
 			InputStream input = this.getClass().getResourceAsStream(filename);
 			extractor = new XmlExtractor(input);
@@ -38,17 +38,23 @@ public class XmlDatabase {
 	}
 
 	public SimpleNode extractNode(String xPath) throws XPathExpressionException {
-		Node node = extractor.extractNode(xPath);
-		return new SimpleNode(node);
+		return extractor.extractNode(xPath);
 	}
 
 	public List<SimpleNode> extractNodeSet(String xPath) throws XPathExpressionException {
-		List<SimpleNode> simpleNodes = new ArrayList<>();
-		NodeList nodes = extractor.extractNodeSet(xPath);
-		for (int i = 0; i < nodes.getLength(); i++) {
-			Node node = nodes.item(i);
-			simpleNodes.add(new SimpleNode(node));
+		return extractor.extractNodeSet(xPath);
+
+	}
+
+	public void addNode(String xPath, SimpleNode simpleNode) throws XPathExpressionException {
+		extractor.createNode(xPath, simpleNode);
+	}
+
+	public void commit() {
+		try {
+			extractor.commit(filename);
+		} catch (TransformerException e) {
+			throw new RuntimeException(e);
 		}
-		return simpleNodes;
 	}
 }
