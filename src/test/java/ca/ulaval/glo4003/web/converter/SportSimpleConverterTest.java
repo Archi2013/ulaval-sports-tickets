@@ -14,10 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.dto.GameDto;
-import ca.ulaval.glo4003.dto.SportDto;
-import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
-import ca.ulaval.glo4003.utility.SportUrlMapperPropertieFile;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertieFileException;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertieFile;
 import ca.ulaval.glo4003.web.viewmodel.SportSimpleViewModel;
 
 @RunWith(MockitoJUnitRunner.class)

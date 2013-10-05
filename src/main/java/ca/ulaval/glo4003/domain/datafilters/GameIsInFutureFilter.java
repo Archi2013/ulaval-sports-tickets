@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.datafilter;
+package ca.ulaval.glo4003.domain.datafilters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
 
 @Component
 public class GameIsInFutureFilter implements DataFilter<GameDto> {

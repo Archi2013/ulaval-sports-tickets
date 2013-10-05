@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.persistence.dao.GameDao;
 import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodel.GameViewModel;

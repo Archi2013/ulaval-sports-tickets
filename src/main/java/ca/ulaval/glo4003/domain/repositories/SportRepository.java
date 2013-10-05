@@ -1,9 +1,9 @@
-package ca.ulaval.glo4003.repositories;
+package ca.ulaval.glo4003.domain.repositories;
 
-import ca.ulaval.glo4003.dto.SportDto;
-import ca.ulaval.glo4003.factories.SportFactory;
+import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.domain.factories.SportFactory;
+import ca.ulaval.glo4003.domain.pojos.Sport;
 import ca.ulaval.glo4003.persistence.dao.SportDao;
-import ca.ulaval.glo4003.pojos.Sport;
 
 public class SportRepository implements ISportRepository {
 

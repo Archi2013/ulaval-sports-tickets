@@ -6,9 +6,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Repository;
 
-import ca.ulaval.glo4003.dto.GameDto;
-import ca.ulaval.glo4003.dto.SportDto;
-import ca.ulaval.glo4003.dto.TicketDto;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.dao.TicketDao;
 import ca.ulaval.glo4003.persistence.dao.TicketDoesntExistException;

@@ -2,7 +2,7 @@ package ca.ulaval.glo4003.web.converter;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.dto.TicketDto;
+import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.web.viewmodel.TicketViewModel;
 
 @Component

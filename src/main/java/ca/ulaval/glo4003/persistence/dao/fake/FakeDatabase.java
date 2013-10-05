@@ -11,9 +11,9 @@ import javax.inject.Singleton;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
-import ca.ulaval.glo4003.dto.GameDto;
-import ca.ulaval.glo4003.dto.SportDto;
-import ca.ulaval.glo4003.dto.TicketDto;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
 
 @Service

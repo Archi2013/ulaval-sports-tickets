@@ -15,9 +15,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.datafilter.DataFilter;
-import ca.ulaval.glo4003.dto.GameDto;
-import ca.ulaval.glo4003.dto.SportDto;
+import ca.ulaval.glo4003.domain.datafilters.DataFilter;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.dao.GameDao;
 import ca.ulaval.glo4003.persistence.dao.SportDao;
 import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;

@@ -9,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.persistence.dao.GameDao;
 import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodel.GameViewModel;

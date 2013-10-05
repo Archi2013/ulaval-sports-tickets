@@ -14,12 +14,12 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
+import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.services.SportService;
-import ca.ulaval.glo4003.dto.GameDto;
-import ca.ulaval.glo4003.dto.SportDto;
+import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertieFileException;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertieFile;
 import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;
-import ca.ulaval.glo4003.utility.SportDoesntExistInPropertieFileException;
-import ca.ulaval.glo4003.utility.SportUrlMapperPropertieFile;
 import ca.ulaval.glo4003.web.viewmodel.GamesViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SportViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SportsViewModel;

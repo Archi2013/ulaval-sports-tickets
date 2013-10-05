@@ -1,8 +1,8 @@
-package ca.ulaval.glo4003.factories;
+package ca.ulaval.glo4003.domain.factories;
 
 import org.joda.time.DateTime;
 
-import ca.ulaval.glo4003.pojos.Game;
+import ca.ulaval.glo4003.domain.pojos.Game;
 
 public interface IGameFactory {
 

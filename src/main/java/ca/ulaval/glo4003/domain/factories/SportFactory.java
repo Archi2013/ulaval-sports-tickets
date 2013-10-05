@@ -1,9 +1,9 @@
-package ca.ulaval.glo4003.factories;
+package ca.ulaval.glo4003.domain.factories;
 
 import java.util.ArrayList;
 
-import ca.ulaval.glo4003.pojos.Game;
-import ca.ulaval.glo4003.pojos.Sport;
+import ca.ulaval.glo4003.domain.pojos.Game;
+import ca.ulaval.glo4003.domain.pojos.Sport;
 
 public class SportFactory {
 

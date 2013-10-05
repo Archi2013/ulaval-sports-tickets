@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.dto;
+package ca.ulaval.glo4003.domain.dtos;
 
 import java.util.ArrayList;
 import java.util.List;

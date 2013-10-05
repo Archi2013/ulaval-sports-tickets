@@ -10,7 +10,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.persistence.dao.GameDao;
 import ca.ulaval.glo4003.persistence.dao.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.dao.SportDoesntExistException;

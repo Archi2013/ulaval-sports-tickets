@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
 
 @Repository
 public interface GameDao {

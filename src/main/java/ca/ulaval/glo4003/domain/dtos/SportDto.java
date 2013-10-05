@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.dto;
+package ca.ulaval.glo4003.domain.dtos;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

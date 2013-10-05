@@ -10,6 +10,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.domain.pojos.Game;
+import ca.ulaval.glo4003.domain.pojos.Sport;
+
 @RunWith(MockitoJUnitRunner.class)
 public class SportTest {
 

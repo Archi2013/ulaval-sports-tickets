@@ -2,10 +2,10 @@ package ca.ulaval.glo4003.domain.services;
 
 import org.joda.time.DateTime;
 
-import ca.ulaval.glo4003.factories.IGameFactory;
-import ca.ulaval.glo4003.pojos.Game;
-import ca.ulaval.glo4003.pojos.Sport;
-import ca.ulaval.glo4003.repositories.ISportRepository;
+import ca.ulaval.glo4003.domain.factories.IGameFactory;
+import ca.ulaval.glo4003.domain.pojos.Game;
+import ca.ulaval.glo4003.domain.pojos.Sport;
+import ca.ulaval.glo4003.domain.repositories.ISportRepository;
 
 public class CommandGameService {
 

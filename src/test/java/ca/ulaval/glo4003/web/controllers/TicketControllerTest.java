@@ -12,7 +12,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
-import ca.ulaval.glo4003.dto.TicketDto;
+import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.persistence.dao.TicketDao;
 import ca.ulaval.glo4003.persistence.dao.TicketDoesntExistException;
 import ca.ulaval.glo4003.web.controllers.TicketController;

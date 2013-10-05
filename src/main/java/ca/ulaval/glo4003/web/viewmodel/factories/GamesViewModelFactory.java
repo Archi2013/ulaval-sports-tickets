@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.web.converter.GameSimpleConverter;
 import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
 import ca.ulaval.glo4003.web.viewmodel.GamesViewModel;

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.pojos;
+package ca.ulaval.glo4003.domain.pojos;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.utility;
+package ca.ulaval.glo4003.domain.utilities;
 
 import java.io.IOException;
 import java.io.InputStream;

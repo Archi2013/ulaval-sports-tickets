@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import ca.ulaval.glo4003.dto.SportDto;
+import ca.ulaval.glo4003.domain.dtos.SportDto;
 
 @Repository
 public interface SportDao {

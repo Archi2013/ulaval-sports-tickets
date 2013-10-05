@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.dto.GameDto;
-import ca.ulaval.glo4003.dto.TicketDto;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.web.viewmodel.GameViewModel;
 import ca.ulaval.glo4003.web.viewmodel.SectionViewModel;
 import ca.ulaval.glo4003.web.viewmodel.TicketViewModel;

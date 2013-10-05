@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ca.ulaval.glo4003.dto.SportDto;
+import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.xml.XmlSportDao;
 
 public class XmlSportDaoIT {

@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.dto.GameDto;
+import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.web.viewmodel.GameSimpleViewModel;
 
 @RunWith(MockitoJUnitRunner.class)

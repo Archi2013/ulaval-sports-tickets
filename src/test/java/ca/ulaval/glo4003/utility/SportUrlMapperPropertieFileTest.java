@@ -17,6 +17,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertieFileException;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertieFile;
+
 @RunWith(MockitoJUnitRunner.class)
 public class SportUrlMapperPropertieFileTest {
 	private static final String SPORT_NAME = "Basketball";
