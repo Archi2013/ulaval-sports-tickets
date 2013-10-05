@@ -17,8 +17,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertieFileException;
-import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertieFile;
+import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertiesFile;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportUrlMapperPropertieFileTest {
@@ -35,7 +35,7 @@ public class SportUrlMapperPropertieFileTest {
 	Properties properties;
 	
 	@InjectMocks
-	SportUrlMapperPropertieFile sportUrlMapper;
+	SportUrlMapperPropertiesFile sportUrlMapper;
 	
 	Set<Object> keySet;
 	
@@ -48,7 +48,7 @@ public class SportUrlMapperPropertieFileTest {
 	}
 	
 	@Test
-	public void with_a_existing_sport_getSportUrl_should_return_the_url() throws RuntimeException, SportDoesntExistInPropertieFileException {
+	public void with_a_existing_sport_getSportUrl_should_return_the_url() throws RuntimeException, SportDoesntExistInPropertiesFileException {
 		when(properties.getProperty(SPORT_URL)).thenReturn(SPORT_NAME);
 		when(properties.keySet()).thenReturn(keySet);
 		when(properties.isEmpty()).thenReturn(true);
@@ -59,7 +59,7 @@ public class SportUrlMapperPropertieFileTest {
 	}
 	
 	@Test
-	public void with_a_existing_sport_getSportName_should_return_the_name() throws RuntimeException, SportDoesntExistInPropertieFileException {
+	public void with_a_existing_sport_getSportName_should_return_the_name() throws RuntimeException, SportDoesntExistInPropertiesFileException {
 		when(properties.getProperty(SPORT_URL)).thenReturn(SPORT_NAME);
 		when(properties.isEmpty()).thenReturn(true);
 		
@@ -68,8 +68,8 @@ public class SportUrlMapperPropertieFileTest {
 		assertEquals(sportName, SPORT_NAME);
 	}
 	
-	@Test(expected = SportDoesntExistInPropertieFileException.class)
-	public void given_an_invalid_sport_name_getSportUrl_shoudl_raise_a_SportDoesntExistInPropertieFileException() throws RuntimeException, SportDoesntExistInPropertieFileException {
+	@Test(expected = SportDoesntExistInPropertiesFileException.class)
+	public void given_an_invalid_sport_name_getSportUrl_shoudl_raise_a_SportDoesntExistInPropertieFileException() throws RuntimeException, SportDoesntExistInPropertiesFileException {
 		when(properties.getProperty(SPORT_URL)).thenReturn(SPORT_NAME);
 		when(properties.getProperty(SPORT_URL_ACCENTS)).thenReturn(SPORT_NAME_ACCENTS);
 		when(properties.getProperty(SPORT_URL_SPACES)).thenReturn(SPORT_NAME_SPACES);
@@ -79,8 +79,8 @@ public class SportUrlMapperPropertieFileTest {
 		sportUrlMapper.getSportUrl(INVALID_SPORT_NAME);
 	}
 	
-	@Test(expected = SportDoesntExistInPropertieFileException.class)
-	public void given_an_invalid_sport_url_getSportName_should_raise_a_SportDoesntExistInPropertieFileException() throws RuntimeException, SportDoesntExistInPropertieFileException {
+	@Test(expected = SportDoesntExistInPropertiesFileException.class)
+	public void given_an_invalid_sport_url_getSportName_should_raise_a_SportDoesntExistInPropertieFileException() throws RuntimeException, SportDoesntExistInPropertiesFileException {
 		when(properties.getProperty(SPORT_URL)).thenReturn(SPORT_NAME);
 		when(properties.getProperty(SPORT_URL_ACCENTS)).thenReturn(SPORT_NAME_ACCENTS);
 		when(properties.getProperty(SPORT_URL_SPACES)).thenReturn(SPORT_NAME_SPACES);
@@ -91,7 +91,7 @@ public class SportUrlMapperPropertieFileTest {
 	}
 	
 	@Test
-	public void when_second_use_getSportUrl_should_return_the_url() throws RuntimeException, SportDoesntExistInPropertieFileException {
+	public void when_second_use_getSportUrl_should_return_the_url() throws RuntimeException, SportDoesntExistInPropertiesFileException {
 		when(properties.getProperty(SPORT_URL)).thenReturn(SPORT_NAME);
 		when(properties.keySet()).thenReturn(keySet);
 		when(properties.isEmpty()).thenReturn(false);
@@ -101,7 +101,7 @@ public class SportUrlMapperPropertieFileTest {
 	}
 	
 	@Test
-	public void when_second_use_getSportName_should_return_the_name() throws RuntimeException, SportDoesntExistInPropertieFileException {
+	public void when_second_use_getSportName_should_return_the_name() throws RuntimeException, SportDoesntExistInPropertiesFileException {
 		when(properties.getProperty(SPORT_URL)).thenReturn(SPORT_NAME);
 		when(properties.isEmpty()).thenReturn(false);
 		
@@ -110,7 +110,7 @@ public class SportUrlMapperPropertieFileTest {
 	}
 	
 	@Test(expected = RuntimeException.class)
-	public void when_propertie_file_doesnt_exist_getSportUrl_shoudl_raise_a_RuntimeException() throws RuntimeException, SportDoesntExistInPropertieFileException, IOException {
+	public void when_propertie_file_doesnt_exist_getSportUrl_shoudl_raise_a_RuntimeException() throws RuntimeException, SportDoesntExistInPropertiesFileException, IOException {
 		when(properties.isEmpty()).thenReturn(true);
 		doThrow(IOException.class).when(properties).load((InputStream) any());
 		
@@ -118,7 +118,7 @@ public class SportUrlMapperPropertieFileTest {
 	}
 	
 	@Test(expected = RuntimeException.class)
-	public void when_propertie_file_doesnt_exist_getSportName_should_raise_a_RuntimeException() throws RuntimeException, SportDoesntExistInPropertieFileException, IOException {
+	public void when_propertie_file_doesnt_exist_getSportName_should_raise_a_RuntimeException() throws RuntimeException, SportDoesntExistInPropertiesFileException, IOException {
 		when(properties.isEmpty()).thenReturn(true);
 		doThrow(IOException.class).when(properties).load((InputStream) any());
 		

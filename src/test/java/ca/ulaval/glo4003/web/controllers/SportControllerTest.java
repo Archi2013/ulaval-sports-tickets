@@ -12,8 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
 import ca.ulaval.glo4003.domain.services.SportService;
-import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertieFileException;
-import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertieFile;
+import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertiesFile;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
@@ -28,7 +28,7 @@ public class SportControllerTest {
 	private Model model;
 
 	@Mock
-	private SportUrlMapperPropertieFile sportUrlMapper;
+	private SportUrlMapperPropertiesFile sportUrlMapper;
 
 	@Mock
 	private SportService sportService;
@@ -39,7 +39,7 @@ public class SportControllerTest {
 	private GamesViewModel gamesViewModel;
 
 	@Before
-	public void setUp() throws SportDoesntExistException, RuntimeException, SportDoesntExistInPropertieFileException {
+	public void setUp() throws SportDoesntExistException, RuntimeException, SportDoesntExistInPropertiesFileException {
 		gamesViewModel = mock(GamesViewModel.class);
 		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 		when(gamesViewModel.hasGames()).thenReturn(true);
@@ -119,8 +119,8 @@ public class SportControllerTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void getSportGames_should_redirect_to_404_path_when_sport_doesnt_exist_in_propertie_file() throws RuntimeException,
-			SportDoesntExistInPropertieFileException {
-		when(sportUrlMapper.getSportName(SPORT_URL)).thenThrow(SportDoesntExistInPropertieFileException.class);
+			SportDoesntExistInPropertiesFileException {
+		when(sportUrlMapper.getSportName(SPORT_URL)).thenThrow(SportDoesntExistInPropertiesFileException.class);
 
 		String path = controller.getSportGames(SPORT_URL, model);
 

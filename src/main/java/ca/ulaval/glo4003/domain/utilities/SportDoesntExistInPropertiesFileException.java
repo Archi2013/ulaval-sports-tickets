@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.domain.utilities;
 
-public class SportDoesntExistInPropertieFileException extends Exception {
+public class SportDoesntExistInPropertiesFileException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 }

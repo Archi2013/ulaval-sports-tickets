@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ca.ulaval.glo4003.domain.services.SportService;
-import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertieFileException;
+import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
@@ -52,7 +52,7 @@ public class SportController {
 			} else {
 				return "sport/no-games";
 			}
-		} catch (RuntimeException | SportDoesntExistInPropertieFileException | SportDoesntExistException e) {
+		} catch (RuntimeException | SportDoesntExistInPropertiesFileException | SportDoesntExistException e) {
 			logger.info("==> Impossible to get games for sport: " + sportUrl);
 			e.printStackTrace();
 			return "error/404";
