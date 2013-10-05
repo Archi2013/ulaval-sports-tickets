@@ -3,8 +3,6 @@ package ca.ulaval.glo4003.web.controllers;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +11,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
-import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertieFileException;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertieFile;
@@ -37,26 +33,14 @@ public class SportControllerTest {
 	@Mock
 	private SportService sportService;
 
-	@Mock
-	private SportDto sportDto;
-
-	@Mock
-	private GameDto gameDto;
-
-	@Mock
-	private GamesViewModel gamesViewModel;
-
-	@Mock
-	List<GameDto> gameDtosEmpty;
-
 	@InjectMocks
 	private SportController controller;
 
-	List<GameDto> gameDtos;
-	List<GameDto> gameDtosNonEmpty;
+	private GamesViewModel gamesViewModel;
 
 	@Before
 	public void setUp() throws SportDoesntExistException, RuntimeException, SportDoesntExistInPropertieFileException {
+		gamesViewModel = mock(GamesViewModel.class);
 		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 		when(gamesViewModel.hasGames()).thenReturn(true);
 	}

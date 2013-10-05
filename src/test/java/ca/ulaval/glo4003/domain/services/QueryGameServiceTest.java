@@ -30,14 +30,14 @@ public class QueryGameServiceTest {
 	private QueryGameService service;
 
 	@Test
-	public void getGame_should_get_game_from_dao() throws GameDoesntExistException {
+	public void getSectionsForGame_should_get_game_from_dao() throws GameDoesntExistException {
 		service.getSectionsForGame(GAME_ID);
 
 		verify(gameDaoMock).get(GAME_ID);
 	}
 
 	@Test
-	public void getGame_should_create_view_model_from_game() throws GameDoesntExistException {
+	public void getSectionsForGame_should_create_view_model_from_game() throws GameDoesntExistException {
 		GameDto gameDto = mock(GameDto.class);
 		when(gameDaoMock.get(GAME_ID)).thenReturn(gameDto);
 
@@ -47,7 +47,7 @@ public class QueryGameServiceTest {
 	}
 
 	@Test
-	public void getGame_should_return_view_model() throws GameDoesntExistException {
+	public void getSectionsForGame_should_return_view_model() throws GameDoesntExistException {
 		GameDto gameDto = mock(GameDto.class);
 		when(gameDaoMock.get(GAME_ID)).thenReturn(gameDto);
 		SectionsViewModel expectedViewModel = mock(SectionsViewModel.class);

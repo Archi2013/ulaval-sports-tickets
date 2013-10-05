@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import ca.ulaval.glo4003.domain.datafilters.DataFilter;
+import ca.ulaval.glo4003.domain.datafilters.GameIsInFutureFilter;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
@@ -26,7 +26,7 @@ public class SportService {
 	private GameDao gameDao;
 
 	@Inject
-	private DataFilter<GameDto> filter;
+	private GameIsInFutureFilter filter;
 
 	@Inject
 	private SportsViewModelFactory sportsViewModelFactory;

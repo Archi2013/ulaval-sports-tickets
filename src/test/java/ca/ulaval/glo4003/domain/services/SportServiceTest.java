@@ -19,8 +19,6 @@ import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
-import ca.ulaval.glo4003.web.converters.GameConverter;
-import ca.ulaval.glo4003.web.converters.SportConverter;
 import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.factories.GamesViewModelFactory;
@@ -41,12 +39,6 @@ public class SportServiceTest {
 	private DataFilter<GameDto> filterMock;
 
 	@Mock
-	private SportConverter simpleSportConverterMock;
-
-	@Mock
-	private GameConverter gameConverterMock;
-
-	@Mock
 	private SportsViewModelFactory sportsViewModelFactoryMock;
 
 	@Mock
@@ -55,8 +47,8 @@ public class SportServiceTest {
 	@InjectMocks
 	private SportService service = new SportService();
 
-	private List<GameDto> games;
 	private List<SportDto> sports;
+	private List<GameDto> games;
 
 	@Before
 	public void setUp() throws SportDoesntExistException {
