@@ -38,6 +38,10 @@ public class SimpleNode {
 		this.attributeValues = attributeValues;
 	}
 	
+	public SimpleNode(String name, Map<String, String> subNodes) {
+	    this(name, subNodes, new HashMap<String, String>());
+    }
+
 	public boolean hasNode(String... nodeNames) {
 		for(String nodeName : nodeNames) {
 			if (!subNodes.containsKey(nodeName) && !attributeValues.containsKey(nodeName)) {

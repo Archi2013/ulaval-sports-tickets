@@ -1,7 +1,9 @@
 package ca.ulaval.glo4003.persistence.xml;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.xml.xpath.XPathExpressionException;
@@ -47,6 +49,19 @@ public class XmlGameDao implements GameDao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void add(GameDto game) {
+		Map<String, String> nodes = new HashMap<>();
+		nodes.put("id", Long.toString(game.getId()));
+		nodes.put("oponents", game.getOpponents());
+		nodes.put("date", game.getGameDate().toString("yyyyMMdd"));
+		SimpleNode simpleNode = new SimpleNode("game", nodes);
+		try {
+	        database.addNode("/base/games", simpleNode);
+        } catch (XPathExpressionException cause) {
+	        throw new RuntimeException(cause);
+        }
 	}
 
 	List<Long> getIdForSport(String sportName) {

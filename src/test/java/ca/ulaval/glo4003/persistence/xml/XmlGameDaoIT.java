@@ -38,6 +38,19 @@ public class XmlGameDaoIT {
 		assertGame(expected1, ids.get(1));
 	}
 	
+	@Test
+	public void testAddDto() throws Exception {
+		DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
+		GameDto toAdd = new GameDto(4, "Vert et Or", DateTime.parse("20131201", format));
+		
+		gameDao.add(toAdd);
+		
+		GameDto actual = gameDao.get(4);
+		GameDto expected = toAdd;
+		
+		assertGame(expected, actual);
+	}
+	
 	private void assertGame(GameDto expected, GameDto actual) {
 		Assert.assertEquals(expected.getId(), actual.getId());
 		Assert.assertEquals(expected.getOpponents(), actual.getOpponents());
