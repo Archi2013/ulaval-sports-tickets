@@ -81,12 +81,8 @@ public class XmlExtractor {
 	}
 
 	public void commit(String filename) throws TransformerException {
-		DOMSource source = new DOMSource(document);
-
-		TransformerFactory transformerFactory = TransformerFactory.newInstance();
-		Transformer transformer = transformerFactory.newTransformer();
-		StreamResult result = new StreamResult(filename);
-		transformer.transform(source, result);
+		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		transformer.transform(new DOMSource(document), new StreamResult(filename));
 	}
 
 }
