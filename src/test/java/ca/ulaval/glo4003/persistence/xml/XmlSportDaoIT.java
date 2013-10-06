@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
-import ca.ulaval.glo4003.persistence.xml.XmlSportDao;
 
 public class XmlSportDaoIT {
 	private XmlSportDao sportDao = new XmlSportDao();
@@ -25,5 +24,16 @@ public class XmlSportDaoIT {
 		Assert.assertEquals("Hockey-Masculin", sports.get(0).getName());
 		Assert.assertEquals("Baseball-Masculin", sports.get(1).getName());
 		Assert.assertEquals("Volleyball-Feminin", sports.get(2).getName());
+	}
+	
+	@Test
+	public void testAddDto() throws Exception {
+		SportDto toAdd = new SportDto("Football américain");
+		
+		sportDao.add(toAdd);
+		
+		List<SportDto> sports = sportDao.getAll();
+		Assert.assertEquals(4, sports.size());
+		Assert.assertEquals("Football américain", sports.get(3).getName());
 	}
 }
