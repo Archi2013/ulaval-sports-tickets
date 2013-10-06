@@ -8,7 +8,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
 
 public class SimpleNode {
 	
@@ -70,9 +69,8 @@ public class SimpleNode {
 			String value = subNodes.get(attribute);
 			
 			Node sub = document.createElement(attribute);
-			Text nodeValue = document.createTextNode(value);
+			sub.setTextContent(value);
 			
-			sub.appendChild(nodeValue);
 			node.appendChild(sub);
 		}
 	}
