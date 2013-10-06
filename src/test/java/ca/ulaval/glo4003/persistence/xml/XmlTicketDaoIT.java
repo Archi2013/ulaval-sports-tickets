@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
-import ca.ulaval.glo4003.persistence.xml.XmlTicketDao;
 
 public class XmlTicketDaoIT {
 	
@@ -37,6 +36,18 @@ public class XmlTicketDaoIT {
 		assertTicket(expected3, tickets.get(3));
 		assertTicket(expected4, tickets.get(4));
 		assertTicket(expected5, tickets.get(5));
+	}
+	
+	@Test
+	public void testAddDto() throws Exception {
+		TicketDto toAdd = new TicketDto(1, 1000, 20.00f, "Général", "Rouges");
+		
+		ticketDao.add(toAdd);
+		
+		TicketDto actual = ticketDao.getTicket(1000);
+		TicketDto expected = toAdd;
+		
+		assertTicket(expected, actual);
 	}
 	
 	private void assertTicket(TicketDto expected, TicketDto actual) {

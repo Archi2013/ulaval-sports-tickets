@@ -1,7 +1,9 @@
 package ca.ulaval.glo4003.persistence.xml;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.xml.xpath.XPathExpressionException;
@@ -45,6 +47,21 @@ public class XmlTicketDao implements TicketDao {
 		}
 		return null;
     }
+	
+	public void add(TicketDto ticket) {
+		Map<String, String> nodes = new HashMap<>();
+		nodes.put("id", Integer.toString(ticket.getTicketId()));
+		nodes.put("price", Double.toString(ticket.getPrice()));
+		nodes.put("section", ticket.getSection());
+		nodes.put("type", ticket.getAdmissionType());
+		
+		SimpleNode simpleNode = new SimpleNode("ticket", nodes);
+		try {
+	        database.addNode("/base/tickets", simpleNode);
+        } catch (XPathExpressionException cause) {
+	        throw new RuntimeException(cause);
+        }
+	}
 
 	List<Integer> getIdForGame(int gameID) {
 		List<Integer> ids = new ArrayList<>();
