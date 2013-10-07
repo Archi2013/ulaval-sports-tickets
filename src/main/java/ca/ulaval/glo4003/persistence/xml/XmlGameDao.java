@@ -51,6 +51,7 @@ public class XmlGameDao implements GameDao {
 		return null;
 	}
 	
+	@Override
 	public void add(GameDto game) {
 		Map<String, String> nodes = new HashMap<>();
 		nodes.put("id", Long.toString(game.getId()));

@@ -32,4 +32,10 @@ public class FakeDataGameDao implements GameDao {
 	public GameDto get(long id) throws GameDoesntExistException {
 		return database.getGame(id);
 	}
+
+	@Override
+    public void add(GameDto game) {
+	    // TODO Auto-generated method stub
+	    
+    }
 }
