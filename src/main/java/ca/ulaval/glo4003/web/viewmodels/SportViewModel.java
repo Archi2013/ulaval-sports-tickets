@@ -9,19 +9,13 @@ public class SportViewModel {
 		this.url = url;
 	}
 
+	// Used for jsps.
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getUrl() {
 		return url;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
 }

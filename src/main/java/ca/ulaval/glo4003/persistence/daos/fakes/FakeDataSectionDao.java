@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.persistence.daos.fakes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,15 +25,26 @@ public class FakeDataSectionDao implements SectionDao {
 	private FakeDatabase database;
 
 	@Override
+	public List<SectionDto> getAll(int gameId) throws GameDoesntExistException {
+		Map<String, SectionDto> sections = createSections(gameId);
+		return new ArrayList<SectionDto>(sections.values());
+	}
+
+	@Override
 	public SectionDto get(int gameId, String admissionType, String sectionName) throws SectionDoesntExistException {
 		try {
-			GameDto game = database.getGame(gameId);
-			List<TicketDto> tickets = game.getTickets();
-			Map<String, SectionDto> sections = convertListTicketDtoToListOfSections(tickets);
+			Map<String, SectionDto> sections = createSections(gameId);
 			return sections.get(createKey(admissionType, sectionName));
 		} catch (GameDoesntExistException e) {
 			throw new SectionDoesntExistException();
 		}
+	}
+
+	private Map<String, SectionDto> createSections(int gameId) throws GameDoesntExistException {
+		GameDto game = database.getGame(gameId);
+		List<TicketDto> tickets = game.getTickets();
+		Map<String, SectionDto> sections = convertListTicketDtoToListOfSections(tickets);
+		return sections;
 	}
 
 	private Map<String, SectionDto> convertListTicketDtoToListOfSections(List<TicketDto> ticketDtos) {
@@ -46,7 +58,8 @@ public class FakeDataSectionDao implements SectionDao {
 			String admissionType = key.split(",")[0];
 			String sectionName = key.split(",")[1];
 			int numberOfTickets = map.get(key).size();
-			SectionDto section = new SectionDto(admissionType, sectionName, numberOfTickets);
+			double price = map.get(key).get(0).getPrice();
+			SectionDto section = new SectionDto(admissionType, sectionName, numberOfTickets, price);
 			sections.put(key, section);
 		}
 		return sections;
@@ -55,4 +68,5 @@ public class FakeDataSectionDao implements SectionDao {
 	private String createKey(String admissionType, String section) {
 		return admissionType + "," + section;
 	}
+
 }

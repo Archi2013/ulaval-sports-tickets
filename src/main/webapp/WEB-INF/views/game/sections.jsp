@@ -3,7 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<c:set var="pageTitle" value="${gameSections.opponents} : ${gameSections.date}" />
+<c:set var="pageTitle"
+	value="${gameSections.opponents} : ${gameSections.date}" />
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,9 +12,7 @@
 <body>
 	<%@include file="../layout/header.jsp"%>
 
-	<h2>
-		${pageTitle}
-	</h2>
+	<h2>${pageTitle}</h2>
 
 	<div>
 		<table>
@@ -22,6 +21,8 @@
 					<th>Type d'admission</th>
 					<th>Section</th>
 					<th>Nombre de billets</th>
+					<th>Prix</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,6 +31,10 @@
 						<td>${section.admissionType}</td>
 						<td>${section.sectionName}</td>
 						<td>${section.numberOfTickets}</td>
+						<td>${section.price}$</td>
+						<td><a href="billets/${section.url}"
+							class="standard-button-round orange-button">Consulter</a></td>
+
 					</tr>
 				</c:forEach>
 			</tbody>
