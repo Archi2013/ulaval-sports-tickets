@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.datafilter;
+package ca.ulaval.glo4003.domain.datafilters;
 
 import java.util.ArrayList;
 import java.util.List;

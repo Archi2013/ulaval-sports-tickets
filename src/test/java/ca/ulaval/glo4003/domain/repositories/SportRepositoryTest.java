@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.repositories;
+package ca.ulaval.glo4003.domain.repositories;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
