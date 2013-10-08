@@ -29,13 +29,13 @@ public class FakeDataGameDao implements GameDao {
 	}
 
 	@Override
-	public GameDto get(long id) throws GameDoesntExistException {
+	public GameDto get(int id) throws GameDoesntExistException {
 		return database.getGame(id);
 	}
 
 	@Override
-    public void add(GameDto game) {
-	    // TODO Auto-generated method stub
-	    
-    }
+	public void add(GameDto game) {
+		// TODO Auto-generated method stub
+
+	}
 }

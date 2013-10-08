@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ca.ulaval.glo4003.domain.services.SportService;
-import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
-import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
@@ -22,9 +20,6 @@ import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
 public class SportController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SportController.class);
-
-	@Inject
-	private SportUrlMapper sportUrlMapper;
 
 	@Inject
 	private SportService service;
@@ -41,10 +36,9 @@ public class SportController {
 	@RequestMapping(value = "/{sportUrl}/matchs", method = RequestMethod.GET)
 	public String getSportGames(@PathVariable String sportUrl, Model model) {
 		try {
-			String sportName = sportUrlMapper.getSportName(sportUrl);
-			logger.info("Getting games for sport: " + sportName);
+			logger.info("Getting games for sport: " + sportUrl);
 
-			GamesViewModel games = service.getGamesForSport(sportName);
+			GamesViewModel games = service.getGamesForSport(sportUrl);
 			model.addAttribute("games", games);
 
 			if (games.hasGames()) {
@@ -52,7 +46,7 @@ public class SportController {
 			} else {
 				return "sport/no-games";
 			}
-		} catch (RuntimeException | SportDoesntExistInPropertiesFileException | SportDoesntExistException e) {
+		} catch (RuntimeException | SportDoesntExistException e) {
 			logger.info("==> Impossible to get games for sport: " + sportUrl);
 			e.printStackTrace();
 			return "error/404";

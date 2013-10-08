@@ -1,12 +1,16 @@
 package ca.ulaval.glo4003.domain.services;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.web.viewmodels.SectionsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.factories.SectionsViewModelFactory;
 
@@ -17,10 +21,14 @@ public class QueryGameService {
 	private GameDao gameDao;
 
 	@Inject
+	private SectionDao sectionDao;
+
+	@Inject
 	private SectionsViewModelFactory viewModelFactory;
 
-	public SectionsViewModel getSectionsForGame(long gameId) throws GameDoesntExistException {
+	public SectionsViewModel getSectionsForGame(int gameId) throws GameDoesntExistException {
 		GameDto game = gameDao.get(gameId);
-		return viewModelFactory.createViewModel(game);
+		List<SectionDto> sections = sectionDao.getAll(gameId);
+		return viewModelFactory.createViewModel(game, sections);
 	}
 }

@@ -10,7 +10,9 @@ import ca.ulaval.glo4003.domain.dtos.GameDto;
 public interface GameDao {
 
 	List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException;
-	GameDto get(long id) throws GameDoesntExistException;
+
+	GameDto get(int id) throws GameDoesntExistException;
+
 	void add(GameDto game);
 
 }

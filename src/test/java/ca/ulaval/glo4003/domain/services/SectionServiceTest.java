@@ -10,14 +10,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.domain.utilities.SectionDoesntExistInPropertiesFileException;
 import ca.ulaval.glo4003.domain.utilities.SectionUrlMapper;
 import ca.ulaval.glo4003.domain.utilities.TicketType;
+import ca.ulaval.glo4003.persistence.daos.GameDao;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
-import ca.ulaval.glo4003.web.converters.SectionConverter;
 import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
+import ca.ulaval.glo4003.web.viewmodels.factories.SectionViewModelFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SectionServiceTest {
@@ -32,10 +35,13 @@ public class SectionServiceTest {
 	private SectionUrlMapper sectionUrlMapperMock;
 
 	@Mock
+	private GameDao gameDaoMock;
+
+	@Mock
 	private SectionDao sectionDaoMock;
 
 	@Mock
-	private SectionConverter sectionConverterMock;
+	private SectionViewModelFactory sectionFactoryMock;
 
 	@InjectMocks
 	private SectionService service;
@@ -71,21 +77,41 @@ public class SectionServiceTest {
 	}
 
 	@Test
-	public void getSection_should_convert_dto_to_view_model() throws SectionDoesntExistException {
-		SectionDto dto = mock(SectionDto.class);
-		when(sectionDaoMock.get(GAME_ID, ADMISSION, SECTION_NAME)).thenReturn(dto);
-
+	public void getSection_should_get_game_from_dao() throws SectionDoesntExistException, GameDoesntExistException {
 		service.getSection(GAME_ID, SECTION_URL);
 
-		verify(sectionConverterMock).convert(dto);
+		verify(gameDaoMock).get(GAME_ID);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test(expected = SectionDoesntExistException.class)
+	public void getSection_should_throw_section_doesnt_exist_exception_if_game_doesnt_exist() throws GameDoesntExistException,
+			SectionDoesntExistException {
+		when(gameDaoMock.get(GAME_ID)).thenThrow(GameDoesntExistException.class);
+
+		service.getSection(GAME_ID, SECTION_URL);
 	}
 
 	@Test
-	public void getSection_should_return_view_model() throws SectionDoesntExistException {
+	public void getSection_should_convert_dto_to_view_model() throws SectionDoesntExistException, GameDoesntExistException {
 		SectionDto dto = mock(SectionDto.class);
 		when(sectionDaoMock.get(GAME_ID, ADMISSION, SECTION_NAME)).thenReturn(dto);
+		GameDto gameDto = mock(GameDto.class);
+		when(gameDaoMock.get(GAME_ID)).thenReturn(gameDto);
+
+		service.getSection(GAME_ID, SECTION_URL);
+
+		verify(sectionFactoryMock).createViewModel(dto, gameDto);
+	}
+
+	@Test
+	public void getSection_should_return_view_model() throws SectionDoesntExistException, GameDoesntExistException {
+		SectionDto dto = mock(SectionDto.class);
+		when(sectionDaoMock.get(GAME_ID, ADMISSION, SECTION_NAME)).thenReturn(dto);
+		GameDto gameDto = mock(GameDto.class);
+		when(gameDaoMock.get(GAME_ID)).thenReturn(gameDto);
 		SectionViewModel expectedViewModel = mock(SectionViewModel.class);
-		when(sectionConverterMock.convert(dto)).thenReturn(expectedViewModel);
+		when(sectionFactoryMock.createViewModel(dto, gameDto)).thenReturn(expectedViewModel);
 
 		SectionViewModel viewModel = service.getSection(GAME_ID, SECTION_URL);
 

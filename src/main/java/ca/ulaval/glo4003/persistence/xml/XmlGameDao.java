@@ -28,7 +28,7 @@ public class XmlGameDao implements GameDao {
 	@Override
 	public List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException {
 		List<GameDto> games = new ArrayList<>();
-		for (long id : getIdForSport(sportName)) {
+		for (int id : getIdForSport(sportName)) {
 			try {
 				GameDto game = get(id);
 				games.add(game);
@@ -38,9 +38,9 @@ public class XmlGameDao implements GameDao {
 		}
 		return games;
 	}
-	
+
 	@Override
-	public GameDto get(long id) throws GameDoesntExistException {
+	public GameDto get(int id) throws GameDoesntExistException {
 		String xPath = basePath + "[id=\"" + id + "\"]";
 		try {
 			SimpleNode node = database.extractNode(xPath);
@@ -50,7 +50,7 @@ public class XmlGameDao implements GameDao {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public void add(GameDto game) {
 		Map<String, String> nodes = new HashMap<>();
@@ -59,20 +59,20 @@ public class XmlGameDao implements GameDao {
 		nodes.put("date", game.getGameDate().toString("yyyyMMdd"));
 		SimpleNode simpleNode = new SimpleNode("game", nodes);
 		try {
-	        database.addNode("/base/games", simpleNode);
-        } catch (XPathExpressionException cause) {
-	        throw new RuntimeException(cause);
-        }
+			database.addNode("/base/games", simpleNode);
+		} catch (XPathExpressionException cause) {
+			throw new RuntimeException(cause);
+		}
 	}
 
-	List<Long> getIdForSport(String sportName) {
-		List<Long> ids = new ArrayList<>();
+	List<Integer> getIdForSport(String sportName) {
+		List<Integer> ids = new ArrayList<>();
 		String xPath = mappingPath + "[@name=\"" + sportName + "\"]/games/game";
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(xPath);
 			for (SimpleNode node : nodes) {
 				if (node.hasNode("id")) {
-					long id = Long.parseLong(node.getNodeValue("id"));
+					int id = Integer.parseInt(node.getNodeValue("id"));
 					ids.add(id);
 				}
 			}

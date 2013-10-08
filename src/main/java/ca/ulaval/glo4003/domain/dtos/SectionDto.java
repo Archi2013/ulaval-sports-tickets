@@ -4,13 +4,14 @@ public class SectionDto {
 
 	private String admissionType;
 	private String sectionName;
-
 	private int numberOfTickets;
+	private double price;
 
-	public SectionDto(String admissionType, String sectionName, int numberOfTickets) {
+	public SectionDto(String admissionType, String sectionName, int numberOfTickets, double price) {
 		this.admissionType = admissionType;
 		this.sectionName = sectionName;
 		this.numberOfTickets = numberOfTickets;
+		this.price = price;
 	}
 
 	public String getAdmissionType() {
@@ -23,6 +24,10 @@ public class SectionDto {
 
 	public int getNumberOfTickets() {
 		return numberOfTickets;
+	}
+
+	public double getPrice() {
+		return price;
 	}
 
 }

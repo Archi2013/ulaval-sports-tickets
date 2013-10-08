@@ -5,11 +5,20 @@ public class SectionViewModel {
 	public String admissionType;
 	public String sectionName;
 	public int numberOfTickets;
+	public double price;
+	private String date;
+	private String opponents;
+	public String url;
 
-	public SectionViewModel(String admissionType, String sectionName, int numberOfTickets) {
+	public SectionViewModel(String admissionType, String sectionName, int numberOfTickets, double price, String date,
+			String opponents, String url) {
 		this.admissionType = admissionType;
 		this.sectionName = sectionName;
 		this.numberOfTickets = numberOfTickets;
+		this.price = price;
+		this.date = date;
+		this.opponents = opponents;
+		this.url = url;
 	}
 
 	public String getAdmissionType() {
@@ -22,5 +31,21 @@ public class SectionViewModel {
 
 	public int getNumberOfTickets() {
 		return numberOfTickets;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public String getOpponents() {
+		return opponents;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public String getUrl() {
+		return url;
 	}
 }

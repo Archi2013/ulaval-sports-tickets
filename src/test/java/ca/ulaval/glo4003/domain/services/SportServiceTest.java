@@ -16,6 +16,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4003.domain.datafilters.GameIsInFutureFilter;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
@@ -27,13 +29,17 @@ import ca.ulaval.glo4003.web.viewmodels.factories.SportsViewModelFactory;
 @RunWith(MockitoJUnitRunner.class)
 public class SportServiceTest {
 
-	private static final String SPORT_NAME = "SPORT_NAME";
+	private static final String SPORT_NAME = "Baseball Masculin";
+	private static final String SPORT_URL = "baseball-masculin";
 
 	@Mock
 	private SportDao sportDaoMock;
 
 	@Mock
 	private GameDao gameDaoMock;
+
+	@Mock
+	private SportUrlMapper sportUrlMapperMock;
 
 	@Mock
 	private GameIsInFutureFilter filterMock;
@@ -51,12 +57,14 @@ public class SportServiceTest {
 	private List<GameDto> games;
 
 	@Before
-	public void setUp() throws SportDoesntExistException {
+	public void setUp() throws SportDoesntExistException, SportDoesntExistInPropertiesFileException {
 		sports = newArrayList();
 		when(sportDaoMock.getAll()).thenReturn(sports);
 
 		games = newArrayList();
 		when(gameDaoMock.getGamesForSport(SPORT_NAME)).thenReturn(games);
+
+		when(sportUrlMapperMock.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 	}
 
 	@Test
@@ -83,22 +91,30 @@ public class SportServiceTest {
 	}
 
 	@Test
+	public void getGamesForSport_should_map_sport_url_to_sport_name() throws SportDoesntExistException,
+			SportDoesntExistInPropertiesFileException {
+		service.getGamesForSport(SPORT_URL);
+
+		verify(sportUrlMapperMock).getSportName(SPORT_URL);
+	}
+
+	@Test
 	public void getGamesForSport_should_get_games_for_sport_from_dao() throws SportDoesntExistException {
-		service.getGamesForSport(SPORT_NAME);
+		service.getGamesForSport(SPORT_URL);
 
 		verify(gameDaoMock).getGamesForSport(SPORT_NAME);
 	}
 
 	@Test
 	public void getGamesForSport_should_apply_filter_on_sport_games() throws SportDoesntExistException {
-		service.getGamesForSport(SPORT_NAME);
+		service.getGamesForSport(SPORT_URL);
 
 		verify(filterMock).applyFilterOnList(games);
 	}
 
 	@Test
 	public void getGamesForSport_should_create_view_model() throws SportDoesntExistException {
-		service.getGamesForSport(SPORT_NAME);
+		service.getGamesForSport(SPORT_URL);
 
 		verify(gamesViewModelFactoryMock).createViewModel(SPORT_NAME, games);
 	}
@@ -107,8 +123,18 @@ public class SportServiceTest {
 	public void getGamesForSport_should_return_created_view_model() throws SportDoesntExistException {
 		GamesViewModel viewModel = new GamesViewModel();
 		when(gamesViewModelFactoryMock.createViewModel(SPORT_NAME, games)).thenReturn(viewModel);
-		GamesViewModel response = service.getGamesForSport(SPORT_NAME);
+
+		GamesViewModel response = service.getGamesForSport(SPORT_URL);
 
 		assertSame(viewModel, response);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test(expected = SportDoesntExistException.class)
+	public void getGamesForSport_should_throw_sport_doesnt_exist_exception_if_sport_doesnt_exist_in_properties_file()
+			throws SportDoesntExistInPropertiesFileException, SportDoesntExistException {
+		when(sportUrlMapperMock.getSportName(SPORT_URL)).thenThrow(SportDoesntExistInPropertiesFileException.class);
+
+		service.getGamesForSport(SPORT_URL);
 	}
 }
