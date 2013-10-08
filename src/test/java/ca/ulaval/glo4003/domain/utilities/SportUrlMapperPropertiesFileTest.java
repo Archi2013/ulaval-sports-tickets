@@ -21,7 +21,7 @@ import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileExcept
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertiesFile;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SportUrlMapperPropertieFileTest {
+public class SportUrlMapperPropertiesFileTest {
 	private static final String SPORT_NAME = "Basketball";
 	private static final String SPORT_URL = "basketball";
 	private static final String SPORT_NAME_SPACES = "Tennis de table";

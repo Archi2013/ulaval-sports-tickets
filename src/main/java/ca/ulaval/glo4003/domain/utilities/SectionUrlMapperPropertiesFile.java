@@ -14,7 +14,7 @@ public class SectionUrlMapperPropertiesFile extends PropertiesFileMapper impleme
 		try {
 			String value = createValueFromSectionInfo(admissionType, sectionName);
 			return getKey(value);
-		} catch (Exception e) {
+		} catch (KeyValueDoesntExistException e) {
 			throw new SectionDoesntExistInPropertiesFileException();
 		}
 	}
@@ -24,7 +24,7 @@ public class SectionUrlMapperPropertiesFile extends PropertiesFileMapper impleme
 		try {
 			String value = getValue(sectionUrl);
 			return TicketType.fromString(value);
-		} catch (Exception e) {
+		} catch (KeyValueDoesntExistException e) {
 			throw new SectionDoesntExistInPropertiesFileException();
 		}
 	}
