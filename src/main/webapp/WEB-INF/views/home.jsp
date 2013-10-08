@@ -14,7 +14,7 @@
     <nav>
         <ul>
             <li><a href="/sport">Liste des sports disponibles ▷</a></li>
-            <li><a href="/admin/match">Administration : ajout d'un match ▷</a></li>
+            <li><a href="/admin">Administration ▷</a></li>
         </ul>
     </nav>
     

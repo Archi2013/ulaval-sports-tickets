@@ -16,15 +16,21 @@ import ca.ulaval.glo4003.web.viewmodels.GameToAddViewModel;
 public class AdministrationController {
 	private static final Logger logger = LoggerFactory.getLogger(AdministrationController.class);
 	
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String home() {
+		logger.info("Adminisatration : Home");
+		return "admin/home";
+	}
+	
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
 	public ModelAndView game() {
-		logger.info("Page to add a new game for a sport");
+		logger.info("Adminisatration : Page to add a new game for a sport");
 		return new ModelAndView("admin/game", "command", new GameToAddViewModel());
 	}
 	
 	@RequestMapping(value = "/ajout-match", method = RequestMethod.POST)
 	public String addGame(@ModelAttribute("SpringWeb")GameToAddViewModel gameToAddVM, Model model) {
-		logger.info("Add a new game for a sport : " + gameToAddVM.getSport());
+		logger.info("Adminisatration : Add a new game for a sport : " + gameToAddVM.getSport());
 		
 		model.addAttribute("game", gameToAddVM);
 		
