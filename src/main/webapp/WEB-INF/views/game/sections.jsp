@@ -21,7 +21,7 @@
 					<th>Type d'admission</th>
 					<th>Section</th>
 					<th>Nombre de billets</th>
-					<th>Prix</th>
+					<th>Prix (CDN$)</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -31,7 +31,7 @@
 						<td>${section.admissionType}</td>
 						<td>${section.sectionName}</td>
 						<td>${section.numberOfTickets}</td>
-						<td>${section.price}$</td>
+						<td>${section.price}</td>
 						<td><a href="billets/${section.url}"
 							class="standard-button-round orange-button">Consulter</a></td>
 

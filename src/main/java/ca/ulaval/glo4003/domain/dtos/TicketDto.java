@@ -29,12 +29,6 @@ public class TicketDto {
 		return price;
 	}
 
-	public String getPriceFormatted() {
-		String formatted = new Double(price).toString();
-		formatted = formatted.replace('.', ',');
-		return formatted;
-	}
-
 	public String getAdmissionType() {
 		return admissionType;
 	}

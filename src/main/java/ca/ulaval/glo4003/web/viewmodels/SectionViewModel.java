@@ -5,12 +5,12 @@ public class SectionViewModel {
 	public String admissionType;
 	public String sectionName;
 	public int numberOfTickets;
-	public double price;
+	public String price;
 	private String date;
 	private String opponents;
 	public String url;
 
-	public SectionViewModel(String admissionType, String sectionName, int numberOfTickets, double price, String date,
+	public SectionViewModel(String admissionType, String sectionName, int numberOfTickets, String price, String date,
 			String opponents, String url) {
 		this.admissionType = admissionType;
 		this.sectionName = sectionName;
@@ -33,7 +33,7 @@ public class SectionViewModel {
 		return numberOfTickets;
 	}
 
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 

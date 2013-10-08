@@ -10,6 +10,6 @@ public class GameConverter extends AbstractConverter<GameDto, GameViewModel> {
 
 	public GameViewModel convert(GameDto gameDto) {
 		return new GameViewModel(gameDto.getId(), gameDto.getOpponents(), gameDto.getGameDate().toString(
-				"dd MMMM yyyy à HH'h'mm z"), gameDto.getNumberOfTickets());
+				"d MMMM yyyy à HH'h'mm z"), gameDto.getNumberOfTickets());
 	}
 }

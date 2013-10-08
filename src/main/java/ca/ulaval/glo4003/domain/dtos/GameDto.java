@@ -47,10 +47,6 @@ public class GameDto {
 		return gameDate;
 	}
 
-	public String getGameDateFormatted() {
-		return gameDate.toString("dd MMMM yyyy à HH'h'mm z");
-	}
-
 	public void setGameDate(DateTime gameDate) {
 		this.gameDate = gameDate;
 	}

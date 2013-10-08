@@ -17,7 +17,7 @@ public class SectionsViewModelFactory {
 	private SectionViewModelFactory sectionFactory;
 
 	public SectionsViewModel createViewModel(GameDto gameDto, List<SectionDto> sections) {
-		return new SectionsViewModel(gameDto.getOpponents(), gameDto.getGameDate().toString("dd MMMM yyyy à HH'h'mm z"),
+		return new SectionsViewModel(gameDto.getOpponents(), gameDto.getGameDate().toString("d MMMM yyyy à HH'h'mm z"),
 				sectionFactory.createViewModel(sections, gameDto));
 	}
 }

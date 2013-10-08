@@ -17,7 +17,7 @@
 	<div class="wrapper-ticket-card">
 		<div class="ticket-card">
 			<div class="ticket-admin-info">
-			<span class="half-admin-info"></span><!-- important
+			<span class="half-admin-info">Nombre de billets : <strong>${section.numberOfTickets}</strong></span><!-- important
 			--><span class="half-admin-info text-align-right">Prix : <strong>${section.price} CDN$</strong></span>
 			</div>
 			<h3>
@@ -26,8 +26,7 @@
 			<div class="ticket-date-info">${section.date}</div>
 			<div class="ticket-seat-info">
 				Type d'admission : <strong>${section.admissionType}</strong><br>
-				Section : <strong>${section.sectionName}</strong><br>
-				Nombre de billets : <strong>${section.numberOfTickets}</strong>
+				Section : <strong>${section.sectionName}</strong>
 			</div>
 		</div>
 	</div>

@@ -21,8 +21,11 @@ public class SectionViewModelFactory {
 	private SectionUrlMapper sectionUrlMapper;
 
 	public SectionViewModel createViewModel(SectionDto section, GameDto game) {
+		String dateFR = game.getGameDate().toString("d MMMM yyyy à HH'h'mm z");
+		String priceFR = (new Double(section.getPrice())).toString();
+		priceFR = priceFR.replace(".", ",");
 		return new SectionViewModel(section.getAdmissionType(), section.getSectionName(), section.getNumberOfTickets(),
-				section.getPrice(), game.getGameDateFormatted(), game.getOpponents(), createUrl(section.getAdmissionType(),
+				priceFR, dateFR, game.getOpponents(), createUrl(section.getAdmissionType(),
 						section.getSectionName()));
 	}
 
