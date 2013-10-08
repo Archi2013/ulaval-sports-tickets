@@ -261,6 +261,10 @@ footer {
     margin: 25px 50px;
 }
 
+.margin-25 {
+    margin: 25px;
+}
+
 .information-block(@background-color, @border-color, @text-color) {
     background-color: @background-color;
     border: 2px solid @border-color;
@@ -395,4 +399,39 @@ footer {
 	a:hover, a:active {
 	    color: @standard-blue-color;
 	}
+}
+
+.form-admin {
+    label {
+        .inline-block(middle);
+        width: 250px;
+        font-size: 1.5em;
+        line-height: 2em;
+        color: @standard-medium-gray-color;
+    }
+    
+    input[type=text], input[type=date] {
+        font-size: 1.3em;
+        line-height: 1.7em;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 300;
+        
+        width: 250px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        outline: none;
+    }
+    
+    select {
+        font-size: 1.3em;
+        line-height: 1.7em;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 300;
+        background: @standard-blue-gray-color;
+        color: white;
+        -webkit-appearance: none;
+        .border-radius(0);
+        padding-right: 5px;
+        padding-left: 5px;
+    }
 }
