@@ -18,6 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class XmlExtractorTest {
 
+	private static final String ITEM_XPATH = "/Magasin/Items/Item";
 	private static final String ITEMS_XPATH = "/Magasin/Items";
 	private static final String CHEMISE_XPATH = "/Magasin/Items/Item[Nom=\"Chemise\"]";
 	private static final String CHEMISE_PRICE_XPATH = "/Magasin/Items/Item[Nom=\"Chemise\"]/Prix";
@@ -27,7 +28,7 @@ public class XmlExtractorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		String xml = "<Magasin><Items><Item><Nom>Chemise</Nom><Prix>9,99</Prix></Item></Items></Magasin>";
+		String xml = "<Magasin><Items><Item><Nom>Chemise</Nom><Prix>9,99</Prix></Item><Item><Nom>Chapeau</Nom><Prix>4,99</Prix></Item></Items></Magasin>";
 		InputStream stream = new ByteArrayInputStream(xml.getBytes("UTF-8"));
 		extractor = new XmlExtractor(stream);
 	}
@@ -66,13 +67,25 @@ public class XmlExtractorTest {
 
 	@Test
 	public void testCreateNode() throws Exception {
-		initSimpleNode();
-		
 		extractor.createNode(ITEMS_XPATH, initSimpleNode());
 		
 		String result = extractor.extractPath(PANTALON_PRICE_XPATH);
 		String expected = "19.99";
 		
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testCountNodeWithFilter() throws Exception {
+		int result = extractor.count(CHEMISE_XPATH);
+		int expected = 1;
+		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testCountNode() throws Exception {
+		int result = extractor.count(ITEM_XPATH);
+		int expected = 2;
 		assertEquals(expected, result);
 	}
 	

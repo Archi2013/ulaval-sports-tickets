@@ -70,6 +70,11 @@ public class XmlExtractor {
 		XPathExpression expr = xpath.compile(xPath);
 		return expr.evaluate(document, qName);
 	}
+	
+	public int count(String xPath) throws XPathExpressionException {
+		double result = (double)extract("count(" + xPath + ")", XPathConstants.NUMBER);
+		return (int)result;
+	}
 
 	public void createNode(String xPath, SimpleNode simpleNode) throws XPathExpressionException {
 
