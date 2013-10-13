@@ -43,7 +43,6 @@ public class XmlDatabase {
 
 	public List<SimpleNode> extractNodeSet(String xPath) throws XPathExpressionException {
 		return extractor.extractNodeSet(xPath);
-
 	}
 
 	public void addNode(String xPath, SimpleNode simpleNode) throws XPathExpressionException {
@@ -56,5 +55,9 @@ public class XmlDatabase {
 		} catch (TransformerException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public int countNode(String xPath) throws XPathExpressionException {
+		return extractor.count(xPath);
 	}
 }
