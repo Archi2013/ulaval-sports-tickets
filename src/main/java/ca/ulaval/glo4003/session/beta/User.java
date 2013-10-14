@@ -11,8 +11,19 @@ public class User {
 		
 	  private String username;
 	  private String password;
+	  private Boolean isLogged;
 	  
-	public User(){}
+	public Boolean isLogged() {
+		return isLogged;
+	}
+
+	public void setIsLogged(Boolean isLogged) {
+		this.isLogged = isLogged;
+	}
+
+	public User(){
+		this.isLogged=false;
+	}
 	 
 	  public User(String username, String password) {
 		this.username=username;

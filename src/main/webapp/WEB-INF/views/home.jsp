@@ -20,6 +20,8 @@
     
     <%@include file="layout/footer.jsp" %>
     
+    <p>Welcome:${user.username}</p>
     <p>Sur le serveur, c'est le ${serverTime}.</p>
+
 </body>
 </html>

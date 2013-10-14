@@ -35,15 +35,26 @@ public class SessionController {
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public String signIn(Model model) {
 		logger.info("Sign In");
-	
-		return "session/signin";
+		
+		model.addAttribute("user", currentUser);
+		if (currentUser.isLogged()) {
+			return "session/logged";
+		} else {
+			return "session/signin";
+		}	
+		
 	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signUp(Model model) {
 		logger.info("Sign Up");
-	
-		return "session/signup";
+		
+		model.addAttribute("user", currentUser);
+		if (currentUser.isLogged()) {
+			return "session/logged";
+		} else {
+			return "session/signup";
+		}
 	}
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)

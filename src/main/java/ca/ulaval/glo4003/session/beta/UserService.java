@@ -24,6 +24,7 @@ public class UserService {
 	private void setCurrentUser(UserDto user){
 		currentUser.setUsername(user.getName());	
 		currentUser.setPassword(user.getPassword());
+		currentUser.setIsLogged(true);
 	}
 	
 	public void signUp(String username, String password) {

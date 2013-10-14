@@ -10,14 +10,12 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    
-    
-    <h2> Sign In </h2>
-    <form action="/session/auth" method="post">  
-		<%@ include file="../session/authForm.jsp" %>
-	</form>  
-    
-    
-    <%@include file="../layout/footer.jsp" %>
+    <h2> Vous êtes déjà connecté ${user.username}!</h2>
+
+    <div class="information-block-error-skin margin-25-50"> 
+        Vous ne pouvez pas vous connecter et/ou vous enregistrer si vous êtes déjà connecté dans le système. Vous devez vous déconnecté auparavant. Pour le faire, cliquer ici.
+    </div>
+
+
 </body>
 </html>
