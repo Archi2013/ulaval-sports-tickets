@@ -12,7 +12,7 @@
     
 
 
-    <h2> Sign up </h2>
+    <h2> S'inscrire sur UL Sport </h2>
     <form action="/session/save" method="post">  
 		<%@ include file="../session/authForm.jsp" %>
 	</form>  

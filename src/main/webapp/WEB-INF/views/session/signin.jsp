@@ -10,12 +10,12 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    
-    
-    <h2> Sign In </h2>
+    <h2> Se connecté! </h2>
     <form action="/session/auth" method="post">  
 		<%@ include file="../session/authForm.jsp" %>
-	</form>  
+	</form> 
+	<p class="margin-25"> Vous n'avez pas de compte? </p>
+	<a href="/session/signup" class="standard-button-round orange-button margin-25">S'inscrire!</a> 
     
     
     <%@include file="../layout/footer.jsp" %>

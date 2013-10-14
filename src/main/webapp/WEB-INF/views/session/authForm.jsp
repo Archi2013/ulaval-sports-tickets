@@ -9,7 +9,7 @@
 					<td><input type="text" name="passwordParam"></td>  
 				</tr>
 				<tr> 
-					<td><input type="submit" ></td>  
+					<td><input type="submit" class="standard-button-round orange-button"></td>  
 					<td></td>  
 				</tr>  
 			</tbody>

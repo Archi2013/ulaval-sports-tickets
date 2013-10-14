@@ -90,7 +90,6 @@ public class SessionController {
 	@RequestMapping(value="/current",method = RequestMethod.GET)
 	public String showCurrentUser(Model model){
 		
-		
 		model.addAttribute("user", currentUser); 
 		if (currentUser.isLogged()) {
 			return "session/success";

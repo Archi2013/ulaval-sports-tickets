@@ -10,6 +10,7 @@
 <%@include file="layout/head.jsp"%>
 <body>
     <%@include file="layout/header.jsp" %>
+
     
     <nav>
         <ul>

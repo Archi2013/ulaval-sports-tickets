@@ -10,16 +10,14 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <h2> Successful Sign Up!</h2>
+    <h2> Vous êtes connecté ${user.username}!</h2>
 
-    <table>
-    	<tr>
-    		<td> Welcome:${user.username}</td>
-    	</tr>
-    	<tr>
-    		<td> Password:${user.password}</td>
-    	</tr>
-    </table>
+    <nav>
+        <ul>
+            <li><a href="/">Retourner à l'acceuil ▷</a></li>
+            <li><a href="/session/logout">Se deconnecter ▷</a></li>
+        </ul>
+    </nav>
 
 </body>
 </html>
