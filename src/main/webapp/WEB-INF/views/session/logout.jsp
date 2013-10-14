@@ -10,7 +10,7 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <h2> Vous êtes maintenant déconnecté!</h2>
+    <h2> Vous êtes déconnecté!</h2>
     <nav>
         <ul>
             <li><a href="/">Retourner à l'acceuil ▷</a></li>
