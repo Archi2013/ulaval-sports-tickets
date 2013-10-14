@@ -14,6 +14,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
@@ -59,7 +60,7 @@ public class XmlGameDao implements GameDao {
 	}
 
 	@Override
-	public void add(GameDto game) {
+	public void add(GameDto game) throws GameAlreadyExistException {
 		Map<String, String> nodes = new HashMap<>();
 		nodes.put("id", Long.toString(game.getId()));
 		nodes.put("oponents", game.getOpponents());

@@ -9,7 +9,7 @@ import ca.ulaval.glo4003.domain.dtos.TicketDto;
 @Repository
 public interface TicketDao {
 
-	List<TicketDto> getTicketsForGame(int gameID) throws GameDoesntExistException;
-
-	TicketDto getTicket(int ticketId) throws TicketDoesntExistException;
+	public List<TicketDto> getTicketsForGame(int gameID) throws GameDoesntExistException;
+	public TicketDto getTicket(int ticketId) throws TicketDoesntExistException;
+	public void add(TicketDto ticket) throws TicketAlreadyExistException;
 }

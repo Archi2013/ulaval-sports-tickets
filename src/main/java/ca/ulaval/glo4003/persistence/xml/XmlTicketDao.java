@@ -11,6 +11,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketDao;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
@@ -60,7 +61,7 @@ public class XmlTicketDao implements TicketDao {
 		}
     }
 	
-	public void add(TicketDto ticket) {
+	public void add(TicketDto ticket) throws TicketAlreadyExistException {
 		SimpleNode simpleNode = convertTicketToNode(ticket);
 		try {
 	        database.addNode("/base/tickets", simpleNode);

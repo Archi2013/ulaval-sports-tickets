@@ -10,6 +10,7 @@ import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.persistence.daos.SportAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
@@ -56,7 +57,7 @@ public class XmlSportDao implements SportDao {
         }
 	}
 	
-	public void add(SportDto sport) {
+	public void add(SportDto sport) throws SportAlreadyExistException {
 		Map<String, String> nodes = new HashMap<>();
 		nodes.put("name", sport.getName());
 		SimpleNode simpleNode = new SimpleNode("sport", nodes);

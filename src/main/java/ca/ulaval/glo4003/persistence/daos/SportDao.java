@@ -8,7 +8,9 @@ import ca.ulaval.glo4003.domain.dtos.SportDto;
 
 @Repository
 public interface SportDao {
+	
 	public List<SportDto> getAll();
 	public SportDto get(String sportName) throws SportDoesntExistException;
+	public void add(SportDto sport) throws SportAlreadyExistException;
 }
 
