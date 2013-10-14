@@ -4,6 +4,7 @@ import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.factories.SportFactory;
 import ca.ulaval.glo4003.domain.pojos.Sport;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
+import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 public class SportRepository implements ISportRepository {
 
@@ -16,7 +17,7 @@ public class SportRepository implements ISportRepository {
 	}
 
 	@Override
-	public Sport getSportByName(String sportName) {
+	public Sport getSportByName(String sportName) throws SportDoesntExistException {
 		SportDto dto = sportDao.get(sportName);
 
 		return sportFactory.instantiateSport(dto.getName());

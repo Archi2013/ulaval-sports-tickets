@@ -3,6 +3,8 @@ package ca.ulaval.glo4003.persistence.xml;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.naming.directory.NoSuchAttributeException;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -51,14 +53,14 @@ public class SimpleNode {
 		return true;
 	}
 	
-	public String getNodeValue(String nodeName) {
+	public String getNodeValue(String nodeName) throws NoSuchAttributeException {
 		if (subNodes.containsKey(nodeName)) {
 			return subNodes.get(nodeName);
 		}
 		if (attributeValues.containsKey(nodeName)) {
 			return attributeValues.get(nodeName);
 		}
-		throw new RuntimeException();
+		throw new NoSuchAttributeException();
 	}
 
 	public Node toNode(Document document) {

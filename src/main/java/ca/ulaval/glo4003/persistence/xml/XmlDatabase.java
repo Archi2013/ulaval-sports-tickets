@@ -3,7 +3,6 @@ package ca.ulaval.glo4003.persistence.xml;
 import java.io.InputStream;
 import java.util.List;
 
-import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
 public class XmlDatabase {
@@ -18,7 +17,7 @@ public class XmlDatabase {
 			InputStream input = this.getClass().getResourceAsStream(filename);
 			extractor = new XmlExtractor(input);
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new XmlIntegrityException(e);
 		}
 	}
 
@@ -52,7 +51,7 @@ public class XmlDatabase {
 	public void commit() {
 		try {
 			extractor.commit(filename);
-		} catch (TransformerException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}

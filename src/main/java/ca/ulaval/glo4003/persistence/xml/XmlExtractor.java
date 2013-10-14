@@ -10,7 +10,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -85,7 +84,7 @@ public class XmlExtractor {
 		parent.appendChild(child);
 	}
 
-	public void commit(String filename) throws TransformerException {
+	public void commit(String filename) throws Exception {
 		Transformer transformer = TransformerFactory.newInstance().newTransformer();
 		transformer.transform(new DOMSource(document), new StreamResult(filename));
 	}

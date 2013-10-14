@@ -12,6 +12,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.naming.directory.NoSuchAttributeException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -86,7 +88,7 @@ public class SimpleNodeTest {
 		assertEquals(expected, actual);
 	}
 	
-	@Test(expected=RuntimeException.class)
+	@Test(expected=NoSuchAttributeException.class)
 	public void testGetNodeValueThrowException() throws Exception {
 		someNode.getNodeValue("test");
 	}

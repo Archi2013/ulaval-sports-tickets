@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
@@ -42,10 +43,9 @@ public class XmlTicketDao implements TicketDao {
 		try {
 			SimpleNode node = database.extractNode(xPath);
 			return createFromNode(node);
-		} catch (XPathExpressionException e) {
-			e.printStackTrace();
+		} catch (XPathExpressionException | NoSuchAttributeException e) {
+			throw new XmlIntegrityException(e);
 		}
-		return null;
     }
 	
 	public void add(TicketDto ticket) {
@@ -64,25 +64,20 @@ public class XmlTicketDao implements TicketDao {
         }
 	}
 
-	List<Integer> getIdForGame(int gameID) {
-		List<Integer> ids = new ArrayList<>();
+	List<Integer> getIdForGame(int gameID) throws GameDoesntExistException {
 		String xPath = mappingPath + "[@gameID=\"" + gameID + "\"]/tickets/ticket";
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(xPath);
-			for (SimpleNode node : nodes) {
-				if (node.hasNode("ticketID")) {
-					int id = Integer.parseInt(node.getNodeValue("ticketID"));
-					ids.add(id);
-				}
-			}
+			
+			return NodesConverter.toIntegerList(nodes, "ticketID");
 		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new XmlIntegrityException(e);
+		} catch (NoSuchAttributeException e) {
+			throw new GameDoesntExistException();
 		}
-		return ids;
 	}
 
-	private TicketDto createFromNode(SimpleNode parent) {
+	private TicketDto createFromNode(SimpleNode parent) throws NoSuchAttributeException, TicketDoesntExistException {
 		if (parent.hasNode("id", "gameID", "price", "type", "section")) {
 			int ticketId = Integer.parseInt(parent.getNodeValue("id"));
 			long gameId = Long.parseLong(parent.getNodeValue("gameID"));
@@ -91,7 +86,7 @@ public class XmlTicketDao implements TicketDao {
 			String section =parent.getNodeValue("section");
 			return new TicketDto(gameId, ticketId, price, admissionType, section);
 		}
-		return null;
+		throw new TicketDoesntExistException();
 	}
 
 }

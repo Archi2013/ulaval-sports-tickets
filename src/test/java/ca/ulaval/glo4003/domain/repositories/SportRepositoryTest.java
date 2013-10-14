@@ -37,28 +37,28 @@ public class SportRepositoryTest {
 	private SportRepository repository;
 
 	@Before()
-	public void setUp() {
+	public void setUp() throws Exception {
 		sportDto = new SportDto(DTO_SPORT);
 		when(sportDao.get(PARAMETER_SPORT)).thenReturn(sportDto);
 		when(sportFactory.instantiateSport(DTO_SPORT)).thenReturn(sport);
 	}
 
 	@Test
-	public void getSportByName_gets_sport_data_from_dao() {
+	public void getSportByName_gets_sport_data_from_dao() throws Exception {
 		repository.getSportByName(PARAMETER_SPORT);
 
 		verify(sportDao).get(PARAMETER_SPORT);
 	}
 
 	@Test
-	public void getSportByName_instantiate_sport_using_factory() {
+	public void getSportByName_instantiate_sport_using_factory() throws Exception {
 		repository.getSportByName(PARAMETER_SPORT);
 
 		verify(sportFactory).instantiateSport(DTO_SPORT);
 	}
 
 	@Test
-	public void getSportByName_returns_sport_instantiated_by_factory() {
+	public void getSportByName_returns_sport_instantiated_by_factory() throws Exception {
 		Sport sportReturned = repository.getSportByName(PARAMETER_SPORT);
 
 		Assert.assertSame(sport, sportReturned);

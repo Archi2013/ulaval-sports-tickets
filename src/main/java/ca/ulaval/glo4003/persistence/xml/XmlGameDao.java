@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.joda.time.DateTime;
@@ -33,7 +34,7 @@ public class XmlGameDao implements GameDao {
 				GameDto game = get(id);
 				games.add(game);
 			} catch (GameDoesntExistException cause) {
-				throw new RuntimeException("'Database contains invalide game ID", cause);
+				throw new XmlIntegrityException("'Database contains invalide game ID", cause);
 			}
 		}
 		return games;
@@ -45,10 +46,9 @@ public class XmlGameDao implements GameDao {
 		try {
 			SimpleNode node = database.extractNode(xPath);
 			return createFromNode(node);
-		} catch (XPathExpressionException e) {
-			e.printStackTrace();
+		} catch (XPathExpressionException | NoSuchAttributeException e) {
+			throw new XmlIntegrityException(e);
 		}
-		return null;
 	}
 
 	@Override
@@ -60,30 +60,22 @@ public class XmlGameDao implements GameDao {
 		SimpleNode simpleNode = new SimpleNode("game", nodes);
 		try {
 			database.addNode("/base/games", simpleNode);
-		} catch (XPathExpressionException cause) {
-			throw new RuntimeException(cause);
+		} catch (XPathExpressionException e) {
+			throw new XmlIntegrityException(e);
 		}
 	}
 
 	List<Integer> getIdForSport(String sportName) {
-		List<Integer> ids = new ArrayList<>();
 		String xPath = mappingPath + "[@name=\"" + sportName + "\"]/games/game";
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(xPath);
-			for (SimpleNode node : nodes) {
-				if (node.hasNode("id")) {
-					int id = Integer.parseInt(node.getNodeValue("id"));
-					ids.add(id);
-				}
-			}
-		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return NodesConverter.toIntegerList(nodes, "id");
+		} catch (XPathExpressionException | NoSuchAttributeException e) {
+			throw new XmlIntegrityException(e);
 		}
-		return ids;
 	}
 
-	private GameDto createFromNode(SimpleNode parent) {
+	private GameDto createFromNode(SimpleNode parent) throws NoSuchAttributeException, GameDoesntExistException {
 		if (parent.hasNode("id", "oponents", "date")) {
 			long id = Long.parseLong(parent.getNodeValue("id"));
 			String opponents = parent.getNodeValue("oponents");
@@ -91,7 +83,7 @@ public class XmlGameDao implements GameDao {
 			DateTime gameDate = DateTime.parse(parent.getNodeValue("date"), format);
 			return new GameDto(id, opponents, gameDate);
 		}
-		return null;
+		throw new GameDoesntExistException();
 	}
 
 }

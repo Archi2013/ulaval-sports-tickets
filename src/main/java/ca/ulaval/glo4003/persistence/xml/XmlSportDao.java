@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
+import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 public class XmlSportDao implements SportDao {
 	
@@ -22,28 +24,29 @@ public class XmlSportDao implements SportDao {
 	public List<SportDto> getAll() {
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(basePath);
-	        
-	        List<SportDto> sports = new ArrayList<>();
-	        for (SimpleNode node : nodes) {
-	        	sports.add(createFromNode(node));
-	        }
-	        return sports;
-        } catch (XPathExpressionException e) {
-	        e.printStackTrace();
+	        return convertNodesToDtos(nodes);
+        } catch (XPathExpressionException | NoSuchAttributeException | SportDoesntExistException e) {
+        	throw new XmlIntegrityException(e);
         }
-		return null;
+	}
+
+	private List<SportDto> convertNodesToDtos(List<SimpleNode> nodes) throws NoSuchAttributeException, SportDoesntExistException {
+		List<SportDto> sports = new ArrayList<>();
+		for (SimpleNode node : nodes) {
+			sports.add(createFromNode(node));
+		}
+		return sports;
 	}
 
 	@Override
-	public SportDto get(String sportName) {
+	public SportDto get(String sportName) throws SportDoesntExistException {
 		try {
 			String xPath = basePath + "[name=\"" + sportName + "\"]";
 			SimpleNode node = database.extractNode(xPath);
 	        return createFromNode(node);
-        } catch (XPathExpressionException e) {
-	        e.printStackTrace();
+        } catch (XPathExpressionException | NoSuchAttributeException e) {
+	        throw new XmlIntegrityException(e);
         }
-		return null;
 	}
 	
 	public void add(SportDto sport) {
@@ -52,15 +55,15 @@ public class XmlSportDao implements SportDao {
 		SimpleNode simpleNode = new SimpleNode("sport", nodes);
 		try {
 	        database.addNode("/base/sports", simpleNode);
-        } catch (XPathExpressionException cause) {
-	        throw new RuntimeException(cause);
+        } catch (XPathExpressionException e) {
+        	throw new XmlIntegrityException(e);
         }
 	}
 	
-	private SportDto createFromNode(SimpleNode parent) {
+	private SportDto createFromNode(SimpleNode parent) throws NoSuchAttributeException, SportDoesntExistException {
 		if (parent.hasNode("name"))
 			return new SportDto(parent.getNodeValue("name"));
-		return null;
+		throw new SportDoesntExistException();
 	}
 
 }

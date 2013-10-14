@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
+import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 @Repository
 public class FakeDataSportDao implements SportDao {
@@ -21,7 +22,7 @@ public class FakeDataSportDao implements SportDao {
 	}
 
 	@Override
-	public SportDto get(String sportName) {
+	public SportDto get(String sportName) throws SportDoesntExistException {
 		return database.getSport(sportName);
 	}
 

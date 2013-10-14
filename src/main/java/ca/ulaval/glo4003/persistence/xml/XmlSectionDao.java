@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
@@ -28,7 +29,7 @@ public class XmlSectionDao implements SectionDao {
 			price = database.extractPath(xPath + "/price");
 			admissionType = database.extractPath(xPath + "/type");
 		} catch (XPathExpressionException e) {
-			e.printStackTrace();
+			throw new XmlIntegrityException(e);
 		}
 		
 		return new SectionDto(admissionType, sectionName, numberOfTickets, Double.parseDouble(price));
@@ -38,19 +39,22 @@ public class XmlSectionDao implements SectionDao {
     public List<SectionDto> getAll(int gameId) throws GameDoesntExistException {
 		String xPath = "/base/games-sections/game-section[@gameID=\"" + gameId + "\"]/sections/section";
 		
-		List<SectionDto> sections = new ArrayList<>();
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(xPath);
-			for(SimpleNode node : nodes) {
-				if (node.hasNode("name")) {
-					SectionDto section = get(gameId, node.getNodeValue("name"));
-					sections.add(section);
-				}
-			}
-		} catch (XPathExpressionException | SectionDoesntExistException e) {
-			e.printStackTrace();
+			return convertNodesToSectionDtos(gameId, nodes);
+		} catch (XPathExpressionException | SectionDoesntExistException | NoSuchAttributeException e) {
+			throw new XmlIntegrityException(e);
+		}
+    }
+
+	private List<SectionDto> convertNodesToSectionDtos(int gameId, List<SimpleNode> nodes) throws SectionDoesntExistException,
+			NoSuchAttributeException {
+		List<SectionDto> sections = new ArrayList<>();
+		for(SimpleNode node : nodes) {
+			SectionDto section = get(gameId, node.getNodeValue("name"));
+			sections.add(section);
 		}
 		return sections;
-    }
+	}
 
 }

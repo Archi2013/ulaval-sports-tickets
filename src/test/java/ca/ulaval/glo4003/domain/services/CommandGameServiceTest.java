@@ -37,7 +37,7 @@ public class CommandGameServiceTest {
 	private CommandGameService gameService;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		when(sportRepositoryMock.getSportByName(A_SPORT_NAME)).thenReturn(sport);
 		when(gameFactoryMock.instantiateGame(A_OPPONENT, A_DATE)).thenReturn(game);
 	}
@@ -50,7 +50,7 @@ public class CommandGameServiceTest {
 	}
 
 	@Test
-	public void addGameToSportCalendar_ask_for_related_sport_to_repository() {
+	public void addGameToSportCalendar_ask_for_related_sport_to_repository() throws Exception {
 		gameService.createNewGame(A_SPORT_NAME, A_OPPONENT, A_DATE);
 
 		verify(sportRepositoryMock).getSportByName(A_SPORT_NAME);
