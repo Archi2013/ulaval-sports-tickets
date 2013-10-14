@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
+import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 public class XmlTicketDaoIT {
 	
@@ -23,6 +24,11 @@ public class XmlTicketDaoIT {
 		
 		TicketDto expected = new TicketDto(1, 1, 35.00f, "VIP", "Front Row");
 		assertTicket(expected, actual);
+	}
+	
+	@Test(expected=TicketDoesntExistException.class)
+	public void testGetInvalidGameSectionShouldThrow() throws Exception {
+		ticketDao.getTicket(-1);
 	}
 	
 	@Test

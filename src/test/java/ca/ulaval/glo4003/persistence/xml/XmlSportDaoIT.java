@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 public class XmlSportDaoIT {
 	private XmlSportDao sportDao;
@@ -30,6 +31,11 @@ public class XmlSportDaoIT {
 		Assert.assertEquals("Hockey-Masculin", sports.get(0).getName());
 		Assert.assertEquals("Baseball-Masculin", sports.get(1).getName());
 		Assert.assertEquals("Volleyball-Feminin", sports.get(2).getName());
+	}
+	
+	@Test(expected=SportDoesntExistException.class)
+	public void testGetInvalidSportShouldThrow() throws Exception {
+		sportDao.get("Natation");
 	}
 	
 	@Test

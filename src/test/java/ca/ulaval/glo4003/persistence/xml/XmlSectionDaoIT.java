@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
+import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 
 public class XmlSectionDaoIT {
 	
@@ -38,6 +39,16 @@ public class XmlSectionDaoIT {
 		assertSection(expected0, sections.get(0));
 		assertSection(expected1, sections.get(1));
 		assertSection(expected2, sections.get(2));
+	}
+	
+	@Test(expected=SectionDoesntExistException.class)
+	public void testGetInvalidGameSectionShouldThrow() throws Exception {
+		sectionDao.get(-1, "Général");
+	}
+	
+	@Test(expected=SectionDoesntExistException.class)
+	public void testGetInvalidSectionShouldThrow() throws Exception {
+		sectionDao.get(1, "Indigo");
 	}
 
 	private void assertSection(SectionDto expected, SectionDto actual) {

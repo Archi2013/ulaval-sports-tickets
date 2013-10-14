@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 
 public class XmlGameDaoIT {
 
@@ -54,6 +55,11 @@ public class XmlGameDaoIT {
 		GameDto expected = toAdd;
 
 		assertGame(expected, actual);
+	}
+	
+	@Test(expected=GameDoesntExistException.class)
+	public void testGetInvalidGameShouldThrow() throws Exception {
+		gameDao.get(-1);
 	}
 
 	private void assertGame(GameDto expected, GameDto actual) {
