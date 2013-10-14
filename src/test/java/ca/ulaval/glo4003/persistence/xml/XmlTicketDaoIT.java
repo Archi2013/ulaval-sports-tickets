@@ -3,13 +3,19 @@ package ca.ulaval.glo4003.persistence.xml;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 
 public class XmlTicketDaoIT {
 	
-	private XmlTicketDao ticketDao = new XmlTicketDao();
+	private XmlTicketDao ticketDao;
+	
+	@Before
+	public void setUp() throws Exception {
+		ticketDao = new XmlTicketDao("/BasicData.xml");
+	}
 	
 	@Test
 	public void testGetTicket() throws Exception {
@@ -23,12 +29,12 @@ public class XmlTicketDaoIT {
 	public void testGetTicketsForGame() throws Exception {
 		List<TicketDto> tickets = ticketDao.getTicketsForGame(2);
 		
-		TicketDto expected0 = new TicketDto(1, 3, 35.00f, "VIP", "Front Row");
-		TicketDto expected1 = new TicketDto(1, 4, 35.00f, "VIP", "Front Row");
-		TicketDto expected2 = new TicketDto(1, 5, 35.00f, "VIP", "Front Row");
-		TicketDto expected3 = new TicketDto(1, 13, 20.00f, "VIP", "Rouges");
-		TicketDto expected4 = new TicketDto(1, 14, 20.00f, "VIP", "Rouges");
-		TicketDto expected5 = new TicketDto(1, 15, 20.00f, "VIP", "Rouges");
+		TicketDto expected0 = new TicketDto(2, 3, 35.00f, "VIP", "Front Row");
+		TicketDto expected1 = new TicketDto(2, 4, 35.00f, "VIP", "Front Row");
+		TicketDto expected2 = new TicketDto(2, 5, 35.00f, "VIP", "Front Row");
+		TicketDto expected3 = new TicketDto(2, 13, 20.00f, "VIP", "Rouges");
+		TicketDto expected4 = new TicketDto(2, 14, 20.00f, "VIP", "Rouges");
+		TicketDto expected5 = new TicketDto(2, 15, 20.00f, "VIP", "Rouges");
 		
 		assertTicket(expected0, tickets.get(0));
 		assertTicket(expected1, tickets.get(1));

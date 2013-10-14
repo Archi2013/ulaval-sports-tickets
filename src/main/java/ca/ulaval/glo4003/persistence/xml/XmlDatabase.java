@@ -24,6 +24,10 @@ public class XmlDatabase {
 	public static XmlDatabase getInstance() {
 		return getInstance("/BasicData.xml");
 	}
+	
+	static XmlDatabase getUniqueInstance(String filename) {
+		return new XmlDatabase(filename); 
+	}
 
 	public static XmlDatabase getInstance(String filename) {
 		if (instance == null) {

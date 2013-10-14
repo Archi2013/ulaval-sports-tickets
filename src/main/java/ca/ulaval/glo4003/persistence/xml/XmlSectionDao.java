@@ -15,7 +15,15 @@ import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 public class XmlSectionDao implements SectionDao {
 
 	@Inject
-	private XmlDatabase database = XmlDatabase.getInstance();
+	private XmlDatabase database;
+	
+	public XmlSectionDao() {
+		database = XmlDatabase.getInstance();
+	}
+	
+	public XmlSectionDao(String filename) {
+		database = XmlDatabase.getUniqueInstance(filename);
+	}
 	
 	@Override
     public SectionDto get(int gameId, String sectionName) throws SectionDoesntExistException {

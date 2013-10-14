@@ -18,10 +18,18 @@ import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 public class XmlTicketDao implements TicketDao {
 	
 	@Inject
-	private XmlDatabase database = XmlDatabase.getInstance();
+	private XmlDatabase database;
 
 	private String basePath = "/base/tickets/ticket";
 	private String mappingPath = "/base/games-tickets/game-tickets";
+	
+	public XmlTicketDao() {
+		database = XmlDatabase.getInstance();
+	}
+	
+	XmlTicketDao(String filename) {
+		database = XmlDatabase.getUniqueInstance(filename);
+	}
 	
 	@Override
     public List<TicketDto> getTicketsForGame(int gameID) throws GameDoesntExistException {
@@ -53,6 +61,15 @@ public class XmlTicketDao implements TicketDao {
     }
 	
 	public void add(TicketDto ticket) {
+		SimpleNode simpleNode = convertTicketToNode(ticket);
+		try {
+	        database.addNode("/base/tickets", simpleNode);
+        } catch (XPathExpressionException cause) {
+	        throw new XmlIntegrityException(cause);
+        }
+	}
+
+	private SimpleNode convertTicketToNode(TicketDto ticket) {
 		Map<String, String> nodes = new HashMap<>();
 		nodes.put("id", Integer.toString(ticket.getTicketId()));
 		nodes.put("gameID", Long.toString(ticket.getGameId()));
@@ -60,12 +77,7 @@ public class XmlTicketDao implements TicketDao {
 		nodes.put("section", ticket.getSection());
 		nodes.put("type", ticket.getAdmissionType());
 		
-		SimpleNode simpleNode = new SimpleNode("ticket", nodes);
-		try {
-	        database.addNode("/base/tickets", simpleNode);
-        } catch (XPathExpressionException cause) {
-	        throw new XmlIntegrityException(cause);
-        }
+		return new SimpleNode("ticket", nodes);
 	}
 
 	List<Integer> getIdForGame(int gameID) throws GameDoesntExistException {

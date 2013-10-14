@@ -6,13 +6,19 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 
 public class XmlGameDaoIT {
 
-	private XmlGameDao gameDao = new XmlGameDao();
+	private XmlGameDao gameDao;
+	
+	@Before
+	public void setUp() throws Exception {
+		gameDao = new XmlGameDao("/BasicData.xml");
+	}
 
 	@Test
 	public void testGetIdForSport() throws Exception {

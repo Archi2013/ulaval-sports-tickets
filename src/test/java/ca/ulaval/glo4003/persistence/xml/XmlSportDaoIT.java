@@ -3,12 +3,18 @@ package ca.ulaval.glo4003.persistence.xml;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 
 public class XmlSportDaoIT {
-	private XmlSportDao sportDao = new XmlSportDao();
+	private XmlSportDao sportDao;
+	
+	@Before
+	public void setUp() throws Exception {
+		sportDao = new XmlSportDao("/BasicData.xml");
+	}
 	
 	@Test
 	public void testGet() throws Exception {

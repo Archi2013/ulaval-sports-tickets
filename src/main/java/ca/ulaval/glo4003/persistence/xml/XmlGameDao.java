@@ -21,10 +21,17 @@ import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 public class XmlGameDao implements GameDao {
 
 	@Inject
-	private XmlDatabase database = XmlDatabase.getInstance();
-
+	private XmlDatabase database;
 	private String basePath = "/base/games/game";
 	private String mappingPath = "/base/sport-games/sport-game";
+	
+	public XmlGameDao() {
+		database = XmlDatabase.getInstance();
+	}
+	
+	public XmlGameDao(String filename) {
+		database = XmlDatabase.getUniqueInstance(filename);
+	}
 
 	@Override
 	public List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException {

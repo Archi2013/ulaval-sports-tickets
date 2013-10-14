@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.naming.directory.NoSuchAttributeException;
 
-public class NodesConverter {
+public final class NodesConverter {
 
+	private NodesConverter(){}
+	
 	public static Integer toInteger(SimpleNode node, String key) throws NoSuchAttributeException {
 		return Integer.parseInt(node.getNodeValue(key));
 	}
