@@ -62,8 +62,8 @@ public class SessionController {
 		logger.info("Authentification");
 		
 		try {
-			UserDto user = userService.signIn(usernameParam,passwordParam);
-			model.addAttribute("user", currentUser); 
+			UserViewModel userViewModel = userService.signIn(usernameParam,passwordParam);
+			model.addAttribute("user", userViewModel); 
 	        return "session/success";
 		} catch (UserDoesntExistException | UsernameAndPasswordDoesntMatchException e) {
 			logger.info("==> Impossible to Sign In : " + usernameParam);

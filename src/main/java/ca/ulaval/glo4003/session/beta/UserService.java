@@ -34,12 +34,13 @@ public class UserService {
 	
 	}
 	
-	public UserDto signIn(String username, String password) throws UserDoesntExistException, UsernameAndPasswordDoesntMatchException{
+	public UserViewModel signIn(String username, String password) throws UserDoesntExistException, UsernameAndPasswordDoesntMatchException{
 		
 		UserDto user = userDao.getUser(username);
 		if( user.getPassword().equals(password)){
 			setCurrentUser(user);
-			return user;
+			UserViewModel userViewModel = new UserViewModel(username, password);
+			return userViewModel;
 		}
 		else
 			throw new UsernameAndPasswordDoesntMatchException();
