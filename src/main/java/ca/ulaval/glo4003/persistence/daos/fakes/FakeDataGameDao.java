@@ -35,7 +35,6 @@ public class FakeDataGameDao implements GameDao {
 
 	@Override
 	public void add(GameDto game) {
-		// TODO Auto-generated method stub
-
+		throw new RuntimeException("Cannot add element to fake data");
 	}
 }

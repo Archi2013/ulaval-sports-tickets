@@ -25,17 +25,21 @@ public class XmlTicketDao implements TicketDao {
 	
 	@Override
     public List<TicketDto> getTicketsForGame(int gameID) throws GameDoesntExistException {
+		List<Integer> ids = getIdForGame(gameID);
+		try {
+			return getTicketsFromIds(ids);
+        } catch (TicketDoesntExistException e) {
+            throw new XmlIntegrityException(e);
+        }
+    }
+
+	private List<TicketDto> getTicketsFromIds(List<Integer> ids) throws TicketDoesntExistException {
 		List<TicketDto> tickets = new ArrayList<>();
-		for (Integer id : getIdForGame(gameID)) {
-			try {
-	            tickets.add(getTicket(id));
-            } catch (TicketDoesntExistException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-            }
+		for (Integer id : ids) {
+			tickets.add(getTicket(id));
 		}
 		return tickets;
-    }
+	}
 
 	@Override
     public TicketDto getTicket(int ticketId) throws TicketDoesntExistException {
