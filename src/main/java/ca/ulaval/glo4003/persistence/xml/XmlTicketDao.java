@@ -18,12 +18,14 @@ import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 public class XmlTicketDao implements TicketDao {
 	
+	private static final String TICKETS_XPATH = "/base/tickets";
+	private final static String TICKET_XPATH = TICKETS_XPATH + "/ticket";
+	private final static String TICKET_XPATH_ID = TICKET_XPATH + "[id=\"%s\"]";
+	private final static String TICKET_XPATH_GAME_ID = TICKET_XPATH + "[gameID=\"%s\"]";
+
 	@Inject
 	private XmlDatabase database;
 
-	private String basePath = "/base/tickets/ticket";
-	private String mappingPath = "/base/games-tickets/game-tickets";
-	
 	public XmlTicketDao() {
 		database = XmlDatabase.getInstance();
 	}
@@ -33,48 +35,43 @@ public class XmlTicketDao implements TicketDao {
 	}
 	
 	@Override
-    public List<TicketDto> getTicketsForGame(int gameID) throws GameDoesntExistException {
-		List<Integer> ids = getIdForGame(gameID);
-		try {
-			return getTicketsFromIds(ids);
-        } catch (TicketDoesntExistException e) {
-            throw new XmlIntegrityException(e);
-        }
-    }
-
-	private List<TicketDto> getTicketsFromIds(List<Integer> ids) throws TicketDoesntExistException {
-		List<TicketDto> tickets = new ArrayList<>();
-		for (Integer id : ids) {
-			tickets.add(getTicket(id));
-		}
-		return tickets;
-	}
-
-	@Override
     public TicketDto getTicket(int ticketId) throws TicketDoesntExistException {
-		String xPath = basePath + "[id=\"" + ticketId + "\"]";
+		String xPath = String.format(TICKET_XPATH_ID, ticketId);
 		try {
 			SimpleNode node = database.extractNode(xPath);
-			return createFromNode(node);
+			return convertNodeToTicket(node);
 		} catch (XPathExpressionException | NoSuchAttributeException e) {
 			throw new XmlIntegrityException(e);
 		}
     }
 	
+	@Override
+    public List<TicketDto> getTicketsForGame(int gameID) throws GameDoesntExistException {
+		String xPath = String.format(TICKET_XPATH_GAME_ID, gameID);
+		
+		try {
+			List<SimpleNode> nodes = database.extractNodeSet(xPath);
+			return convertNodesToTickets(nodes);
+		} catch (NoSuchAttributeException | TicketDoesntExistException | XPathExpressionException e) {
+			throw new XmlIntegrityException(e);
+		} 
+    }
+
+	@Override
 	public void add(TicketDto ticket) throws TicketAlreadyExistException {
 		if(isIdExist(ticket.getTicketId())) {
 			throw new TicketAlreadyExistException();
 		}
 		SimpleNode simpleNode = convertTicketToNode(ticket);
 		try {
-	        database.addNode("/base/tickets", simpleNode);
+	        database.addNode(TICKETS_XPATH, simpleNode);
         } catch (XPathExpressionException cause) {
 	        throw new XmlIntegrityException(cause);
         }
 	}
 
 	private boolean isIdExist(int ticketId) {
-		String xPath = basePath + "[id=\"" + ticketId + "\"]";
+		String xPath = String.format(TICKET_XPATH_ID, ticketId);
 		return database.exist(xPath);
 	}
 
@@ -89,20 +86,7 @@ public class XmlTicketDao implements TicketDao {
 		return new SimpleNode("ticket", nodes);
 	}
 
-	List<Integer> getIdForGame(int gameID) throws GameDoesntExistException {
-		String xPath = mappingPath + "[@gameID=\"" + gameID + "\"]/tickets/ticket";
-		try {
-			List<SimpleNode> nodes = database.extractNodeSet(xPath);
-			
-			return NodesConverter.toIntegerList(nodes, "ticketID");
-		} catch (XPathExpressionException e) {
-			throw new XmlIntegrityException(e);
-		} catch (NoSuchAttributeException e) {
-			throw new GameDoesntExistException();
-		}
-	}
-
-	private TicketDto createFromNode(SimpleNode parent) throws NoSuchAttributeException, TicketDoesntExistException {
+	private TicketDto convertNodeToTicket(SimpleNode parent) throws NoSuchAttributeException, TicketDoesntExistException {
 		if (parent.hasNode("id", "gameID", "price", "type", "section")) {
 			int ticketId = Integer.parseInt(parent.getNodeValue("id"));
 			long gameId = Long.parseLong(parent.getNodeValue("gameID"));
@@ -113,5 +97,12 @@ public class XmlTicketDao implements TicketDao {
 		}
 		throw new TicketDoesntExistException();
 	}
-
+	
+	private List<TicketDto> convertNodesToTickets(List<SimpleNode> nodes) throws NoSuchAttributeException, TicketDoesntExistException {
+		List<TicketDto> tickets = new ArrayList<>();
+		for (SimpleNode node : nodes) {
+			tickets.add(convertNodeToTicket(node));
+		}
+		return tickets;
+	}
 }
