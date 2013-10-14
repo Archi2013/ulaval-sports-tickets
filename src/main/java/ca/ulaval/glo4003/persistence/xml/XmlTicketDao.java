@@ -64,7 +64,7 @@ public class XmlTicketDao implements TicketDao {
 		try {
 	        database.addNode("/base/tickets", simpleNode);
         } catch (XPathExpressionException cause) {
-	        throw new RuntimeException(cause);
+	        throw new XmlIntegrityException(cause);
         }
 	}
 
