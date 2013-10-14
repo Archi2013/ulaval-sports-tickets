@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 @Component
 @Scope(value="session", proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class User {
+		
 	  private String username;
 	  private String password;
 	  

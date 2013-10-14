@@ -13,7 +13,7 @@
 
 
     <h2> Sign up</h2>
-    <form action="session/save.html" method="post">  
+    <form action="/session/save" method="post">  
 		<table>  
 			<tbody>
 				<tr>  

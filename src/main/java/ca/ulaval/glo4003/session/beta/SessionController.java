@@ -30,19 +30,25 @@ public class SessionController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SessionController.class);
 
-	@RequestMapping(value = "/session", method = RequestMethod.GET)
+	@RequestMapping(value = "/session/signup", method = RequestMethod.GET)
 	public String signUp(Model model) {
 		logger.info("Sign Up");
 	
 		return "session/signup";
 	}
 	
-	@RequestMapping(value="/session/save",method = RequestMethod.POST)    
+	@RequestMapping(value = "/session/signin", method = RequestMethod.GET)
+	public String signIn(Model model){
+		logger.info("Sign In");
+		
+		return "session/signin";
+	}
+	
+	@RequestMapping(value="session/save",method = RequestMethod.POST)    
     public String registerUser(@RequestParam String usernameParam,@RequestParam String passwordParam,Model model) { 
 		
 		
 		userService.signIn(usernameParam,passwordParam);
-		
 		model.addAttribute("user", currentUser); 
         return "session/success";  
     } 

@@ -14,8 +14,10 @@ public class UserService {
 	
 	public void signUp(String username, String password) {
 		
+		
 		//TODO verifier si username existe
 		//TODO Persister
+		
 		
 	}
 	
