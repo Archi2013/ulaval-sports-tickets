@@ -26,9 +26,9 @@ public class XmlTicketDaoIT {
 		TicketDto expected0 = new TicketDto(1, 3, 35.00f, "VIP", "Front Row");
 		TicketDto expected1 = new TicketDto(1, 4, 35.00f, "VIP", "Front Row");
 		TicketDto expected2 = new TicketDto(1, 5, 35.00f, "VIP", "Front Row");
-		TicketDto expected3 = new TicketDto(1, 13, 20.00f, "Général", "Rouges");
-		TicketDto expected4 = new TicketDto(1, 14, 20.00f, "Général", "Rouges");
-		TicketDto expected5 = new TicketDto(1, 15, 20.00f, "Général", "Rouges");
+		TicketDto expected3 = new TicketDto(1, 13, 20.00f, "VIP", "Rouges");
+		TicketDto expected4 = new TicketDto(1, 14, 20.00f, "VIP", "Rouges");
+		TicketDto expected5 = new TicketDto(1, 15, 20.00f, "VIP", "Rouges");
 		
 		assertTicket(expected0, tickets.get(0));
 		assertTicket(expected1, tickets.get(1));
@@ -52,6 +52,7 @@ public class XmlTicketDaoIT {
 	
 	private void assertTicket(TicketDto expected, TicketDto actual) {
 		Assert.assertEquals(expected.getTicketId(), actual.getTicketId());
+		Assert.assertEquals(expected.getGameId(), actual.getGameId());
 		Assert.assertEquals(expected.getPrice(), actual.getPrice(), 0.01f);
 		Assert.assertEquals(expected.getAdmissionType(), actual.getAdmissionType());
 		Assert.assertEquals(expected.getSection(), actual.getSection());
