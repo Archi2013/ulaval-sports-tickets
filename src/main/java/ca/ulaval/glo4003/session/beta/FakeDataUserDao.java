@@ -32,14 +32,14 @@ public class FakeDataUserDao implements UserDao {
 		
 		for (UserDto user : this.userList)
 		{
-			System.out.println("getName()="+user.getName()+" and name="+name);
 			if(name.equals(user.getName())){
-				System.out.println("ICI");
 				return user;
 			}
 		}
 		throw new UserDoesntExistException();
 	}
+	
+	
 	@Override
 	public void AddUser(String name, String password){
 		this.userList.add(new UserDto(name,password));

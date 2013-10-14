@@ -30,19 +30,19 @@ public class UserService {
 		
 		//TODO verifier si username existe
 		//TODO Persister
-		
-		
+	
 	}
 	
-	public UserDto signIn(String username, String password) throws UserDoesntExistException{
+	public UserDto signIn(String username, String password) throws UserDoesntExistException, UsernameAndPasswordDoesntMatchException{
 		
 		UserDto user = userDao.getUser(username);
-		//TODO verifier password
-		setCurrentUser(user);
-		return user;
+		if( user.getPassword().equals(password)){
+			setCurrentUser(user);
+			return user;
+		}
+		else
+			throw new UsernameAndPasswordDoesntMatchException();
 	}
 
-	public void getCurrentUser() {
-
-	}
+	
 }

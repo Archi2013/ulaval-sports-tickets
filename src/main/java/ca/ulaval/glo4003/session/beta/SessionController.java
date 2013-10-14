@@ -31,13 +31,6 @@ public class SessionController {
 	public User currentUser;
 	
 	private static final Logger logger = LoggerFactory.getLogger(SessionController.class);
-
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String authForm(Model model) {
-		logger.info("Sign Up/Sign in");
-		
-		return "session/signup";
-	}
 	
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public String signIn(Model model) {
@@ -55,16 +48,15 @@ public class SessionController {
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public String submitSignIn(@RequestParam String usernameParam,@RequestParam String passwordParam,Model model){
-		logger.info("Sign In");
+		logger.info("Authentification");
 		
 		try {
 			UserDto user = userService.signIn(usernameParam,passwordParam);
-			logger.info("dans le try, user==:"+user.getName());
 			model.addAttribute("user", currentUser); 
 	        return "session/success";
-		} catch (UserDoesntExistException e) {
+		} catch (UserDoesntExistException | UsernameAndPasswordDoesntMatchException e) {
 			logger.info("==> Impossible to Sign In : " + usernameParam);
-			return "error/404";
+			return "session/retry";
 		}
 	
 	}
