@@ -13,7 +13,7 @@
     <h2> Vous êtes déjà connecté ${user.username}!</h2>
 
     <div class="information-block-error-skin margin-25-50"> 
-        Vous ne pouvez pas vous connecter et/ou vous enregistrer si vous êtes déjà connecté dans le système. Vous devez vous déconnecté auparavant. Pour le faire, cliquer ici.
+        Vous ne pouvez pas vous connecter et/ou vous enregistrer si vous êtes déjà connecté dans le système. Vous devez vous déconnecté auparavant. Pour le faire, <a href="/session/logout">cliquez ici</a>..
     </div>
 
 

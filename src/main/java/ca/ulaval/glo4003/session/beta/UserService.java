@@ -22,7 +22,7 @@ public class UserService {
 	private UserDao userDao;
 	
 	private void setCurrentUser(UserDto user){
-		currentUser.setUsername(user.getName());	
+		currentUser.setUsername(user.getUsername());	
 		currentUser.setPassword(user.getPassword());
 		currentUser.setIsLogged(true);
 	}
@@ -43,6 +43,12 @@ public class UserService {
 		}
 		else
 			throw new UsernameAndPasswordDoesntMatchException();
+	}
+	
+	public void logOutCurrentUser() {
+		currentUser.setPassword("");
+		currentUser.setUsername("");
+		currentUser.setIsLogged(false);	
 	}
 
 	

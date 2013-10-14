@@ -15,12 +15,9 @@ public class FakeDataUserDao implements UserDao {
 	private List<UserDto> userList;
 	
 	public FakeDataUserDao(){
-		this.userList = new ArrayList<UserDto>();
-		
+		this.userList = new ArrayList<UserDto>();	
 		this.userList.add(new UserDto("marco","1234"));
-		this.userList.add(new UserDto("math","4321"));
-		
-		System.out.println("this.userList="+userList);
+		this.userList.add(new UserDto("math","4321"));		
 	}
 
 	@Override
@@ -32,7 +29,7 @@ public class FakeDataUserDao implements UserDao {
 		
 		for (UserDto user : this.userList)
 		{
-			if(name.equals(user.getName())){
+			if(name.equals(user.getUsername())){
 				return user;
 			}
 		}

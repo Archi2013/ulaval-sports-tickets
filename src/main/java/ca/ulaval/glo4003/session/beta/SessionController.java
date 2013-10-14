@@ -78,15 +78,25 @@ public class SessionController {
 		userService.signUp(usernameParam, passwordParam);
 		model.addAttribute("user", currentUser); 
         return "session/success";  
-
         
+    } 
+	
+	@RequestMapping(value="/logout",method = RequestMethod.GET)    
+    public String logoutUser(Model model) { 
+		userService.logOutCurrentUser(); 
+        return "session/logout";  
     } 
 	
 	@RequestMapping(value="/current",method = RequestMethod.GET)
 	public String showCurrentUser(Model model){
 		
+		
 		model.addAttribute("user", currentUser); 
-		return "session/success";
+		if (currentUser.isLogged()) {
+			return "session/success";
+		} else {
+			return "session/logout";
+		}
 	}
 
 }
