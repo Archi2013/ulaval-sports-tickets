@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.persistence.daos.SportAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 public class XmlSportDaoIT {
@@ -47,5 +48,12 @@ public class XmlSportDaoIT {
 		List<SportDto> sports = sportDao.getAll();
 		Assert.assertEquals(4, sports.size());
 		Assert.assertEquals("Football américain", sports.get(3).getName());
+	}
+	
+	@Test(expected=SportAlreadyExistException.class)
+	public void testAddExistingShouldThrow() throws Exception {
+		SportDto toAdd = new SportDto("Hockey-Masculin");
+		
+		sportDao.add(toAdd);
 	}
 }

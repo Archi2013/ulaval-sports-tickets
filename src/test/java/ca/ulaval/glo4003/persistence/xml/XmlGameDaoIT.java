@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 
 public class XmlGameDaoIT {
@@ -55,6 +56,14 @@ public class XmlGameDaoIT {
 		GameDto expected = toAdd;
 
 		assertGame(expected, actual);
+	}
+	
+	@Test(expected=GameAlreadyExistException.class)
+	public void testAddExistingShouldThrow() throws Exception {
+		DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
+		GameDto toAdd = new GameDto(1, "Carabins", DateTime.parse("20131212", format));
+
+		gameDao.add(toAdd);
 	}
 	
 	@Test(expected=GameDoesntExistException.class)

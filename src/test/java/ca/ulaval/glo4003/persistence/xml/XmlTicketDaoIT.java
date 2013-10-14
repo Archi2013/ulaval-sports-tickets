@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 public class XmlTicketDaoIT {
@@ -60,6 +61,13 @@ public class XmlTicketDaoIT {
 		TicketDto expected = toAdd;
 		
 		assertTicket(expected, actual);
+	}
+	
+	@Test(expected=TicketAlreadyExistException.class)
+	public void testAddExistingShouldThrow() throws Exception {
+		TicketDto toAdd = new TicketDto(2, 3, 35.00f, "VIP", "Front Row");
+		
+		ticketDao.add(toAdd);
 	}
 	
 	private void assertTicket(TicketDto expected, TicketDto actual) {

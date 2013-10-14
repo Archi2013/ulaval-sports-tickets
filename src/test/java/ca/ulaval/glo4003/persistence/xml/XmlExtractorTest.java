@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +22,7 @@ public class XmlExtractorTest {
 	private static final String ITEM_XPATH = "/Magasin/Items/Item";
 	private static final String ITEMS_XPATH = "/Magasin/Items";
 	private static final String CHEMISE_XPATH = "/Magasin/Items/Item[Nom=\"Chemise\"]";
+	private static final String PANTALON_XPATH = "/Magasin/Items/Item[Nom=\"Pantalon\"]";
 	private static final String CHEMISE_PRICE_XPATH = "/Magasin/Items/Item[Nom=\"Chemise\"]/Prix";
 	private static final String PANTALON_PRICE_XPATH = "/Magasin/Items/Item[Nom=\"Pantalon\"]/Prix";
 	private static final String INVALID_XPATH = "][]<<><>A##{}";
@@ -87,6 +89,18 @@ public class XmlExtractorTest {
 		int result = extractor.count(ITEM_XPATH);
 		int expected = 2;
 		assertEquals(expected, result);
+	}
+	
+	@Test
+	public void testNodeExistWithExistingEntry() throws Exception {
+		boolean result = extractor.isNodeExist(CHEMISE_XPATH);
+		Assert.assertTrue(result);
+	}
+	
+	@Test
+	public void testNodeExistWithMissingEntry() throws Exception {
+		boolean result = extractor.isNodeExist(PANTALON_XPATH);
+		Assert.assertFalse(result);
 	}
 	
 	private SimpleNode initSimpleNode() {

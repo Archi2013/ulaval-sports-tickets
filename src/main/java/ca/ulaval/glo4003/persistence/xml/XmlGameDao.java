@@ -61,16 +61,29 @@ public class XmlGameDao implements GameDao {
 
 	@Override
 	public void add(GameDto game) throws GameAlreadyExistException {
-		Map<String, String> nodes = new HashMap<>();
-		nodes.put("id", Long.toString(game.getId()));
-		nodes.put("oponents", game.getOpponents());
-		nodes.put("date", game.getGameDate().toString("yyyyMMdd"));
-		SimpleNode simpleNode = new SimpleNode("game", nodes);
+		if (isIdExist(game.getId())) {
+			throw new GameAlreadyExistException();
+		}
+		SimpleNode simpleNode = convertGameToNode(game);
 		try {
 			database.addNode("/base/games", simpleNode);
 		} catch (XPathExpressionException e) {
 			throw new XmlIntegrityException(e);
 		}
+	}
+
+	private boolean isIdExist(long id) {
+		String xPath = basePath + "[id=\"" + id + "\"]";
+		return database.exist(xPath);
+	}
+
+	private SimpleNode convertGameToNode(GameDto game) {
+		Map<String, String> nodes = new HashMap<>();
+		nodes.put("id", Long.toString(game.getId()));
+		nodes.put("oponents", game.getOpponents());
+		nodes.put("date", game.getGameDate().toString("yyyyMMdd"));
+		SimpleNode simpleNode = new SimpleNode("game", nodes);
+		return simpleNode;
 	}
 
 	List<Integer> getIdForSport(String sportName) {

@@ -58,14 +58,27 @@ public class XmlSportDao implements SportDao {
 	}
 	
 	public void add(SportDto sport) throws SportAlreadyExistException {
-		Map<String, String> nodes = new HashMap<>();
-		nodes.put("name", sport.getName());
-		SimpleNode simpleNode = new SimpleNode("sport", nodes);
+		if (isIdExist(sport.getName())) {
+			throw new SportAlreadyExistException();
+		}
+		SimpleNode simpleNode = convertSportToNode(sport);
 		try {
 	        database.addNode("/base/sports", simpleNode);
         } catch (XPathExpressionException e) {
         	throw new XmlIntegrityException(e);
         }
+	}
+
+	private boolean isIdExist(String sportName) {
+		String xPath = basePath + "[name=\"" + sportName + "\"]";
+		return database.exist(xPath);
+	}
+
+	private SimpleNode convertSportToNode(SportDto sport) {
+		Map<String, String> nodes = new HashMap<>();
+		nodes.put("name", sport.getName());
+		SimpleNode simpleNode = new SimpleNode("sport", nodes);
+		return simpleNode;
 	}
 	
 	private SportDto createFromNode(SimpleNode parent) throws NoSuchAttributeException, SportDoesntExistException {
@@ -73,5 +86,4 @@ public class XmlSportDao implements SportDao {
 			return new SportDto(parent.getNodeValue("name"));
 		throw new SportDoesntExistException();
 	}
-
 }

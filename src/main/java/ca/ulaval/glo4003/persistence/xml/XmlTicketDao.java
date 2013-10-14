@@ -62,12 +62,20 @@ public class XmlTicketDao implements TicketDao {
     }
 	
 	public void add(TicketDto ticket) throws TicketAlreadyExistException {
+		if(isIdExist(ticket.getTicketId())) {
+			throw new TicketAlreadyExistException();
+		}
 		SimpleNode simpleNode = convertTicketToNode(ticket);
 		try {
 	        database.addNode("/base/tickets", simpleNode);
         } catch (XPathExpressionException cause) {
 	        throw new XmlIntegrityException(cause);
         }
+	}
+
+	private boolean isIdExist(int ticketId) {
+		String xPath = basePath + "[id=\"" + ticketId + "\"]";
+		return database.exist(xPath);
 	}
 
 	private SimpleNode convertTicketToNode(TicketDto ticket) {

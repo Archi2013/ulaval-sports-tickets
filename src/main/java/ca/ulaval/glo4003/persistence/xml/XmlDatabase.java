@@ -63,4 +63,8 @@ public class XmlDatabase {
 	public int countNode(String xPath) throws XPathExpressionException {
 		return extractor.count(xPath);
 	}
+
+	public boolean exist(String xPath) {
+		return extractor.isNodeExist(xPath);
+	}
 }

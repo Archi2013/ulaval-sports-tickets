@@ -89,4 +89,12 @@ public class XmlExtractor {
 		transformer.transform(new DOMSource(document), new StreamResult(filename));
 	}
 
+	public boolean isNodeExist(String xPath) {
+		try {
+			Boolean result = (Boolean)extract(xPath, XPathConstants.BOOLEAN);
+			return result;
+		} catch (XPathExpressionException e) {
+			return false;
+		}
+	}
 }
