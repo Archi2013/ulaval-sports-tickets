@@ -31,10 +31,10 @@ public class FakeDataSectionDao implements SectionDao {
 	}
 
 	@Override
-	public SectionDto get(int gameId, String admissionType, String sectionName) throws SectionDoesntExistException {
+	public SectionDto get(int gameId, String sectionName) throws SectionDoesntExistException {
 		try {
 			Map<String, SectionDto> sections = createSections(gameId);
-			return sections.get(createKey(admissionType, sectionName));
+			return sections.get(sectionName);
 		} catch (GameDoesntExistException e) {
 			throw new SectionDoesntExistException();
 		}
@@ -50,7 +50,7 @@ public class FakeDataSectionDao implements SectionDao {
 	private Map<String, SectionDto> convertListTicketDtoToListOfSections(List<TicketDto> ticketDtos) {
 		ArrayListMultimap<String, TicketDto> map = ArrayListMultimap.create();
 		for (TicketDto ticket : ticketDtos) {
-			String section = createKey(ticket.admissionType, ticket.section);
+			String section = ticket.section;
 			map.put(section, ticket);
 		}
 		Map<String, SectionDto> sections = Maps.newHashMap();
@@ -63,10 +63,6 @@ public class FakeDataSectionDao implements SectionDao {
 			sections.put(key, section);
 		}
 		return sections;
-	}
-
-	private String createKey(String admissionType, String section) {
-		return admissionType + "," + section;
 	}
 
 }

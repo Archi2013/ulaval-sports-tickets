@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.persistence.xml;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,24 +17,40 @@ public class XmlSectionDao implements SectionDao {
 	private XmlDatabase database = XmlDatabase.getInstance();
 	
 	@Override
-    public SectionDto get(int gameId, String admissionType, String sectionName) throws SectionDoesntExistException {
-	    String xPath = "/base/games/game[\"" + gameId + "\"]/section[\"" + sectionName + "\"]";
+    public SectionDto get(int gameId, String sectionName) throws SectionDoesntExistException {
+	    String xPath = "/base/tickets/ticket[gameID=\"" + gameId + "\"][section=\"" + sectionName + "\"]";
 		
 		int numberOfTickets = 0;
+		String price = "";
+		String admissionType = "";
 		try {
 			numberOfTickets = database.countNode(xPath);
+			price = database.extractPath(xPath + "/price");
+			admissionType = database.extractPath(xPath + "/type");
 		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return new SectionDto(admissionType, sectionName, numberOfTickets, 0.00f);
+		return new SectionDto(admissionType, sectionName, numberOfTickets, Double.parseDouble(price));
     }
 
 	@Override
     public List<SectionDto> getAll(int gameId) throws GameDoesntExistException {
-	    // TODO Auto-generated method stub
-	    return null;
+		String xPath = "/base/games-sections/game-section[@gameID=\"" + gameId + "\"]/sections/section";
+		
+		List<SectionDto> sections = new ArrayList<>();
+		try {
+			List<SimpleNode> nodes = database.extractNodeSet(xPath);
+			for(SimpleNode node : nodes) {
+				if (node.hasNode("name")) {
+					SectionDto section = get(gameId, node.getNodeValue("name"));
+					sections.add(section);
+				}
+			}
+		} catch (XPathExpressionException | SectionDoesntExistException e) {
+			e.printStackTrace();
+		}
+		return sections;
     }
 
 }

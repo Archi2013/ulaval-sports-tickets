@@ -35,7 +35,7 @@ public class SectionService {
 		try {
 			TicketType ticketType = sectionUrlMapper.getTicketType(sectionUrl);
 			GameDto game = gameDao.get(gameId);
-			SectionDto section = sectionDao.get(gameId, ticketType.admissionType, ticketType.sectionName);
+			SectionDto section = sectionDao.get(gameId, ticketType.sectionName);
 			SectionViewModel sectionViewModel = sectionFactory.createViewModel(section, game);
 			return sectionViewModel;
 		} catch (SectionDoesntExistInPropertiesFileException | GameDoesntExistException e) {

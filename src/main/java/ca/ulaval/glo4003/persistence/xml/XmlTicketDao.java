@@ -51,6 +51,7 @@ public class XmlTicketDao implements TicketDao {
 	public void add(TicketDto ticket) {
 		Map<String, String> nodes = new HashMap<>();
 		nodes.put("id", Integer.toString(ticket.getTicketId()));
+		nodes.put("gameID", Long.toString(ticket.getGameId()));
 		nodes.put("price", Double.toString(ticket.getPrice()));
 		nodes.put("section", ticket.getSection());
 		nodes.put("type", ticket.getAdmissionType());
@@ -82,12 +83,13 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	private TicketDto createFromNode(SimpleNode parent) {
-		if (parent.hasNode("id", "price", "type", "section")) {
+		if (parent.hasNode("id", "gameID", "price", "type", "section")) {
 			int ticketId = Integer.parseInt(parent.getNodeValue("id"));
+			long gameId = Long.parseLong(parent.getNodeValue("gameID"));
 			Double price = Double.parseDouble(parent.getNodeValue("price"));
 			String admissionType = parent.getNodeValue("type");
 			String section =parent.getNodeValue("section");
-			return new TicketDto(0, ticketId, price, admissionType, section);
+			return new TicketDto(gameId, ticketId, price, admissionType, section);
 		}
 		return null;
 	}

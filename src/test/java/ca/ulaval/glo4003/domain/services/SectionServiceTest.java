@@ -73,7 +73,7 @@ public class SectionServiceTest {
 	public void getSection_should_get_section_from_dao() throws SectionDoesntExistException {
 		service.getSection(GAME_ID, SECTION_URL);
 
-		verify(sectionDaoMock).get(GAME_ID, ADMISSION, SECTION_NAME);
+		verify(sectionDaoMock).get(GAME_ID, SECTION_NAME);
 	}
 
 	@Test
@@ -95,7 +95,7 @@ public class SectionServiceTest {
 	@Test
 	public void getSection_should_convert_dto_to_view_model() throws SectionDoesntExistException, GameDoesntExistException {
 		SectionDto dto = mock(SectionDto.class);
-		when(sectionDaoMock.get(GAME_ID, ADMISSION, SECTION_NAME)).thenReturn(dto);
+		when(sectionDaoMock.get(GAME_ID, SECTION_NAME)).thenReturn(dto);
 		GameDto gameDto = mock(GameDto.class);
 		when(gameDaoMock.get(GAME_ID)).thenReturn(gameDto);
 
@@ -107,7 +107,7 @@ public class SectionServiceTest {
 	@Test
 	public void getSection_should_return_view_model() throws SectionDoesntExistException, GameDoesntExistException {
 		SectionDto dto = mock(SectionDto.class);
-		when(sectionDaoMock.get(GAME_ID, ADMISSION, SECTION_NAME)).thenReturn(dto);
+		when(sectionDaoMock.get(GAME_ID, SECTION_NAME)).thenReturn(dto);
 		GameDto gameDto = mock(GameDto.class);
 		when(gameDaoMock.get(GAME_ID)).thenReturn(gameDto);
 		SectionViewModel expectedViewModel = mock(SectionViewModel.class);
