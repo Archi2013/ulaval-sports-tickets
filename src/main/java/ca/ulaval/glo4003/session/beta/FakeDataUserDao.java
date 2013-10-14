@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.session.beta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,14 @@ public class FakeDataUserDao implements UserDao {
 
 	private List<UserDto> userList;
 	
+	public FakeDataUserDao(){
+		this.userList = new ArrayList<UserDto>();
+		
+		this.userList.add(new UserDto("marco","1234"));
+		this.userList.add(new UserDto("math","4321"));
+		
+		System.out.println("this.userList="+userList);
+	}
 
 	@Override
 	public List<UserDto> getAllUser() {
@@ -20,10 +29,14 @@ public class FakeDataUserDao implements UserDao {
 	}
 	@Override
 	public UserDto getUser(String name) throws  UserDoesntExistException{
+		
 		for (UserDto user : this.userList)
 		{
-			if(user.getName() == name)
+			System.out.println("getName()="+user.getName()+" and name="+name);
+			if(name.equals(user.getName())){
+				System.out.println("ICI");
 				return user;
+			}
 		}
 		throw new UserDoesntExistException();
 	}

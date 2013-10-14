@@ -12,8 +12,8 @@
     
 
 
-    <h2> Sign up </h2>
-    <form action="/session/save" method="post">  
+    <h2> Sign In </h2>
+    <form action="/session/auth" method="post">  
 		<table>  
 			<tbody>
 				<tr>  

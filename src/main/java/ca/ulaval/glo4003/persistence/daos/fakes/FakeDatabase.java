@@ -127,6 +127,7 @@ public class FakeDatabase {
 
 		return games;
 	}
+	
 
 	private List<TicketDto> createGeneralAdmissionTickets(GameDto game, double price, String section, int number) {
 		List<TicketDto> tickets = new ArrayList<TicketDto>();

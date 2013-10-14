@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import ca.ulaval.glo4003.domain.services.QueryGameService;
+import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
 
 
 @Controller
 
+@RequestMapping(value = "/session", method = RequestMethod.GET)
 public class SessionController {
 	
 	@Inject
@@ -30,30 +32,54 @@ public class SessionController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SessionController.class);
 
-	@RequestMapping(value = "/session/signup", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String authForm(Model model) {
+		logger.info("Sign Up/Sign in");
+		
+		return "session/signup";
+	}
+	
+	@RequestMapping(value = "/signin", method = RequestMethod.GET)
+	public String signIn(Model model) {
+		logger.info("Sign In");
+	
+		return "session/signin";
+	}
+	
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signUp(Model model) {
 		logger.info("Sign Up");
 	
 		return "session/signup";
 	}
 	
-	@RequestMapping(value = "/session/signin", method = RequestMethod.GET)
-	public String signIn(Model model){
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
+	public String submitSignIn(@RequestParam String usernameParam,@RequestParam String passwordParam,Model model){
 		logger.info("Sign In");
 		
-		return "session/signin";
+		try {
+			UserDto user = userService.signIn(usernameParam,passwordParam);
+			logger.info("dans le try, user==:"+user.getName());
+			model.addAttribute("user", currentUser); 
+	        return "session/success";
+		} catch (UserDoesntExistException e) {
+			logger.info("==> Impossible to Sign In : " + usernameParam);
+			return "error/404";
+		}
+	
 	}
 	
-	@RequestMapping(value="session/save",method = RequestMethod.POST)    
+	@RequestMapping(value="/save",method = RequestMethod.POST)    
     public String registerUser(@RequestParam String usernameParam,@RequestParam String passwordParam,Model model) { 
 		
-		
-		userService.signIn(usernameParam,passwordParam);
+		userService.signUp(usernameParam, passwordParam);
 		model.addAttribute("user", currentUser); 
         return "session/success";  
+
+        
     } 
 	
-	@RequestMapping(value="/session/current",method = RequestMethod.GET)
+	@RequestMapping(value="/current",method = RequestMethod.GET)
 	public String showCurrentUser(Model model){
 		
 		model.addAttribute("user", currentUser); 
