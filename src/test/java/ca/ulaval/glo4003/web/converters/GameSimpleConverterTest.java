@@ -28,8 +28,8 @@ public class GameSimpleConverterTest {
 
 	@Before
 	public void setUp() {
-		gameDto1 = new GameDto(1, "", DateTime.now().plusDays(6));
-		gameDto2 = new GameDto(2, "", DateTime.now().plusDays(11));
+		gameDto1 = new GameDto(1, "", DateTime.now().plusDays(6), "");
+		gameDto2 = new GameDto(2, "", DateTime.now().plusDays(11), "");
 
 		gameDtos = newArrayList();
 		gameDtos.add(gameDto1);

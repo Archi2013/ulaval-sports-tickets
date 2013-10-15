@@ -87,13 +87,14 @@ public class XmlGameDao implements GameDao {
 		return simpleNode;
 	}
 
-	private GameDto convertNodeToGame(SimpleNode parent) throws NoSuchAttributeException, GameDoesntExistException {
-		if (parent.hasNode("id", "oponents", "date")) {
-			long id = Long.parseLong(parent.getNodeValue("id"));
-			String opponents = parent.getNodeValue("oponents");
+	private GameDto convertNodeToGame(SimpleNode node) throws NoSuchAttributeException, GameDoesntExistException {
+		if (node.hasNode("id", "oponents", "date", "sportName")) {
+			long id = Long.parseLong(node.getNodeValue("id"));
+			String opponents = node.getNodeValue("oponents");
 			DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
-			DateTime gameDate = DateTime.parse(parent.getNodeValue("date"), format);
-			return new GameDto(id, opponents, gameDate);
+			DateTime gameDate = DateTime.parse(node.getNodeValue("date"), format);
+			String sportName = node.getNodeValue("sportName");
+			return new GameDto(id, opponents, gameDate, sportName);
 		}
 		throw new GameDoesntExistException();
 	}

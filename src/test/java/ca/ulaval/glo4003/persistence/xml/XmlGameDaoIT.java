@@ -28,8 +28,8 @@ public class XmlGameDaoIT {
 		Assert.assertEquals(2, ids.size());
 
 		DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
-		GameDto expected0 = new GameDto(1, "Carabins", DateTime.parse("20131212", format));
-		GameDto expected1 = new GameDto(2, "Redmen", DateTime.parse("20131212", format));
+		GameDto expected0 = new GameDto(1, "Carabins", DateTime.parse("20131212", format), "Hockey-Masculin");
+		GameDto expected1 = new GameDto(2, "Redmen", DateTime.parse("20131212", format), "Hockey-Masculin");
 
 		assertGame(expected0, ids.get(0));
 		assertGame(expected1, ids.get(1));
@@ -38,7 +38,7 @@ public class XmlGameDaoIT {
 	@Test
 	public void testAddDto() throws Exception {
 		DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
-		GameDto toAdd = new GameDto(4, "Vert et Or", DateTime.parse("20131201", format));
+		GameDto toAdd = new GameDto(4, "Vert et Or", DateTime.parse("20131201", format), "Hockey-Masculin");
 
 		gameDao.add(toAdd);
 
@@ -51,7 +51,7 @@ public class XmlGameDaoIT {
 	@Test(expected=GameAlreadyExistException.class)
 	public void testAddExistingShouldThrow() throws Exception {
 		DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
-		GameDto toAdd = new GameDto(1, "Carabins", DateTime.parse("20131212", format));
+		GameDto toAdd = new GameDto(1, "Carabins", DateTime.parse("20131212", format), "Hockey-Masculin");
 
 		gameDao.add(toAdd);
 	}

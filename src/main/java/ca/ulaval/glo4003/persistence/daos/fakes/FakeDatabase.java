@@ -62,18 +62,18 @@ public class FakeDatabase {
 
 	private SportDto createBasketball() {
 		SportDto basketball = new SportDto("Basketball Masculin");
-		basketball.getGames().addAll(createBasketballGames());
+		basketball.getGames().addAll(createBasketballGames(basketball));
 		return basketball;
 	}
 
-	private List<GameDto> createBasketballGames() {
-		GameDto firstGame = new GameDto(1, "Carabins", DateTime.now().plusDays(1));
+	private List<GameDto> createBasketballGames(SportDto sport) {
+		GameDto firstGame = new GameDto(1, "Carabins", DateTime.now().plusDays(1), sport.getName());
 		firstGame.getTickets().addAll(createGeneralAdmissionTickets(firstGame, 15.50, "Bleus", 2));
 		firstGame.getTickets().addAll(createGeneralAdmissionTickets(firstGame, 20.00, "Rouges", 5));
 		firstGame.getTickets().add(new TicketDto(1, ticketid++, 35.00, "VIP", "Front Row"));
 		firstGame.getTickets().add(new TicketDto(1, ticketid++, 35.00, "VIP", "Front Row"));
 
-		GameDto secondGame = new GameDto(2, "Redmen", DateTime.now().plusDays(1));
+		GameDto secondGame = new GameDto(2, "Redmen", DateTime.now().plusDays(1), sport.getName());
 		secondGame.getTickets().addAll(createGeneralAdmissionTickets(secondGame, 15.50, "Bleus", 0));
 		secondGame.getTickets().addAll(createGeneralAdmissionTickets(secondGame, 20.00, "Rouges", 3));
 		secondGame.getTickets().add(new TicketDto(2, ticketid++, 35.00, "VIP", "Front Row"));
@@ -89,18 +89,18 @@ public class FakeDatabase {
 
 	private SportDto createVolleyballFeminin() {
 		SportDto volley = new SportDto("Volleyball Féminin");
-		volley.getGames().addAll(createVolleyballFemininGames());
+		volley.getGames().addAll(createVolleyballFemininGames(volley));
 		return volley;
 	}
 
-	private List<GameDto> createVolleyballFemininGames() {
-		GameDto firstGame = new GameDto(40, "Blue Dragoon", DateTime.now().plusDays(1));
+	private List<GameDto> createVolleyballFemininGames(SportDto sport) {
+		GameDto firstGame = new GameDto(40, "Blue Dragoon", DateTime.now().plusDays(1), sport.getName());
 		firstGame.getTickets().addAll(createGeneralAdmissionTickets(firstGame, 5.95, "Indigo", 12));
 		firstGame.getTickets().addAll(createGeneralAdmissionTickets(firstGame, 6.95, "Cyan", 52));
 		firstGame.getTickets().add(new TicketDto(1, ticketid++, 15.50, "VIP", "Loge Sud-Est"));
 		firstGame.getTickets().add(new TicketDto(1, ticketid++, 15.50, "VIP", "Loge Nord-Est"));
 
-		GameDto secondGame = new GameDto(41, "Phoenix rouge", DateTime.now().plusDays(1));
+		GameDto secondGame = new GameDto(41, "Phoenix rouge", DateTime.now().plusDays(1), sport.getName());
 		secondGame.getTickets().addAll(createGeneralAdmissionTickets(secondGame, 25.95, "Pourpres", 10));
 		secondGame.getTickets().addAll(createGeneralAdmissionTickets(secondGame, 20.05, "Bordeaux", 8));
 		secondGame.getTickets().addAll(createGeneralAdmissionTickets(secondGame, 15.45, "Mauves", 12));
@@ -110,7 +110,7 @@ public class FakeDatabase {
 		secondGame.getTickets().add(new TicketDto(2, ticketid++, 30.70, "VIP", "Loge C"));
 		secondGame.getTickets().add(new TicketDto(2, ticketid++, 30.70, "VIP", "Loge E"));
 
-		GameDto thirdGame = new GameDto(42, "Emeraude vif", DateTime.now().plusDays(1));
+		GameDto thirdGame = new GameDto(42, "Emeraude vif", DateTime.now().plusDays(1), sport.getName());
 		thirdGame.getTickets().addAll(createGeneralAdmissionTickets(secondGame, 15.95, "Olive", 22));
 		thirdGame.getTickets().addAll(createGeneralAdmissionTickets(secondGame, 20.05, "Turquoise", 17));
 		thirdGame.getTickets().addAll(createGeneralAdmissionTickets(secondGame, 5.45, "Basilic", 2));

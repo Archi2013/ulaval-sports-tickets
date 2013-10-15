@@ -12,7 +12,7 @@ public class GameDto {
 	private DateTime gameDate;
 	private List<TicketDto> tickets;
 
-	public GameDto(long id, String opponents, DateTime gameDate) {
+	public GameDto(long id, String opponents, DateTime gameDate, String sportName) {
 		this.id = id;
 		this.opponents = opponents;
 		this.gameDate = gameDate;
