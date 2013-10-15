@@ -37,4 +37,10 @@ public class FakeDataGameDao implements GameDao {
 	public void add(GameDto game) {
 		throw new RuntimeException("Cannot add element to fake data");
 	}
+
+	@Override
+	public List<GameDto> getGamesForSport(int sportID) throws SportDoesntExistException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -21,39 +21,45 @@ import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 public class XmlGameDao implements GameDao {
 
+	private static final String GAMES_XPATH = "/base/games";
+	private static final String GAME_XPATH = GAMES_XPATH + "/game";
+	private static final String GAME_XPATH_ID = GAME_XPATH + "[id=\"%d\"]";
+	private static final String GAME_XPATH_SPORT_ID = GAME_XPATH + "[sportID=\"%d\"]";
+	
 	@Inject
 	private XmlDatabase database;
-	private String basePath = "/base/games/game";
-	private String mappingPath = "/base/sport-games/sport-game";
 	
 	public XmlGameDao() {
 		database = XmlDatabase.getInstance();
 	}
 	
-	public XmlGameDao(String filename) {
+	XmlGameDao(String filename) {
 		database = XmlDatabase.getUniqueInstance(filename);
 	}
 
 	@Override
 	public List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException {
-		List<GameDto> games = new ArrayList<>();
-		for (int id : getIdForSport(sportName)) {
-			try {
-				GameDto game = get(id);
-				games.add(game);
-			} catch (GameDoesntExistException cause) {
-				throw new XmlIntegrityException("'Database contains invalide game ID", cause);
-			}
-		}
-		return games;
+		return null;
 	}
+	
+	@Override
+    public List<GameDto> getGamesForSport(int sportID) throws SportDoesntExistException {
+		String xPath = String.format(GAME_XPATH_SPORT_ID, sportID);
+		
+		try {
+			List<SimpleNode> nodes = database.extractNodeSet(xPath);
+			return convertNodesToGames(nodes);
+		} catch (NoSuchAttributeException | XPathExpressionException | GameDoesntExistException e) {
+			throw new XmlIntegrityException(e);
+		} 
+    }
 
 	@Override
 	public GameDto get(int id) throws GameDoesntExistException {
-		String xPath = basePath + "[id=\"" + id + "\"]";
+		String xPath = String.format(GAME_XPATH_ID, id);
 		try {
 			SimpleNode node = database.extractNode(xPath);
-			return createFromNode(node);
+			return convertNodeToGame(node);
 		} catch (XPathExpressionException | NoSuchAttributeException e) {
 			throw new XmlIntegrityException(e);
 		}
@@ -66,14 +72,14 @@ public class XmlGameDao implements GameDao {
 		}
 		SimpleNode simpleNode = convertGameToNode(game);
 		try {
-			database.addNode("/base/games", simpleNode);
+			database.addNode(GAMES_XPATH, simpleNode);
 		} catch (XPathExpressionException e) {
 			throw new XmlIntegrityException(e);
 		}
 	}
 
 	private boolean isIdExist(long id) {
-		String xPath = basePath + "[id=\"" + id + "\"]";
+		String xPath = String.format(GAME_XPATH_ID, id);
 		return database.exist(xPath);
 	}
 
@@ -86,17 +92,7 @@ public class XmlGameDao implements GameDao {
 		return simpleNode;
 	}
 
-	List<Integer> getIdForSport(String sportName) {
-		String xPath = mappingPath + "[@name=\"" + sportName + "\"]/games/game";
-		try {
-			List<SimpleNode> nodes = database.extractNodeSet(xPath);
-			return NodesConverter.toIntegerList(nodes, "id");
-		} catch (XPathExpressionException | NoSuchAttributeException e) {
-			throw new XmlIntegrityException(e);
-		}
-	}
-
-	private GameDto createFromNode(SimpleNode parent) throws NoSuchAttributeException, GameDoesntExistException {
+	private GameDto convertNodeToGame(SimpleNode parent) throws NoSuchAttributeException, GameDoesntExistException {
 		if (parent.hasNode("id", "oponents", "date")) {
 			long id = Long.parseLong(parent.getNodeValue("id"));
 			String opponents = parent.getNodeValue("oponents");
@@ -105,6 +101,14 @@ public class XmlGameDao implements GameDao {
 			return new GameDto(id, opponents, gameDate);
 		}
 		throw new GameDoesntExistException();
+	}
+	
+	private List<GameDto> convertNodesToGames(List<SimpleNode> nodes) throws NoSuchAttributeException, GameDoesntExistException {
+		List<GameDto> games = new ArrayList<>();
+		for (SimpleNode node : nodes) {
+			games.add(convertNodeToGame(node));
+		}
+		return games;
 	}
 
 }

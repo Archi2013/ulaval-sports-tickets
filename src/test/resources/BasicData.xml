@@ -2,53 +2,46 @@
 <base>
 <sports>
 <sport>
+<id>1</id>
 <name>Hockey-Masculin</name>
 </sport>
 <sport>
+<id>2</id>
 <name>Baseball-Masculin</name>
 </sport>
 <sport>
+<id>3</id>
 <name>Volleyball-Feminin</name>
 </sport>
 </sports>
-<sport-games>
-<sport-game name="Hockey-Masculin">
-<games>
-<game id="1" />
-<game id="2" />
-</games>
-</sport-game>
-<sport-game name="Volleyball-Feminin">
-<games>
-<game id="40" />
-<game id="41" />
-<game id="42" />
-</games>
-</sport-game>
-</sport-games>
 <games>
 <game>
 <id>1</id>
+<sportID>1</sportID>
 <oponents>Carabins</oponents>
 <date>20131212</date>
 </game>
 <game>
 <id>2</id>
+<sportID>1</sportID>
 <oponents>Redmen</oponents>
 <date>20131212</date>
 </game>
 <game>
 <id>40</id>
+<sportID>3</sportID>
 <oponents>Blue Dragoon</oponents>
 <date>20131212</date>
 </game>
 <game>
 <id>41</id>
+<sportID>3</sportID>
 <oponents>Phoenix rouge</oponents>
 <date>20131212</date>
 </game>
 <game>
 <id>42</id>
+<sportID>3</sportID>
 <oponents>Emeraude vif</oponents>
 <date>20131212</date>
 </game>
