@@ -24,7 +24,7 @@ public class XmlGameDao implements GameDao {
 	private static final String GAMES_XPATH = "/base/games";
 	private static final String GAME_XPATH = GAMES_XPATH + "/game";
 	private static final String GAME_XPATH_ID = GAME_XPATH + "[id=\"%d\"]";
-	private static final String GAME_XPATH_SPORT_ID = GAME_XPATH + "[sportID=\"%d\"]";
+	private static final String GAME_XPATH_SPORT_NAME = GAME_XPATH + "[sportName=\"%s\"]";
 	
 	@Inject
 	private XmlDatabase database;
@@ -38,13 +38,8 @@ public class XmlGameDao implements GameDao {
 	}
 
 	@Override
-	public List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException {
-		return null;
-	}
-	
-	@Override
-    public List<GameDto> getGamesForSport(int sportID) throws SportDoesntExistException {
-		String xPath = String.format(GAME_XPATH_SPORT_ID, sportID);
+    public List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException {
+		String xPath = String.format(GAME_XPATH_SPORT_NAME, sportName);
 		
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(xPath);

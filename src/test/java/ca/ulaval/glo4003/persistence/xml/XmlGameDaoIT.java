@@ -24,7 +24,7 @@ public class XmlGameDaoIT {
 
 	@Test
 	public void testGetGamesForSport() throws Exception {
-		List<GameDto> ids = gameDao.getGamesForSport(1);
+		List<GameDto> ids = gameDao.getGamesForSport("Hockey-Masculin");
 		Assert.assertEquals(2, ids.size());
 
 		DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");

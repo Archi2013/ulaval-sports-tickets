@@ -16,64 +16,68 @@ import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 public class XmlSportDao implements SportDao {
 	
+	private static final String SPORTS_XPATH = "/base/sports";
+	private static final String SPORT_XPATH = SPORTS_XPATH + "/sport";
+	private static final String SPORT_XPATH_ID = SPORT_XPATH + "[name=\"%s\"]";
+	
 	@Inject
 	private XmlDatabase database;
-	private String basePath = "/base/sports/sport";
 	
 	public XmlSportDao() {
 		database = XmlDatabase.getInstance();
 	}
 	
-	public XmlSportDao(String filename) {
+	XmlSportDao(String filename) {
 		database = XmlDatabase.getUniqueInstance(filename);
 	}
 
 	@Override
 	public List<SportDto> getAll() {
 		try {
-			List<SimpleNode> nodes = database.extractNodeSet(basePath);
-	        return convertNodesToDtos(nodes);
+			List<SimpleNode> nodes = database.extractNodeSet(SPORT_XPATH);
+	        return convertNodesToSports(nodes);
         } catch (XPathExpressionException | NoSuchAttributeException | SportDoesntExistException e) {
         	throw new XmlIntegrityException(e);
         }
 	}
 
-	private List<SportDto> convertNodesToDtos(List<SimpleNode> nodes) throws NoSuchAttributeException, SportDoesntExistException {
-		List<SportDto> sports = new ArrayList<>();
-		for (SimpleNode node : nodes) {
-			sports.add(createFromNode(node));
-		}
-		return sports;
-	}
-
 	@Override
 	public SportDto get(String sportName) throws SportDoesntExistException {
 		try {
-			String xPath = basePath + "[name=\"" + sportName + "\"]";
+			String xPath = String.format(SPORT_XPATH_ID, sportName);
 			SimpleNode node = database.extractNode(xPath);
-	        return createFromNode(node);
+	        return convertNodeToSport(node);
         } catch (XPathExpressionException | NoSuchAttributeException e) {
 	        throw new XmlIntegrityException(e);
         }
 	}
 	
+	@Override
 	public void add(SportDto sport) throws SportAlreadyExistException {
 		if (isIdExist(sport.getName())) {
 			throw new SportAlreadyExistException();
 		}
 		SimpleNode simpleNode = convertSportToNode(sport);
 		try {
-	        database.addNode("/base/sports", simpleNode);
+	        database.addNode(SPORTS_XPATH, simpleNode);
         } catch (XPathExpressionException e) {
         	throw new XmlIntegrityException(e);
         }
 	}
 
 	private boolean isIdExist(String sportName) {
-		String xPath = basePath + "[name=\"" + sportName + "\"]";
+		String xPath = String.format(SPORT_XPATH_ID, sportName);
 		return database.exist(xPath);
 	}
 
+	private List<SportDto> convertNodesToSports(List<SimpleNode> nodes) throws NoSuchAttributeException, SportDoesntExistException {
+		List<SportDto> sports = new ArrayList<>();
+		for (SimpleNode node : nodes) {
+			sports.add(convertNodeToSport(node));
+		}
+		return sports;
+	}
+	
 	private SimpleNode convertSportToNode(SportDto sport) {
 		Map<String, String> nodes = new HashMap<>();
 		nodes.put("name", sport.getName());
@@ -81,9 +85,9 @@ public class XmlSportDao implements SportDao {
 		return simpleNode;
 	}
 	
-	private SportDto createFromNode(SimpleNode parent) throws NoSuchAttributeException, SportDoesntExistException {
-		if (parent.hasNode("name"))
-			return new SportDto(parent.getNodeValue("name"));
+	private SportDto convertNodeToSport(SimpleNode node) throws NoSuchAttributeException, SportDoesntExistException {
+		if (node.hasNode("name"))
+			return new SportDto(node.getNodeValue("name"));
 		throw new SportDoesntExistException();
 	}
 }

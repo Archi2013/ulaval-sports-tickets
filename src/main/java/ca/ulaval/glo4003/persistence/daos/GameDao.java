@@ -9,9 +9,7 @@ import ca.ulaval.glo4003.domain.dtos.GameDto;
 @Repository
 public interface GameDao {
 
-	@Deprecated
 	public List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException;
 	public GameDto get(int id) throws GameDoesntExistException;
 	public void add(GameDto game) throws GameAlreadyExistException;
-	public List<GameDto> getGamesForSport(int sportID) throws SportDoesntExistException;
 }
