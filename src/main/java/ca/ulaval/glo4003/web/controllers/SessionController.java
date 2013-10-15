@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.session.beta;
+package ca.ulaval.glo4003.web.controllers;
 
 import java.util.Locale;
 
@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import ca.ulaval.glo4003.domain.services.QueryGameService;
+import ca.ulaval.glo4003.domain.services.UserService;
+import ca.ulaval.glo4003.domain.utilities.User;
+import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
+import ca.ulaval.glo4003.domain.utilities.UsernameAndPasswordDoesntMatchException;
 import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
+import ca.ulaval.glo4003.web.viewmodels.UserViewModel;
 
 
 @Controller

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.session.beta;
+package ca.ulaval.glo4003.domain.services;
 
 import javax.inject.Inject;
 
@@ -8,8 +8,14 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.domain.dtos.UserDto;
+import ca.ulaval.glo4003.domain.utilities.User;
+import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
+import ca.ulaval.glo4003.domain.utilities.UsernameAndPasswordDoesntMatchException;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.UserDao;
+import ca.ulaval.glo4003.web.viewmodels.UserViewModel;
 
 @Service
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)

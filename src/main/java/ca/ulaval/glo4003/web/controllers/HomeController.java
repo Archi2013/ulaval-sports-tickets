@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ca.ulaval.glo4003.session.beta.User;
+import ca.ulaval.glo4003.domain.utilities.User;
 
 /**
  * Handles requests for the application home page.

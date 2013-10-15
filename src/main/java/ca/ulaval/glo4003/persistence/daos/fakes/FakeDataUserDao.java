@@ -1,13 +1,14 @@
-package ca.ulaval.glo4003.session.beta;
+package ca.ulaval.glo4003.persistence.daos.fakes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ca.ulaval.glo4003.session.beta.UserDto;
-import ca.ulaval.glo4003.session.beta.UserDao;
-import ca.ulaval.glo4003.session.beta.UserDoesntExistException;
+
+import ca.ulaval.glo4003.domain.dtos.UserDto;
+import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.UserDao;
 
 @Repository
 public class FakeDataUserDao implements UserDao {

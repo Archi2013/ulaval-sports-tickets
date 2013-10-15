@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.session.beta;
+package ca.ulaval.glo4003.web.viewmodels;
 
 import java.util.List;
 
