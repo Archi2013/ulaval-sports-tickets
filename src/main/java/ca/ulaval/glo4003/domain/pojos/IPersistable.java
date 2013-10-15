@@ -1,9 +1,7 @@
 package ca.ulaval.glo4003.domain.pojos;
 
-public interface IPersistable {
+public interface IPersistable<T> {
 
-	void persistChanges();
-
-	int getID();
+	T saveDataInDTO();
 
 }

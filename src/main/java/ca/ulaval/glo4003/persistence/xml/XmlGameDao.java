@@ -25,29 +25,29 @@ public class XmlGameDao implements GameDao {
 	private static final String GAME_XPATH = GAMES_XPATH + "/game";
 	private static final String GAME_XPATH_ID = GAME_XPATH + "[id=\"%d\"]";
 	private static final String GAME_XPATH_SPORT_NAME = GAME_XPATH + "[sportName=\"%s\"]";
-	
+
 	@Inject
 	private XmlDatabase database;
-	
+
 	public XmlGameDao() {
 		database = XmlDatabase.getInstance();
 	}
-	
+
 	XmlGameDao(String filename) {
 		database = XmlDatabase.getUniqueInstance(filename);
 	}
 
 	@Override
-    public List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException {
+	public List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException {
 		String xPath = String.format(GAME_XPATH_SPORT_NAME, sportName);
-		
+
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(xPath);
 			return convertNodesToGames(nodes);
 		} catch (NoSuchAttributeException | XPathExpressionException | GameDoesntExistException e) {
 			throw new XmlIntegrityException(e);
-		} 
-    }
+		}
+	}
 
 	@Override
 	public GameDto get(int id) throws GameDoesntExistException {
@@ -98,13 +98,20 @@ public class XmlGameDao implements GameDao {
 		}
 		throw new GameDoesntExistException();
 	}
-	
-	private List<GameDto> convertNodesToGames(List<SimpleNode> nodes) throws NoSuchAttributeException, GameDoesntExistException {
+
+	private List<GameDto> convertNodesToGames(List<SimpleNode> nodes) throws NoSuchAttributeException,
+			GameDoesntExistException {
 		List<GameDto> games = new ArrayList<>();
 		for (SimpleNode node : nodes) {
 			games.add(convertNodeToGame(node));
 		}
 		return games;
+	}
+
+	@Override
+	public void saveChanges(GameDto game) throws GameDoesntExistException {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.domain.repositories;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -37,8 +38,11 @@ public class GameRepositoryTest {
 	List<GameDto> listWithTwoGameDtos;
 	List<Game> listGame;
 
-	Game game1;
-	Game game2;
+	@Mock
+	Game gameMock1;
+
+	@Mock
+	Game gameMock2;
 
 	@Mock
 	GameDao gameDaoMock;
@@ -52,11 +56,11 @@ public class GameRepositoryTest {
 	@Before
 	public void setUp() throws SportDoesntExistException {
 		setUpListsOfDtos();
-		game1 = new Game(AN_OPPONENT, A_DATE);
-		game2 = new Game(ANOTHER_OPPONENT, ANOTHER_DATE);
 
-		when(gameFactoryMock.instantiateGame(AN_OPPONENT, A_DATE)).thenReturn(game1);
-		when(gameFactoryMock.instantiateGame(ANOTHER_OPPONENT, ANOTHER_DATE)).thenReturn(game2);
+		when(gameFactoryMock.instantiateGame(AN_OPPONENT, A_DATE)).thenReturn(gameMock1);
+		when(gameFactoryMock.instantiateGame(ANOTHER_OPPONENT, ANOTHER_DATE)).thenReturn(gameMock2);
+		when(gameMock1.saveDataInDTO()).thenReturn(gameDto1);
+		when(gameMock2.saveDataInDTO()).thenReturn(gameDto2);
 	}
 
 	@Test
@@ -66,7 +70,7 @@ public class GameRepositoryTest {
 		List<Game> gamesReturned = gameRepository.getGamesScheduledForSport(A_SPORT);
 
 		Assert.assertEquals(1, gamesReturned.size());
-		Assert.assertSame(game1, gamesReturned.get(0));
+		Assert.assertSame(gameMock1, gamesReturned.get(0));
 	}
 
 	@Test
@@ -77,8 +81,37 @@ public class GameRepositoryTest {
 		List<Game> gamesReturned = gameRepository.getGamesScheduledForSport(A_SPORT);
 
 		Assert.assertEquals(2, gamesReturned.size());
-		Assert.assertSame(game1, gamesReturned.get(0));
-		Assert.assertSame(game2, gamesReturned.get(1));
+		Assert.assertSame(gameMock1, gamesReturned.get(0));
+		Assert.assertSame(gameMock2, gamesReturned.get(1));
+	}
+
+	@Test
+	public void addGameToRepository_return_game_instantiated_by_factory() {
+		Game gameReturned = gameRepository.createNewGameInRepository(AN_OPPONENT, A_DATE);
+
+		Assert.assertSame(gameReturned, gameMock1);
+	}
+
+	@Test
+	public void commit_sends_data_of_every_existing_active_object_to_Dao() throws Exception {
+		when(gameDaoMock.getGamesForSport(A_SPORT)).thenReturn(listWithTwoGameDtos);
+
+		gameRepository.getGamesScheduledForSport(A_SPORT);
+		gameRepository.commit();
+
+		verify(gameDaoMock).saveChanges(gameDto1);
+		verify(gameDaoMock).saveChanges(gameDto2);
+	}
+
+	@Test
+	public void commit_sends_data_of_every_new_active_object_to_dao() throws Exception {
+		gameRepository.createNewGameInRepository(AN_OPPONENT, A_DATE);
+		gameRepository.createNewGameInRepository(ANOTHER_OPPONENT, ANOTHER_DATE);
+
+		gameRepository.commit();
+
+		verify(gameDaoMock).add(gameDto1);
+		verify(gameDaoMock).add(gameDto2);
 	}
 
 	private void setUpListsOfDtos() {
