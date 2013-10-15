@@ -15,7 +15,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.factories.SportFactory;
-import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
+import ca.ulaval.glo4003.domain.pojos.Game;
+import ca.ulaval.glo4003.domain.pojos.Sport;
 import ca.ulaval.glo4003.domain.pojos.persistable.PersistableSport;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 
@@ -33,7 +34,7 @@ public class SportRepositoryTest {
 	private SportDao sportDao;
 
 	@Mock
-	private List<PersistableGame> gameList;
+	private List<Game> gameList;
 
 	@Mock
 	private IGameRepository gameRepository;
@@ -50,20 +51,7 @@ public class SportRepositoryTest {
 		when(sportDao.get(PARAMETER_SPORT)).thenReturn(sportDto);
 		when(sportFactory.instantiateSport(DTO_SPORT, gameList)).thenReturn(sport);
 		when(gameRepository.getGamesScheduledForSport(PARAMETER_SPORT)).thenReturn(gameList);
-	}
-
-	@Test
-	public void getSportByName_gets_sport_data_from_dao() throws Exception {
-		repository.getSportByName(PARAMETER_SPORT);
-
-		verify(sportDao).get(PARAMETER_SPORT);
-	}
-
-	@Test
-	public void getSportByName_gets_game_scheduled_in_sport_from_GameRepository() throws Exception {
-		repository.getSportByName(PARAMETER_SPORT);
-
-		verify(gameRepository).getGamesScheduledForSport(PARAMETER_SPORT);
+		when(sport.saveDataInDTO()).thenReturn(sportDto);
 	}
 
 	@Test
@@ -75,8 +63,17 @@ public class SportRepositoryTest {
 
 	@Test
 	public void getSportByName_returns_sport_instantiated_by_factory() throws Exception {
-		PersistableSport sportReturned = repository.getSportByName(PARAMETER_SPORT);
+		Sport sportReturned = repository.getSportByName(PARAMETER_SPORT);
 
 		Assert.assertSame(sport, sportReturned);
+	}
+
+	@Test
+	public void commit_sends_active_objects_to_dao_to_save_changes() throws Exception {
+		repository.getSportByName(PARAMETER_SPORT);
+
+		repository.commit();
+
+		verify(sportDao).saveChanges(sportDto);
 	}
 }

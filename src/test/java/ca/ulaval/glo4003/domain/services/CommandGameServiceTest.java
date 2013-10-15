@@ -11,9 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.factories.IGameFactory;
 import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
 import ca.ulaval.glo4003.domain.pojos.persistable.PersistableSport;
+import ca.ulaval.glo4003.domain.repositories.IGameRepository;
 import ca.ulaval.glo4003.domain.repositories.ISportRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -28,7 +28,7 @@ public class CommandGameServiceTest {
 	private PersistableGame game;
 
 	@Mock
-	private IGameFactory gameFactoryMock;
+	private IGameRepository gameRepositoryMock;
 
 	@Mock
 	private ISportRepository sportRepositoryMock;
@@ -39,28 +39,22 @@ public class CommandGameServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		when(sportRepositoryMock.getSportByName(A_SPORT_NAME)).thenReturn(sport);
-		when(gameFactoryMock.instantiateGame(A_OPPONENT, A_DATE)).thenReturn(game);
+		when(gameRepositoryMock.createNewGameInRepository(A_OPPONENT, A_DATE)).thenReturn(game);
 	}
 
 	@Test
-	public void addGameToSportCalendar_ask_factory_for_a_new_Game() {
-		gameService.createNewGame(A_SPORT_NAME, A_OPPONENT, A_DATE);
-
-		verify(gameFactoryMock).instantiateGame(A_OPPONENT, A_DATE);
-	}
-
-	@Test
-	public void addGameToSportCalendar_ask_for_related_sport_to_repository() throws Exception {
-		gameService.createNewGame(A_SPORT_NAME, A_OPPONENT, A_DATE);
-
-		verify(sportRepositoryMock).getSportByName(A_SPORT_NAME);
-	}
-
-	@Test
-	public void addGameToCalendar_add_the_game_to_the_sport() {
+	public void addGameToCalendar_add_the_game_to_the_sport() throws Exception {
 		gameService.createNewGame(A_SPORT_NAME, A_OPPONENT, A_DATE);
 
 		verify(sport).addGameToCalendar(game);
 
+	}
+
+	@Test
+	public void addGameToCalendar_commits_its_changes() throws Exception {
+		gameService.createNewGame(A_SPORT_NAME, A_OPPONENT, A_DATE);
+
+		verify(sportRepositoryMock).commit();
+		verify(gameRepositoryMock).commit();
 	}
 }

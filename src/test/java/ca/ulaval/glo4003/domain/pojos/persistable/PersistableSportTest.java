@@ -11,13 +11,13 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
-import ca.ulaval.glo4003.domain.pojos.persistable.PersistableSport;
+import ca.ulaval.glo4003.domain.pojos.Game;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersistableSportTest {
 
 	private static final String A_SPORT_NAME = "Sport";
-	private List<PersistableGame> gameCalendar;
+	private List<Game> gameCalendar;
 
 	@Mock
 	private PersistableGame game;
@@ -26,7 +26,7 @@ public class PersistableSportTest {
 
 	@Before
 	public void setUp() {
-		gameCalendar = new ArrayList<PersistableGame>();
+		gameCalendar = new ArrayList<Game>();
 		sport = new PersistableSport(A_SPORT_NAME, gameCalendar);
 	}
 

@@ -32,4 +32,10 @@ public class FakeDataSportDao implements SportDao {
 		throw new RuntimeException("Cannot add element to fake data");
 	}
 
+	@Override
+	public void saveChanges(SportDto sport) throws SportDoesntExistException {
+		// TODO Auto-generated method stub
+
+	}
+
 }
