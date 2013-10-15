@@ -2,14 +2,14 @@ package ca.ulaval.glo4003.domain.factories;
 
 import java.util.List;
 
-import ca.ulaval.glo4003.domain.pojos.Game;
-import ca.ulaval.glo4003.domain.pojos.Sport;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableSport;
 
 public class SportFactory {
 
-	public Sport instantiateSport(String sportName, List<Game> gameList) {
+	public PersistableSport instantiateSport(String sportName, List<PersistableGame> gameList) {
 
-		return new Sport(sportName, gameList);
+		return new PersistableSport(sportName, gameList);
 	}
 
 }

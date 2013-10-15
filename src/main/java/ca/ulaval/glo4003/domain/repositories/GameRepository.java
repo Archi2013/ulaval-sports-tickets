@@ -7,7 +7,7 @@ import org.joda.time.DateTime;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.factories.IGameFactory;
-import ca.ulaval.glo4003.domain.pojos.Game;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
@@ -17,8 +17,8 @@ public class GameRepository implements IGameRepository {
 
 	private GameDao gameDao;
 	private IGameFactory gameFactory;
-	private List<Game> existingActiveGames;
-	private List<Game> newActiveGames;
+	private List<PersistableGame> existingActiveGames;
+	private List<PersistableGame> newActiveGames;
 
 	public GameRepository(GameDao gameDao, IGameFactory gameFactory) {
 		this.gameDao = gameDao;
@@ -28,31 +28,31 @@ public class GameRepository implements IGameRepository {
 	}
 
 	@Override
-	public List<Game> getGamesScheduledForSport(String sportName) throws SportDoesntExistException {
+	public List<PersistableGame> getGamesScheduledForSport(String sportName) throws SportDoesntExistException {
 		List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
-		List<Game> games = new ArrayList<>();
+		List<PersistableGame> games = new ArrayList<>();
 		for (GameDto dto : gameDtos) {
-			Game newGame = gameFactory.instantiateGame(dto.getOpponents(), dto.getGameDate());
+			PersistableGame newGame = gameFactory.instantiateGame(dto.getOpponents(), dto.getGameDate());
 			games.add(newGame);
 		}
 		existingActiveGames.addAll(games);
 		return games;
 	}
 
-	public Game createNewGameInRepository(String opponents, DateTime date) {
-		Game newGame = gameFactory.instantiateGame(opponents, date);
+	public PersistableGame createNewGameInRepository(String opponents, DateTime date) {
+		PersistableGame newGame = gameFactory.instantiateGame(opponents, date);
 		newActiveGames.add(newGame);
 		return newGame;
 
 	}
 
 	public void commit() throws GameDoesntExistException, GameAlreadyExistException {
-		for (Game game : existingActiveGames) {
+		for (PersistableGame game : existingActiveGames) {
 			GameDto dto = game.saveDataInDTO();
 			gameDao.saveChanges(dto);
 		}
 
-		for (Game game : newActiveGames) {
+		for (PersistableGame game : newActiveGames) {
 			GameDto dto = game.saveDataInDTO();
 			gameDao.add(dto);
 		}

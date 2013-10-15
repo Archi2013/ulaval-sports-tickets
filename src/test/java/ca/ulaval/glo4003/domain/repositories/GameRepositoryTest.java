@@ -18,7 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.factories.IGameFactory;
-import ca.ulaval.glo4003.domain.pojos.Game;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
@@ -36,13 +36,13 @@ public class GameRepositoryTest {
 	GameDto gameDto2;
 	List<GameDto> listWithOneGameDto;
 	List<GameDto> listWithTwoGameDtos;
-	List<Game> listGame;
+	List<PersistableGame> listGame;
 
 	@Mock
-	Game gameMock1;
+	PersistableGame gameMock1;
 
 	@Mock
-	Game gameMock2;
+	PersistableGame gameMock2;
 
 	@Mock
 	GameDao gameDaoMock;
@@ -67,7 +67,7 @@ public class GameRepositoryTest {
 	public void if_one_game_is_scheduled_getGamesScheduledForSport_return_one_game() throws SportDoesntExistException {
 		when(gameDaoMock.getGamesForSport(A_SPORT)).thenReturn(listWithOneGameDto);
 
-		List<Game> gamesReturned = gameRepository.getGamesScheduledForSport(A_SPORT);
+		List<PersistableGame> gamesReturned = gameRepository.getGamesScheduledForSport(A_SPORT);
 
 		Assert.assertEquals(1, gamesReturned.size());
 		Assert.assertSame(gameMock1, gamesReturned.get(0));
@@ -78,7 +78,7 @@ public class GameRepositoryTest {
 			throws SportDoesntExistException {
 		when(gameDaoMock.getGamesForSport(A_SPORT)).thenReturn(listWithTwoGameDtos);
 
-		List<Game> gamesReturned = gameRepository.getGamesScheduledForSport(A_SPORT);
+		List<PersistableGame> gamesReturned = gameRepository.getGamesScheduledForSport(A_SPORT);
 
 		Assert.assertEquals(2, gamesReturned.size());
 		Assert.assertSame(gameMock1, gamesReturned.get(0));
@@ -87,7 +87,7 @@ public class GameRepositoryTest {
 
 	@Test
 	public void addGameToRepository_return_game_instantiated_by_factory() {
-		Game gameReturned = gameRepository.createNewGameInRepository(AN_OPPONENT, A_DATE);
+		PersistableGame gameReturned = gameRepository.createNewGameInRepository(AN_OPPONENT, A_DATE);
 
 		Assert.assertSame(gameReturned, gameMock1);
 	}

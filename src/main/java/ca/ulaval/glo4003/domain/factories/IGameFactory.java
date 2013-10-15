@@ -2,9 +2,9 @@ package ca.ulaval.glo4003.domain.factories;
 
 import org.joda.time.DateTime;
 
-import ca.ulaval.glo4003.domain.pojos.Game;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
 
 public interface IGameFactory {
 
-	Game instantiateGame(String opponents, DateTime gameDate);
+	PersistableGame instantiateGame(String opponents, DateTime gameDate);
 }

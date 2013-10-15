@@ -12,8 +12,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.factories.IGameFactory;
-import ca.ulaval.glo4003.domain.pojos.Game;
-import ca.ulaval.glo4003.domain.pojos.Sport;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableSport;
 import ca.ulaval.glo4003.domain.repositories.ISportRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -22,10 +22,10 @@ public class CommandGameServiceTest {
 	private static final String A_SPORT_NAME = "Sport";
 	private static final DateTime A_DATE = new DateTime(100);
 	@Mock
-	private Sport sport;
+	private PersistableSport sport;
 
 	@Mock
-	private Game game;
+	private PersistableGame game;
 
 	@Mock
 	private IGameFactory gameFactoryMock;

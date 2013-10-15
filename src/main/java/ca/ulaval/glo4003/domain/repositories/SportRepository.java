@@ -4,8 +4,8 @@ import java.util.List;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.factories.SportFactory;
-import ca.ulaval.glo4003.domain.pojos.Game;
-import ca.ulaval.glo4003.domain.pojos.Sport;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableSport;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
@@ -22,9 +22,9 @@ public class SportRepository implements ISportRepository {
 	}
 
 	@Override
-	public Sport getSportByName(String sportName) throws SportDoesntExistException {
+	public PersistableSport getSportByName(String sportName) throws SportDoesntExistException {
 		SportDto dto = sportDao.get(sportName);
-		List<Game> gameList = gameRepository.getGamesScheduledForSport(sportName);
+		List<PersistableGame> gameList = gameRepository.getGamesScheduledForSport(sportName);
 
 		return sportFactory.instantiateSport(dto.getName(), gameList);
 	}

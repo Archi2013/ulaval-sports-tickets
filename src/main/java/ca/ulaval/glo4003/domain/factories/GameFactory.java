@@ -2,13 +2,13 @@ package ca.ulaval.glo4003.domain.factories;
 
 import org.joda.time.DateTime;
 
-import ca.ulaval.glo4003.domain.pojos.Game;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
 
 public class GameFactory implements IGameFactory {
 
 	@Override
-	public Game instantiateGame(String opponents, DateTime gameDate) {
-		return new Game(opponents, gameDate);
+	public PersistableGame instantiateGame(String opponents, DateTime gameDate) {
+		return new PersistableGame(opponents, gameDate);
 	}
 
 }

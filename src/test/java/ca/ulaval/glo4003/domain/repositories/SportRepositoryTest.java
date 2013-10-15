@@ -15,8 +15,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.factories.SportFactory;
-import ca.ulaval.glo4003.domain.pojos.Game;
-import ca.ulaval.glo4003.domain.pojos.Sport;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
+import ca.ulaval.glo4003.domain.pojos.persistable.PersistableSport;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -27,13 +27,13 @@ public class SportRepositoryTest {
 	private SportDto sportDto;
 
 	@Mock
-	private Sport sport;
+	private PersistableSport sport;
 
 	@Mock
 	private SportDao sportDao;
 
 	@Mock
-	private List<Game> gameList;
+	private List<PersistableGame> gameList;
 
 	@Mock
 	private IGameRepository gameRepository;
@@ -75,7 +75,7 @@ public class SportRepositoryTest {
 
 	@Test
 	public void getSportByName_returns_sport_instantiated_by_factory() throws Exception {
-		Sport sportReturned = repository.getSportByName(PARAMETER_SPORT);
+		PersistableSport sportReturned = repository.getSportByName(PARAMETER_SPORT);
 
 		Assert.assertSame(sport, sportReturned);
 	}
