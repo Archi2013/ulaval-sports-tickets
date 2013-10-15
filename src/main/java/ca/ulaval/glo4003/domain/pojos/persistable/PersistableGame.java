@@ -3,8 +3,9 @@ package ca.ulaval.glo4003.domain.pojos.persistable;
 import org.joda.time.DateTime;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.domain.pojos.Game;
 
-public class PersistableGame implements IPersistable<GameDto> {
+public class PersistableGame implements Game, Persistable<GameDto> {
 	public static final String DEFAULT_SPORT = "nosport";
 	public static final long DEFAULT_ID = -1;
 	private long id;
