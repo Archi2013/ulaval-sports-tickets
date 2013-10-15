@@ -7,16 +7,26 @@ import org.joda.time.DateTime;
 
 public class GameDto {
 
+	private String sportName;
 	private long id;
 	private String opponents;
 	private DateTime gameDate;
 	private List<TicketDto> tickets;
 
 	public GameDto(long id, String opponents, DateTime gameDate, String sportName) {
+		this.sportName = sportName;
 		this.id = id;
 		this.opponents = opponents;
 		this.gameDate = gameDate;
 		this.tickets = new ArrayList<TicketDto>();
+	}
+
+	public String getSportName() {
+		return sportName;
+	}
+
+	public void setSportName(String sportName) {
+		this.sportName = sportName;
 	}
 
 	public long getId() {
