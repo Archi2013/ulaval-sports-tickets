@@ -12,5 +12,6 @@ public interface UserDao {
 	public List<UserDto> getAllUser();
 	public UserDto getUser(String name) throws UserDoesntExistException;
 	public void AddUser(String name, String password);
+	boolean doesUserExist(String name);
 }
 

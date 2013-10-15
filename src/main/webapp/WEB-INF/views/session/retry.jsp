@@ -10,7 +10,7 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <h2> Sign up </h2>
+    <h2> Essaie encore! </h2>
     <form action="/session/auth" method="post"> 
   		<div class="information-block-error-skin margin-25-50"> Mauvaise combinaison de Nom d'utilisateur et mot de passe. </div>
 		<%@ include file="../session/authForm.jsp" %>

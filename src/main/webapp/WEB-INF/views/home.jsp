@@ -14,6 +14,7 @@
     
     <nav>
         <ul>
+            <li><a href="/session/signin">Se connecter ▷</a></li>
             <li><a href="/sport">Liste des sports disponibles ▷</a></li>
             <li><a href="/admin">Administration ▷</a></li>
         </ul>
