@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.dtos.UserDto;
 import ca.ulaval.glo4003.domain.utilities.User;
+import ca.ulaval.glo4003.domain.utilities.UserAlreadyExistException;
 import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
 import ca.ulaval.glo4003.domain.utilities.UsernameAndPasswordDoesntMatchException;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
-import ca.ulaval.glo4003.persistence.daos.fakes.UserAlreadyExistException;
 import ca.ulaval.glo4003.web.viewmodels.UserViewModel;
 
 @Service
