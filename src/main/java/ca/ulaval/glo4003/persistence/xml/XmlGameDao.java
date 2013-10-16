@@ -83,6 +83,7 @@ public class XmlGameDao implements GameDao {
 		nodes.put("id", Long.toString(game.getId()));
 		nodes.put("oponents", game.getOpponents());
 		nodes.put("date", game.getGameDate().toString("yyyyMMdd"));
+		nodes.put("sportName", game.getSportName());
 		SimpleNode simpleNode = new SimpleNode("game", nodes);
 		return simpleNode;
 	}

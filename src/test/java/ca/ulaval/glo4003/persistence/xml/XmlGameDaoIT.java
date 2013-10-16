@@ -7,7 +7,6 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
@@ -37,7 +36,6 @@ public class XmlGameDaoIT {
 	}
 
 	@Test
-	@Ignore
 	public void testAddDto() throws Exception {
 		DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
 		GameDto toAdd = new GameDto(4, "Vert et Or", DateTime.parse("20131201", format), "Hockey-Masculin");
