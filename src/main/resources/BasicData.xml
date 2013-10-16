@@ -16,31 +16,31 @@
 <id>1</id>
 <sportName>Hockey-Masculin</sportName>
 <oponents>Carabins</oponents>
-<date>20131212</date>
+<date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>2</id>
 <sportName>Hockey-Masculin</sportName>
 <oponents>Redmen</oponents>
-<date>20131212</date>
+<date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>40</id>
 <sportName>Volleyball-Feminin</sportName>
 <oponents>Blue Dragoon</oponents>
-<date>20131212</date>
+<date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>41</id>
 <sportName>Volleyball-Feminin</sportName>
 <oponents>Phoenix rouge</oponents>
-<date>20131212</date>
+<date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>42</id>
 <sportName>Volleyball-Feminin</sportName>
 <oponents>Emeraude vif</oponents>
-<date>20131212</date>
+<date>2013/12/12 18:30 EST</date>
 </game>
 </games>
 <games-sections>

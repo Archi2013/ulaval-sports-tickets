@@ -15,8 +15,11 @@ import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 
 public class XmlGameDaoIT {
 
-	private XmlGameDao gameDao;
+	private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormat.forPattern(XmlGameDao.DATE_PATTERN);
+	private static final DateTime SOME_DATE = DateTime.parse("2013/12/12 18:30 EST", DATE_TIME_FORMAT);
 
+	private XmlGameDao gameDao;
+	
 	@Before
 	public void setUp() throws Exception {
 		gameDao = new XmlGameDao("/BasicData.xml");
@@ -27,9 +30,8 @@ public class XmlGameDaoIT {
 		List<GameDto> ids = gameDao.getGamesForSport("Hockey-Masculin");
 		Assert.assertEquals(2, ids.size());
 
-		DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
-		GameDto expected0 = new GameDto(1, "Carabins", DateTime.parse("20131212", format), "Hockey-Masculin");
-		GameDto expected1 = new GameDto(2, "Redmen", DateTime.parse("20131212", format), "Hockey-Masculin");
+		GameDto expected0 = new GameDto(1, "Carabins", SOME_DATE, "Hockey-Masculin");
+		GameDto expected1 = new GameDto(2, "Redmen", SOME_DATE, "Hockey-Masculin");
 
 		assertGame(expected0, ids.get(0));
 		assertGame(expected1, ids.get(1));
@@ -37,8 +39,7 @@ public class XmlGameDaoIT {
 
 	@Test
 	public void testAddDto() throws Exception {
-		DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
-		GameDto toAdd = new GameDto(4, "Vert et Or", DateTime.parse("20131201", format), "Hockey-Masculin");
+		GameDto toAdd = new GameDto(4, "Vert et Or", SOME_DATE, "Hockey-Masculin");
 
 		gameDao.add(toAdd);
 
@@ -50,8 +51,7 @@ public class XmlGameDaoIT {
 
 	@Test(expected = GameAlreadyExistException.class)
 	public void testAddExistingShouldThrow() throws Exception {
-		DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
-		GameDto toAdd = new GameDto(1, "Carabins", DateTime.parse("20131212", format), "Hockey-Masculin");
+		GameDto toAdd = new GameDto(1, "Carabins", SOME_DATE, "Hockey-Masculin");
 
 		gameDao.add(toAdd);
 	}

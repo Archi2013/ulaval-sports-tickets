@@ -21,6 +21,7 @@ import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 public class XmlGameDao implements GameDao {
 
+	public static final String DATE_PATTERN = "yyyy/MM/dd HH:mm z";
 	private static final String GAMES_XPATH = "/base/games";
 	private static final String GAME_XPATH = GAMES_XPATH + "/game";
 	private static final String GAME_XPATH_ID = GAME_XPATH + "[id=\"%d\"]";
@@ -82,7 +83,7 @@ public class XmlGameDao implements GameDao {
 		Map<String, String> nodes = new HashMap<>();
 		nodes.put("id", Long.toString(game.getId()));
 		nodes.put("oponents", game.getOpponents());
-		nodes.put("date", game.getGameDate().toString("yyyyMMdd"));
+		nodes.put("date", game.getGameDate().toString(DATE_PATTERN));
 		nodes.put("sportName", game.getSportName());
 		SimpleNode simpleNode = new SimpleNode("game", nodes);
 		return simpleNode;
@@ -92,7 +93,7 @@ public class XmlGameDao implements GameDao {
 		if (node.hasNode("id", "oponents", "date", "sportName")) {
 			long id = Long.parseLong(node.getNodeValue("id"));
 			String opponents = node.getNodeValue("oponents");
-			DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
+			DateTimeFormatter format = DateTimeFormat.forPattern(DATE_PATTERN);
 			DateTime gameDate = DateTime.parse(node.getNodeValue("date"), format);
 			String sportName = node.getNodeValue("sportName");
 			return new GameDto(id, opponents, gameDate, sportName);
