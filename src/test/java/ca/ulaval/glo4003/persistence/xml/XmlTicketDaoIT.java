@@ -62,7 +62,7 @@ public class XmlTicketDaoIT {
 	
 	@Test
 	public void testGetTicketsForSection() throws Exception {
-		List<TicketDto> tickets = ticketDao.getTicketForSection(2, "Front Row");
+		List<TicketDto> tickets = ticketDao.getTicketsForSection(2, "Front Row");
 		
 		TicketDto expected0 = new TicketDto(2, 3, 35.00f, "VIP", "Front Row");
 		TicketDto expected1 = new TicketDto(2, 4, 35.00f, "VIP", "Front Row");
@@ -77,7 +77,7 @@ public class XmlTicketDaoIT {
 	
 	@Test(expected=SectionDoesntExistException.class)
 	public void testGetTicketsForInvalidSectionShouldThrow() throws Exception {
-		ticketDao.getTicketForSection(2, "Général");
+		ticketDao.getTicketsForSection(2, "Général");
 	}
 	
 	@Test

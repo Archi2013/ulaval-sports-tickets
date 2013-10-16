@@ -55,7 +55,7 @@ public class FakeDataTicketDao implements TicketDao {
 	}
 
 	@Override
-	public List<TicketDto> getTicketForSection(int gameID, String sectionName) throws SectionDoesntExistException {
+	public List<TicketDto> getTicketsForSection(int gameID, String sectionName) throws SectionDoesntExistException {
 		throw new RuntimeException("Not implemented yet.");
 	}
 }

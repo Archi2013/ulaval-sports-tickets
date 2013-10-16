@@ -76,7 +76,7 @@ public class XmlTicketDao implements TicketDao {
 	}
 	
 	@Override
-	public List<TicketDto> getTicketForSection(int gameID, String sectionName) throws SectionDoesntExistException {
+	public List<TicketDto> getTicketsForSection(int gameID, String sectionName) throws SectionDoesntExistException {
 		String xPath = String.format(TICKET_XPATH_SECTION, gameID, sectionName);
 		
 		try {
