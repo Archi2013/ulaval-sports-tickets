@@ -10,9 +10,11 @@
 <%@include file="layout/head.jsp"%>
 <body>
     <%@include file="layout/header.jsp" %>
+
     
     <nav>
         <ul>
+            <li><a href="/session/signin">Se connecter ▷</a></li>
             <li><a href="/sport">Liste des sports disponibles ▷</a></li>
             <li><a href="/admin">Administration ▷</a></li>
         </ul>
@@ -20,6 +22,8 @@
     
     <%@include file="layout/footer.jsp" %>
     
+    <p>Welcome:${user.username}</p>
     <p>Sur le serveur, c'est le ${serverTime}.</p>
+
 </body>
 </html>
