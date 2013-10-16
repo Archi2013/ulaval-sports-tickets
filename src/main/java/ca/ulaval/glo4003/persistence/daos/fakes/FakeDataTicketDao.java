@@ -10,6 +10,7 @@ import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketDao;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
@@ -51,5 +52,10 @@ public class FakeDataTicketDao implements TicketDao {
 	@Override
 	public void add(TicketDto ticket) throws TicketAlreadyExistException {
 		throw new RuntimeException("Cannot add element to fake data");
+	}
+
+	@Override
+	public List<TicketDto> getTicketForSection(int gameID, String sectionName) throws SectionDoesntExistException {
+		throw new RuntimeException("Not implemented yet.");
 	}
 }

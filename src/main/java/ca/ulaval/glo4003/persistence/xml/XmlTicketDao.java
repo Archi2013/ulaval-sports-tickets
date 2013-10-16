@@ -11,6 +11,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketDao;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
@@ -22,6 +23,7 @@ public class XmlTicketDao implements TicketDao {
 	private final static String TICKET_XPATH = TICKETS_XPATH + "/ticket";
 	private final static String TICKET_XPATH_ID = TICKET_XPATH + "[id=\"%s\"]";
 	private final static String TICKET_XPATH_GAME_ID = TICKET_XPATH + "[gameID=\"%s\"]";
+	private final static String TICKET_XPATH_SECTION = TICKET_XPATH_GAME_ID + "[section=\"%s\"]";
 
 	@Inject
 	private XmlDatabase database;
@@ -51,6 +53,9 @@ public class XmlTicketDao implements TicketDao {
 		
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(xPath);
+			if (nodes.isEmpty()) {
+				throw new GameDoesntExistException();
+			}
 			return convertNodesToTickets(nodes);
 		} catch (NoSuchAttributeException | TicketDoesntExistException | XPathExpressionException e) {
 			throw new XmlIntegrityException(e);
@@ -68,6 +73,21 @@ public class XmlTicketDao implements TicketDao {
         } catch (XPathExpressionException cause) {
 	        throw new XmlIntegrityException(cause);
         }
+	}
+	
+	@Override
+	public List<TicketDto> getTicketForSection(int gameID, String sectionName) throws SectionDoesntExistException {
+		String xPath = String.format(TICKET_XPATH_SECTION, gameID, sectionName);
+		
+		try {
+			List<SimpleNode> nodes = database.extractNodeSet(xPath);
+			if (nodes.isEmpty()) {
+				throw new SectionDoesntExistException();
+			}
+			return convertNodesToTickets(nodes);
+		} catch (NoSuchAttributeException | TicketDoesntExistException | XPathExpressionException e) {
+			throw new XmlIntegrityException(e);
+		} 
 	}
 
 	private boolean isIdExist(int ticketId) {
