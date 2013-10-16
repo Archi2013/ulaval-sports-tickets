@@ -1,7 +1,5 @@
 package ca.ulaval.glo4003.web.controllers;
 
-import java.util.Locale;
-
 import javax.inject.Inject;
 
 
@@ -13,14 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
-
-import ca.ulaval.glo4003.domain.services.QueryGameService;
 import ca.ulaval.glo4003.domain.services.UserService;
 import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
 import ca.ulaval.glo4003.domain.utilities.UsernameAndPasswordDoesntMatchException;
-import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
+import ca.ulaval.glo4003.persistence.daos.fakes.UserAlreadyExistException;
 import ca.ulaval.glo4003.web.viewmodels.UserViewModel;
 
 
@@ -80,9 +75,14 @@ public class SessionController {
 	@RequestMapping(value="/save",method = RequestMethod.POST)    
     public String registerUser(@RequestParam String usernameParam,@RequestParam String passwordParam,Model model) { 
 		
-		userService.signUp(usernameParam, passwordParam);
-		model.addAttribute("user", currentUser); 
-        return "session/success";  
+		
+		try {
+			userService.signUp(usernameParam, passwordParam);
+			model.addAttribute("user", currentUser); 
+	        return "session/signin"; 
+		} catch (UserAlreadyExistException e) {
+			return "session/exist";
+		} 
         
     } 
 	

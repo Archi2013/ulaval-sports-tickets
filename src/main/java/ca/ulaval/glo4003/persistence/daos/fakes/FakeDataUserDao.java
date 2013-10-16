@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import ca.ulaval.glo4003.domain.dtos.UserDto;
 import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
+import ca.ulaval.glo4003.domain.utilities.UsernameAndPasswordDoesntMatchException;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
 
 @Repository
@@ -39,8 +40,9 @@ public class FakeDataUserDao implements UserDao {
 	
 	
 	@Override
-	public void AddUser(String name, String password){
-		this.userList.add(new UserDto(name,password));
+	public void AddUser(String name, String password) {
+		if(!(doesUserExist(name)))
+			this.userList.add(new UserDto(name,password));
 	}
 	
 	@Override

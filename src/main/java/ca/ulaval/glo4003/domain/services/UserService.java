@@ -7,14 +7,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
-import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.UserDto;
 import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
 import ca.ulaval.glo4003.domain.utilities.UsernameAndPasswordDoesntMatchException;
-import ca.ulaval.glo4003.persistence.daos.GameDao;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
+import ca.ulaval.glo4003.persistence.daos.fakes.UserAlreadyExistException;
 import ca.ulaval.glo4003.web.viewmodels.UserViewModel;
 
 @Service
@@ -23,40 +21,41 @@ public class UserService {
 
 	@Autowired
 	public User currentUser;
-	
+
 	@Inject
 	private UserDao userDao;
-	
-	private void setCurrentUser(UserDto user){
-		currentUser.setUsername(user.getUsername());	
+
+	private void setCurrentUser(UserDto user) {
+		currentUser.setUsername(user.getUsername());
 		currentUser.setPassword(user.getPassword());
 		currentUser.setIsLogged(true);
 	}
-	
-	public void signUp(String username, String password) {
-		
-		//TODO verifier si username existe
-		//TODO Persister
-	
+
+	public void signUp(String username, String password) throws UserAlreadyExistException {
+
+		if (!(userDao.doesUserExist(username)))
+			userDao.AddUser(username, password);
+		else
+			throw new UserAlreadyExistException();
 	}
-	
-	public UserViewModel signIn(String username, String password) throws UserDoesntExistException, UsernameAndPasswordDoesntMatchException{
-		
+
+	public UserViewModel signIn(String username, String password)
+			throws UserDoesntExistException,
+			UsernameAndPasswordDoesntMatchException {
+
 		UserDto user = userDao.getUser(username);
-		if( user.getPassword().equals(password)){
+		if (user.getPassword().equals(password)) {
 			setCurrentUser(user);
 			UserViewModel userViewModel = new UserViewModel(username, password);
 			return userViewModel;
-		}
-		else
+		} else
 			throw new UsernameAndPasswordDoesntMatchException();
 	}
-	
+
 	public void logOutCurrentUser() {
 		currentUser.setPassword("");
 		currentUser.setUsername("");
-		currentUser.setIsLogged(false);	
+		currentUser.setIsLogged(false);
 	}
 
-	
 }
