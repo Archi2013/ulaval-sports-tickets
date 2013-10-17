@@ -1,7 +1,9 @@
 package ca.ulaval.glo4003.web.controllers;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertiesFile;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
@@ -39,7 +42,8 @@ public class SportControllerTest {
 	private GamesViewModel gamesViewModel;
 
 	@Before
-	public void setUp() throws SportDoesntExistException, RuntimeException, SportDoesntExistInPropertiesFileException {
+	public void setUp() throws SportDoesntExistException, RuntimeException, SportDoesntExistInPropertiesFileException,
+			GameDoesntExistException {
 		gamesViewModel = mock(GamesViewModel.class);
 		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 		when(gamesViewModel.hasGames()).thenReturn(true);
@@ -71,7 +75,7 @@ public class SportControllerTest {
 	}
 
 	@Test
-	public void getSportGames_should_get_games_from_service() throws SportDoesntExistException {
+	public void getSportGames_should_get_games_from_service() throws Exception {
 
 		controller.getSportGames(SPORT_URL, model);
 
@@ -79,7 +83,7 @@ public class SportControllerTest {
 	}
 
 	@Test
-	public void getSportsGames_should_return_no_games_path_when_sport_doesnt_have_any_game() throws SportDoesntExistException {
+	public void getSportsGames_should_return_no_games_path_when_sport_doesnt_have_any_game() throws Exception {
 		when(gamesViewModel.hasGames()).thenReturn(false);
 
 		String path = controller.getSportGames(SPORT_URL, model);
@@ -88,7 +92,7 @@ public class SportControllerTest {
 	}
 
 	@Test
-	public void getSportsGames_should_add_view_model_to_model_when_game_doesnt_have_any_game() throws SportDoesntExistException {
+	public void getSportsGames_should_add_view_model_to_model_when_game_doesnt_have_any_game() throws Exception {
 		when(gamesViewModel.hasGames()).thenReturn(false);
 
 		controller.getSportGames(SPORT_URL, model);
@@ -97,14 +101,14 @@ public class SportControllerTest {
 	}
 
 	@Test
-	public void getSportGames_should_return_correct_path_when_games_exist() throws SportDoesntExistException {
+	public void getSportGames_should_return_correct_path_when_games_exist() throws Exception {
 		String path = controller.getSportGames(SPORT_URL, model);
 
 		assertEquals("sport/games", path);
 	}
 
 	@Test
-	public void getSportGames_should_add_sport_to_model_when_games_exist() throws SportDoesntExistException {
+	public void getSportGames_should_add_sport_to_model_when_games_exist() throws Exception {
 		controller.getSportGames(SPORT_URL, model);
 
 		verify(model).addAttribute("games", gamesViewModel);
@@ -112,8 +116,7 @@ public class SportControllerTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void getSportGames_should_redirect_to_404_path_when_sport_doesnt_exist() throws RuntimeException,
-			SportDoesntExistException {
+	public void getSportGames_should_redirect_to_404_path_when_sport_doesnt_exist() throws Exception {
 		when(sportService.getGamesForSport(SPORT_URL)).thenThrow(SportDoesntExistException.class);
 
 		String path = controller.getSportGames(SPORT_URL, model);

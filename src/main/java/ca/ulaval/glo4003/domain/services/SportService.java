@@ -12,8 +12,10 @@ import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketDao;
 import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.factories.GamesViewModelFactory;
@@ -31,6 +33,9 @@ public class SportService {
 	private GameDao gameDao;
 
 	@Inject
+	private TicketDao ticketDao;
+
+	@Inject
 	private GameIsInFutureFilter filter;
 
 	@Inject
@@ -44,10 +49,11 @@ public class SportService {
 		return sportsViewModelFactory.createViewModel(sports);
 	}
 
-	public GamesViewModel getGamesForSport(String sportUrl) throws SportDoesntExistException {
+	public GamesViewModel getGamesForSport(String sportUrl) throws SportDoesntExistException, GameDoesntExistException {
 		try {
 			String sportName = sportUrlMapper.getSportName(sportUrl);
 			List<GameDto> games = gameDao.getGamesForSport(sportName);
+			countNumberOfTickets(games);
 			filter.applyFilterOnList(games);
 			return gamesViewModelFactory.createViewModel(sportName, games);
 		} catch (SportDoesntExistInPropertiesFileException e) {
@@ -55,4 +61,10 @@ public class SportService {
 		}
 	}
 
+	private void countNumberOfTickets(List<GameDto> games) throws GameDoesntExistException {
+		for (GameDto game : games) {
+			game.setNumberOfTickets(ticketDao.getTicketsForGame((int) game.getId()).size());
+		}
+
+	}
 }

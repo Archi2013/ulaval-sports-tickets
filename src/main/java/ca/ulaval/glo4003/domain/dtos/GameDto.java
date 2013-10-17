@@ -1,8 +1,5 @@
 package ca.ulaval.glo4003.domain.dtos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.joda.time.DateTime;
 
 public class GameDto {
@@ -11,14 +8,13 @@ public class GameDto {
 	private long id;
 	private String opponents;
 	private DateTime gameDate;
-	private List<TicketDto> tickets;
+	private int numberOfTickets;
 
 	public GameDto(long id, String opponents, DateTime gameDate, String sportName) {
 		this.sportName = sportName;
 		this.id = id;
 		this.opponents = opponents;
 		this.gameDate = gameDate;
-		this.tickets = new ArrayList<TicketDto>();
 	}
 
 	public String getSportName() {
@@ -37,12 +33,12 @@ public class GameDto {
 		this.id = id;
 	}
 
-	public List<TicketDto> getTickets() {
-		return tickets;
+	public int getNumberOfTickets() {
+		return numberOfTickets;
 	}
 
-	public int getNumberOfTickets() {
-		return tickets.size();
+	public void setNumberOfTickets(int numberOfTickets) {
+		this.numberOfTickets = numberOfTickets;
 	}
 
 	public String getOpponents() {

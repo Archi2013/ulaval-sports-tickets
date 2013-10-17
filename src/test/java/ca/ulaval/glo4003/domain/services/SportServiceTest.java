@@ -1,8 +1,10 @@
 package ca.ulaval.glo4003.domain.services;
 
-import static com.google.common.collect.Lists.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
@@ -91,36 +93,35 @@ public class SportServiceTest {
 	}
 
 	@Test
-	public void getGamesForSport_should_map_sport_url_to_sport_name() throws SportDoesntExistException,
-			SportDoesntExistInPropertiesFileException {
+	public void getGamesForSport_should_map_sport_url_to_sport_name() throws Exception {
 		service.getGamesForSport(SPORT_URL);
 
 		verify(sportUrlMapperMock).getSportName(SPORT_URL);
 	}
 
 	@Test
-	public void getGamesForSport_should_get_games_for_sport_from_dao() throws SportDoesntExistException {
+	public void getGamesForSport_should_get_games_for_sport_from_dao() throws Exception {
 		service.getGamesForSport(SPORT_URL);
 
 		verify(gameDaoMock).getGamesForSport(SPORT_NAME);
 	}
 
 	@Test
-	public void getGamesForSport_should_apply_filter_on_sport_games() throws SportDoesntExistException {
+	public void getGamesForSport_should_apply_filter_on_sport_games() throws Exception {
 		service.getGamesForSport(SPORT_URL);
 
 		verify(filterMock).applyFilterOnList(games);
 	}
 
 	@Test
-	public void getGamesForSport_should_create_view_model() throws SportDoesntExistException {
+	public void getGamesForSport_should_create_view_model() throws Exception {
 		service.getGamesForSport(SPORT_URL);
 
 		verify(gamesViewModelFactoryMock).createViewModel(SPORT_NAME, games);
 	}
 
 	@Test
-	public void getGamesForSport_should_return_created_view_model() throws SportDoesntExistException {
+	public void getGamesForSport_should_return_created_view_model() throws Exception {
 		GamesViewModel viewModel = new GamesViewModel();
 		when(gamesViewModelFactoryMock.createViewModel(SPORT_NAME, games)).thenReturn(viewModel);
 
@@ -132,7 +133,7 @@ public class SportServiceTest {
 	@SuppressWarnings("unchecked")
 	@Test(expected = SportDoesntExistException.class)
 	public void getGamesForSport_should_throw_sport_doesnt_exist_exception_if_sport_doesnt_exist_in_properties_file()
-			throws SportDoesntExistInPropertiesFileException, SportDoesntExistException {
+			throws Exception {
 		when(sportUrlMapperMock.getSportName(SPORT_URL)).thenThrow(SportDoesntExistInPropertiesFileException.class);
 
 		service.getGamesForSport(SPORT_URL);

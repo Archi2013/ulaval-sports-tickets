@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ca.ulaval.glo4003.domain.services.SportService;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
@@ -34,7 +35,7 @@ public class SportController {
 	}
 
 	@RequestMapping(value = "/{sportUrl}/matchs", method = RequestMethod.GET)
-	public String getSportGames(@PathVariable String sportUrl, Model model) {
+	public String getSportGames(@PathVariable String sportUrl, Model model) throws GameDoesntExistException {
 		try {
 			logger.info("Getting games for sport: " + sportUrl);
 
