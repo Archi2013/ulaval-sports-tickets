@@ -15,6 +15,7 @@ import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
 import ca.ulaval.glo4003.domain.pojos.persistable.PersistableSport;
 import ca.ulaval.glo4003.domain.repositories.IGameRepository;
 import ca.ulaval.glo4003.domain.repositories.ISportRepository;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandGameServiceTest {
@@ -33,6 +34,9 @@ public class CommandGameServiceTest {
 	@Mock
 	private ISportRepository sportRepositoryMock;
 
+	@Mock
+	private SportUrlMapper sportUrlMapper;
+
 	@InjectMocks
 	private CommandGameService gameService;
 
@@ -40,6 +44,7 @@ public class CommandGameServiceTest {
 	public void setUp() throws Exception {
 		when(sportRepositoryMock.getSportByName(A_SPORT_NAME)).thenReturn(sport);
 		when(gameRepositoryMock.createNewGameInRepository(A_OPPONENT, A_DATE)).thenReturn(game);
+		when(sportUrlMapper.getSportName(A_SPORT_NAME)).thenReturn(A_SPORT_NAME);
 	}
 
 	@Test

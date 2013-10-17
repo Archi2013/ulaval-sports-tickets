@@ -4,15 +4,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Repository;
-
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
-@Repository
+//@Repository
 public class FakeDataGameDao implements GameDao {
 
 	@Inject
@@ -35,7 +33,9 @@ public class FakeDataGameDao implements GameDao {
 
 	@Override
 	public void add(GameDto game) {
-		throw new RuntimeException("Cannot add element to fake data");
+		System.out.println("Le nom du sport: " + game.getSportName());
+		SportDto sport = database.getSport(game.getSportName());
+		sport.getGames().add(game);
 	}
 
 	@Override

@@ -7,9 +7,14 @@ import javax.xml.xpath.XPathExpressionException;
 
 public class XmlDatabase {
 
+	private static final String DEFAULT_FILE = "/BasicData.xml";
 	private String filename;
 	private XmlExtractor extractor;
 	private static XmlDatabase instance;
+
+	/*
+	 * public XmlDatabase() { this(DEFAULT_FILE); }
+	 */
 
 	private XmlDatabase(String filename) {
 		this.filename = filename;
@@ -24,9 +29,9 @@ public class XmlDatabase {
 	public static XmlDatabase getInstance() {
 		return getInstance("/BasicData.xml");
 	}
-	
+
 	static XmlDatabase getUniqueInstance(String filename) {
-		return new XmlDatabase(filename); 
+		return new XmlDatabase(filename);
 	}
 
 	public static XmlDatabase getInstance(String filename) {

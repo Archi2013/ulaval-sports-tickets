@@ -3,6 +3,7 @@ package ca.ulaval.glo4003.domain.repositories;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -33,7 +34,6 @@ public class SportRepositoryTest {
 	@Mock
 	private SportDao sportDao;
 
-	@Mock
 	private List<Game> gameList;
 
 	@Mock
@@ -47,6 +47,7 @@ public class SportRepositoryTest {
 
 	@Before()
 	public void setUp() throws Exception {
+		gameList = new ArrayList<>();
 		sportDto = new SportDto(DTO_SPORT);
 		when(sportDao.get(PARAMETER_SPORT)).thenReturn(sportDto);
 		when(sportFactory.instantiateSport(DTO_SPORT, gameList)).thenReturn(sport);
@@ -66,6 +67,13 @@ public class SportRepositoryTest {
 		Sport sportReturned = repository.getSportByName(PARAMETER_SPORT);
 
 		Assert.assertSame(sport, sportReturned);
+	}
+
+	@Test
+	public void commit_tells_the_match_repo_to_commit_too() throws Exception {
+		repository.commit();
+
+		verify(gameRepository).commit();
 	}
 
 	@Test

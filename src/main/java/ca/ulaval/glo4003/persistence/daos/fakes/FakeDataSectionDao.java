@@ -6,8 +6,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Repository;
-
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
@@ -18,7 +16,7 @@ import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Maps;
 
-@Repository
+//@Repository
 public class FakeDataSectionDao implements SectionDao {
 
 	@Inject

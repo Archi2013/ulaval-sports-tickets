@@ -5,10 +5,14 @@ import java.util.List;
 
 import javax.naming.directory.NoSuchAttributeException;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public final class NodesConverter {
 
-	private NodesConverter(){}
-	
+	private NodesConverter() {
+	}
+
 	public static Integer toInteger(SimpleNode node, String key) throws NoSuchAttributeException {
 		return Integer.parseInt(node.getNodeValue(key));
 	}

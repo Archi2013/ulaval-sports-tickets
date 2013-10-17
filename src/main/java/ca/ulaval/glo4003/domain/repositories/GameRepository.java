@@ -3,7 +3,10 @@ package ca.ulaval.glo4003.domain.repositories;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.joda.time.DateTime;
+import org.springframework.stereotype.Repository;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.factories.IGameFactory;
@@ -15,18 +18,20 @@ import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
+@Repository
 public class GameRepository implements IGameRepository {
 
+	@Inject
 	private GameDao gameDao;
+	@Inject
 	private IGameFactory gameFactory;
+
 	private List<Persistable<GameDto>> existingActiveGames;
 	private List<Persistable<GameDto>> newActiveGames;
 
-	public GameRepository(GameDao gameDao, IGameFactory gameFactory) {
-		this.gameDao = gameDao;
-		this.gameFactory = gameFactory;
-		this.existingActiveGames = new ArrayList<>();
-		this.newActiveGames = new ArrayList<>();
+	public GameRepository() {
+		existingActiveGames = new ArrayList<>();
+		newActiveGames = new ArrayList<>();
 	}
 
 	@Override
@@ -60,6 +65,8 @@ public class GameRepository implements IGameRepository {
 			GameDto dto = game.saveDataInDTO();
 			gameDao.add(dto);
 		}
+		existingActiveGames.addAll(newActiveGames);
+		newActiveGames.clear();
 	}
 
 }

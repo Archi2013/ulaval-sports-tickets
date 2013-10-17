@@ -16,8 +16,11 @@ public class PersistableSport implements Sport, Persistable<SportDto> {
 		this.gameCalendar = gameCalendar;
 	}
 
-	public void addGameToCalendar(Game game) {
-		gameCalendar.add(game);
+	public void addGameToCalendar(Game gameToAdd) {
+		if (gameToAdd.acceptsToBeScheduled()) {
+			gameToAdd.beScheduledToThisSport(sportName);
+			gameCalendar.add(gameToAdd);
+		}
 	}
 
 	@Override

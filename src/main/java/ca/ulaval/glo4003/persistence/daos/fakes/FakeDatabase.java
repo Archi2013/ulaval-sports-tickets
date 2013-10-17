@@ -38,7 +38,7 @@ public class FakeDatabase {
 		}
 		throw new GameDoesntExistException();
 	}
-	
+
 	public List<SportDto> getSports() {
 		return new ArrayList<SportDto>(sports.values());
 	}

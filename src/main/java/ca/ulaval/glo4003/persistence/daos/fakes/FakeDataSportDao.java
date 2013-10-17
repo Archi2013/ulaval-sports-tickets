@@ -4,14 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Repository;
-
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.SportAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
-@Repository
+//@Repository
 public class FakeDataSportDao implements SportDao {
 
 	@Inject

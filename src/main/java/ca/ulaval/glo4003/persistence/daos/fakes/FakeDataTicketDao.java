@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Repository;
-
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
@@ -15,7 +13,7 @@ import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketDao;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
-@Repository
+//@Repository
 public class FakeDataTicketDao implements TicketDao {
 
 	@Inject

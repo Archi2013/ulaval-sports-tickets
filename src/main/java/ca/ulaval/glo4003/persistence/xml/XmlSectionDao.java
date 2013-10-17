@@ -3,18 +3,20 @@ package ca.ulaval.glo4003.persistence.xml;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
+
+import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 
+@Component
 public class XmlSectionDao implements SectionDao {
 
-	@Inject
+	// @Inject
 	private XmlDatabase database;
 
 	public XmlSectionDao() {
@@ -55,8 +57,8 @@ public class XmlSectionDao implements SectionDao {
 		}
 	}
 
-	private List<SectionDto> convertNodesToSectionDtos(int gameId, List<SimpleNode> nodes) throws SectionDoesntExistException,
-			NoSuchAttributeException {
+	private List<SectionDto> convertNodesToSectionDtos(int gameId, List<SimpleNode> nodes)
+			throws SectionDoesntExistException, NoSuchAttributeException {
 		List<SectionDto> sections = new ArrayList<>();
 		for (SimpleNode node : nodes) {
 			SectionDto section = get(gameId, node.getNodeValue("name"));

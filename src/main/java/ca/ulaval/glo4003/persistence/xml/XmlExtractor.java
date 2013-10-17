@@ -69,10 +69,10 @@ public class XmlExtractor {
 		XPathExpression expr = xpath.compile(xPath);
 		return expr.evaluate(document, qName);
 	}
-	
+
 	public int count(String xPath) throws XPathExpressionException {
-		double result = (double)extract("count(" + xPath + ")", XPathConstants.NUMBER);
-		return (int)result;
+		double result = (double) extract("count(" + xPath + ")", XPathConstants.NUMBER);
+		return (int) result;
 	}
 
 	public void createNode(String xPath, SimpleNode simpleNode) throws XPathExpressionException {
@@ -91,7 +91,7 @@ public class XmlExtractor {
 
 	public boolean isNodeExist(String xPath) {
 		try {
-			Boolean result = (Boolean)extract(xPath, XPathConstants.BOOLEAN);
+			Boolean result = (Boolean) extract(xPath, XPathConstants.BOOLEAN);
 			return result;
 		} catch (XPathExpressionException e) {
 			return false;

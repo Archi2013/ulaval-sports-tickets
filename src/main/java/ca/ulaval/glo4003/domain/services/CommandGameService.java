@@ -1,29 +1,37 @@
 package ca.ulaval.glo4003.domain.services;
 
+import javax.inject.Inject;
+
 import org.joda.time.DateTime;
+import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.pojos.Game;
 import ca.ulaval.glo4003.domain.pojos.Sport;
 import ca.ulaval.glo4003.domain.repositories.IGameRepository;
 import ca.ulaval.glo4003.domain.repositories.ISportRepository;
+import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
+@Service
 public class CommandGameService {
 
+	@Inject
 	private IGameRepository gameRepository;
+	@Inject
 	private ISportRepository sportRepository;
-
-	public CommandGameService(IGameRepository gameFactory, ISportRepository sportRepository) {
-		this.gameRepository = gameFactory;
-		this.sportRepository = sportRepository;
-	}
+	@Inject
+	private SportUrlMapper sportUrlMapper;
 
 	public void createNewGame(String sportName, String opponent, DateTime date) throws SportDoesntExistException,
-			GameDoesntExistException, GameAlreadyExistException {
+			GameDoesntExistException, GameAlreadyExistException, SportDoesntExistInPropertiesFileException {
+
+		String domainSportName = sportUrlMapper.getSportName(sportName);
+		System.out.println("Nom du sport dans le service: " + domainSportName);
 		Game game = gameRepository.createNewGameInRepository(opponent, date);
-		Sport sport = sportRepository.getSportByName(sportName);
+		Sport sport = sportRepository.getSportByName(domainSportName);
 
 		sport.addGameToCalendar(game);
 

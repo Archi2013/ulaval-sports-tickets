@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
@@ -19,6 +19,7 @@ import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
+@Component
 public class XmlGameDao implements GameDao {
 
 	public static final String DATE_PATTERN = "yyyy/MM/dd HH:mm z";
@@ -27,7 +28,7 @@ public class XmlGameDao implements GameDao {
 	private static final String GAME_XPATH_ID = GAME_XPATH + "[id=\"%d\"]";
 	private static final String GAME_XPATH_SPORT_NAME = GAME_XPATH + "[sportName=\"%s\"]";
 
-	@Inject
+	// @Inject
 	private XmlDatabase database;
 
 	public XmlGameDao() {

@@ -5,22 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
+
+import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.SportAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
+@Component
 public class XmlSportDao implements SportDao {
 
 	private static final String SPORTS_XPATH = "/base/sports";
 	private static final String SPORT_XPATH = SPORTS_XPATH + "/sport";
 	private static final String SPORT_XPATH_ID = SPORT_XPATH + "[name=\"%s\"]";
 
-	@Inject
+	// @Inject
 	private XmlDatabase database;
 
 	public XmlSportDao() {

@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.domain.repositories;
 
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -113,6 +114,35 @@ public class GameRepositoryTest {
 
 		verify(gameDaoMock).add(gameDto1);
 		verify(gameDaoMock).add(gameDto2);
+	}
+
+	@Test
+	public void after_a_commit_new_objects_are_considered_as_existing() throws Exception {
+		gameRepository.createNewGameInRepository(AN_OPPONENT, A_DATE);
+		gameRepository.createNewGameInRepository(ANOTHER_OPPONENT, ANOTHER_DATE);
+
+		gameRepository.commit();
+		gameRepository.commit();
+
+		verify(gameDaoMock, times(1)).add(gameDto1);
+		verify(gameDaoMock, times(1)).add(gameDto2);
+		verify(gameDaoMock, times(1)).saveChanges(gameDto1);
+		verify(gameDaoMock, times(1)).saveChanges(gameDto2);
+	}
+
+	@Test
+	public void if_one_object_is_new_and_one_is_not_committing_twice_works_fine() throws Exception {
+		when(gameDaoMock.getGamesForSport(A_SPORT)).thenReturn(listWithOneGameDto);
+		gameRepository.getGamesScheduledForSport(A_SPORT);
+		gameRepository.createNewGameInRepository(ANOTHER_OPPONENT, ANOTHER_DATE);
+
+		gameRepository.commit();
+		gameRepository.commit();
+
+		verify(gameDaoMock, times(2)).saveChanges(gameDto1);
+		verify(gameDaoMock, times(1)).add(gameDto2);
+		verify(gameDaoMock, times(1)).add(gameDto2);
+
 	}
 
 	private void setUpListsOfDtos() {

@@ -2,43 +2,43 @@
 <base>
 <sports>
 <sport>
-<name>Hockey-Masculin</name>
+<name>Volleyball Féminin</name>
 </sport>
 <sport>
-<name>Baseball-Masculin</name>
+<name>Baseball Masculin</name>
 </sport>
 <sport>
-<name>Volleyball-Feminin</name>
+<name>Basketball Masculin</name>
 </sport>
 </sports>
 <games>
 <game>
 <id>1</id>
-<sportName>Hockey-Masculin</sportName>
+<sportName>Volleyball Féminin</sportName>
 <oponents>Carabins</oponents>
 <date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>2</id>
-<sportName>Hockey-Masculin</sportName>
+<sportName>Volleyball Féminin</sportName>
 <oponents>Redmen</oponents>
 <date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>40</id>
-<sportName>Volleyball-Feminin</sportName>
+<sportName>Volleyball Féminin</sportName>
 <oponents>Blue Dragoon</oponents>
 <date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>41</id>
-<sportName>Volleyball-Feminin</sportName>
+<sportName>Baseball Masculin</sportName>
 <oponents>Phoenix rouge</oponents>
 <date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>42</id>
-<sportName>Volleyball-Feminin</sportName>
+<sportName>Baseball Masculin</sportName>
 <oponents>Emeraude vif</oponents>
 <date>2013/12/12 18:30 EST</date>
 </game>
