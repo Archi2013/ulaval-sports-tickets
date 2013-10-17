@@ -43,7 +43,7 @@ public class UserServiceTest {
 		
 		userService.signUp(VALID_USER, VALID_PASSWORD);
 		
-		verify(userDao).AddUser(VALID_USER, VALID_PASSWORD);
+		verify(userDao).addUser(VALID_USER, VALID_PASSWORD);
 	}
 	
 	@Test(expected=UserAlreadyExistException.class)

@@ -38,7 +38,7 @@ public class UserService {
 	public void signUp(String username, String password) throws UserAlreadyExistException {
 
 		if (!(userDao.doesUserExist(username)))
-			userDao.AddUser(username, password);
+			userDao.addUser(username, password);
 		else
 			throw new UserAlreadyExistException();
 	}
