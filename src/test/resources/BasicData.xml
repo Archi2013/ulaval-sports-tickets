@@ -87,84 +87,84 @@
 <gameID>1</gameID>
 <price>35.00</price>
 <type>VIP</type>
-<section>Front Row</section>
+<section>Loge Nord-Est</section>
 </ticket>
 <ticket>
 <id>2</id>
 <gameID>1</gameID>
 <price>35.00</price>
 <type>VIP</type>
-<section>Front Row</section>
+<section>Loge Nord-Est</section>
 </ticket>
 <ticket>
 <id>3</id>
 <gameID>2</gameID>
 <price>35.00</price>
 <type>VIP</type>
-<section>Front Row</section>
+<section>Loge Nord-Est</section>
 </ticket>
 <ticket>
 <id>4</id>
 <gameID>2</gameID>
 <price>35.00</price>
 <type>VIP</type>
-<section>Front Row</section>
+<section>Loge Nord-Est</section>
 </ticket>
 <ticket>
 <id>5</id>
 <gameID>2</gameID>
 <price>35.00</price>
 <type>VIP</type>
-<section>Front Row</section>
+<section>Loge Nord-Est</section>
 </ticket>
 <ticket>
 <id>6</id>
 <gameID>1</gameID>
 <price>15.50</price>
 <type>Général</type>
-<section>Général</section>
+<section>Cyan</section>
 </ticket>
 <ticket>
 <id>7</id>
 <gameID>1</gameID>
 <price>15.50</price>
 <type>Général</type>
-<section>Général</section>
+<section>Cyan</section>
 </ticket>
 <ticket>
 <id>8</id>
 <gameID>1</gameID>
 <price>20.00</price>
 <type>VIP</type>
-<section>Rouges</section>
+<section>Loge Sud-Est</section>
 </ticket>
 <ticket>
 <id>9</id>
 <gameID>1</gameID>
 <price>20.00</price>
 <type>VIP</type>
-<section>Rouges</section>
+<section>Loge Sud-Est</section>
 </ticket>
 <ticket>
 <id>10</id>
 <gameID>1</gameID>
 <price>20.00</price>
 <type>VIP</type>
-<section>Rouges</section>
+<section>Loge Sud-Est</section>
 </ticket>
 <ticket>
 <id>11</id>
 <gameID>1</gameID>
 <price>20.00</price>
 <type>VIP</type>
-<section>Rouges</section>
+<section>Loge Sud-Est</section>
 </ticket>
 <ticket>
 <id>12</id>
 <gameID>1</gameID>
 <price>20.00</price>
 <type>VIP</type>
-<section>Rouges</section>
+<section>Loge Sud-Est</section>
 </ticket>
 <ticket>
 <id>13</id>
