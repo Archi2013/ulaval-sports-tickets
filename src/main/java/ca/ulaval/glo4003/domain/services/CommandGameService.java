@@ -29,7 +29,6 @@ public class CommandGameService {
 			GameDoesntExistException, GameAlreadyExistException, SportDoesntExistInPropertiesFileException {
 
 		String domainSportName = sportUrlMapper.getSportName(sportName);
-		System.out.println("Nom du sport dans le service: " + domainSportName);
 		Game game = gameRepository.createNewGameInRepository(opponent, date);
 		Sport sport = sportRepository.getSportByName(domainSportName);
 

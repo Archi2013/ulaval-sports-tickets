@@ -3,11 +3,13 @@ package ca.ulaval.glo4003.persistence.daos.fakes;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import ca.ulaval.glo4003.domain.dtos.UserDto;
 import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
 
-//@Repository
+@Repository
 public class FakeDataUserDao implements UserDao {
 
 	private List<UserDto> userList;

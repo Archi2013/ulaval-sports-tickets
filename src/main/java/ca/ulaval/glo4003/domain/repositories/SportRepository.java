@@ -32,18 +32,11 @@ public class SportRepository implements ISportRepository {
 
 	@Override
 	public Sport getSportByName(String sportName) throws SportDoesntExistException {
-		System.out.println("Nom du sport passe au sportRepo:" + sportName);
 		SportDto dto = sportDao.get(sportName);
-		System.out.println("Nom du sport obtenu par le sportDao" + dto.getName());
-
 		List<Game> gameList = gameRepository.getGamesScheduledForSport(sportName);
-
-		System.out.println("Nom du sport apres avoir ete cherche les games: " + dto.getName());
-
 		PersistableSport sport = sportFactory.instantiateSport(dto.getName(), gameList);
 
 		activeSports.add(sport);
-
 		return sport;
 	}
 
