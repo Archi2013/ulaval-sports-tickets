@@ -8,11 +8,14 @@ import java.util.Map;
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.springframework.stereotype.Repository;
+
 import ca.ulaval.glo4003.domain.dtos.UserDto;
 import ca.ulaval.glo4003.domain.utilities.UserAlreadyExistException;
 import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
 
+@Repository
 public class XmlUserDao implements UserDao {
 
 	private static final String USERS_XPATH = "/base/users";
@@ -65,7 +68,12 @@ public class XmlUserDao implements UserDao {
 
 	@Override
 	public boolean doesUserExist(String name) {
-		// TODO Auto-generated method stub
+		List<UserDto> users = getAll();
+		for (UserDto user : users) {
+			if (user.getUsername() == name) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -91,7 +99,8 @@ public class XmlUserDao implements UserDao {
 		throw new UserDoesntExistException();
 	}
 
-	private List<UserDto> convertNodesToUsers(List<SimpleNode> nodes) throws NoSuchAttributeException, UserDoesntExistException {
+	private List<UserDto> convertNodesToUsers(List<SimpleNode> nodes) throws NoSuchAttributeException,
+			UserDoesntExistException {
 		List<UserDto> users = new ArrayList<>();
 		for (SimpleNode node : nodes) {
 			users.add(convertNodeToUser(node));
