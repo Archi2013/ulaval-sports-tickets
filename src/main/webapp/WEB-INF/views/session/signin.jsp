@@ -10,7 +10,7 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <h2> Se connecté! </h2>
+    <h2> Se connecter ! </h2>
     <form action="/session/auth" method="post">  
 		<%@ include file="../session/authForm.jsp" %>
 	</form> 

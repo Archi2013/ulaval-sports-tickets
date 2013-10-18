@@ -10,10 +10,10 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <h2> Vous êtes déconnecté!</h2>
+    <h2> Vous êtes déconnecté !</h2>
     <nav>
         <ul>
-            <li><a href="/">Retourner à l'acceuil ▷</a></li>
+            <li><a href="/">Retourner à l'accueil ▷</a></li>
             <li><a href="/session/signin">Se reconnecter ▷</a></li>
         </ul>
     </nav>

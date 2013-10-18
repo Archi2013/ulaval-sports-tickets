@@ -12,7 +12,7 @@
     
     <h2> Essaie encore! </h2>
     <form action="/session/save" method="post"> 
-  		<div class="information-block-error-skin margin-25-50"> Le nom d'utilisateur est déjà pris!. </div>
+  		<div class="information-block-error-skin margin-25-50"> Le nom d'utilisateur est déjà pris !. </div>
 		<%@ include file="../session/authForm.jsp" %>
 	</form>  
       

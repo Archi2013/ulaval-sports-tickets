@@ -10,12 +10,12 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <h2> Vous êtes connecté ${user.username}!</h2>
+    <h2> Vous êtes connecté ${user.username} !</h2>
 
     <nav>
         <ul>
-            <li><a href="/">Retourner à l'acceuil ▷</a></li>
-            <li><a href="/session/logout">Se deconnecter ▷</a></li>
+            <li><a href="/">Retourner à l'accueil ▷</a></li>
+            <li><a href="/session/logout">Se déconnecter ▷</a></li>
         </ul>
     </nav>
 
