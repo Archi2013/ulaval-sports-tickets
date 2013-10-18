@@ -10,9 +10,10 @@ import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
 
 @Repository
 public interface UserDao {
-	public List<UserDto> getAllUser();
-	public UserDto getUser(String name) throws UserDoesntExistException;
-	public void addUser(String name, String password) throws UserAlreadyExistException;
+	
+	public List<UserDto> getAll();
+	public UserDto get(String name) throws UserDoesntExistException;
+	public void add(String name, String password) throws UserAlreadyExistException;
 	public boolean doesUserExist(String name);
 }
 

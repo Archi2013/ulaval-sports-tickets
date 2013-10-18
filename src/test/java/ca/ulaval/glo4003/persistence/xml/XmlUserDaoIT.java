@@ -21,13 +21,13 @@ public class XmlUserDaoIT {
 	@Test
 	public void testGet() throws Exception {
 		String userName = "Robert Trebob";
-		UserDto user = userDao.getUser(userName);
+		UserDto user = userDao.get(userName);
 		Assert.assertEquals(userName, user.getUsername());
 	}
 	
 	@Test
 	public void testGetAll() throws Exception {
-		List<UserDto> users = userDao.getAllUser();
+		List<UserDto> users = userDao.getAll();
 		
 		UserDto expected0 = new UserDto("Robert Trebob", "try5yrth");
 		UserDto expected1 = new UserDto("Bobby Ybbob", "435gdfg");
@@ -39,16 +39,16 @@ public class XmlUserDaoIT {
 	
 	@Test(expected=UserDoesntExistException.class)
 	public void testGetInvalidUserShouldThrow() throws Exception {
-		userDao.getUser("Jimmy Ymmij");
+		userDao.get("Jimmy Ymmij");
 	}
 	
 	@Test
 	public void testAddDto() throws Exception {
 		UserDto toAdd = new UserDto("Herry Yrreh", "jhkvcbd");
 		
-		userDao.addUser(toAdd.getUsername(), toAdd.getPassword());
+		userDao.add(toAdd.getUsername(), toAdd.getPassword());
 		
-		List<UserDto> users = userDao.getAllUser();
+		List<UserDto> users = userDao.getAll();
 		Assert.assertEquals(3, users.size());
 		assertUser(toAdd, users.get(2));
 	}
@@ -57,7 +57,7 @@ public class XmlUserDaoIT {
 	public void testAddExistingShouldThrow() throws Exception {
 		UserDto toAdd = new UserDto("Robert Trebob", "try5yrth");
 		
-		userDao.addUser(toAdd.getUsername(), toAdd.getPassword());
+		userDao.add(toAdd.getUsername(), toAdd.getPassword());
 	}
 	
 	private void assertUser(UserDto expected, UserDto actual) {

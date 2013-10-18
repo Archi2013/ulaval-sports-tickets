@@ -30,7 +30,7 @@ public class XmlUserDao implements UserDao {
 	}
 
 	@Override
-	public List<UserDto> getAllUser() {
+	public List<UserDto> getAll() {
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(USER_XPATH);
 			return convertNodesToUsers(nodes);
@@ -40,7 +40,7 @@ public class XmlUserDao implements UserDao {
 	}
 
 	@Override
-	public UserDto getUser(String name) throws UserDoesntExistException {
+	public UserDto get(String name) throws UserDoesntExistException {
 		String xPath = String.format(USER_XPATH_ID, name);
 		try {
 			SimpleNode node = database.extractNode(xPath);
@@ -51,7 +51,7 @@ public class XmlUserDao implements UserDao {
 	}
 
 	@Override
-	public void addUser(String name, String password) throws UserAlreadyExistException {
+	public void add(String name, String password) throws UserAlreadyExistException {
 		UserDto user = new UserDto(name, password);
 		if (isIdExist(user.getUsername())) {
 			throw new UserAlreadyExistException();

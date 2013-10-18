@@ -43,7 +43,7 @@ public class UserServiceTest {
 		
 		userService.signUp(VALID_USER, VALID_PASSWORD);
 		
-		verify(userDao).addUser(VALID_USER, VALID_PASSWORD);
+		verify(userDao).add(VALID_USER, VALID_PASSWORD);
 	}
 	
 	@Test(expected=UserAlreadyExistException.class)
@@ -58,7 +58,7 @@ public class UserServiceTest {
 	UsernameAndPasswordDoesntMatchException {
 		UserDto userDto = new UserDto(VALID_USER,VALID_PASSWORD);
 		UserViewModel userViewModel = new UserViewModel(VALID_USER,VALID_PASSWORD);
-		when(userDao.getUser(VALID_USER)).thenReturn(userDto);
+		when(userDao.get(VALID_USER)).thenReturn(userDto);
 		when(userViewModelFactory.createViewModel(userDto)).thenReturn(userViewModel);
 		
 		UserViewModel userViewModelCompared = userService.signIn(VALID_USER,VALID_PASSWORD);
@@ -71,7 +71,7 @@ public class UserServiceTest {
 			throws UserDoesntExistException,UsernameAndPasswordDoesntMatchException {
 		UserDto userDto = new UserDto(VALID_USER,VALID_PASSWORD);
 		UserViewModel userViewModel = new UserViewModel(VALID_USER,VALID_PASSWORD);
-		when(userDao.getUser(VALID_USER)).thenReturn(userDto);
+		when(userDao.get(VALID_USER)).thenReturn(userDto);
 		when(userViewModelFactory.createViewModel(userDto)).thenReturn(userViewModel);
 		
 		userService.signIn(VALID_USER,INVALID_PASSWORD);
@@ -81,7 +81,7 @@ public class UserServiceTest {
 	@Test(expected=UserDoesntExistException.class)
 	public void signIn_should_get_UserDoesntExistException_error_when_user_dont_exist() throws UserDoesntExistException,
 	UsernameAndPasswordDoesntMatchException {
-		when(userDao.getUser(INVALID_USER)).thenThrow(UserDoesntExistException.class);
+		when(userDao.get(INVALID_USER)).thenThrow(UserDoesntExistException.class);
 		
 		userService.signIn(INVALID_USER,INVALID_PASSWORD);
 	}

@@ -38,7 +38,7 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	@Override
-	public TicketDto getTicket(int ticketId) throws TicketDoesntExistException {
+	public TicketDto get(int ticketId) throws TicketDoesntExistException {
 		String xPath = String.format(TICKET_XPATH_ID, ticketId);
 		try {
 			SimpleNode node = database.extractNode(xPath);

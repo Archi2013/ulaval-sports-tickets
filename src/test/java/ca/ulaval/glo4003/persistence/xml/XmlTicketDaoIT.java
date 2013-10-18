@@ -23,7 +23,7 @@ public class XmlTicketDaoIT {
 	
 	@Test
 	public void testGetTicket() throws Exception {
-		TicketDto actual = ticketDao.getTicket(1);
+		TicketDto actual = ticketDao.get(1);
 		
 		TicketDto expected = new TicketDto(1, 1, 35.00f, "VIP", "Front Row");
 		assertTicket(expected, actual);
@@ -31,7 +31,7 @@ public class XmlTicketDaoIT {
 	
 	@Test(expected=TicketDoesntExistException.class)
 	public void testGetInvalidGameSectionShouldThrow() throws Exception {
-		ticketDao.getTicket(-1);
+		ticketDao.get(-1);
 	}
 	
 	@Test
@@ -86,7 +86,7 @@ public class XmlTicketDaoIT {
 		
 		ticketDao.add(toAdd);
 		
-		TicketDto actual = ticketDao.getTicket(1000);
+		TicketDto actual = ticketDao.get(1000);
 		TicketDto expected = toAdd;
 		
 		assertTicket(expected, actual);

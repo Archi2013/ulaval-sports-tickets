@@ -16,17 +16,17 @@ public class FakeDataUserDao implements UserDao {
 
 	public FakeDataUserDao() {
 		this.userList = new ArrayList<UserDto>();
-		addUser("marco", "1234");
-		addUser("math", "4321");
+		add("marco", "1234");
+		add("math", "4321");
 	}
 
 	@Override
-	public List<UserDto> getAllUser() {
+	public List<UserDto> getAll() {
 		return this.userList;
 	}
 
 	@Override
-	public UserDto getUser(String name) throws UserDoesntExistException {
+	public UserDto get(String name) throws UserDoesntExistException {
 
 		for (UserDto user : this.userList) {
 			if (name.equals(user.getUsername())) {
@@ -37,7 +37,7 @@ public class FakeDataUserDao implements UserDao {
 	}
 
 	@Override
-	public void addUser(String name, String password) {
+	public void add(String name, String password) {
 		if (!(doesUserExist(name)))
 			this.userList.add(new UserDto(name, password));
 	}

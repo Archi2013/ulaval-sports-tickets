@@ -38,7 +38,7 @@ public class UserService {
 	public void signUp(String username, String password) throws UserAlreadyExistException {
 
 		if (!(userDao.doesUserExist(username)))
-			userDao.addUser(username, password);
+			userDao.add(username, password);
 		else
 			throw new UserAlreadyExistException();
 	}
@@ -47,7 +47,7 @@ public class UserService {
 			throws UserDoesntExistException,
 			UsernameAndPasswordDoesntMatchException {
 
-		UserDto user = userDao.getUser(username);
+		UserDto user = userDao.get(username);
 		if (user.getPassword().equals(password)) {
 			setCurrentUser(user);
 			UserViewModel userViewModel = userViewModelFactory.createViewModel(user);
