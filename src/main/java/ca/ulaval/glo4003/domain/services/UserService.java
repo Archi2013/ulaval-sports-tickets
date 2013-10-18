@@ -36,11 +36,15 @@ public class UserService {
 	}
 
 	public void signUp(String username, String password) throws UserAlreadyExistException {
-
+		
 		if (!(userDao.doesUserExist(username)))
-			userDao.add(username, password);
+			userDao.add(makeUser(username, password));
 		else
 			throw new UserAlreadyExistException();
+	}
+	
+	UserDto makeUser(String username, String password) {
+		return new UserDto(username, password);
 	}
 
 	public UserViewModel signIn(String username, String password)

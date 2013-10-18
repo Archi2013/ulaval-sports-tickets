@@ -51,8 +51,7 @@ public class XmlUserDao implements UserDao {
 	}
 
 	@Override
-	public void add(String name, String password) throws UserAlreadyExistException {
-		UserDto user = new UserDto(name, password);
+	public void add(UserDto user) throws UserAlreadyExistException {
 		if (isIdExist(user.getUsername())) {
 			throw new UserAlreadyExistException();
 		}

@@ -13,7 +13,7 @@ public interface UserDao {
 	
 	public List<UserDto> getAll();
 	public UserDto get(String name) throws UserDoesntExistException;
-	public void add(String name, String password) throws UserAlreadyExistException;
+	public void add(UserDto user) throws UserAlreadyExistException;
 	public boolean doesUserExist(String name);
 }
 
