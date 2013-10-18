@@ -53,7 +53,7 @@ public class AdministrationController {
 		} catch (SportDoesntExistException | GameDoesntExistException | GameAlreadyExistException
 				| SportDoesntExistInPropertiesFileException e) {
 			e.printStackTrace();
-			return "game-added-dataError";
+			return "admin/game-added-data-error";
 		}
 
 		return "admin/game-added";
