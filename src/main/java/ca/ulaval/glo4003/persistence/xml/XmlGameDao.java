@@ -64,7 +64,7 @@ public class XmlGameDao implements GameDao {
 
 	@Override
 	public void add(GameDto game) throws GameAlreadyExistException {
-		if (isIdExist(game.getId())) {
+		if (game.getId() != null && isIdExist(game.getId())) {
 			throw new GameAlreadyExistException();
 		}
 		try {
