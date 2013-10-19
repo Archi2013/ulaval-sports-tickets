@@ -30,7 +30,7 @@ public class XmlExtractorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		String xml = "<Magasin><Items><Item><Nom>Chemise</Nom><Prix>9,99</Prix></Item><Item><Nom>Chapeau</Nom><Prix>4,99</Prix></Item></Items></Magasin>";
+		String xml = "<Magasin><Items><Item><id>1</id><Nom>Chemise</Nom><Prix>9,99</Prix></Item><Item><id>2</id><Nom>Chapeau</Nom><Prix>4,99</Prix></Item></Items></Magasin>";
 		InputStream stream = new ByteArrayInputStream(xml.getBytes("UTF-8"));
 		extractor = new XmlExtractor(stream);
 	}
@@ -101,6 +101,14 @@ public class XmlExtractorTest {
 	public void testNodeExistWithMissingEntry() throws Exception {
 		boolean result = extractor.isNodeExist(PANTALON_XPATH);
 		Assert.assertFalse(result);
+	}
+	
+	@Test
+	public void testMaxValue() throws Exception {
+		int actual = extractor.max(ITEM_XPATH, "id");
+		int expected = 2;
+		
+		Assert.assertEquals(expected, actual);
 	}
 	
 	private SimpleNode initSimpleNode() {

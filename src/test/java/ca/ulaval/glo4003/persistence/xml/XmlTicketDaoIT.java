@@ -36,7 +36,7 @@ public class XmlTicketDaoIT {
 	
 	@Test
 	public void testGetTicketsForGame() throws Exception {
-		List<TicketDto> tickets = ticketDao.getTicketsForGame(2);
+		List<TicketDto> tickets = ticketDao.getTicketsForGame(2L);
 		
 		TicketDto expected0 = new TicketDto(2, 3, 35.00f, "VIP", "Front Row");
 		TicketDto expected1 = new TicketDto(2, 4, 35.00f, "VIP", "Front Row");
@@ -57,7 +57,7 @@ public class XmlTicketDaoIT {
 	
 	@Test(expected=GameDoesntExistException.class)
 	public void testGetTicketsForInvalidGameShouldThrow() throws Exception {
-		ticketDao.getTicketsForGame(-1);
+		ticketDao.getTicketsForGame(-1L);
 	}
 	
 	@Test

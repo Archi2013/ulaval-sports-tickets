@@ -7,8 +7,8 @@ import ca.ulaval.glo4003.domain.pojos.Game;
 
 public class PersistableGame implements Game, Persistable<GameDto> {
 	public static final String NO_SPORT_SET = "The sport has not yet been set in this new game";
-	public static final long DEFAULT_ID = -1;
-	private long id;
+	public static final Long DEFAULT_ID = null;
+	private Long id;
 	private String opponents;
 	private DateTime gameDate;
 	private String sportName;

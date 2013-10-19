@@ -39,11 +39,11 @@ public class XmlGameDaoIT {
 
 	@Test
 	public void testAddDto() throws Exception {
-		GameDto toAdd = new GameDto(4, "Vert et Or", SOME_DATE, "Hockey-Masculin");
+		GameDto toAdd = new GameDto(43, "Vert et Or", SOME_DATE, "Hockey-Masculin");
 
 		gameDao.add(toAdd);
 
-		GameDto actual = gameDao.get(4);
+		GameDto actual = gameDao.get(43);
 		GameDto expected = toAdd;
 
 		assertGame(expected, actual);

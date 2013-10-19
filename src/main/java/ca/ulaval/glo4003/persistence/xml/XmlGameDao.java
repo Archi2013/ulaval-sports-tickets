@@ -67,12 +67,16 @@ public class XmlGameDao implements GameDao {
 		if (isIdExist(game.getId())) {
 			throw new GameAlreadyExistException();
 		}
-		SimpleNode simpleNode = convertGameToNode(game);
 		try {
+			SimpleNode simpleNode = convertGameToNode(game);
 			database.addNode(GAMES_XPATH, simpleNode);
 		} catch (XPathExpressionException e) {
 			throw new XmlIntegrityException(e);
 		}
+	}
+	
+	synchronized private long getNextId() throws XPathExpressionException {
+		return (long)database.getMaxValue(GAME_XPATH, "id") + 1;
 	}
 
 	private boolean isIdExist(long id) {
@@ -80,9 +84,9 @@ public class XmlGameDao implements GameDao {
 		return database.exist(xPath);
 	}
 
-	private SimpleNode convertGameToNode(GameDto game) {
+	private SimpleNode convertGameToNode(GameDto game) throws XPathExpressionException {
 		Map<String, String> nodes = new HashMap<>();
-		nodes.put("id", Long.toString(game.getId()));
+		nodes.put("id", Long.toString(getNextId()));
 		nodes.put("oponents", game.getOpponents());
 		nodes.put("date", game.getGameDate().toString(DATE_PATTERN));
 		nodes.put("sportName", game.getSportName());
