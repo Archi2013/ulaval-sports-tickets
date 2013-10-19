@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
@@ -27,6 +28,8 @@ public class XmlGameDao implements GameDao {
 	private static final String GAME_XPATH = GAMES_XPATH + "/game";
 	private static final String GAME_XPATH_ID = GAME_XPATH + "[id=\"%d\"]";
 	private static final String GAME_XPATH_SPORT_NAME = GAME_XPATH + "[sportName=\"%s\"]";
+	
+	private static AtomicLong nextId;
 
 	// @Inject
 	private XmlDatabase database;
@@ -76,7 +79,11 @@ public class XmlGameDao implements GameDao {
 	}
 	
 	synchronized private long getNextId() throws XPathExpressionException {
-		return (long)database.getMaxValue(GAME_XPATH, "id") + 1;
+		if (nextId == null) {
+			long next = (long)database.getMaxValue(GAME_XPATH, "id");
+			nextId = new AtomicLong(next);
+		}
+		return nextId.incrementAndGet();
 	}
 
 	private boolean isIdExist(long id) {
