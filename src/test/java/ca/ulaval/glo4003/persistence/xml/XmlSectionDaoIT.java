@@ -31,7 +31,7 @@ public class XmlSectionDaoIT {
 		List<SectionDto> sections = sectionDao.getAll(1);
 		
 		SectionDto expected0 = new SectionDto("VIP", "Front Row", 2, 35.00f);
-		SectionDto expected1 = new SectionDto("Général", "Général", 2, 15.50f);
+		SectionDto expected1 = new SectionDto("Générale", "Générale", 2, 15.50f);
 		SectionDto expected2 = new SectionDto("VIP", "Rouges", 5, 20.00f);
 		
 		Assert.assertEquals(3, sections.size());
@@ -43,7 +43,7 @@ public class XmlSectionDaoIT {
 	
 	@Test(expected=SectionDoesntExistException.class)
 	public void testGetInvalidGameSectionShouldThrow() throws Exception {
-		sectionDao.get(-1, "Général");
+		sectionDao.get(-1, "Générale");
 	}
 	
 	@Test(expected=SectionDoesntExistException.class)

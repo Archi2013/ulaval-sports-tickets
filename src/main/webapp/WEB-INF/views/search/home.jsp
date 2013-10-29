@@ -38,7 +38,7 @@
         --><div class="search-criterion">
             <h4 class="search-criterion-title">Type de billet</h4>
             <div class="search-criterion-elements">
-                <input type="checkbox" name="general-admission" id="general-admission"/> <label for="general-admission">admission générale</label><br>
+                <input type="checkbox" name="general-admission" id="general-admission"/> <label for="general-admission">admission Généralee</label><br>
                 <input type="checkbox" name="seat-admission" id="seat-admission"/> <label for="seat-admission">avec siège</label>
             </div>
         </div>
@@ -75,8 +75,8 @@
                         <td>Volleyball Féminin</td>
                         <td>Radiants</td>
                         <td>10/11/2013 à 14h30 EST</td>
-                        <td>Général</td>
-                        <td>Général</td>
+                        <td>Générale</td>
+                        <td>Générale</td>
                         <td>2</td>
                         <td>15,5</td>
                         <td><a href="/sport/volleyball-feminin/match/1/billets/general-general" class="standard-button-round orange-button">Consulter</a></td>
