@@ -14,7 +14,7 @@
     <h2>${pageTitle}</h2>
     
     <div>
-        <table>
+        <table class="margin-25">
             <thead>
                 <tr>
                     <th>Identifiant</th>

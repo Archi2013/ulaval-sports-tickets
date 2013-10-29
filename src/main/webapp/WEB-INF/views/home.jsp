@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,7 +12,9 @@
 <body>
     <%@include file="layout/header.jsp" %>
 
-    <h2>Bienvenue : ${user.username}</h2>
+    <c:if test="${fn:length(user.username) > 0}">
+        <h2>Bienvenue : ${user.username}</h2>
+    </c:if>
     
     <nav>
         <ul>

@@ -205,8 +205,6 @@ a, a:visited {
 }
 
 table {
-    margin: 25px;
-    
     thead tr {
         border-bottom: 4px solid @standard-blue-gray-color;
     }
@@ -437,4 +435,62 @@ footer {
         padding-right: 5px;
         padding-left: 5px;
     }
+}
+
+.search-left-block {
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+    
+    background: lighten(@standard-blue-gray-color, 55%);
+    
+    .search-criterion {
+        .inline-block(top);
+        width: 25%;
+    }
+    
+    .search-criterion-title {
+        font-family: "Lato", sans-serif;
+        font-size: 1.5em;
+        font-weight: 400;
+        color: white;
+        
+        padding: 5px 10px;
+    }
+    
+    .search-criterion:nth-child(2n+1) .search-criterion-title {
+        background-color: lighten(@standard-blue-gray-color, 20%);
+    }
+    
+    .search-criterion:nth-child(2n) .search-criterion-title {
+        background-color: lighten(@standard-blue-gray-color, 25%);
+    }
+    
+    .search-criterion-elements {
+        font-size: 1.3em;
+        line-height: 1.7em;
+        
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .search-criterion:nth-child(2n+1) .search-criterion-title {
+        background-color: lighten(@standard-blue-gray-color, 20%);
+    }
+    
+    .search-criterion:nth-child(2n) .search-criterion-title {
+        background-color: lighten(@standard-blue-gray-color, 25%);
+    }
+    
+    input[type=date] {
+        font-size: 1em;
+        line-height: 1em;
+        font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+        
+        background-color: lighten(@standard-blue-gray-color, 55%);
+        border: 2px solid white;
+    }
+}
+
+.search-right-block {
 }
