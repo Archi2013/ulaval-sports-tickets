@@ -68,13 +68,7 @@ public class XmlUserDao implements UserDao {
 
 	@Override
 	public boolean doesUserExist(String name) {
-		List<UserDto> users = getAll();
-		for (UserDto user : users) {
-			if (user.getUsername() == name) {
-				return true;
-			}
-		}
-		return false;
+		return isIdExist(name);
 	}
 
 	private boolean isIdExist(String id) {

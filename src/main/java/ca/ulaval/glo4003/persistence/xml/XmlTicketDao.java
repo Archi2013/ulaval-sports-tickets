@@ -49,7 +49,7 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	@Override
-	public List<TicketDto> getTicketsForGame(int gameID) throws GameDoesntExistException {
+	public List<TicketDto> getTicketsForGame(Long gameID) throws GameDoesntExistException {
 		String xPath = String.format(TICKET_XPATH_GAME_ID, gameID);
 
 		try {

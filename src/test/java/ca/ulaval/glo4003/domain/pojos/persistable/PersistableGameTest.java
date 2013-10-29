@@ -11,7 +11,7 @@ import ca.ulaval.glo4003.domain.dtos.GameDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersistableGameTest {
-	private static final long AN_ID = 0;
+	private static final Long AN_ID = 0L;
 	private static final String AN_OPPONENT = "Opponent";
 	private static final DateTime A_DATE = new DateTime(100);
 	private static final String A_SPORT = "sport";

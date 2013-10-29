@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
@@ -27,6 +28,8 @@ public class XmlGameDao implements GameDao {
 	private static final String GAME_XPATH = GAMES_XPATH + "/game";
 	private static final String GAME_XPATH_ID = GAME_XPATH + "[id=\"%d\"]";
 	private static final String GAME_XPATH_SPORT_NAME = GAME_XPATH + "[sportName=\"%s\"]";
+	
+	private static AtomicLong nextId;
 
 	// @Inject
 	private XmlDatabase database;
@@ -64,15 +67,23 @@ public class XmlGameDao implements GameDao {
 
 	@Override
 	public void add(GameDto game) throws GameAlreadyExistException {
-		if (isIdExist(game.getId())) {
+		if (game.getId() != null && isIdExist(game.getId())) {
 			throw new GameAlreadyExistException();
 		}
-		SimpleNode simpleNode = convertGameToNode(game);
 		try {
+			SimpleNode simpleNode = convertGameToNode(game);
 			database.addNode(GAMES_XPATH, simpleNode);
 		} catch (XPathExpressionException e) {
 			throw new XmlIntegrityException(e);
 		}
+	}
+	
+	synchronized private long getNextId() throws XPathExpressionException {
+		if (nextId == null) {
+			long next = (long)database.getMaxValue(GAME_XPATH, "id");
+			nextId = new AtomicLong(next);
+		}
+		return nextId.incrementAndGet();
 	}
 
 	private boolean isIdExist(long id) {
@@ -80,9 +91,9 @@ public class XmlGameDao implements GameDao {
 		return database.exist(xPath);
 	}
 
-	private SimpleNode convertGameToNode(GameDto game) {
+	private SimpleNode convertGameToNode(GameDto game) throws XPathExpressionException {
 		Map<String, String> nodes = new HashMap<>();
-		nodes.put("id", Long.toString(game.getId()));
+		nodes.put("id", Long.toString(getNextId()));
 		nodes.put("oponents", game.getOpponents());
 		nodes.put("date", game.getGameDate().toString(DATE_PATTERN));
 		nodes.put("sportName", game.getSportName());

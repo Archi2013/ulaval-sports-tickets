@@ -68,6 +68,10 @@ public class XmlDatabase {
 	public int countNode(String xPath) throws XPathExpressionException {
 		return extractor.count(xPath);
 	}
+	
+	public int getMaxValue(String baseXPath, String idName) throws XPathExpressionException {
+		return extractor.max(baseXPath, idName);
+	}
 
 	public boolean exist(String xPath) {
 		return extractor.isNodeExist(xPath);

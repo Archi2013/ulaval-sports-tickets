@@ -2,9 +2,6 @@ package ca.ulaval.glo4003.web.controllers;
 
 import javax.inject.Inject;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.CommandGameService;
+import ca.ulaval.glo4003.domain.utilities.DateParser;
 import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
@@ -28,6 +26,9 @@ public class AdministrationController {
 
 	@Inject
 	private CommandGameService gameService;
+
+	@Inject
+	private DateParser dateParser;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home() {
@@ -49,7 +50,7 @@ public class AdministrationController {
 
 		try {
 			gameService.createNewGame(gameToAddVM.getSport(), gameToAddVM.getOpponents(),
-					parseDate(gameToAddVM.getDate()));
+					dateParser.parseDate(gameToAddVM.getDate()));
 		} catch (SportDoesntExistException | GameDoesntExistException | GameAlreadyExistException
 				| SportDoesntExistInPropertiesFileException e) {
 			e.printStackTrace();
@@ -57,10 +58,5 @@ public class AdministrationController {
 		}
 
 		return "admin/game-added";
-	}
-
-	private DateTime parseDate(String date) {
-		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd");
-		return DateTime.parse(date, format);
 	}
 }
