@@ -44,7 +44,7 @@
         </div>
     </section>
     <section class="search-right-block">
-        <table class="margin-25">
+        <table class="standard-table margin-25">
             <thead>
                 <tr>
                     <th>Sport</th>
@@ -62,7 +62,7 @@
                     <tr>
                         <td>Volleyball Féminin</td>
                         <td>Radiants</td>
-                        <td>10.11.2013 à 14h30 EDT</td>
+                        <td>10/11/2013 à 14h30 EST</td>
                         <td>VIP</td>
                         <td>Front Row</td>
                         <td>2</td>
@@ -74,7 +74,7 @@
                     <tr>
                         <td>Volleyball Féminin</td>
                         <td>Radiants</td>
-                        <td>10.11.2013 à 14h30 EDT</td>
+                        <td>10/11/2013 à 14h30 EST</td>
                         <td>Général</td>
                         <td>Général</td>
                         <td>2</td>
@@ -86,7 +86,7 @@
                     <tr>
                         <td>Basketball Masculin</td>
                         <td>Endormis</td>
-                        <td>10.11.2013 à 15h30 EDT</td>
+                        <td>10/11/2013 à 15h30 EST</td>
                         <td>VIP</td>
                         <td>Rouges</td>
                         <td>5</td>
