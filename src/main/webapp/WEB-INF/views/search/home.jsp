@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -14,34 +15,34 @@
     <h2>${pageTitle}</h2>
     
     <section class="search-left-block">
-        <div class="search-criterion">
-            <h4 class="search-criterion-title">Sport(s)</h4>
-            <div class="search-criterion-elements">
-                <input type="checkbox" name="soccer-masculin" id="soccer-masculin"/> <label for="soccer-masculin">Soccer Masculin</label><br />
-                <input type="checkbox" name="volleyball-feminin" id="volleyball-feminin"/> <label for="volleyball-feminin">Volleyball Féminin</label><br />
-                <input type="checkbox" name="basketball-masculin" id="basketball-masculin"/> <label for="basketball-masculin">Basketball Masculin</label>
+        <c:url value="/recherche/execution" var="searchAction"/>
+        <form:form commandName="ticketSearchForm" action="${searchAction}" method="POST">
+            <div class="search-criterion">
+                <h4 class="search-criterion-title">Sport(s)</h4>
+                <div class="search-criterion-elements">
+                    <form:checkboxes delimiter="<br>" items="${sportsList}" path="selectedSports" />
+                </div>
+            </div><!-- important supprime espace blanc
+            --><div class="search-criterion">
+                <h4 class="search-criterion-title">Période affichée</h4>
+                <div class="search-criterion-elements">
+                    <form:radiobuttons delimiter="<br>" items="${displayedPeriods}" path="displayedPeriod" />
+                </div>
+            </div><!-- important supprime espace blanc
+            --><div class="search-criterion">
+                <h4 class="search-criterion-title">Localisation</h4>
+                <div class="search-criterion-elements">
+                    <form:checkbox path="localGame"/>à domicile
+                </div>
+            </div><!-- important supprime espace blanc
+            --><div class="search-criterion">
+                <h4 class="search-criterion-title">Type de billet</h4>
+                <div class="search-criterion-elements">
+                    <form:checkboxes delimiter="<br>" items="${ticketTypes}" path="selectedTicketTypes" />
+                </div>
             </div>
-        </div><!-- important supprime espace blanc
-        --><div class="search-criterion">
-            <h4 class="search-criterion-title">Période</h4>
-            <div class="search-criterion-elements">
-                <label for="start-date">Date de début :</label> <input type="date" id="start-date" name="start-date" value="2013-01-01" size="11"/><br>
-                <label for="end-date">Date de fin :</label> <input type="date" id="end-date" name="end-date" value="2014-01-01" size="11"/>
-            </div>
-        </div><!-- important supprime espace blanc
-        --><div class="search-criterion">
-            <h4 class="search-criterion-title">Localisation</h4>
-            <div class="search-criterion-elements">
-                <input type="checkbox" name="local-game" id="local-game"/> <label for="local-game">match à domicile</label>
-            </div>
-        </div><!-- important supprime espace blanc
-        --><div class="search-criterion">
-            <h4 class="search-criterion-title">Type de billet</h4>
-            <div class="search-criterion-elements">
-                <input type="checkbox" name="general-admission" id="general-admission"/> <label for="general-admission">admission Généralee</label><br>
-                <input type="checkbox" name="seat-admission" id="seat-admission"/> <label for="seat-admission">avec siège</label>
-            </div>
-        </div>
+            <input type="submit" class="standard-button-rounded-border orange-button" value="Rechercher" />
+        </form:form>
     </section>
     <section class="search-right-block">
         <table class="standard-table margin-25">
