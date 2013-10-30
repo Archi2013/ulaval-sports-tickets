@@ -14,37 +14,36 @@
     
     <h2>${pageTitle}</h2>
     
-    <section class="search-left-block">
+    <section class="search-block">
         <c:url value="/recherche/execution" var="searchAction"/>
-        <form:form commandName="ticketSearchForm" action="${searchAction}" method="POST">
+        <form:form id="search-form" commandName="ticketSearchForm" action="${searchAction}" method="POST">
             <div class="search-criterion">
                 <h4 class="search-criterion-title">Sport(s)</h4>
                 <div class="search-criterion-elements">
-                    <form:checkboxes delimiter="<br>" items="${sportsList}" path="selectedSports" />
+                    <form:checkboxes delimiter="<br>" items="${sportsList}" path="selectedSports" onclick="doAjaxPost();"/>
                 </div>
             </div><!-- important supprime espace blanc
             --><div class="search-criterion">
                 <h4 class="search-criterion-title">Période affichée</h4>
                 <div class="search-criterion-elements">
-                    <form:radiobuttons delimiter="<br>" items="${displayedPeriods}" path="displayedPeriod" />
+                    <form:radiobuttons delimiter="<br>" items="${displayedPeriods}" path="displayedPeriod" onchange="doAjaxPost();"/>
                 </div>
             </div><!-- important supprime espace blanc
             --><div class="search-criterion">
                 <h4 class="search-criterion-title">Localisation</h4>
                 <div class="search-criterion-elements">
-                    <form:checkbox path="localGame"/>à domicile
+                    <form:checkbox path="localGame" onclick="doAjaxPost();" id="localGame"/><form:label path="localGame">à domicile</form:label>
                 </div>
             </div><!-- important supprime espace blanc
             --><div class="search-criterion">
                 <h4 class="search-criterion-title">Type de billet</h4>
                 <div class="search-criterion-elements">
-                    <form:checkboxes delimiter="<br>" items="${ticketTypes}" path="selectedTicketTypes" />
+                    <form:checkboxes delimiter="<br>" items="${ticketTypes}" path="selectedTicketTypes" onclick="doAjaxPost();"/>
                 </div>
             </div>
-            <input type="submit" class="standard-button-rounded-border orange-button" value="Rechercher" />
         </form:form>
     </section>
-    <section class="search-right-block">
+    <section id="ajax-table">
         <table class="standard-table margin-25">
             <thead>
                 <tr>
@@ -99,6 +98,22 @@
             </tbody>
         </table>
     </section>
+    
+    <%@include file="../utility/javascript-import.jsp" %>
+	<script type="text/javascript">
+	    function doAjaxPost() {
+	    	var str = $("#search-form").serialize();
+	        $.ajax({
+	            type: "POST",
+	            data: str,
+	            url: "/recherche/list",
+	            success: function(response) {
+	                $("#ajax-table").html(response);
+	            }
+	        });
+	    }
+	</script>
+	<input type="button" value="GO!" onclick="doAjaxPost();" />
     
     <%@include file="../layout/footer.jsp" %>
 </body>

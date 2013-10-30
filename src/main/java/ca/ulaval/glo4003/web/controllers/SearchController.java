@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
+import ca.ulaval.glo4003.web.viewmodels.TicketToSearchViewModel;
 
 @Controller
 @RequestMapping(value = "/recherche", method = RequestMethod.GET)
@@ -25,6 +26,8 @@ public class SearchController {
 	
 	@Inject
 	SportDao sportDao;
+	
+	private int counter = 0;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home() {
@@ -47,8 +50,38 @@ public class SearchController {
 		return mav;
 	}
 	
+	@RequestMapping(value="list", method=RequestMethod.POST)
+    public ModelAndView getTemp(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM, Model model) {
+		logger.info("Search : search tickets");
+
+		ModelAndView mav = new ModelAndView("search/list");
+		
+		TicketToSearchViewModel t1 = new TicketToSearchViewModel("Baseball Masculin", "Radiants", "15/11/2013 à 16h45",
+				"Générale", "Générale", new Integer(3), "16,95");
+		TicketToSearchViewModel t2 = new TicketToSearchViewModel("Soccer Masculin", "Endormis", "16/11/2013 à 20h45",
+				"Générale", "Générale", new Integer(22), "23,95");
+		TicketToSearchViewModel t3 = new TicketToSearchViewModel("Volleyball Féminin", "Kira", "17/11/2013 à 10h30",
+				"VIP", "Orange", new Integer(4), "16,95");
+		TicketToSearchViewModel t4 = new TicketToSearchViewModel("Volleyball Féminin", "Kira", "17/11/2013 à 10h30",
+				"VIP", "Rouge", new Integer(4), "17,95");
+		List<TicketToSearchViewModel> tickets = new ArrayList<>();
+		tickets.add(t1);
+		tickets.add(t2);
+		tickets.add(t3);
+		tickets.add(t4);
+		
+		mav.addObject("tickets", tickets);
+		
+		counter++;
+		
+		mav.addObject("counter", counter);
+		
+		return mav;
+    }
+	
+	/*
 	@RequestMapping(value = "/execution", method = RequestMethod.POST)
-	public ModelAndView search(@ModelAttribute("SpringWeb") TicketSearchViewModel ticketSearchVM, Model model) {
+	public ModelAndView search(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM, Model model) {
 		logger.info("Search : search tickets");
 
 		ModelAndView mav = new ModelAndView("search/home");
@@ -58,6 +91,7 @@ public class SearchController {
 		
 		return mav;
 	}
+	*/
 
 	private void initSearchCriterions(ModelAndView mav) {
 		mav.addObject("sportsList", getSportsList());

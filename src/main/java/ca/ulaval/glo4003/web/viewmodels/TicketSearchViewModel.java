@@ -3,10 +3,10 @@ package ca.ulaval.glo4003.web.viewmodels;
 import java.util.Map;
 
 public class TicketSearchViewModel {
-	private String [] selectedSports;
-	private String displayedPeriod;
-	private boolean localGame;
-	private String [] selectedTicketTypes;
+	public String [] selectedSports;
+	public String displayedPeriod;
+	public boolean localGame;
+	public String [] selectedTicketTypes;
 	
 	public String[] getSelectedSports() {
 		return selectedSports;
