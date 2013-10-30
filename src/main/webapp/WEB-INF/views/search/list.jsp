@@ -34,4 +34,3 @@
 		</c:forEach>
 	</tbody>
 </table>
-Compteur : ${counter}

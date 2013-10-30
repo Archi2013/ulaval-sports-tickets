@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.web.viewmodels;
 
-public class TicketToSearchViewModel {
+public class TicketForSearchViewModel {
 	public String sport;
 	public String opponents;
 	public String date;
@@ -9,7 +9,7 @@ public class TicketToSearchViewModel {
 	public Integer numberOfTicket;
 	public String price;
 	
-	public TicketToSearchViewModel(String sport, String opponents, String date,
+	public TicketForSearchViewModel(String sport, String opponents, String date,
 			String admissionType, String section, Integer numberOfTicket,
 			String price) {
 		super();

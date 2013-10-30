@@ -43,61 +43,7 @@
             </div>
         </form:form>
     </section>
-    <section id="ajax-table">
-        <table class="standard-table margin-25">
-            <thead>
-                <tr>
-                    <th>Sport</th>
-                    <th>Opposants</th>
-                    <th>Date</th>
-                    <th>Type d'admission</th>
-                    <th>Section</th>
-                    <th>Nombre de billets</th>
-                    <th>Prix (CDN$)</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                    <tr>
-                        <td>Volleyball Féminin</td>
-                        <td>Radiants</td>
-                        <td>10/11/2013 à 14h30 EST</td>
-                        <td>VIP</td>
-                        <td>Front Row</td>
-                        <td>2</td>
-                        <td>35,0</td>
-                        <td><a href="/sport/volleyball-feminin/match/1/billets/vip-front-row" class="standard-button-round orange-button">Consulter</a></td>
-
-                    </tr>
-                
-                    <tr>
-                        <td>Volleyball Féminin</td>
-                        <td>Radiants</td>
-                        <td>10/11/2013 à 14h30 EST</td>
-                        <td>Générale</td>
-                        <td>Générale</td>
-                        <td>2</td>
-                        <td>15,5</td>
-                        <td><a href="/sport/volleyball-feminin/match/1/billets/general-general" class="standard-button-round orange-button">Consulter</a></td>
-
-                    </tr>
-                
-                    <tr>
-                        <td>Basketball Masculin</td>
-                        <td>Endormis</td>
-                        <td>10/11/2013 à 15h30 EST</td>
-                        <td>VIP</td>
-                        <td>Rouges</td>
-                        <td>5</td>
-                        <td>20,0</td>
-                        <td><a href="/sport/volleyball-feminin/match/1/billets/vip-rouges" class="standard-button-round orange-button">Consulter</a></td>
-
-                    </tr>
-                
-            </tbody>
-        </table>
-    </section>
+    <section id="ajax-table"></section>
     
     <%@include file="../utility/javascript-import.jsp" %>
 	<script type="text/javascript">
@@ -113,7 +59,6 @@
 	        });
 	    }
 	</script>
-	<input type="button" value="GO!" onclick="doAjaxPost();" />
     
     <%@include file="../layout/footer.jsp" %>
 </body>
