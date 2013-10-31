@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.domain.utilities.Constants.AdmissionType;
 import ca.ulaval.glo4003.domain.utilities.DisplayedPeriodMapper;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.web.viewmodels.TicketForSearchViewModel;
@@ -29,7 +30,9 @@ public class SearchService {
 		List<String> periods = getDisplayedPeriods();
 		ticketSearchVM.setDisplayedPeriod(periods.get(periods.size() - 1));
 		ticketSearchVM.setLocalGame(true);
-		ticketSearchVM.setSelectedTicketTypes(new String [] {getTicketTypes().get(0)});
+		List<AdmissionType> admissionTypes = new ArrayList<>();
+		admissionTypes.add(getTicketTypes().get(0));
+		ticketSearchVM.setSelectedTicketTypes(admissionTypes);
 		return ticketSearchVM;
 	}
 	
@@ -71,10 +74,10 @@ public class SearchService {
 		return displayedPeriodMapper.getAllNames();
 	}
 	
-	private List<String> getTicketTypes() {
-		List<String> ticketTypes = new ArrayList<>();
-		ticketTypes.add("admission générale");
-		ticketTypes.add("avec siège");
+	private List<AdmissionType> getTicketTypes() {
+		List<AdmissionType> ticketTypes = new ArrayList<>();
+		ticketTypes.add(AdmissionType.GENERAL_ADMISSION);
+		ticketTypes.add(AdmissionType.WITH_SEAT);
 		return ticketTypes;
 	}
 }

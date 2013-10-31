@@ -1,12 +1,14 @@
 package ca.ulaval.glo4003.web.viewmodels;
 
-import java.util.Map;
+import java.util.List;
+
+import ca.ulaval.glo4003.domain.utilities.Constants.AdmissionType;
 
 public class TicketSearchViewModel {
 	public String [] selectedSports;
 	public String displayedPeriod;
 	public boolean localGame;
-	public String [] selectedTicketTypes;
+	public List<AdmissionType> selectedTicketTypes;
 	
 	public String[] getSelectedSports() {
 		return selectedSports;
@@ -32,11 +34,11 @@ public class TicketSearchViewModel {
 		this.localGame = localGame;
 	}
 
-	public String[] getSelectedTicketTypes() {
+	public List<AdmissionType> getSelectedTicketTypes() {
 		return selectedTicketTypes;
 	}
 
-	public void setSelectedTicketTypes(String[] selectedTicketTypes) {
-		this.selectedTicketTypes = selectedTicketTypes;
+	public void setSelectedTicketTypes(List<AdmissionType> admissionTypes) {
+		this.selectedTicketTypes = admissionTypes;
 	}
 }

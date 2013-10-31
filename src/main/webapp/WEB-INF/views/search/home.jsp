@@ -38,7 +38,9 @@
             --><div class="search-criterion">
                 <h4 class="search-criterion-title">Type de billet</h4>
                 <div class="search-criterion-elements">
-                    <form:checkboxes delimiter="<br>" items="${ticketTypes}" path="selectedTicketTypes" onclick="doAjaxPost();"/>
+                    <c:forEach items="${ticketTypes}" var="type">
+                        <form:checkbox path="selectedTicketTypes" value="${type.name()}" label="${type.toString()}"  onclick="doAjaxPost();"/><br>
+                    </c:forEach>
                 </div>
             </div>
         </form:form>
