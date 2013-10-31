@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.domain.utilities.DisplayedPeriodMapper;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.web.viewmodels.TicketForSearchViewModel;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
@@ -18,6 +19,9 @@ public class SearchService {
 	
 	@Inject
 	private SportDao sportDao;
+	
+	@Inject
+	private DisplayedPeriodMapper displayedPeriodMapper;
 
 	public TicketSearchViewModel getInitialisedTicketSearchViewModel() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
@@ -64,14 +68,7 @@ public class SearchService {
 	}
 	
 	private List<String> getDisplayedPeriods() {
-		List<String> displayedPeriods = new ArrayList<>();
-		displayedPeriods.add("aujourd'hui");
-		displayedPeriods.add("une semaine");
-		displayedPeriods.add("un mois");
-		displayedPeriods.add("trois mois");
-		displayedPeriods.add("six mois");
-		displayedPeriods.add("tout");
-		return displayedPeriods;
+		return displayedPeriodMapper.getAllNames();
 	}
 	
 	private List<String> getTicketTypes() {

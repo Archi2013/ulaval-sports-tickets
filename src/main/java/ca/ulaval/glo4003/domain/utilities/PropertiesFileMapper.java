@@ -2,6 +2,8 @@ package ca.ulaval.glo4003.domain.utilities;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -40,5 +42,27 @@ public abstract class PropertiesFileMapper {
 			}
 		}
 		throw new KeyValueDoesntExistException();
+	}
+	
+	protected List<String> getAllValues() {
+		if (properties.isEmpty()) {
+			loadProperties();
+		}
+		List<String> list = new ArrayList<>();
+		for (Object key : properties.keySet()) {
+			list.add(properties.getProperty(key.toString()));
+		}
+		return list;
+	}
+	
+	protected List<String> getAllKeys() {
+		if (properties.isEmpty()) {
+			loadProperties();
+		}
+		List<String> list = new ArrayList<>();
+		for (Object key : properties.keySet()) {
+			list.add(key.toString());
+		}
+		return list;
 	}
 }
