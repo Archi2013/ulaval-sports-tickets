@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.utilities.Constants.AdmissionType;
+import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 import ca.ulaval.glo4003.domain.utilities.DisplayedPeriodMapper;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.web.viewmodels.TicketForSearchViewModel;
@@ -20,22 +21,19 @@ public class SearchService {
 	
 	@Inject
 	private SportDao sportDao;
-	
-	@Inject
-	private DisplayedPeriodMapper displayedPeriodMapper;
 
 	public TicketSearchViewModel getInitialisedTicketSearchViewModel() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
 		ticketSearchVM.setSelectedSports(new String [] {getSportsList().get(2)});
-		List<String> periods = getDisplayedPeriods();
-		ticketSearchVM.setDisplayedPeriod(periods.get(periods.size() - 1));
+		List<DisplayedPeriod> displayedPeriods = getDisplayedPeriods();
+		ticketSearchVM.setDisplayedPeriod(displayedPeriods.get(displayedPeriods.size() - 1));
 		ticketSearchVM.setLocalGame(true);
 		List<AdmissionType> admissionTypes = new ArrayList<>();
 		admissionTypes.add(getTicketTypes().get(0));
 		ticketSearchVM.setSelectedTicketTypes(admissionTypes);
 		return ticketSearchVM;
 	}
-	
+
 	public void initSearchCriterions(ModelAndView mav) {
 		mav.addObject("sportsList", getSportsList());
 		mav.addObject("displayedPeriods", getDisplayedPeriods());
@@ -70,8 +68,12 @@ public class SearchService {
 		return sportsList;
 	}
 	
-	private List<String> getDisplayedPeriods() {
-		return displayedPeriodMapper.getAllNames();
+	private List<DisplayedPeriod> getDisplayedPeriods() {
+		List<DisplayedPeriod> list = new ArrayList<>();
+		for (DisplayedPeriod period : DisplayedPeriod.values()) {
+			list.add(period);
+		}
+		return list;
 	}
 	
 	private List<AdmissionType> getTicketTypes() {

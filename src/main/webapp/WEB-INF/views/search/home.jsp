@@ -26,7 +26,9 @@
             --><div class="search-criterion">
                 <h4 class="search-criterion-title">Période affichée</h4>
                 <div class="search-criterion-elements">
-                    <form:radiobuttons delimiter="<br>" items="${displayedPeriods}" path="displayedPeriod" onchange="doAjaxPost();"/>
+                    <c:forEach items="${displayedPeriods}" var="period">
+                        <form:radiobutton path="displayedPeriod" value="${period.name()}" label="${period.toString()}"  onchange="doAjaxPost();"/><br>
+                    </c:forEach>
                 </div>
             </div><!-- important supprime espace blanc
             --><div class="search-criterion">

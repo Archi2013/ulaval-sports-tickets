@@ -3,10 +3,11 @@ package ca.ulaval.glo4003.web.viewmodels;
 import java.util.List;
 
 import ca.ulaval.glo4003.domain.utilities.Constants.AdmissionType;
+import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 
 public class TicketSearchViewModel {
 	public String [] selectedSports;
-	public String displayedPeriod;
+	private DisplayedPeriod displayedPeriod;
 	public boolean localGame;
 	public List<AdmissionType> selectedTicketTypes;
 	
@@ -17,13 +18,13 @@ public class TicketSearchViewModel {
 	public void setSelectedSports(String[] selectedSports) {
 		this.selectedSports = selectedSports;
 	}
-
-	public String getDisplayedPeriod() {
+	
+	public DisplayedPeriod getDisplayedPeriod() {
 		return displayedPeriod;
 	}
-
-	public void setDisplayedPeriod(String displayedPeriod) {
-		this.displayedPeriod = displayedPeriod;
+	
+	public void setDisplayedPeriod(DisplayedPeriod displayedPeriod2) {
+		this.displayedPeriod = displayedPeriod2;
 	}
 
 	public boolean isLocalGame() {
