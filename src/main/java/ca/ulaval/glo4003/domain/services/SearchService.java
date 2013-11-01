@@ -17,6 +17,7 @@ import ca.ulaval.glo4003.persistence.daos.TicketForSearchDao;
 import ca.ulaval.glo4003.web.viewmodels.TicketForSearchViewModel;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.web.viewmodels.factories.TicketForSearchViewModelFactory;
+import ca.ulaval.glo4003.web.viewmodels.factories.TicketSearchPreferenceFactory;
 
 @Service
 public class SearchService {
@@ -29,6 +30,9 @@ public class SearchService {
 
 	@Inject
 	private TicketForSearchViewModelFactory ticketForSearchViewModelFactory;
+	
+	@Inject
+	private TicketSearchPreferenceFactory ticketSearchPreferenceFactory;
 
 	public TicketSearchViewModel getInitialisedTicketSearchViewModel() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
@@ -51,7 +55,8 @@ public class SearchService {
 	}
 	
 	public List<TicketForSearchViewModel> getTickets(TicketSearchViewModel ticketSearchVM) {
-		List<TicketForSearchDto> ticketForSearchDtos = ticketForSearchDao.getTickets(ticketSearchVM);
+		List<TicketForSearchDto> ticketForSearchDtos = ticketForSearchDao.getTickets(
+				ticketSearchPreferenceFactory.createPreferenceDto(ticketSearchVM));
 		return ticketForSearchViewModelFactory.createViewModels(ticketForSearchDtos);
 	}
 	

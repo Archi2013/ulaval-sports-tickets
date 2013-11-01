@@ -7,15 +7,17 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 
 import ca.ulaval.glo4003.domain.dtos.TicketForSearchDto;
+import ca.ulaval.glo4003.domain.dtos.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.persistence.daos.TicketForSearchDao;
-import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
 
 
 @Repository
 public class FakeDataTicketForSearchDao implements TicketForSearchDao {
 	
 	@Override
-	public List<TicketForSearchDto> getTickets(TicketSearchViewModel ticketSearchVM) {
+	public List<TicketForSearchDto> getTickets(TicketSearchPreferenceDto ticketSearchPreferenceDto) {
+		// Faire qqc avec ticketSearchPreferenceDto
+		
 		TicketForSearchDto t1 = new TicketForSearchDto("Baseball Masculin", "Radiants", DateTime.now(),
 				"Générale", "Générale", new Integer(3), new Double(16.95), "/sport/volleyball-feminin/match/40/billets/generale-generale");
 		TicketForSearchDto t2 = new TicketForSearchDto("Soccer Masculin", "Endormis", DateTime.now(),
