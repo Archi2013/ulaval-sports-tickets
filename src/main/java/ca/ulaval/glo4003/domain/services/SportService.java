@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ca.ulaval.glo4003.domain.datafilters.GameIsInFutureFilter;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
 import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
@@ -56,7 +57,7 @@ public class SportService {
 			countNumberOfTickets(games);
 			filter.applyFilterOnList(games);
 			return gamesViewModelFactory.createViewModel(sportName, games);
-		} catch (SportDoesntExistInPropertiesFileException e) {
+		} catch (SportDoesntExistInPropertiesFileException | NoSportForUrlException e) {
 			throw new SportDoesntExistException();
 		}
 	}

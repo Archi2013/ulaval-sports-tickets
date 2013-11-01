@@ -1,5 +1,7 @@
 package ca.ulaval.glo4003.persistence.xml;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +11,8 @@ import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.springframework.stereotype.Component;
+
+import com.google.common.base.Function;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.SportAlreadyExistException;
@@ -41,6 +45,18 @@ public class XmlSportDao implements SportDao {
 		} catch (XPathExpressionException | NoSuchAttributeException | SportDoesntExistException e) {
 			throw new XmlIntegrityException(e);
 		}
+	}
+	
+	@Override
+	public List<String> getAllSportNames() {
+		List<SportDto> sports = getAll();
+		List<String> result = transform(sports, new Function<SportDto, String>() {
+			@Override
+			public String apply(SportDto dto) {
+				return dto.getName();
+			}
+		});
+		return result;
 	}
 
 	@Override
