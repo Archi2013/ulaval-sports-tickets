@@ -1,18 +1,20 @@
-package ca.ulaval.glo4003.web.viewmodels;
+package ca.ulaval.glo4003.domain.dtos;
 
-public class TicketForSearchViewModel {
+import org.joda.time.DateTime;
+
+public class TicketForSearchDto {
 	public String sport;
 	public String opponents;
-	public String date;
+	public DateTime date;
 	public String admissionType;
 	public String section;
 	public Integer numberOfTicket;
-	public String price;
+	public Double price;
 	public String url;
 	
-	public TicketForSearchViewModel(String sport, String opponents, String date,
+	public TicketForSearchDto(String sport, String opponents, DateTime date,
 			String admissionType, String section, Integer numberOfTicket,
-			String price, String url) {
+			Double price, String url) {
 		super();
 		this.sport = sport;
 		this.opponents = opponents;
@@ -23,60 +25,60 @@ public class TicketForSearchViewModel {
 		this.price = price;
 		this.url = url;
 	}
-	
+
 	public String getSport() {
 		return sport;
 	}
-	
+
 	public void setSport(String sport) {
 		this.sport = sport;
 	}
-	
+
 	public String getOpponents() {
 		return opponents;
 	}
-	
+
 	public void setOpponents(String opponents) {
 		this.opponents = opponents;
 	}
-	
-	public String getDate() {
+
+	public DateTime getDate() {
 		return date;
 	}
-	
-	public void setDate(String date) {
+
+	public void setDate(DateTime date) {
 		this.date = date;
 	}
-	
+
 	public String getAdmissionType() {
 		return admissionType;
 	}
-	
+
 	public void setAdmissionType(String admissionType) {
 		this.admissionType = admissionType;
 	}
-	
+
 	public String getSection() {
 		return section;
 	}
-	
+
 	public void setSection(String section) {
 		this.section = section;
 	}
-	
+
 	public Integer getNumberOfTicket() {
 		return numberOfTicket;
 	}
-	
+
 	public void setNumberOfTicket(Integer numberOfTicket) {
 		this.numberOfTicket = numberOfTicket;
 	}
-	
-	public String getPrice() {
+
+	public Double getPrice() {
 		return price;
 	}
-	
-	public void setPrice(String price) {
+
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 

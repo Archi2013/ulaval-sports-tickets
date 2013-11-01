@@ -41,7 +41,7 @@ Types de billet : <c:forEach items="${searchForm.selectedTicketTypes}" var="type
 			<td>${ticket.numberOfTicket}</td>
 			<td>${ticket.price}</td>
 			<td><a
-				href="/sport/volleyball-feminin/match/1/billets/vip-front-row"
+				href="${ticket.url}"
 				class="standard-button-round orange-button">Consulter</a></td>
 
 		</tr>

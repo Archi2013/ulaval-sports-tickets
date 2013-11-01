@@ -9,17 +9,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.domain.dtos.TicketForSearchDto;
 import ca.ulaval.glo4003.domain.utilities.Constants.AdmissionType;
 import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
+import ca.ulaval.glo4003.persistence.daos.TicketForSearchDao;
 import ca.ulaval.glo4003.web.viewmodels.TicketForSearchViewModel;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
+import ca.ulaval.glo4003.web.viewmodels.factories.TicketForSearchViewModelFactory;
 
 @Service
 public class SearchService {
 	
 	@Inject
 	private SportDao sportDao;
+	
+	@Inject
+	private TicketForSearchDao ticketForSearchDao;
+
+	@Inject
+	private TicketForSearchViewModelFactory ticketForSearchViewModelFactory;
 
 	public TicketSearchViewModel getInitialisedTicketSearchViewModel() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
@@ -42,20 +51,8 @@ public class SearchService {
 	}
 	
 	public List<TicketForSearchViewModel> getTickets(TicketSearchViewModel ticketSearchVM) {
-		TicketForSearchViewModel t1 = new TicketForSearchViewModel("Baseball Masculin", "Radiants", "15/11/2013 à 16h45",
-				"Générale", "Générale", new Integer(3), "16,95");
-		TicketForSearchViewModel t2 = new TicketForSearchViewModel("Soccer Masculin", "Endormis", "16/11/2013 à 20h45",
-				"Générale", "Générale", new Integer(22), "23,95");
-		TicketForSearchViewModel t3 = new TicketForSearchViewModel("Volleyball Féminin", "Kira", "17/11/2013 à 10h30",
-				"VIP", "Orange", new Integer(4), "16,95");
-		TicketForSearchViewModel t4 = new TicketForSearchViewModel("Volleyball Féminin", "Kira", "17/11/2013 à 10h30",
-				"VIP", "Rouge", new Integer(4), "17,95");
-		List<TicketForSearchViewModel> tickets = new ArrayList<>();
-		tickets.add(t1);
-		tickets.add(t2);
-		tickets.add(t3);
-		tickets.add(t4);
-		return tickets;
+		List<TicketForSearchDto> ticketForSearchDtos = ticketForSearchDao.getTickets(ticketSearchVM);
+		return ticketForSearchViewModelFactory.createViewModels(ticketForSearchDtos);
 	}
 	
 	private List<String> getSportsList() {

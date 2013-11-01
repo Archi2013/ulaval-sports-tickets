@@ -12,16 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SearchService;
-import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
 
 @Controller
 @RequestMapping(value = "/recherche", method = RequestMethod.GET)
 public class SearchController {
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
-	
-	@Inject
-	SportDao sportDao;
 	
 	@Inject
 	SearchService searchService;
