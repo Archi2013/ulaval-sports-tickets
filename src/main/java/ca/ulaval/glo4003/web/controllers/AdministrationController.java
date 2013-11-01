@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.CommandGameService;
+import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.domain.utilities.DateParser;
 import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
@@ -28,6 +29,9 @@ public class AdministrationController {
 	private CommandGameService gameService;
 
 	@Inject
+	SportService sportService;
+	
+	@Inject
 	private DateParser dateParser;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -39,7 +43,12 @@ public class AdministrationController {
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
 	public ModelAndView game() {
 		logger.info("Adminisatration : Page to add a new game for a sport");
-		return new ModelAndView("admin/game", "command", new GameToAddViewModel());
+		
+		ModelAndView mav = new ModelAndView("admin/game", "command", new GameToAddViewModel());
+		
+		mav.addObject("sportsVM", sportService.getSports());
+		
+		return mav;
 	}
 
 	@RequestMapping(value = "/ajout-match", method = RequestMethod.POST)

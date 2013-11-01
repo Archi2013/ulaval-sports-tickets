@@ -16,9 +16,9 @@
     
     <form:form action="/admin/ajout-match" method="POST" class="margin-25 form-admin">
         <form:label path="sport">Sport : </form:label><form:select path="sport">
-            <form:option value="basketball-masculin">Basketball Masculin</form:option>
-            <form:option value="soccer-masculin">Soccer Masculin</form:option>
-            <form:option value="volleyball-feminin">Volleyball Féminin</form:option>
+            <c:forEach items="${sportsVM.sports}" var="sport">
+                <form:option value="${sport.url}">${sport.name}</form:option>
+            </c:forEach>
         </form:select><br>
         <form:label path="opponents">Opposants : </form:label><form:input path="opponents" /><br>
         <form:label path="date">Date de la rencontre : </form:label><form:input path="date" type="date" value="2014-01-01"/><br>
