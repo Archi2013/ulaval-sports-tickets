@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.utilities.Constants.AdmissionType;
 import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
-import ca.ulaval.glo4003.domain.utilities.DisplayedPeriodMapper;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.web.viewmodels.TicketForSearchViewModel;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
