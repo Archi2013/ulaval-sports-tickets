@@ -47,6 +47,8 @@ public class SearchController {
 		
 		mav.addObject("tickets", searchService.getTickets(ticketSearchVM));
 		
+		mav.addObject("searchForm", ticketSearchVM);
+		
 		return mav;
     }
 }

@@ -23,7 +23,9 @@ public class SearchService {
 
 	public TicketSearchViewModel getInitialisedTicketSearchViewModel() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
-		ticketSearchVM.setSelectedSports(new String [] {getSportsList().get(2)});
+		List<String> selectedSports = new ArrayList<>();
+		selectedSports.add(getSportsList().get(2));
+		ticketSearchVM.setSelectedSports(selectedSports);
 		List<DisplayedPeriod> displayedPeriods = getDisplayedPeriods();
 		ticketSearchVM.setDisplayedPeriod(displayedPeriods.get(displayedPeriods.size() - 1));
 		ticketSearchVM.setLocalGame(true);

@@ -6,16 +6,16 @@ import ca.ulaval.glo4003.domain.utilities.Constants.AdmissionType;
 import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 
 public class TicketSearchViewModel {
-	public String [] selectedSports;
+	public List<String> selectedSports;
 	private DisplayedPeriod displayedPeriod;
 	public boolean localGame;
 	public List<AdmissionType> selectedTicketTypes;
 	
-	public String[] getSelectedSports() {
+	public List<String> getSelectedSports() {
 		return selectedSports;
 	}
 	
-	public void setSelectedSports(String[] selectedSports) {
+	public void setSelectedSports(List<String> selectedSports) {
 		this.selectedSports = selectedSports;
 	}
 	

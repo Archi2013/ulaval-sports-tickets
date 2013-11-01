@@ -23,13 +23,13 @@ public class Constants {
 	}
 	
 	public static enum DisplayedPeriod {
-		TODAY, ONE_WEEK, ONE_MONTH, THREE_MONTH, SIX_MONTH, ALL;
+		ONE_DAY, ONE_WEEK, ONE_MONTH, THREE_MONTH, SIX_MONTH, ALL;
 		
 	    public String toString() {
 	        String name = "";
 	        switch (ordinal()) {
 	        case 0:
-	            name = "aujourd'hui";
+	            name = "un jour";
 	            break;
 	        case 1:
 	            name = "une semaine";

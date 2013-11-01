@@ -52,10 +52,10 @@
     <%@include file="../utility/javascript-import.jsp" %>
 	<script type="text/javascript">
 	    function doAjaxPost() {
-	    	var str = $("#search-form").serialize();
+	    	var search_form = $("#search-form").serialize();
 	        $.ajax({
 	            type: "POST",
-	            data: str,
+	            data: search_form,
 	            url: "/recherche/list",
 	            success: function(response) {
 	                $("#ajax-table").html(response);
