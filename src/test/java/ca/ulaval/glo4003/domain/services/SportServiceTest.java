@@ -1,10 +1,8 @@
 package ca.ulaval.glo4003.domain.services;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static com.google.common.collect.Lists.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 
@@ -19,7 +17,6 @@ import ca.ulaval.glo4003.domain.datafilters.GameIsInFutureFilter;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
-import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
@@ -60,7 +57,7 @@ public class SportServiceTest {
 	private List<GameDto> games;
 
 	@Before
-	public void setUp() throws SportDoesntExistException, SportDoesntExistInPropertiesFileException, NoSportForUrlException {
+	public void setUp() throws SportDoesntExistException, NoSportForUrlException {
 		sports = newArrayList();
 		when(sportDaoMock.getAll()).thenReturn(sports);
 
@@ -135,7 +132,7 @@ public class SportServiceTest {
 	@Test(expected = SportDoesntExistException.class)
 	public void getGamesForSport_should_throw_sport_doesnt_exist_exception_if_sport_doesnt_exist_in_properties_file()
 			throws Exception {
-		when(sportUrlMapperMock.getSportName(SPORT_URL)).thenThrow(SportDoesntExistInPropertiesFileException.class);
+		when(sportUrlMapperMock.getSportName(SPORT_URL)).thenThrow(NoSportForUrlException.class);
 
 		service.getGamesForSport(SPORT_URL);
 	}

@@ -16,21 +16,18 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
-import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
-import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertiesFile;
-import ca.ulaval.glo4003.web.converters.SportConverter;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.web.viewmodels.SportViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SportSimpleConverterTest {
-	private static final String ERROR_URL = "erreur";
+public class SportConverterTest {
 	private static final String SPORT_URL1 = "handball";
 	private static final String SPORT_NAME1 = "Handball";
 	private static final String SPORT_URL2 = "escrime";
 	private static final String SPORT_NAME2 = "Escrime";
 
 	@Mock
-	SportUrlMapperPropertiesFile sportUrlMapper;
+	SportUrlMapper sportUrlMapper;
 
 	@InjectMocks
 	SportConverter sportConverter;
@@ -55,8 +52,7 @@ public class SportSimpleConverterTest {
 	}
 
 	@Test
-	public void given_a_SportDto_convert_should_return_a_SportSimpleViewModel() throws RuntimeException,
-			SportDoesntExistInPropertiesFileException {
+	public void given_a_SportDto_convert_should_return_a_SportViewModel() {
 		when(sportUrlMapper.getSportUrl(SPORT_NAME1)).thenReturn(SPORT_URL1);
 
 		SportViewModel sportSVM = sportConverter.convert(sportDto1);
@@ -66,30 +62,7 @@ public class SportSimpleConverterTest {
 	}
 
 	@Test
-	public void when_url_mapping_throw_SportDoesntExistInPropertieFileException_convert_should_return_a_SportSimpleViewModel_with_erreur_as_url()
-			throws RuntimeException, SportDoesntExistInPropertiesFileException {
-		when(sportUrlMapper.getSportUrl(SPORT_NAME1)).thenThrow(SportDoesntExistInPropertiesFileException.class);
-
-		SportViewModel sportSVM = sportConverter.convert(sportDto1);
-
-		assertEquals(sportSVM.name, SPORT_NAME1);
-		assertEquals(sportSVM.url, ERROR_URL);
-	}
-
-	@Test
-	public void when_url_mapping_throw_RuntimeException_convert_should_return_a_SportSimpleViewModel_with_erreur_as_url()
-			throws RuntimeException, SportDoesntExistInPropertiesFileException {
-		when(sportUrlMapper.getSportUrl(SPORT_NAME1)).thenThrow(RuntimeException.class);
-
-		SportViewModel sportSVM = sportConverter.convert(sportDto1);
-
-		assertEquals(sportSVM.name, SPORT_NAME1);
-		assertEquals(sportSVM.url, ERROR_URL);
-	}
-
-	@Test
-	public void given_sportDtoList_convert_should_return_a_SportSimpleViewList() throws RuntimeException,
-			SportDoesntExistInPropertiesFileException {
+	public void given_sportDtoList_convert_should_return_a_SportViewList() throws RuntimeException {
 		when(sportUrlMapper.getSportUrl(SPORT_NAME1)).thenReturn(SPORT_URL1);
 		when(sportUrlMapper.getSportUrl(SPORT_NAME2)).thenReturn(SPORT_URL2);
 

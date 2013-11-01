@@ -15,7 +15,6 @@ import ca.ulaval.glo4003.domain.services.CommandGameService;
 import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.domain.utilities.DateParser;
 import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
-import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
@@ -61,8 +60,7 @@ public class AdministrationController {
 		try {
 			gameService.createNewGame(gameToAddVM.getSport(), gameToAddVM.getOpponents(),
 					dateParser.parseDate(gameToAddVM.getDate()));
-		} catch (SportDoesntExistException | GameDoesntExistException | GameAlreadyExistException
-				| SportDoesntExistInPropertiesFileException | NoSportForUrlException e) {
+		} catch (SportDoesntExistException | GameDoesntExistException | GameAlreadyExistException | NoSportForUrlException e) {
 			e.printStackTrace();
 			return "admin/game-added-data-error";
 		}

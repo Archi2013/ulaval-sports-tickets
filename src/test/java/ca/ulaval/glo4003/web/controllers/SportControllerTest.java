@@ -1,9 +1,7 @@
 package ca.ulaval.glo4003.web.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
 import ca.ulaval.glo4003.domain.services.SportService;
-import ca.ulaval.glo4003.domain.utilities.SportDoesntExistInPropertiesFileException;
-import ca.ulaval.glo4003.domain.utilities.SportUrlMapperPropertiesFile;
+import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
@@ -31,7 +29,7 @@ public class SportControllerTest {
 	private Model model;
 
 	@Mock
-	private SportUrlMapperPropertiesFile sportUrlMapper;
+	private SportUrlMapper sportUrlMapper;
 
 	@Mock
 	private SportService sportService;
@@ -42,8 +40,7 @@ public class SportControllerTest {
 	private GamesViewModel gamesViewModel;
 
 	@Before
-	public void setUp() throws SportDoesntExistException, RuntimeException, SportDoesntExistInPropertiesFileException,
-			GameDoesntExistException {
+	public void setUp() throws SportDoesntExistException, GameDoesntExistException, NoSportForUrlException {
 		gamesViewModel = mock(GamesViewModel.class);
 		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 		when(gamesViewModel.hasGames()).thenReturn(true);
