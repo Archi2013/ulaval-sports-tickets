@@ -2,46 +2,55 @@
 <base>
 <sports>
 <sport>
-<name>Volleyball Féminin</name>
+<name>Volleyball féminin</name>
 </sport>
 <sport>
-<name>Baseball Masculin</name>
+<name>Baseball masculin</name>
 </sport>
 <sport>
-<name>Basketball Masculin</name>
+<name>Basketball masculin</name>
 </sport>
 <sport>
-<name>Soccer Masculin</name>
+<name>Soccer masculin</name>
+</sport>
+<sport>
+<name>Football féminin</name>
+</sport>
+<sport>
+<name>Natation masculine</name>
+</sport>
+<sport>
+<name>Handball féminin</name>
 </sport>
 </sports>
 <games>
 <game>
 <id>1</id>
-<sportName>Volleyball Féminin</sportName>
+<sportName>Volleyball féminin</sportName>
 <oponents>Carabins</oponents>
 <date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>2</id>
-<sportName>Volleyball Féminin</sportName>
+<sportName>Volleyball féminin</sportName>
 <oponents>Redmen</oponents>
 <date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>40</id>
-<sportName>Volleyball Féminin</sportName>
+<sportName>Volleyball féminin</sportName>
 <oponents>Blue Dragoon</oponents>
 <date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>41</id>
-<sportName>Baseball Masculin</sportName>
+<sportName>Baseball masculin</sportName>
 <oponents>Phoenix rouge</oponents>
 <date>2013/12/12 18:30 EST</date>
 </game>
 <game>
 <id>42</id>
-<sportName>Baseball Masculin</sportName>
+<sportName>Baseball masculin</sportName>
 <oponents>Emeraude vif</oponents>
 <date>2013/12/12 18:30 EST</date>
 </game>
