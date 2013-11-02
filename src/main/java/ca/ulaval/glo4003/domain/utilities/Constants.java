@@ -1,6 +1,20 @@
 package ca.ulaval.glo4003.domain.utilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Component;
+
+import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.persistence.daos.SportDao;
+
+@Component
 public class Constants {
+	
+	@Inject
+	private SportDao sportDao;
 	
 	public static enum AdmissionType {
 		GENERAL_ADMISSION, WITH_SEAT;
@@ -52,5 +66,31 @@ public class Constants {
 	        }
 	        return name;
 	    }
+	}
+	
+	public List<String> getSportsList() {
+		List<SportDto> sportsDto = sportDao.getAll();
+		
+		List<String> sportsList = new ArrayList<>();
+		
+		for (SportDto sport : sportsDto) {
+			sportsList.add(sport.getName());
+		}
+		return sportsList;
+	}
+	
+	public List<DisplayedPeriod> getDisplayedPeriods() {
+		List<DisplayedPeriod> list = new ArrayList<>();
+		for (DisplayedPeriod period : DisplayedPeriod.values()) {
+			list.add(period);
+		}
+		return list;
+	}
+	
+	public List<AdmissionType> getTicketTypes() {
+		List<AdmissionType> ticketTypes = new ArrayList<>();
+		ticketTypes.add(AdmissionType.GENERAL_ADMISSION);
+		ticketTypes.add(AdmissionType.WITH_SEAT);
+		return ticketTypes;
 	}
 }

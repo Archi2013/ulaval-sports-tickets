@@ -66,6 +66,21 @@ public class SearchControllerTest {
 	}
 	
 	@Test
+	public void home_should_add_a_ticket_list_to_model() {
+		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
+		List<TicketForSearchViewModel> tickets = new ArrayList<>();
+
+		when(searchService.getInitialisedTicketSearchViewModel()).thenReturn(ticketSearchVM);
+		when(searchService.getTickets(ticketSearchVM)).thenReturn(tickets);
+		
+		ModelAndView mav = controller.home();
+		ModelMap modelMap = mav.getModelMap();
+
+		assertTrue(modelMap.containsAttribute("tickets"));
+		assertSame(tickets, modelMap.get("tickets"));
+	}
+	
+	@Test
 	public void getList_should_return_the_good_subview() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
 		

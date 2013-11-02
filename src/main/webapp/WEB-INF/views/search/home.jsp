@@ -34,7 +34,7 @@
             --><div class="search-criterion">
                 <h4 class="search-criterion-title">Localisation</h4>
                 <div class="search-criterion-elements">
-                    <form:checkbox path="localGame" onclick="doAjaxPost();" id="localGame"/><form:label path="localGame">à domicile</form:label>
+                    <form:checkbox path="localGameOnly" onclick="doAjaxPost();" id="localGameOnly"/><form:label path="localGameOnly">à domicile seulement</form:label>
                 </div>
             </div><!-- important supprime espace blanc
             --><div class="search-criterion">
@@ -47,7 +47,7 @@
             </div>
         </form:form>
     </section>
-    <section id="ajax-table"></section>
+    <section id="ajax-table"><%@include file="list.jsp"%></section>
     
     <%@include file="../utility/javascript-import.jsp" %>
 	<script type="text/javascript">

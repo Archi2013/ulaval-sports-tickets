@@ -11,7 +11,7 @@ Sports sélectionnés : <c:forEach items="${searchForm.selectedSports}" var="spo
                       <br>
 Période affichée : ${searchForm.displayedPeriod}
 <br>
-À domicile : <c:if test="${searchForm.localGame}">Vrai</c:if>
+À domicile : <c:if test="${searchForm.localGameOnly}">Vrai</c:if>
 <br>
 Types de billet : <c:forEach items="${searchForm.selectedTicketTypes}" var="type">
                       <span>${type}, </span>

@@ -28,7 +28,13 @@ public class SearchController {
 		
 		ModelAndView mav = new ModelAndView("search/home");
 		
-		mav.addObject("ticketSearchForm", searchService.getInitialisedTicketSearchViewModel());
+		TicketSearchViewModel ticketSearchVM = searchService.getInitialisedTicketSearchViewModel();
+		
+		mav.addObject("ticketSearchForm", ticketSearchVM);
+		
+		mav.addObject("tickets", searchService.getTickets(ticketSearchVM));
+		
+		mav.addObject("searchForm", ticketSearchVM); // Pour les tests
 		
 		searchService.initSearchCriterions(mav);
 		

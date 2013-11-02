@@ -8,16 +8,16 @@ import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 public class TicketSearchPreferenceDto {
 	public List<String> selectedSports;
 	private DisplayedPeriod displayedPeriod;
-	public boolean localGame;
+	public boolean localGameOnly;
 	public List<AdmissionType> selectedTicketTypes;
 	
 	public TicketSearchPreferenceDto(List<String> selectedSports,
-			DisplayedPeriod displayedPeriod, boolean localGame,
+			DisplayedPeriod displayedPeriod, boolean localGameOnly,
 			List<AdmissionType> selectedTicketTypes) {
 		super();
 		this.selectedSports = selectedSports;
 		this.displayedPeriod = displayedPeriod;
-		this.localGame = localGame;
+		this.localGameOnly = localGameOnly;
 		this.selectedTicketTypes = selectedTicketTypes;
 	}
 
@@ -37,12 +37,12 @@ public class TicketSearchPreferenceDto {
 		this.displayedPeriod = displayedPeriod;
 	}
 
-	public boolean isLocalGame() {
-		return localGame;
+	public boolean isLocalGameOnly() {
+		return localGameOnly;
 	}
 
-	public void setLocalGame(boolean localGame) {
-		this.localGame = localGame;
+	public void setLocalGameOnly(boolean localGameOnly) {
+		this.localGameOnly = localGameOnly;
 	}
 
 	public List<AdmissionType> getSelectedTicketTypes() {

@@ -8,7 +8,7 @@ import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 public class TicketSearchViewModel {
 	public List<String> selectedSports;
 	private DisplayedPeriod displayedPeriod;
-	public boolean localGame;
+	public boolean localGameOnly;
 	public List<AdmissionType> selectedTicketTypes;
 	
 	public List<String> getSelectedSports() {
@@ -27,12 +27,12 @@ public class TicketSearchViewModel {
 		this.displayedPeriod = displayedPeriod2;
 	}
 
-	public boolean isLocalGame() {
-		return localGame;
+	public boolean isLocalGameOnly() {
+		return localGameOnly;
 	}
 
-	public void setLocalGame(boolean localGame) {
-		this.localGame = localGame;
+	public void setLocalGameOnly(boolean localGameOnly) {
+		this.localGameOnly = localGameOnly;
 	}
 
 	public List<AdmissionType> getSelectedTicketTypes() {
