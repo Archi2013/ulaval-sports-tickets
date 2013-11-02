@@ -36,14 +36,14 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="list", method=RequestMethod.POST)
-    public ModelAndView getTemp(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM, Model model) {
+    public ModelAndView getList(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM, Model model) {
 		logger.info("Search : search tickets");
 
 		ModelAndView mav = new ModelAndView("search/list");
 		
 		mav.addObject("tickets", searchService.getTickets(ticketSearchVM));
 		
-		mav.addObject("searchForm", ticketSearchVM);
+		mav.addObject("searchForm", ticketSearchVM); // Pour les tests
 		
 		return mav;
     }
