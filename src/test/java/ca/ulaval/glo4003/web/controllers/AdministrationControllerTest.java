@@ -2,9 +2,6 @@ package ca.ulaval.glo4003.web.controllers;
 
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
-
-import javax.inject.Inject;
-
 import junit.framework.Assert;
 
 import org.joda.time.DateTime;
@@ -15,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.CommandGameService;
@@ -25,6 +23,7 @@ import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.GameToAddViewModel;
+import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdministrationControllerTest {
@@ -35,7 +34,7 @@ public class AdministrationControllerTest {
 	private CommandGameService gameService;
 	
 	@Mock
-	SportService sportService;
+	private SportService sportService;
 
 	@Mock
 	private Model model;
@@ -43,7 +42,10 @@ public class AdministrationControllerTest {
 	@Mock
 	private DateParser dateParser;
 
-	private GameToAddViewModel viewModel = new GameToAddViewModel();
+	@Mock
+	private SportsViewModel sportsVM;
+	
+	private GameToAddViewModel gameToAddVM = new GameToAddViewModel();
 
 	@InjectMocks
 	private AdministrationController controller;
@@ -68,15 +70,23 @@ public class AdministrationControllerTest {
 	}
 
 	@Test
-	public void addGame_adds_game_to_add_to_model() {
-		controller.addGame(viewModel, model);
+	public void game_adds_a_sportsVM_to_model() {
+		ModelAndView model = controller.game();
+		ModelMap modelMap = model.getModelMap();
 
-		verify(model).addAttribute("game", viewModel);
+		Assert.assertTrue(modelMap.containsAttribute("sportsVM"));
+	}
+	
+	@Test
+	public void addGame_adds_game_to_add_to_model() {
+		controller.addGame(gameToAddVM, model);
+
+		verify(model).addAttribute("game", gameToAddVM);
 	}
 
 	@Test
 	public void addGame_returns_confirmation_view_if_service_throws_nothing() {
-		String viewReturned = controller.addGame(viewModel, model);
+		String viewReturned = controller.addGame(gameToAddVM, model);
 
 		Assert.assertEquals("admin/game-added", viewReturned);
 	}
@@ -86,7 +96,7 @@ public class AdministrationControllerTest {
 			GameDoesntExistException, GameAlreadyExistException, NoSportForUrlException {
 		doThrow(new SportDoesntExistException()).when(gameService).createNewGame(any(String.class), any(String.class),
 				any(DateTime.class));
-		String viewReturned = controller.addGame(viewModel, model);
+		String viewReturned = controller.addGame(gameToAddVM, model);
 
 		Assert.assertEquals("admin/game-added-data-error", viewReturned);
 	}

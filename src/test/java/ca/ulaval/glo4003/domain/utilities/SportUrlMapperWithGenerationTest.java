@@ -29,10 +29,10 @@ public class SportUrlMapperWithGenerationTest {
 	private static final String INVALID_SPORT_URL = "une-url-ne-correspondant-a-aucun-sport";
 	
 	@Mock
-	SportDao sportDao;
+	private SportDao sportDao;
 	
 	@InjectMocks
-	SportUrlMapperWithGeneration sportUrlMapper;
+	private SportUrlMapperWithGeneration sportUrlMapper;
 	
 	@Before
 	public void setUp() throws Exception {
