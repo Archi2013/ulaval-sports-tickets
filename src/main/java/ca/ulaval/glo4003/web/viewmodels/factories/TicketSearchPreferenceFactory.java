@@ -19,7 +19,7 @@ public class TicketSearchPreferenceFactory {
 	
 	public TicketSearchPreferenceDto createPreferenceDto(TicketSearchViewModel ticketSVM) {
 		TicketSearchPreferenceDto ticketSPDto = new TicketSearchPreferenceDto(ticketSVM.getSelectedSports(), ticketSVM.getDisplayedPeriod(),
-				ticketSVM.isLocalGameOnly(), ticketSVM.getSelectedTicketTypes());
+				ticketSVM.isLocalGameOnly(), ticketSVM.getSelectedTicketKinds());
 		return ticketSPDto;
 	}
 	
@@ -28,7 +28,7 @@ public class TicketSearchPreferenceFactory {
 		ticketSearchVM.setSelectedSports(ticketSPDto.getSelectedSports());
 		ticketSearchVM.setDisplayedPeriod(ticketSPDto.getDisplayedPeriod());
 		ticketSearchVM.setLocalGameOnly(ticketSPDto.isLocalGameOnly());
-		ticketSearchVM.setSelectedTicketTypes(ticketSPDto.getSelectedTicketTypes());
+		ticketSearchVM.setSelectedTicketKinds(ticketSPDto.getSelectedTicketKinds());
 		return ticketSearchVM;
 	}
 	
@@ -38,7 +38,7 @@ public class TicketSearchPreferenceFactory {
 		List<DisplayedPeriod> displayedPeriods = constants.getDisplayedPeriods();
 		ticketSearchVM.setDisplayedPeriod(displayedPeriods.get(displayedPeriods.size() - 1));
 		ticketSearchVM.setLocalGameOnly(false);
-		ticketSearchVM.setSelectedTicketTypes(constants.getTicketTypes());
+		ticketSearchVM.setSelectedTicketKinds(constants.getTicketKinds());
 		return ticketSearchVM;
 	}
 }

@@ -13,8 +13,8 @@ Période affichée : ${searchForm.displayedPeriod}
 <br>
 À domicile : <c:if test="${searchForm.localGameOnly}">Vrai</c:if>
 <br>
-Types de billet : <c:forEach items="${searchForm.selectedTicketTypes}" var="type">
-                      <span>${type}, </span>
+Types de billet : <c:forEach items="${searchForm.selectedTicketKinds}" var="kind">
+                      <span>${kind}, </span>
                   </c:forEach>
 </div>
 <table class="standard-table margin-25">

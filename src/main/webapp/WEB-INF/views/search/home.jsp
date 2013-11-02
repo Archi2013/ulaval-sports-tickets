@@ -20,7 +20,7 @@
             <div class="search-criterion">
                 <h4 class="search-criterion-title">Sport(s)</h4>
                 <div class="search-criterion-elements">
-                    <form:checkboxes delimiter="<br>" items="${sportsList}" path="selectedSports" onclick="doAjaxPost();"/>
+                    <form:checkboxes delimiter="<br>" items="${sportList}" path="selectedSports" onclick="doAjaxPost();"/>
                 </div>
             </div><!-- important supprime espace blanc
             --><div class="search-criterion">
@@ -40,8 +40,8 @@
             --><div class="search-criterion">
                 <h4 class="search-criterion-title">Type de billet</h4>
                 <div class="search-criterion-elements">
-                    <c:forEach items="${ticketTypes}" var="type">
-                        <form:checkbox path="selectedTicketTypes" value="${type.name()}" label="${type.toString()}"  onclick="doAjaxPost();"/><br>
+                    <c:forEach items="${ticketKinds}" var="kind">
+                        <form:checkbox path="selectedTicketKinds" value="${kind.name()}" label="${kind.toString()}"  onclick="doAjaxPost();"/><br>
                     </c:forEach>
                 </div>
             </div>

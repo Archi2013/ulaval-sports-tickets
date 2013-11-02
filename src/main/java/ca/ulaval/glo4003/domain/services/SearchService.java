@@ -1,6 +1,5 @@
 package ca.ulaval.glo4003.domain.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,12 +7,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.dtos.TicketForSearchDto;
+import ca.ulaval.glo4003.domain.dtos.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.utilities.Constants;
-import ca.ulaval.glo4003.domain.utilities.Constants.AdmissionType;
-import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
-import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.TicketForSearchDao;
 import ca.ulaval.glo4003.web.viewmodels.TicketForSearchViewModel;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
@@ -34,23 +30,20 @@ public class SearchService {
 	
 	@Inject
 	private TicketSearchPreferenceFactory ticketSearchPreferenceFactory;
-	
-	@Inject
-	private TicketSearchPreferenceFactory ticketSearchPreferenceViewModelFactory;
 
 	public TicketSearchViewModel getInitialisedTicketSearchViewModel() {
-		return ticketSearchPreferenceViewModelFactory.createInitialViewModel();
+		return ticketSearchPreferenceFactory.createInitialViewModel();
 	}
 
 	public void initSearchCriterions(ModelAndView mav) {
-		mav.addObject("sportsList", constants.getSportsList());
+		mav.addObject("sportList", constants.getSportsList());
 		mav.addObject("displayedPeriods", constants.getDisplayedPeriods());
-		mav.addObject("ticketTypes", constants.getTicketTypes());
+		mav.addObject("ticketKinds", constants.getTicketKinds());
 	}
 	
 	public List<TicketForSearchViewModel> getTickets(TicketSearchViewModel ticketSearchVM) {
-		List<TicketForSearchDto> ticketForSearchDtos = ticketForSearchDao.getTickets(
-				ticketSearchPreferenceFactory.createPreferenceDto(ticketSearchVM));
+		TicketSearchPreferenceDto preferenceDto = ticketSearchPreferenceFactory.createPreferenceDto(ticketSearchVM);
+		List<TicketForSearchDto> ticketForSearchDtos = ticketForSearchDao.getTickets(preferenceDto);
 		return ticketForSearchViewModelFactory.createViewModels(ticketForSearchDtos);
 	}
 }

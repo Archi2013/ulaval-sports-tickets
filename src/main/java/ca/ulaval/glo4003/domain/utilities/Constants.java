@@ -16,7 +16,7 @@ public class Constants {
 	@Inject
 	private SportDao sportDao;
 	
-	public static enum AdmissionType {
+	public static enum TicketKind {
 		GENERAL_ADMISSION, WITH_SEAT;
 		
 	    public String toString() {
@@ -87,10 +87,10 @@ public class Constants {
 		return list;
 	}
 	
-	public List<AdmissionType> getTicketTypes() {
-		List<AdmissionType> ticketTypes = new ArrayList<>();
-		ticketTypes.add(AdmissionType.GENERAL_ADMISSION);
-		ticketTypes.add(AdmissionType.WITH_SEAT);
+	public List<TicketKind> getTicketKinds() {
+		List<TicketKind> ticketTypes = new ArrayList<>();
+		ticketTypes.add(TicketKind.GENERAL_ADMISSION);
+		ticketTypes.add(TicketKind.WITH_SEAT);
 		return ticketTypes;
 	}
 }
