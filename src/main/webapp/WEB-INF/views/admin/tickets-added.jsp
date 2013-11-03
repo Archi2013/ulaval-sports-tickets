@@ -1,9 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<c:set var="pageTitle" value="Administration : accueil" />
+<c:set var="pageTitle" value="Ajout de billets réussis" />
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,12 +12,8 @@
 <body>
     <%@include file="../layout/header.jsp" %>
     
-    <nav>
-        <ul>
-            <li><a href="/admin/match">Ajout d'un match ▷</a></li>
-            <li><a href="/admin/billets/choisir-sport">Ajout de billets ▷</a></li>
-        </ul>
-    </nav>
+    <h2>${pageTitle}</h2>
+    
     
     <%@include file="../layout/footer.jsp" %>
 </body>

@@ -1,9 +1,12 @@
 package ca.ulaval.glo4003.domain.pojos.persistable;
 
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.pojos.Game;
+import ca.ulaval.glo4003.domain.pojos.Ticket;
 
 public class PersistableGame implements Game, Persistable<GameDto> {
 	public static final String NO_SPORT_SET = "The sport has not yet been set in this new game";
@@ -12,6 +15,7 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 	private String opponents;
 	private DateTime gameDate;
 	private String sportName;
+	private List<Ticket> tickets;
 
 	public PersistableGame(long id, String opponents, DateTime gameDate, String sportName) {
 		this.id = id;
@@ -25,6 +29,14 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 		this.opponents = opponents;
 		this.gameDate = gameDate;
 		this.sportName = NO_SPORT_SET;
+	}
+
+	public PersistableGame(Long id, String opponents, DateTime gameDate, String sportName, List<Ticket> tickets) {
+		this.id = id;
+		this.opponents = opponents;
+		this.gameDate = gameDate;
+		this.sportName = sportName;
+		this.tickets = tickets;
 	}
 
 	@Override
@@ -47,6 +59,22 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 			sportName = newSportName;
 		}
 
+	}
+
+	@Override
+	public void addTicket(Ticket ticketToAdd) {
+		if (!alreadyInTicketList(ticketToAdd)) {
+			tickets.add(ticketToAdd);
+		}
+	}
+
+	private boolean alreadyInTicketList(Ticket ticketToAdd) {
+		for (Ticket ticket : tickets) {
+			if (ticket.isTheSame(ticketToAdd)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
