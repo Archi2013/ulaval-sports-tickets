@@ -17,6 +17,13 @@ Types de billet : <c:forEach items="${searchForm.selectedTicketKinds}" var="kind
                       <span>${kind}, </span>
                   </c:forEach>
 </div>
+
+<c:if test="${preferencesSaved}">
+    <div class="information-block-succes-skin margin-25-50">
+        Vos préférences de recherche ont été sauvegardées.
+    </div>
+</c:if>
+
 <table class="standard-table margin-25">
 	<thead>
 		<tr>

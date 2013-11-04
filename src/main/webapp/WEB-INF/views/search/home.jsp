@@ -15,7 +15,7 @@
     <h2>${pageTitle}</h2>
     
     <section class="search-block">
-        <c:url value="/recherche/execution" var="searchAction"/>
+        <c:url value="/recherche/sauvegarde-preferences" var="searchAction"/>
         <form:form id="search-form" commandName="ticketSearchForm" action="${searchAction}" method="POST">
             <div class="search-criterion">
                 <h4 class="search-criterion-title">Sport(s)</h4>
@@ -45,6 +45,9 @@
                     </c:forEach>
                 </div>
             </div>
+            <c:if test="${connectedUser}">
+                <input type="submit" value="Sauvegarder" class="standard-button-rounded-border orange-button"/>
+            </c:if>
         </form:form>
     </section>
     <section id="ajax-table"><%@include file="list.jsp"%></section>

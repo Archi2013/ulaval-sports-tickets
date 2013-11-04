@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,9 +26,6 @@ public class SearchControllerTest {
 	
 	@Mock
 	private SearchService searchService;
-	
-	@Mock
-	private Model model;
 	
 	@InjectMocks
 	private SearchController controller;
@@ -81,10 +77,21 @@ public class SearchControllerTest {
 	}
 	
 	@Test
+	public void savePreferences_should_set_preferencesSaved_to_true() {
+		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
+		
+		ModelAndView mav = controller.savePreferences(ticketSearchVM);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("preseferencesSaved"));
+		assertTrue((boolean) modelMap.get("preferencesSaved"));
+	}
+	
+	@Test
 	public void getList_should_return_the_good_subview() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
 		
-		ModelAndView mav = controller.getList(ticketSearchVM, model);
+		ModelAndView mav = controller.getList(ticketSearchVM);
 
 		assertEquals("search/list", mav.getViewName());
 	}
@@ -96,7 +103,7 @@ public class SearchControllerTest {
 		
 		when(searchService.getTickets(ticketSearchVM)).thenReturn(tickets);
 		
-		ModelAndView mav = controller.getList(ticketSearchVM, model);
+		ModelAndView mav = controller.getList(ticketSearchVM);
 		ModelMap modelMap = mav.getModelMap();
 
 		assertTrue(modelMap.containsAttribute("tickets"));
