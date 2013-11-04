@@ -83,7 +83,7 @@ public class SearchControllerTest {
 		ModelAndView mav = controller.savePreferences(ticketSearchVM);
 		ModelMap modelMap = mav.getModelMap();
 		
-		assertTrue(modelMap.containsAttribute("preseferencesSaved"));
+		assertTrue(modelMap.containsAttribute("preferencesSaved"));
 		assertTrue((boolean) modelMap.get("preferencesSaved"));
 	}
 	
