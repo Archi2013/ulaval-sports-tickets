@@ -1,5 +1,7 @@
 package ca.ulaval.glo4003.web.viewmodels.factories;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
@@ -13,6 +15,7 @@ public class ChooseTicketsViewModelFactory {
 	public ChooseTicketsViewModel createViewModel(GameDto gameDto, SectionDto sectionDto) {
 		ChooseTicketsViewModel chooseTicketsVM = new ChooseTicketsViewModel();
 		chooseTicketsVM.setNumberOfTicketsToBuy(1);
+		chooseTicketsVM.setSelectedSeats(new ArrayList<String>());
 		if (sectionDto.isGeneralAdmission()) {
 			chooseTicketsVM.setTicketKind(TicketKind.GENERAL_ADMISSION);
 		} else {

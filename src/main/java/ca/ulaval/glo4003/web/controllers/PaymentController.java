@@ -35,7 +35,8 @@ public class PaymentController {
 			logger.info("Search : Home : usagé non connecté");
 		}
 		
-		mav.addObject("x", chooseTicketsVM.getSport());
+		mav.addObject("chooseTicketsForm", chooseTicketsVM);
+		
 		
 		return mav;
 	}

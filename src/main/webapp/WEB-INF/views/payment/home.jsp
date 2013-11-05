@@ -15,7 +15,14 @@
     <h2>${pageTitle}</h2>
     
     <div>
-    Type de ticket : ${x}<br>
+    Type de ticket : ${chooseTicketsForm.ticketKind}<br>
+    Type d'admission : ${chooseTicketsForm.admissionType}<br>
+    Nom de section : ${chooseTicketsForm.sectionName}<br>
+    Date : ${chooseTicketsForm.date}<br>
+    Opposants : ${chooseTicketsForm.opponents}<br>
+    Sport : ${chooseTicketsForm.sport}<br><br>
+    Sièges : ${chooseTicketsForm.selectedSeats.size()}<br>
+    Nombre de tickets : ${chooseTicketsForm.numberOfTicketsToBuy}
     </div>
     
     <%@include file="../layout/footer.jsp" %>
