@@ -20,7 +20,7 @@ import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
 @RunWith(MockitoJUnitRunner.class)
 public class SectionControllerTest {
 
-	public static final int GAME_ID = 123;
+	public static final Long GAME_ID = 123L;
 	private static final String TICKET_TYPE = "GÉNÉRAL:BLEUS";
 
 	@Mock

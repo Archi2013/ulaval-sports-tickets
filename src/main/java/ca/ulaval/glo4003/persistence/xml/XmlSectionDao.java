@@ -28,7 +28,7 @@ public class XmlSectionDao implements SectionDao {
 	}
 
 	@Override
-	public SectionDto get(int gameId, String sectionName) throws SectionDoesntExistException {
+	public SectionDto get(Long gameId, String sectionName) throws SectionDoesntExistException {
 		String xPath = "/base/tickets/ticket[gameID=\"" + gameId + "\"][section=\"" + sectionName + "\"]";
 
 		try {
@@ -41,9 +41,9 @@ public class XmlSectionDao implements SectionDao {
 			
 			// TODO à remplacer par des vrais sièges
 			List<String> seats = new ArrayList<>();
-			seats.add("2A");
-			seats.add("375");
-			seats.add("X1");
+			//seats.add("2A");
+			//seats.add("375");
+			//seats.add("X1");
 
 			return new SectionDto(admissionType, sectionName, numberOfTickets, Double.parseDouble(price), seats);
 		} catch (XPathExpressionException e) {
@@ -52,7 +52,7 @@ public class XmlSectionDao implements SectionDao {
 	}
 
 	@Override
-	public List<SectionDto> getAll(int gameId) throws GameDoesntExistException {
+	public List<SectionDto> getAll(Long gameId) throws GameDoesntExistException {
 		String xPath = "/base/games-sections/game-section[@gameID=\"" + gameId + "\"]/sections/section";
 
 		try {
@@ -63,7 +63,7 @@ public class XmlSectionDao implements SectionDao {
 		}
 	}
 
-	private List<SectionDto> convertNodesToSectionDtos(int gameId, List<SimpleNode> nodes)
+	private List<SectionDto> convertNodesToSectionDtos(Long gameId, List<SimpleNode> nodes)
 			throws SectionDoesntExistException, NoSuchAttributeException {
 		List<SectionDto> sections = new ArrayList<>();
 		for (SimpleNode node : nodes) {

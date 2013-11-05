@@ -15,12 +15,8 @@
     <h2>${pageTitle}</h2>
     
     <div>
-    Type de ticket : ${chooseTicketsForm.ticketKind}<br>
-    Type d'admission : ${chooseTicketsForm.admissionType}<br>
+    ID du match : ${chooseTicketsForm.gameId}<br>
     Nom de section : ${chooseTicketsForm.sectionName}<br>
-    Date : ${chooseTicketsForm.date}<br>
-    Opposants : ${chooseTicketsForm.opponents}<br>
-    Sport : ${chooseTicketsForm.sport}<br><br>
     Sièges : ${chooseTicketsForm.selectedSeats}<br>
     Nombre de tickets : ${chooseTicketsForm.numberOfTicketsToBuy}<br><br>
     Total : ${cumulatedPrice}

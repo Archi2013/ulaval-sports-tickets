@@ -31,7 +31,7 @@ public class SectionServiceTest {
 	private static final String ADMISSION = "GENERAL";
 	private static final String SECTION_NAME = "BLEUS";
 
-	private static final int GAME_ID = 12;
+	private static final Long GAME_ID = 12L;
 
 	@Mock
 	private SectionUrlMapper sectionUrlMapperMock;

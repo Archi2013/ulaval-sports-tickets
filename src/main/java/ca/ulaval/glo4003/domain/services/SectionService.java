@@ -36,7 +36,7 @@ public class SectionService {
 	@Inject
 	private ChooseTicketsViewModelFactory chooseTicketsViewModelFactory;
 
-	public SectionViewModel getSection(int gameId, String sectionUrl) throws SectionDoesntExistException {
+	public SectionViewModel getSection(Long gameId, String sectionUrl) throws SectionDoesntExistException {
 		try {
 			TicketType ticketType = sectionUrlMapper.getTicketType(sectionUrl);
 			GameDto game = gameDao.get(gameId);
@@ -49,7 +49,7 @@ public class SectionService {
 		}
 	}
 
-	public ChooseTicketsViewModel getChooseTicketsViewModel(int gameId, String sectionUrl) throws SectionDoesntExistException {
+	public ChooseTicketsViewModel getChooseTicketsViewModel(Long gameId, String sectionUrl) throws SectionDoesntExistException {
 		try {
 			TicketType ticketType = sectionUrlMapper.getTicketType(sectionUrl);
 			GameDto gameDto = gameDao.get(gameId);

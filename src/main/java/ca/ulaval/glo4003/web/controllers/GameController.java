@@ -23,7 +23,7 @@ public class GameController {
 	private QueryGameService gameService;
 
 	@RequestMapping(value = "/{gameId}/billets", method = RequestMethod.GET)
-	public String getTicketsForGame(@PathVariable int gameId, @PathVariable String sportNameUrl, Model model) {
+	public String getTicketsForGame(@PathVariable Long gameId, @PathVariable String sportNameUrl, Model model) {
 		try {
 			logger.info("Getting all tickets for game : " + gameId);
 

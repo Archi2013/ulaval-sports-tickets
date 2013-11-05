@@ -39,14 +39,10 @@
 	<div class="wrapper-choose-tickets-form padding-10">
 	   <c:url value="/paiement" var="searchAction"/>
 	   <form:form id="choose-tickets-form" commandName="chooseTicketsForm" modelAttribute="chooseTicketsForm" action="${searchAction}" method="POST">
-	       <form:hidden path="ticketKind"/>
-	       <form:hidden path="admissionType"/>
 	       <form:hidden path="sectionName"/>
-	       <form:hidden path="date"/>
-	       <form:hidden path="opponents"/>
-	       <form:hidden path="sport"/>
+	       <form:hidden path="gameId"/>
 	       <c:choose>
-	           <c:when test="${chooseTicketsForm.isGeneralAdmission()}">
+	           <c:when test="${section.isGeneralAdmission()}">
 	               <form:hidden path="selectedSeats"/>
 	               <form:label path="numberOfTicketsToBuy">Choisir le nombre de billets :</form:label> <form:input type="number" size="4" min="1" max="${section.numberOfTickets}" path="numberOfTicketsToBuy"/>
 	           </c:when>

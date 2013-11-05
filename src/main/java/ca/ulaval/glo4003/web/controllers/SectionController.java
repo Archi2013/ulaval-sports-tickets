@@ -24,7 +24,7 @@ public class SectionController {
 	private SectionService sectionService;
 
 	@RequestMapping(value = "/billets/{ticketType}", method = RequestMethod.GET)
-	public ModelAndView getSectionForGame(@PathVariable int gameId, @PathVariable String ticketType) {
+	public ModelAndView getSectionForGame(@PathVariable Long gameId, @PathVariable String ticketType) {
 		try {
 			logger.info("Getting ticket section : " + ticketType);
 			

@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 
 @Controller
@@ -43,7 +45,12 @@ public class PaymentController {
 
 		mav.addObject("cumulatedPrice", paymentService.getCumulatedPrice(chooseTicketsVM));
 		
-		mav.addObject("payment", paymentService.getPaymentViewModel(chooseTicketsVM));
+		try {
+			mav.addObject("payment", paymentService.getPaymentViewModel(chooseTicketsVM));
+		} catch (GameDoesntExistException | SectionDoesntExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		

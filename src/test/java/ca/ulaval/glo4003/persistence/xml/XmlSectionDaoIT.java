@@ -21,7 +21,7 @@ public class XmlSectionDaoIT {
 	
 	@Test
 	public void testGetSection() throws Exception {
-		SectionDto actual = sectionDao.get(1, "Front Row");
+		SectionDto actual = sectionDao.get(1L, "Front Row");
 		
 		List<String> seats = new ArrayList();
 		
@@ -31,7 +31,7 @@ public class XmlSectionDaoIT {
 	
 	@Test
 	public void testGetAllSections() throws Exception {
-		List<SectionDto> sections = sectionDao.getAll(1);
+		List<SectionDto> sections = sectionDao.getAll(1L);
 		
 		List<String> seats = new ArrayList();
 		
@@ -48,12 +48,12 @@ public class XmlSectionDaoIT {
 	
 	@Test(expected=SectionDoesntExistException.class)
 	public void testGetInvalidGameSectionShouldThrow() throws Exception {
-		sectionDao.get(-1, "Générale");
+		sectionDao.get(-1L, "Générale");
 	}
 	
 	@Test(expected=SectionDoesntExistException.class)
 	public void testGetInvalidSectionShouldThrow() throws Exception {
-		sectionDao.get(1, "Indigo");
+		sectionDao.get(1L, "Indigo");
 	}
 
 	private void assertSection(SectionDto expected, SectionDto actual) {

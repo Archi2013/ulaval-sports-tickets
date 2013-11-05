@@ -55,7 +55,7 @@ public class XmlGameDao implements GameDao {
 	}
 
 	@Override
-	public GameDto get(int id) throws GameDoesntExistException {
+	public GameDto get(Long id) throws GameDoesntExistException {
 		String xPath = String.format(GAME_XPATH_ID, id);
 		try {
 			SimpleNode node = database.extractNode(xPath);

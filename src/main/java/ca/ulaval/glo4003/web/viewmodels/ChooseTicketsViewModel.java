@@ -2,24 +2,12 @@ package ca.ulaval.glo4003.web.viewmodels;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
-
-import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
-
 public class ChooseTicketsViewModel {
 	public Integer numberOfTicketsToBuy;
 	public List<String> selectedSeats;
-	
-	public TicketKind ticketKind;
-	public String admissionType;
-	public String sectionName;
-	public DateTime date;
-	public String opponents;
-	public String sport;
 
-	public boolean isGeneralAdmission() {
-		return ( ticketKind.equals(TicketKind.GENERAL_ADMISSION) ? true : false );
-	}
+	public String sectionName;
+	public Long gameId;
 	
 	public Integer getNumberOfTicketsToBuy() {
 		return numberOfTicketsToBuy;
@@ -37,22 +25,6 @@ public class ChooseTicketsViewModel {
 		this.selectedSeats = selectedSeats;
 	}
 
-	public TicketKind getTicketKind() {
-		return ticketKind;
-	}
-
-	public void setTicketKind(TicketKind ticketKind) {
-		this.ticketKind = ticketKind;
-	}
-
-	public String getAdmissionType() {
-		return admissionType;
-	}
-
-	public void setAdmissionType(String admissionType) {
-		this.admissionType = admissionType;
-	}
-
 	public String getSectionName() {
 		return sectionName;
 	}
@@ -61,27 +33,11 @@ public class ChooseTicketsViewModel {
 		this.sectionName = sectionName;
 	}
 
-	public DateTime getDate() {
-		return date;
+	public Long getGameId() {
+		return gameId;
 	}
 
-	public void setDate(DateTime date) {
-		this.date = date;
-	}
-
-	public String getOpponents() {
-		return opponents;
-	}
-
-	public void setOpponents(String opponents) {
-		this.opponents = opponents;
-	}
-
-	public String getSport() {
-		return sport;
-	}
-
-	public void setSport(String sport) {
-		this.sport = sport;
+	public void setGameId(Long gameId) {
+		this.gameId = gameId;
 	}
 }

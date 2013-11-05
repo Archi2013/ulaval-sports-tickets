@@ -18,7 +18,7 @@ import ca.ulaval.glo4003.web.viewmodels.SectionsViewModel;
 @RunWith(MockitoJUnitRunner.class)
 public class GameControllerTest {
 
-	public static final int GAME_ID = 123;
+	public static final Long GAME_ID = 123L;
 	public static final String A_SPORT_NAME = "SportName";
 
 	@Mock
