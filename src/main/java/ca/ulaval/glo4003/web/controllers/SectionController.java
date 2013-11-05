@@ -5,13 +5,14 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SectionService;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
+import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
 
 @Controller
@@ -23,15 +24,23 @@ public class SectionController {
 	private SectionService sectionService;
 
 	@RequestMapping(value = "/billets/{ticketType}", method = RequestMethod.GET)
-	public String getSectionForGame(@PathVariable int gameId, @PathVariable String ticketType, Model model) {
+	public ModelAndView getSectionForGame(@PathVariable int gameId, @PathVariable String ticketType) {
 		try {
 			logger.info("Getting ticket section : " + ticketType);
-
+			
 			SectionViewModel section = sectionService.getSection(gameId, ticketType);
-			model.addAttribute("section", section);
-			return "section/details";
+			
+			ModelAndView mav = new ModelAndView("section/details");
+			
+			mav.addObject("section", section);
+			
+			ChooseTicketsViewModel chooseTicketsVM = sectionService.getChooseTicketsViewModel(gameId, ticketType);
+			
+			mav.addObject("chooseTicketsForm", chooseTicketsVM);
+			
+			return mav;
 		} catch (SectionDoesntExistException e) {
-			return "error/404";
+			return new ModelAndView("error/404");
 		}
 	}
 }

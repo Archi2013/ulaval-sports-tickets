@@ -30,4 +30,9 @@ public class SectionDto {
 		return price;
 	}
 
+	public boolean isGeneralAdmission() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }

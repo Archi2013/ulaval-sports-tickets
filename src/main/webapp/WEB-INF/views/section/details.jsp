@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -29,6 +30,20 @@
 				Section : <strong>${section.sectionName}</strong>
 			</div>
 		</div>
+	</div>
+	<div class="wrapper-choose-tickets-form padding-10">
+	   <c:url value="/recherche/sauvegarde-preferences" var="searchAction"/>
+	   <form:form id="choose-tickets-form" commandName="chooseTicketsForm" action="${searchAction}" method="POST">
+	       <c:choose>
+	           <c:when test="${chooseTicketsForm.isGeneralAdmission()}">
+	               <form:label path="numberOfTicketsToBuy">Choisir le nombre de billets :</form:label> <form:input type="number" size="4" min="1" max="${section.numberOfTickets}" path="numberOfTicketsToBuy"/>
+	           </c:when>
+	           <c:otherwise>
+	           
+	           </c:otherwise>
+	       </c:choose>
+	       <input type="submit" value="Sélectionner" class="standard-button-rounded-border orange-button"/>
+	   </form:form>
 	</div>
 
 	<%@include file="../layout/footer.jsp"%>
