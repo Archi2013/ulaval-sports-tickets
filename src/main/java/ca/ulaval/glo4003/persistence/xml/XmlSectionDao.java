@@ -38,8 +38,14 @@ public class XmlSectionDao implements SectionDao {
 			}
 			String price = database.extractPath(xPath + "/price");
 			String admissionType = database.extractPath(xPath + "/type");
+			
+			// TODO à remplacer par des vrais sièges
+			List<String> seats = new ArrayList<>();
+			seats.add("2A");
+			seats.add("375");
+			seats.add("X1");
 
-			return new SectionDto(admissionType, sectionName, numberOfTickets, Double.parseDouble(price));
+			return new SectionDto(admissionType, sectionName, numberOfTickets, Double.parseDouble(price), seats);
 		} catch (XPathExpressionException e) {
 			throw new XmlIntegrityException(e);
 		}

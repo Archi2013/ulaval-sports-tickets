@@ -56,4 +56,12 @@ public class SectionViewModel {
 	public List<String> getSeats() {
 		return seats;
 	}
+	
+	public boolean isGeneralAdmission() {
+		if (seats.size() == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

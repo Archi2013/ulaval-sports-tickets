@@ -27,7 +27,12 @@
 			<div class="ticket-date-info">${section.date}</div>
 			<div class="ticket-seat-info">
 				Type d'admission : <strong>${section.admissionType}</strong><br>
-				Section : <strong>${section.sectionName}</strong>
+				<c:choose>
+				    <c:when test="${section.isGeneralAdmission()}"></c:when>
+				    <c:otherwise>
+				        Section : <strong>${section.sectionName}</strong>
+				    </c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>

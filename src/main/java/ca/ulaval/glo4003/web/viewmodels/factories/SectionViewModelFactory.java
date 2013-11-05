@@ -2,7 +2,6 @@ package ca.ulaval.glo4003.web.viewmodels.factories;
 
 import static com.google.common.collect.Lists.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -26,14 +25,9 @@ public class SectionViewModelFactory {
 		String priceFR = (new Double(section.getPrice())).toString();
 		priceFR = priceFR.replace(".", ",");
 		
-		List<String> l = new ArrayList<>();
-		l.add("2A");
-		l.add("375");
-		l.add("X1");
-		
 		return new SectionViewModel(section.getAdmissionType(), section.getSectionName(), section.getNumberOfTickets(),
 				priceFR, dateFR, game.getOpponents(), createUrl(section.getAdmissionType(),
-						section.getSectionName()), l);
+						section.getSectionName()), section.getSeats());
 	}
 
 	public List<SectionViewModel> createViewModel(List<SectionDto> sections, GameDto gameDto) {
