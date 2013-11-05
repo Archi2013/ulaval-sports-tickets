@@ -15,12 +15,28 @@
     <h2>${pageTitle}</h2>
     
     <div>
-    ID du match : ${chooseTicketsForm.gameId}<br>
-    Nom de section : ${chooseTicketsForm.sectionName}<br>
-    Sièges : ${chooseTicketsForm.selectedSeats}<br>
-    Nombre de tickets : ${chooseTicketsForm.numberOfTicketsToBuy}<br><br>
-    Total : ${cumulatedPrice}
+        <table class="standard-table margin-25">
+            <thead>
+                <tr>
+                    <th>Sport</th>
+                    <th>Date</th>
+                    <th>Type d'admission</th>
+                    <th>Section</th>
+                    <th>Nombre de billets</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>${payment.sectionForPaymentViewModel.sport}</td>
+                    <td>${payment.sectionForPaymentViewModel.date}</td>
+                    <td>${payment.sectionForPaymentViewModel.admissionType}</td>
+                    <td>${payment.sectionForPaymentViewModel.sectionName}</td>
+                    <td>${payment.sectionForPaymentViewModel.numberOfTicketsToBuy}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+    Total : ${payment.cumulatedPrice}
     
     <%@include file="../layout/footer.jsp" %>
 </body>

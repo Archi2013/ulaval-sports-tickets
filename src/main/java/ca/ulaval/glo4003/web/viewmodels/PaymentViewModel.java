@@ -14,11 +14,11 @@ public class PaymentViewModel {
 		this.cumulatedPrice = cumulatedPrice;
 	}
 
-	public SectionForPaymentViewModel getTicketForPaymentViewModel() {
+	public SectionForPaymentViewModel getSectionForPaymentViewModel() {
 		return sectionForPaymentViewModel;
 	}
 	
-	public void setTicketForPaymentViewModel(SectionForPaymentViewModel sectionForPaymentViewModel) {
+	public void setSectionForPaymentViewModel(SectionForPaymentViewModel sectionForPaymentViewModel) {
 		this.sectionForPaymentViewModel = sectionForPaymentViewModel;
 	}
 }
