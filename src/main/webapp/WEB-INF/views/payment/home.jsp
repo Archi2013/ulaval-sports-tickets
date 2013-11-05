@@ -21,8 +21,9 @@
     Date : ${chooseTicketsForm.date}<br>
     Opposants : ${chooseTicketsForm.opponents}<br>
     Sport : ${chooseTicketsForm.sport}<br><br>
-    Sièges : ${chooseTicketsForm.selectedSeats.size()}<br>
-    Nombre de tickets : ${chooseTicketsForm.numberOfTicketsToBuy}
+    Sièges : ${chooseTicketsForm.selectedSeats}<br>
+    Nombre de tickets : ${chooseTicketsForm.numberOfTicketsToBuy}<br><br>
+    Total : ${cumulatedPrice}
     </div>
     
     <%@include file="../layout/footer.jsp" %>

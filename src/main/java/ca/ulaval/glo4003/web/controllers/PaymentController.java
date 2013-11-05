@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 
@@ -20,6 +21,9 @@ public class PaymentController {
 	
 	@Inject
 	SearchService searchService;
+	
+	@Inject
+	PaymentService paymentService;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView home(@ModelAttribute("chooseTicketsForm") ChooseTicketsViewModel chooseTicketsVM) {
@@ -36,6 +40,11 @@ public class PaymentController {
 		}
 		
 		mav.addObject("chooseTicketsForm", chooseTicketsVM);
+
+		mav.addObject("cumulatedPrice", paymentService.getCumulatedPrice(chooseTicketsVM));
+		
+		mav.addObject("payment", paymentService.getPaymentViewModel(chooseTicketsVM));
+		
 		
 		
 		return mav;

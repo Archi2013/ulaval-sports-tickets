@@ -41,7 +41,7 @@ public class SearchController {
 		
 		mav.addObject("ticketSearchForm", ticketSearchVM);
 		
-		mav.addObject("tickets", searchService.getTickets(ticketSearchVM));
+		mav.addObject("sections", searchService.getSections(ticketSearchVM));
 		
 		mav.addObject("searchForm", ticketSearchVM); // Pour les tests
 		
@@ -69,7 +69,7 @@ public class SearchController {
 
 		ModelAndView mav = new ModelAndView("search/list");
 		
-		mav.addObject("tickets", searchService.getTickets(ticketSearchVM));
+		mav.addObject("sections", searchService.getSections(ticketSearchVM));
 		
 		mav.addObject("searchForm", ticketSearchVM); // Pour les tests
 		
