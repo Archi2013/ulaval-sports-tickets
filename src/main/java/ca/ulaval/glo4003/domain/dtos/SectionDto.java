@@ -32,7 +32,7 @@ public class SectionDto {
 
 	public boolean isGeneralAdmission() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 }

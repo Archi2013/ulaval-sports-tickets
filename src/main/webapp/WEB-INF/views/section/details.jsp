@@ -39,7 +39,10 @@
 	               <form:label path="numberOfTicketsToBuy">Choisir le nombre de billets :</form:label> <form:input type="number" size="4" min="1" max="${section.numberOfTickets}" path="numberOfTicketsToBuy"/>
 	           </c:when>
 	           <c:otherwise>
-	           
+	               <label>Choisir des billets suivant les sièges :</label>
+	               <div class="wrapper-seats">
+	                   <form:checkboxes items="${section.seats}" path="selectedSeats" delimiter="<br>"/>
+	               </div>
 	           </c:otherwise>
 	       </c:choose>
 	       <input type="submit" value="Sélectionner" class="standard-button-rounded-border orange-button"/>
