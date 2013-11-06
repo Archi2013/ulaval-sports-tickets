@@ -29,9 +29,20 @@ public class SectionController {
 		try {
 			logger.info("Getting ticket section : " + ticketType);
 			
+			ModelAndView mav = new ModelAndView("section/details");
+			
+			boolean connectedUser = true; // mettre la bonne valeur suivant la situation
+			
+			if (connectedUser) {
+				logger.info("Fiche d'un billet : usagé connecté");
+				mav.addObject("connectedUser", connectedUser);
+			} else {
+				logger.info("Fiche d'un billet : usagé non connecté");
+				mav.addObject("connectedUser", connectedUser);
+			}
+			
 			SectionViewModel section = sectionService.getSection(gameId, ticketType);
 			
-			ModelAndView mav = new ModelAndView("section/details");
 			mav.addObject("currency", Constants.CURRENCY);
 			
 			mav.addObject("section", section);

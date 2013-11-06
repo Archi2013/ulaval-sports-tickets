@@ -26,15 +26,6 @@ public class PaymentService {
 	@Inject
 	PaymentViewModelFactory paymentViewModelFactory;
 
-	public double getCumulatedPrice(ChooseTicketsViewModel chooseTicketsVM) {
-		double price = 20.5;
-		//if (chooseTicketsVM.isGeneralAdmission()) {
-			return chooseTicketsVM.getNumberOfTicketsToBuy() * price;
-		//} else {
-			//return chooseTicketsVM.getSelectedSeats().size() * price;
-		//}
-	}
-
 	public PaymentViewModel getPaymentViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
 		GameDto gameDto = gameDao.get(chooseTicketsVM.getGameId());
 		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());

@@ -37,16 +37,13 @@ public class PaymentController {
 		boolean connectedUser = true; // mettre la bonne valeur suivant la situation
 		
 		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("Search : Home : usagé connecté");
+			logger.info("Payment : Home : usagé connecté");
 		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("Search : Home : usagé non connecté");
+			logger.info("Payment : Home : usagé non connecté");
+			return new ModelAndView("payment/not-connected-user");
 		}
 		
 		mav.addObject("chooseTicketsForm", chooseTicketsVM);
-
-		mav.addObject("cumulatedPrice", paymentService.getCumulatedPrice(chooseTicketsVM));
 		
 		try {
 			mav.addObject("payment", paymentService.getPaymentViewModel(chooseTicketsVM));
