@@ -34,7 +34,7 @@ public class TicketSearchPreferenceFactory {
 	
 	public TicketSearchViewModel createInitialViewModel() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
-		ticketSearchVM.setSelectedSports(constants.getSportsList());
+		ticketSearchVM.setSelectedSports(constants.getSportList());
 		List<DisplayedPeriod> displayedPeriods = constants.getDisplayedPeriods();
 		ticketSearchVM.setDisplayedPeriod(displayedPeriods.get(displayedPeriods.size() - 1));
 		ticketSearchVM.setLocalGameOnly(false);

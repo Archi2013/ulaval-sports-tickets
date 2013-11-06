@@ -36,7 +36,7 @@ public class SearchService {
 	}
 
 	public void initSearchCriterions(ModelAndView mav) {
-		mav.addObject("sportList", constants.getSportsList());
+		mav.addObject("sportList", constants.getSportList());
 		mav.addObject("displayedPeriods", constants.getDisplayedPeriods());
 		mav.addObject("ticketKinds", constants.getTicketKinds());
 	}

@@ -1,21 +1,26 @@
 package ca.ulaval.glo4003.web.viewmodels;
 
-import java.util.List;
-
-import org.joda.time.DateTime;
-
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 
 public class SectionForPaymentViewModel {
 	public Integer numberOfTicketsToBuy;
-	public List<String> selectedSeats;
+	public String selectedSeats;
 	
 	public TicketKind ticketKind;
 	public String admissionType;
 	public String sectionName;
-	public DateTime date;
+	public String date;
 	public String opponents;
 	public String sport;
+	public String subtotal;
+	
+	public Boolean isGeneralAdmission() {
+		if (ticketKind.equals(TicketKind.GENERAL_ADMISSION)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	public Integer getNumberOfTicketsToBuy() {
 		return numberOfTicketsToBuy;
@@ -25,11 +30,11 @@ public class SectionForPaymentViewModel {
 		this.numberOfTicketsToBuy = numberOfTicketsToBuy;
 	}
 	
-	public List<String> getSelectedSeats() {
+	public String getSelectedSeats() {
 		return selectedSeats;
 	}
 	
-	public void setSelectedSeats(List<String> selectedSeats) {
+	public void setSelectedSeats(String selectedSeats) {
 		this.selectedSeats = selectedSeats;
 	}
 	
@@ -57,11 +62,11 @@ public class SectionForPaymentViewModel {
 		this.sectionName = sectionName;
 	}
 	
-	public DateTime getDate() {
+	public String getDate() {
 		return date;
 	}
 	
-	public void setDate(DateTime date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	
@@ -79,5 +84,13 @@ public class SectionForPaymentViewModel {
 	
 	public void setSport(String sport) {
 		this.sport = sport;
+	}
+
+	public String getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(String subtotal) {
+		this.subtotal = subtotal;
 	}
 }

@@ -264,6 +264,10 @@ footer {
     margin: 25px;
 }
 
+.padding-20 {
+    padding: 20px;
+}
+
 .information-block(@background-color, @border-color, @text-color) {
     background-color: @background-color;
     border: 2px solid @border-color;
@@ -365,7 +369,6 @@ footer {
 
 .wrapper-choose-tickets-form {
     text-align: center;
-    padding: 20px;
     margin-bottom: 25px;
     border: 1px solid #ddd;
     background: lighten(@standard-blue-gray-color, 55%);
@@ -518,6 +521,25 @@ footer {
         position: absolute;
         right: 20px;
         bottom: 20px;
+    }
+}
+
+.total-price-container {
+    text-align: center;
+    margin-bottom: 25px;
+    border: 1px solid #ddd;
+    background: lighten(@standard-blue-gray-color, 55%);
+    
+    span {
+        font-size: 1.3em;
+        line-height: 1.5em;
+        color: @standard-dark-gray-color;
+    }
+    
+    strong {
+        color: @standard-blue-color;
+        font-size: 1.7em;
+        font-weight: 400;
     }
 }
 

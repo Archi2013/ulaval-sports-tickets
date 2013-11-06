@@ -64,7 +64,7 @@ public class SearchServiceTest {
 		ModelAndView mav = new ModelAndView();
 		List<String> sportList = new ArrayList<>();
 		
-		when(constants.getSportsList()).thenReturn(sportList);
+		when(constants.getSportList()).thenReturn(sportList);
 		
 		service.initSearchCriterions(mav);
 		ModelMap modelMap = mav.getModelMap();

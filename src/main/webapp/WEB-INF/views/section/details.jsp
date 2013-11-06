@@ -36,7 +36,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="wrapper-choose-tickets-form padding-10">
+	<div class="wrapper-choose-tickets-form padding-20">
 	   <c:url value="/paiement" var="searchAction"/>
 	   <form:form id="choose-tickets-form" commandName="chooseTicketsForm" modelAttribute="chooseTicketsForm" action="${searchAction}" method="POST">
 	       <form:hidden path="sectionName"/>
@@ -54,6 +54,7 @@
 	               </div>
 	           </c:otherwise>
 	       </c:choose>
+	       <span style="padding-left: 20px; padding-right:20px;"></span>
 	       <input type="submit" value="Sélectionner" class="standard-button-rounded-border orange-button"/>
 	   </form:form>
 	</div>

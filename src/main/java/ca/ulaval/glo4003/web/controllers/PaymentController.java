@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
+import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
@@ -30,6 +31,8 @@ public class PaymentController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView home(@ModelAttribute("chooseTicketsForm") ChooseTicketsViewModel chooseTicketsVM) {
 		ModelAndView mav = new ModelAndView("payment/home");
+		
+		mav.addObject("currency", Constants.CURRENCY);
 		
 		boolean connectedUser = true; // mettre la bonne valeur suivant la situation
 		

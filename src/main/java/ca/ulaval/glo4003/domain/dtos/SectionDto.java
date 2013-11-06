@@ -18,6 +18,14 @@ public class SectionDto {
 		this.seats = seats;
 	}
 
+	public boolean isGeneralAdmission() {
+		if (seats.size() == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public String getAdmissionType() {
 		return admissionType;
 	}
@@ -37,13 +45,4 @@ public class SectionDto {
 	public List<String> getSeats() {
 		return seats;
 	}
-
-	public boolean isGeneralAdmission() {
-		if (seats.size() == 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 }

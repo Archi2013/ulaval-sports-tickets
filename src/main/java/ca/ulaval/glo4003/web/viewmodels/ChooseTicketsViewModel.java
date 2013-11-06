@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.web.viewmodels;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChooseTicketsViewModel {
@@ -8,6 +9,10 @@ public class ChooseTicketsViewModel {
 
 	public String sectionName;
 	public Long gameId;
+	
+	public ChooseTicketsViewModel() {
+		this.selectedSeats = new ArrayList<String>();
+	}
 	
 	public Integer getNumberOfTicketsToBuy() {
 		return numberOfTicketsToBuy;
@@ -22,7 +27,9 @@ public class ChooseTicketsViewModel {
 	}
 
 	public void setSelectedSeats(List<String> selectedSeats) {
-		this.selectedSeats = selectedSeats;
+		if (selectedSeats != null) {
+			this.selectedSeats = selectedSeats;
+		}
 	}
 
 	public String getSectionName() {

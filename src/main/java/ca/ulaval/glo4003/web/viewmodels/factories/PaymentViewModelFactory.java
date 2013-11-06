@@ -1,31 +1,24 @@
 package ca.ulaval.glo4003.web.viewmodels.factories;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SectionForPaymentViewModel;
 
 @Component
 public class PaymentViewModelFactory {
+	
+	@Inject
+	SectionForPaymentViewModelFactory sectionForPaymentViewModelFactory;
 
 	public PaymentViewModel createViewModel(ChooseTicketsViewModel chooseTicketsVM, GameDto gameDto, SectionDto sectionDto) {
-		SectionForPaymentViewModel sectionForPaymentVM = new SectionForPaymentViewModel();
-		sectionForPaymentVM.setNumberOfTicketsToBuy(chooseTicketsVM.getNumberOfTicketsToBuy());
-		sectionForPaymentVM.setSelectedSeats(chooseTicketsVM.getSelectedSeats());
-		if (sectionDto.isGeneralAdmission()) {
-			sectionForPaymentVM.setTicketKind(TicketKind.GENERAL_ADMISSION);
-		} else {
-			sectionForPaymentVM.setTicketKind(TicketKind.WITH_SEAT);
-		}
-		sectionForPaymentVM.setAdmissionType(sectionDto.getAdmissionType());
-		sectionForPaymentVM.setSectionName(sectionDto.getSectionName());
-		sectionForPaymentVM.setDate(gameDto.getGameDate());
-		sectionForPaymentVM.setOpponents(gameDto.getOpponents());
-		sectionForPaymentVM.setSport(gameDto.getSportName());
+		SectionForPaymentViewModel sectionForPaymentVM = sectionForPaymentViewModelFactory.createViewModel(chooseTicketsVM,
+				gameDto, sectionDto);
 		
 		Double cumulatedPrice = 0.0;
 		
@@ -35,10 +28,12 @@ public class PaymentViewModelFactory {
 			cumulatedPrice = chooseTicketsVM.getSelectedSeats().size() * sectionDto.getPrice();
 		}
 		
+		String cumulatedPriceFR = cumulatedPrice.toString().replace(".", ",");
+		
 		PaymentViewModel paymentVM = new PaymentViewModel();
 		
 		paymentVM.setSectionForPaymentViewModel(sectionForPaymentVM);
-		paymentVM.setCumulatedPrice(cumulatedPrice);
+		paymentVM.setCumulatedPrice(cumulatedPriceFR);
 		
 		return paymentVM;
 	}

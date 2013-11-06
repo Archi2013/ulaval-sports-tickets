@@ -7,11 +7,13 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 
 @Component
 public class Constants {
+	
+	public static final String LONG_DATE_TIME_FORMAT = "d MMMM yyyy à HH'h'mm z";
+	public static final String CURRENCY = "CDN$";
 	
 	@Inject
 	private SportDao sportDao;
@@ -68,15 +70,8 @@ public class Constants {
 	    }
 	}
 	
-	public List<String> getSportsList() {
-		List<SportDto> sportsDto = sportDao.getAll();
-		
-		List<String> sportsList = new ArrayList<>();
-		
-		for (SportDto sport : sportsDto) {
-			sportsList.add(sport.getName());
-		}
-		return sportsList;
+	public List<String> getSportList() {
+		return sportDao.getAllSportNames();
 	}
 	
 	public List<DisplayedPeriod> getDisplayedPeriods() {
