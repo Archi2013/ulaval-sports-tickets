@@ -70,6 +70,28 @@ public class Constants {
 	    }
 	}
 	
+	public static enum CreditCardType {
+		MISTERCARD, VASI, AMERICANEXPRESSO;
+		
+	    public String toString() {
+	        String name = "";
+	        switch (ordinal()) {
+	        case 0:
+	            name = "Mistercard";
+	            break;
+	        case 1:
+	            name = "Vasi";
+	            break;
+	        case 2:
+	        	name = "AmericanExpresso";
+	        default:
+	            name = "Erreur";
+	            break;
+	        }
+	        return name;
+	    }
+	}
+	
 	public List<String> getSportList() {
 		return sportDao.getAllSportNames();
 	}

@@ -56,7 +56,8 @@
         </table>
     </div>
     <div class="total-price-container padding-20">
-        <span>Total : </span><strong>${payment.cumulatedPrice} ${currency}</strong><span style="padding-left: 20px; padding-right:20px;"></span><input type="submit" value="Valider la commande" class="standard-button-rounded-border orange-button"/>
+        <span>Total : </span><strong>${payment.cumulatedPrice} ${currency}</strong><span style="padding-left: 20px; padding-right:20px;"></span>
+        <input type="submit" value="Valider la commande" class="standard-button-rounded-border orange-button"/>
     </div>
     
     <%@include file="../layout/footer.jsp" %>

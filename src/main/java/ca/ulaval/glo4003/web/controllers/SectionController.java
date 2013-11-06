@@ -35,6 +35,7 @@ public class SectionController {
 			logger.info("Getting ticket section : " + ticketType);
 			
 			ModelAndView mav = new ModelAndView("section/details");
+			mav.addObject("currency", Constants.CURRENCY);
 			
 			Boolean connectedUser = currentUser.isLogged();
 			
@@ -47,8 +48,6 @@ public class SectionController {
 			}
 			
 			SectionViewModel section = sectionService.getSection(gameId, ticketType);
-			
-			mav.addObject("currency", Constants.CURRENCY);
 			
 			mav.addObject("section", section);
 			
