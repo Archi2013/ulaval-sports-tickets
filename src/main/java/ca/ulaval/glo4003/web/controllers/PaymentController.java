@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.utilities.Constants;
+import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
@@ -27,6 +29,9 @@ public class PaymentController {
 	
 	@Inject
 	PaymentService paymentService;
+	
+	@Autowired
+	public User currentUser;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView home(@ModelAttribute("chooseTicketsForm") ChooseTicketsViewModel chooseTicketsVM) {
@@ -34,7 +39,7 @@ public class PaymentController {
 		
 		mav.addObject("currency", Constants.CURRENCY);
 		
-		boolean connectedUser = true; // mettre la bonne valeur suivant la situation
+		Boolean connectedUser = currentUser.isLogged();
 		
 		if (connectedUser) {
 			logger.info("Payment : Home : usagé connecté");

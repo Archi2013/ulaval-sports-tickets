@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.utilities.Constants;
+import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
 
 @Controller
@@ -21,13 +23,16 @@ public class SearchController {
 	
 	@Inject
 	SearchService searchService;
+	
+	@Autowired
+	public User currentUser;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("search/home");
 		mav.addObject("currency", Constants.CURRENCY);
 		
-		boolean connectedUser = true; // mettre la bonne valeur suivant la situation
+		boolean connectedUser = currentUser.isLogged();
 		
 		TicketSearchViewModel ticketSearchVM = searchService.getInitialisedTicketSearchViewModel();
 		

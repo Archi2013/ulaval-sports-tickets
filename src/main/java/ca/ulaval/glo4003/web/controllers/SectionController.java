@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SectionService;
 import ca.ulaval.glo4003.domain.utilities.Constants;
+import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
@@ -23,6 +25,9 @@ public class SectionController {
 
 	@Inject
 	private SectionService sectionService;
+	
+	@Autowired
+	public User currentUser;
 
 	@RequestMapping(value = "/billets/{ticketType}", method = RequestMethod.GET)
 	public ModelAndView getSectionForGame(@PathVariable Long gameId, @PathVariable String ticketType) {
@@ -31,7 +36,7 @@ public class SectionController {
 			
 			ModelAndView mav = new ModelAndView("section/details");
 			
-			boolean connectedUser = true; // mettre la bonne valeur suivant la situation
+			Boolean connectedUser = currentUser.isLogged();
 			
 			if (connectedUser) {
 				logger.info("Fiche d'un billet : usagé connecté");
