@@ -27,7 +27,7 @@ public class SectionController {
 	private SectionService sectionService;
 	
 	@Autowired
-	public User currentUser;
+	private User currentUser;
 
 	@RequestMapping(value = "/billets/{ticketType}", method = RequestMethod.GET)
 	public ModelAndView getSectionForGame(@PathVariable Long gameId, @PathVariable String ticketType) {

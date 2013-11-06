@@ -3,15 +3,15 @@ package ca.ulaval.glo4003.web.viewmodels;
 
 public class PaymentViewModel {
 	
-	public String cumulatedPrice;
+	public String cumulativePrice;
 	public SectionForPaymentViewModel sectionForPaymentViewModel;
 	
-	public String getCumulatedPrice() {
-		return cumulatedPrice;
+	public String getCumulativePrice() {
+		return cumulativePrice;
 	}
 
-	public void setCumulatedPrice(String cumulatedPrice) {
-		this.cumulatedPrice = cumulatedPrice;
+	public void setCumulativePrice(String cumulativePrice) {
+		this.cumulativePrice = cumulativePrice;
 	}
 
 	public SectionForPaymentViewModel getSectionForPaymentViewModel() {

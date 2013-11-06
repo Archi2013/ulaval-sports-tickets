@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
+import ca.ulaval.glo4003.domain.utilities.Calculator;
+import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.SectionDoesntExistInPropertiesFileException;
 import ca.ulaval.glo4003.domain.utilities.SectionUrlMapper;
 import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
@@ -19,11 +21,16 @@ public class SectionViewModelFactory {
 
 	@Inject
 	private SectionUrlMapper sectionUrlMapper;
+	
+	@Inject
+	private Calculator calculator;
+	
+	@Inject
+	private Constants constants;
 
 	public SectionViewModel createViewModel(SectionDto section, GameDto game) {
-		String dateFR = game.getGameDate().toString("d MMMM yyyy à HH'h'mm z");
-		String priceFR = (new Double(section.getPrice())).toString();
-		priceFR = priceFR.replace(".", ",");
+		String dateFR = constants.toLongDateTimeFormatFR(game.getGameDate());
+		String priceFR = calculator.toPriceFR(section.getPrice());
 		
 		return new SectionViewModel(section.getAdmissionType(), section.getSectionName(), section.getNumberOfTickets(),
 				priceFR, dateFR, game.getOpponents(), createUrl(section.getAdmissionType(),

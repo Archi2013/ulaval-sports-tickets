@@ -25,7 +25,7 @@ public class SearchController {
 	SearchService searchService;
 	
 	@Autowired
-	public User currentUser;
+	private User currentUser;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home() {

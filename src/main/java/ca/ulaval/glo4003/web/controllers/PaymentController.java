@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
+import ca.ulaval.glo4003.domain.utilities.Calculator;
+import ca.ulaval.glo4003.domain.utilities.Cart;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
@@ -31,7 +33,13 @@ public class PaymentController {
 	PaymentService paymentService;
 	
 	@Autowired
-	public User currentUser;
+	private User currentUser;
+	
+	@Autowired
+	public Cart currentCart;
+	
+	@Inject
+	Calculator calculator;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView home(@ModelAttribute("chooseTicketsForm") ChooseTicketsViewModel chooseTicketsVM) {
@@ -52,12 +60,32 @@ public class PaymentController {
 		
 		try {
 			mav.addObject("payment", paymentService.getPaymentViewModel(chooseTicketsVM));
+			paymentService.saveToCart(chooseTicketsVM);
 		} catch (GameDoesntExistException | SectionDoesntExistException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String errorMessage = "Une erreur s'est produite lors du passage à la phase de paiement. "
+					+ "Veuillez réessayer en recommençant votre sélection de billets. <a href=\"/\">Accueil</a>";
+			mav.addObject("errorMessage", errorMessage);
+		}	
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "mode-de-paiement", method = RequestMethod.GET)
+	public ModelAndView modeOfPayment(@ModelAttribute("chooseTicketsForm") ChooseTicketsViewModel chooseTicketsVM) {
+		ModelAndView mav = new ModelAndView("payment/mode-of-payment");
+		
+		mav.addObject("currency", Constants.CURRENCY);
+		
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			logger.info("Payment : Mode of payment : usagé connecté");
+		} else {
+			logger.info("Payment : Mode of payment : usagé non connecté");
+			return new ModelAndView("payment/not-connected-user");
 		}
 		
-		
+		mav.addObject("x", calculator.toPriceFR(currentCart.getCumulativePrice()));
 		
 		return mav;
 	}

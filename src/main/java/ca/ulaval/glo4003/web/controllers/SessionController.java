@@ -28,7 +28,7 @@ public class SessionController {
 	private UserService userService;
 
 	@Autowired
-	public User currentUser;
+	private User currentUser;
 	
 	private static final Logger logger = LoggerFactory.getLogger(SessionController.class);
 	

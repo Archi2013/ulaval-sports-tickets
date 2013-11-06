@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SectionService;
+import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
@@ -26,6 +27,9 @@ public class SectionControllerTest {
 	@Mock
 	private SectionService sectionService;
 
+	@Mock
+	private User user;
+	
 	@InjectMocks
 	private SectionController sectionController;
 
@@ -71,11 +75,33 @@ public class SectionControllerTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void getTicketsForGame_should_redirect_to_404_page_when_section_doesnt_exist() throws SectionDoesntExistException {
+	public void getSectionForGame_should_redirect_to_404_page_when_section_doesnt_exist() throws SectionDoesntExistException {
 		when(sectionService.getSection(GAME_ID, TICKET_TYPE)).thenThrow(SectionDoesntExistException.class);
 
 		ModelAndView mav = sectionController.getSectionForGame(GAME_ID, TICKET_TYPE);
 
 		assertEquals("error/404", mav.getViewName());
+	}
+	
+	@Test
+	public void when_user_is_logged_getSectionForGame_should_add_connectedUser_at_true() {
+		when(user.isLogged()).thenReturn(true);
+		
+		ModelAndView mav = sectionController.getSectionForGame(GAME_ID, TICKET_TYPE);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("connectedUser"));
+		assertTrue((Boolean) modelMap.get("connectedUser"));
+	}
+	
+	@Test
+	public void when_user_isnt_logged_getSectionForGame_should_add_connectedUser_at_false() {
+		when(user.isLogged()).thenReturn(false);
+		
+		ModelAndView mav = sectionController.getSectionForGame(GAME_ID, TICKET_TYPE);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("connectedUser"));
+		assertFalse((Boolean) modelMap.get("connectedUser"));
 	}
 }

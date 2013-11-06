@@ -2,10 +2,13 @@ package ca.ulaval.glo4003.web.viewmodels.factories;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
+import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
@@ -13,6 +16,12 @@ import ca.ulaval.glo4003.web.viewmodels.SectionForPaymentViewModel;
 
 @Component
 public class SectionForPaymentViewModelFactory {
+	
+	@Inject
+	private Calculator calculator;
+	
+	@Inject
+	private Constants constants;
 
 	public SectionForPaymentViewModel createViewModel(ChooseTicketsViewModel chooseTicketsVM,
 			GameDto gameDto, SectionDto sectionDto) {
@@ -26,7 +35,7 @@ public class SectionForPaymentViewModelFactory {
 		}
 		sectionForPaymentVM.setAdmissionType(sectionDto.getAdmissionType());
 		sectionForPaymentVM.setSectionName(sectionDto.getSectionName());
-		sectionForPaymentVM.setDate(gameDto.getGameDate().toString(Constants.LONG_DATE_TIME_FORMAT));
+		sectionForPaymentVM.setDate(constants.toLongDateTimeFormatFR(gameDto.getGameDate()));
 		sectionForPaymentVM.setOpponents(gameDto.getOpponents());
 		sectionForPaymentVM.setSport(gameDto.getSportName());
 		
@@ -38,7 +47,7 @@ public class SectionForPaymentViewModelFactory {
 			subtotal = chooseTicketsVM.getSelectedSeats().size() * sectionDto.getPrice();
 		}
 		
-		String subtotalFR = subtotal.toString().replace(".", ",");
+		String subtotalFR = calculator.toPriceFR(subtotal);
 		
 		sectionForPaymentVM.setSubtotal(subtotalFR);
 		

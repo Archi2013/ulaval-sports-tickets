@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SearchService;
+import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.web.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
 
@@ -26,6 +27,9 @@ public class SearchControllerTest {
 	
 	@Mock
 	private SearchService searchService;
+	
+	@Mock
+	private User user;
 	
 	@InjectMocks
 	private SearchController controller;
@@ -74,6 +78,28 @@ public class SearchControllerTest {
 
 		assertTrue(modelMap.containsAttribute("sections"));
 		assertSame(tickets, modelMap.get("sections"));
+	}
+	
+	@Test
+	public void when_user_is_logged_home_should_add_connectedUser_at_true() {
+		when(user.isLogged()).thenReturn(true);
+		
+		ModelAndView mav = controller.home();
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("connectedUser"));
+		assertTrue((Boolean) modelMap.get("connectedUser"));
+	}
+	
+	@Test
+	public void when_user_isnt_logged_home_should_add_connectedUser_at_false() {
+		when(user.isLogged()).thenReturn(false);
+		
+		ModelAndView mav = controller.home();
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("connectedUser"));
+		assertFalse((Boolean) modelMap.get("connectedUser"));
 	}
 	
 	@Test
