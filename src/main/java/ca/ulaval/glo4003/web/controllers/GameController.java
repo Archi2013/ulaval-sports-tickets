@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ca.ulaval.glo4003.domain.services.QueryGameService;
+import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.SectionsViewModel;
 
@@ -26,9 +27,10 @@ public class GameController {
 	public String getTicketsForGame(@PathVariable Long gameId, @PathVariable String sportNameUrl, Model model) {
 		try {
 			logger.info("Getting all tickets for game : " + gameId);
+			model.addAttribute("currency", Constants.CURRENCY);
 
-			SectionsViewModel gameViewModel = gameService.getSectionsForGame(gameId);
-			model.addAttribute("gameSections", gameViewModel);
+			SectionsViewModel sectionsViewModel = gameService.getSectionsForGame(gameId);
+			model.addAttribute("gameSections", sectionsViewModel);
 			return "game/sections";
 
 		} catch (GameDoesntExistException e) {

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SearchService;
+import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
 
 @Controller
@@ -24,6 +25,7 @@ public class SearchController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("search/home");
+		mav.addObject("currency", Constants.CURRENCY);
 		
 		boolean connectedUser = true; // mettre la bonne valeur suivant la situation
 		

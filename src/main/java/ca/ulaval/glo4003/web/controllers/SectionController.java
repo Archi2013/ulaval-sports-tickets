@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SectionService;
+import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
@@ -31,6 +32,7 @@ public class SectionController {
 			SectionViewModel section = sectionService.getSection(gameId, ticketType);
 			
 			ModelAndView mav = new ModelAndView("section/details");
+			mav.addObject("currency", Constants.CURRENCY);
 			
 			mav.addObject("section", section);
 			

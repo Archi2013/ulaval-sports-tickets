@@ -33,7 +33,7 @@ Types de billet : <c:forEach items="${searchForm.selectedTicketKinds}" var="kind
 			<th>Type d'admission</th>
 			<th>Section</th>
 			<th>Nombre de billets</th>
-			<th>Prix (CDN$)</th>
+			<th>Prix (${currency})</th>
 			<th>Action</th>
 		</tr>
 	</thead>
