@@ -85,6 +85,7 @@ public class Constants {
 	            break;
 	        case 2:
 	        	name = "AmericanExpresso";
+	        	break;
 	        default:
 	            name = "Erreur";
 	            break;
@@ -110,6 +111,14 @@ public class Constants {
 		ticketTypes.add(TicketKind.GENERAL_ADMISSION);
 		ticketTypes.add(TicketKind.WITH_SEAT);
 		return ticketTypes;
+	}
+	
+	public List<CreditCardType> getCreditCardTypes() {
+		List<CreditCardType> list = new ArrayList<>();
+		for (CreditCardType type : CreditCardType.values()) {
+			list.add(type);
+		}
+		return list;
 	}
 	
 	public String toLongDateTimeFormatFR(DateTime dateTime) {

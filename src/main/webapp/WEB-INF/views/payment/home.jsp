@@ -20,7 +20,7 @@
     
     <div>
         <table class="standard-table margin-25">
-            <c:set var="section" value="${payment.sectionForPaymentViewModel}" />
+            <c:set var="section" value="${payableItems.sectionForPaymentViewModel}" />
             <thead>
                 <tr>
                     <th>Sport</th>
@@ -60,7 +60,7 @@
         </table>
     </div>
     <div class="total-price-container padding-20">
-        <span>Total : </span><strong>${payment.cumulativePrice} ${currency}</strong><span style="padding-left: 20px; padding-right:20px;"></span>
+        <span>Total : </span><strong>${payableItems.cumulativePrice} ${currency}</strong><span style="padding-left: 20px; padding-right:20px;"></span>
         <a href="/paiement/mode-de-paiement" class="standard-button-rounded-border orange-button">Valider la commande</a>
     </div>
     

@@ -14,12 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.utilities.Calculator;
-import ca.ulaval.glo4003.domain.utilities.Cart;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
 
 @Controller
 @RequestMapping(value = "/paiement", method = RequestMethod.GET)
@@ -34,9 +34,6 @@ public class PaymentController {
 	
 	@Autowired
 	private User currentUser;
-	
-	@Autowired
-	public Cart currentCart;
 	
 	@Inject
 	Calculator calculator;
@@ -59,7 +56,7 @@ public class PaymentController {
 		mav.addObject("chooseTicketsForm", chooseTicketsVM);
 		
 		try {
-			mav.addObject("payment", paymentService.getPaymentViewModel(chooseTicketsVM));
+			mav.addObject("payableItems", paymentService.getPayableItemsViewModel(chooseTicketsVM));
 			paymentService.saveToCart(chooseTicketsVM);
 		} catch (GameDoesntExistException | SectionDoesntExistException e) {
 			String errorMessage = "Une erreur s'est produite lors du passage à la phase de paiement. "
@@ -85,7 +82,38 @@ public class PaymentController {
 			return new ModelAndView("payment/not-connected-user");
 		}
 		
-		mav.addObject("x", calculator.toPriceFR(currentCart.getCumulativePrice()));
+		PaymentViewModel paymentVM = new PaymentViewModel();
+		
+		mav.addObject("paymentForm", paymentVM);
+		mav.addObject("creditCardTypes", paymentService.getCreditCardTypes());
+		mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "validation-achat", method = RequestMethod.POST)
+	public ModelAndView validate(@ModelAttribute("paymentForm") PaymentViewModel paymentVM) {
+		ModelAndView mav = new ModelAndView("payment/valid");
+		
+		mav.addObject("currency", Constants.CURRENCY);
+		
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			logger.info("Payment : Mode of payment : usagé connecté");
+		} else {
+			logger.info("Payment : Mode of payment : usagé non connecté");
+			return new ModelAndView("payment/not-connected-user");
+		}
+		
+		mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
+		
+		System.out.println("Type " + paymentVM.getCreditCardType());
+		System.out.println("CN " + paymentVM.getCreditCardNumber());
+		System.out.println("SC " + paymentVM.getSecurityCode());
+		System.out.println("Exp M " + paymentVM.getExpirationMonth());
+		System.out.println("Exp Y " + paymentVM.getExpirationYear());
+		System.out.println("Name " + paymentVM.getCreditCardUserName());
 		
 		return mav;
 	}

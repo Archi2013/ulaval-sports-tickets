@@ -264,6 +264,10 @@ footer {
     margin: 25px;
 }
 
+.margin-25-0 {
+    margin: 25px 0;
+}
+
 .padding-20 {
     padding: 20px;
 }
@@ -543,3 +547,49 @@ footer {
     }
 }
 
+.wrapper-payment-form {
+    text-align: center;
+}
+
+#payment-form {
+    .inline-block(top);
+    text-align: left;
+    
+    border: 1px solid @standard-blue-color;
+    
+    label {
+        .inline-block(middle);
+        width: 300px;
+        font-size: 1.5em;
+        line-height: 2em;
+        color: @standard-medium-gray-color;
+    }
+    
+    input[type=text], input[type=date], input[type=number] {
+        font-size: 1.3em;
+        line-height: 1.7em;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 300;
+        
+        width: 250px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        outline: none;
+    }
+    
+    select {
+        font-size: 1.3em;
+        line-height: 1.7em;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 300;
+        background: @standard-blue-gray-color;
+        color: white;
+        
+        -webkit-appearance: none;
+        outline: none;
+        
+        .border-radius(0);
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+}

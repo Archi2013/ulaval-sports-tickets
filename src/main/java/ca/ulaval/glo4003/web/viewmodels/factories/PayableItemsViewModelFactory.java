@@ -8,11 +8,11 @@ import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
-import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
+import ca.ulaval.glo4003.web.viewmodels.PayableItemsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SectionForPaymentViewModel;
 
 @Component
-public class PaymentViewModelFactory {
+public class PayableItemsViewModelFactory {
 	
 	@Inject
 	SectionForPaymentViewModelFactory sectionForPaymentViewModelFactory;
@@ -20,7 +20,7 @@ public class PaymentViewModelFactory {
 	@Inject
 	Calculator calculator;
 
-	public PaymentViewModel createViewModel(ChooseTicketsViewModel chooseTicketsVM, GameDto gameDto, SectionDto sectionDto) {
+	public PayableItemsViewModel createViewModel(ChooseTicketsViewModel chooseTicketsVM, GameDto gameDto, SectionDto sectionDto) {
 		SectionForPaymentViewModel sectionForPaymentVM = sectionForPaymentViewModelFactory.createViewModel(chooseTicketsVM,
 				gameDto, sectionDto);
 		
@@ -28,11 +28,11 @@ public class PaymentViewModelFactory {
 		
 		String cumulatedPriceFR = calculator.toPriceFR(cumulatedPrice);
 		
-		PaymentViewModel paymentVM = new PaymentViewModel();
+		PayableItemsViewModel payableItemsVM = new PayableItemsViewModel();
 		
-		paymentVM.setSectionForPaymentViewModel(sectionForPaymentVM);
-		paymentVM.setCumulativePrice(cumulatedPriceFR);
+		payableItemsVM.setSectionForPaymentViewModel(sectionForPaymentVM);
+		payableItemsVM.setCumulativePrice(cumulatedPriceFR);
 		
-		return paymentVM;
+		return payableItemsVM;
 	}
 }

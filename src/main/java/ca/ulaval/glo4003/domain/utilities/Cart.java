@@ -1,5 +1,7 @@
 package ca.ulaval.glo4003.domain.utilities;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -11,6 +13,9 @@ import ca.ulaval.glo4003.domain.dtos.SectionDto;
 @Component
 @Scope(value="session", proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class Cart {
+	public Integer numberOfTicketsToBuy;
+	public List<String> selectedSeats;
+	
 	private GameDto gameDto;
 	private SectionDto sectionDto;
 	private Double cumulativePrice;
@@ -21,6 +26,22 @@ public class Cart {
 		} else {
 			return false;
 		}
+	}
+	
+	public Integer getNumberOfTicketsToBuy() {
+		return numberOfTicketsToBuy;
+	}
+
+	public void setNumberOfTicketsToBuy(Integer numberOfTicketsToBuy) {
+		this.numberOfTicketsToBuy = numberOfTicketsToBuy;
+	}
+
+	public List<String> getSelectedSeats() {
+		return selectedSeats;
+	}
+
+	public void setSelectedSeats(List<String> selectedSeats) {
+		this.selectedSeats = selectedSeats;
 	}
 	
 	public GameDto getGameDto() {

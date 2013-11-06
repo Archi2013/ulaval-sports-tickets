@@ -48,8 +48,8 @@
 	<c:choose>
         <c:when test="${connectedUser}">
 			<div class="wrapper-choose-tickets-form padding-20">
-			   <c:url value="/paiement" var="searchAction"/>
-			   <form:form id="choose-tickets-form" commandName="chooseTicketsForm" modelAttribute="chooseTicketsForm" action="${searchAction}" method="POST">
+			   <c:url value="/paiement" var="chooseAction"/>
+			   <form:form id="choose-tickets-form" commandName="chooseTicketsForm" action="${chooseAction}" method="POST">
 			       <form:hidden path="sectionName"/>
 			       <form:hidden path="gameId"/>
 			       <c:choose>
