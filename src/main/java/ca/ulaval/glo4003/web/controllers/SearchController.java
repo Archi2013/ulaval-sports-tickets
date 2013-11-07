@@ -78,6 +78,8 @@ public class SearchController {
 
 		ModelAndView mav = new ModelAndView("search/list");
 		
+		mav.addObject("currency", Constants.CURRENCY);
+		
 		mav.addObject("sections", searchService.getSections(ticketSearchVM));
 		
 		mav.addObject("searchForm", ticketSearchVM); // Pour les tests
