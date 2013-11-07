@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.domain.pojos.persistable;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class PersistableGameTest {
 	@Mock
 	private Ticket sameTicket;
 	@Mock
-	private Ticket unassociableTicket;
+	private Ticket unassignableTicket;
 	@Mock
 	private Ticket okayTicket;
 
@@ -51,11 +52,11 @@ public class PersistableGameTest {
 
 	private void initializeTickets() {
 		when(baseTicket.isSame(sameTicket)).thenReturn(true);
-		when(baseTicket.isSame(unassociableTicket)).thenReturn(false);
+		when(baseTicket.isSame(unassignableTicket)).thenReturn(false);
 		when(baseTicket.isSame(okayTicket)).thenReturn(false);
-		when(sameTicket.isAssociable()).thenReturn(false);
-		when(unassociableTicket.isAssociable()).thenReturn(false);
-		when(okayTicket.isAssociable()).thenReturn(true);
+		when(sameTicket.isAssignable()).thenReturn(false);
+		when(unassignableTicket.isAssignable()).thenReturn(false);
+		when(okayTicket.isAssignable()).thenReturn(true);
 
 		tickets = new ArrayList<>();
 		tickets.add(baseTicket);
@@ -87,6 +88,7 @@ public class PersistableGameTest {
 
 		Assert.assertEquals(2, tickets.size());
 		Assert.assertSame(okayTicket, tickets.get(1));
+		verify(okayTicket).assign(A_SPORT, A_DATE, tickets.size() - 1);
 	}
 
 	@Test
@@ -97,8 +99,8 @@ public class PersistableGameTest {
 	}
 
 	@Test
-	public void if_ticket_is_unassociateable_addTickets_does_nothing() {
-		gameWithTickets.addTicket(unassociableTicket);
+	public void if_ticket_is_unassignable_addTickets_does_nothing() {
+		gameWithTickets.addTicket(unassignableTicket);
 
 		Assert.assertEquals(1, tickets.size());
 	}

@@ -2,6 +2,7 @@ package ca.ulaval.glo4003.domain.tickets;
 
 import static org.mockito.Mockito.when;
 
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,28 +10,33 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.tickets.state.TicketAssociationState;
+import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PersistableTicketTest {
-
+public class SeatedTicketTest {
+	public static final String A_SPORT = "Sport";
+	public static final DateTime A_DATE = new DateTime(100);
+	public static final int A_TICKET_NUMBER = 120;
 	public static final String A_SEAT = "seat";
 	public static final String ANOTHER_SEAT = "Another seat";
 	public static final String A_SECTION = "section";
 	public static final String ANOTHER_SECTION = "Another section";
 
 	@Mock
-	TicketAssociationState associationState;
+	TicketAssignationState firstAssociationState;
+
+	@Mock
+	TicketAssignationState secondAssociationState;
 
 	@Mock
 	Ticket otherTicket;
 
-	PersistableTicket ticket;
+	SeatedTicket ticket;
 
 	@Before
 	public void setup() {
 
-		ticket = new PersistableTicket(A_SEAT, A_SECTION, associationState);
+		ticket = new SeatedTicket(A_SEAT, A_SECTION, firstAssociationState);
 	}
 
 	@Test
@@ -63,17 +69,5 @@ public class PersistableTicketTest {
 	public void isSection_returns_true_if_equals_to_own_section_and_false_otherwise() {
 		Assert.assertTrue(ticket.isSection(A_SECTION));
 		Assert.assertFalse(ticket.isSection(ANOTHER_SECTION));
-	}
-
-	@Test
-	public void isAssociable_returns_what_the_associationState_returns() {
-		when(associationState.isAssociable()).thenReturn(true);
-
-		Assert.assertTrue(ticket.isAssociable());
-	}
-
-	@Test
-	public void associate_calls_the_associationState() {
-		// ticket.associate(sport, date, ticketNumber);
 	}
 }
