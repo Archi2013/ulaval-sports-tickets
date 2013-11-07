@@ -1,16 +1,9 @@
-		<table>  
-			<tbody>
-				<tr>  
-					<td>Username:</td>  
-					<td><input type="text" name="usernameParam"></td>  
-				</tr>
-				<tr>
-					<td>Password:</td> 
-					<td><input type="password" name="passwordParam"></td>  
-				</tr>
-				<tr> 
-					<td><input type="submit" class="standard-button-round orange-button"></td>  
-					<td></td>  
-				</tr>  
-			</tbody>
-		</table>  
+<div class="text-align-center margin-25">
+	<div class="authentification-form padding-20">
+		<label for="usernameParam">Nom d'utilisateur : </label><input type="text" name="usernameParam" id="usernameParam"/><br>
+		<label for="passwordParam">Mot de passe : </label><input type="password" name="passwordParam" id="passwordParam"/><br>
+		<div style="text-align:center;">
+		   <input type="submit" class="standard-button-rounded-border orange-button"/>
+		</div>
+	</div>
+</div>
