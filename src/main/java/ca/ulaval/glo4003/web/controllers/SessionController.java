@@ -80,22 +80,14 @@ public class SessionController {
 		
 		ModelAndView mav = new ModelAndView("session/success");
 		
-		Boolean connectedUser = currentUser.isLogged();
-		
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
-		}
-		
 		try {
 			UserViewModel userViewModel = userService.signIn(usernameParam, passwordParam);
 			mav.addObject("user", userViewModel); 
+			mav.addObject("connectedUser", true);
 	        return mav;
 		} catch (UserDoesntExistException | UsernameAndPasswordDoesntMatchException e) {
 			logger.info("==> Impossible to Sign In : " + usernameParam);
+			mav.addObject("connectedUser", false);
 			mav.setViewName("session/retry");
 			return mav;
 		}

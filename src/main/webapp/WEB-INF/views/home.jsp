@@ -14,7 +14,7 @@
     <%@include file="layout/menu.jsp" %>
     
     <c:if test="${fn:length(user.username) > 0}">
-        <h2>Bienvenue : ${user.username}</h2>
+        <h2>Bienvenue : <span class="normal">${user.username}</span></h2>
     </c:if>
     
     <blockquote class="featured-quote margin-50">

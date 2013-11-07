@@ -182,9 +182,7 @@ public class SessionControllerTest {
 	}
 	
 	@Test
-	public void when_user_is_logged_submitSignIn_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
-		
+	public void submitSignIn_should_add_connectedUser_at_true() {
 		ModelAndView mav = controller.submitSignIn(VALID_USER,VALID_PASSWORD);
 		ModelMap modelMap = mav.getModelMap();
 		
@@ -192,11 +190,24 @@ public class SessionControllerTest {
 		assertTrue((Boolean) modelMap.get("connectedUser"));
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
-	public void when_user_isnt_logged_submitSignIn_should_add_connectedUser_at_false() {
-		when(currentUser.isLogged()).thenReturn(false);
+	public void submitSignIn_should_add_connectedUser_at_false_when_user_dont_exists() throws UserDoesntExistException, UsernameAndPasswordDoesntMatchException {
+		when(userService.signIn(INVALID_USER, INVALID_PASSWORD)).thenThrow(UserDoesntExistException.class);
 		
-		ModelAndView mav = controller.submitSignIn(VALID_USER,VALID_PASSWORD);
+		ModelAndView mav = controller.submitSignIn(INVALID_USER, INVALID_PASSWORD);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("connectedUser"));
+		assertFalse((Boolean) modelMap.get("connectedUser"));
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void submitSignIn_should_add_connectedUser_at_false_when_user_exists_and_credentials_dont_match() throws UserDoesntExistException, UsernameAndPasswordDoesntMatchException {
+		when(userService.signIn(VALID_USER, INVALID_PASSWORD)).thenThrow(UsernameAndPasswordDoesntMatchException.class);
+		
+		ModelAndView mav = controller.submitSignIn(VALID_USER, INVALID_PASSWORD);
 		ModelMap modelMap = mav.getModelMap();
 		
 		assertTrue(modelMap.containsAttribute("connectedUser"));
