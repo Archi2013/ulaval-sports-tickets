@@ -13,7 +13,7 @@ public class PaymentViewModel {
 	@NotNull
 	private CreditCardType creditCardType;
 	
-	@NotNull @Min(1000000000000L) @Max(9999999999999L) // doit être 13 ou 16 chiffres
+	@NotNull @Min(1000000000000L) @Max(9999999999999999L) // doit être 13 ou 16 chiffres
 	private Long creditCardNumber;
 	
 	@NotNull @Min(100) @Max(9999)
