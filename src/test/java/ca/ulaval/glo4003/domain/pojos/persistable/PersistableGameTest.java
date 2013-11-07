@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.domain.pojos.Ticket;
+import ca.ulaval.glo4003.domain.tickets.Ticket;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersistableGameTest {
@@ -27,9 +27,13 @@ public class PersistableGameTest {
 	private List<Ticket> tickets;
 
 	@Mock
-	private Ticket ticket1;
+	private Ticket baseTicket;
 	@Mock
-	private Ticket ticket2;
+	private Ticket sameTicket;
+	@Mock
+	private Ticket unassociableTicket;
+	@Mock
+	private Ticket okayTicket;
 
 	PersistableGame fullyInitiatedGame;
 	PersistableGame partlyInitiatedGame;
@@ -46,13 +50,15 @@ public class PersistableGameTest {
 	}
 
 	private void initializeTickets() {
-		when(ticket1.isTheSame(ticket1)).thenReturn(true);
-		when(ticket1.isTheSame(ticket2)).thenReturn(false);
-		when(ticket2.isTheSame(ticket1)).thenReturn(false);
-		when(ticket2.isTheSame(ticket2)).thenReturn(true);
+		when(baseTicket.isSame(sameTicket)).thenReturn(true);
+		when(baseTicket.isSame(unassociableTicket)).thenReturn(false);
+		when(baseTicket.isSame(okayTicket)).thenReturn(false);
+		when(sameTicket.isAssociable()).thenReturn(false);
+		when(unassociableTicket.isAssociable()).thenReturn(false);
+		when(okayTicket.isAssociable()).thenReturn(true);
 
 		tickets = new ArrayList<>();
-		tickets.add(ticket1);
+		tickets.add(baseTicket);
 	}
 
 	@Test
@@ -76,16 +82,23 @@ public class PersistableGameTest {
 	}
 
 	@Test
-	public void addTickets_adds_the_passed_ticket_to_the_ticket_list() {
-		gameWithTickets.addTicket(ticket2);
+	public void if_ticket_is_not_in_ticket_list_and_can_be_associated_addTickets_adds_the_ticket_to_the_list() {
+		gameWithTickets.addTicket(okayTicket);
 
 		Assert.assertEquals(2, tickets.size());
-		Assert.assertSame(ticket2, tickets.get(1));
+		Assert.assertSame(okayTicket, tickets.get(1));
 	}
 
 	@Test
-	public void addTickets_does_not_add_ticket_if_ticket_is_already_in_ticket_list() {
-		gameWithTickets.addTicket(ticket1);
+	public void if_ticket_is_already_in_list_addTickets_does_nothing() {
+		gameWithTickets.addTicket(sameTicket);
+
+		Assert.assertEquals(1, tickets.size());
+	}
+
+	@Test
+	public void if_ticket_is_unassociateable_addTickets_does_nothing() {
+		gameWithTickets.addTicket(unassociableTicket);
 
 		Assert.assertEquals(1, tickets.size());
 	}

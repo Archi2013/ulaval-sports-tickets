@@ -22,8 +22,9 @@
             </c:forEach>
         </form:select><br>
         <form:label path="typeBillet">Type des billets : </form:label><form:select path="typeBillet">
-        	<form:option value="General">General</form:option>
-        	<form:option value="Siege">Avec Siège</form:option>
+        	<c:forEach  items="${ticketKinds}" var="kind">
+        		<form:option value="${kind.name()}"> ${kind.toString()}</form:option>
+        	</c:forEach>
         	</form:select><br>
         <input type="submit" value="Continuer" class="standard-button-rounded-border orange-button"/>
     </form:form>

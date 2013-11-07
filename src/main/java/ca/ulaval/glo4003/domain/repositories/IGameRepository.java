@@ -17,4 +17,6 @@ public interface IGameRepository {
 
 	public void commit() throws GameDoesntExistException, GameAlreadyExistException;
 
+	Game getGame(String aSport, DateTime a_DATE);
+
 }

@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.CommandGameService;
 import ca.ulaval.glo4003.domain.services.SportService;
+import ca.ulaval.glo4003.domain.utilities.Constants;
+import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 import ca.ulaval.glo4003.domain.utilities.DateParser;
 import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
 import ca.ulaval.glo4003.domain.utilities.User;
@@ -29,6 +31,9 @@ import ca.ulaval.glo4003.web.viewmodels.SelectSportViewModel;
 @RequestMapping(value = "/admin", method = RequestMethod.GET)
 public class AdministrationController {
 	private static final Logger logger = LoggerFactory.getLogger(AdministrationController.class);
+
+	@Inject
+	private Constants constants;
 
 	@Inject
 	private CommandGameService gameService;
@@ -129,6 +134,7 @@ public class AdministrationController {
 		}
 		
 		mav.addObject("sportsVM", sportService.getSports());
+		mav.addObject("ticketKinds", constants.getTicketKinds());
 
 		return mav;
 	}
@@ -140,7 +146,7 @@ public class AdministrationController {
 		logger.info("Ticket is of type : " + selectSportVM.getTypeBillet());
 
 		ModelAndView mav;
-		if (selectSportVM.getTypeBillet().equals("General")) {
+		if (selectSportVM.getTypeBillet() == TicketKind.GENERAL_ADMISSION) {
 			mav = new ModelAndView("admin/addTickets-General", "command", new GeneralTicketsToAddViewModel());
 		} else {
 			mav = new ModelAndView("admin/addTickets-Seated", "command", new SeatedTicketsToAddViewModel());
@@ -180,5 +186,14 @@ public class AdministrationController {
 		}
 		
 		return mav;
+	}
+
+	@RequestMapping(value = "/ajout-billets-seated", method = RequestMethod.POST)
+	public String addTickets_seated(@ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM, Model model)
+			throws SportDoesntExistException, GameDoesntExistException {
+		logger.info("Adminisatration: adding a seated ticket to game on " + ticketsToAddVM.getGameDate() + " in seat "
+				+ ticketsToAddVM.getSeat() + " of section " + ticketsToAddVM.getSection());
+
+		return "/admin/tickets-added";
 	}
 }

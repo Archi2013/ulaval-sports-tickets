@@ -1,14 +1,16 @@
 package ca.ulaval.glo4003.web.viewmodels;
 
+import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
+
 public class SelectSportViewModel {
 	String sport;
-	String typeBillet;
+	TicketKind typeBillet;
 
-	public String getTypeBillet() {
+	public TicketKind getTypeBillet() {
 		return typeBillet;
 	}
 
-	public void setTypeBillet(String typeBillet) {
+	public void setTypeBillet(TicketKind typeBillet) {
 		this.typeBillet = typeBillet;
 	}
 

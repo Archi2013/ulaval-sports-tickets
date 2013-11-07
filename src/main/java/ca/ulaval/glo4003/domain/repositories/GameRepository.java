@@ -69,4 +69,10 @@ public class GameRepository implements IGameRepository {
 		newActiveGames.clear();
 	}
 
+	@Override
+	public Game getGame(String aSport, DateTime a_DATE) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
