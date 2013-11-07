@@ -41,10 +41,10 @@ public class XmlSectionDao implements SectionDao {
 			
 			// TODO à remplacer par des vrais sièges
 			List<String> seats = new ArrayList<>();
-			//seats.add("2A");
-			//seats.add("375");
-			//seats.add("X1");
-			//seats.add("L87A");
+			seats.add("2A");
+			seats.add("375");
+			seats.add("X1");
+			seats.add("L87A");
 
 			return new SectionDto(admissionType, sectionName, numberOfTickets, Double.parseDouble(price), seats);
 		} catch (XPathExpressionException e) {

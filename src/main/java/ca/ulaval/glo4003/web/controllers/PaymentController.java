@@ -18,6 +18,7 @@ import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.User;
+import ca.ulaval.glo4003.domain.utilities.payment.InvalidCardException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
@@ -122,18 +123,24 @@ public class PaymentController {
             return mav;
         }
 		
+		try {
+			paymentService.payAmount(paymentVM);
+		} catch (InvalidCardException e) {
+			ModelAndView mav = new ModelAndView("payment/mode-of-payment");
+			mav.addObject("paymentForm", paymentVM);
+			mav.addObject("creditCardTypes", paymentService.getCreditCardTypes());
+			mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
+			String errorMessage = "Une erreur s'est produite lors de la vérification de votre carte de crédit. "
+					+ "Veuillez réessayer en modifiants les informations fournies.";
+			mav.addObject("errorMessage", errorMessage);
+            return mav;
+		}
+		
 		ModelAndView mav = new ModelAndView("payment/valid");
 		
 		mav.addObject("currency", Constants.CURRENCY);
 		
 		mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
-		
-		System.out.println("Type " + paymentVM.getCreditCardType());
-		System.out.println("CN " + paymentVM.getCreditCardNumber());
-		System.out.println("SC " + paymentVM.getSecurityCode());
-		System.out.println("Exp M " + paymentVM.getExpirationMonth());
-		System.out.println("Exp Y " + paymentVM.getExpirationYear());
-		System.out.println("Name " + paymentVM.getCreditCardUserName());
 		
 		return mav;
 	}

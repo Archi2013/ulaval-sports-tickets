@@ -13,12 +13,16 @@ import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Cart;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
+import ca.ulaval.glo4003.domain.utilities.payment.CreditCard;
+import ca.ulaval.glo4003.domain.utilities.payment.CreditCardFactory;
+import ca.ulaval.glo4003.domain.utilities.payment.InvalidCardException;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.PayableItemsViewModel;
+import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
 import ca.ulaval.glo4003.web.viewmodels.factories.PayableItemsViewModelFactory;
 
 @Service
@@ -38,6 +42,9 @@ public class PaymentService {
 	
 	@Inject
 	Constants constants;
+	
+	@Inject
+	CreditCardFactory creditCardFactory;
 	
 	@Autowired
 	public Cart currentCart;
@@ -95,6 +102,11 @@ public class PaymentService {
 		} else {
 			return "Erreur : il n'y a pas de tickets dans le panier d'achats. Le montant ne peut être affiché.";
 		}
+	}
+
+	public void payAmount(PaymentViewModel paymentVM) throws InvalidCardException {
+		CreditCard creditCard = creditCardFactory.createCreditCard(paymentVM);
+		creditCard.pay(currentCart.getCumulativePrice());
 	}
 
 }

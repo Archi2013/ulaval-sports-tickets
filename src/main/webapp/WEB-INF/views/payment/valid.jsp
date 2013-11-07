@@ -15,7 +15,7 @@
     <h2>${pageTitle}</h2>
     
     <div class="information-block-succes-skin margin-25-50">
-        Votre achat de ${cumulativePrice} ${currency} a bien été effectué. 
+        Votre achat de ${cumulativePrice} ${currency} a bien été effectué. Retourner à l'<a href="/">accueil</a>.
     </div>
     
     <%@include file="../layout/footer.jsp" %>
