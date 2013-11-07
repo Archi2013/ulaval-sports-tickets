@@ -67,6 +67,14 @@ public class Cart {
 	public void setCumulativePrice(Double cumulativePrice) {
 		this.cumulativePrice = cumulativePrice;
 	}
+
+	public void empty() {
+		this.cumulativePrice = 0.0;
+		this.gameDto = null;
+		this.sectionDto = null;
+		this.numberOfTicketsToBuy = 0;
+		this.selectedSeats = null;
+	}
 }
 
 

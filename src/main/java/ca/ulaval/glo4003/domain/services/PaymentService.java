@@ -109,4 +109,8 @@ public class PaymentService {
 		creditCard.pay(currentCart.getCumulativePrice());
 	}
 
+	public void emptyCart() {
+		currentCart.empty();
+	}
+
 }
