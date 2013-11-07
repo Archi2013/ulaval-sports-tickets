@@ -52,14 +52,15 @@ public class PaymentController {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
 		} else {
-			ModelAndView modelAV =  new ModelAndView("payment/not-connected-user");
-			modelAV.addObject("connectedUser", false);
+			mav.addObject("connectedUser", false);
+			mav.setViewName("payment/not-connected-user");
 			logger.info("usagé non connecté");
-			return modelAV;
+			return mav;
 		}
 		
 		if(result.hasErrors()) {
-            return new ModelAndView("payment/trafficked-page");
+			mav.setViewName("payment/trafficked-page");
+            return mav;
         }
 		
 		mav.addObject("currency", Constants.CURRENCY);
@@ -92,17 +93,15 @@ public class PaymentController {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
 		} else {
-			ModelAndView modelAV = new ModelAndView("payment/not-connected-user");
-			modelAV.addObject("connectedUser", false);
+			mav.addObject("connectedUser", false);
+			mav.setViewName("payment/not-connected-user");
 			logger.info("usagé non connecté");
-			return modelAV;
+			return mav;
 		}
 		
 		mav.addObject("currency", Constants.CURRENCY);
 		
-		PaymentViewModel paymentVM = new PaymentViewModel();
-		
-		mav.addObject("paymentForm", paymentVM);
+		mav.addObject("paymentForm", new PaymentViewModel());
 		mav.addObject("creditCardTypes", paymentService.getCreditCardTypes());
 		mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
 		
@@ -120,33 +119,31 @@ public class PaymentController {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
 		} else {
-			ModelAndView modelAV = new ModelAndView("payment/not-connected-user");
-			modelAV.addObject("connectedUser", false);
+			mav.addObject("connectedUser", false);
+			mav.setViewName("payment/not-connected-user");
 			logger.info("usagé non connecté");
-			return modelAV;
+			return mav;
 		}
 		
 		if(result.hasErrors()) {
-			ModelAndView modelAV = new ModelAndView("payment/mode-of-payment");
-			modelAV.addObject("connectedUser", connectedUser);
-			modelAV.addObject("paymentForm", paymentVM);
-			modelAV.addObject("creditCardTypes", paymentService.getCreditCardTypes());
-			modelAV.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
-            return modelAV;
+			mav.setViewName("payment/mode-of-payment");
+			mav.addObject("paymentForm", paymentVM);
+			mav.addObject("creditCardTypes", paymentService.getCreditCardTypes());
+			mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
+            return mav;
         }
 		
 		try {
 			paymentService.payAmount(paymentVM);
 		} catch (InvalidCardException e) {
-			ModelAndView modelAV = new ModelAndView("payment/mode-of-payment");
-			modelAV.addObject("connectedUser", connectedUser);
-			modelAV.addObject("paymentForm", paymentVM);
-			modelAV.addObject("creditCardTypes", paymentService.getCreditCardTypes());
-			modelAV.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
+			mav.setViewName("payment/mode-of-payment");
+			mav.addObject("paymentForm", paymentVM);
+			mav.addObject("creditCardTypes", paymentService.getCreditCardTypes());
+			mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
 			String errorMessage = "Une erreur s'est produite lors de la vérification de votre carte de crédit. "
 					+ "Veuillez réessayer en modifiants les informations fournies.";
-			modelAV.addObject("errorMessage", errorMessage);
-            return modelAV;
+			mav.addObject("errorMessage", errorMessage);
+            return mav;
 		}
 		
 		mav.addObject("currency", Constants.CURRENCY);
