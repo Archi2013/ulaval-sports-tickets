@@ -14,6 +14,11 @@ public class CommandTicketService {
 	private ITicketRepository ticketRepository;
 	private IGameRepository gameRepository;
 
+	// TODO est là pour corriger le bogue
+	public CommandTicketService() {
+		
+	}
+	
 	public CommandTicketService(ITicketRepository ticketRepository, IGameRepository gameRepository) {
 		this.ticketRepository = ticketRepository;
 		this.gameRepository = gameRepository;
