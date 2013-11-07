@@ -63,7 +63,8 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 
 	@Override
 	public void addTicket(Ticket ticketToAdd) {
-		if (!alreadyInTicketList(ticketToAdd) && ticketToAdd.isAssociable()) {
+		if (!alreadyInTicketList(ticketToAdd) && ticketToAdd.isAssignable()) {
+			ticketToAdd.assign(sportName, gameDate, tickets.size());
 			tickets.add(ticketToAdd);
 		}
 	}

@@ -6,11 +6,9 @@ public interface Ticket {
 
 	boolean isSame(Ticket ticketToAdd);
 
-	boolean isAssociable();
+	boolean isAssignable();
 
-	void associate(String sport, DateTime date, int ticketNumber);
-
-	boolean compareSeatAndSection(String seat, String section);
+	void assign(String sport, DateTime date, int ticketNumber);
 
 	boolean isSeat(String seat);
 
