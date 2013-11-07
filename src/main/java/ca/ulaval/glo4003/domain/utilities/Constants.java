@@ -5,13 +5,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 
 @Component
 public class Constants {
+	
+	public static final String LONG_DATE_TIME_FORMAT_FR = "d MMMM yyyy à HH'h'mm z";
+	public static final String CURRENCY = "CDN$";
 	
 	@Inject
 	private SportDao sportDao;
@@ -68,15 +71,31 @@ public class Constants {
 	    }
 	}
 	
-	public List<String> getSportsList() {
-		List<SportDto> sportsDto = sportDao.getAll();
+	public static enum CreditCardType {
+		MISTERCARD, VASI, AMERICANEXPRESSO;
 		
-		List<String> sportsList = new ArrayList<>();
-		
-		for (SportDto sport : sportsDto) {
-			sportsList.add(sport.getName());
-		}
-		return sportsList;
+	    public String toString() {
+	        String name = "";
+	        switch (ordinal()) {
+	        case 0:
+	            name = "Mistercard";
+	            break;
+	        case 1:
+	            name = "Vasi";
+	            break;
+	        case 2:
+	        	name = "AmericanExpresso";
+	        	break;
+	        default:
+	            name = "Erreur";
+	            break;
+	        }
+	        return name;
+	    }
+	}
+	
+	public List<String> getSportList() {
+		return sportDao.getAllSportNames();
 	}
 	
 	public List<DisplayedPeriod> getDisplayedPeriods() {
@@ -92,5 +111,17 @@ public class Constants {
 		ticketTypes.add(TicketKind.GENERAL_ADMISSION);
 		ticketTypes.add(TicketKind.WITH_SEAT);
 		return ticketTypes;
+	}
+	
+	public List<CreditCardType> getCreditCardTypes() {
+		List<CreditCardType> list = new ArrayList<>();
+		for (CreditCardType type : CreditCardType.values()) {
+			list.add(type);
+		}
+		return list;
+	}
+	
+	public String toLongDateTimeFormatFR(DateTime dateTime) {
+		return dateTime.toString(LONG_DATE_TIME_FORMAT_FR);
 	}
 }

@@ -19,7 +19,9 @@ import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
+import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
+import ca.ulaval.glo4003.web.viewmodels.factories.ChooseTicketsViewModelFactory;
 import ca.ulaval.glo4003.web.viewmodels.factories.SectionViewModelFactory;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,7 +31,7 @@ public class SectionServiceTest {
 	private static final String ADMISSION = "GENERAL";
 	private static final String SECTION_NAME = "BLEUS";
 
-	private static final int GAME_ID = 12;
+	private static final Long GAME_ID = 12L;
 
 	@Mock
 	private SectionUrlMapper sectionUrlMapperMock;
@@ -42,12 +44,15 @@ public class SectionServiceTest {
 
 	@Mock
 	private SectionViewModelFactory sectionFactoryMock;
+	
+	@Mock
+	private ChooseTicketsViewModelFactory chooseTicketsViewModelFactoryMock;
 
 	@InjectMocks
 	private SectionService service;
 
 	@Before
-	public void setup() throws SectionDoesntExistInPropertiesFileException {
+	public void setUp() throws SectionDoesntExistInPropertiesFileException {
 		TicketType ticketType = new TicketType(ADMISSION, SECTION_NAME);
 		when(sectionUrlMapperMock.getTicketType(SECTION_URL)).thenReturn(ticketType);
 	}
@@ -114,6 +119,54 @@ public class SectionServiceTest {
 		when(sectionFactoryMock.createViewModel(dto, gameDto)).thenReturn(expectedViewModel);
 
 		SectionViewModel viewModel = service.getSection(GAME_ID, SECTION_URL);
+
+		assertEquals(expectedViewModel, viewModel);
+	}
+	
+	@Test
+	public void getChooseTicketsViewModel_should_get_ticket_type_from_section_url() throws SectionDoesntExistException,
+			SectionDoesntExistInPropertiesFileException {
+		service.getChooseTicketsViewModel(GAME_ID, SECTION_URL);
+
+		verify(sectionUrlMapperMock).getTicketType(SECTION_URL);
+	}
+	
+	@Test
+	public void getChooseTicketsViewModel_should_get_section_from_dao() throws SectionDoesntExistException {
+		service.getChooseTicketsViewModel(GAME_ID, SECTION_URL);
+
+		verify(sectionDaoMock).get(GAME_ID, SECTION_NAME);
+	}
+
+	@Test
+	public void getChooseTicketsViewModel_should_get_game_from_dao() throws SectionDoesntExistException, GameDoesntExistException {
+		service.getChooseTicketsViewModel(GAME_ID, SECTION_URL);
+
+		verify(gameDaoMock).get(GAME_ID);
+	}
+	
+	@Test
+	public void getChooseTicketsViewModel_should_obtain_a_chooseTicketsViewModel() throws SectionDoesntExistException, GameDoesntExistException {
+		SectionDto sectionDto = mock(SectionDto.class);
+		when(sectionDaoMock.get(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
+		GameDto gameDto = mock(GameDto.class);
+		when(gameDaoMock.get(GAME_ID)).thenReturn(gameDto);
+
+		service.getChooseTicketsViewModel(GAME_ID, SECTION_URL);
+
+		verify(chooseTicketsViewModelFactoryMock).createViewModel(gameDto, sectionDto);
+	}
+
+	@Test
+	public void getChooseTicketsViewModel_should_return_a_chooseTicketsViewModel() throws SectionDoesntExistException, GameDoesntExistException {
+		SectionDto sectionDto = mock(SectionDto.class);
+		when(sectionDaoMock.get(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
+		GameDto gameDto = mock(GameDto.class);
+		when(gameDaoMock.get(GAME_ID)).thenReturn(gameDto);
+		ChooseTicketsViewModel expectedViewModel = mock(ChooseTicketsViewModel.class);
+		when(chooseTicketsViewModelFactoryMock.createViewModel(gameDto, sectionDto)).thenReturn(expectedViewModel);
+
+		ChooseTicketsViewModel viewModel = service.getChooseTicketsViewModel(GAME_ID, SECTION_URL);
 
 		assertEquals(expectedViewModel, viewModel);
 	}

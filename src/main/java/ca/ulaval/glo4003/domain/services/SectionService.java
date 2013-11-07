@@ -13,7 +13,9 @@ import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
+import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
+import ca.ulaval.glo4003.web.viewmodels.factories.ChooseTicketsViewModelFactory;
 import ca.ulaval.glo4003.web.viewmodels.factories.SectionViewModelFactory;
 
 @Service
@@ -30,14 +32,30 @@ public class SectionService {
 
 	@Inject
 	private SectionViewModelFactory sectionFactory;
+	
+	@Inject
+	private ChooseTicketsViewModelFactory chooseTicketsViewModelFactory;
 
-	public SectionViewModel getSection(int gameId, String sectionUrl) throws SectionDoesntExistException {
+	public SectionViewModel getSection(Long gameId, String sectionUrl) throws SectionDoesntExistException {
 		try {
 			TicketType ticketType = sectionUrlMapper.getTicketType(sectionUrl);
 			GameDto game = gameDao.get(gameId);
 			SectionDto section = sectionDao.get(gameId, ticketType.sectionName);
 			SectionViewModel sectionViewModel = sectionFactory.createViewModel(section, game);
+			
 			return sectionViewModel;
+		} catch (SectionDoesntExistInPropertiesFileException | GameDoesntExistException e) {
+			throw new SectionDoesntExistException();
+		}
+	}
+
+	public ChooseTicketsViewModel getChooseTicketsViewModel(Long gameId, String sectionUrl) throws SectionDoesntExistException {
+		try {
+			TicketType ticketType = sectionUrlMapper.getTicketType(sectionUrl);
+			GameDto gameDto = gameDao.get(gameId);
+			SectionDto sectionDto = sectionDao.get(gameId, ticketType.sectionName);
+			
+			return chooseTicketsViewModelFactory.createViewModel(gameDto, sectionDto);
 		} catch (SectionDoesntExistInPropertiesFileException | GameDoesntExistException e) {
 			throw new SectionDoesntExistException();
 		}

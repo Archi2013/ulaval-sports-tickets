@@ -15,15 +15,15 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.dtos.TicketForSearchDto;
+import ca.ulaval.glo4003.domain.dtos.SectionForSearchDto;
 import ca.ulaval.glo4003.domain.dtos.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
-import ca.ulaval.glo4003.persistence.daos.TicketForSearchDao;
-import ca.ulaval.glo4003.web.viewmodels.TicketForSearchViewModel;
+import ca.ulaval.glo4003.persistence.daos.SectionForSearchDao;
+import ca.ulaval.glo4003.web.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
-import ca.ulaval.glo4003.web.viewmodels.factories.TicketForSearchViewModelFactory;
+import ca.ulaval.glo4003.web.viewmodels.factories.SectionForSearchViewModelFactory;
 import ca.ulaval.glo4003.web.viewmodels.factories.TicketSearchPreferenceFactory;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -33,10 +33,10 @@ public class SearchServiceTest {
 	private Constants constants;
 	
 	@Mock
-	private TicketForSearchDao ticketForSearchDao;
+	private SectionForSearchDao sectionForSearchDao;
 
 	@Mock
-	private TicketForSearchViewModelFactory ticketForSearchViewModelFactory;
+	private SectionForSearchViewModelFactory ticketForSearchViewModelFactory;
 	
 	@Mock
 	private TicketSearchPreferenceFactory ticketSearchPreferenceFactory;
@@ -64,7 +64,7 @@ public class SearchServiceTest {
 		ModelAndView mav = new ModelAndView();
 		List<String> sportList = new ArrayList<>();
 		
-		when(constants.getSportsList()).thenReturn(sportList);
+		when(constants.getSportList()).thenReturn(sportList);
 		
 		service.initSearchCriterions(mav);
 		ModelMap modelMap = mav.getModelMap();
@@ -104,15 +104,15 @@ public class SearchServiceTest {
 	@Test
 	public void given_a_ticketSearchViewModel_getTickets_should_return_a_ticket_list() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
-		List<TicketForSearchDto> ticketDtos = new ArrayList<>();
+		List<SectionForSearchDto> sectionDtos = new ArrayList<>();
 		TicketSearchPreferenceDto preferenceDto = new TicketSearchPreferenceDto(null, null, true, null);
-		List<TicketForSearchViewModel> ticketVMs = new ArrayList<>();
+		List<SectionForSearchViewModel> ticketVMs = new ArrayList<>();
 		
 		when(ticketSearchPreferenceFactory.createPreferenceDto(ticketSearchVM)).thenReturn(preferenceDto);
-		when(ticketForSearchDao.getTickets(preferenceDto)).thenReturn(ticketDtos);
-		when(ticketForSearchViewModelFactory.createViewModels(ticketDtos)).thenReturn(ticketVMs);
+		when(sectionForSearchDao.getSections(preferenceDto)).thenReturn(sectionDtos);
+		when(ticketForSearchViewModelFactory.createViewModels(sectionDtos)).thenReturn(ticketVMs);
 		
-		List<TicketForSearchViewModel> actual = service.getTickets(ticketSearchVM);
+		List<SectionForSearchViewModel> actual = service.getSections(ticketSearchVM);
 		
 		assertSame(ticketVMs, actual);
 	}

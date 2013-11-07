@@ -10,16 +10,15 @@
 <%@include file="../layout/head.jsp"%>
 <body>
     <%@include file="../layout/header.jsp" %>
+    <%@include file="../layout/menu.jsp" %>
     
     <h2>${pageTitle}</h2>
     
-    <div class="vertical-normal-list">
-        <ul>
-            <c:forEach items="${sports.sports}" var="sport">
-                <li><a href="/sport/${sport.url}/matchs">${sport.name} ▷</a></li>
-            </c:forEach>
-        </ul>
-    </div>
+    <nav class="horizontal-button-menu margin-50">
+        <c:forEach items="${sports.sports}" var="sport">
+            <div class="menu-element"><a href="/sport/${sport.url}/matchs" class="standard-button-round blue-button">${sport.name}</a></div>
+        </c:forEach>
+    </nav>
     
     <%@include file="../layout/footer.jsp" %>
 </body>

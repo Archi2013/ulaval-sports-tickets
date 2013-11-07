@@ -10,17 +10,21 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.web.converters.GameConverter;
+import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.web.viewmodels.GameViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GameSimpleConverterTest {
+public class GameConverterTest {
 
+	@Mock
+	Constants constants;
+	
 	@InjectMocks
-	GameConverter gameSimpleConverter;
+	GameConverter gameConverter;
 
 	List<GameDto> gameDtos;
 	GameDto gameDto1;
@@ -38,7 +42,7 @@ public class GameSimpleConverterTest {
 
 	@Test
 	public void given_a_GameDto_convert_should_return_a_GameSimpleViewModel() {
-		GameViewModel gameSVM = gameSimpleConverter.convert(gameDto1);
+		GameViewModel gameSVM = gameConverter.convert(gameDto1);
 
 		assertEquals(gameSVM.id, new Long(gameDto1.getId()));
 		assertEquals(gameSVM.opponents, gameDto1.getOpponents());
@@ -46,7 +50,7 @@ public class GameSimpleConverterTest {
 
 	@Test
 	public void given_GameDtoList_convert_should_return_a_GameSimpleViewModelList() {
-		List<GameViewModel> gameSVMs = gameSimpleConverter.convert(gameDtos);
+		List<GameViewModel> gameSVMs = gameConverter.convert(gameDtos);
 
 		for (int i = 0; i < gameDtos.size(); i++) {
 			assertEquals(new Long(gameDtos.get(i).getId()), gameSVMs.get(i).id);

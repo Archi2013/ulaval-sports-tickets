@@ -17,6 +17,13 @@ Types de billet : <c:forEach items="${searchForm.selectedTicketKinds}" var="kind
                       <span>${kind}, </span>
                   </c:forEach>
 </div>
+
+<c:if test="${preferencesSaved}">
+    <div class="information-block-succes-skin margin-25-50">
+        Vos préférences de recherche ont été sauvegardées.
+    </div>
+</c:if>
+
 <table class="standard-table margin-25">
 	<thead>
 		<tr>
@@ -26,22 +33,22 @@ Types de billet : <c:forEach items="${searchForm.selectedTicketKinds}" var="kind
 			<th>Type d'admission</th>
 			<th>Section</th>
 			<th>Nombre de billets</th>
-			<th>Prix (CDN$)</th>
+			<th>Prix (${currency})</th>
 			<th>Action</th>
 		</tr>
 	</thead>
 	<tbody>
-	    <c:forEach items="${tickets}" var="ticket">
+	    <c:forEach items="${sections}" var="section">
 		<tr>
-			<td>${ticket.sport}</td>
-			<td>${ticket.opponents}</td>
-			<td>${ticket.date}</td>
-			<td>${ticket.admissionType}</td>
-			<td>${ticket.section}</td>
-			<td>${ticket.numberOfTicket}</td>
-			<td>${ticket.price}</td>
+			<td>${section.sport}</td>
+			<td>${section.opponents}</td>
+			<td>${section.date}</td>
+			<td>${section.admissionType}</td>
+			<td>${section.section}</td>
+			<td>${section.numberOfTicket}</td>
+			<td>${section.price}</td>
 			<td><a
-				href="${ticket.url}"
+				href="${section.url}"
 				class="standard-button-round orange-button">Consulter</a></td>
 
 		</tr>

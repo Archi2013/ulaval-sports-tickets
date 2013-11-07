@@ -11,6 +11,7 @@
 <%@include file="../layout/head.jsp"%>
 <body>
 	<%@include file="../layout/header.jsp"%>
+	<%@include file="../layout/menu.jsp" %>
 
 	<h2>${pageTitle}</h2>
 
@@ -21,7 +22,7 @@
 					<th>Type d'admission</th>
 					<th>Section</th>
 					<th>Nombre de billets</th>
-					<th>Prix (CDN$)</th>
+					<th>Prix (${currency})</th>
 					<th>Action</th>
 				</tr>
 			</thead>

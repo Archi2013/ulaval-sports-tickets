@@ -24,7 +24,7 @@ import ca.ulaval.glo4003.web.viewmodels.factories.SectionsViewModelFactory;
 @RunWith(MockitoJUnitRunner.class)
 public class QueryGameServiceTest {
 
-	private static final int GAME_ID = 12;
+	private static final Long GAME_ID = 12L;
 
 	@Mock
 	private GameDao gameDaoMock;

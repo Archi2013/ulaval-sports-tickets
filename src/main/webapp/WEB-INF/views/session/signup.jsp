@@ -2,17 +2,18 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<c:set var="pageTitle" value="S'inscrire" />
 
 <!DOCTYPE html>
 <html lang="fr">
 <%@include file="../layout/head.jsp"%>
 <body>
     <%@include file="../layout/header.jsp" %>
-    
+    <%@include file="../layout/menu.jsp" %>
 
 
-    <h2> S'inscrire sur UL Sport </h2>
+    <h2>${pageTitle}</h2>
     <form action="/session/save" method="post">  
 		<%@ include file="../session/authForm.jsp" %>
 	</form>  

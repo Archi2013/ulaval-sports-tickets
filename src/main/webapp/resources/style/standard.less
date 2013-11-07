@@ -74,19 +74,34 @@ body {
 	color: @standard-black-gray-color;
 	font-family: "Open Sans", sans-serif;
 	font-weight: 300;
+	background: #f9f9f9;
 }
 
-nav {
-	margin: 25px;
-	font-size: 1.3em;
-	line-height: 1.5em;
-	
-	a, a:visited {
-	    color: @standard-orange-color;
-	}
-	a:hover, a:active {
-	   color: @standard-red-color;
-	}
+.main-menu {
+    border-top: 1px solid @standard-dark-gray-color;
+    border-bottom: 1px solid @standard-dark-gray-color;
+    background: white;
+    
+    .menu-element {
+        .inline-block(top);
+        padding: 15px 30px;
+        
+        font-size: 1.3em;
+        font-weight: 400;
+        font-family: "Lato", sans-serif;
+        
+        a {
+            color: @standard-dark-gray-color;
+        }
+    }
+}
+
+.horizontal-button-menu {
+    .menu-element {
+        .inline-block(top);
+        margin-right: 30px;
+        margin-bottom: 30px;
+    }
 }
 
 h1 {
@@ -115,6 +130,10 @@ h2 {
 	text-transform: uppercase;
 	
 	border-bottom: 5px solid @standard-red-color;
+	
+	.normal {
+	    text-transform: none;
+	}
 }
 
 a, a:visited {
@@ -186,6 +205,24 @@ a, a:visited {
     }
 }
 
+.blue-button {
+    background-color: @standard-blue-color;
+    border: 0;
+    color: white;
+    text-transform: uppercase;
+    font-family: "Lato", Helvetica, Arial, "Lucida Grande";
+    font-weight: 300;
+    font-size: 0.9em;
+
+    a, a:link, a:visited, a:active, a:hover {
+        color: white;
+    }
+
+    &:hover {
+        background-color: @standard-blue-gray-color;
+    }
+}
+
 .button-red-border {
     border: @standard-red-color 2px solid;
     color: @standard-red-color;
@@ -240,8 +277,6 @@ footer {
 }
 
 .vertical-normal-list {
-	margin: 25px;
-	
 	li {
 	    margin: 15px 0;
         font-size: 1.5em;
@@ -264,17 +299,25 @@ footer {
     margin: 25px;
 }
 
+.margin-50 {
+    margin: 50px;
+}
+
+.margin-25-0 {
+    margin: 25px 0;
+}
+
+.padding-20 {
+    padding: 20px;
+}
+
 .information-block(@background-color, @border-color, @text-color) {
     background-color: @background-color;
     border: 2px solid @border-color;
     color: @text-color;
     
 	padding: 10px 15px;
-    -webkit-border-radius: 0.3em;
-    -moz-border-radius: 0.3em;
-    -ms-border-radius: 0.3em;
-    -o-border-radius: 0.3em;
-    border-radius: 0.3em;
+    .border-radius(0.3em);
     font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
     font-size: 1.3em;
 }
@@ -293,6 +336,29 @@ footer {
 
 .information-block-succes-skin {
     .information-block(#dff0d8, #d6e9c6, #468847);
+    
+    a, a:visited {
+        color: @standard-blue-color;
+    }
+    
+    a:hover, a:active {
+        color: green;
+    }
+}
+
+.featured-quote {
+    background: #efefef;
+    border-left: 7px solid #555;
+    padding: 20px;
+    
+    font-family: Times, Georgia, "Times New Roman", serif;
+    color: @standard-dark-gray-color;
+    font-size: 1.7em;
+    text-align: center;
+    
+    .quote-author {
+        color: #606060;
+    }
 }
 
 .wrapper-ticket-card {
@@ -300,6 +366,7 @@ footer {
 }
 
 .ticket-card {
+    background: white;
     .inline-block(middle);
     padding: 20px 30px;
     margin: 25px auto;
@@ -360,6 +427,35 @@ footer {
         }
         
         .inline-block(middle);
+    }
+}
+
+.wrapper-choose-tickets-form {
+    text-align: center;
+    margin-bottom: 25px;
+    border: 1px solid #ddd;
+    background: lighten(@standard-blue-gray-color, 55%);
+}
+
+#choose-tickets-form {
+    label {
+        font-size: 1.3em;
+        line-height: 1.5em;
+        color: @standard-dark-gray-color;
+    }
+    
+    input[type=number] {
+        border: 1px @standard-orange-color solid;
+        color: @standard-orange-color;
+        font-size: 1.3em;
+        line-height: 1.5em;
+    }
+    
+    .wrapper-seats {
+        .inline-block(middle);
+        text-align: left;
+        margin-left: 20px;
+        margin-right: 20px;
     }
 }
 
@@ -439,6 +535,7 @@ footer {
 }
 
 .search-block {
+    position: relative;
     margin-top: 25px;
     margin-left: 25px;
     margin-right: 25px;
@@ -483,12 +580,82 @@ footer {
         background-color: lighten(@standard-blue-gray-color, 25%);
     }
     
-    input[type=date] {
-        font-size: 0.9em;
-        line-height: 1em;
-        font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+    input[type=submit] {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+    }
+}
+
+.total-price-container {
+    text-align: center;
+    margin-bottom: 25px;
+    border: 1px solid #ddd;
+    background: lighten(@standard-blue-gray-color, 55%);
+    
+    span {
+        font-size: 1.3em;
+        line-height: 1.5em;
+        color: @standard-dark-gray-color;
+    }
+    
+    strong {
+        color: @standard-blue-color;
+        font-size: 1.7em;
+        font-weight: 400;
+    }
+}
+
+.wrapper-payment-form {
+    text-align: center;
+}
+
+#payment-form {
+    .inline-block(top);
+    text-align: left;
+    
+    border: 1px solid @standard-blue-color;
+    
+    label {
+        .inline-block(middle);
+        width: 300px;
+        font-size: 1.5em;
+        line-height: 2em;
+        color: @standard-medium-gray-color;
+    }
+    
+    input[type=text], input[type=date], input[type=number] {
+        font-size: 1.3em;
+        line-height: 1.7em;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 300;
         
-        background-color: lighten(@standard-blue-gray-color, 55%);
-        border: 2px solid white;
+        width: 250px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        outline: none;
+    }
+    
+    select {
+        font-size: 1.3em;
+        line-height: 1.7em;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 300;
+        background: @standard-blue-gray-color;
+        color: white;
+        
+        -webkit-appearance: none;
+        outline: none;
+        
+        .border-radius(0);
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    
+    .error {
+        color: #cd594c;
+
+        font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-size: 1.3em;
     }
 }

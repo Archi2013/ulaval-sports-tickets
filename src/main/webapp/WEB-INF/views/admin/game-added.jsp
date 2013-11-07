@@ -11,10 +11,11 @@
 <%@include file="../layout/head.jsp"%>
 <body>
     <%@include file="../layout/header.jsp" %>
+    <%@include file="../layout/menu.jsp" %>
     
     <h2>${pageTitle}</h2>
     
-    <div class="vertical-normal-list">
+    <div class="vertical-normal-list margin-25">
         <ul>
             <li>Sport : ${game.sport}</li>
             <li>Opposants : ${game.opponents}</li>

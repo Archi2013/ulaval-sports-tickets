@@ -9,24 +9,26 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.QueryGameService;
+import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.SectionsViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameControllerTest {
 
-	public static final int GAME_ID = 123;
+	public static final Long GAME_ID = 123L;
 	public static final String A_SPORT_NAME = "SportName";
-
-	@Mock
-	private Model model;
 
 	@Mock
 	private QueryGameService gameService;
 
+	@Mock
+	private User currentUser;
+	
 	@InjectMocks
 	private GameController gameController;
 
@@ -36,7 +38,7 @@ public class GameControllerTest {
 
 	@Test
 	public void getTicketsForGame_should_get_games() throws GameDoesntExistException {
-		gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME, model);
+		gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME);
 
 		verify(gameService).getSectionsForGame(GAME_ID);
 	}
@@ -46,16 +48,18 @@ public class GameControllerTest {
 		SectionsViewModel sectionsViewModel = mock(SectionsViewModel.class);
 		when(gameService.getSectionsForGame(GAME_ID)).thenReturn(sectionsViewModel);
 
-		gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME, model);
+		ModelAndView mav = gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME);
+		ModelMap modelMap = mav.getModelMap();
 
-		verify(model).addAttribute("gameSections", sectionsViewModel);
+		assertTrue(modelMap.containsAttribute("gameSections"));
+		assertSame(sectionsViewModel, modelMap.get("gameSections"));
 	}
 
 	@Test
 	public void getTicketsForGame_should_return_correct_view_path() {
-		String path = gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME, model);
+		ModelAndView mav = gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME);
 
-		assertEquals("game/sections", path);
+		assertEquals("game/sections", mav.getViewName());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -63,8 +67,30 @@ public class GameControllerTest {
 	public void getTicketsForGame_should_redirect_to_404_page_when_game_id_doesnt_exist() throws GameDoesntExistException {
 		when(gameService.getSectionsForGame(GAME_ID)).thenThrow(GameDoesntExistException.class);
 
-		String path = gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME, model);
+		ModelAndView mav = gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME);
 
-		assertEquals("error/404", path);
+		assertEquals("error/404", mav.getViewName());
+	}
+	
+	@Test
+	public void when_user_is_logged_home_should_add_connectedUser_at_true() {
+		when(currentUser.isLogged()).thenReturn(true);
+		
+		ModelAndView mav = gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("connectedUser"));
+		assertTrue((Boolean) modelMap.get("connectedUser"));
+	}
+	
+	@Test
+	public void when_user_isnt_logged_home_should_add_connectedUser_at_false() {
+		when(currentUser.isLogged()).thenReturn(false);
+		
+		ModelAndView mav = gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("connectedUser"));
+		assertFalse((Boolean) modelMap.get("connectedUser"));
 	}
 }

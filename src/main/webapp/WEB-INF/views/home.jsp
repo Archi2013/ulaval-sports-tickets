@@ -11,22 +11,33 @@
 <%@include file="layout/head.jsp"%>
 <body>
     <%@include file="layout/header.jsp" %>
-
+    <%@include file="layout/menu.jsp" %>
+    
     <c:if test="${fn:length(user.username) > 0}">
-        <h2>Bienvenue : ${user.username}</h2>
+        <h2>Bienvenue : <span class="normal">${user.username}</span></h2>
     </c:if>
     
-    <nav>
-        <ul>
-            <li><a href="/session/signin">Se connecter ▷</a></li>
-            <li><a href="/sport">Liste des sports disponibles ▷</a></li>
-            <li><a href="/recherche">Recherche de billets disponibles ▷</a></li>
-            <li><a href="/admin">Administration ▷</a></li>
-        </ul>
-    </nav>
+    <blockquote class="featured-quote margin-50">
+        <p>
+        La jeunesse est un sport que l’on peut - que dis-je : que l’on doit pratiquer toute sa vie.<br><br>
+        <span class="quote-author">— Henri Jeanson</span>
+        </p>
+    </blockquote>
+    
+    <blockquote class="featured-quote margin-50">
+        <p>
+        Il faut vider son esprit, être informe, sans contours - comme de l'eau.<br><br>
+        <span class="quote-author">— Bruce Lee</span>
+        </p>
+    </blockquote>
+    
+    <blockquote class="featured-quote margin-50">
+        <p>
+        Qui n'a pas d'imagination n'a pas d'ailes.<br><br>
+        <span class="quote-author">— Mohammed Ali</span>
+        </p>
+    </blockquote>
     
     <%@include file="layout/footer.jsp" %>
-    <p>Sur le serveur, c'est le ${serverTime}.</p>
-
 </body>
 </html>

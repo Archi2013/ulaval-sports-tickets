@@ -1,5 +1,7 @@
 package ca.ulaval.glo4003.web.viewmodels;
 
+import java.util.List;
+
 public class SectionViewModel {
 
 	public String admissionType;
@@ -9,9 +11,10 @@ public class SectionViewModel {
 	private String date;
 	private String opponents;
 	public String url;
+	public List<String> seats;
 
 	public SectionViewModel(String admissionType, String sectionName, int numberOfTickets, String price, String date,
-			String opponents, String url) {
+			String opponents, String url, List<String> seats) {
 		this.admissionType = admissionType;
 		this.sectionName = sectionName;
 		this.numberOfTickets = numberOfTickets;
@@ -19,6 +22,7 @@ public class SectionViewModel {
 		this.date = date;
 		this.opponents = opponents;
 		this.url = url;
+		this.seats = seats;
 	}
 
 	public String getAdmissionType() {
@@ -47,5 +51,17 @@ public class SectionViewModel {
 
 	public String getUrl() {
 		return url;
+	}
+
+	public List<String> getSeats() {
+		return seats;
+	}
+	
+	public boolean isGeneralAdmission() {
+		if (seats.size() == 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

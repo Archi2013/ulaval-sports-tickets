@@ -1,3 +1,3 @@
 <header>
-    <h1><a href="/">UL <em>Sport</a></em></h1>
+    <h1><a href="/">UL <em>Sport</em></a></h1>
 </header>
