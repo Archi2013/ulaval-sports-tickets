@@ -125,7 +125,6 @@ public class PaymentController {
 		
 		try {
 			paymentService.payAmount(paymentVM);
-			paymentService.emptyCart();
 		} catch (InvalidCardException e) {
 			ModelAndView mav = new ModelAndView("payment/mode-of-payment");
 			mav.addObject("paymentForm", paymentVM);
@@ -142,6 +141,8 @@ public class PaymentController {
 		mav.addObject("currency", Constants.CURRENCY);
 		
 		mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
+		
+		paymentService.emptyCart();
 		
 		return mav;
 	}
