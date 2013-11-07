@@ -11,6 +11,7 @@
 <%@include file="../layout/head.jsp"%>
 <body>
     <%@include file="../layout/header.jsp" %>
+    <%@include file="../layout/menu.jsp" %>
     
     <h2>${pageTitle}</h2>
     

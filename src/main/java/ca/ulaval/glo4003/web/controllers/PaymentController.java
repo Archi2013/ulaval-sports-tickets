@@ -46,18 +46,21 @@ public class PaymentController {
 			BindingResult result) {		
 		Boolean connectedUser = currentUser.isLogged();
 		
+		ModelAndView mav = new ModelAndView("payment/home");
+		
 		if (connectedUser) {
-			logger.info("Payment : Home : usagé connecté");
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
 		} else {
-			logger.info("Payment : Home : usagé non connecté");
-			return new ModelAndView("payment/not-connected-user");
+			ModelAndView modelAV =  new ModelAndView("payment/not-connected-user");
+			modelAV.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+			return modelAV;
 		}
 		
 		if(result.hasErrors()) {
             return new ModelAndView("payment/trafficked-page");
         }
-		
-		ModelAndView mav = new ModelAndView("payment/home");
 		
 		mav.addObject("currency", Constants.CURRENCY);
 		
@@ -80,17 +83,20 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(value = "mode-de-paiement", method = RequestMethod.GET)
-	public ModelAndView modeOfPayment() {		
+	public ModelAndView modeOfPayment() {
+		ModelAndView mav = new ModelAndView("payment/mode-of-payment");
+		
 		Boolean connectedUser = currentUser.isLogged();
 		
 		if (connectedUser) {
-			logger.info("Payment : Mode of payment : usagé connecté");
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
 		} else {
-			logger.info("Payment : Mode of payment : usagé non connecté");
-			return new ModelAndView("payment/not-connected-user");
+			ModelAndView modelAV = new ModelAndView("payment/not-connected-user");
+			modelAV.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+			return modelAV;
 		}
-		
-		ModelAndView mav = new ModelAndView("payment/mode-of-payment");
 		
 		mav.addObject("currency", Constants.CURRENCY);
 		
@@ -106,37 +112,42 @@ public class PaymentController {
 	@RequestMapping(value = "validation-achat", method = RequestMethod.POST)
 	public ModelAndView validate(@ModelAttribute("paymentForm") @Valid PaymentViewModel paymentVM,
 			BindingResult result) {
+		ModelAndView mav = new ModelAndView("payment/valid");
+		
 		Boolean connectedUser = currentUser.isLogged();
 		
 		if (connectedUser) {
-			logger.info("Payment : Mode of payment : usagé connecté");
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
 		} else {
-			logger.info("Payment : Mode of payment : usagé non connecté");
-			return new ModelAndView("payment/not-connected-user");
+			ModelAndView modelAV = new ModelAndView("payment/not-connected-user");
+			modelAV.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+			return modelAV;
 		}
 		
 		if(result.hasErrors()) {
-			ModelAndView mav = new ModelAndView("payment/mode-of-payment");
-			mav.addObject("paymentForm", paymentVM);
-			mav.addObject("creditCardTypes", paymentService.getCreditCardTypes());
-			mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
-            return mav;
+			ModelAndView modelAV = new ModelAndView("payment/mode-of-payment");
+			modelAV.addObject("connectedUser", connectedUser);
+			modelAV.addObject("paymentForm", paymentVM);
+			modelAV.addObject("creditCardTypes", paymentService.getCreditCardTypes());
+			modelAV.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
+            return modelAV;
         }
 		
 		try {
 			paymentService.payAmount(paymentVM);
 		} catch (InvalidCardException e) {
-			ModelAndView mav = new ModelAndView("payment/mode-of-payment");
-			mav.addObject("paymentForm", paymentVM);
-			mav.addObject("creditCardTypes", paymentService.getCreditCardTypes());
-			mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
+			ModelAndView modelAV = new ModelAndView("payment/mode-of-payment");
+			modelAV.addObject("connectedUser", connectedUser);
+			modelAV.addObject("paymentForm", paymentVM);
+			modelAV.addObject("creditCardTypes", paymentService.getCreditCardTypes());
+			modelAV.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
 			String errorMessage = "Une erreur s'est produite lors de la vérification de votre carte de crédit. "
 					+ "Veuillez réessayer en modifiants les informations fournies.";
-			mav.addObject("errorMessage", errorMessage);
-            return mav;
+			modelAV.addObject("errorMessage", errorMessage);
+            return modelAV;
 		}
-		
-		ModelAndView mav = new ModelAndView("payment/valid");
 		
 		mav.addObject("currency", Constants.CURRENCY);
 		

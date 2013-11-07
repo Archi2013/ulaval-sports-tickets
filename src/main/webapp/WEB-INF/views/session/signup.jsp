@@ -9,7 +9,7 @@
 <%@include file="../layout/head.jsp"%>
 <body>
     <%@include file="../layout/header.jsp" %>
-    
+    <%@include file="../layout/menu.jsp" %>
 
 
     <h2> S'inscrire sur UL Sport </h2>

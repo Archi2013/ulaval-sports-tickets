@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +16,7 @@ import ca.ulaval.glo4003.domain.services.CommandGameService;
 import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.domain.utilities.DateParser;
 import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
+import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
@@ -36,11 +38,27 @@ public class AdministrationController {
 
 	@Inject
 	private DateParser dateParser;
+	
+	@Autowired
+	private User currentUser;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String home() {
+	public ModelAndView home() {
 		logger.info("Adminisatration : Home");
-		return "admin/home";
+		
+		ModelAndView mav = new ModelAndView("admin/home");
+		
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
+		} else {
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+		}
+		
+		return mav;
 	}
 
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
@@ -48,6 +66,16 @@ public class AdministrationController {
 		logger.info("Adminisatration : Page to add a new game for a sport");
 
 		ModelAndView mav = new ModelAndView("admin/game", "command", new GameToAddViewModel());
+		
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
+		} else {
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+		}
 
 		mav.addObject("sportsVM", sportService.getSports());
 
@@ -55,10 +83,22 @@ public class AdministrationController {
 	}
 
 	@RequestMapping(value = "/ajout-match", method = RequestMethod.POST)
-	public String addGame(@ModelAttribute("SpringWeb") GameToAddViewModel gameToAddVM, Model model) {
+	public ModelAndView addGame(@ModelAttribute("SpringWeb") GameToAddViewModel gameToAddVM) {
 		logger.info("Adminisatration : Add a new game for a sport : " + gameToAddVM.getSport());
 
-		model.addAttribute("game", gameToAddVM);
+		ModelAndView mav = new ModelAndView("admin/game-added");
+		
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
+		} else {
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+		}
+		
+		mav.addObject("game", gameToAddVM);
 
 		try {
 			gameService.createNewGame(gameToAddVM.getSport(), gameToAddVM.getOpponents(),
@@ -66,10 +106,10 @@ public class AdministrationController {
 		} catch (SportDoesntExistException | GameDoesntExistException | GameAlreadyExistException
 				| NoSportForUrlException e) {
 			e.printStackTrace();
-			return "admin/game-added-data-error";
+			return new ModelAndView("admin/game-added-data-error");
 		}
 
-		return "admin/game-added";
+		return mav;
 	}
 
 	@RequestMapping(value = "/billets/choisir-sport", method = RequestMethod.GET)
@@ -78,6 +118,16 @@ public class AdministrationController {
 
 		ModelAndView mav = new ModelAndView("admin/addTickets-chooseSport", "command", new SelectSportViewModel());
 
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
+		} else {
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+		}
+		
 		mav.addObject("sportsVM", sportService.getSports());
 
 		return mav;
@@ -96,17 +146,39 @@ public class AdministrationController {
 			mav = new ModelAndView("admin/addTickets-Seated", "command", new SeatedTicketsToAddViewModel());
 		}
 
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
+		} else {
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+		}
+		
 		mav.addObject("gamesVM", sportService.getGamesForSport(selectSportVM.getSport()));
 
 		return mav;
 	}
 
 	@RequestMapping(value = "/ajout-billets-general", method = RequestMethod.POST)
-	public String addTickets_general(@ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel ticketsToAddVM,
+	public ModelAndView addTickets_general(@ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel ticketsToAddVM,
 			Model model) throws SportDoesntExistException, GameDoesntExistException {
 		logger.info("Adminisatration :Adding " + ticketsToAddVM.getNumberOfTickets() + "new general tickets to game"
 				+ ticketsToAddVM.getGameDate());
 
-		return "/admin/tickets-added";
+		ModelAndView mav = new ModelAndView("/admin/tickets-added");
+		
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
+		} else {
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+		}
+		
+		return mav;
 	}
 }

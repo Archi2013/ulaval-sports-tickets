@@ -9,6 +9,7 @@
 <%@include file="../layout/head.jsp"%>
 <body>
     <%@include file="../layout/header.jsp" %>
+    <%@include file="../layout/menu.jsp" %>
     
     <h2> Vous êtes déconnecté !</h2>
     <nav>

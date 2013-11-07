@@ -32,18 +32,20 @@ public class SearchController {
 		ModelAndView mav = new ModelAndView("search/home");
 		mav.addObject("currency", Constants.CURRENCY);
 		
-		boolean connectedUser = currentUser.isLogged();
+		Boolean connectedUser = currentUser.isLogged();
 		
 		TicketSearchViewModel ticketSearchVM = searchService.getInitialisedTicketSearchViewModel();
 		
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
+			
 			// mettre les préférences de l'usager
 			// TicketSearchViewModel ticketSearchVM = 
-			logger.info("Search : Home : usagé connecté");
+			
+			logger.info("usagé connecté");
 		} else {
 			mav.addObject("connectedUser", false);
-			logger.info("Search : Home : usagé non connecté");
+			logger.info("usagé non connecté");
 		}
 		
 		mav.addObject("ticketSearchForm", ticketSearchVM);
@@ -61,7 +63,7 @@ public class SearchController {
 	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
 		logger.info("Search : save user search preferences");
 		
-		// Enregistrement de ticketSearchVM
+		// Enregistrement de ticketSearchVM | il faut le transformer en TicketSearchPreferenceDto
 		
 		ModelAndView mav = home();
 		

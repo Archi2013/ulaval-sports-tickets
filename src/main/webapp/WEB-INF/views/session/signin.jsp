@@ -9,6 +9,7 @@
 <%@include file="../layout/head.jsp"%>
 <body>
     <%@include file="../layout/header.jsp" %>
+    <%@include file="../layout/menu.jsp" %>
     
     <h2> Se connecter ! </h2>
     <form action="/session/auth" method="post">  

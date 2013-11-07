@@ -28,7 +28,7 @@ public class SectionControllerTest {
 	private SectionService sectionService;
 
 	@Mock
-	private User user;
+	private User currentUser;
 	
 	@InjectMocks
 	private SectionController sectionController;
@@ -85,7 +85,7 @@ public class SectionControllerTest {
 	
 	@Test
 	public void when_user_is_logged_getSectionForGame_should_add_connectedUser_at_true() {
-		when(user.isLogged()).thenReturn(true);
+		when(currentUser.isLogged()).thenReturn(true);
 		
 		ModelAndView mav = sectionController.getSectionForGame(GAME_ID, TICKET_TYPE);
 		ModelMap modelMap = mav.getModelMap();
@@ -96,7 +96,7 @@ public class SectionControllerTest {
 	
 	@Test
 	public void when_user_isnt_logged_getSectionForGame_should_add_connectedUser_at_false() {
-		when(user.isLogged()).thenReturn(false);
+		when(currentUser.isLogged()).thenReturn(false);
 		
 		ModelAndView mav = sectionController.getSectionForGame(GAME_ID, TICKET_TYPE);
 		ModelMap modelMap = mav.getModelMap();

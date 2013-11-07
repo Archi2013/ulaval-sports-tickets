@@ -9,6 +9,7 @@
 <%@include file="../layout/head.jsp"%>
 <body>
     <%@include file="../layout/header.jsp" %>
+    <%@include file="../layout/menu.jsp" %>
     
     <h2> Essaie encore! </h2>
     <form action="/session/save" method="post"> 

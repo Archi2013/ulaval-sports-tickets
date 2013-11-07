@@ -2,15 +2,15 @@ package ca.ulaval.glo4003.web.controllers;
 
 import javax.inject.Inject;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import ca.ulaval.glo4003.domain.services.UserService;
 import ca.ulaval.glo4003.domain.utilities.User;
 import ca.ulaval.glo4003.domain.utilities.UserAlreadyExistException;
@@ -33,70 +33,132 @@ public class SessionController {
 	private static final Logger logger = LoggerFactory.getLogger(SessionController.class);
 	
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
-	public String signIn(Model model) {
+	public ModelAndView signIn() {
 		logger.info("Sign In");
 		
-		model.addAttribute("user", currentUser);
-		if (currentUser.isLogged()) {
-			return "session/logged";
+		ModelAndView mav = new ModelAndView("session/logged");
+
+		mav.addObject("user", currentUser);
+		
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
 		} else {
-			return "session/signin";
-		}	
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+			mav.setViewName("session/signin");
+		}
+		return mav;
 	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public String signUp(Model model) {
+	public ModelAndView signUp() {
 		logger.info("Sign Up");
 		
-		model.addAttribute("user", currentUser);
-		if (currentUser.isLogged()) {
-			return "session/logged";
+		ModelAndView mav = new ModelAndView("session/logged");
+		
+		mav.addObject("user", currentUser);
+		
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
 		} else {
-			return "session/signup";
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+			mav.setViewName("session/signup");
 		}
+		return mav;
 	}
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
-	public String submitSignIn(@RequestParam String usernameParam,@RequestParam String passwordParam,Model model){
+	public ModelAndView submitSignIn(@RequestParam String usernameParam, @RequestParam String passwordParam){
 		logger.info("Authentification");
 		
+		ModelAndView mav = new ModelAndView("session/success");
+		
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
+		} else {
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+		}
+		
 		try {
-			UserViewModel userViewModel = userService.signIn(usernameParam,passwordParam);
-			model.addAttribute("user", userViewModel); 
-	        return "session/success";
+			UserViewModel userViewModel = userService.signIn(usernameParam, passwordParam);
+			mav.addObject("user", userViewModel); 
+	        return mav;
 		} catch (UserDoesntExistException | UsernameAndPasswordDoesntMatchException e) {
 			logger.info("==> Impossible to Sign In : " + usernameParam);
-			return "session/retry";
+			mav.setViewName("session/retry");
+			return mav;
 		}
 	}
 	
 	@RequestMapping(value="/save",method = RequestMethod.POST)    
-    public String registerUser(@RequestParam String usernameParam,@RequestParam String passwordParam,Model model) { 
+    public ModelAndView registerUser(@RequestParam String usernameParam, @RequestParam String passwordParam) { 
+		ModelAndView mav = new ModelAndView("session/signin");
 		
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
+		} else {
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+		}
 		
 		try {
 			userService.signUp(usernameParam, passwordParam);
-			model.addAttribute("user", currentUser); 
-	        return "session/signin"; 
+			mav.addObject("user", currentUser); 
+	        return mav; 
 		} catch (UserAlreadyExistException e) {
-			return "session/exist";
+			mav.setViewName("session/exist");
+			return mav;
 		} 
     } 
 	
 	@RequestMapping(value="/logout",method = RequestMethod.GET)    
-    public String logoutUser(Model model) { 
+    public ModelAndView logoutUser() {
 		userService.logOutCurrentUser(); 
-        return "session/logout";  
+		
+		ModelAndView mav = new ModelAndView("session/logout");
+		
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
+		} else {
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+		}
+		
+        return mav;  
     } 
 	
 	@RequestMapping(value="/current",method = RequestMethod.GET)
-	public String showCurrentUser(Model model){
+	public ModelAndView showCurrentUser(){
+		ModelAndView mav = new ModelAndView("session/success");
 		
-		model.addAttribute("user", currentUser); 
-		if (currentUser.isLogged()) {
-			return "session/success";
+		Boolean connectedUser = currentUser.isLogged();
+		
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+			logger.info("usagé connecté");
 		} else {
-			return "session/logout";
+			mav.addObject("connectedUser", false);
+			logger.info("usagé non connecté");
+			mav.setViewName("session/logout");
 		}
+		mav.addObject("user", currentUser); 
+		return mav;
 	}
 }

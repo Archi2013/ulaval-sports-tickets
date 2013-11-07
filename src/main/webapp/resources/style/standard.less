@@ -74,19 +74,34 @@ body {
 	color: @standard-black-gray-color;
 	font-family: "Open Sans", sans-serif;
 	font-weight: 300;
+	background: #f9f9f9;
 }
 
-nav {
-	margin: 25px;
-	font-size: 1.3em;
-	line-height: 1.5em;
-	
-	a, a:visited {
-	    color: @standard-orange-color;
-	}
-	a:hover, a:active {
-	   color: @standard-red-color;
-	}
+.main-menu {
+    border-top: 1px solid @standard-dark-gray-color;
+    border-bottom: 1px solid @standard-dark-gray-color;
+    background: white;
+    
+    .menu-element {
+        .inline-block(top);
+        padding: 15px 30px;
+        
+        font-size: 1.3em;
+        font-weight: 400;
+        font-family: "Lato", sans-serif;
+        
+        a {
+            color: @standard-dark-gray-color;
+        }
+    }
+}
+
+.horizontal-button-menu {
+    .menu-element {
+        .inline-block(top);
+        margin-right: 30px;
+        margin-bottom: 30px;
+    }
 }
 
 h1 {
@@ -186,6 +201,24 @@ a, a:visited {
     }
 }
 
+.blue-button {
+    background-color: @standard-blue-color;
+    border: 0;
+    color: white;
+    text-transform: uppercase;
+    font-family: "Lato", Helvetica, Arial, "Lucida Grande";
+    font-weight: 300;
+    font-size: 0.9em;
+
+    a, a:link, a:visited, a:active, a:hover {
+        color: white;
+    }
+
+    &:hover {
+        background-color: @standard-blue-gray-color;
+    }
+}
+
 .button-red-border {
     border: @standard-red-color 2px solid;
     color: @standard-red-color;
@@ -240,8 +273,6 @@ footer {
 }
 
 .vertical-normal-list {
-	margin: 25px;
-	
 	li {
 	    margin: 15px 0;
         font-size: 1.5em;
@@ -262,6 +293,10 @@ footer {
 
 .margin-25 {
     margin: 25px;
+}
+
+.margin-50 {
+    margin: 50px;
 }
 
 .margin-25-0 {
@@ -307,11 +342,27 @@ footer {
     }
 }
 
+.featured-quote {
+    background: #efefef;
+    border-left: 7px solid #555;
+    padding: 20px;
+    
+    font-family: Times, Georgia, "Times New Roman", serif;
+    color: @standard-dark-gray-color;
+    font-size: 1.7em;
+    text-align: center;
+    
+    .quote-author {
+        color: #606060;
+    }
+}
+
 .wrapper-ticket-card {
     text-align: center;
 }
 
 .ticket-card {
+    background: white;
     .inline-block(middle);
     padding: 20px 30px;
     margin: 25px auto;
