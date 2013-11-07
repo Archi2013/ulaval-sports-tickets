@@ -84,14 +84,23 @@ body {
     
     .menu-element {
         .inline-block(top);
-        padding: 15px 30px;
         
         font-size: 1.3em;
         font-weight: 400;
         font-family: "Lato", sans-serif;
         
         a {
+            .inline-block(middle);
+            line-height: 55px;
+            height: 50px;
+            padding-right: 30px;
+            padding-left: 30px;
             color: @standard-dark-gray-color;
+            border-bottom: 5px solid transparent;
+            
+            &:hover {
+                border-bottom: 5px solid @standard-red-color;
+            }
         }
     }
 }
@@ -108,7 +117,7 @@ h1 {
 	font-family: "Ubuntu", sans-serif;
 	color: @standard-red-color;
 	font-weight: 700;
-	font-size: 5em;
+	font-size: 4em;
 	padding: 15px 25px 30px 25px;
 	
 	a {
@@ -117,6 +126,10 @@ h1 {
 	
 	em {
         color: @standard-gold-yellow-color;
+    }
+    
+    img {
+        height: 60px;
     }
 }
 
