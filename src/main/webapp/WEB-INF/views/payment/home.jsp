@@ -59,10 +59,12 @@
             </tbody>
         </table>
     </div>
-    <div class="total-price-container padding-20">
-        <span>Total : </span><strong>${payableItems.cumulativePrice} ${currency}</strong><span style="padding-left: 20px; padding-right:20px;"></span>
-        <a href="/paiement/mode-de-paiement" class="standard-button-rounded-border orange-button">Valider la commande</a>
-    </div>
+    <c:if test="${empty errorMessage}">
+	    <div class="total-price-container padding-20">
+	        <span>Total : </span><strong>${payableItems.cumulativePrice} ${currency}</strong><span style="padding-left: 20px; padding-right:20px;"></span>
+	        <a href="/paiement/mode-de-paiement" class="standard-button-rounded-border orange-button">Valider la commande</a>
+	    </div>
+    </c:if>
     
     <%@include file="../layout/footer.jsp" %>
 </body>

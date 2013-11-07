@@ -3,11 +3,20 @@ package ca.ulaval.glo4003.web.viewmodels;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class ChooseTicketsViewModel {
+	
 	public Integer numberOfTicketsToBuy;
 	public List<String> selectedSeats;
 
+	@NotNull @NotEmpty
 	public String sectionName;
+	
+	@NotNull @Min(1)
 	public Long gameId;
 	
 	public ChooseTicketsViewModel() {

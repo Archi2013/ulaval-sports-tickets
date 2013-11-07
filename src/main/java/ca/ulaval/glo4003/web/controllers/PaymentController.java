@@ -1,11 +1,13 @@
 package ca.ulaval.glo4003.web.controllers;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,11 +41,8 @@ public class PaymentController {
 	Calculator calculator;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ModelAndView home(@ModelAttribute("chooseTicketsForm") ChooseTicketsViewModel chooseTicketsVM) {
-		ModelAndView mav = new ModelAndView("payment/home");
-		
-		mav.addObject("currency", Constants.CURRENCY);
-		
+	public ModelAndView home(@ModelAttribute("chooseTicketsForm") @Valid ChooseTicketsViewModel chooseTicketsVM,
+			BindingResult result) {		
 		Boolean connectedUser = currentUser.isLogged();
 		
 		if (connectedUser) {
@@ -53,9 +52,21 @@ public class PaymentController {
 			return new ModelAndView("payment/not-connected-user");
 		}
 		
-		mav.addObject("chooseTicketsForm", chooseTicketsVM);
+		if(result.hasErrors()) {
+            return new ModelAndView("payment/trafficked-page");
+        }
+		
+		ModelAndView mav = new ModelAndView("payment/home");
+		
+		mav.addObject("currency", Constants.CURRENCY);
 		
 		try {
+			if (!paymentService.isValidPayableItemsViewModel(chooseTicketsVM)) {
+				String errorMessage = "Une erreur s'est produite lors de la vérification des éléments choisis. "
+						+ "Veuillez réessayer en recommençant votre sélection de billets. <a href=\"/\">Accueil</a>";
+				mav.addObject("errorMessage", errorMessage);
+				return mav;
+			}
 			mav.addObject("payableItems", paymentService.getPayableItemsViewModel(chooseTicketsVM));
 			paymentService.saveToCart(chooseTicketsVM);
 		} catch (GameDoesntExistException | SectionDoesntExistException e) {
@@ -68,11 +79,7 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(value = "mode-de-paiement", method = RequestMethod.GET)
-	public ModelAndView modeOfPayment(@ModelAttribute("chooseTicketsForm") ChooseTicketsViewModel chooseTicketsVM) {
-		ModelAndView mav = new ModelAndView("payment/mode-of-payment");
-		
-		mav.addObject("currency", Constants.CURRENCY);
-		
+	public ModelAndView modeOfPayment() {		
 		Boolean connectedUser = currentUser.isLogged();
 		
 		if (connectedUser) {
@@ -81,6 +88,10 @@ public class PaymentController {
 			logger.info("Payment : Mode of payment : usagé non connecté");
 			return new ModelAndView("payment/not-connected-user");
 		}
+		
+		ModelAndView mav = new ModelAndView("payment/mode-of-payment");
+		
+		mav.addObject("currency", Constants.CURRENCY);
 		
 		PaymentViewModel paymentVM = new PaymentViewModel();
 		
@@ -92,11 +103,8 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(value = "validation-achat", method = RequestMethod.POST)
-	public ModelAndView validate(@ModelAttribute("paymentForm") PaymentViewModel paymentVM) {
-		ModelAndView mav = new ModelAndView("payment/valid");
-		
-		mav.addObject("currency", Constants.CURRENCY);
-		
+	public ModelAndView validate(@ModelAttribute("paymentForm") @Valid PaymentViewModel paymentVM,
+			BindingResult result) {
 		Boolean connectedUser = currentUser.isLogged();
 		
 		if (connectedUser) {
@@ -105,6 +113,18 @@ public class PaymentController {
 			logger.info("Payment : Mode of payment : usagé non connecté");
 			return new ModelAndView("payment/not-connected-user");
 		}
+		
+		if(result.hasErrors()) {
+			ModelAndView mav = new ModelAndView("payment/mode-of-payment");
+			mav.addObject("paymentForm", paymentVM);
+			mav.addObject("creditCardTypes", paymentService.getCreditCardTypes());
+			mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
+            return mav;
+        }
+		
+		ModelAndView mav = new ModelAndView("payment/valid");
+		
+		mav.addObject("currency", Constants.CURRENCY);
 		
 		mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
 		

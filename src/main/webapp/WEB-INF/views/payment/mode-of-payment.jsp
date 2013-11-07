@@ -30,13 +30,18 @@
 	            <c:forEach items="${creditCardTypes}" var="type">
 	                <form:option value="${type.name()}">${type.toString()}</form:option>
 	            </c:forEach>
-	        </form:select><br>
+	        </form:select>
+	        <form:errors path="creditCardType" cssClass="error"></form:errors>
+	        <br>
 	        <form:label path="creditCardNumber">No de carte de crédit : </form:label>
-	        <form:input path="creditCardNumber" type="number"/><br>
+	        <form:input path="creditCardNumber" type="number"/>
+	        <form:errors path="creditCardNumber" cssClass="error"></form:errors><br>
 	        <form:label path="securityCode">Code de sécurité au verso : </form:label>
-	        <form:input path="securityCode" type="number"/><br>
+	        <form:input path="securityCode" type="number"/>
+	        <form:errors path="securityCode" cssClass="error"></form:errors><br>
 	        <form:label path="creditCardUserName">Nom sur la carte : </form:label>
-	        <form:input path="creditCardUserName"/><br>
+	        <form:input path="creditCardUserName"/>
+	        <form:errors path="creditCardUserName" cssClass="error"></form:errors><br>
 	        <form:label path="expirationMonth" type="number">Mois d'expiration : </form:label>
             <form:select path="expirationMonth">
                 <form:option value="1">janvier</form:option>
@@ -51,7 +56,8 @@
                 <form:option value="10">octobre</form:option>
                 <form:option value="11">novembre</form:option>
                 <form:option value="12">décembre</form:option>
-            </form:select><br>
+            </form:select>
+            <form:errors path="expirationMonth" cssClass="error"></form:errors><br>
             <form:label path="expirationYear">Année d'expiration : </form:label>
             <form:select path="expirationYear">
                 <form:option value="2014">2014</form:option>
@@ -60,7 +66,8 @@
                 <form:option value="2017">2017</form:option>
                 <form:option value="2018">2018</form:option>
                 <form:option value="2019">2019</form:option>
-            </form:select><br>
+            </form:select>
+            <form:errors path="expirationYear" cssClass="error"></form:errors><br>
             <div style="text-align:center;">
                 <input type="submit" value="Payer le montant" class="standard-button-rounded-border orange-button"/>
             </div>

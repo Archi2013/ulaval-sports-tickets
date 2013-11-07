@@ -42,6 +42,29 @@ public class PaymentService {
 	@Autowired
 	public Cart currentCart;
 
+	public Boolean isValidPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
+		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
+		
+		if (sectionDto.isGeneralAdmission()) {
+			Integer numberOfTickets = chooseTicketsVM.getNumberOfTicketsToBuy();
+			if (numberOfTickets < 1 || numberOfTickets > sectionDto.getNumberOfTickets()) {
+				return false;
+			}
+		} else {
+			Integer numberOfTickets = chooseTicketsVM.getSelectedSeats().size();
+			if (numberOfTickets < 1 || numberOfTickets > sectionDto.getNumberOfTickets()) {
+				return false;
+			}
+			for (String seat : chooseTicketsVM.getSelectedSeats()) {
+				if (!sectionDto.getSeats().contains(seat)) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	public PayableItemsViewModel getPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
 		GameDto gameDto = gameDao.get(chooseTicketsVM.getGameId());
 		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());

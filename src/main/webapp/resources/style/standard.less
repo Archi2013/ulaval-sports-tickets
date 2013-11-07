@@ -278,11 +278,7 @@ footer {
     color: @text-color;
     
 	padding: 10px 15px;
-    -webkit-border-radius: 0.3em;
-    -moz-border-radius: 0.3em;
-    -ms-border-radius: 0.3em;
-    -o-border-radius: 0.3em;
-    border-radius: 0.3em;
+    .border-radius(0.3em);
     font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
     font-size: 1.3em;
 }
@@ -591,5 +587,12 @@ footer {
         .border-radius(0);
         padding-right: 5px;
         padding-left: 5px;
+    }
+    
+    .error {
+        color: #cd594c;
+
+        font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-size: 1.3em;
     }
 }
