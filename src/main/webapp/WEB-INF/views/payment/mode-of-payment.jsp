@@ -69,7 +69,7 @@
                 <form:option value="2019">2019</form:option>
             </form:select>
             <form:errors path="expirationYear" cssClass="error"></form:errors><br>
-            <div style="text-align:center;">
+            <div class="text-align-center">
                 <input type="submit" value="Payer le montant" class="standard-button-rounded-border orange-button"/>
             </div>
 	    </form:form>

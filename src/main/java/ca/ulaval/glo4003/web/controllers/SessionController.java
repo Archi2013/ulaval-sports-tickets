@@ -109,8 +109,7 @@ public class SessionController {
 		
 		try {
 			userService.signUp(usernameParam, passwordParam);
-			mav.addObject("user", currentUser); 
-	        return mav; 
+	        return submitSignIn(usernameParam, passwordParam);
 		} catch (UserAlreadyExistException e) {
 			mav.setViewName("session/exist");
 			return mav;

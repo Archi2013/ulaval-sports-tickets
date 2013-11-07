@@ -291,6 +291,18 @@ footer {
 	}
 }
 
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
 .margin-25-50 {
     margin: 25px 50px;
 }
@@ -657,5 +669,32 @@ footer {
 
         font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
         font-size: 1.3em;
+    }
+}
+
+.authentification-form {
+    .inline-block(top);
+    text-align: left;
+    
+    border: 1px solid @standard-orange-color;
+    
+    label {
+        .inline-block(middle);
+        width: 250px;
+        font-size: 1.5em;
+        line-height: 2em;
+        color: @standard-medium-gray-color;
+    }
+    
+    input[type=text], input[type=date], input[type=number], input[type=password] {
+        font-size: 1.3em;
+        line-height: 1.7em;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 300;
+        
+        width: 250px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        outline: none;
     }
 }
