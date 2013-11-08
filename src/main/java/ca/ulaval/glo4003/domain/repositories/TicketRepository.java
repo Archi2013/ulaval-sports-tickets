@@ -17,6 +17,11 @@ public class TicketRepository implements ITicketRepository {
 	private TicketFactory factory;
 	private TicketDao dao;
 
+	// TODO règle le bogue. À supprimer plus tard.
+	public TicketRepository() {
+		
+	}
+	
 	public TicketRepository(TicketFactory factory, TicketDao dao) {
 		this.factory = factory;
 		this.dao = dao;
