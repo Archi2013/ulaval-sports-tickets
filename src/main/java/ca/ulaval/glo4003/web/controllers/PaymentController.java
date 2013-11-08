@@ -125,35 +125,33 @@ public class PaymentController {
 			return mav;
 		}
 		
+		mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
+		mav.addObject("currency", Constants.CURRENCY);
+		
 		if(result.hasErrors()) {
-			modifyToRetryModeOfPayment(paymentVM, mav);
+			modifyModelAndViewToRetryModeOfPayment(paymentVM, mav);
             return mav;
         }
 		
 		try {
 			paymentService.payAmount(paymentVM);
 		} catch (InvalidCardException e) {
-			modifyToRetryModeOfPayment(paymentVM, mav);
+			modifyModelAndViewToRetryModeOfPayment(paymentVM, mav);
 			String errorMessage = "Une erreur s'est produite lors de la vérification de votre carte de crédit. "
 					+ "Veuillez réessayer en modifiants les informations fournies.";
 			mav.addObject("errorMessage", errorMessage);
             return mav;
 		}
 		
-		mav.addObject("currency", Constants.CURRENCY);
-		
-		mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
-		
 		paymentService.emptyCart();
 		
 		return mav;
 	}
 
-	private void modifyToRetryModeOfPayment(PaymentViewModel paymentVM,
+	private void modifyModelAndViewToRetryModeOfPayment(PaymentViewModel paymentVM,
 			ModelAndView mav) {
 		mav.setViewName("payment/mode-of-payment");
 		mav.addObject("paymentForm", paymentVM);
 		mav.addObject("creditCardTypes", paymentService.getCreditCardTypes());
-		mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
 	}
 }
