@@ -29,25 +29,25 @@ import ca.ulaval.glo4003.web.viewmodels.factories.PayableItemsViewModelFactory;
 public class PaymentService {
 	
 	@Inject
-	GameDao gameDao;
+	private GameDao gameDao;
 	
 	@Inject
-	SectionDao sectionDao;
+	private SectionDao sectionDao;
 	
 	@Inject
-	PayableItemsViewModelFactory payableItemsViewModelFactory;
+	private PayableItemsViewModelFactory payableItemsViewModelFactory;
 	
 	@Inject
-	Calculator calculator;
+	private Calculator calculator;
 	
 	@Inject
-	Constants constants;
+	private Constants constants;
 	
 	@Inject
-	CreditCardFactory creditCardFactory;
+	private CreditCardFactory creditCardFactory;
 	
 	@Autowired
-	public Cart currentCart;
+	private Cart currentCart;
 
 	public Boolean isValidPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
 		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
@@ -72,7 +72,8 @@ public class PaymentService {
 		return true;
 	}
 	
-	public PayableItemsViewModel getPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
+	public PayableItemsViewModel getPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM)
+			throws GameDoesntExistException, SectionDoesntExistException {
 		GameDto gameDto = gameDao.get(chooseTicketsVM.getGameId());
 		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
 		
@@ -106,7 +107,9 @@ public class PaymentService {
 
 	public void payAmount(PaymentViewModel paymentVM) throws InvalidCardException {
 		CreditCard creditCard = creditCardFactory.createCreditCard(paymentVM);
-		creditCard.pay(currentCart.getCumulativePrice());
+		if (currentCart.containTickets()) {
+			creditCard.pay(currentCart.getCumulativePrice());
+		}
 	}
 
 	public void emptyCart() {
