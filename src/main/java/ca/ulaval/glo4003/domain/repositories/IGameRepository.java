@@ -11,12 +11,12 @@ import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 public interface IGameRepository {
 
-	List<Game> getGamesScheduledForSport(String sportName) throws SportDoesntExistException;
+	List<Game> recoverAllGamesForSport(String sportName) throws SportDoesntExistException;
 
-	public Game createNewGameInRepository(String opponents, DateTime date);
+	public Game instantiateNewGame(String opponents, DateTime date);
+
+	Game recoverGame(String aSport, DateTime a_DATE);
 
 	public void commit() throws GameDoesntExistException, GameAlreadyExistException;
-
-	Game getGame(String aSport, DateTime a_DATE);
 
 }

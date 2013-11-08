@@ -1,6 +1,5 @@
 package ca.ulaval.glo4003.domain.dtos;
 
-
 public class TicketDto {
 
 	public long gameId;
@@ -8,6 +7,7 @@ public class TicketDto {
 	public double price;
 	public String admissionType;
 	public String section;
+	public String seat;
 
 	public TicketDto(long gameId, int ticketId, double price, String admissionType, String section) {
 		this.ticketId = ticketId;
@@ -39,5 +39,9 @@ public class TicketDto {
 
 	public long getGameId() {
 		return gameId;
+	}
+
+	public String getSeat() {
+		return seat;
 	}
 }

@@ -35,7 +35,7 @@ public class GameRepository implements IGameRepository {
 	}
 
 	@Override
-	public List<Game> getGamesScheduledForSport(String sportName) throws SportDoesntExistException {
+	public List<Game> recoverAllGamesForSport(String sportName) throws SportDoesntExistException {
 		List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
 		List<PersistableGame> games = new ArrayList<>();
 		for (GameDto dto : gameDtos) {
@@ -48,7 +48,7 @@ public class GameRepository implements IGameRepository {
 		return gameList;
 	}
 
-	public Game createNewGameInRepository(String opponents, DateTime date) {
+	public Game instantiateNewGame(String opponents, DateTime date) {
 		PersistableGame newGame = gameFactory.instantiateGame(opponents, date);
 		newActiveGames.add(newGame);
 		return newGame;
@@ -70,7 +70,7 @@ public class GameRepository implements IGameRepository {
 	}
 
 	@Override
-	public Game getGame(String aSport, DateTime a_DATE) {
+	public Game recoverGame(String aSport, DateTime a_DATE) {
 		// TODO Auto-generated method stub
 		return null;
 	}

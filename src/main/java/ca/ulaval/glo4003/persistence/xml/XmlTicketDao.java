@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
@@ -127,5 +128,17 @@ public class XmlTicketDao implements TicketDao {
 			tickets.add(convertNodeToTicket(node));
 		}
 		return tickets;
+	}
+
+	@Override
+	public TicketDto get(String sportName, DateTime date, int ticketNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

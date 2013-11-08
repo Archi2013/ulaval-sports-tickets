@@ -29,7 +29,7 @@ public class CommandGameService {
 			GameDoesntExistException, GameAlreadyExistException, NoSportForUrlException {
 
 		String domainSportName = sportUrlMapper.getSportName(sportName);
-		Game game = gameRepository.createNewGameInRepository(opponent, date);
+		Game game = gameRepository.instantiateNewGame(opponent, date);
 		Sport sport = sportRepository.getSportByName(domainSportName);
 
 		sport.addGameToCalendar(game);

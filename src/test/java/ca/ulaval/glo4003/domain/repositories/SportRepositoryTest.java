@@ -51,7 +51,7 @@ public class SportRepositoryTest {
 		sportDto = new SportDto(DTO_SPORT);
 		when(sportDao.get(PARAMETER_SPORT)).thenReturn(sportDto);
 		when(sportFactory.instantiateSport(DTO_SPORT, gameList)).thenReturn(sport);
-		when(gameRepository.getGamesScheduledForSport(PARAMETER_SPORT)).thenReturn(gameList);
+		when(gameRepository.recoverAllGamesForSport(PARAMETER_SPORT)).thenReturn(gameList);
 		when(sport.saveDataInDTO()).thenReturn(sportDto);
 	}
 
