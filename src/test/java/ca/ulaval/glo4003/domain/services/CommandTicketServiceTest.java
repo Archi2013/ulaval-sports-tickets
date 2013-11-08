@@ -47,7 +47,7 @@ public class CommandTicketServiceTest {
 	public void setup() {
 		when(ticketRepository.instantiateNewTicket()).thenReturn(ticketToAdd);
 		when(ticketRepository.instantiateNewTicket(A_SECTION, A_SEAT)).thenReturn(ticketToAdd);
-		when(gameRepository.getGame(A_SPORT, A_DATE)).thenReturn(game);
+		when(gameRepository.recoverGame(A_SPORT, A_DATE)).thenReturn(game);
 	}
 
 	@Test
@@ -76,7 +76,7 @@ public class CommandTicketServiceTest {
 	public void game_used_by_addGeneralTickets_is_obtained_from_a_repository() throws Exception {
 		ticketService.addGeneralTickets(A_SPORT, A_DATE, A_NUMBER_OF_TICKETS);
 
-		verify(gameRepository).getGame(A_SPORT, A_DATE);
+		verify(gameRepository).recoverGame(A_SPORT, A_DATE);
 	}
 
 	@Test
@@ -111,7 +111,7 @@ public class CommandTicketServiceTest {
 	public void game_used_by_addSeatedTicket_is_obtained_from_repository() throws Exception {
 		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT);
 
-		verify(gameRepository).getGame(A_SPORT, A_DATE);
+		verify(gameRepository).recoverGame(A_SPORT, A_DATE);
 	}
 
 	@Test
