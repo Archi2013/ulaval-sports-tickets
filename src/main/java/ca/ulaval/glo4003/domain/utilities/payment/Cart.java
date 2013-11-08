@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.utilities;
+package ca.ulaval.glo4003.domain.utilities.payment;
 
 import java.util.List;
 

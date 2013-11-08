@@ -8,10 +8,11 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.dtos.UserDto;
-import ca.ulaval.glo4003.domain.utilities.User;
-import ca.ulaval.glo4003.domain.utilities.UserAlreadyExistException;
-import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
-import ca.ulaval.glo4003.domain.utilities.UsernameAndPasswordDoesntMatchException;
+import ca.ulaval.glo4003.domain.utilities.user.Encryption;
+import ca.ulaval.glo4003.domain.utilities.user.User;
+import ca.ulaval.glo4003.domain.utilities.user.UserAlreadyExistException;
+import ca.ulaval.glo4003.domain.utilities.user.UserDoesntExistException;
+import ca.ulaval.glo4003.domain.utilities.user.UsernameAndPasswordDoesntMatchException;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
 import ca.ulaval.glo4003.web.viewmodels.UserViewModel;
 import ca.ulaval.glo4003.web.viewmodels.factories.UserViewModelFactory;
@@ -28,6 +29,9 @@ public class UserService {
 	
 	@Inject
 	private UserViewModelFactory userViewModelFactory;
+	
+	@Inject
+	private Encryption encryption;
 
 	private void setCurrentUser(UserDto user) {
 		currentUser.setUsername(user.getUsername());
@@ -43,16 +47,15 @@ public class UserService {
 			throw new UserAlreadyExistException();
 	}
 	
-	UserDto makeUser(String username, String password) {
-		return new UserDto(username, password);
+	private UserDto makeUser(String username, String password) {
+		return new UserDto(username, encryption.encrypt(password));
 	}
 
-	public UserViewModel signIn(String username, String password)
-			throws UserDoesntExistException,
+	public UserViewModel signIn(String username, String password) throws UserDoesntExistException,
 			UsernameAndPasswordDoesntMatchException {
 
 		UserDto user = userDao.get(username);
-		if (user.getPassword().equals(password)) {
+		if (encryption.isSamePassword(password, user.getPassword())) {
 			setCurrentUser(user);
 			UserViewModel userViewModel = userViewModelFactory.createViewModel(user);
 			return userViewModel;

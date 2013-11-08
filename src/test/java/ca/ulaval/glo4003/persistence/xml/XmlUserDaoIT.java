@@ -7,8 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.UserDto;
-import ca.ulaval.glo4003.domain.utilities.UserAlreadyExistException;
-import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
+import ca.ulaval.glo4003.domain.utilities.user.UserAlreadyExistException;
+import ca.ulaval.glo4003.domain.utilities.user.UserDoesntExistException;
 
 public class XmlUserDaoIT {
 	private XmlUserDao userDao;

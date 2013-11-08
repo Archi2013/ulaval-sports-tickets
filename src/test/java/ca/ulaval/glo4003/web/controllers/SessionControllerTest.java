@@ -12,10 +12,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.UserService;
-import ca.ulaval.glo4003.domain.utilities.User;
-import ca.ulaval.glo4003.domain.utilities.UserAlreadyExistException;
-import ca.ulaval.glo4003.domain.utilities.UserDoesntExistException;
-import ca.ulaval.glo4003.domain.utilities.UsernameAndPasswordDoesntMatchException;
+import ca.ulaval.glo4003.domain.utilities.user.User;
+import ca.ulaval.glo4003.domain.utilities.user.UserAlreadyExistException;
+import ca.ulaval.glo4003.domain.utilities.user.UserDoesntExistException;
+import ca.ulaval.glo4003.domain.utilities.user.UsernameAndPasswordDoesntMatchException;
 import ca.ulaval.glo4003.web.viewmodels.UserViewModel;
 
 @RunWith(MockitoJUnitRunner.class)

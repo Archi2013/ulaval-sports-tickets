@@ -163,6 +163,13 @@
             <artifactId>hibernate-validator</artifactId>
             <version>5.0.1.Final</version>
         </dependency>
+        
+        <!-- For encryption -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>1.9.1</version>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>

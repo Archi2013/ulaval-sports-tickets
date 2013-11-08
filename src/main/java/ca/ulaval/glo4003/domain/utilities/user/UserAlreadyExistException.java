@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.utilities;
+package ca.ulaval.glo4003.domain.utilities.user;
 
 public class UserAlreadyExistException extends Exception {
 	

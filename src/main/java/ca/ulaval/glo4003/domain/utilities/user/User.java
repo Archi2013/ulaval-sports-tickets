@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.utilities;
+package ca.ulaval.glo4003.domain.utilities.user;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

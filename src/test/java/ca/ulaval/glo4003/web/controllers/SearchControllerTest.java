@@ -16,7 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SearchService;
-import ca.ulaval.glo4003.domain.utilities.User;
+import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.web.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
 
