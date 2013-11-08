@@ -141,4 +141,16 @@ public class XmlTicketDao implements TicketDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void saveChanges(TicketDto firstTicketData) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void endTransaction() {
+		// TODO Auto-generated method stub
+
+	}
 }

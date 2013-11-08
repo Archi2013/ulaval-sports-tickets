@@ -21,4 +21,8 @@ public interface TicketDao {
 	public TicketDto get(String sportName, DateTime gameDate, int ticketNumber);
 
 	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate);
+
+	public void saveChanges(TicketDto firstTicketData);
+
+	public void endTransaction();
 }

@@ -1,14 +1,17 @@
 package ca.ulaval.glo4003.domain.factories;
 
-import ca.ulaval.glo4003.domain.tickets.Ticket;
+import org.springframework.stereotype.Component;
 
+import ca.ulaval.glo4003.domain.tickets.PersistableTicket;
+
+@Component
 public class TicketFactory {
 
-	public Ticket instantiateTicket() {
+	public PersistableTicket instantiateTicket() {
 		return null;
 	}
 
-	public Ticket instantiateTicket(String seat, String section) {
+	public PersistableTicket instantiateTicket(String seat, String section) {
 		return null;
 	}
 

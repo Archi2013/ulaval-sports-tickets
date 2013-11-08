@@ -1,5 +1,7 @@
 package ca.ulaval.glo4003.domain.repositories;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -16,7 +18,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.factories.TicketFactory;
+import ca.ulaval.glo4003.domain.tickets.PersistableTicket;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketDao;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -40,16 +44,16 @@ public class TicketRepositoryTest {
 	private TicketDto secondTicketData;
 
 	@Mock
-	private Ticket ticketGeneratedWithNoParameter;
+	private PersistableTicket ticketGeneratedWithNoParameter;
 
 	@Mock
-	private Ticket ticketGeneratedWithParameter;
+	private PersistableTicket ticketGeneratedWithParameter;
 
 	@Mock
-	private Ticket ticketWithDataFromDao;
+	private PersistableTicket ticketWithDataFromDao;
 
 	@Mock
-	private Ticket anotherTicketWithDataFromDao;
+	private PersistableTicket anotherTicketWithDataFromDao;
 
 	@Mock
 	private TicketFactory ticketFactory;
@@ -76,6 +80,10 @@ public class TicketRepositoryTest {
 		when(ticketFactory.instantiateTicket(AN_EXISTING_SEAT, AN_EXISTING_SECTION)).thenReturn(ticketWithDataFromDao);
 		when(ticketFactory.instantiateTicket(ANOTHER_EXISTING_SEAT, ANOTHER_EXISTING_SECTION)).thenReturn(
 				anotherTicketWithDataFromDao);
+		when(ticketGeneratedWithNoParameter.saveDataInDTO()).thenReturn(firstTicketData);
+		when(ticketGeneratedWithParameter.saveDataInDTO()).thenReturn(secondTicketData);
+		when(ticketWithDataFromDao.saveDataInDTO()).thenReturn(firstTicketData);
+		when(anotherTicketWithDataFromDao.saveDataInDTO()).thenReturn(secondTicketData);
 	}
 
 	@Test
@@ -100,5 +108,63 @@ public class TicketRepositoryTest {
 
 		Assert.assertSame(ticketWithDataFromDao, ticketsReturned.get(0));
 		Assert.assertSame(anotherTicketWithDataFromDao, ticketsReturned.get(1));
+	}
+
+	@Test
+	public void commit_adds_the_new_tickets_to_the_dao() throws TicketAlreadyExistException {
+		repository.instantiateNewTicket();
+		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION);
+		repository.commit();
+
+		verify(ticketDao).add(firstTicketData);
+		verify(ticketDao).add(secondTicketData);
+	}
+
+	@Test
+	public void after_two_commits_new_tickets_are_added_only_once() throws TicketAlreadyExistException {
+		repository.instantiateNewTicket();
+		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION);
+		repository.commit();
+		repository.commit();
+
+		verify(ticketDao, times(1)).add(firstTicketData);
+		verify(ticketDao, times(1)).add(secondTicketData);
+	}
+
+	@Test
+	public void commit_save_changes_of_single_recovered_tickets_to_dao() throws TicketAlreadyExistException {
+		repository.recoverTicket(A_SPORT, A_DATE, A_TICKET_NUMBER);
+		repository.commit();
+
+		verify(ticketDao).saveChanges(firstTicketData);
+	}
+
+	@Test
+	public void commit_save_changes_of_group_of_recovered_tickets_to_dao() throws TicketAlreadyExistException {
+		repository.recoverAllTicketsForGame(A_SPORT, A_DATE);
+		repository.commit();
+
+		verify(ticketDao).saveChanges(firstTicketData);
+		verify(ticketDao).saveChanges(secondTicketData);
+	}
+
+	@Test
+	public void after_new_tickets_have_been_added_to_dao_other_commits_save_changes()
+			throws TicketAlreadyExistException {
+		repository.instantiateNewTicket();
+		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION);
+
+		repository.commit();
+		repository.commit();
+
+		verify(ticketDao, times(1)).saveChanges(firstTicketData);
+		verify(ticketDao, times(1)).saveChanges(secondTicketData);
+	}
+
+	@Test
+	public void commit_notify_dao_of_transaction_end() throws TicketAlreadyExistException {
+		repository.commit();
+
+		verify(ticketDao, times(1)).endTransaction();
 	}
 }
