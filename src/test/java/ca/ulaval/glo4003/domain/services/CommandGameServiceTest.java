@@ -19,7 +19,7 @@ import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandGameServiceTest {
-	private static final String A_OPPONENT = "Oppenent";
+	private static final String A_OPPONENT = "Opponent";
 	private static final String A_SPORT_NAME = "Sport";
 	private static final DateTime A_DATE = new DateTime(100);
 	@Mock

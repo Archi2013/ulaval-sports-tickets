@@ -18,6 +18,7 @@ import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Constants;
+import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
 import ca.ulaval.glo4003.domain.utilities.payment.Cart;
 import ca.ulaval.glo4003.domain.utilities.payment.CreditCardFactory;
 import ca.ulaval.glo4003.domain.utilities.payment.InvalidCardException;
@@ -27,6 +28,7 @@ import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.web.viewmodels.PayableItemsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
 import ca.ulaval.glo4003.web.viewmodels.factories.PayableItemsViewModelFactory;
 
@@ -87,6 +89,47 @@ public class PaymentServiceTest {
 		when(chooseTicketsVM.getSelectedSeats()).thenReturn(selectedSeats);
 	}
 	
+	@Ignore("Il devrait y avoir un objet du domaine Section pour effectuer cette tâche")
+	@Test
+	public void isValidPayableItemsViewModel_should_assert_PayableItemsViewModel_is_valid() {
+		
+	}
+	
+	@Test
+	public void given_a_ChooseTicketsViewModel_getPayableItemsViewModel_should_return_a_PayableItemsViewModel() throws GameDoesntExistException, SectionDoesntExistException {
+		GameDto gameDto = mock(GameDto.class);
+		SectionDto sectionDto = mock(SectionDto.class);
+		PayableItemsViewModel payableItemsVM = mock(PayableItemsViewModel.class);
+		
+		when(gameDao.get(GAME_ID)).thenReturn(gameDto);
+		when(sectionDao.get(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
+		when(payableItemsViewModelFactory.createViewModel(chooseTicketsVM, gameDto, sectionDto)).thenReturn(payableItemsVM);
+		
+		PayableItemsViewModel actual = paymentService.getPayableItemsViewModel(chooseTicketsVM);
+		
+		assertSame(payableItemsVM, actual);
+	}
+	
+	@Test(expected=SectionDoesntExistException.class)
+	public void given_a_ChooseTicketsViewModel_getPayableItemsViewModel_should_throw_SectionDoesntExistException_when_sectionDao_throw_SectionDoesntExistException() throws GameDoesntExistException, SectionDoesntExistException {
+		GameDto gameDto = mock(GameDto.class);
+		
+		when(gameDao.get(GAME_ID)).thenReturn(gameDto);
+		when(sectionDao.get(GAME_ID, SECTION_NAME)).thenThrow(new SectionDoesntExistException());
+		
+		paymentService.getPayableItemsViewModel(chooseTicketsVM);
+	}
+	
+	@Test(expected=GameDoesntExistException.class)
+	public void given_a_ChooseTicketsViewModel_getPayableItemsViewModel_should_throw_GameDoesntExistException_when_gameDao_throw_GameDoesntExistException() throws GameDoesntExistException, SectionDoesntExistException {
+		SectionDto sectionDto = mock(SectionDto.class);
+		
+		when(gameDao.get(GAME_ID)).thenThrow(new GameDoesntExistException());
+		when(sectionDao.get(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
+		
+		paymentService.getPayableItemsViewModel(chooseTicketsVM);
+	}
+	
 	@Test
 	public void saveToCart_should_save_choose_tickets_to_current_cart() throws GameDoesntExistException, SectionDoesntExistException {
 		GameDto gameDto = mock(GameDto.class);
@@ -123,6 +166,17 @@ public class PaymentServiceTest {
 		when(sectionDao.get(GAME_ID, SECTION_NAME)).thenThrow(new SectionDoesntExistException());
 		
 		paymentService.saveToCart(chooseTicketsVM);
+	}
+	
+	@Test
+	public void getCreditCardTypes_should_return_the_a_list_of_creditCardType() {
+		List<CreditCardType> creditCardTypes = new ArrayList<>();
+		
+		when(constants.getCreditCardTypes()).thenReturn(creditCardTypes);
+	
+		List<CreditCardType> actual = paymentService.getCreditCardTypes();
+		
+		assertSame(creditCardTypes, actual);
 	}
 	
 	@Test
