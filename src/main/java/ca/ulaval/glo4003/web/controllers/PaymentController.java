@@ -26,6 +26,8 @@ import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
 @Controller
 @RequestMapping(value = "/paiement", method = RequestMethod.GET)
 public class PaymentController {
+	private static final String NOT_CONNECTED_USER_PAGE = "payment/not-connected-user";
+
 	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 	
 	@Inject
@@ -49,12 +51,12 @@ public class PaymentController {
 		addLogOfUserConnection(connectedUser);
 		
 		if (!connectedUser) {
-			mav.setViewName("payment/not-connected-user");
+			mav.setViewName(NOT_CONNECTED_USER_PAGE);
 			return mav;
 		}
 		
 		if(result.hasErrors()) {
-			mav.setViewName("payment/trafficked-page");
+			mav.setViewName("payment/trafficked");
             return mav;
         }
 		
@@ -89,7 +91,7 @@ public class PaymentController {
 		addLogOfUserConnection(connectedUser);
 		
 		if (!connectedUser) {
-			mav.setViewName("payment/not-connected-user");
+			mav.setViewName(NOT_CONNECTED_USER_PAGE);
 			return mav;
 		}
 		
@@ -105,7 +107,7 @@ public class PaymentController {
 	@RequestMapping(value = "validation-achat", method = RequestMethod.POST)
 	public ModelAndView validate(@ModelAttribute("paymentForm") @Valid PaymentViewModel paymentVM,
 			BindingResult result) {
-		ModelAndView mav = new ModelAndView("payment/valid");
+		ModelAndView mav = new ModelAndView("payment/succes");
 		
 		Boolean connectedUser = currentUser.isLogged();
 		
@@ -114,12 +116,13 @@ public class PaymentController {
 		addLogOfUserConnection(connectedUser);
 		
 		if (!connectedUser) {
-			mav.setViewName("payment/not-connected-user");
+			mav.setViewName(NOT_CONNECTED_USER_PAGE);
 			return mav;
 		}
 		
-		mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
 		mav.addObject("currency", Constants.CURRENCY);
+		
+		mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
 		
 		if(result.hasErrors()) {
 			modifyModelAndViewToRetryModeOfPayment(paymentVM, mav);
