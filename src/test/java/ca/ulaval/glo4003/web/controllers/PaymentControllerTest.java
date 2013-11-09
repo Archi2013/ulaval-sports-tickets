@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+import ca.ulaval.glo4003.domain.services.NoTicketsInCartException;
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.utilities.Constants;
@@ -30,6 +31,8 @@ import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentControllerTest {
+
+	private static final String NO_TICKETS_PAGE = "payment/no-tickets";
 
 	private static final String PRICE_FR = "76,78";
 
@@ -309,7 +312,7 @@ public class PaymentControllerTest {
 	}
 	
 	@Test
-	public void modeOfPayment_should_add_cumulativePrice_in_model_when_user_is_connected() {
+	public void modeOfPayment_should_add_cumulativePrice_in_model_when_user_is_connected() throws NoTicketsInCartException {
 		when(currentUser.isLogged()).thenReturn(true);
 		when(paymentService.getCumulativePriceFR()).thenReturn(PRICE_FR);
 		
@@ -319,6 +322,16 @@ public class PaymentControllerTest {
 		verify(paymentService).getCumulativePriceFR();
 		assertTrue(modelMap.containsAttribute("cumulativePrice"));
 		assertSame(PRICE_FR, modelMap.get("cumulativePrice"));
+	}
+	
+	@Test
+	public void modeOfPayment_should_return_no_tickets_page_when_user_is_connected_and_getCumulativePriceFR_raise_NoTicketsInCartException() throws NoTicketsInCartException {
+		when(currentUser.isLogged()).thenReturn(true);
+		when(paymentService.getCumulativePriceFR()).thenThrow(new NoTicketsInCartException());
+		
+		ModelAndView mav = controller.modeOfPayment();
+		
+		assertEquals(NO_TICKETS_PAGE, mav.getViewName());
 	}
 	
 	@Test
@@ -436,7 +449,7 @@ public class PaymentControllerTest {
 	}
 	
 	@Test
-	public void validate_should_add_cumulativePrice_in_model_when_user_is_connected_and_no_error_in_BindingResult() {
+	public void validate_should_add_cumulativePrice_in_model_when_user_is_connected_and_no_error_in_BindingResult() throws NoTicketsInCartException {
 		BindingResult bindingResult = mock(BindingResult.class);
 		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
 		
@@ -449,6 +462,20 @@ public class PaymentControllerTest {
 		
 		assertTrue(modelMap.containsAttribute("cumulativePrice"));
 		assertEquals(PRICE_FR, modelMap.get("cumulativePrice"));
+	}
+	
+	@Test
+	public void validate_should_return_no_tickets_page_when_user_is_connected_and_no_error_in_BindingResult_and_getCumulativePriceFR_raise_NoTicketsInCartException() throws NoTicketsInCartException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		when(paymentService.getCumulativePriceFR()).thenThrow(new NoTicketsInCartException());
+		
+		ModelAndView mav = controller.validate(paymentVM, bindingResult);
+		
+		assertEquals(NO_TICKETS_PAGE, mav.getViewName());
 	}
 	
 	@Test

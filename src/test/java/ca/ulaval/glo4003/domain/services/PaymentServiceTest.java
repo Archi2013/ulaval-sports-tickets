@@ -40,9 +40,7 @@ public class PaymentServiceTest {
 	private static final String SECTION_NAME = "Turquoise";
 
 	private static final Long GAME_ID = 23L;
-
-	private static final String ERROR_MESSAGE = "Erreur : il n'y a pas de tickets dans le panier d'achats. Le montant ne peut être affiché.";
-
+	
 	private static final String PRICE_FR = "36,70";
 
 	private static final Double PRICE = 36.7;
@@ -180,7 +178,7 @@ public class PaymentServiceTest {
 	}
 	
 	@Test
-	public void getCumulativePriceFR_should_return_the_FR_price_when_currentCart_contains_tickets() {
+	public void getCumulativePriceFR_should_return_the_FR_price_when_currentCart_contains_tickets() throws NoTicketsInCartException {
 		when(currentCart.containTickets()).thenReturn(true);
 		when(currentCart.getCumulativePrice()).thenReturn(PRICE);
 		when(calculator.toPriceFR(PRICE)).thenReturn(PRICE_FR);
@@ -190,15 +188,13 @@ public class PaymentServiceTest {
 		assertEquals(PRICE_FR, actual);
 	}
 	
-	@Test
-	public void getCumulativePriceFR_should_return_a_error_message_when_currentCart_contains_no_tickets() {
+	@Test(expected=NoTicketsInCartException.class)
+	public void getCumulativePriceFR_should_throw_NoTicketsInCartException_when_currentCart_contains_no_tickets() throws NoTicketsInCartException {
 		when(currentCart.containTickets()).thenReturn(false);
 		when(currentCart.getCumulativePrice()).thenReturn(PRICE);
 		when(calculator.toPriceFR(PRICE)).thenReturn(PRICE_FR);
 		
-		String actual = paymentService.getCumulativePriceFR();
-		
-		assertEquals(ERROR_MESSAGE, actual);
+		paymentService.getCumulativePriceFR();
 	}
 	
 	@Ignore

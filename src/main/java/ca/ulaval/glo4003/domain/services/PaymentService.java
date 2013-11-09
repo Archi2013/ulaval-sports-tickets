@@ -97,11 +97,11 @@ public class PaymentService {
 		return constants.getCreditCardTypes();
 	}
 
-	public String getCumulativePriceFR() {
+	public String getCumulativePriceFR() throws NoTicketsInCartException {
 		if (currentCart.containTickets()) {
 			return calculator.toPriceFR(currentCart.getCumulativePrice());
 		} else {
-			return "Erreur : il n'y a pas de tickets dans le panier d'achats. Le montant ne peut être affiché.";
+			throw new NoTicketsInCartException();
 		}
 	}
 
