@@ -6,29 +6,27 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
-import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
+import ca.ulaval.glo4003.domain.utilities.payment.InvalidCardException;
 import ca.ulaval.glo4003.domain.utilities.user.User;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.web.viewmodels.PayableItemsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
-import ca.ulaval.glo4003.web.viewmodels.SectionForSearchViewModel;
-import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentControllerTest {
@@ -153,6 +151,85 @@ public class PaymentControllerTest {
 		
 		assertTrue(modelMap.containsAttribute("currency"));
 		assertEquals(Constants.CURRENCY, modelMap.get("currency"));
+	}
+	
+	@Test
+	public void home_should_add_payableItems_when_user_is_connected_and_no_error_in_BindingResult_and_is_valid_ChooseTicketsViewModel()
+			throws GameDoesntExistException, SectionDoesntExistException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PayableItemsViewModel payableItemsVM = new PayableItemsViewModel();
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		when(paymentService.isValidChooseTicketsViewModel(chooseTicketsVM)).thenReturn(true);
+		when(paymentService.getPayableItemsViewModel(chooseTicketsVM)).thenReturn(payableItemsVM);
+		
+		ModelAndView mav = controller.home(chooseTicketsVM, bindingResult);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("payableItems"));
+		assertEquals(payableItemsVM, modelMap.get("payableItems"));
+	}
+	
+	@Test
+	public void home_should_save_to_cart_items_when_user_is_connected_and_no_error_in_BindingResult_and_is_valid_ChooseTicketsViewModel()
+			throws GameDoesntExistException, SectionDoesntExistException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		when(paymentService.isValidChooseTicketsViewModel(chooseTicketsVM)).thenReturn(true);
+		
+		controller.home(chooseTicketsVM, bindingResult);
+		
+		verify(paymentService).saveToCart(chooseTicketsVM);
+	}
+	
+	@Test
+	public void home_should_add_errorMessage_when_user_is_connected_and_no_error_in_BindingResult_and_isnt_valid_ChooseTicketsViewModel()
+			throws GameDoesntExistException, SectionDoesntExistException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		when(paymentService.isValidChooseTicketsViewModel(chooseTicketsVM)).thenReturn(false);
+		
+		ModelAndView mav = controller.home(chooseTicketsVM, bindingResult);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("errorMessage"));
+	}
+	
+	@Test
+	public void home_should_add_errorMessage_when_user_is_connected_and_no_error_in_BindingResult_and_is_valid_ChooseTicketsViewModel_and_paymentService_getPayableItemsViewModel_throw_GameDoesntExistException()
+			throws GameDoesntExistException, SectionDoesntExistException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		when(paymentService.isValidChooseTicketsViewModel(chooseTicketsVM)).thenReturn(true);
+		when(paymentService.getPayableItemsViewModel(chooseTicketsVM)).thenThrow(new GameDoesntExistException());
+		
+		ModelAndView mav = controller.home(chooseTicketsVM, bindingResult);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("errorMessage"));
+	}
+	
+	@Test
+	public void home_should_add_errorMessage_when_user_is_connected_and_no_error_in_BindingResult_and_is_valid_ChooseTicketsViewModel_and_paymentService_getPayableItemsViewModel_throw_SectionDoesntExistException()
+			throws GameDoesntExistException, SectionDoesntExistException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		when(paymentService.isValidChooseTicketsViewModel(chooseTicketsVM)).thenReturn(true);
+		when(paymentService.getPayableItemsViewModel(chooseTicketsVM)).thenThrow(new SectionDoesntExistException());
+		
+		ModelAndView mav = controller.home(chooseTicketsVM, bindingResult);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("errorMessage"));
 	}
 	
 	@Test
@@ -284,6 +361,38 @@ public class PaymentControllerTest {
 	}
 	
 	@Test
+	public void validate_should_add_paymentForm_when_errors_in_BindingResult() {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(true);
+		
+		ModelAndView mav = controller.validate(paymentVM, bindingResult);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("paymentForm"));
+		assertSame(paymentVM, modelMap.get("paymentForm"));
+	}
+	
+	@Test
+	public void validate_should_add_creditCardTypes_when_errors_in_BindingResult() {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
+		List<CreditCardType> creditCardTypes = new ArrayList<>();
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(true);
+		when(paymentService.getCreditCardTypes()).thenReturn(creditCardTypes);
+		
+		ModelAndView mav = controller.validate(paymentVM, bindingResult);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("creditCardTypes"));
+		assertSame(creditCardTypes, modelMap.get("creditCardTypes"));
+	}
+	
+	@Test
 	public void validate_should_add_connected_user_at_true_when_user_is_connected() {
 		BindingResult bindingResult = mock(BindingResult.class);
 		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
@@ -324,5 +433,95 @@ public class PaymentControllerTest {
 		
 		assertTrue(modelMap.containsAttribute("currency"));
 		assertEquals(Constants.CURRENCY, modelMap.get("currency"));
+	}
+	
+	@Test
+	public void validate_should_add_cumulativePrice_in_model_when_user_is_connected_and_no_error_in_BindingResult() {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		when(paymentService.getCumulativePriceFR()).thenReturn(PRICE_FR);
+		
+		ModelAndView mav = controller.validate(paymentVM, bindingResult);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("cumulativePrice"));
+		assertEquals(PRICE_FR, modelMap.get("cumulativePrice"));
+	}
+	
+	@Test
+	public void validate_should_pay_amount_when_user_is_connected_and_no_error_in_BindingResult() throws InvalidCardException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		
+		controller.validate(paymentVM, bindingResult);
+		
+		verify(paymentService).payAmount(paymentVM);
+	}
+	
+	@Test
+	public void validate_should_return_mode_of_ayment_page_when_user_is_connected_and_no_error_in_BindingResult_and_payAmount_raise_InvalidCardException() throws InvalidCardException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		doThrow(new InvalidCardException()).when(paymentService).payAmount(paymentVM);
+		
+		ModelAndView mav = controller.validate(paymentVM, bindingResult);
+		
+		assertEquals(MODE_OF_PAYMENT_PAGE, mav.getViewName());
+	}
+	
+	@Test
+	public void validate_should_add_paymentForm_in_model_when_user_is_connected_and_no_error_in_BindingResult_and_payAmount_raise_InvalidCardException() throws InvalidCardException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		doThrow(new InvalidCardException()).when(paymentService).payAmount(paymentVM);
+		
+		ModelAndView mav = controller.validate(paymentVM, bindingResult);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("paymentForm"));
+		assertSame(paymentVM, modelMap.get("paymentForm"));
+	}
+	
+	@Test
+	public void validate_should_add_creditCardTypes_in_model_when_user_is_connected_and_no_error_in_BindingResult_and_payAmount_raise_InvalidCardException() throws InvalidCardException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
+		List<CreditCardType> creditCardTypes = new ArrayList<>();
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		doThrow(new InvalidCardException()).when(paymentService).payAmount(paymentVM);
+		when(paymentService.getCreditCardTypes()).thenReturn(creditCardTypes);
+		
+		ModelAndView mav = controller.validate(paymentVM, bindingResult);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("creditCardTypes"));
+		assertSame(creditCardTypes, modelMap.get("creditCardTypes"));
+	}
+	
+	@Test
+	public void validate_should_empty_cart_when_user_is_connected_and_no_error_in_BindingResult() throws InvalidCardException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		
+		controller.validate(paymentVM, bindingResult);
+		
+		verify(paymentService).emptyCart();
 	}
 }

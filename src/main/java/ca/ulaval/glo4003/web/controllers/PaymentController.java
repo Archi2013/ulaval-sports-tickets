@@ -63,7 +63,7 @@ public class PaymentController {
 		mav.addObject("currency", Constants.CURRENCY);
 		
 		try {
-			if (!paymentService.isValidPayableItemsViewModel(chooseTicketsVM)) {
+			if (!paymentService.isValidChooseTicketsViewModel(chooseTicketsVM)) {
 				String errorMessage = "Une erreur s'est produite lors de la vérification des éléments choisis. "
 						+ "Veuillez réessayer en recommençant votre sélection de billets. <a href=\"/\">Accueil</a>";
 				mav.addObject("errorMessage", errorMessage);

@@ -49,7 +49,7 @@ public class PaymentService {
 	@Autowired
 	private Cart currentCart;
 
-	public Boolean isValidPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
+	public Boolean isValidChooseTicketsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
 		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
 		
 		if (sectionDto.isGeneralAdmission()) {
