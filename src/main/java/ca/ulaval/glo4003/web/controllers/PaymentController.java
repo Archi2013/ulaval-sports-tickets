@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
-import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.payment.InvalidCardException;
 import ca.ulaval.glo4003.domain.utilities.user.User;
@@ -37,9 +36,6 @@ public class PaymentController {
 	
 	@Autowired
 	private User currentUser;
-	
-	@Inject
-	Calculator calculator;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView home(@ModelAttribute("chooseTicketsForm") @Valid ChooseTicketsViewModel chooseTicketsVM,
@@ -48,13 +44,12 @@ public class PaymentController {
 		
 		ModelAndView mav = new ModelAndView("payment/home");
 		
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
+		addConnectedUserToModelAndView(connectedUser, mav);
+		
+		addLogOfUserConnection(connectedUser);
+		
+		if (!connectedUser) {
 			mav.setViewName("payment/not-connected-user");
-			logger.info("usagé non connecté");
 			return mav;
 		}
 		
@@ -89,13 +84,12 @@ public class PaymentController {
 		
 		Boolean connectedUser = currentUser.isLogged();
 		
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
+		addConnectedUserToModelAndView(connectedUser, mav);
+		
+		addLogOfUserConnection(connectedUser);
+		
+		if (!connectedUser) {
 			mav.setViewName("payment/not-connected-user");
-			logger.info("usagé non connecté");
 			return mav;
 		}
 		
@@ -115,13 +109,12 @@ public class PaymentController {
 		
 		Boolean connectedUser = currentUser.isLogged();
 		
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
+		addConnectedUserToModelAndView(connectedUser, mav);
+		
+		addLogOfUserConnection(connectedUser);
+		
+		if (!connectedUser) {
 			mav.setViewName("payment/not-connected-user");
-			logger.info("usagé non connecté");
 			return mav;
 		}
 		
@@ -147,7 +140,24 @@ public class PaymentController {
 		
 		return mav;
 	}
+	
+	private void addLogOfUserConnection(Boolean connectedUser) {
+		if (connectedUser) {
+			logger.info("usagé connecté");
+		} else {
+			logger.info("usagé non connecté");
+		}
+	}
 
+	private void addConnectedUserToModelAndView(Boolean connectedUser,
+			ModelAndView mav) {
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+		} else {
+			mav.addObject("connectedUser", false);
+		}
+	}
+	
 	private void modifyModelAndViewToRetryModeOfPayment(PaymentViewModel paymentVM,
 			ModelAndView mav) {
 		mav.setViewName("payment/mode-of-payment");
