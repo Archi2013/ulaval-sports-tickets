@@ -36,7 +36,7 @@ public class UserService {
 	private void setCurrentUser(UserDto user) {
 		currentUser.setUsername(user.getUsername());
 		currentUser.setPassword(user.getPassword());
-		currentUser.setIsLogged(true);
+		currentUser.setLogged(true);
 	}
 
 	public void signUp(String username, String password) throws UserAlreadyExistException {
@@ -66,7 +66,7 @@ public class UserService {
 	public void logOutCurrentUser() {
 		currentUser.setPassword("");
 		currentUser.setUsername("");
-		currentUser.setIsLogged(false);
+		currentUser.setLogged(false);
 	}
 
 }

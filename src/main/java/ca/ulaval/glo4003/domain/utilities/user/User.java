@@ -10,10 +10,10 @@ public class User {
 
 	private String username;
 	private String password;
-	private Boolean isLogged;
+	private Boolean logged;
 
 	public User() {
-		this.isLogged = false;
+		this.logged = false;
 	}
 
 	public User(String username, String password) {
@@ -22,11 +22,11 @@ public class User {
 	}
 
 	public Boolean isLogged() {
-		return isLogged;
+		return logged;
 	}
 
-	public void setIsLogged(Boolean isLogged) {
-		this.isLogged = isLogged;
+	public void setLogged(Boolean logged) {
+		this.logged = logged;
 	}
 
 	public String getPassword() {

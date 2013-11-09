@@ -100,6 +100,6 @@ public class UserServiceTest {
 		
 		verify(currentUser, times(1)).setUsername("");
 		verify(currentUser, times(1)).setPassword("");
-		verify(currentUser, times(1)).setIsLogged(false);
+		verify(currentUser, times(1)).setLogged(false);
 	}
 }
