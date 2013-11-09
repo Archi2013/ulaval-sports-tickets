@@ -23,6 +23,7 @@ import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Constants;
+import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
 import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
@@ -31,6 +32,8 @@ import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentControllerTest {
+
+	private static final String PRICE_FR = "76,78";
 
 	private static final String TRAFFICKED_PAGE = "payment/trafficked";
 
@@ -201,6 +204,44 @@ public class PaymentControllerTest {
 		
 		assertTrue(modelMap.containsAttribute("currency"));
 		assertEquals(Constants.CURRENCY, modelMap.get("currency"));
+	}
+	
+	@Test
+	public void modeOfPayment_should_add_paymentForm_in_model_when_user_is_connected() {
+		when(currentUser.isLogged()).thenReturn(true);
+		
+		ModelAndView mav = controller.modeOfPayment();
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("paymentForm"));
+	}
+	
+	@Test
+	public void modeOfPayment_should_add_creditCardTypes_in_model_when_user_is_connected() {
+		List<CreditCardType> creditCardTypes = new ArrayList<>();
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(paymentService.getCreditCardTypes()).thenReturn(creditCardTypes);
+		
+		ModelAndView mav = controller.modeOfPayment();
+		ModelMap modelMap = mav.getModelMap();
+		
+		verify(paymentService).getCreditCardTypes();
+		assertTrue(modelMap.containsAttribute("creditCardTypes"));
+		assertSame(creditCardTypes, modelMap.get("creditCardTypes"));
+	}
+	
+	@Test
+	public void modeOfPayment_should_add_cumulativePrice_in_model_when_user_is_connected() {
+		when(currentUser.isLogged()).thenReturn(true);
+		when(paymentService.getCumulativePriceFR()).thenReturn(PRICE_FR);
+		
+		ModelAndView mav = controller.modeOfPayment();
+		ModelMap modelMap = mav.getModelMap();
+		
+		verify(paymentService).getCumulativePriceFR();
+		assertTrue(modelMap.containsAttribute("cumulativePrice"));
+		assertSame(PRICE_FR, modelMap.get("cumulativePrice"));
 	}
 	
 	@Test
