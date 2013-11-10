@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.domain.utilities;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -22,7 +22,7 @@ public class SectionUrlMapperWithGeneration extends UrlMapper {
 	}
 
 	public TicketType getTicketType(String sourceTicketTypeUrl) throws NoTicketTypeForUrlException {
-		List<TicketType> ticketTypes = sectionDao.getAllTicketTypes();
+		Set<TicketType> ticketTypes = sectionDao.getAllTicketTypes();
 		
 		for (TicketType ticketType : ticketTypes) {
 			String url = getSectionUrl(ticketType.admissionType, ticketType.sectionName);

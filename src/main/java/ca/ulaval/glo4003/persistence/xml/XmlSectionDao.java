@@ -1,7 +1,9 @@
 package ca.ulaval.glo4003.persistence.xml;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
@@ -66,8 +68,8 @@ public class XmlSectionDao implements SectionDao {
 	}
 
 	@Override
-	public List<TicketType> getAllTicketTypes() {
-		List<TicketType> ticketTypes = new ArrayList<>();
+	public Set<TicketType> getAllTicketTypes() {
+		Set<TicketType> ticketTypes = new HashSet<>();
 		ticketTypes.add(new TicketType("VIP", "Loge Nord-Est"));
 		ticketTypes.add(new TicketType("VIP", "Loge Sud-Est"));
 		ticketTypes.add(new TicketType("VIP", "Front Row"));

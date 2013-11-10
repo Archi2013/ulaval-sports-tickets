@@ -3,8 +3,8 @@ package ca.ulaval.glo4003.domain.utilities;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class SectionUrlMapperWithGenerationTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		List<TicketType> ticketTypes = new ArrayList<>();
+		Set<TicketType> ticketTypes = new HashSet<>();
 		ticketTypes.add(new TicketType(ADMISSION_TYPE, SECTION_NAME));
 		ticketTypes.add(new TicketType(ADMISSION_TYPE_WITH_ACCENT, SECTION_NAME_WITH_ACCENT));
 		ticketTypes.add(new TicketType(ADMISSION_TYPE_EXTREME, SECTION_NAME_EXTREME));
