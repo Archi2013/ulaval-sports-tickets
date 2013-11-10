@@ -18,7 +18,7 @@
 		<%@ include file="../session/authForm.jsp"%>
 	</form>
 	<div class="text-align-center margin-25">
-		<p class="">Vous n'avez pas de compte ?</p>
+		<p class="">Vous n'avez pas encore de compte ?</p>
 		<a href="/session/signup" class="standard-button-round orange-button margin-25">S'inscrire !</a>
 	</div>
 
