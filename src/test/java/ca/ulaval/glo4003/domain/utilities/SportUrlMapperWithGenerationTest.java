@@ -46,25 +46,25 @@ public class SportUrlMapperWithGenerationTest {
 
 	@Test
 	public void given_a_valid_sportName_getSportUrl_should_return_the_url() {
-		String url = sportUrlMapper.getSportUrl(SPORT_NAME);
+		String url = sportUrlMapper.getUrl(SPORT_NAME);
 		assertEquals(SPORT_URL, url);
 	}
 	
 	@Test
 	public void given_a_sportName_with_accent_getSportUrl_should_return_the_url() {
-		String url = sportUrlMapper.getSportUrl(SPORT_NAME_WITH_ACCENT);
+		String url = sportUrlMapper.getUrl(SPORT_NAME_WITH_ACCENT);
 		assertEquals(SPORT_URL_FROM_WITH_ACCENT, url);
 	}
 	
 	@Test
 	public void given_a_sportName_first_letter_with_accent_getSportUrl_should_return_the_url() {
-		String url = sportUrlMapper.getSportUrl(SPORT_NAME_FIRST_LETTER_WITH_ACCENT);
+		String url = sportUrlMapper.getUrl(SPORT_NAME_FIRST_LETTER_WITH_ACCENT);
 		assertEquals(SPORT_URL_FROM_FIRST_LETTER_WITH_ACCENT, url);
 	}
 
 	@Test
 	public void given_a_sportName_extreme_getSportUrl_should_return_the_url() {
-		String url = sportUrlMapper.getSportUrl(SPORT_NAME_EXTREME);
+		String url = sportUrlMapper.getUrl(SPORT_NAME_EXTREME);
 		assertEquals(SPORT_URL_FROM_EXTREME, url);
 	}
 	

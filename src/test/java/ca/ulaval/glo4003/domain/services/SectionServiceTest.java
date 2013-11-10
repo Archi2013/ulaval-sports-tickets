@@ -12,9 +12,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.domain.utilities.SectionDoesntExistInPropertiesFileException;
-import ca.ulaval.glo4003.domain.utilities.SectionUrlMapper;
+import ca.ulaval.glo4003.domain.utilities.NoTicketTypeForUrlException;
 import ca.ulaval.glo4003.domain.utilities.TicketType;
+import ca.ulaval.glo4003.domain.utilities.TicketTypeUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
@@ -34,7 +34,7 @@ public class SectionServiceTest {
 	private static final Long GAME_ID = 12L;
 
 	@Mock
-	private SectionUrlMapper sectionUrlMapperMock;
+	private TicketTypeUrlMapper ticketTypeUrlMapperMock;
 
 	@Mock
 	private GameDao gameDaoMock;
@@ -52,24 +52,24 @@ public class SectionServiceTest {
 	private SectionService service;
 
 	@Before
-	public void setUp() throws SectionDoesntExistInPropertiesFileException {
+	public void setUp() throws NoTicketTypeForUrlException {
 		TicketType ticketType = new TicketType(ADMISSION, SECTION_NAME);
-		when(sectionUrlMapperMock.getTicketType(SECTION_URL)).thenReturn(ticketType);
+		when(ticketTypeUrlMapperMock.getTicketType(SECTION_URL)).thenReturn(ticketType);
 	}
 
 	@Test
 	public void getSection_should_get_ticket_type_from_section_url() throws SectionDoesntExistException,
-			SectionDoesntExistInPropertiesFileException {
+			NoTicketTypeForUrlException {
 		service.getSection(GAME_ID, SECTION_URL);
 
-		verify(sectionUrlMapperMock).getTicketType(SECTION_URL);
+		verify(ticketTypeUrlMapperMock).getTicketType(SECTION_URL);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test(expected = SectionDoesntExistException.class)
-	public void getSection_should_throw_section_doesnt_exist_exception_if_section_doesnt_exist_in_properties_file()
-			throws SectionDoesntExistInPropertiesFileException, SectionDoesntExistException {
-		when(sectionUrlMapperMock.getTicketType(SECTION_URL)).thenThrow(SectionDoesntExistInPropertiesFileException.class);
+	public void getSection_should_throw_section_doesnt_exist_exception_if_section_doesnt_exist()
+			throws SectionDoesntExistException, NoTicketTypeForUrlException {
+		when(ticketTypeUrlMapperMock.getTicketType(SECTION_URL)).thenThrow(NoTicketTypeForUrlException.class);
 
 		service.getSection(GAME_ID, SECTION_URL);
 	}
@@ -125,10 +125,10 @@ public class SectionServiceTest {
 	
 	@Test
 	public void getChooseTicketsViewModel_should_get_ticket_type_from_section_url() throws SectionDoesntExistException,
-			SectionDoesntExistInPropertiesFileException {
+			NoTicketTypeForUrlException {
 		service.getChooseTicketsViewModel(GAME_ID, SECTION_URL);
 
-		verify(sectionUrlMapperMock).getTicketType(SECTION_URL);
+		verify(ticketTypeUrlMapperMock).getTicketType(SECTION_URL);
 	}
 	
 	@Test

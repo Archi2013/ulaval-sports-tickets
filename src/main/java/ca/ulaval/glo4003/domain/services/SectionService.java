@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.domain.utilities.SectionDoesntExistInPropertiesFileException;
-import ca.ulaval.glo4003.domain.utilities.SectionUrlMapper;
+import ca.ulaval.glo4003.domain.utilities.NoTicketTypeForUrlException;
 import ca.ulaval.glo4003.domain.utilities.TicketType;
+import ca.ulaval.glo4003.domain.utilities.TicketTypeUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
@@ -22,7 +22,7 @@ import ca.ulaval.glo4003.web.viewmodels.factories.SectionViewModelFactory;
 public class SectionService {
 
 	@Inject
-	private SectionUrlMapper sectionUrlMapper;
+	private TicketTypeUrlMapper ticketTypeUrlMapper;
 
 	@Inject
 	private GameDao gameDao;
@@ -38,25 +38,25 @@ public class SectionService {
 
 	public SectionViewModel getSection(Long gameId, String sectionUrl) throws SectionDoesntExistException {
 		try {
-			TicketType ticketType = sectionUrlMapper.getTicketType(sectionUrl);
+			TicketType ticketType = ticketTypeUrlMapper.getTicketType(sectionUrl);
 			GameDto game = gameDao.get(gameId);
 			SectionDto section = sectionDao.get(gameId, ticketType.sectionName);
 			SectionViewModel sectionViewModel = sectionFactory.createViewModel(section, game);
 			
 			return sectionViewModel;
-		} catch (SectionDoesntExistInPropertiesFileException | GameDoesntExistException e) {
+		} catch (GameDoesntExistException | NoTicketTypeForUrlException e) {
 			throw new SectionDoesntExistException();
 		}
 	}
 
 	public ChooseTicketsViewModel getChooseTicketsViewModel(Long gameId, String sectionUrl) throws SectionDoesntExistException {
 		try {
-			TicketType ticketType = sectionUrlMapper.getTicketType(sectionUrl);
+			TicketType ticketType = ticketTypeUrlMapper.getTicketType(sectionUrl);
 			GameDto gameDto = gameDao.get(gameId);
 			SectionDto sectionDto = sectionDao.get(gameId, ticketType.sectionName);
 			
 			return chooseTicketsViewModelFactory.createViewModel(gameDto, sectionDto);
-		} catch (SectionDoesntExistInPropertiesFileException | GameDoesntExistException e) {
+		} catch (GameDoesntExistException | NoTicketTypeForUrlException e) {
 			throw new SectionDoesntExistException();
 		}
 	}

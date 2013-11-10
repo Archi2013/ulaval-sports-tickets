@@ -12,15 +12,14 @@ import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Constants;
-import ca.ulaval.glo4003.domain.utilities.SectionDoesntExistInPropertiesFileException;
-import ca.ulaval.glo4003.domain.utilities.SectionUrlMapper;
+import ca.ulaval.glo4003.domain.utilities.TicketTypeUrlMapper;
 import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
 
 @Component
 public class SectionViewModelFactory {
 
 	@Inject
-	private SectionUrlMapper sectionUrlMapper;
+	private TicketTypeUrlMapper ticketTypeUrlMapper;
 	
 	@Inject
 	private Calculator calculator;
@@ -46,11 +45,7 @@ public class SectionViewModelFactory {
 	}
 
 	private String createUrl(String admissionType, String sectionName) {
-		try {
-			return sectionUrlMapper.getSectionUrl(admissionType, sectionName);
-		} catch (RuntimeException | SectionDoesntExistInPropertiesFileException e) {
-			return "erreur";
-		}
+		return ticketTypeUrlMapper.getUrl(admissionType, sectionName);
 	}
 
 }

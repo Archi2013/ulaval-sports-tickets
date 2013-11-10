@@ -16,7 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SectionUrlMapperWithGenerationTest {
+public class TicketTypeUrlMapperWithGenerationTest {
 	
 	private static final String INVALID_TICKET_TYPE_URL = "invalid-ticket-type-url";
 	private static final String URL_FROM_EXTREME = "oeuvre-de-l-amitie-confiance--coeur-penche-vigueur-eternelle";
@@ -33,7 +33,7 @@ public class SectionUrlMapperWithGenerationTest {
 	SectionDao sectionDao;
 	
 	@InjectMocks
-	private SectionUrlMapperWithGeneration sectionUrlMapper;
+	private TicketTypeUrlMapperWithGeneration sectionUrlMapper;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -46,19 +46,19 @@ public class SectionUrlMapperWithGenerationTest {
 	
 	@Test
 	public void given_an_admissionType_and_a_sectionName_getSectionUrl_should_return_the_url() {
-		String url = sectionUrlMapper.getSectionUrl(ADMISSION_TYPE, SECTION_NAME);
+		String url = sectionUrlMapper.getUrl(ADMISSION_TYPE, SECTION_NAME);
 		assertEquals(URL, url);
 	}
 	
 	@Test
 	public void given_an_admissionType_with_accent_and_a_sectionName_with_accent_getSectionUrl_should_return_the_url() {
-		String url = sectionUrlMapper.getSectionUrl(ADMISSION_TYPE_WITH_ACCENT, SECTION_NAME_WITH_ACCENT);
+		String url = sectionUrlMapper.getUrl(ADMISSION_TYPE_WITH_ACCENT, SECTION_NAME_WITH_ACCENT);
 		assertEquals(URL_FROM_WITH_ACCENT, url);
 	}
 	
 	@Test
 	public void given_an_admissionType_extreme_and_a_sectionName_extreme_getSectionUrl_should_return_the_url() {
-		String url = sectionUrlMapper.getSectionUrl(ADMISSION_TYPE_EXTREME, SECTION_NAME_EXTREME);
+		String url = sectionUrlMapper.getUrl(ADMISSION_TYPE_EXTREME, SECTION_NAME_EXTREME);
 		assertEquals(URL_FROM_EXTREME, url);
 	}
 	

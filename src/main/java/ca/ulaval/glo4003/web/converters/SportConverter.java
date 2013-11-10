@@ -15,7 +15,7 @@ public class SportConverter extends AbstractConverter<SportDto, SportViewModel> 
 	SportUrlMapper sportUrlMapper;
 
 	public SportViewModel convert(SportDto sportDto) {
-		String url = sportUrlMapper.getSportUrl(sportDto.getName());
+		String url = sportUrlMapper.getUrl(sportDto.getName());
 		return new SportViewModel(sportDto.getName(), url);
 	}
 }

@@ -53,7 +53,7 @@ public class SportConverterTest {
 
 	@Test
 	public void given_a_SportDto_convert_should_return_a_SportViewModel() {
-		when(sportUrlMapper.getSportUrl(SPORT_NAME1)).thenReturn(SPORT_URL1);
+		when(sportUrlMapper.getUrl(SPORT_NAME1)).thenReturn(SPORT_URL1);
 
 		SportViewModel sportSVM = sportConverter.convert(sportDto1);
 
@@ -63,8 +63,8 @@ public class SportConverterTest {
 
 	@Test
 	public void given_sportDtoList_convert_should_return_a_SportViewList() throws RuntimeException {
-		when(sportUrlMapper.getSportUrl(SPORT_NAME1)).thenReturn(SPORT_URL1);
-		when(sportUrlMapper.getSportUrl(SPORT_NAME2)).thenReturn(SPORT_URL2);
+		when(sportUrlMapper.getUrl(SPORT_NAME1)).thenReturn(SPORT_URL1);
+		when(sportUrlMapper.getUrl(SPORT_NAME2)).thenReturn(SPORT_URL2);
 
 		List<SportViewModel> sportSVMs = sportConverter.convert(sportDtos);
 

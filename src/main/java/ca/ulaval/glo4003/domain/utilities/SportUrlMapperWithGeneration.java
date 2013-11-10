@@ -15,7 +15,7 @@ public class SportUrlMapperWithGeneration extends UrlMapper implements SportUrlM
 	SportDao sportDao;
 
 	@Override
-	public String getSportUrl(String sportName) {
+	public String getUrl(String sportName) {
 		return createUrl(sportName);
 	}
 
@@ -23,7 +23,7 @@ public class SportUrlMapperWithGeneration extends UrlMapper implements SportUrlM
 	public String getSportName(String sportUrl) throws NoSportForUrlException {
 		List<String> sports = sportDao.getAllSportNames();
 		for (String sport : sports) {
-			if (getSportUrl(sport).equals(sportUrl)) {
+			if (getUrl(sport).equals(sportUrl)) {
 				return sport;
 			}
 		}

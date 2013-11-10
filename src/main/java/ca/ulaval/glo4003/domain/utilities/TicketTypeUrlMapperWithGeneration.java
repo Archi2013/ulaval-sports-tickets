@@ -9,23 +9,25 @@ import org.springframework.stereotype.Component;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 
 @Component
-public class SectionUrlMapperWithGeneration extends UrlMapper {
+public class TicketTypeUrlMapperWithGeneration extends UrlMapper implements TicketTypeUrlMapper {
 	
 	@Inject
 	SectionDao sectionDao;
 
-	public String getSectionUrl(String admissionType, String sectionName) {
+	@Override
+	public String getUrl(String admissionType, String sectionName) {
 		String admissionTypeUrl = createUrl(admissionType);
 		String sectionNameUrl = createUrl(sectionName);
 		String result = admissionTypeUrl + "--" + sectionNameUrl;
 		return result;
 	}
 
+	@Override
 	public TicketType getTicketType(String sourceTicketTypeUrl) throws NoTicketTypeForUrlException {
 		Set<TicketType> ticketTypes = sectionDao.getAllTicketTypes();
 		
 		for (TicketType ticketType : ticketTypes) {
-			String url = getSectionUrl(ticketType.admissionType, ticketType.sectionName);
+			String url = getUrl(ticketType.admissionType, ticketType.sectionName);
 			
 			if (url.equals(sourceTicketTypeUrl)) {
 				return ticketType;
