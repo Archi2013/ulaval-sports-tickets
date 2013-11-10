@@ -27,31 +27,35 @@ import ca.ulaval.glo4003.web.viewmodels.factories.PayableItemsViewModelFactory;
 
 @Service
 public class PaymentService {
-	
+
 	@Inject
 	private GameDao gameDao;
-	
+
 	@Inject
 	private SectionDao sectionDao;
-	
+
 	@Inject
 	private PayableItemsViewModelFactory payableItemsViewModelFactory;
-	
+
 	@Inject
 	private Calculator calculator;
-	
+
 	@Inject
 	private Constants constants;
-	
+
 	@Inject
 	private CreditCardFactory creditCardFactory;
-	
+
+	@Inject
+	private CartService cartService;
+
 	@Autowired
 	private Cart currentCart;
 
-	public Boolean isValidChooseTicketsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
+	public Boolean isValidChooseTicketsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException,
+			SectionDoesntExistException {
 		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
-		
+
 		if (sectionDto.isGeneralAdmission()) {
 			Integer numberOfTickets = chooseTicketsVM.getNumberOfTicketsToBuy();
 			if (numberOfTickets < 1 || numberOfTickets > sectionDto.getNumberOfTickets()) {
@@ -68,24 +72,24 @@ public class PaymentService {
 				}
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	public PayableItemsViewModel getPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM)
 			throws GameDoesntExistException, SectionDoesntExistException {
 		GameDto gameDto = gameDao.get(chooseTicketsVM.getGameId());
 		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
-		
+
 		return payableItemsViewModelFactory.createViewModel(chooseTicketsVM, gameDto, sectionDto);
 	}
 
 	public void saveToCart(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
 		GameDto gameDto = gameDao.get(chooseTicketsVM.getGameId());
 		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
-		
+
 		Double cumulativePrice = calculator.calculateCumulativePrice(chooseTicketsVM, sectionDto);
-		
+
 		currentCart.setNumberOfTicketsToBuy(chooseTicketsVM.getNumberOfTicketsToBuy());
 		currentCart.setSelectedSeats(chooseTicketsVM.getSelectedSeats());
 		currentCart.setGameDto(gameDto);
@@ -105,10 +109,12 @@ public class PaymentService {
 		}
 	}
 
-	public void payAmount(PaymentViewModel paymentVM) throws InvalidCreditCardException {
+	public void buyTicketsInCart(PaymentViewModel paymentVM) throws InvalidCreditCardException {
 		CreditCard creditCard = creditCardFactory.createCreditCard(paymentVM);
 		if (currentCart.containTickets()) {
 			creditCard.pay(currentCart.getCumulativePrice());
+			// TODO
+			// cartService.makeTicketsUnavailableToOtherPeople(currentCart);
 		}
 	}
 

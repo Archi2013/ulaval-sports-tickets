@@ -555,7 +555,7 @@ public class PaymentControllerTest {
 		
 		controller.validate(paymentVM, bindingResult);
 		
-		verify(paymentService).payAmount(paymentVM);
+		verify(paymentService).buyTicketsInCart(paymentVM);
 	}
 	
 	@Test
@@ -565,7 +565,7 @@ public class PaymentControllerTest {
 		
 		when(currentUser.isLogged()).thenReturn(true);
 		when(bindingResult.hasErrors()).thenReturn(false);
-		doThrow(new InvalidCreditCardException()).when(paymentService).payAmount(paymentVM);
+		doThrow(new InvalidCreditCardException()).when(paymentService).buyTicketsInCart(paymentVM);
 		
 		ModelAndView mav = controller.validate(paymentVM, bindingResult);
 		
@@ -579,7 +579,7 @@ public class PaymentControllerTest {
 		
 		when(currentUser.isLogged()).thenReturn(true);
 		when(bindingResult.hasErrors()).thenReturn(false);
-		doThrow(new InvalidCreditCardException()).when(paymentService).payAmount(paymentVM);
+		doThrow(new InvalidCreditCardException()).when(paymentService).buyTicketsInCart(paymentVM);
 		
 		ModelAndView mav = controller.validate(paymentVM, bindingResult);
 		ModelMap modelMap = mav.getModelMap();
@@ -596,7 +596,7 @@ public class PaymentControllerTest {
 		
 		when(currentUser.isLogged()).thenReturn(true);
 		when(bindingResult.hasErrors()).thenReturn(false);
-		doThrow(new InvalidCreditCardException()).when(paymentService).payAmount(paymentVM);
+		doThrow(new InvalidCreditCardException()).when(paymentService).buyTicketsInCart(paymentVM);
 		when(paymentService.getCreditCardTypes()).thenReturn(creditCardTypes);
 		
 		ModelAndView mav = controller.validate(paymentVM, bindingResult);

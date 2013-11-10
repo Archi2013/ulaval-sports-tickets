@@ -20,9 +20,12 @@ public interface TicketDao {
 
 	public TicketDto get(String sportName, DateTime gameDate, int ticketNumber);
 
+	public TicketDto get(String sport, DateTime date, String seat);
+
 	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate);
 
 	public void saveChanges(TicketDto firstTicketData);
 
 	public void endTransaction();
+
 }

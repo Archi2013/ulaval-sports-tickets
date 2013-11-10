@@ -56,6 +56,14 @@ public class TicketRepository implements ITicketRepository {
 	}
 
 	@Override
+	public Ticket recoverTicket(String sport, DateTime date, String seat) {
+		TicketDto data = dao.get(sport, date, seat);
+		PersistableTicket oldTicket = factory.instantiateTicket(data.getSeat(), data.getSection());
+		oldTickets.add(oldTicket);
+		return oldTicket;
+	}
+
+	@Override
 	public List<Ticket> recoverAllTicketsForGame(String sport, DateTime Date) {
 		List<Ticket> ticketsToReturn = new ArrayList<>();
 

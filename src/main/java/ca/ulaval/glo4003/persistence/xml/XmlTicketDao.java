@@ -108,8 +108,7 @@ public class XmlTicketDao implements TicketDao {
 		return new SimpleNode("ticket", nodes);
 	}
 
-	private TicketDto convertNodeToTicket(SimpleNode parent) throws NoSuchAttributeException,
-			TicketDoesntExistException {
+	private TicketDto convertNodeToTicket(SimpleNode parent) throws NoSuchAttributeException, TicketDoesntExistException {
 		if (parent.hasNode("id", "gameID", "price", "type", "section")) {
 			int ticketId = Integer.parseInt(parent.getNodeValue("id"));
 			long gameId = Long.parseLong(parent.getNodeValue("gameID"));
@@ -137,6 +136,12 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	@Override
+	public TicketDto get(String sport, DateTime date, String seat) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate) {
 		// TODO Auto-generated method stub
 		return null;
@@ -153,4 +158,5 @@ public class XmlTicketDao implements TicketDao {
 		// TODO Auto-generated method stub
 
 	}
+
 }

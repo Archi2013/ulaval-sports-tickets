@@ -15,6 +15,8 @@ public interface ITicketRepository {
 
 	Ticket recoverTicket(String sport, DateTime Date, int ticketNumber);
 
+	Ticket recoverTicket(String sportName, DateTime gameDate, String seat);
+
 	List<Ticket> recoverAllTicketsForGame(String sport, DateTime Date);
 
 	void commit() throws TicketAlreadyExistException;
