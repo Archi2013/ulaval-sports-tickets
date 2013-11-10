@@ -9,6 +9,7 @@ import javax.xml.xpath.XPathExpressionException;
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
+import ca.ulaval.glo4003.domain.utilities.TicketType;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
@@ -64,6 +65,26 @@ public class XmlSectionDao implements SectionDao {
 		}
 	}
 
+	@Override
+	public List<TicketType> getAllTicketTypes() {
+		List<TicketType> ticketTypes = new ArrayList<>();
+		ticketTypes.add(new TicketType("VIP", "Loge Nord-Est"));
+		ticketTypes.add(new TicketType("VIP", "Loge Sud-Est"));
+		ticketTypes.add(new TicketType("VIP", "Front Row"));
+		ticketTypes.add(new TicketType("VIP", "Rouges"));
+		ticketTypes.add(new TicketType("VIP", "Indigo"));
+		ticketTypes.add(new TicketType("VIP", "Poupres"));
+		ticketTypes.add(new TicketType("VIP", "Bordeaux"));
+		ticketTypes.add(new TicketType("VIP", "Loge A"));
+		ticketTypes.add(new TicketType("VIP", "Loge B"));
+		ticketTypes.add(new TicketType("VIP", "Loge C"));
+		ticketTypes.add(new TicketType("VIP", "Loge E"));
+		ticketTypes.add(new TicketType("Générale", "Générale"));
+		ticketTypes.add(new TicketType("Générale", "Cyan"));
+		ticketTypes.add(new TicketType("Générale", "Indigo"));
+		return ticketTypes;
+	}
+	
 	private List<SectionDto> convertNodesToSectionDtos(Long gameId, List<SimpleNode> nodes)
 			throws SectionDoesntExistException, NoSuchAttributeException {
 		List<SectionDto> sections = new ArrayList<>();
@@ -73,5 +94,4 @@ public class XmlSectionDao implements SectionDao {
 		}
 		return sections;
 	}
-
 }

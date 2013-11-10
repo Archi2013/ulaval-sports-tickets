@@ -21,11 +21,11 @@ public class SportUrlMapperWithGenerationTest {
 	private static final String SPORT_NAME = "Soccer mixte";
 	private static final String SPORT_URL = "soccer-mixte";
 	private static final String SPORT_NAME_WITH_ACCENT = "Baseball féminin";
-	private static final String SPORT_URL_WITH_ACCENT = "baseball-feminin";
+	private static final String SPORT_URL_FROM_WITH_ACCENT = "baseball-feminin";
 	private static final String SPORT_NAME_FIRST_LETTER_WITH_ACCENT = "Équitation";
-	private static final String SPORT_URL_FIRST_LETTER_WITH_ACCENT = "equitation";
-	private static final String SPORT_NAME_EXTREME = "Œuvre d'art de l'être-aimé : enfant";
-	private static final String SPORT_URL_EXTREME = "oeuvre-d-art-de-l-etre-aime-enfant";
+	private static final String SPORT_URL_FROM_FIRST_LETTER_WITH_ACCENT = "equitation";
+	private static final String SPORT_NAME_EXTREME = "/Œuvre d'art de l'être-aimé : enfant.";
+	private static final String SPORT_URL_FROM_EXTREME = "oeuvre-d-art-de-l-etre-aime-enfant";
 	private static final String INVALID_SPORT_URL = "une-url-ne-correspondant-a-aucun-sport";
 	
 	@Mock
@@ -53,19 +53,19 @@ public class SportUrlMapperWithGenerationTest {
 	@Test
 	public void given_a_sportName_with_accent_getSportUrl_should_return_the_url() {
 		String url = sportUrlMapper.getSportUrl(SPORT_NAME_WITH_ACCENT);
-		assertEquals(SPORT_URL_WITH_ACCENT, url);
+		assertEquals(SPORT_URL_FROM_WITH_ACCENT, url);
 	}
 	
 	@Test
 	public void given_a_sportName_first_letter_with_accent_getSportUrl_should_return_the_url() {
 		String url = sportUrlMapper.getSportUrl(SPORT_NAME_FIRST_LETTER_WITH_ACCENT);
-		assertEquals(SPORT_URL_FIRST_LETTER_WITH_ACCENT, url);
+		assertEquals(SPORT_URL_FROM_FIRST_LETTER_WITH_ACCENT, url);
 	}
 
 	@Test
 	public void given_a_sportName_extreme_getSportUrl_should_return_the_url() {
 		String url = sportUrlMapper.getSportUrl(SPORT_NAME_EXTREME);
-		assertEquals(SPORT_URL_EXTREME, url);
+		assertEquals(SPORT_URL_FROM_EXTREME, url);
 	}
 	
 	@Test
@@ -76,7 +76,7 @@ public class SportUrlMapperWithGenerationTest {
 	
 	@Test
 	public void given_an_other_sportUrl_getSportName_should_return_the_name() throws NoSportForUrlException {
-		String name = sportUrlMapper.getSportName(SPORT_URL_EXTREME);
+		String name = sportUrlMapper.getSportName(SPORT_URL_FROM_EXTREME);
 		assertEquals(SPORT_NAME_EXTREME, name);
 	}
 	
