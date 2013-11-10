@@ -1,5 +1,7 @@
 package ca.ulaval.glo4003.domain.dtos;
 
+import org.joda.time.DateTime;
+
 public class TicketDto {
 
 	public long gameId;
@@ -8,6 +10,21 @@ public class TicketDto {
 	public String admissionType;
 	public String section;
 	public String seat;
+	public String sportName;
+	public DateTime gameDate;
+	public int ticketNumber;
+
+	public TicketDto(String sportName, DateTime gameDate, int ticketNumber, double price, String admissionType,
+			String seat, String section) {
+		this.sportName = sportName;
+
+		this.gameDate = gameDate;
+		this.ticketNumber = ticketNumber;
+		this.price = price;
+		this.admissionType = admissionType;
+		this.section = section;
+		this.seat = seat;
+	}
 
 	public TicketDto(long gameId, int ticketId, double price, String admissionType, String section) {
 		this.ticketId = ticketId;
@@ -43,5 +60,17 @@ public class TicketDto {
 
 	public String getSeat() {
 		return seat;
+	}
+
+	public String getSportName() {
+		return sportName;
+	}
+
+	public DateTime getGameDate() {
+		return gameDate;
+	}
+
+	public int getTicketNumber() {
+		return ticketNumber;
 	}
 }

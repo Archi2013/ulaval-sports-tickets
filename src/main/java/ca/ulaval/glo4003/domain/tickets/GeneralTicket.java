@@ -5,7 +5,7 @@ import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 
 public class GeneralTicket extends PersistableTicket {
 
-	public GeneralTicket(String seat, String section, TicketAssignationState associationState) {
+	public GeneralTicket(TicketAssignationState associationState) {
 		super(associationState);
 	}
 

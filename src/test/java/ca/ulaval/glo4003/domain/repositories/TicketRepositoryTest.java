@@ -29,10 +29,6 @@ public class TicketRepositoryTest {
 	private static final String A_SPORT = "Sport";
 	private static final DateTime A_DATE = new DateTime(100);
 	private static final int A_TICKET_NUMBER = 145;
-	private static final String AN_EXISTING_SEAT = "existingSeat";
-	private static final String ANOTHER_EXISTING_SEAT = "existingseat2";
-	private static final String AN_EXISTING_SECTION = "existingSection";
-	private static final String ANOTHER_EXISTING_SECTION = "existingSection2";
 	private static final String A_NEW_SEAT = "Seat";
 	private static final String A_NEW_SECTION = "Section";
 
@@ -73,13 +69,8 @@ public class TicketRepositoryTest {
 		when(ticketFactory.instantiateTicket(A_NEW_SEAT, A_NEW_SECTION)).thenReturn(ticketGeneratedWithParameter);
 		when(ticketDao.get(A_SPORT, A_DATE, A_TICKET_NUMBER)).thenReturn(firstTicketData);
 		when(ticketDao.getTicketsForGame(A_SPORT, A_DATE)).thenReturn(datas);
-		when(firstTicketData.getSection()).thenReturn(AN_EXISTING_SECTION);
-		when(firstTicketData.getSeat()).thenReturn(AN_EXISTING_SEAT);
-		when(secondTicketData.getSection()).thenReturn(ANOTHER_EXISTING_SECTION);
-		when(secondTicketData.getSeat()).thenReturn(ANOTHER_EXISTING_SEAT);
-		when(ticketFactory.instantiateTicket(AN_EXISTING_SEAT, AN_EXISTING_SECTION)).thenReturn(ticketWithDataFromDao);
-		when(ticketFactory.instantiateTicket(ANOTHER_EXISTING_SEAT, ANOTHER_EXISTING_SECTION)).thenReturn(
-				anotherTicketWithDataFromDao);
+		when(ticketFactory.instantiateTicket(firstTicketData)).thenReturn(ticketWithDataFromDao);
+		when(ticketFactory.instantiateTicket(secondTicketData)).thenReturn(anotherTicketWithDataFromDao);
 		when(ticketGeneratedWithNoParameter.saveDataInDTO()).thenReturn(firstTicketData);
 		when(ticketGeneratedWithParameter.saveDataInDTO()).thenReturn(secondTicketData);
 		when(ticketWithDataFromDao.saveDataInDTO()).thenReturn(firstTicketData);
