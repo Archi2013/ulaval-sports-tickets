@@ -40,10 +40,10 @@ public class SectionController {
 			Boolean connectedUser = currentUser.isLogged();
 			
 			if (connectedUser) {
-				logger.info("Fiche d'un billet : usagé connecté");
+				logger.info("usagé connecté");
 				mav.addObject("connectedUser", connectedUser);
 			} else {
-				logger.info("Fiche d'un billet : usagé non connecté");
+				logger.info("usagé non connecté");
 				mav.addObject("connectedUser", connectedUser);
 			}
 			

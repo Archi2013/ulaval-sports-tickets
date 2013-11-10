@@ -21,7 +21,7 @@ import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
 import ca.ulaval.glo4003.domain.utilities.payment.Cart;
 import ca.ulaval.glo4003.domain.utilities.payment.CreditCardFactory;
-import ca.ulaval.glo4003.domain.utilities.payment.InvalidCardException;
+import ca.ulaval.glo4003.domain.utilities.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.utilities.payment.MisterCard;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
@@ -199,7 +199,7 @@ public class PaymentServiceTest {
 	
 	@Ignore
 	@Test
-	public void given_a_paymentViewModel_payAmount_should_call_pay_of_a_credit_card() throws InvalidCardException {
+	public void given_a_paymentViewModel_payAmount_should_call_pay_of_a_credit_card() throws InvalidCreditCardException {
 		PaymentViewModel paymentVM = new PaymentViewModel();
 		MisterCard creditCard = mock(MisterCard.class);
 		
@@ -214,15 +214,15 @@ public class PaymentServiceTest {
 	}
 	
 	@Ignore
-	@Test(expected=InvalidCardException.class)
-	public void given_a_paymentViewModel_payAmount_should_raise_InvalidCardException_when_card_is_invalid() throws InvalidCardException {
+	@Test(expected=InvalidCreditCardException.class)
+	public void given_a_paymentViewModel_payAmount_should_raise_InvalidCardException_when_card_is_invalid() throws InvalidCreditCardException {
 		PaymentViewModel paymentVM = new PaymentViewModel();
 		MisterCard creditCard = mock(MisterCard.class);
 		
 		when(creditCardFactory.createCreditCard(paymentVM)).thenReturn(creditCard);
 		when(currentCart.containTickets()).thenReturn(true);
 		when(currentCart.getCumulativePrice()).thenReturn(CUMULATIVE_PRICE);
-		doThrow(new InvalidCardException()).when(creditCard).pay(CUMULATIVE_PRICE);
+		doThrow(new InvalidCreditCardException()).when(creditCard).pay(CUMULATIVE_PRICE);
 		
 		paymentService.payAmount(paymentVM);
 	}

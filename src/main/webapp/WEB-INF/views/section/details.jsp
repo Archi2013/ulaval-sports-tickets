@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -20,7 +21,7 @@
 	   <c:when test="${connectedUser}"></c:when>
 	   <c:otherwise>
 	       <div class="information-block-error-skin margin-25-50">
-               Vous devez être connecté pour pouvoir sélectionner des billets à acheter. Pour ce faire, <a href="/session/signin">cliquez ici</a>.
+               <spring:message code="error-message.section.details.not-connected-user" />
            </div>
 	   </c:otherwise>
 	</c:choose>

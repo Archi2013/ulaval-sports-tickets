@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -15,9 +15,7 @@
     
     <h2>${pageTitle}</h2>
     
-    <div class="information-block-error-skin margin-25-50">
-        Oups. Il semblerait qu'il n'y ait pas de tickets dans le panier d'achat. Vous pouvez toujours retourner à l'<a href="/">accueil</a> et retenter votre chance.
-    </div>
+    <div class="information-block-error-skin margin-25-50">${errorMessage}</div>
     
     <%@include file="../layout/footer.jsp" %>
 </body>

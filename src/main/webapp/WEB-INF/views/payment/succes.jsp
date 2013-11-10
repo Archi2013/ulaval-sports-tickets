@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -16,7 +16,7 @@
     <h2>${pageTitle}</h2>
     
     <div class="information-block-succes-skin margin-25-50">
-        Votre achat de ${cumulativePrice} ${currency} a bien été effectué. Retourner à l'<a href="/">accueil</a>.
+        <spring:message code="succes-message.payment.validation-succes" arguments="${cumulativePrice}|${currency}" argumentSeparator="|"/>
     </div>
     
     <%@include file="../layout/footer.jsp" %>

@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,7 +18,7 @@ import ca.ulaval.glo4003.domain.services.NoTicketsInCartException;
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.utilities.Constants;
-import ca.ulaval.glo4003.domain.utilities.payment.InvalidCardException;
+import ca.ulaval.glo4003.domain.utilities.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
@@ -27,17 +28,25 @@ import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
 @Controller
 @RequestMapping(value = "/paiement", method = RequestMethod.GET)
 public class PaymentController {
-	private static final String TRAFFICKED_PAGE = "payment/trafficked";
+	private static final String ERROR_MESSAGE_INVALID_CREDIT_CARD = "error-message.payment.invalid-credit-card";
+
+	private static final String ERROR_MESSAGE_NO_TICKETS = "error-message.payment.no-tickets";
+
+	private static final String ERROR_MESSAGE_NOT_FOUND_TICKET = "error-message.payment.not-found-ticket";
+
+	private static final String ERROR_MESSAGE_INVALID_CHOOSE_TICKETS_VIEW_MODEL = "error-message.payment.invalid-choose-tickets-view-model";
+
+	private static final String ERROR_MESSAGE_TRAFFICKED_PAGE = "error-message.payment.trafficked-page";
+
+	private static final String ERROR_MESSAGE_NOT_CONNECTED_USER = "error-message.payment.not-connected-user";
+
+	private static final String ERROR_PAGE = "payment/error-page";
 
 	private static final String HOME_PAGE = "payment/home";
 
 	private static final String MODE_OF_PAYMENT_PAGE = "payment/mode-of-payment";
 
 	private static final String VALIDATION_SUCCES_PAGE = "payment/succes";
-
-	private static final String NO_TICKETS_PAGE = "payment/no-tickets";
-
-	private static final String NOT_CONNECTED_USER_PAGE = "payment/not-connected-user";
 
 	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 	
@@ -49,6 +58,9 @@ public class PaymentController {
 	
 	@Autowired
 	private User currentUser;
+	
+	@Inject
+	private MessageSource messageSource;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView home(@ModelAttribute("chooseTicketsForm") @Valid ChooseTicketsViewModel chooseTicketsVM,
@@ -62,12 +74,18 @@ public class PaymentController {
 		addLogOfUserConnection(connectedUser);
 		
 		if (!connectedUser) {
-			mav.setViewName(NOT_CONNECTED_USER_PAGE);
+			mav.setViewName(ERROR_PAGE);
+			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_CONNECTED_USER,
+					new Object [] {}, null);
+			mav.addObject("errorMessage", errorMessage);
 			return mav;
 		}
 		
 		if(result.hasErrors()) {
-			mav.setViewName(TRAFFICKED_PAGE);
+			mav.setViewName(ERROR_PAGE);
+			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_TRAFFICKED_PAGE,
+					new Object [] {}, null);
+			mav.addObject("errorMessage", errorMessage);
             return mav;
         }
 		
@@ -75,16 +93,16 @@ public class PaymentController {
 		
 		try {
 			if (!paymentService.isValidChooseTicketsViewModel(chooseTicketsVM)) {
-				String errorMessage = "Une erreur s'est produite lors de la vérification des éléments choisis. "
-						+ "Veuillez réessayer en recommençant votre sélection de billets. <a href=\"/\">Accueil</a>";
+				String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_INVALID_CHOOSE_TICKETS_VIEW_MODEL,
+						new Object [] {}, null);
 				mav.addObject("errorMessage", errorMessage);
 				return mav;
 			}
 			mav.addObject("payableItems", paymentService.getPayableItemsViewModel(chooseTicketsVM));
 			paymentService.saveToCart(chooseTicketsVM);
 		} catch (GameDoesntExistException | SectionDoesntExistException e) {
-			String errorMessage = "Une erreur s'est produite lors du passage à la phase de paiement. "
-					+ "Veuillez réessayer en recommençant votre sélection de billets. <a href=\"/\">Accueil</a>";
+			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_FOUND_TICKET,
+					new Object [] {}, null);
 			mav.addObject("errorMessage", errorMessage);
 		}	
 		
@@ -102,7 +120,10 @@ public class PaymentController {
 		addLogOfUserConnection(connectedUser);
 		
 		if (!connectedUser) {
-			mav.setViewName(NOT_CONNECTED_USER_PAGE);
+			mav.setViewName(ERROR_PAGE);
+			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_CONNECTED_USER,
+					new Object [] {}, null);
+			mav.addObject("errorMessage", errorMessage);
 			return mav;
 		}
 		
@@ -113,7 +134,10 @@ public class PaymentController {
 		try {
 			mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
 		} catch (NoTicketsInCartException e) {
-			mav.setViewName(NO_TICKETS_PAGE);
+			mav.setViewName(ERROR_PAGE);
+			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NO_TICKETS,
+					new Object [] {}, null);
+			mav.addObject("errorMessage", errorMessage);
 		}
 		
 		return mav;
@@ -131,7 +155,10 @@ public class PaymentController {
 		addLogOfUserConnection(connectedUser);
 		
 		if (!connectedUser) {
-			mav.setViewName(NOT_CONNECTED_USER_PAGE);
+			mav.setViewName(ERROR_PAGE);
+			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_CONNECTED_USER,
+					new Object [] {}, null);
+			mav.addObject("errorMessage", errorMessage);
 			return mav;
 		}
 		
@@ -140,7 +167,10 @@ public class PaymentController {
 		try {
 			mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
 		} catch (NoTicketsInCartException e) {
-			mav.setViewName(NO_TICKETS_PAGE);
+			mav.setViewName(ERROR_PAGE);
+			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NO_TICKETS,
+					new Object [] {}, null);
+			mav.addObject("errorMessage", errorMessage);
 			return mav;
 		}
 		
@@ -151,10 +181,10 @@ public class PaymentController {
 		
 		try {
 			paymentService.payAmount(paymentVM);
-		} catch (InvalidCardException e) {
+		} catch (InvalidCreditCardException e) {
 			modifyModelAndViewToRetryModeOfPayment(paymentVM, mav);
-			String errorMessage = "Une erreur s'est produite lors de la vérification de votre carte de crédit. "
-					+ "Veuillez réessayer en modifiants les informations fournies.";
+			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_INVALID_CREDIT_CARD,
+					new Object [] {}, null);
 			mav.addObject("errorMessage", errorMessage);
             return mav;
 		}

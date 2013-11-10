@@ -21,11 +21,11 @@ public abstract class CreditCard {
 		this.expirationYear = expirationYear;
 	}
 	
-	final public void pay(Double number) throws InvalidCardException {
+	final public void pay(Double number) throws InvalidCreditCardException {
 		if (isValid()) {
 			// Paiement
 		} else {
-			throw new InvalidCardException();
+			throw new InvalidCreditCardException();
 		}
 	}
 	

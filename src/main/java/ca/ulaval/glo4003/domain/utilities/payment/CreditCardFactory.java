@@ -8,7 +8,7 @@ import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
 @Component
 public class CreditCardFactory {
 
-	public CreditCard createCreditCard(PaymentViewModel paymentVM) throws InvalidCardException {
+	public CreditCard createCreditCard(PaymentViewModel paymentVM) throws InvalidCreditCardException {
 		CreditCardType type = paymentVM.getCreditCardType();
 		if (type.equals(CreditCardType.MISTERCARD)) {
 			return new MisterCard(paymentVM.getCreditCardNumber(), paymentVM.getSecurityCode(),
@@ -20,7 +20,7 @@ public class CreditCardFactory {
 			return new AmericanExpressoCard(paymentVM.getCreditCardNumber(), paymentVM.getSecurityCode(),
 					paymentVM.getCreditCardUserName(), paymentVM.getExpirationMonth(), paymentVM.getExpirationYear());
 		} else {
-			throw new InvalidCardException();
+			throw new InvalidCreditCardException();
 		}
 	}
 

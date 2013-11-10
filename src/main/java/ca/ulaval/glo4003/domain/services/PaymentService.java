@@ -15,7 +15,7 @@ import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
 import ca.ulaval.glo4003.domain.utilities.payment.Cart;
 import ca.ulaval.glo4003.domain.utilities.payment.CreditCard;
 import ca.ulaval.glo4003.domain.utilities.payment.CreditCardFactory;
-import ca.ulaval.glo4003.domain.utilities.payment.InvalidCardException;
+import ca.ulaval.glo4003.domain.utilities.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
@@ -105,7 +105,7 @@ public class PaymentService {
 		}
 	}
 
-	public void payAmount(PaymentViewModel paymentVM) throws InvalidCardException {
+	public void payAmount(PaymentViewModel paymentVM) throws InvalidCreditCardException {
 		CreditCard creditCard = creditCardFactory.createCreditCard(paymentVM);
 		if (currentCart.containTickets()) {
 			creditCard.pay(currentCart.getCumulativePrice());
