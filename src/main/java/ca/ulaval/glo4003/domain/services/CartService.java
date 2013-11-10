@@ -1,0 +1,30 @@
+package ca.ulaval.glo4003.domain.services;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.domain.dtos.SectionDto;
+import ca.ulaval.glo4003.domain.utilities.payment.Cart;
+import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+
+public class CartService {
+
+	@Inject
+	private CommandTicketService ticketService;
+
+	public void makeTicketsUnavailableToOtherPeople(Cart cart) {
+		try {
+			GameDto game = cart.getGameDto();
+			SectionDto section = cart.getSectionDto();
+			List<String> seats = cart.getSelectedSeats();
+
+			ticketService.makeTicketsUnavailable(game, section, seats);
+
+		} catch (GameDoesntExistException | GameAlreadyExistException e) {
+			// TODO Do nothing for now
+		}
+	}
+}
