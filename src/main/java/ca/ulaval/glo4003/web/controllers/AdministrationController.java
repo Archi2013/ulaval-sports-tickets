@@ -55,15 +55,7 @@ public class AdministrationController {
 
 		ModelAndView mav = new ModelAndView("admin/home");
 
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
-		}
+		manageUserConnection(mav);
 
 		return mav;
 	}
@@ -74,15 +66,7 @@ public class AdministrationController {
 
 		ModelAndView mav = new ModelAndView("admin/game", "command", new GameToAddViewModel());
 
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
-		}
+		manageUserConnection(mav);
 
 		mav.addObject("sportsVM", sportService.getSports());
 
@@ -95,15 +79,7 @@ public class AdministrationController {
 
 		ModelAndView mav = new ModelAndView("admin/game-added");
 
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
-		}
+		manageUserConnection(mav);
 
 		mav.addObject("game", gameToAddVM);
 
@@ -124,16 +100,8 @@ public class AdministrationController {
 		logger.info("Adminisatration : Page to add new tickets for a sport");
 
 		ModelAndView mav = new ModelAndView("admin/addTickets-chooseSport", "command", new SelectSportViewModel());
-
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
-		}
+		
+		manageUserConnection(mav);
 
 		mav.addObject("sportsVM", sportService.getSports());
 		mav.addObject("ticketKinds", constants.getTicketKinds());
@@ -148,21 +116,14 @@ public class AdministrationController {
 		logger.info("Ticket is of type : " + selectSportVM.getTypeBillet());
 
 		ModelAndView mav;
+		
 		if (selectSportVM.getTypeBillet() == TicketKind.GENERAL_ADMISSION) {
 			mav = new ModelAndView("admin/addTickets-General", "command", new GeneralTicketsToAddViewModel());
 		} else {
 			mav = new ModelAndView("admin/addTickets-Seated", "command", new SeatedTicketsToAddViewModel());
 		}
 
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
-		}
+		manageUserConnection(mav);
 
 		mav.addObject("gamesVM", sportService.getGamesForSport(selectSportVM.getSport()));
 
@@ -177,25 +138,46 @@ public class AdministrationController {
 
 		ModelAndView mav = new ModelAndView("/admin/tickets-added");
 
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
-		}
+		manageUserConnection(mav);
 
 		return mav;
 	}
 
 	@RequestMapping(value = "/ajout-billets-seated", method = RequestMethod.POST)
-	public String addTickets_seated(@ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM, Model model)
+	public ModelAndView addTickets_seated(@ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM, Model model)
 			throws SportDoesntExistException, GameDoesntExistException {
 		logger.info("Adminisatration: adding a seated ticket to game on " + ticketsToAddVM.getGameDate() + " in seat "
 				+ ticketsToAddVM.getSeat() + " of section " + ticketsToAddVM.getSection());
 
-		return "/admin/tickets-added";
+		ModelAndView mav = new ModelAndView("/admin/tickets-added");
+		
+		manageUserConnection(mav);
+		
+		return mav;
+	}
+	
+	private void addConnectedUserToModelAndView(ModelAndView mav,
+			Boolean connectedUser) {
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+		} else {
+			mav.addObject("connectedUser", false);
+		}
+	}
+	
+	private void addLogOfUserConnection(Boolean connectedUser) {
+		if (connectedUser) {
+			logger.info("usagé connecté");
+		} else {
+			logger.info("usagé non connecté");
+		}
+	}
+	
+	private void manageUserConnection(ModelAndView mav) {
+		Boolean connectedUser = currentUser.isLogged();
+
+		addConnectedUserToModelAndView(mav, connectedUser);
+		
+		addLogOfUserConnection(connectedUser);
 	}
 }

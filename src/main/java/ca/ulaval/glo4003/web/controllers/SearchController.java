@@ -36,16 +36,12 @@ public class SearchController {
 		
 		TicketSearchViewModel ticketSearchVM = searchService.getInitialisedTicketSearchViewModel();
 		
+		addConnectedUserToModelAndView(mav, connectedUser);
+		addLogOfUserConnection(connectedUser);
+		
 		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			
 			// mettre les préférences de l'usager
 			// TicketSearchViewModel ticketSearchVM = 
-			
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
 		}
 		
 		mav.addObject("ticketSearchForm", ticketSearchVM);
@@ -88,4 +84,21 @@ public class SearchController {
 		
 		return mav;
     }
+	
+	private void addConnectedUserToModelAndView(ModelAndView mav,
+			Boolean connectedUser) {
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+		} else {
+			mav.addObject("connectedUser", false);
+		}
+	}
+	
+	private void addLogOfUserConnection(Boolean connectedUser) {
+		if (connectedUser) {
+			logger.info("usagé connecté");
+		} else {
+			logger.info("usagé non connecté");
+		}
+	}
 }

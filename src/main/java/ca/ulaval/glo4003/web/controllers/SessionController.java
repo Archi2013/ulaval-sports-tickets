@@ -42,12 +42,9 @@ public class SessionController {
 		
 		Boolean connectedUser = currentUser.isLogged();
 		
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
+		manageUserConnection(mav);
+		
+		if (!connectedUser) {
 			mav.setViewName("session/signin");
 		}
 		return mav;
@@ -63,12 +60,9 @@ public class SessionController {
 		
 		Boolean connectedUser = currentUser.isLogged();
 		
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
+		manageUserConnection(mav);
+		
+		if (!connectedUser) {
 			mav.setViewName("session/signup");
 		}
 		return mav;
@@ -97,15 +91,7 @@ public class SessionController {
     public ModelAndView registerUser(@RequestParam String usernameParam, @RequestParam String passwordParam) { 
 		ModelAndView mav = new ModelAndView("session/signin");
 		
-		Boolean connectedUser = currentUser.isLogged();
-		
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
-		}
+		manageUserConnection(mav);
 		
 		try {
 			userService.signUp(usernameParam, passwordParam);
@@ -122,16 +108,8 @@ public class SessionController {
 		
 		ModelAndView mav = new ModelAndView("session/logout");
 		
-		Boolean connectedUser = currentUser.isLogged();
-		
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
-		}
-		
+		manageUserConnection(mav);
+
         return mav;  
     } 
 	
@@ -141,15 +119,37 @@ public class SessionController {
 		
 		Boolean connectedUser = currentUser.isLogged();
 		
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
+		manageUserConnection(mav);
+		
+		if (!connectedUser) {
 			mav.setViewName("session/logout");
 		}
 		mav.addObject("user", currentUser); 
 		return mav;
+	}
+	
+	private void addConnectedUserToModelAndView(ModelAndView mav,
+			Boolean connectedUser) {
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+		} else {
+			mav.addObject("connectedUser", false);
+		}
+	}
+	
+	private void addLogOfUserConnection(Boolean connectedUser) {
+		if (connectedUser) {
+			logger.info("usagé connecté");
+		} else {
+			logger.info("usagé non connecté");
+		}
+	}
+	
+	private void manageUserConnection(ModelAndView mav) {
+		Boolean connectedUser = currentUser.isLogged();
+
+		addConnectedUserToModelAndView(mav, connectedUser);
+		
+		addLogOfUserConnection(connectedUser);
 	}
 }

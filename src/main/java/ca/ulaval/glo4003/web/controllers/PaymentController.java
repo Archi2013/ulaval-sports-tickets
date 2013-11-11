@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.CommandTicketService;
 import ca.ulaval.glo4003.domain.services.NoTicketsInCartException;
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
@@ -57,9 +56,6 @@ public class PaymentController {
 	@Inject
 	PaymentService paymentService;
 
-	@Inject
-	private CommandTicketService ticketService;
-
 	@Autowired
 	private User currentUser;
 
@@ -78,9 +74,7 @@ public class PaymentController {
 		addLogOfUserConnection(connectedUser);
 
 		if (!connectedUser) {
-			mav.setViewName(ERROR_PAGE);
-			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_CONNECTED_USER, new Object[] {}, null);
-			mav.addObject("errorMessage", errorMessage);
+			modifyModelAndViewToShowNotConnectedUserPage(mav);
 			return mav;
 		}
 
@@ -121,9 +115,7 @@ public class PaymentController {
 		addLogOfUserConnection(connectedUser);
 
 		if (!connectedUser) {
-			mav.setViewName(ERROR_PAGE);
-			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_CONNECTED_USER, new Object[] {}, null);
-			mav.addObject("errorMessage", errorMessage);
+			modifyModelAndViewToShowNotConnectedUserPage(mav);
 			return mav;
 		}
 
@@ -153,9 +145,7 @@ public class PaymentController {
 		addLogOfUserConnection(userIsconnected);
 
 		if (!userIsconnected) {
-			mav.setViewName(ERROR_PAGE);
-			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_CONNECTED_USER, new Object[] {}, null);
-			mav.addObject("errorMessage", errorMessage);
+			modifyModelAndViewToShowNotConnectedUserPage(mav);
 			return mav;
 		}
 
@@ -187,6 +177,12 @@ public class PaymentController {
 		paymentService.emptyCart();
 
 		return mav;
+	}
+
+	private void modifyModelAndViewToShowNotConnectedUserPage(ModelAndView mav) {
+		mav.setViewName(ERROR_PAGE);
+		String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_CONNECTED_USER, new Object[] {}, null);
+		mav.addObject("errorMessage", errorMessage);
 	}
 
 	private void addLogOfUserConnection(Boolean connectedUser) {

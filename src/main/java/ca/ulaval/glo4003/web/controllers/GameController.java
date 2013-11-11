@@ -35,15 +35,7 @@ public class GameController {
 			
 			ModelAndView mav = new ModelAndView("game/sections");
 			
-			Boolean connectedUser = currentUser.isLogged();
-			
-			if (connectedUser) {
-				mav.addObject("connectedUser", true);
-				logger.info("usagé connecté");
-			} else {
-				mav.addObject("connectedUser", false);
-				logger.info("usagé non connecté");
-			}
+			manageUserConnection(mav);
 			
 			mav.addObject("currency", Constants.CURRENCY);
 
@@ -55,5 +47,30 @@ public class GameController {
 			logger.info("==> Impossible to get all tickets for game : " + gameId);
 			return new ModelAndView("error/404");
 		}
+	}
+	
+	private void addConnectedUserToModelAndView(ModelAndView mav,
+			Boolean connectedUser) {
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+		} else {
+			mav.addObject("connectedUser", false);
+		}
+	}
+	
+	private void addLogOfUserConnection(Boolean connectedUser) {
+		if (connectedUser) {
+			logger.info("usagé connecté");
+		} else {
+			logger.info("usagé non connecté");
+		}
+	}
+	
+	private void manageUserConnection(ModelAndView mav) {
+		Boolean connectedUser = currentUser.isLogged();
+
+		addConnectedUserToModelAndView(mav, connectedUser);
+		
+		addLogOfUserConnection(connectedUser);
 	}
 }

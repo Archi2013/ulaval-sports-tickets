@@ -37,15 +37,7 @@ public class SectionController {
 			ModelAndView mav = new ModelAndView("section/details");
 			mav.addObject("currency", Constants.CURRENCY);
 			
-			Boolean connectedUser = currentUser.isLogged();
-			
-			if (connectedUser) {
-				logger.info("usagé connecté");
-				mav.addObject("connectedUser", connectedUser);
-			} else {
-				logger.info("usagé non connecté");
-				mav.addObject("connectedUser", connectedUser);
-			}
+			manageUserConnection(mav);
 			
 			SectionViewModel section = sectionService.getSection(gameId, ticketType);
 			
@@ -59,5 +51,30 @@ public class SectionController {
 		} catch (SectionDoesntExistException e) {
 			return new ModelAndView("error/404");
 		}
+	}
+	
+	private void addConnectedUserToModelAndView(ModelAndView mav,
+			Boolean connectedUser) {
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+		} else {
+			mav.addObject("connectedUser", false);
+		}
+	}
+	
+	private void addLogOfUserConnection(Boolean connectedUser) {
+		if (connectedUser) {
+			logger.info("usagé connecté");
+		} else {
+			logger.info("usagé non connecté");
+		}
+	}
+	
+	private void manageUserConnection(ModelAndView mav) {
+		Boolean connectedUser = currentUser.isLogged();
+
+		addConnectedUserToModelAndView(mav, connectedUser);
+		
+		addLogOfUserConnection(connectedUser);
 	}
 }
