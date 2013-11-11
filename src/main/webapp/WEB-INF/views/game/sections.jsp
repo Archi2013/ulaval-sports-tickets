@@ -33,7 +33,7 @@
 						<td>${section.sectionName}</td>
 						<td>${section.numberOfTickets}</td>
 						<td>${section.price}</td>
-						<td><a href="billets/${section.url}"
+						<td class="action-column"><a href="billets/${section.url}"
 							class="standard-button-round orange-button">Consulter</a></td>
 
 					</tr>

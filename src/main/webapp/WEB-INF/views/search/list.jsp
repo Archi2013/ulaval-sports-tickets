@@ -47,7 +47,7 @@ Types de billet : <c:forEach items="${searchForm.selectedTicketKinds}" var="kind
 			<td>${section.section}</td>
 			<td>${section.numberOfTicket}</td>
 			<td>${section.price}</td>
-			<td><a
+			<td class="action-column"><a
 				href="${section.url}"
 				class="standard-button-round orange-button">Consulter</a></td>
 

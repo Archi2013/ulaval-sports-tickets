@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
+import ca.ulaval.glo4003.domain.pojos.Section;
+import ca.ulaval.glo4003.domain.repositories.ISectionRepository;
 import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
@@ -51,29 +53,14 @@ public class PaymentService {
 
 	@Autowired
 	private Cart currentCart;
+	
+	@Inject
+	private ISectionRepository sectionRepository;
 
 	public Boolean isValidChooseTicketsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException,
 			SectionDoesntExistException {
-		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
-
-		if (sectionDto.isGeneralAdmission()) {
-			Integer numberOfTickets = chooseTicketsVM.getNumberOfTicketsToBuy();
-			if (numberOfTickets < 1 || numberOfTickets > sectionDto.getNumberOfTickets()) {
-				return false;
-			}
-		} else {
-			Integer numberOfTickets = chooseTicketsVM.getSelectedSeats().size();
-			if (numberOfTickets < 1 || numberOfTickets > sectionDto.getNumberOfTickets()) {
-				return false;
-			}
-			for (String seat : chooseTicketsVM.getSelectedSeats()) {
-				if (!sectionDto.getSeats().contains(seat)) {
-					return false;
-				}
-			}
-		}
-
-		return true;
+		Section section = sectionRepository.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
+		return section.isValidElements(chooseTicketsVM.getNumberOfTicketsToBuy(), chooseTicketsVM.getSelectedSeats());
 	}
 
 	public PayableItemsViewModel getPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM)
