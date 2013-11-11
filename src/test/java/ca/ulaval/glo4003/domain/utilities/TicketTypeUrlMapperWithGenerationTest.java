@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
+import ca.ulaval.glo4003.persistence.daos.TicketType;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TicketTypeUrlMapperWithGenerationTest {

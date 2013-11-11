@@ -142,7 +142,8 @@ public class PaymentServiceTest {
 
 		when(gameDao.get(GAME_ID)).thenReturn(gameDto);
 		when(sectionDao.get(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
-		when(calculator.calculateCumulativePrice(chooseTicketsVM, sectionDto)).thenReturn(CUMULATIVE_PRICE);
+		when(sectionDto.isGeneralAdmission()).thenReturn(true);
+		when(calculator.calculateCumulativePriceForGeneralAdmission(any(Integer.class), any(Double.class))).thenReturn(CUMULATIVE_PRICE);
 
 		paymentService.saveToCart(chooseTicketsVM);
 

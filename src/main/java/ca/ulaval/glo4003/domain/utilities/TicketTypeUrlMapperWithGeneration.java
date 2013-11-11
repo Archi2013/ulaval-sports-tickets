@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
+import ca.ulaval.glo4003.persistence.daos.TicketType;
 
 @Component
 public class TicketTypeUrlMapperWithGeneration extends UrlMapper implements TicketTypeUrlMapper {

@@ -105,7 +105,7 @@ public class SearchServiceTest {
 	public void given_a_ticketSearchViewModel_getTickets_should_return_a_ticket_list() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
 		List<SectionForSearchDto> sectionDtos = new ArrayList<>();
-		TicketSearchPreferenceDto preferenceDto = new TicketSearchPreferenceDto(null, null, true, null);
+		TicketSearchPreferenceDto preferenceDto = mock(TicketSearchPreferenceDto.class);
 		List<SectionForSearchViewModel> ticketVMs = new ArrayList<>();
 		
 		when(ticketSearchPreferenceFactory.createPreferenceDto(ticketSearchVM)).thenReturn(preferenceDto);

@@ -24,14 +24,19 @@ public class PayableItemsViewModelFactory {
 		SectionForPaymentViewModel sectionForPaymentVM = sectionForPaymentViewModelFactory.createViewModel(chooseTicketsVM,
 				gameDto, sectionDto);
 		
-		Double cumulatedPrice = calculator.calculateCumulativePrice(chooseTicketsVM, sectionDto);
+		Double cumulativePrice = 0.0;
+		if (sectionDto.isGeneralAdmission()) {
+			cumulativePrice = calculator.calculateCumulativePriceForGeneralAdmission(chooseTicketsVM.getNumberOfTicketsToBuy(), sectionDto.getPrice());
+		} else {
+			cumulativePrice = calculator.calculateCumulativePriceForWithSeatAdmission(chooseTicketsVM.getSelectedSeats(), sectionDto.getPrice());
+		}
 		
-		String cumulatedPriceFR = calculator.toPriceFR(cumulatedPrice);
+		String cumulativePriceFR = calculator.toPriceFR(cumulativePrice);
 		
 		PayableItemsViewModel payableItemsVM = new PayableItemsViewModel();
 		
 		payableItemsVM.setSectionForPaymentViewModel(sectionForPaymentVM);
-		payableItemsVM.setCumulativePrice(cumulatedPriceFR);
+		payableItemsVM.setCumulativePrice(cumulativePriceFR);
 		
 		return payableItemsVM;
 	}

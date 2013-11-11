@@ -1,19 +1,20 @@
 package ca.ulaval.glo4003.domain.dtos;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
+import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 
 public class TicketSearchPreferenceDto {
 	public List<String> selectedSports;
-	private DisplayedPeriod displayedPeriod;
+	private String displayedPeriod;
 	public boolean localGameOnly;
-	public List<TicketKind> selectedTicketKinds;
+	public List<String> selectedTicketKinds;
 	
 	public TicketSearchPreferenceDto(List<String> selectedSports,
-			DisplayedPeriod displayedPeriod, boolean localGameOnly,
-			List<TicketKind> selectedTicketKinds) {
+			String displayedPeriod, boolean localGameOnly,
+			List<String> selectedTicketKinds) {
 		super();
 		this.selectedSports = selectedSports;
 		this.displayedPeriod = displayedPeriod;
@@ -29,11 +30,11 @@ public class TicketSearchPreferenceDto {
 		this.selectedSports = selectedSports;
 	}
 
-	public DisplayedPeriod getDisplayedPeriod() {
+	public String getDisplayedPeriod() {
 		return displayedPeriod;
 	}
 
-	public void setDisplayedPeriod(DisplayedPeriod displayedPeriod) {
+	public void setDisplayedPeriod(String displayedPeriod) {
 		this.displayedPeriod = displayedPeriod;
 	}
 
@@ -45,11 +46,11 @@ public class TicketSearchPreferenceDto {
 		this.localGameOnly = localGameOnly;
 	}
 
-	public List<TicketKind> getSelectedTicketKinds() {
+	public List<String> getSelectedTicketKinds() {
 		return selectedTicketKinds;
 	}
 
-	public void setSelectedTicketKinds(List<TicketKind> selectedTicketKinds) {
+	public void setSelectedTicketKinds(List<String> selectedTicketKinds) {
 		this.selectedTicketKinds = selectedTicketKinds;
 	}
 }

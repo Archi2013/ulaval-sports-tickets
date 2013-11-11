@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.domain.utilities.TicketType;
 
 public interface SectionDao {
 

@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.utilities;
+package ca.ulaval.glo4003.persistence.daos;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

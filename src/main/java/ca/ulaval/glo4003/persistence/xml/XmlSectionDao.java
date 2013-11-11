@@ -15,10 +15,10 @@ import javax.xml.xpath.XPathExpressionException;
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.domain.utilities.TicketType;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketType;
 
 @Component
 public class XmlSectionDao implements SectionDao {
