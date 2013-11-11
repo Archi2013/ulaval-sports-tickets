@@ -1,7 +1,9 @@
 package ca.ulaval.glo4003.domain.services;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +20,6 @@ import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketType;
 import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
 import ca.ulaval.glo4003.web.viewmodels.factories.ChooseTicketsViewModelFactory;
@@ -28,7 +29,6 @@ import ca.ulaval.glo4003.web.viewmodels.factories.SectionViewModelFactory;
 public class SectionServiceTest {
 
 	private static final String SECTION_URL = "SECTION_URL";
-	private static final String ADMISSION = "GENERAL";
 	private static final String SECTION_NAME = "BLEUS";
 
 	private static final Long GAME_ID = 12L;
@@ -53,8 +53,7 @@ public class SectionServiceTest {
 
 	@Before
 	public void setUp() throws NoTicketTypeForUrlException {
-		TicketType ticketType = new TicketType(ADMISSION, SECTION_NAME);
-		when(ticketTypeUrlMapperMock.getTicketType(SECTION_URL)).thenReturn(ticketType);
+		when(ticketTypeUrlMapperMock.getTicketType(SECTION_URL)).thenReturn(SECTION_NAME);
 	}
 
 	@Test

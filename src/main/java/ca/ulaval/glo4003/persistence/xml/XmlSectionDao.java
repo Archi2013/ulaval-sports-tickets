@@ -18,12 +18,10 @@ import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketType;
 
 @Component
 public class XmlSectionDao implements SectionDao {
 
-	private static final String VIP_KEYWORD = "VIP";
 	private static final String GENERAL_KEYWORD = "Générale";
 
 	private XmlDatabase database;
@@ -73,7 +71,7 @@ public class XmlSectionDao implements SectionDao {
 	}
 
 	@Override
-	public Set<TicketType> getAllTicketTypes() {
+	public Set<String> getAllSections() {
 		if (sectionCache == null) {
 			initCache();
 		}
@@ -81,12 +79,7 @@ public class XmlSectionDao implements SectionDao {
 		for (Set<String> section : sectionCache.values()) {
 			sections.addAll(section);
 		}
-		Set<TicketType> ticketTypes = new HashSet<>();
-		for (String section : sections) {
-			String admissionType = GENERAL_KEYWORD.equals(section) ? GENERAL_KEYWORD : VIP_KEYWORD;
-			ticketTypes.add(new TicketType(admissionType, section));
-		}
-		return ticketTypes;
+		return sections;
 	}
 
 	private List<SectionDto> convertToSectionDtos(Long gameId, Set<String> sectionNames) throws SectionDoesntExistException,
@@ -129,6 +122,7 @@ public class XmlSectionDao implements SectionDao {
 			sectionCache.put(gameId, new LinkedHashSet<String>());
 		}
 		Set<String> sections = sectionCache.get(gameId);
-		sections.add(node.getNodeValue("section"));
+		String section = node.getNodeValue("section");
+		sections.add(section == null ? GENERAL_KEYWORD : section);
 	}
 }
