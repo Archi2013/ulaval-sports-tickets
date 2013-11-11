@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.web.viewmodels.factories;
 
-import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.List;
 
@@ -32,8 +32,7 @@ public class SectionViewModelFactory {
 		String priceFR = calculator.toPriceFR(section.getPrice());
 		
 		return new SectionViewModel(section.getAdmissionType(), section.getSectionName(), section.getNumberOfTickets(),
-				priceFR, dateFR, game.getOpponents(), createUrl(section.getAdmissionType(),
-						section.getSectionName()), section.getSeats());
+				priceFR, dateFR, game.getOpponents(), createUrl(section.getSectionName()), section.getSeats());
 	}
 
 	public List<SectionViewModel> createViewModel(List<SectionDto> sections, GameDto gameDto) {
@@ -44,8 +43,8 @@ public class SectionViewModelFactory {
 		return sectionsVM;
 	}
 
-	private String createUrl(String admissionType, String sectionName) {
-		return ticketTypeUrlMapper.getUrl(admissionType, sectionName);
+	private String createUrl(String sectionName) {
+		return ticketTypeUrlMapper.getUrl(sectionName);
 	}
 
 }

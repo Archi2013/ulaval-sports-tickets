@@ -9,5 +9,5 @@ public interface SectionDao {
 
 	public SectionDto get(Long gameId, String sectionName) throws SectionDoesntExistException;
 	public List<SectionDto> getAll(Long gameId) throws GameDoesntExistException;
-	public Set<TicketType> getAllTicketTypes();
+	public Set<String> getAllSections();
 }
