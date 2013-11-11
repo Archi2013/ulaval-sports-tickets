@@ -41,10 +41,12 @@ public class UserService {
 
 	public void signUp(String username, String password) throws UserAlreadyExistException {
 		
-		if (!(userDao.doesUserExist(username)))
+		if (!(userDao.doesUserExist(username))) {
 			userDao.add(makeUser(username, password));
-		else
+			userDao.commit();
+		} else {
 			throw new UserAlreadyExistException();
+		}
 	}
 	
 	private UserDto makeUser(String username, String password) {

@@ -18,6 +18,8 @@ import ca.ulaval.glo4003.persistence.daos.UserDao;
 @Repository
 public class XmlUserDao implements UserDao {
 
+	private static final String DEFAULT_FILE = "resources/DemoUserData.xml";
+	
 	private static final String USERS_XPATH = "/base/users";
 	private static final String USER_XPATH = USERS_XPATH + "/user";
 	private static final String USER_XPATH_ID = USER_XPATH + "[username=\"%s\"]";
@@ -25,7 +27,7 @@ public class XmlUserDao implements UserDao {
 	private XmlDatabase database;
 
 	public XmlUserDao() {
-		database = XmlDatabase.getInstance();
+		database = XmlDatabase.getInstance(DEFAULT_FILE);
 	}
 
 	XmlUserDao(String filename) {
@@ -70,6 +72,11 @@ public class XmlUserDao implements UserDao {
 	public boolean doesUserExist(String name) {
 		return isIdExist(name);
 	}
+	
+	@Override
+	public void commit() {
+		database.commit();
+	}
 
 	private boolean isIdExist(String id) {
 		String xPath = String.format(USER_XPATH_ID, id);
@@ -101,5 +108,4 @@ public class XmlUserDao implements UserDao {
 		}
 		return users;
 	}
-
 }

@@ -50,4 +50,10 @@ public class FakeDataUserDao implements UserDao {
 		}
 		return false;
 	}
+
+	@Override
+	public void commit() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -15,5 +15,6 @@ public interface UserDao {
 	public UserDto get(String name) throws UserDoesntExistException;
 	public void add(UserDto user) throws UserAlreadyExistException;
 	public boolean doesUserExist(String name);
+	public void commit();
 }
 

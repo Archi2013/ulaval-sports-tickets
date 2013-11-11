@@ -2,7 +2,10 @@ package ca.ulaval.glo4003.persistence.xml;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -11,7 +14,7 @@ public class XmlDatabase {
 	private static final String DEFAULT_FILE = "resources/DemoData.xml";
 	private File file;
 	private XmlExtractor extractor;
-	private static XmlDatabase instance;
+	private static Map<String, XmlDatabase> instances;
 
 	private XmlDatabase(String filename) {
 		this.file = new File(filename);
@@ -30,11 +33,14 @@ public class XmlDatabase {
 		return new XmlDatabase(filename);
 	}
 
-	public static XmlDatabase getInstance(String filename) {
-		if (instance == null) {
-			instance = new XmlDatabase(filename);
+	public synchronized static XmlDatabase getInstance(String filename) {
+		if (instances == null) {
+			instances = Collections.synchronizedMap(new HashMap<String, XmlDatabase>());
 		}
-		return instance;
+		if (!instances.containsKey(filename)) {
+			instances.put(filename, new XmlDatabase(filename));
+		}
+		return instances.get(filename);
 	}
 
 	public String extractPath(String xPath) throws XPathExpressionException {
