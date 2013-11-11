@@ -28,7 +28,7 @@ public class XmlGameDao implements GameDao {
 	private static final String GAME_XPATH = GAMES_XPATH + "/game";
 	private static final String GAME_XPATH_ID = GAME_XPATH + "[id=\"%d\"]";
 	private static final String GAME_XPATH_SPORT_NAME = GAME_XPATH + "[sportName=\"%s\"]";
-	
+
 	private static AtomicLong nextId;
 
 	// @Inject
@@ -77,10 +77,10 @@ public class XmlGameDao implements GameDao {
 			throw new XmlIntegrityException(e);
 		}
 	}
-	
+
 	synchronized private long getNextId() throws XPathExpressionException {
 		if (nextId == null) {
-			long next = (long)database.getMaxValue(GAME_XPATH, "id");
+			long next = (long) database.getMaxValue(GAME_XPATH, "id");
 			nextId = new AtomicLong(next);
 		}
 		return nextId.incrementAndGet();
@@ -126,6 +126,12 @@ public class XmlGameDao implements GameDao {
 	public void saveChanges(GameDto game) throws GameDoesntExistException {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public GameDto get(String sportName, DateTime gameDate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

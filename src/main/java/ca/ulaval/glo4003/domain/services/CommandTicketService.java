@@ -13,6 +13,7 @@ import ca.ulaval.glo4003.domain.repositories.ITicketRepository;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 
 @Service
 public class CommandTicketService {
@@ -30,7 +31,7 @@ public class CommandTicketService {
 	}
 
 	public void addGeneralTickets(String sport, DateTime date, int numberOfTickets) throws GameDoesntExistException,
-			GameAlreadyExistException {
+			GameAlreadyExistException, TicketAlreadyExistException {
 		Game game = gameRepository.recoverGame(sport, date);
 
 		for (int i = 0; i < numberOfTickets; i++) {
@@ -40,15 +41,15 @@ public class CommandTicketService {
 		gameRepository.commit();
 	}
 
-	public void addSeatedTicket(String sport, DateTime date, String section, String seat) throws GameDoesntExistException,
-			GameAlreadyExistException {
+	public void addSeatedTicket(String sport, DateTime date, String section, String seat)
+			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException {
 		Game gameToUse = gameRepository.recoverGame(sport, date);
 		gameToUse.addTicket(ticketRepository.instantiateNewTicket(section, seat));
 		gameRepository.commit();
 	}
 
-	public void makeTicketsUnavailable(GameDto game, SectionDto section, List<String> seats) throws GameDoesntExistException,
-			GameAlreadyExistException {
+	public void makeTicketsUnavailable(GameDto game, SectionDto section, List<String> seats)
+			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException {
 		Game gameToUse = gameRepository.recoverGame(game.getSportName(), game.getGameDate());
 		for (String seat : seats) {
 			Ticket ticket = ticketRepository.recoverTicket(game.getSportName(), game.getGameDate(), seat);

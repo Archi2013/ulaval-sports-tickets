@@ -13,10 +13,12 @@ import ca.ulaval.glo4003.domain.factories.IGameFactory;
 import ca.ulaval.glo4003.domain.pojos.Game;
 import ca.ulaval.glo4003.domain.pojos.persistable.Persistable;
 import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
+import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 
 @Repository
 public class GameRepository implements IGameRepository {
@@ -25,13 +27,19 @@ public class GameRepository implements IGameRepository {
 	private GameDao gameDao;
 	@Inject
 	private IGameFactory gameFactory;
+	@Inject
+	private TicketRepository ticketRepository;
 
-	private List<Persistable<GameDto>> existingActiveGames;
-	private List<Persistable<GameDto>> newActiveGames;
+	private List<Persistable<GameDto>> existingActiveGames = new ArrayList<>();
+	private List<Persistable<GameDto>> newActiveGames = new ArrayList<>();
 
-	public GameRepository() {
-		existingActiveGames = new ArrayList<>();
-		newActiveGames = new ArrayList<>();
+	@Override
+	public Game recoverGame(String sport, DateTime date) {
+		GameDto gameDto = gameDao.get(sport, date);
+		List<Ticket> tickets = ticketRepository.recoverAllTicketsForGame(sport, date);
+		PersistableGame game = gameFactory.instantiateGame(gameDto.getOpponents(), gameDto.getGameDate(), tickets);
+		existingActiveGames.add(game);
+		return game;
 	}
 
 	@Override
@@ -39,7 +47,8 @@ public class GameRepository implements IGameRepository {
 		List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
 		List<PersistableGame> games = new ArrayList<>();
 		for (GameDto dto : gameDtos) {
-			PersistableGame newGame = gameFactory.instantiateGame(dto.getOpponents(), dto.getGameDate());
+			List<Ticket> tickets = ticketRepository.recoverAllTicketsForGame(sportName, dto.getGameDate());
+			PersistableGame newGame = gameFactory.instantiateGame(dto.getOpponents(), dto.getGameDate(), tickets);
 			games.add(newGame);
 		}
 		existingActiveGames.addAll(games);
@@ -55,7 +64,7 @@ public class GameRepository implements IGameRepository {
 
 	}
 
-	public void commit() throws GameDoesntExistException, GameAlreadyExistException {
+	public void commit() throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException {
 		for (Persistable<GameDto> game : existingActiveGames) {
 			GameDto dto = game.saveDataInDTO();
 			gameDao.saveChanges(dto);
@@ -67,12 +76,7 @@ public class GameRepository implements IGameRepository {
 		}
 		existingActiveGames.addAll(newActiveGames);
 		newActiveGames.clear();
-	}
-
-	@Override
-	public Game recoverGame(String aSport, DateTime a_DATE) {
-		// TODO Auto-generated method stub
-		return null;
+		ticketRepository.commit();
 	}
 
 }
