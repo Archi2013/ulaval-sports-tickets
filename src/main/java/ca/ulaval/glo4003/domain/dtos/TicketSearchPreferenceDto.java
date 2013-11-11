@@ -1,10 +1,6 @@
 package ca.ulaval.glo4003.domain.dtos;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
-import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 
 public class TicketSearchPreferenceDto {
 	public List<String> selectedSports;

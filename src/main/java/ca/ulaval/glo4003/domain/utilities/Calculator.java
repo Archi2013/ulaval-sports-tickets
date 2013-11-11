@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.dtos.SectionDto;
-
 @Component
 public class Calculator {
 

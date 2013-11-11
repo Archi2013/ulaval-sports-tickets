@@ -49,6 +49,7 @@ public class SectionController {
 			
 			return mav;
 		} catch (SectionDoesntExistException e) {
+			logger.info("Exception : " + e.getClass().getSimpleName() + " : la section n'existe pas");
 			return new ModelAndView("error/404");
 		}
 	}

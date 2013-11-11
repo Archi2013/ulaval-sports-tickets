@@ -51,7 +51,7 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 
 	@Override
 	public boolean acceptsToBeScheduled() {
-		if (sportName == NO_SPORT_SET) {
+		if (sportName.equals(NO_SPORT_SET)) {
 			return true;
 		}
 		return false;

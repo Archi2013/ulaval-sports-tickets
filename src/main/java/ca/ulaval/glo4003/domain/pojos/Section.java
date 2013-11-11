@@ -21,11 +21,7 @@ public class Section {
 	}
 
 	public boolean isGeneralAdmission() {
-		if (seats.size() == 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return sectionName == null;
 	}
 	
 	public Boolean isValidElements(Integer numberOfTicketsToBuy, List<String> selectedSeats) {

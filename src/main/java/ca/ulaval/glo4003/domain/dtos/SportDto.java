@@ -34,7 +34,7 @@ public class SportDto implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (obj.getClass() != getClass()) {
+		if ( !(obj instanceof SportDto) ) {
 			return false;
 		}
         

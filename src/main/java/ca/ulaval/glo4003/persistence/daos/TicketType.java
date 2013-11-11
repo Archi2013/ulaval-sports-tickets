@@ -26,7 +26,7 @@ public class TicketType {
 		if (this == obj) {
 			return true;
 		}
-		if (obj.getClass() != getClass()) {
+		if ( !(obj instanceof TicketType) ) {
 			return false;
 		}
 
