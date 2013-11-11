@@ -20,7 +20,6 @@ import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
 import ca.ulaval.glo4003.domain.utilities.payment.Cart;
-import ca.ulaval.glo4003.domain.utilities.payment.CreditCard;
 import ca.ulaval.glo4003.domain.utilities.payment.CreditCardFactory;
 import ca.ulaval.glo4003.domain.utilities.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.utilities.payment.MisterCard;
@@ -218,7 +217,7 @@ public class PaymentServiceTest {
 		when(creditCardFactory.createCreditCard(paymentVM)).thenReturn(creditCard);
 		when(currentCart.containTickets()).thenReturn(true);
 		when(currentCart.getCumulativePrice()).thenReturn(CUMULATIVE_PRICE);
-		when(creditCard.isValid()).thenReturn(true);
+		doNothing().when(creditCard).pay(CUMULATIVE_PRICE);
 
 		paymentService.buyTicketsInCart(paymentVM);
 
@@ -239,21 +238,6 @@ public class PaymentServiceTest {
 		paymentService.buyTicketsInCart(paymentVM);
 
 		verify(cartService).makeTicketsUnavailableToOtherPeople(currentCart);
-	}
-
-	@Ignore
-	@Test(expected = InvalidCreditCardException.class)
-	public void given_a_paymentViewModel_buyTicketsInCart_should_raise_InvalidCreditCardException_when_card_is_invalid()
-			throws InvalidCreditCardException {
-		PaymentViewModel paymentVM = new PaymentViewModel();
-		CreditCard creditCard = mock(MisterCard.class);
-
-		when(creditCardFactory.createCreditCard(paymentVM)).thenReturn(creditCard);
-		when(currentCart.containTickets()).thenReturn(true);
-		when(currentCart.getCumulativePrice()).thenReturn(CUMULATIVE_PRICE);
-		doThrow(new InvalidCreditCardException()).when(creditCard).pay(CUMULATIVE_PRICE);
-
-		paymentService.buyTicketsInCart(paymentVM);
 	}
 
 	@Test
