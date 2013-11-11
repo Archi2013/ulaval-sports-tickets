@@ -7,30 +7,41 @@ public class TicketDto {
 	public long gameId;
 	public int ticketId;
 	public double price;
-	public String admissionType;
 	public String section;
 	public String seat;
 	public String sportName;
 	public DateTime gameDate;
 	public int ticketNumber;
 
-	public TicketDto(String sportName, DateTime gameDate, int ticketNumber, double price, String admissionType,
-			String seat, String section) {
+	public TicketDto(String sportName, DateTime gameDate, int ticketNumber, double price) {
 		this.sportName = sportName;
 
 		this.gameDate = gameDate;
 		this.ticketNumber = ticketNumber;
 		this.price = price;
-		this.admissionType = admissionType;
+	}
+	
+	public TicketDto(String sportName, DateTime gameDate, int ticketNumber, double price, String seat, String section) {
+		this.sportName = sportName;
+
+		this.gameDate = gameDate;
+		this.ticketNumber = ticketNumber;
+		this.price = price;
 		this.section = section;
 		this.seat = seat;
 	}
 
-	public TicketDto(long gameId, int ticketId, double price, String admissionType, String section) {
+	public TicketDto(long gameId, int ticketId, double price, String section, String seat) {
 		this.ticketId = ticketId;
 		this.price = price;
-		this.admissionType = admissionType;
 		this.section = section;
+		this.gameId = gameId;
+		this.seat = seat;
+	}
+	
+	public TicketDto(long gameId, int ticketId, double price) {
+		this.ticketId = ticketId;
+		this.price = price;
 		this.gameId = gameId;
 	}
 
@@ -44,10 +55,6 @@ public class TicketDto {
 
 	public double getPrice() {
 		return price;
-	}
-
-	public String getAdmissionType() {
-		return admissionType;
 	}
 
 	public String getSection() {

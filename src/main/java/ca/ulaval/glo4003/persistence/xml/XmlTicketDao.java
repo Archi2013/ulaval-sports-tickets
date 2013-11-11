@@ -101,20 +101,25 @@ public class XmlTicketDao implements TicketDao {
 		nodes.put("id", Integer.toString(ticket.getTicketId()));
 		nodes.put("gameID", Long.toString(ticket.getGameId()));
 		nodes.put("price", Double.toString(ticket.getPrice()));
-		nodes.put("section", ticket.getSection());
-		nodes.put("type", ticket.getAdmissionType());
-
+		if (ticket.getSection() != null && ticket.getSeat()!= null) {
+			nodes.put("section", ticket.getSection());
+			nodes.put("seat", ticket.getSeat());
+		}
 		return new SimpleNode("ticket", nodes);
 	}
 
 	private TicketDto convertNodeToTicket(SimpleNode parent) throws NoSuchAttributeException, TicketDoesntExistException {
-		if (parent.hasNode("id", "gameID", "price", "type", "section")) {
+		if (parent.hasNode("id", "gameID", "price")) {
 			int ticketId = Integer.parseInt(parent.getNodeValue("id"));
 			long gameId = Long.parseLong(parent.getNodeValue("gameID"));
 			Double price = Double.parseDouble(parent.getNodeValue("price"));
-			String admissionType = parent.getNodeValue("type");
-			String section = parent.getNodeValue("section");
-			return new TicketDto(gameId, ticketId, price, admissionType, section);
+			if (parent.hasNode("section", "seat")) {
+				String section = parent.getNodeValue("section");
+				String seat = parent.getNodeValue("seat");
+				return new TicketDto(gameId, ticketId, price, section, seat);
+			} else {
+				return new TicketDto(gameId, ticketId, price);
+			}
 		}
 		throw new TicketDoesntExistException();
 	}

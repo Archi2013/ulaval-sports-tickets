@@ -19,11 +19,7 @@ public class SectionDto {
 	}
 
 	public boolean isGeneralAdmission() {
-		if (seats.size() == 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return sectionName == null;
 	}
 	
 	public String getAdmissionType() {

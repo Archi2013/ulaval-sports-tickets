@@ -10,7 +10,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4003.domain.tickets.GeneralTicket;
 import ca.ulaval.glo4003.domain.tickets.PersistableTicket;
 import ca.ulaval.glo4003.domain.tickets.SeatedTicket;
-import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TicketFactoryTest {
@@ -41,7 +40,7 @@ public class TicketFactoryTest {
 
 	@Test
 	public void instantiation_with_section_parameter_to_general_returns_a_general_ticket() {
-		PersistableTicket ticket = factory.instantiateTicket(A_SEAT, TicketKind.GENERAL_ADMISSION.toString());
+		PersistableTicket ticket = factory.instantiateTicket();
 
 		Assert.assertSame(GeneralTicket.class, ticket.getClass());
 

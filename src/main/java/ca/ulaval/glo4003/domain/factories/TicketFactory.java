@@ -9,17 +9,16 @@ import ca.ulaval.glo4003.domain.tickets.SeatedTicket;
 import ca.ulaval.glo4003.domain.tickets.state.AssignedTicketState;
 import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 import ca.ulaval.glo4003.domain.tickets.state.UnassignedTicketState;
-import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 
 @Component
 public class TicketFactory {
 
 	public PersistableTicket instantiateTicket() {
-		return instantiateTicket(new TicketDto(null, null, 0, 0, null, null, TicketKind.GENERAL_ADMISSION.toString()));
+		return instantiateTicket(new TicketDto(null, null, 0, 0));
 	}
 
 	public PersistableTicket instantiateTicket(String seat, String section) {
-		return instantiateTicket(new TicketDto(null, null, 0, 0, null, seat, section));
+		return instantiateTicket(new TicketDto(null, null, 0, 0, seat, section));
 	}
 
 	public PersistableTicket instantiateTicket(TicketDto data) {
@@ -30,7 +29,7 @@ public class TicketFactory {
 	}
 
 	private boolean sectionIsGeneral(String section) {
-		return section.equals(TicketKind.GENERAL_ADMISSION.toString());
+		return section == null;
 	}
 
 	private TicketAssignationState createAssignationState(TicketDto data) {
