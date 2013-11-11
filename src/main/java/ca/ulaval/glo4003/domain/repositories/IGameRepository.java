@@ -9,6 +9,7 @@ import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 public interface IGameRepository {
 
@@ -18,6 +19,6 @@ public interface IGameRepository {
 
 	Game recoverGame(String aSport, DateTime a_DATE);
 
-	public void commit() throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException;
+	public void commit() throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException;
 
 }

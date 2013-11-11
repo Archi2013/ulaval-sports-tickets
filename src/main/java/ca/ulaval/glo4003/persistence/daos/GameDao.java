@@ -18,5 +18,7 @@ public interface GameDao {
 
 	public void add(GameDto game) throws GameAlreadyExistException;
 
-	public void saveChanges(GameDto game) throws GameDoesntExistException;
+	public void commit();
+
+	public void update(GameDto dto) throws GameDoesntExistException;
 }

@@ -12,48 +12,54 @@ import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 public class XmlSportDaoIT {
 	private XmlSportDao sportDao;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		sportDao = new XmlSportDao("/BasicData.xml");
+		sportDao = new XmlSportDao("resources/SportData.xml");
+
+		sportDao.add(new SportDto("Soccer-Masculin"));
+		sportDao.add(new SportDto("Soccer-Féminin"));
+		sportDao.add(new SportDto("Rugby-Féminin"));
+		sportDao.add(new SportDto("Football"));
 	}
-	
+
 	@Test
 	public void testGet() throws Exception {
-		String sportName = "Hockey-Masculin";
+		String sportName = "Soccer-Masculin";
 		SportDto sport = sportDao.get(sportName);
 		Assert.assertEquals(sportName, sport.getName());
 	}
-	
+
 	@Test
 	public void testGetAll() throws Exception {
 		List<SportDto> sports = sportDao.getAll();
-		Assert.assertEquals(3, sports.size());
-		Assert.assertEquals("Hockey-Masculin", sports.get(0).getName());
-		Assert.assertEquals("Baseball-Masculin", sports.get(1).getName());
-		Assert.assertEquals("Volleyball-Feminin", sports.get(2).getName());
+		Assert.assertEquals(4, sports.size());
+		Assert.assertEquals("Soccer-Masculin", sports.get(0).getName());
+		Assert.assertEquals("Soccer-Féminin", sports.get(1).getName());
+		Assert.assertEquals("Rugby-Féminin", sports.get(2).getName());
+		Assert.assertEquals("Football", sports.get(3).getName());
 	}
-	
-	@Test(expected=SportDoesntExistException.class)
+
+	@Test(expected = SportDoesntExistException.class)
 	public void testGetInvalidSportShouldThrow() throws Exception {
 		sportDao.get("Natation");
 	}
-	
+
 	@Test
 	public void testAddDto() throws Exception {
 		SportDto toAdd = new SportDto("Football américain");
-		
+
 		sportDao.add(toAdd);
-		
+
 		List<SportDto> sports = sportDao.getAll();
-		Assert.assertEquals(4, sports.size());
-		Assert.assertEquals("Football américain", sports.get(3).getName());
+		Assert.assertEquals(5, sports.size());
+		Assert.assertEquals("Football américain", sports.get(4).getName());
 	}
-	
-	@Test(expected=SportAlreadyExistException.class)
+
+	@Test(expected = SportAlreadyExistException.class)
 	public void testAddExistingShouldThrow() throws Exception {
-		SportDto toAdd = new SportDto("Hockey-Masculin");
-		
+		SportDto toAdd = new SportDto("Soccer-Masculin");
+
 		sportDao.add(toAdd);
 	}
 }

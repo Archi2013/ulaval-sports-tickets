@@ -15,9 +15,11 @@ import ca.ulaval.glo4003.domain.pojos.persistable.Persistable;
 import ca.ulaval.glo4003.domain.pojos.persistable.PersistableSport;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.SportAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @Repository
 public class SportRepository implements ISportRepository {
@@ -43,13 +45,17 @@ public class SportRepository implements ISportRepository {
 
 	@Override
 	public void commit() throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
-			TicketAlreadyExistException {
+			TicketAlreadyExistException, TicketDoesntExistException {
 		gameRepository.commit();
 
 		for (Persistable<SportDto> sport : activeSports) {
-			sportDao.saveChanges(sport.saveDataInDTO());
+			try {
+				sportDao.add(sport.saveDataInDTO());
+			} catch (SportAlreadyExistException e) {
+				// Sport Already Exist
+			}
 		}
-
+		sportDao.commit();
 	}
 
 }

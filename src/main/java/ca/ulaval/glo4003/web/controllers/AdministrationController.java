@@ -23,6 +23,7 @@ import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 import ca.ulaval.glo4003.web.viewmodels.GameToAddViewModel;
 import ca.ulaval.glo4003.web.viewmodels.GeneralTicketsToAddViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SeatedTicketsToAddViewModel;
@@ -110,7 +111,7 @@ public class AdministrationController {
 			gameService.createNewGame(gameToAddVM.getSport(), gameToAddVM.getOpponents(),
 					dateParser.parseDate(gameToAddVM.getDate()));
 		} catch (SportDoesntExistException | GameDoesntExistException | GameAlreadyExistException
-				| NoSportForUrlException | TicketAlreadyExistException e) {
+				| NoSportForUrlException | TicketAlreadyExistException | TicketDoesntExistException e) {
 			e.printStackTrace();
 			return new ModelAndView("admin/game-added-data-error");
 		}

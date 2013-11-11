@@ -23,6 +23,7 @@ public class PersistableGameTest {
 	private static final String AN_OPPONENT = "Opponent";
 	private static final DateTime A_DATE = new DateTime(100);
 	private static final String A_SPORT = "sport";
+	private static final String A_LOCATION = "Stade Telus";
 	private static final String ANOTHER_SPORT = "Another sport";
 
 	private List<Ticket> tickets;
@@ -44,9 +45,9 @@ public class PersistableGameTest {
 	public void setUp() {
 		initializeTickets();
 
-		fullyInitiatedGame = new PersistableGame(AN_ID, AN_OPPONENT, A_DATE, A_SPORT);
+		fullyInitiatedGame = new PersistableGame(AN_ID, AN_OPPONENT, A_DATE, A_SPORT, A_LOCATION);
 		partlyInitiatedGame = new PersistableGame(AN_OPPONENT, A_DATE);
-		gameWithTickets = new PersistableGame(AN_ID, AN_OPPONENT, A_DATE, A_SPORT, tickets);
+		gameWithTickets = new PersistableGame(AN_ID, AN_OPPONENT, A_DATE, A_SPORT, A_LOCATION, tickets);
 
 	}
 

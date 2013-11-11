@@ -1,26 +1,22 @@
 package ca.ulaval.glo4003.persistence.xml;
 
-import java.io.InputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 import javax.xml.xpath.XPathExpressionException;
 
 public class XmlDatabase {
 
-	private static final String DEFAULT_FILE = "/BasicData.xml";
-	private String filename;
+	private static final String DEFAULT_FILE = "resources/DemoData.xml";
+	private File file;
 	private XmlExtractor extractor;
 	private static XmlDatabase instance;
 
-	/*
-	 * public XmlDatabase() { this(DEFAULT_FILE); }
-	 */
-
 	private XmlDatabase(String filename) {
-		this.filename = filename;
+		this.file = new File(filename);
 		try {
-			InputStream input = this.getClass().getResourceAsStream(filename);
-			extractor = new XmlExtractor(input);
+			extractor = new XmlExtractor(file.exists() ? new FileInputStream(file) : null);
 		} catch (Exception e) {
 			throw new XmlIntegrityException(e);
 		}
@@ -59,7 +55,7 @@ public class XmlDatabase {
 
 	public void commit() {
 		try {
-			extractor.commit(filename);
+			extractor.commit(file);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -68,12 +64,16 @@ public class XmlDatabase {
 	public int countNode(String xPath) throws XPathExpressionException {
 		return extractor.count(xPath);
 	}
-	
+
 	public int getMaxValue(String baseXPath, String idName) throws XPathExpressionException {
 		return extractor.max(baseXPath, idName);
 	}
 
 	public boolean exist(String xPath) {
 		return extractor.isNodeExist(xPath);
+	}
+
+	public void remove(String xPath) throws XPathExpressionException {
+		extractor.removeParentNode(xPath);
 	}
 }

@@ -40,6 +40,7 @@ public class XmlGameDao implements GameDao {
 
 	XmlGameDao(String filename) {
 		database = XmlDatabase.getUniqueInstance(filename);
+		nextId = null;
 	}
 
 	@Override
@@ -97,24 +98,25 @@ public class XmlGameDao implements GameDao {
 		nodes.put("oponents", game.getOpponents());
 		nodes.put("date", game.getGameDate().toString(DATE_PATTERN));
 		nodes.put("sportName", game.getSportName());
+		nodes.put("location", game.getLocation());
 		SimpleNode simpleNode = new SimpleNode("game", nodes);
 		return simpleNode;
 	}
 
 	private GameDto convertNodeToGame(SimpleNode node) throws NoSuchAttributeException, GameDoesntExistException {
-		if (node.hasNode("id", "oponents", "date", "sportName")) {
+		if (node.hasNode("id", "oponents", "date", "sportName", "location")) {
 			long id = Long.parseLong(node.getNodeValue("id"));
 			String opponents = node.getNodeValue("oponents");
 			DateTimeFormatter format = DateTimeFormat.forPattern(DATE_PATTERN);
 			DateTime gameDate = DateTime.parse(node.getNodeValue("date"), format);
 			String sportName = node.getNodeValue("sportName");
-			return new GameDto(id, opponents, gameDate, sportName);
+			String location = node.getNodeValue("location");
+			return new GameDto(id, opponents, gameDate, sportName, location);
 		}
 		throw new GameDoesntExistException();
 	}
 
-	private List<GameDto> convertNodesToGames(List<SimpleNode> nodes) throws NoSuchAttributeException,
-			GameDoesntExistException {
+	private List<GameDto> convertNodesToGames(List<SimpleNode> nodes) throws NoSuchAttributeException, GameDoesntExistException {
 		List<GameDto> games = new ArrayList<>();
 		for (SimpleNode node : nodes) {
 			games.add(convertNodeToGame(node));
@@ -123,9 +125,8 @@ public class XmlGameDao implements GameDao {
 	}
 
 	@Override
-	public void saveChanges(GameDto game) throws GameDoesntExistException {
-		// TODO Auto-generated method stub
-
+	public void commit() {
+		database.commit();
 	}
 
 	@Override
@@ -134,4 +135,17 @@ public class XmlGameDao implements GameDao {
 		return null;
 	}
 
+	@Override
+	public void update(GameDto dto) throws GameDoesntExistException {
+		String xPath = String.format(GAME_XPATH_ID, dto.getId());
+		if (!database.exist(xPath)) {
+			throw new GameDoesntExistException();
+		}
+		try {
+			database.remove(xPath);
+			add(dto);
+		} catch (XPathExpressionException | GameAlreadyExistException e) {
+			throw new XmlIntegrityException(e);
+		}
+	}
 }

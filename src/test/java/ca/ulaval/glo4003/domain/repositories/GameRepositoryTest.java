@@ -33,6 +33,7 @@ public class GameRepositoryTest {
 	private static final int ANOTHER_ID = 2345;
 	private static final String AN_OPPONENT = "Opponent";
 	private static final String ANOTHER_OPPONENT = "Another";
+	private static final String A_LOCATION = "Stade Telus";
 	private static final DateTime A_DATE = new DateTime(100);
 	private static final DateTime ANOTHER_DATE = new DateTime(125);
 	GameDto gameDto1;
@@ -120,7 +121,8 @@ public class GameRepositoryTest {
 
 		gameRepository.commit();
 
-		verify(gameDaoMock).saveChanges(gameDto1);
+		verify(gameDaoMock).update(gameDto1);
+		verify(gameDaoMock).commit();
 	}
 
 	@Test
@@ -139,8 +141,9 @@ public class GameRepositoryTest {
 		gameRepository.recoverAllGamesForSport(A_SPORT);
 		gameRepository.commit();
 
-		verify(gameDaoMock).saveChanges(gameDto1);
-		verify(gameDaoMock).saveChanges(gameDto2);
+		verify(gameDaoMock).update(gameDto1);
+		verify(gameDaoMock).update(gameDto2);
+		verify(gameDaoMock).commit();
 	}
 
 	@Test
@@ -164,8 +167,7 @@ public class GameRepositoryTest {
 
 		verify(gameDaoMock, times(1)).add(gameDto1);
 		verify(gameDaoMock, times(1)).add(gameDto2);
-		verify(gameDaoMock, times(1)).saveChanges(gameDto1);
-		verify(gameDaoMock, times(1)).saveChanges(gameDto2);
+		verify(gameDaoMock, times(2)).commit();
 	}
 
 	@Test
@@ -177,7 +179,7 @@ public class GameRepositoryTest {
 		gameRepository.commit();
 		gameRepository.commit();
 
-		verify(gameDaoMock, times(2)).saveChanges(gameDto1);
+		verify(gameDaoMock, times(2)).commit();
 		verify(gameDaoMock, times(1)).add(gameDto2);
 		verify(gameDaoMock, times(1)).add(gameDto2);
 
@@ -191,8 +193,8 @@ public class GameRepositoryTest {
 	}
 
 	private void setUpListsOfDtos() {
-		gameDto1 = new GameDto(AN_ID, AN_OPPONENT, A_DATE, A_SPORT);
-		gameDto2 = new GameDto(ANOTHER_ID, ANOTHER_OPPONENT, ANOTHER_DATE, A_SPORT);
+		gameDto1 = new GameDto(AN_ID, AN_OPPONENT, A_DATE, A_SPORT, A_LOCATION);
+		gameDto2 = new GameDto(ANOTHER_ID, ANOTHER_OPPONENT, ANOTHER_DATE, A_SPORT, A_LOCATION);
 		listWithOneGameDto = new ArrayList<>();
 		listWithOneGameDto.add(gameDto1);
 		listWithTwoGameDtos = new ArrayList<>();

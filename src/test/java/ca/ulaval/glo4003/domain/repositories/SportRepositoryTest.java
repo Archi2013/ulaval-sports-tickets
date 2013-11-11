@@ -82,6 +82,6 @@ public class SportRepositoryTest {
 
 		repository.commit();
 
-		verify(sportDao).saveChanges(sportDto);
+		verify(sportDao).add(sportDto);
 	}
 }

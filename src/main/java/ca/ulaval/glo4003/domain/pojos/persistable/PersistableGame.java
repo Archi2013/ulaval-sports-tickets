@@ -10,38 +10,43 @@ import ca.ulaval.glo4003.domain.tickets.Ticket;
 
 public class PersistableGame implements Game, Persistable<GameDto> {
 	public static final String NO_SPORT_SET = "The sport has not yet been set in this new game";
+	public static final String NO_LOCATION_SET = "The location has not yet been set in this new game";
 	public static final Long DEFAULT_ID = null;
 	private Long id;
 	private String opponents;
 	private DateTime gameDate;
 	private String sportName;
+	private String location;
 	private List<Ticket> tickets;
 
-	public PersistableGame(long id, String opponents, DateTime gameDate, String sportName) {
+	public PersistableGame(long id, String opponents, DateTime gameDate, String sportName, String location) {
 		this.id = id;
 		this.opponents = opponents;
 		this.gameDate = gameDate;
 		this.sportName = sportName;
+		this.location = location;
 	}
 
 	public PersistableGame(String opponents, DateTime gameDate) {
 		this.id = DEFAULT_ID;
 		this.opponents = opponents;
 		this.gameDate = gameDate;
+		this.location = NO_LOCATION_SET;
 		this.sportName = NO_SPORT_SET;
 	}
 
-	public PersistableGame(Long id, String opponents, DateTime gameDate, String sportName, List<Ticket> tickets) {
+	public PersistableGame(Long id, String opponents, DateTime gameDate, String sportName, String location, List<Ticket> tickets) {
 		this.id = id;
 		this.opponents = opponents;
 		this.gameDate = gameDate;
 		this.sportName = sportName;
+		this.location = location;
 		this.tickets = tickets;
 	}
 
 	@Override
 	public GameDto saveDataInDTO() {
-		return new GameDto(id, opponents, gameDate, sportName);
+		return new GameDto(id, opponents, gameDate, sportName, location);
 	}
 
 	@Override

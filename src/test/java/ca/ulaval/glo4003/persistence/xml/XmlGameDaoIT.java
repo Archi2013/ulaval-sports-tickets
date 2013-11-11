@@ -19,19 +19,23 @@ public class XmlGameDaoIT {
 	private static final DateTime SOME_DATE = DateTime.parse("2013/12/12 18:30 EST", DATE_TIME_FORMAT);
 
 	private XmlGameDao gameDao;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		gameDao = new XmlGameDao("/BasicData.xml");
+		gameDao = new XmlGameDao("resources/GameData.xml");
+		gameDao.add(new GameDto(null, "Dinos de Calgary", SOME_DATE, "Football", "Stade TELUS-UL"));
+		gameDao.add(new GameDto(null, "Redmen de McGill", SOME_DATE, "Football", "Stade TELUS-UL"));
+		gameDao.add(new GameDto(null, "McGill", SOME_DATE, "Soccer-Masculin", "Montréal"));
+		gameDao.add(new GameDto(null, "Ottawa", SOME_DATE, "Rugby-Féminin", "Stade TELUS-UL"));
 	}
 
 	@Test
 	public void testGetGamesForSport() throws Exception {
-		List<GameDto> ids = gameDao.getGamesForSport("Hockey-Masculin");
+		List<GameDto> ids = gameDao.getGamesForSport("Football");
 		Assert.assertEquals(2, ids.size());
 
-		GameDto expected0 = new GameDto(1, "Carabins", SOME_DATE, "Hockey-Masculin");
-		GameDto expected1 = new GameDto(2, "Redmen", SOME_DATE, "Hockey-Masculin");
+		GameDto expected0 = new GameDto(1, "Dinos de Calgary", SOME_DATE, "Football", "Stade TELUS-UL");
+		GameDto expected1 = new GameDto(2, "Redmen de McGill", SOME_DATE, "Football", "Stade TELUS-UL");
 
 		assertGame(expected0, ids.get(0));
 		assertGame(expected1, ids.get(1));
@@ -39,11 +43,11 @@ public class XmlGameDaoIT {
 
 	@Test
 	public void testAddDto() throws Exception {
-		GameDto toAdd = new GameDto(43L, "Vert et Or", SOME_DATE, "Hockey-Masculin");
+		GameDto toAdd = new GameDto(5L, "McGill", SOME_DATE, "Soccer-Masculin", "Montréal");
 
 		gameDao.add(toAdd);
 
-		GameDto actual = gameDao.get(43L);
+		GameDto actual = gameDao.get(5L);
 		GameDto expected = toAdd;
 
 		assertGame(expected, actual);
@@ -51,7 +55,7 @@ public class XmlGameDaoIT {
 
 	@Test(expected = GameAlreadyExistException.class)
 	public void testAddExistingShouldThrow() throws Exception {
-		GameDto toAdd = new GameDto(1, "Carabins", SOME_DATE, "Hockey-Masculin");
+		GameDto toAdd = new GameDto(1, "Carabins", SOME_DATE, "Hockey-Masculin", "");
 
 		gameDao.add(toAdd);
 	}

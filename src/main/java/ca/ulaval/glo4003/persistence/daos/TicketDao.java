@@ -24,8 +24,10 @@ public interface TicketDao {
 
 	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate);
 
-	public void saveChanges(TicketDto firstTicketData);
+	public void update(TicketDto firstTicketData) throws TicketDoesntExistException;
 
 	public void endTransaction();
+
+	public void commit();
 
 }

@@ -1,8 +1,12 @@
 package ca.ulaval.glo4003.persistence.xml;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.naming.directory.NoSuchAttributeException;
@@ -19,8 +23,11 @@ import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 @Component
 public class XmlSectionDao implements SectionDao {
 
-	// @Inject
+	private static final String VIP_KEYWORD = "VIP";
+	private static final String GENERAL_KEYWORD = "Générale";
+
 	private XmlDatabase database;
+	private Map<Long, Set<String>> sectionCache;
 
 	public XmlSectionDao() {
 		database = XmlDatabase.getInstance();
@@ -41,7 +48,7 @@ public class XmlSectionDao implements SectionDao {
 			}
 			String price = database.extractPath(xPath + "/price");
 			String admissionType = database.extractPath(xPath + "/type");
-			
+
 			// TODO à remplacer par des vrais sièges
 			List<String> seats = new ArrayList<>();
 			seats.add("2A");
@@ -57,43 +64,71 @@ public class XmlSectionDao implements SectionDao {
 
 	@Override
 	public List<SectionDto> getAll(Long gameId) throws GameDoesntExistException {
-		String xPath = "/base/games-sections/game-section[@gameID=\"" + gameId + "\"]/sections/section";
-
 		try {
-			List<SimpleNode> nodes = database.extractNodeSet(xPath);
-			return convertNodesToSectionDtos(gameId, nodes);
-		} catch (XPathExpressionException | SectionDoesntExistException | NoSuchAttributeException e) {
+			Set<String> sections = getSections(gameId);
+			return convertToSectionDtos(gameId, sections);
+		} catch (SectionDoesntExistException | NoSuchAttributeException e) {
 			throw new XmlIntegrityException(e);
 		}
 	}
 
 	@Override
 	public Set<TicketType> getAllTicketTypes() {
+		if (sectionCache == null) {
+			initCache();
+		}
+		Set<String> sections = new HashSet<>();
+		for (Set<String> section : sectionCache.values()) {
+			sections.addAll(section);
+		}
 		Set<TicketType> ticketTypes = new HashSet<>();
-		ticketTypes.add(new TicketType("VIP", "Loge Nord-Est"));
-		ticketTypes.add(new TicketType("VIP", "Loge Sud-Est"));
-		ticketTypes.add(new TicketType("VIP", "Front Row"));
-		ticketTypes.add(new TicketType("VIP", "Rouges"));
-		ticketTypes.add(new TicketType("VIP", "Indigo"));
-		ticketTypes.add(new TicketType("VIP", "Poupres"));
-		ticketTypes.add(new TicketType("VIP", "Bordeaux"));
-		ticketTypes.add(new TicketType("VIP", "Loge A"));
-		ticketTypes.add(new TicketType("VIP", "Loge B"));
-		ticketTypes.add(new TicketType("VIP", "Loge C"));
-		ticketTypes.add(new TicketType("VIP", "Loge E"));
-		ticketTypes.add(new TicketType("Générale", "Générale"));
-		ticketTypes.add(new TicketType("Générale", "Cyan"));
-		ticketTypes.add(new TicketType("Générale", "Indigo"));
+		for (String section : sections) {
+			String admissionType = GENERAL_KEYWORD.equals(section) ? GENERAL_KEYWORD : VIP_KEYWORD;
+			ticketTypes.add(new TicketType(admissionType, section));
+		}
 		return ticketTypes;
 	}
-	
-	private List<SectionDto> convertNodesToSectionDtos(Long gameId, List<SimpleNode> nodes)
-			throws SectionDoesntExistException, NoSuchAttributeException {
+
+	private List<SectionDto> convertToSectionDtos(Long gameId, Set<String> sectionNames) throws SectionDoesntExistException,
+			NoSuchAttributeException {
 		List<SectionDto> sections = new ArrayList<>();
-		for (SimpleNode node : nodes) {
-			SectionDto section = get(gameId, node.getNodeValue("name"));
+		for (String sectionName : sectionNames) {
+			SectionDto section = get(gameId, sectionName);
 			sections.add(section);
 		}
 		return sections;
+	}
+
+	private Set<String> getSections(Long gameId) throws SectionDoesntExistException {
+		if (sectionCache == null) {
+			initCache();
+		}
+		if (sectionCache.containsKey(gameId)) {
+			return sectionCache.get(gameId);
+		}
+		throw new SectionDoesntExistException();
+	}
+
+	private synchronized void initCache() {
+		sectionCache = Collections.synchronizedMap(new HashMap<Long, Set<String>>());
+
+		String xPath = String.format("/base/tickets/ticket");
+		try {
+			List<SimpleNode> nodes = database.extractNodeSet(xPath);
+			for (SimpleNode node : nodes) {
+				putSectionInCache(node);
+			}
+		} catch (XPathExpressionException | NoSuchAttributeException e) {
+			throw new XmlIntegrityException(e);
+		}
+	}
+
+	private void putSectionInCache(SimpleNode node) throws NoSuchAttributeException {
+		Long gameId = Long.parseLong(node.getNodeValue("gameID"));
+		if (!sectionCache.containsKey(gameId)) {
+			sectionCache.put(gameId, new LinkedHashSet<String>());
+		}
+		Set<String> sections = sectionCache.get(gameId);
+		sections.add(node.getNodeValue("section"));
 	}
 }

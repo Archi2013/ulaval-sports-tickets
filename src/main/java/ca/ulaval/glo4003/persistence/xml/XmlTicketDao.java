@@ -27,7 +27,6 @@ public class XmlTicketDao implements TicketDao {
 	private final static String TICKET_XPATH_GAME_ID = TICKET_XPATH + "[gameID=\"%s\"]";
 	private final static String TICKET_XPATH_SECTION = TICKET_XPATH_GAME_ID + "[section=\"%s\"]";
 
-	// @Inject
 	private XmlDatabase database;
 
 	public XmlTicketDao() {
@@ -120,8 +119,7 @@ public class XmlTicketDao implements TicketDao {
 		throw new TicketDoesntExistException();
 	}
 
-	private List<TicketDto> convertNodesToTickets(List<SimpleNode> nodes) throws NoSuchAttributeException,
-			TicketDoesntExistException {
+	private List<TicketDto> convertNodesToTickets(List<SimpleNode> nodes) throws NoSuchAttributeException, TicketDoesntExistException {
 		List<TicketDto> tickets = new ArrayList<>();
 		for (SimpleNode node : nodes) {
 			tickets.add(convertNodeToTicket(node));
@@ -148,15 +146,28 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	@Override
-	public void saveChanges(TicketDto firstTicketData) {
-		// TODO Auto-generated method stub
-
+	public void update(TicketDto dto) throws TicketDoesntExistException {
+		String xPath = String.format(TICKET_XPATH_ID, dto.getTicketId());
+		if (!database.exist(xPath)) {
+			throw new TicketDoesntExistException();
+		}
+		try {
+			database.remove(xPath);
+			add(dto);
+		} catch (XPathExpressionException | TicketAlreadyExistException e) {
+			throw new XmlIntegrityException(e);
+		}
 	}
 
 	@Override
 	public void endTransaction() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void commit() {
+		database.commit();
 	}
 
 }

@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 
 import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 public interface ITicketRepository {
 
@@ -19,6 +20,6 @@ public interface ITicketRepository {
 
 	List<Ticket> recoverAllTicketsForGame(String sport, DateTime Date);
 
-	void commit() throws TicketAlreadyExistException;
+	void commit() throws TicketAlreadyExistException, TicketDoesntExistException;
 
 }

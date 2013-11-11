@@ -20,7 +20,6 @@ import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.factories.TicketFactory;
 import ca.ulaval.glo4003.domain.tickets.PersistableTicket;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketDao;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -102,7 +101,7 @@ public class TicketRepositoryTest {
 	}
 
 	@Test
-	public void commit_adds_the_new_tickets_to_the_dao() throws TicketAlreadyExistException {
+	public void commit_adds_the_new_tickets_to_the_dao() throws Exception {
 		repository.instantiateNewTicket();
 		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION);
 		repository.commit();
@@ -112,7 +111,7 @@ public class TicketRepositoryTest {
 	}
 
 	@Test
-	public void after_two_commits_new_tickets_are_added_only_once() throws TicketAlreadyExistException {
+	public void after_two_commits_new_tickets_are_added_only_once() throws Exception {
 		repository.instantiateNewTicket();
 		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION);
 		repository.commit();
@@ -123,37 +122,40 @@ public class TicketRepositoryTest {
 	}
 
 	@Test
-	public void commit_save_changes_of_single_recovered_tickets_to_dao() throws TicketAlreadyExistException {
+	public void commit_save_changes_of_single_recovered_tickets_to_dao() throws Exception {
 		repository.recoverTicket(A_SPORT, A_DATE, A_TICKET_NUMBER);
 		repository.commit();
 
-		verify(ticketDao).saveChanges(firstTicketData);
+		verify(ticketDao).update(firstTicketData);
+		verify(ticketDao, times(1)).commit();
 	}
 
 	@Test
-	public void commit_save_changes_of_group_of_recovered_tickets_to_dao() throws TicketAlreadyExistException {
+	public void commit_save_changes_of_group_of_recovered_tickets_to_dao() throws Exception {
 		repository.recoverAllTicketsForGame(A_SPORT, A_DATE);
 		repository.commit();
 
-		verify(ticketDao).saveChanges(firstTicketData);
-		verify(ticketDao).saveChanges(secondTicketData);
+		verify(ticketDao).update(firstTicketData);
+		verify(ticketDao).update(secondTicketData);
+		verify(ticketDao, times(1)).commit();
 	}
 
 	@Test
 	public void after_new_tickets_have_been_added_to_dao_other_commits_save_changes()
-			throws TicketAlreadyExistException {
+			throws Exception {
 		repository.instantiateNewTicket();
 		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION);
 
 		repository.commit();
 		repository.commit();
 
-		verify(ticketDao, times(1)).saveChanges(firstTicketData);
-		verify(ticketDao, times(1)).saveChanges(secondTicketData);
+		verify(ticketDao, times(1)).update(firstTicketData);
+		verify(ticketDao, times(1)).update(secondTicketData);
+		verify(ticketDao, times(2)).commit();
 	}
 
 	@Test
-	public void commit_notify_dao_of_transaction_end() throws TicketAlreadyExistException {
+	public void commit_notify_dao_of_transaction_end() throws Exception {
 		repository.commit();
 
 		verify(ticketDao, times(1)).endTransaction();

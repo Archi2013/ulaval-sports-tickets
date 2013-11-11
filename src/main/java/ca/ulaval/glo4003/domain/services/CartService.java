@@ -12,6 +12,7 @@ import ca.ulaval.glo4003.domain.utilities.payment.Cart;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @Service
 public class CartService {
@@ -27,7 +28,7 @@ public class CartService {
 
 			ticketService.makeTicketsUnavailable(game, section, seats);
 
-		} catch (GameDoesntExistException | GameAlreadyExistException | TicketAlreadyExistException e) {
+		} catch (GameDoesntExistException | GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException e) {
 			// TODO Do nothing for now
 		}
 	}

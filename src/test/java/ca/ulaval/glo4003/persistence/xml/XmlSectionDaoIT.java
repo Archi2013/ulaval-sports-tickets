@@ -11,49 +11,47 @@ import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 
 public class XmlSectionDaoIT {
-	
+
 	private XmlSectionDao sectionDao;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		sectionDao = new XmlSectionDao("/BasicData.xml");
+		sectionDao = new XmlSectionDao("resources/SectionData.xml");
 	}
-	
+
 	@Test
 	public void testGetSection() throws Exception {
-		SectionDto actual = sectionDao.get(1L, "Front Row");
-		
-		List<String> seats = new ArrayList();
-		
-		SectionDto expected = new SectionDto("VIP", "Front Row", 2, 35.00f, seats);
+		SectionDto actual = sectionDao.get(2L, "Section 100");
+
+		List<String> seats = new ArrayList<>();
+
+		SectionDto expected = new SectionDto("VIP", "Section 100", 2, 22.00f, seats);
 		assertSection(expected, actual);
 	}
-	
+
 	@Test
 	public void testGetAllSections() throws Exception {
-		List<SectionDto> sections = sectionDao.getAll(1L);
-		
-		List<String> seats = new ArrayList();
-		
-		SectionDto expected0 = new SectionDto("VIP", "Front Row", 2, 35.00f, seats);
-		SectionDto expected1 = new SectionDto("Générale", "Générale", 2, 15.50f, seats);
-		SectionDto expected2 = new SectionDto("VIP", "Rouges", 5, 20.00f, seats);
-		
-		Assert.assertEquals(3, sections.size());
-		
+		List<SectionDto> sections = sectionDao.getAll(2L);
+
+		List<String> seats = new ArrayList<>();
+
+		SectionDto expected0 = new SectionDto("Générale", "Générale", 4, 15.00f, seats);
+		SectionDto expected1 = new SectionDto("VIP", "Section 100", 2, 22.00f, seats);
+
+		Assert.assertEquals(2, sections.size());
+
 		assertSection(expected0, sections.get(0));
 		assertSection(expected1, sections.get(1));
-		assertSection(expected2, sections.get(2));
 	}
-	
-	@Test(expected=SectionDoesntExistException.class)
+
+	@Test(expected = SectionDoesntExistException.class)
 	public void testGetInvalidGameSectionShouldThrow() throws Exception {
 		sectionDao.get(-1L, "Générale");
 	}
-	
-	@Test(expected=SectionDoesntExistException.class)
+
+	@Test(expected = SectionDoesntExistException.class)
 	public void testGetInvalidSectionShouldThrow() throws Exception {
-		sectionDao.get(1L, "Indigo");
+		sectionDao.get(2L, "Indigo");
 	}
 
 	private void assertSection(SectionDto expected, SectionDto actual) {
@@ -61,7 +59,7 @@ public class XmlSectionDaoIT {
 		Assert.assertEquals(expected.getAdmissionType(), actual.getAdmissionType());
 		Assert.assertEquals(expected.getSectionName(), actual.getSectionName());
 		Assert.assertEquals(expected.getNumberOfTickets(), actual.getNumberOfTickets());
-		//Assert.assertEquals(expected.getSeats(), actual.getSeats());
+		// Assert.assertEquals(expected.getSeats(), actual.getSeats());
 	}
 
 }

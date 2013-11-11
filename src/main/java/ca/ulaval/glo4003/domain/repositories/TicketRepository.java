@@ -13,6 +13,7 @@ import ca.ulaval.glo4003.domain.tickets.PersistableTicket;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketDao;
+import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @Repository
 public class TicketRepository implements ITicketRepository {
@@ -78,7 +79,7 @@ public class TicketRepository implements ITicketRepository {
 	}
 
 	@Override
-	public void commit() throws TicketAlreadyExistException {
+	public void commit() throws TicketAlreadyExistException, TicketDoesntExistException {
 		saveChangesToOldTickets();
 		persistsNewTickets();
 		dao.endTransaction();
@@ -92,10 +93,11 @@ public class TicketRepository implements ITicketRepository {
 		newTickets.clear();
 	}
 
-	private void saveChangesToOldTickets() {
+	private void saveChangesToOldTickets() throws TicketDoesntExistException {
 		for (Persistable<TicketDto> ticket : oldTickets) {
-			dao.saveChanges(ticket.saveDataInDTO());
+			dao.update(ticket.saveDataInDTO());
 		}
+		dao.commit();
 	}
 
 }

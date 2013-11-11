@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.persistence.xml;
 
-import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Lists.transform;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,12 +12,12 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.springframework.stereotype.Component;
 
-import com.google.common.base.Function;
-
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.persistence.daos.SportAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+
+import com.google.common.base.Function;
 
 @Component
 public class XmlSportDao implements SportDao {
@@ -46,7 +46,7 @@ public class XmlSportDao implements SportDao {
 			throw new XmlIntegrityException(e);
 		}
 	}
-	
+
 	@Override
 	public List<String> getAllSportNames() {
 		List<SportDto> sports = getAll();
@@ -88,8 +88,7 @@ public class XmlSportDao implements SportDao {
 		return database.exist(xPath);
 	}
 
-	private List<SportDto> convertNodesToSports(List<SimpleNode> nodes) throws NoSuchAttributeException,
-			SportDoesntExistException {
+	private List<SportDto> convertNodesToSports(List<SimpleNode> nodes) throws NoSuchAttributeException, SportDoesntExistException {
 		List<SportDto> sports = new ArrayList<>();
 		for (SimpleNode node : nodes) {
 			sports.add(convertNodeToSport(node));
@@ -111,8 +110,7 @@ public class XmlSportDao implements SportDao {
 	}
 
 	@Override
-	public void saveChanges(SportDto sport) throws SportDoesntExistException {
-		// TODO Auto-generated method stub
-
+	public void commit() {
+		database.commit();
 	}
 }

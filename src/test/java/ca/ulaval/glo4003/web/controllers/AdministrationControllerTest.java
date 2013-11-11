@@ -21,12 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ca.ulaval.glo4003.domain.services.CommandGameService;
 import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.domain.utilities.DateParser;
-import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
 import ca.ulaval.glo4003.domain.utilities.user.User;
-import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 import ca.ulaval.glo4003.web.viewmodels.GameToAddViewModel;
 import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
 
@@ -143,8 +139,7 @@ public class AdministrationControllerTest {
 	}
 
 	@Test
-	public void addGame_returns_error_view_if_service_throws_exception() throws SportDoesntExistException,
-			GameDoesntExistException, GameAlreadyExistException, NoSportForUrlException, TicketAlreadyExistException {
+	public void addGame_returns_error_view_if_service_throws_exception() throws Exception {
 		doThrow(new SportDoesntExistException()).when(gameService).createNewGame(any(String.class), any(String.class),
 				any(DateTime.class));
 		ModelAndView mav = controller.addGame(gameToAddVM);

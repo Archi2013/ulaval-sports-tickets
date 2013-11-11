@@ -39,12 +39,12 @@ public class SportConverterTest {
 	@Before
 	public void setUp() {
 		sportDto1 = new SportDto(SPORT_NAME1);
-		sportDto1.getGames().add(new GameDto(1, "", DateTime.now(), ""));
-		sportDto1.getGames().add(new GameDto(2, "", DateTime.now().plusDays(3), ""));
+		sportDto1.getGames().add(new GameDto(1, "", DateTime.now(), "", ""));
+		sportDto1.getGames().add(new GameDto(2, "", DateTime.now().plusDays(3), "", ""));
 
 		sportDto2 = new SportDto(SPORT_NAME2);
-		sportDto2.getGames().add(new GameDto(1, "", DateTime.now().plusDays(10), ""));
-		sportDto2.getGames().add(new GameDto(2, "", DateTime.now().plusDays(1), ""));
+		sportDto2.getGames().add(new GameDto(1, "", DateTime.now().plusDays(10), "", ""));
+		sportDto2.getGames().add(new GameDto(2, "", DateTime.now().plusDays(1), "", ""));
 
 		sportDtos = newArrayList();
 		sportDtos.add(sportDto1);

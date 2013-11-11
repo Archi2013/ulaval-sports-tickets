@@ -47,9 +47,10 @@ public class XmlExtractorTest {
 		assertEquals(expected, result);
 	}
 
-	@Test(expected = Exception.class)
-	public void testInvalidXmlShouldThrow() throws Exception {
+	@Test
+	public void testEmptyXmlShouldCreate() throws Exception {
 		extractor = new XmlExtractor(null);
+		assertEquals(1, extractor.count("/"));
 	}
 
 	@Test
@@ -70,47 +71,47 @@ public class XmlExtractorTest {
 	@Test
 	public void testCreateNode() throws Exception {
 		extractor.createNode(ITEMS_XPATH, initSimpleNode());
-		
+
 		String result = extractor.extractPath(PANTALON_PRICE_XPATH);
 		String expected = "19.99";
-		
+
 		assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void testCountNodeWithFilter() throws Exception {
 		int result = extractor.count(CHEMISE_XPATH);
 		int expected = 1;
 		assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void testCountNode() throws Exception {
 		int result = extractor.count(ITEM_XPATH);
 		int expected = 2;
 		assertEquals(expected, result);
 	}
-	
+
 	@Test
 	public void testNodeExistWithExistingEntry() throws Exception {
 		boolean result = extractor.isNodeExist(CHEMISE_XPATH);
 		Assert.assertTrue(result);
 	}
-	
+
 	@Test
 	public void testNodeExistWithMissingEntry() throws Exception {
 		boolean result = extractor.isNodeExist(PANTALON_XPATH);
 		Assert.assertFalse(result);
 	}
-	
+
 	@Test
 	public void testMaxValue() throws Exception {
 		int actual = extractor.max(ITEM_XPATH, "id");
 		int expected = 2;
-		
+
 		Assert.assertEquals(expected, actual);
 	}
-	
+
 	private SimpleNode initSimpleNode() {
 		Map<String, String> map = new HashMap<>();
 		map.put("Nom", "Pantalon");
