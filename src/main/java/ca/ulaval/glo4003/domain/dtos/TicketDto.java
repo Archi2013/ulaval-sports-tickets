@@ -13,15 +13,6 @@ public class TicketDto {
 	public DateTime gameDate;
 	public int ticketNumber;
 	public boolean available;
-
-	public TicketDto(String sportName, DateTime gameDate, int ticketNumber, double price, boolean available) {
-		this.sportName = sportName;
-
-		this.gameDate = gameDate;
-		this.ticketNumber = ticketNumber;
-		this.price = price;
-		this.available = available;
-	}
 	
 	public TicketDto(String sportName, String section, DateTime gameDate, int ticketNumber, double price, boolean available) {
 		this.sportName = sportName;
