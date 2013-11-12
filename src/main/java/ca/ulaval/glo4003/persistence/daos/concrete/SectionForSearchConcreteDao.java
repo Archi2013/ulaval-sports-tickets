@@ -12,12 +12,14 @@ import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.domain.dtos.SectionForSearchDto;
 import ca.ulaval.glo4003.domain.dtos.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionForSearchDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -36,13 +38,25 @@ class SectionForSearchConcreteDao implements SectionForSearchDao {
 		List<SectionForSearchDto> sectionFSDtos = createFullListForSelectedSports(sportNames);
 		
 		final Boolean localGameOnly = ticketSearchPreferenceDto.isLocalGameOnly();
+		final List<TicketKind> ticketKinds = transform(ticketSearchPreferenceDto.getSelectedTicketKinds(), new Function<String, TicketKind>() {
+			@Override
+			public TicketKind apply(String ticketKind) {
+				return TicketKind.valueOf(ticketKind);
+			}
+		});
 		
 		sectionFSDtos = newArrayList(Iterables.filter(sectionFSDtos, new Predicate<SectionForSearchDto>() {
 
 			@Override
 			public boolean apply(SectionForSearchDto sectionFSDto) {
 				Boolean localGameCriterion = (sectionFSDto.isLocalGame() || !localGameOnly);
-				return localGameCriterion;
+				Boolean ticketKindCriterion = false;
+				if (sectionFSDto.isGeneralAdmission()) {
+					ticketKindCriterion = ticketKinds.contains(TicketKind.GENERAL_ADMISSION);
+				} else {
+					ticketKindCriterion = ticketKinds.contains(TicketKind.WITH_SEAT);
+				}
+				return localGameCriterion && ticketKindCriterion;
 			}
 		}));
 		return sectionFSDtos;

@@ -31,6 +31,10 @@ public class SectionForSearchDto {
 				sectionDto.getNumberOfTickets(), sectionDto.getPrice(), url);
 	}
 
+	public boolean isGeneralAdmission() {
+		return section == null;
+	}
+	
 	public Boolean isLocalGame() {
 		return this.location.equals("Stade TELUS-UL") || this.location.equals("PEPS Terrain 6");
 	}

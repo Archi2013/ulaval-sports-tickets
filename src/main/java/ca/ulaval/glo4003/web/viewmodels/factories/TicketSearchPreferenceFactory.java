@@ -1,11 +1,15 @@
 package ca.ulaval.glo4003.web.viewmodels.factories;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
+
+import com.google.common.base.Function;
 
 import ca.ulaval.glo4003.domain.dtos.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.utilities.Constants;
@@ -20,21 +24,29 @@ public class TicketSearchPreferenceFactory {
 	private Constants constants;
 	
 	public TicketSearchPreferenceDto createPreferenceDto(TicketSearchViewModel ticketSVM) {
-		List<String> selectedTicketKinds = new ArrayList<>();
-		for (TicketKind ticketKind : ticketSVM.getSelectedTicketKinds()) {
-			selectedTicketKinds.add(ticketKind.name());
+		List<TicketKind> selectedTicketKinds = ticketSVM.getSelectedTicketKinds();
+		List<String> selectedTicketKindsString = newArrayList();
+		if (selectedTicketKinds != null) {
+			selectedTicketKindsString = transform(selectedTicketKinds, new Function<TicketKind, String>() {
+				@Override
+				public String apply(TicketKind ticketKind) {
+					return ticketKind.name();
+				}
+			});
 		}
 		TicketSearchPreferenceDto ticketSPDto = new TicketSearchPreferenceDto(ticketSVM.getSelectedSports(), ticketSVM.getDisplayedPeriod().name(),
-				ticketSVM.isLocalGameOnly(), selectedTicketKinds);
+				ticketSVM.isLocalGameOnly(), selectedTicketKindsString);
 		return ticketSPDto;
 	}
 	
 	public TicketSearchViewModel createViewModel(TicketSearchPreferenceDto ticketSPDto) {
 		DisplayedPeriod displayPeriod = DisplayedPeriod.valueOf(ticketSPDto.getDisplayedPeriod());
-		List<TicketKind> selectedTicketKinds = new ArrayList<>();
-		for (String ticketKind : ticketSPDto.getSelectedTicketKinds()) {
-			selectedTicketKinds.add(TicketKind.valueOf(ticketKind));
-		}
+		List<TicketKind> selectedTicketKinds = transform(ticketSPDto.getSelectedTicketKinds(), new Function<String, TicketKind>() {
+			@Override
+			public TicketKind apply(String ticketKind) {
+				return TicketKind.valueOf(ticketKind);
+			}
+		});
 		
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
 		ticketSearchVM.setSelectedSports(ticketSPDto.getSelectedSports());
