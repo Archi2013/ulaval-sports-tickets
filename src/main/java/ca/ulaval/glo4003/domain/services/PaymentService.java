@@ -53,34 +53,36 @@ public class PaymentService {
 
 	@Autowired
 	private Cart currentCart;
-	
+
 	@Inject
 	private ISectionRepository sectionRepository;
 
 	public Boolean isValidChooseTicketsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException,
 			SectionDoesntExistException {
-		Section section = sectionRepository.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
+		Section section = sectionRepository.getAvailable(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
 		return section.isValidElements(chooseTicketsVM.getNumberOfTicketsToBuy(), chooseTicketsVM.getSelectedSeats());
 	}
 
 	public PayableItemsViewModel getPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM)
 			throws GameDoesntExistException, SectionDoesntExistException {
 		GameDto gameDto = gameDao.get(chooseTicketsVM.getGameId());
-		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
+		SectionDto sectionDto = sectionDao.getAvailable(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
 
 		return payableItemsViewModelFactory.createViewModel(chooseTicketsVM, gameDto, sectionDto);
 	}
 
 	public void saveToCart(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
 		GameDto gameDto = gameDao.get(chooseTicketsVM.getGameId());
-		SectionDto sectionDto = sectionDao.get(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
+		SectionDto sectionDto = sectionDao.getAvailable(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
 
 		Double cumulativePrice = 0.0;
-		
+
 		if (sectionDto.isGeneralAdmission()) {
-			cumulativePrice = calculator.calculateCumulativePriceForGeneralAdmission(chooseTicketsVM.getNumberOfTicketsToBuy(), sectionDto.getPrice());
+			cumulativePrice = calculator.calculateCumulativePriceForGeneralAdmission(chooseTicketsVM.getNumberOfTicketsToBuy(),
+					sectionDto.getPrice());
 		} else {
-			cumulativePrice = calculator.calculateCumulativePriceForWithSeatAdmission(chooseTicketsVM.getSelectedSeats(), sectionDto.getPrice());
+			cumulativePrice = calculator.calculateCumulativePriceForWithSeatAdmission(chooseTicketsVM.getSelectedSeats(),
+					sectionDto.getPrice());
 		}
 
 		currentCart.setNumberOfTicketsToBuy(chooseTicketsVM.getNumberOfTicketsToBuy());

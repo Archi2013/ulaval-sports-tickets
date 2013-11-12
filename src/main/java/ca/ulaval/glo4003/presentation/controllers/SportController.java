@@ -26,7 +26,7 @@ public class SportController {
 
 	@Inject
 	private SportService service;
-	
+
 	@Autowired
 	private User currentUser;
 
@@ -35,9 +35,9 @@ public class SportController {
 		logger.info("Getting all sports");
 
 		ModelAndView mav = new ModelAndView("sport/list");
-		
+
 		Boolean connectedUser = currentUser.isLogged();
-		
+
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
@@ -45,7 +45,7 @@ public class SportController {
 			mav.addObject("connectedUser", false);
 			logger.info("usagé non connecté");
 		}
-		
+
 		SportsViewModel sports = service.getSports();
 		mav.addObject("sports", sports);
 		return mav;
@@ -56,9 +56,9 @@ public class SportController {
 		logger.info("Getting games for sport: " + sportUrl);
 
 		ModelAndView mav = new ModelAndView("sport/games");
-		
+
 		Boolean connectedUser = currentUser.isLogged();
-		
+
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
@@ -66,7 +66,7 @@ public class SportController {
 			mav.addObject("connectedUser", false);
 			logger.info("usagé non connecté");
 		}
-		
+
 		try {
 			GamesViewModel games = service.getGamesForSport(sportUrl);
 			mav.addObject("games", games);

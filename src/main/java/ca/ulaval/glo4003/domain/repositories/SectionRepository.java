@@ -15,13 +15,19 @@ public class SectionRepository implements ISectionRepository {
 
 	@Inject
 	private SectionDao sectionDao;
-	
+
 	@Inject
 	private ISectionFactory sectionFactory;
-	
+
 	@Override
 	public Section get(Long gameId, String sectionName) throws SectionDoesntExistException {
 		SectionDto sectionDto = sectionDao.get(gameId, sectionName);
+		return sectionFactory.createSection(sectionDto);
+	}
+
+	@Override
+	public Section getAvailable(Long gameId, String sectionName) throws SectionDoesntExistException {
+		SectionDto sectionDto = sectionDao.getAvailable(gameId, sectionName);
 		return sectionFactory.createSection(sectionDto);
 	}
 

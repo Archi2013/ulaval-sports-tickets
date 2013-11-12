@@ -7,4 +7,6 @@ public interface ISectionRepository {
 
 	Section get(Long gameId, String sectionName) throws SectionDoesntExistException;
 
+	Section getAvailable(Long gameId, String sectionName) throws SectionDoesntExistException;
+
 }

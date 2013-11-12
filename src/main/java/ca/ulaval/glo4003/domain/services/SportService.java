@@ -64,7 +64,7 @@ public class SportService {
 	private void countNumberOfTickets(List<GameDto> games) throws GameDoesntExistException {
 		for (GameDto game : games) {
 			try {
-				game.setNumberOfTickets(ticketDao.getTicketsForGame(game.getId()).size());
+				game.setNumberOfTickets(ticketDao.getAvailableTicketsForGame(game.getId()).size());
 			} catch (Exception e) {
 				game.setNumberOfTickets(0);
 			}

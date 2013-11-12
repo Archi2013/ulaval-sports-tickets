@@ -62,7 +62,7 @@ public class QueryGameServiceTest {
 	public void getSectionsForGame_should_get_sections_for_game_from_dao() throws GameDoesntExistException {
 		service.getSectionsForGame(GAME_ID);
 
-		verify(sectionDaoMock).getAll(GAME_ID);
+		verify(sectionDaoMock).getAllAvailable(GAME_ID);
 	}
 
 	@Test

@@ -25,6 +25,7 @@ public class XmlTicketDao implements TicketDao {
 	private final static String TICKET_XPATH = TICKETS_XPATH + "/ticket";
 	private final static String TICKET_XPATH_ID = TICKET_XPATH + "[id=\"%s\"]";
 	private final static String TICKET_XPATH_GAME_ID = TICKET_XPATH + "[gameID=\"%s\"]";
+	private final static String TICKET_AVAILABLE_XPATH_GAME_ID = TICKET_XPATH_GAME_ID + "[available='true']";
 	private final static String TICKET_XPATH_SECTION = TICKET_XPATH_GAME_ID + "[section=\"%s\"]";
 
 	private XmlDatabase database;
@@ -49,8 +50,8 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	@Override
-	public List<TicketDto> getTicketsForGame(Long gameID) throws GameDoesntExistException {
-		String xPath = String.format(TICKET_XPATH_GAME_ID, gameID);
+	public List<TicketDto> getAvailableTicketsForGame(Long gameID) throws GameDoesntExistException {
+		String xPath = String.format(TICKET_AVAILABLE_XPATH_GAME_ID, gameID);
 
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(xPath);

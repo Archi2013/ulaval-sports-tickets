@@ -4,6 +4,7 @@ import java.util.List;
 
 public class SectionViewModel {
 
+	private static final String GENERAL_SECTION = "Générale";
 	public String sectionName;
 	public int numberOfTickets;
 	public String price;
@@ -13,8 +14,8 @@ public class SectionViewModel {
 	public String url;
 	public List<String> seats;
 
-	public SectionViewModel(String sectionName, int numberOfTickets, String price, String date,
-			String opponents, String location, String url, List<String> seats) {
+	public SectionViewModel(String sectionName, int numberOfTickets, String price, String date, String opponents,
+			String location, String url, List<String> seats) {
 		this.sectionName = sectionName;
 		this.numberOfTickets = numberOfTickets;
 		this.price = price;
@@ -24,9 +25,9 @@ public class SectionViewModel {
 		this.url = url;
 		this.seats = seats;
 	}
-	
+
 	public boolean isGeneralAdmission() {
-		return sectionName == null;
+		return sectionName.equals(GENERAL_SECTION);
 	}
 
 	public String getSectionName() {

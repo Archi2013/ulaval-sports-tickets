@@ -2165,13 +2165,13 @@
 			<id>245</id>
 			<price>5.0</price>
 			<gameID>12</gameID>
-			<available>true</available>
+			<available>false</available>
 		</ticket>
 		<ticket>
 			<id>246</id>
 			<price>5.0</price>
 			<gameID>12</gameID>
-			<available>true</available>
+			<available>false</available>
 		</ticket>
 		<ticket>
 			<id>247</id>
