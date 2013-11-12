@@ -27,8 +27,7 @@ public class SectionForSearchDto {
 	}
 	
 	public SectionForSearchDto(SectionDto sectionDto, GameDto gameDto, String sportName, String url) {
-		this(sportName, gameDto.getOpponents(), gameDto.getLocation(), gameDto.getGameDate(),
-				sectionDto.getAdmissionType(), sectionDto.getSectionName(),
+		this(sportName, gameDto.getOpponents(), gameDto.getLocation(), gameDto.getGameDate(), sectionDto.getSectionName(),
 				sectionDto.getNumberOfTickets(), sectionDto.getPrice(), url);
 	}
 
