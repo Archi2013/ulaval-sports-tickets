@@ -39,7 +39,7 @@ class SectionForSearchConcreteDao implements SectionForSearchDao {
 		List<SectionForSearchDto> sectionFSDtos = newArrayList();
 		
 		try {
-			/*for (String sportName : sportNames) {
+			for (String sportName : sportNames) {
 					List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
 					
 					for (GameDto gameDto : gameDtos) {
@@ -51,13 +51,13 @@ class SectionForSearchConcreteDao implements SectionForSearchDao {
 							sectionFSDtos.add(sectionFSDto);
 						}
 					}
-			}*/
+			}
 			return sectionFSDtos;
-		/*} catch (SportDoesntExistException | GameDoesntExistException e) {
+		} catch (SportDoesntExistException | GameDoesntExistException e) {
 			System.out.println("### ==> Plantage durant la recherche de billets");
 			e.printStackTrace();
 			return sectionFSDtos;
-		}*/
+		}
 	}
 
 }

@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.domain.dtos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TicketSearchPreferenceDto {
@@ -12,9 +13,15 @@ public class TicketSearchPreferenceDto {
 			String displayedPeriod, boolean localGameOnly,
 			List<String> selectedTicketKinds) {
 		super();
+		if (selectedSports == null) {
+			selectedSports = new ArrayList<String>();
+		}
 		this.selectedSports = selectedSports;
 		this.displayedPeriod = displayedPeriod;
 		this.localGameOnly = localGameOnly;
+		if (selectedTicketKinds == null) {
+			selectedTicketKinds = new ArrayList<String>();
+		}
 		this.selectedTicketKinds = selectedTicketKinds;
 	}
 
@@ -23,6 +30,9 @@ public class TicketSearchPreferenceDto {
 	}
 
 	public void setSelectedSports(List<String> selectedSports) {
+		if (selectedSports == null) {
+			selectedSports = new ArrayList<String>();
+		}
 		this.selectedSports = selectedSports;
 	}
 
@@ -47,6 +57,9 @@ public class TicketSearchPreferenceDto {
 	}
 
 	public void setSelectedTicketKinds(List<String> selectedTicketKinds) {
+		if (selectedTicketKinds == null) {
+			selectedTicketKinds = new ArrayList<String>();
+		}
 		this.selectedTicketKinds = selectedTicketKinds;
 	}
 }

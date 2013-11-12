@@ -225,13 +225,13 @@
 <sportName>Soccer féminin</sportName>
 <date>2014/09/22 13:00 EDT</date>
 </game>
-<game>
+<!-- <game>
 <id>31</id>
 <location>Montréal</location>
 <oponents>McGill</oponents>
 <sportName>Soccer féminin</sportName>
 <date>2014/09/27 18:30 EDT</date>
-</game>
+</game>  -->
 <game>
 <id>32</id>
 <location>PEPS Terrain 6</location>
@@ -295,13 +295,13 @@
 <sportName>Rugby féminin</sportName>
 <date>2014/09/14 13:00 EDT</date>
 </game>
-<game>
+<!-- <game>
 <id>41</id>
 <location>Sherbrooke</location>
 <oponents>Bishop's</oponents>
 <sportName>Rugby féminin</sportName>
 <date>2014/09/20 18:15 EDT</date>
-</game>
+</game>  -->
 <game>
 <id>42</id>
 <location>Stade TELUS-UL</location>
@@ -535,13 +535,13 @@
 <type>Générale</type>
 <section>Générale</section>
 </ticket>
-<ticket>
+<!-- <ticket>
 <id>31</id>
 <price>15.0</price>
 <gameID>1</gameID>
 <type>Générale</type>
 <section>Générale</section>
-</ticket>
+</ticket>  -->
 <ticket>
 <id>32</id>
 <price>15.0</price>
@@ -605,13 +605,13 @@
 <type>Générale</type>
 <section>Générale</section>
 </ticket>
-<ticket>
+<!-- <ticket>
 <id>41</id>
 <price>15.0</price>
 <gameID>1</gameID>
 <type>Générale</type>
 <section>Générale</section>
-</ticket>
+</ticket> -->
 <ticket>
 <id>42</id>
 <price>15.0</price>
