@@ -27,7 +27,7 @@ public class SectionForSearchViewModelFactory {
 	public List<SectionForSearchViewModel> createViewModels(List<SectionForSearchDto> ticketForSearchDtos) {
 		List<SectionForSearchViewModel> list = transform(ticketForSearchDtos, new Function<SectionForSearchDto, SectionForSearchViewModel>() {
 			public SectionForSearchViewModel apply(SectionForSearchDto section) {
-				return new SectionForSearchViewModel(section.sport, section.opponents, constants.toLongDateTimeFormatFR(section.date),
+				return new SectionForSearchViewModel(section.sport, section.opponents, section.location, constants.toLongDateTimeFormatFR(section.date),
 						section.section, section.numberOfTicket, calculator.toPriceFR(section.price), section.url);
 			}
 		});

@@ -3,17 +3,19 @@ package ca.ulaval.glo4003.web.viewmodels;
 public class SectionForSearchViewModel {
 	public String sport;
 	public String opponents;
+	public String location;
 	public String date;
 	public String section;
 	public Integer numberOfTicket;
 	public String price;
 	public String url;
 
-	public SectionForSearchViewModel(String sport, String opponents, String date, String section, Integer numberOfTicket,
+	public SectionForSearchViewModel(String sport, String opponents, String location, String date, String section, Integer numberOfTicket,
 	        String price, String url) {
 		super();
 		this.sport = sport;
 		this.opponents = opponents;
+		this.location = location;
 		this.date = date;
 		this.section = section;
 		this.numberOfTicket = numberOfTicket;
@@ -35,6 +37,14 @@ public class SectionForSearchViewModel {
 
 	public void setOpponents(String opponents) {
 		this.opponents = opponents;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public String getDate() {

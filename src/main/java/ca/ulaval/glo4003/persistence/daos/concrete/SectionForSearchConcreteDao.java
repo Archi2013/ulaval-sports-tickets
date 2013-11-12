@@ -18,6 +18,9 @@ import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionForSearchDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 @Repository
 class SectionForSearchConcreteDao implements SectionForSearchDao {
 	
@@ -32,6 +35,16 @@ class SectionForSearchConcreteDao implements SectionForSearchDao {
 		List<String> sportNames = ticketSearchPreferenceDto.getSelectedSports();
 		List<SectionForSearchDto> sectionFSDtos = createFullListForSelectedSports(sportNames);
 		
+		final Boolean localGameOnly = ticketSearchPreferenceDto.isLocalGameOnly();
+		
+		sectionFSDtos = newArrayList(Iterables.filter(sectionFSDtos, new Predicate<SectionForSearchDto>() {
+
+			@Override
+			public boolean apply(SectionForSearchDto sectionFSDto) {
+				Boolean localGameCriterion = (sectionFSDto.isLocalGame() || !localGameOnly);
+				return localGameCriterion;
+			}
+		}));
 		return sectionFSDtos;
 	}
 
