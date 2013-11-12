@@ -3,7 +3,7 @@ package ca.ulaval.glo4003.domain.utilities.payment;
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
-import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 
 @Component
 public class CreditCardFactory {

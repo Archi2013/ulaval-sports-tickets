@@ -15,7 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ca.ulaval.glo4003.domain.services.QueryGameService;
 import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
-import ca.ulaval.glo4003.web.viewmodels.SectionsViewModel;
+import ca.ulaval.glo4003.presentation.controllers.GameController;
+import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameControllerTest {

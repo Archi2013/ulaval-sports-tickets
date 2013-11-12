@@ -17,7 +17,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
-import ca.ulaval.glo4003.web.viewmodels.SportViewModel;
+import ca.ulaval.glo4003.presentation.converters.SportConverter;
+import ca.ulaval.glo4003.presentation.viewmodels.SportViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportConverterTest {

@@ -27,10 +27,10 @@ import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
-import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
-import ca.ulaval.glo4003.web.viewmodels.PayableItemsViewModel;
-import ca.ulaval.glo4003.web.viewmodels.PaymentViewModel;
-import ca.ulaval.glo4003.web.viewmodels.factories.PayableItemsViewModelFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModelFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentServiceTest {

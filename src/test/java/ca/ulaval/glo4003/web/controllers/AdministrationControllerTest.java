@@ -23,8 +23,9 @@ import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.domain.utilities.DateParser;
 import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
-import ca.ulaval.glo4003.web.viewmodels.GameToAddViewModel;
-import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
+import ca.ulaval.glo4003.presentation.controllers.AdministrationController;
+import ca.ulaval.glo4003.presentation.viewmodels.GameToAddViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdministrationControllerTest {

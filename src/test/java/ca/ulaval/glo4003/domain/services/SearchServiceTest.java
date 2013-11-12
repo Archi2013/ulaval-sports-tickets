@@ -21,10 +21,10 @@ import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 import ca.ulaval.glo4003.persistence.daos.SectionForSearchDao;
-import ca.ulaval.glo4003.web.viewmodels.SectionForSearchViewModel;
-import ca.ulaval.glo4003.web.viewmodels.TicketSearchViewModel;
-import ca.ulaval.glo4003.web.viewmodels.factories.SectionForSearchViewModelFactory;
-import ca.ulaval.glo4003.web.viewmodels.factories.TicketSearchPreferenceFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionForSearchViewModelFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchServiceTest {

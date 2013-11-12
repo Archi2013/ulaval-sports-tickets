@@ -14,8 +14,9 @@
     
     <h2>${pageTitle}</h2>
     
+    <div class="information-block-error-skin margin-25-50">Le nom d'utilisateur est déjà pris !</div>
+    
     <form action="/session/save" method="post"> 
-  		<div class="information-block-error-skin margin-25-50"> Le nom d'utilisateur est déjà pris !. </div>
 		<%@ include file="../session/authForm.jsp" %>
 	</form>  
       

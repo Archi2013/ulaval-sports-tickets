@@ -21,10 +21,10 @@ import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
-import ca.ulaval.glo4003.web.viewmodels.GamesViewModel;
-import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
-import ca.ulaval.glo4003.web.viewmodels.factories.GamesViewModelFactory;
-import ca.ulaval.glo4003.web.viewmodels.factories.SportsViewModelFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.GamesViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.GamesViewModelFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.SportsViewModelFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportServiceTest {

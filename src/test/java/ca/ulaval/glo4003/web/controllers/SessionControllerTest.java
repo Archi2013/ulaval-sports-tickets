@@ -16,7 +16,8 @@ import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.domain.utilities.user.UserAlreadyExistException;
 import ca.ulaval.glo4003.domain.utilities.user.UserDoesntExistException;
 import ca.ulaval.glo4003.domain.utilities.user.UsernameAndPasswordDoesntMatchException;
-import ca.ulaval.glo4003.web.viewmodels.UserViewModel;
+import ca.ulaval.glo4003.presentation.controllers.SessionController;
+import ca.ulaval.glo4003.presentation.viewmodels.UserViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SessionControllerTest {

@@ -12,10 +12,10 @@ import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
-import ca.ulaval.glo4003.web.viewmodels.ChooseTicketsViewModel;
-import ca.ulaval.glo4003.web.viewmodels.SectionViewModel;
-import ca.ulaval.glo4003.web.viewmodels.factories.ChooseTicketsViewModelFactory;
-import ca.ulaval.glo4003.web.viewmodels.factories.SectionViewModelFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.ChooseTicketsViewModelFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionViewModelFactory;
 
 @Service
 public class SectionService {

@@ -15,7 +15,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.utilities.Constants;
-import ca.ulaval.glo4003.web.viewmodels.GameViewModel;
+import ca.ulaval.glo4003.presentation.converters.GameConverter;
+import ca.ulaval.glo4003.presentation.viewmodels.GameViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameConverterTest {

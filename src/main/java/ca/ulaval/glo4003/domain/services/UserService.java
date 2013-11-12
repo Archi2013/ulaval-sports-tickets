@@ -14,8 +14,8 @@ import ca.ulaval.glo4003.domain.utilities.user.UserAlreadyExistException;
 import ca.ulaval.glo4003.domain.utilities.user.UserDoesntExistException;
 import ca.ulaval.glo4003.domain.utilities.user.UsernameAndPasswordDoesntMatchException;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
-import ca.ulaval.glo4003.web.viewmodels.UserViewModel;
-import ca.ulaval.glo4003.web.viewmodels.factories.UserViewModelFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.UserViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.UserViewModelFactory;
 
 @Service
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)

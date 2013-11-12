@@ -18,8 +18,8 @@ import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
-import ca.ulaval.glo4003.web.viewmodels.SectionsViewModel;
-import ca.ulaval.glo4003.web.viewmodels.factories.SectionsViewModelFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionsViewModelFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class QueryGameServiceTest {
