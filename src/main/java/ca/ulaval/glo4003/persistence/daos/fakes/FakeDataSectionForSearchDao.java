@@ -19,13 +19,13 @@ public class FakeDataSectionForSearchDao implements SectionForSearchDao {
 		// Faire qqc avec ticketSearchPreferenceDto
 		
 		SectionForSearchDto t1 = new SectionForSearchDto("Baseball Masculin", "Radiants", DateTime.now(),
-				"Générale", "Générale", new Integer(3), new Double(16.9), "/sport/volleyball-feminin/match/40/billets/generale-generale");
+				"Générale", new Integer(3), new Double(16.9), "/sport/volleyball-feminin/match/40/billets/generale-generale");
 		SectionForSearchDto t2 = new SectionForSearchDto("Soccer Masculin", "Endormis", DateTime.now(),
-				"Générale", "Générale", new Integer(22), new Double(23.0), "/sport/volleyball-feminin/match/40/billets/generale-generale");
+				"Générale", new Integer(22), new Double(23.0), "/sport/volleyball-feminin/match/40/billets/generale-generale");
 		SectionForSearchDto t3 = new SectionForSearchDto("Volleyball Féminin", "Kira", DateTime.now(),
-				"VIP", "Orange", new Integer(7), new Double(16.9505), "/sport/volleyball-feminin/match/1/billets/vip-front-row");
+				"Orange", new Integer(7), new Double(16.9505), "/sport/volleyball-feminin/match/1/billets/vip-front-row");
 		SectionForSearchDto t4 = new SectionForSearchDto("Volleyball Féminin", "Kira", DateTime.now(),
-				"VIP", "Rouge", new Integer(4), new Double(17.95), "/sport/volleyball-feminin/match/1/billets/vip-front-row");
+				"Rouge", new Integer(4), new Double(17.95), "/sport/volleyball-feminin/match/1/billets/vip-front-row");
 		List<SectionForSearchDto> sections = new ArrayList<>();
 		sections.add(t1);
 		sections.add(t2);

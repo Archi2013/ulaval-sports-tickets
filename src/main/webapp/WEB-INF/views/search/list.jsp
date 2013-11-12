@@ -30,7 +30,6 @@ Types de billet : <c:forEach items="${searchForm.selectedTicketKinds}" var="kind
 			<th>Sport</th>
 			<th>Opposants</th>
 			<th>Date</th>
-			<th>Type d'admission</th>
 			<th>Section</th>
 			<th>Nombre de billets</th>
 			<th>Prix (${currency})</th>
@@ -43,7 +42,6 @@ Types de billet : <c:forEach items="${searchForm.selectedTicketKinds}" var="kind
 			<td>${section.sport}</td>
 			<td>${section.opponents}</td>
 			<td>${section.date}</td>
-			<td>${section.admissionType}</td>
 			<td>${section.section}</td>
 			<td>${section.numberOfTicket}</td>
 			<td>${section.price}</td>

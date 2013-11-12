@@ -31,7 +31,7 @@ public class SectionViewModelFactory {
 		String dateFR = constants.toLongDateTimeFormatFR(game.getGameDate());
 		String priceFR = calculator.toPriceFR(section.getPrice());
 		
-		return new SectionViewModel(section.getAdmissionType(), section.getSectionName(), section.getNumberOfTickets(),
+		return new SectionViewModel(section.getSectionName(), section.getNumberOfTickets(),
 				priceFR, dateFR, game.getOpponents(), createUrl(section.getSectionName()), section.getSeats());
 	}
 

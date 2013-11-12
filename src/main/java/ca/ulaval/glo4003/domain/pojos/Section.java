@@ -6,14 +6,12 @@ import ca.ulaval.glo4003.domain.dtos.SectionDto;
 
 public class Section {
 	
-	private String admissionType;
 	private String sectionName;
 	private int numberOfTickets;
 	private double price;
 	private List<String> seats;
 
 	public Section(SectionDto sectionDto) {
-		admissionType = sectionDto.getAdmissionType();
 		sectionName = sectionDto.getSectionName();
 		numberOfTickets = sectionDto.getNumberOfTickets();
 		price = sectionDto.getPrice();

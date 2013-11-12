@@ -24,8 +24,10 @@ public class XmlSectionDaoIT {
 		SectionDto actual = sectionDao.get(2L, "Section 100");
 
 		List<String> seats = new ArrayList<>();
+		seats.add("A-1");
+		seats.add("B-2");
 
-		SectionDto expected = new SectionDto("VIP", "Section 100", 2, 22.00f, seats);
+		SectionDto expected = new SectionDto("Section 100", 2, 22.00f, seats);
 		assertSection(expected, actual);
 	}
 
@@ -34,9 +36,11 @@ public class XmlSectionDaoIT {
 		List<SectionDto> sections = sectionDao.getAll(2L);
 
 		List<String> seats = new ArrayList<>();
+		seats.add("A-1");
+		seats.add("B-2");
 
-		SectionDto expected0 = new SectionDto("Générale", "Générale", 4, 15.00f, seats);
-		SectionDto expected1 = new SectionDto("VIP", "Section 100", 2, 22.00f, seats);
+		SectionDto expected0 = new SectionDto(4, 15.00f);
+		SectionDto expected1 = new SectionDto("Section 100", 2, 22.00f, seats);
 
 		Assert.assertEquals(2, sections.size());
 
@@ -56,10 +60,9 @@ public class XmlSectionDaoIT {
 
 	private void assertSection(SectionDto expected, SectionDto actual) {
 		Assert.assertEquals(expected.getPrice(), actual.getPrice(), 0.001f);
-		Assert.assertEquals(expected.getAdmissionType(), actual.getAdmissionType());
 		Assert.assertEquals(expected.getSectionName(), actual.getSectionName());
 		Assert.assertEquals(expected.getNumberOfTickets(), actual.getNumberOfTickets());
-		// Assert.assertEquals(expected.getSeats(), actual.getSeats());
+		Assert.assertEquals(expected.getSeats().size(), actual.getSeats().size());
 	}
 
 }
