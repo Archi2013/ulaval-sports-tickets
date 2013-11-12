@@ -2,6 +2,9 @@
 <base>
 <sports>
 <sport>
+<name>Démonstration</name>
+</sport>
+<sport>
 <name>Soccer masculin</name>
 </sport>
 <sport>
@@ -295,13 +298,13 @@
 <sportName>Rugby féminin</sportName>
 <date>2014/09/14 13:00 EDT</date>
 </game>
-<!--  <game>
+<game>
 <id>41</id>
 <location>Sherbrooke</location>
 <oponents>Bishop's</oponents>
 <sportName>Rugby féminin</sportName>
 <date>2014/09/20 18:15 EDT</date>
-</game> -->
+</game>
 <game>
 <id>42</id>
 <location>Stade TELUS-UL</location>
@@ -322,6 +325,41 @@
 <oponents>Carleton</oponents>
 <sportName>Rugby féminin</sportName>
 <date>2014/10/13 14:00 EDT</date>
+</game>
+<game>
+<id>10000</id>
+<location>Paris</location>
+<oponents>Tour Eiffel</oponents>
+<sportName>Démonstration</sportName>
+<date>2013/11/12 14:00 EDT</date>
+</game>
+<game>
+<id>20000</id>
+<location>Tôkyô</location>
+<oponents>Tôkyô Tower</oponents>
+<sportName>Démonstration</sportName>
+<date>2013/11/18 15:45 EDT</date>
+</game>
+<game>
+<id>30000</id>
+<location>Londres</location>
+<oponents>Big Ben</oponents>
+<sportName>Démonstration</sportName>
+<date>2013/12/10 18:50 EDT</date>
+</game>
+<game>
+<id>40000</id>
+<location>Canberra</location>
+<oponents>Kangourou</oponents>
+<sportName>Démonstration</sportName>
+<date>2014/02/01 20:30 EDT</date>
+</game>
+<game>
+<id>50000</id>
+<location>Johannesbourg</location>
+<oponents>Vouvouzela</oponents>
+<sportName>Démonstration</sportName>
+<date>2014/05/02 21:00 EDT</date>
 </game>
 </games>
 <tickets>
@@ -577,13 +615,13 @@
 <gameID>2</gameID>
 <section>Section 200</section>
 </ticket>
-<!-- <ticket>
+<ticket>
 <id>41</id>
 <price>30.0</price>
 <seat>E-1</seat>
 <gameID>2</gameID>
 <section>Section 200</section>
-</ticket> -->
+</ticket>
 <ticket>
 <id>42</id>
 <price>30.0</price>
@@ -3162,7 +3200,7 @@
 <ticket>
 <id>501</id>
 <price>8.0</price>
-<gameID>40</gameID>
+<gameID>41</gameID>
 </ticket>
 <ticket>
 <id>502</id>
@@ -3263,6 +3301,31 @@
 <id>521</id>
 <price>8.0</price>
 <gameID>44</gameID>
+</ticket>
+<ticket>
+<id>1001</id>
+<price>100.11</price>
+<gameID>10000</gameID>
+</ticket>
+<ticket>
+<id>1002</id>
+<price>90.99</price>
+<gameID>20000</gameID>
+</ticket>
+<ticket>
+<id>1003</id>
+<price>80.88</price>
+<gameID>30000</gameID>
+</ticket>
+<ticket>
+<id>1004</id>
+<price>70.77</price>
+<gameID>40000</gameID>
+</ticket>
+<ticket>
+<id>1005</id>
+<price>60.66</price>
+<gameID>50000</gameID>
 </ticket>
 </tickets>
 </base>

@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.domain.dtos.SectionForSearchDto;
 import ca.ulaval.glo4003.domain.dtos.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
@@ -44,6 +46,7 @@ class SectionForSearchConcreteDao implements SectionForSearchDao {
 				return TicketKind.valueOf(ticketKind);
 			}
 		});
+		final DateTime endDateTime = calculateEndDateTime(DisplayedPeriod.valueOf(ticketSearchPreferenceDto.getDisplayedPeriod()));
 		
 		sectionFSDtos = newArrayList(Iterables.filter(sectionFSDtos, new Predicate<SectionForSearchDto>() {
 
@@ -56,12 +59,34 @@ class SectionForSearchConcreteDao implements SectionForSearchDao {
 				} else {
 					ticketKindCriterion = ticketKinds.contains(TicketKind.WITH_SEAT);
 				}
-				return localGameCriterion && ticketKindCriterion;
+				Boolean displayedPeriodCriterion = sectionFSDto.getDate().isBefore(endDateTime);
+				return localGameCriterion && ticketKindCriterion && displayedPeriodCriterion;
 			}
 		}));
 		return sectionFSDtos;
 	}
-
+	
+	private DateTime calculateEndDateTime(DisplayedPeriod displayedPeriod) {
+		DateTime result = DateTime.now();
+		
+		switch(displayedPeriod) {
+		case ONE_DAY:
+			return result.plusDays(1);
+		case ONE_WEEK:
+			return result.plusDays(7);
+		case ONE_MONTH:
+			return result.plusDays(30);
+		case THREE_MONTH:
+			return result.plusDays(91);
+		case SIX_MONTH:
+			return result.plusDays(183);
+		case ALL:
+			return result.plusYears(2);
+		default:
+			return result.plusYears(2);
+		}
+	}
+	
 	private List<SectionForSearchDto> createFullListForSelectedSports(List<String> sportNames) {
 		List<SectionForSearchDto> sectionFSDtos = newArrayList();
 		

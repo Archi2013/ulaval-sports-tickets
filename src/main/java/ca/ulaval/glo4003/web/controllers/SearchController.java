@@ -29,6 +29,8 @@ public class SearchController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home() {
+		logger.info("Recherche : accueil");
+		
 		ModelAndView mav = new ModelAndView("search/home");
 		mav.addObject("currency", Constants.CURRENCY);
 		
@@ -48,8 +50,6 @@ public class SearchController {
 		
 		mav.addObject("sections", searchService.getSections(ticketSearchVM));
 		
-		mav.addObject("searchForm", ticketSearchVM); // Pour les tests
-		
 		searchService.initSearchCriterions(mav);
 		
 		return mav;
@@ -57,7 +57,7 @@ public class SearchController {
 	
 	@RequestMapping(value="sauvegarde-preferences", method=RequestMethod.POST)
 	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
-		logger.info("Search : save user search preferences");
+		logger.info("Recherche : enregistre les préférences de recherche");
 		
 		// Enregistrement de ticketSearchVM | il faut le transformer en TicketSearchPreferenceDto
 		
@@ -70,15 +70,13 @@ public class SearchController {
 	
 	@RequestMapping(value="list", method=RequestMethod.POST)
     public ModelAndView getList(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
-		logger.info("Search : search tickets");
+		logger.info("Recherche : recherche des billets...");
 
 		ModelAndView mav = new ModelAndView("search/list");
 		
 		mav.addObject("currency", Constants.CURRENCY);
 		
 		mav.addObject("sections", searchService.getSections(ticketSearchVM));
-		
-		mav.addObject("searchForm", ticketSearchVM); // Pour les tests
 		
 		mav.addObject("preferencesSaved", false);
 		

@@ -2,21 +2,6 @@
 <%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<div>
-<h3>Critères de recherche :</h3>
-Sports sélectionnés : <c:forEach items="${searchForm.selectedSports}" var="sport">
-                        <span>${sport}, </span>
-                      </c:forEach>
-                      <br>
-Période affichée : ${searchForm.displayedPeriod}
-<br>
-À domicile : <c:if test="${searchForm.localGameOnly}">Vrai</c:if>
-<br>
-Types de billet : <c:forEach items="${searchForm.selectedTicketKinds}" var="kind">
-                      <span>${kind}, </span>
-                  </c:forEach>
-</div>
 
 <c:if test="${preferencesSaved}">
     <div class="information-block-succes-skin margin-25-50">
