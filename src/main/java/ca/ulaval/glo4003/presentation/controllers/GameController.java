@@ -39,7 +39,7 @@ public class GameController {
 			
 			mav.addObject("currency", Constants.CURRENCY);
 
-			SectionsViewModel sectionsViewModel = gameService.getSectionsForGame(gameId);
+			SectionsViewModel sectionsViewModel = gameService.getAvailableSectionsForGame(gameId);
 			mav.addObject("gameSections", sectionsViewModel);
 			return mav;
 

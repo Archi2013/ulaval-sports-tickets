@@ -26,7 +26,7 @@ public class QueryGameService {
 	@Inject
 	private SectionsViewModelFactory viewModelFactory;
 
-	public SectionsViewModel getSectionsForGame(Long gameId) throws GameDoesntExistException {
+	public SectionsViewModel getAvailableSectionsForGame(Long gameId) throws GameDoesntExistException {
 		GameDto game = gameDao.get(gameId);
 		List<SectionDto> sections = sectionDao.getAllAvailable(gameId);
 		return viewModelFactory.createViewModel(game, sections);

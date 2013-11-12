@@ -18,7 +18,7 @@ import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SectionRepositoryTest {
+public class SectionByDaoRepositoryTest {
 
 	private static final String SECTION_NAME = "Indigo";
 
@@ -31,7 +31,7 @@ public class SectionRepositoryTest {
 	private ISectionFactory sectionFactory;
 	
 	@InjectMocks
-	SectionRepository sectionRepository;
+	SectionByDaoRepository sectionRepository;
 
 	@Before
 	public void setUp() throws SportDoesntExistException {
