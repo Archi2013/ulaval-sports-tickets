@@ -104,11 +104,13 @@ public class PaymentService {
 		}
 	}
 
-	public void buyTicketsInCart(PaymentViewModel paymentVM) throws InvalidCreditCardException {
+	public void buyTicketsInCart(PaymentViewModel paymentVM) throws InvalidCreditCardException, NoTicketsInCartException {
 		CreditCard creditCard = creditCardFactory.createCreditCard(paymentVM);
 		if (currentCart.containTickets()) {
 			creditCard.pay(currentCart.getCumulativePrice());
 			cartService.makeTicketsUnavailableToOtherPeople(currentCart);
+		} else {
+			throw new NoTicketsInCartException();
 		}
 	}
 

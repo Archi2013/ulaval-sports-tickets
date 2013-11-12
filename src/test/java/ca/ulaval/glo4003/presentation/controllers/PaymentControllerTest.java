@@ -547,7 +547,7 @@ public class PaymentControllerTest {
 	}
 	
 	@Test
-	public void validate_should_pay_amount_when_user_is_connected_and_no_error_in_BindingResult() throws InvalidCreditCardException {
+	public void validate_should_pay_amount_when_user_is_connected_and_no_error_in_BindingResult() throws InvalidCreditCardException, NoTicketsInCartException {
 		BindingResult bindingResult = mock(BindingResult.class);
 		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
 		
@@ -560,7 +560,7 @@ public class PaymentControllerTest {
 	}
 	
 	@Test
-	public void validate_should_return_mode_of_ayment_page_when_user_is_connected_and_no_error_in_BindingResult_and_payAmount_raise_InvalidCardException() throws InvalidCreditCardException {
+	public void validate_should_return_mode_of_ayment_page_when_user_is_connected_and_no_error_in_BindingResult_and_payAmount_raise_InvalidCardException() throws InvalidCreditCardException, NoTicketsInCartException {
 		BindingResult bindingResult = mock(BindingResult.class);
 		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
 		
@@ -574,7 +574,7 @@ public class PaymentControllerTest {
 	}
 	
 	@Test
-	public void validate_should_add_paymentForm_in_model_when_user_is_connected_and_no_error_in_BindingResult_and_payAmount_raise_InvalidCardException() throws InvalidCreditCardException {
+	public void validate_should_add_paymentForm_in_model_when_user_is_connected_and_no_error_in_BindingResult_and_payAmount_raise_InvalidCardException() throws InvalidCreditCardException, NoTicketsInCartException {
 		BindingResult bindingResult = mock(BindingResult.class);
 		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
 		
@@ -590,7 +590,7 @@ public class PaymentControllerTest {
 	}
 	
 	@Test
-	public void validate_should_add_creditCardTypes_in_model_when_user_is_connected_and_no_error_in_BindingResult_and_payAmount_raise_InvalidCardException() throws InvalidCreditCardException {
+	public void validate_should_add_creditCardTypes_in_model_when_user_is_connected_and_no_error_in_BindingResult_and_payAmount_raise_InvalidCardException() throws InvalidCreditCardException, NoTicketsInCartException {
 		BindingResult bindingResult = mock(BindingResult.class);
 		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
 		List<CreditCardType> creditCardTypes = new ArrayList<>();
@@ -605,6 +605,35 @@ public class PaymentControllerTest {
 		
 		assertTrue(modelMap.containsAttribute("creditCardTypes"));
 		assertSame(creditCardTypes, modelMap.get("creditCardTypes"));
+	}
+	
+	@Test
+	public void validate_should_add_errorMessage_in_model_when_user_is_connected_and_no_error_in_BindingResult_and_payAmount_raise_NoTicketsInCartException() throws InvalidCreditCardException, NoTicketsInCartException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		doThrow(new NoTicketsInCartException()).when(paymentService).buyTicketsInCart(paymentVM);
+		
+		ModelAndView mav = controller.validate(paymentVM, bindingResult);
+		ModelMap modelMap = mav.getModelMap();
+		
+		assertTrue(modelMap.containsAttribute("errorMessage"));
+	}
+	
+	@Test
+	public void validate_should_return_error_page_when_user_is_connected_and_no_error_in_BindingResult_and_payAmount_raise_NoTicketsInCartException() throws InvalidCreditCardException, NoTicketsInCartException {
+		BindingResult bindingResult = mock(BindingResult.class);
+		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(bindingResult.hasErrors()).thenReturn(false);
+		doThrow(new NoTicketsInCartException()).when(paymentService).buyTicketsInCart(paymentVM);
+		
+		ModelAndView mav = controller.validate(paymentVM, bindingResult);
+		
+		assertEquals(ERROR_PAGE, mav.getViewName());
 	}
 	
 	@Test

@@ -213,7 +213,7 @@ public class PaymentServiceTest {
 
 	@Ignore
 	@Test
-	public void given_a_paymentViewModel_buyTicketsInCart_should_call_pay_of_a_credit_card() throws InvalidCreditCardException {
+	public void given_a_paymentViewModel_buyTicketsInCart_should_call_pay_of_a_credit_card() throws InvalidCreditCardException, NoTicketsInCartException {
 		PaymentViewModel paymentVM = new PaymentViewModel();
 		MisterCard creditCard = mock(MisterCard.class);
 
@@ -229,7 +229,7 @@ public class PaymentServiceTest {
 
 	@Ignore
 	@Test
-	public void buyTicketsInCart_should_make_tickets_unavailable_to_other_people() throws InvalidCreditCardException {
+	public void buyTicketsInCart_should_make_tickets_unavailable_to_other_people() throws InvalidCreditCardException, NoTicketsInCartException {
 		PaymentViewModel paymentVM = new PaymentViewModel();
 		MisterCard creditCard = mock(MisterCard.class);
 
