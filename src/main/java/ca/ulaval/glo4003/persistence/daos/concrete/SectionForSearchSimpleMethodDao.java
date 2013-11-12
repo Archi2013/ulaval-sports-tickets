@@ -28,7 +28,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 @Repository
-class SectionForSearchConcreteDao implements SectionForSearchDao {
+class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 	
 	@Inject
 	GameDao gameDao;

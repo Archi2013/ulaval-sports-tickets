@@ -24,6 +24,10 @@ public class SectionViewModel {
 		this.url = url;
 		this.seats = seats;
 	}
+	
+	public boolean isGeneralAdmission() {
+		return sectionName == null;
+	}
 
 	public String getSectionName() {
 		return sectionName;
@@ -55,13 +59,5 @@ public class SectionViewModel {
 
 	public List<String> getSeats() {
 		return seats;
-	}
-	
-	public boolean isGeneralAdmission() {
-		if (seats.size() == 0) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 }
