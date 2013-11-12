@@ -9,16 +9,18 @@ public class SectionViewModel {
 	public String price;
 	private String date;
 	private String opponents;
+	private String location;
 	public String url;
 	public List<String> seats;
 
 	public SectionViewModel(String sectionName, int numberOfTickets, String price, String date,
-			String opponents, String url, List<String> seats) {
+			String opponents, String location, String url, List<String> seats) {
 		this.sectionName = sectionName;
 		this.numberOfTickets = numberOfTickets;
 		this.price = price;
 		this.date = date;
 		this.opponents = opponents;
+		this.location = location;
 		this.url = url;
 		this.seats = seats;
 	}
@@ -37,6 +39,10 @@ public class SectionViewModel {
 
 	public String getOpponents() {
 		return opponents;
+	}
+
+	public String getLocation() {
+		return location;
 	}
 
 	public String getDate() {

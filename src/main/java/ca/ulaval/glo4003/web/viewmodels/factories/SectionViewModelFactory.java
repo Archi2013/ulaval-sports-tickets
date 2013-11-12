@@ -32,7 +32,7 @@ public class SectionViewModelFactory {
 		String priceFR = calculator.toPriceFR(section.getPrice());
 		
 		return new SectionViewModel(section.getSectionName(), section.getNumberOfTickets(),
-				priceFR, dateFR, game.getOpponents(), createUrl(section.getSectionName()), section.getSeats());
+				priceFR, dateFR, game.getOpponents(), game.getLocation(), createUrl(section.getSectionName()), section.getSeats());
 	}
 
 	public List<SectionViewModel> createViewModel(List<SectionDto> sections, GameDto gameDto) {

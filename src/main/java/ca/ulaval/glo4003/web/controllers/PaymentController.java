@@ -65,7 +65,7 @@ public class PaymentController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView home(@ModelAttribute("chooseTicketsForm") @Valid ChooseTicketsViewModel chooseTicketsVM,
 			BindingResult result) {
-		logger.info("Page d'accueil de la partie paiment");
+		logger.info("Paiement : accueil");
 		
 		Boolean connectedUser = currentUser.isLogged();
 
@@ -109,7 +109,7 @@ public class PaymentController {
 
 	@RequestMapping(value = "mode-de-paiement", method = RequestMethod.GET)
 	public ModelAndView modeOfPayment() {
-		logger.info("Page du choix du mode de paiement");
+		logger.info("Paiement : choix du mode de paiement");
 		
 		ModelAndView mav = new ModelAndView(MODE_OF_PAYMENT_PAGE);
 
@@ -142,7 +142,7 @@ public class PaymentController {
 
 	@RequestMapping(value = "validation-achat", method = RequestMethod.POST)
 	public ModelAndView validate(@ModelAttribute("paymentForm") @Valid PaymentViewModel paymentVM, BindingResult result) {
-		logger.info("Début de la validation de la carte de crédit et du paiement");
+		logger.info("Paiement : validation de la carte de crédit et du paiement");
 		
 		ModelAndView mav = new ModelAndView(VALIDATION_SUCCES_PAGE);
 

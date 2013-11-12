@@ -18,9 +18,9 @@
         <table class="standard-table margin-25">
             <thead>
                 <tr>
-                    <th>Identifiant</th>
                     <th>Date</th>
                     <th>Opposants</th>
+                    <th>Lieu</th>
                     <th>Billets disponibles</th>
                     <th>Action</th>
                 </tr>
@@ -28,9 +28,9 @@
             <tbody>
                 <c:forEach items="${games.games}" var="game">
                     <tr>
-                        <td>${game.id}</td>
-                        <td>${game.date}</td>
+                        <td><span style="display:none;">${game.id}</span>${game.date}</td>
                         <td>${game.opponents}</td>
+                        <td>${game.location}</td>
                         <td>${game.getNumberOfTickets()}</td>
                         <td class="action-column"><a href="match/${game.id}/billets" class="standard-button-round orange-button">Consulter</a></td>
                     </tr>

@@ -36,9 +36,10 @@
 			    <img class="rouge-et-or-logo" alt="Logo du Rouge et Or" src="/resources/image/rouge-et-or-logo.gif"/> <strong>VS</strong> ${section.opponents}
 	        </h3>
 			<div class="ticket-date-info">${section.date}</div>
+			<div class="ticket-location-info">${section.location}</div>
 			<div class="ticket-seat-info">
 				<c:choose>
-				    <c:when test="${section.isGeneralAdmission()}"></c:when>
+				    <c:when test="${section.isGeneralAdmission()}">Admission : <strong>Générale</strong></c:when>
 				    <c:otherwise>
 				        Section : <strong>${section.sectionName}</strong>
 				    </c:otherwise>
