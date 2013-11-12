@@ -41,13 +41,13 @@ public class GameControllerTest {
 	public void getTicketsForGame_should_get_games() throws GameDoesntExistException {
 		gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME);
 
-		verify(gameService).getSectionsForGame(GAME_ID);
+		verify(gameService).getAvailableSectionsForGame(GAME_ID);
 	}
 
 	@Test
 	public void getTicketsForGame_should_add_the_specified_sections_to_model() throws GameDoesntExistException {
 		SectionsViewModel sectionsViewModel = mock(SectionsViewModel.class);
-		when(gameService.getSectionsForGame(GAME_ID)).thenReturn(sectionsViewModel);
+		when(gameService.getAvailableSectionsForGame(GAME_ID)).thenReturn(sectionsViewModel);
 
 		ModelAndView mav = gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME);
 		ModelMap modelMap = mav.getModelMap();
@@ -66,7 +66,7 @@ public class GameControllerTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void getTicketsForGame_should_redirect_to_404_page_when_game_id_doesnt_exist() throws GameDoesntExistException {
-		when(gameService.getSectionsForGame(GAME_ID)).thenThrow(GameDoesntExistException.class);
+		when(gameService.getAvailableSectionsForGame(GAME_ID)).thenThrow(GameDoesntExistException.class);
 
 		ModelAndView mav = gameController.getTicketsForGame(GAME_ID, A_SPORT_NAME);
 
