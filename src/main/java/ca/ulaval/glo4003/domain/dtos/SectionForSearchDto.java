@@ -3,6 +3,7 @@ package ca.ulaval.glo4003.domain.dtos;
 import org.joda.time.DateTime;
 
 public class SectionForSearchDto {
+	private static final String GENERAL_SECTION = "Générale";
 	public String sport;
 	public String opponents;
 	public String location;
@@ -32,7 +33,7 @@ public class SectionForSearchDto {
 	}
 
 	public boolean isGeneralAdmission() {
-		return section == null;
+		return section.equals(GENERAL_SECTION);
 	}
 	
 	public Boolean isLocalGame() {

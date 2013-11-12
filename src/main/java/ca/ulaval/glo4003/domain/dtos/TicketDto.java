@@ -22,6 +22,15 @@ public class TicketDto {
 		this.price = price;
 		this.available = available;
 	}
+	
+	public TicketDto(String sportName, String section, DateTime gameDate, int ticketNumber, double price, boolean available) {
+		this.sportName = sportName;
+		this.section = section;
+		this.gameDate = gameDate;
+		this.ticketNumber = ticketNumber;
+		this.price = price;
+		this.available = available;
+	}
 
 	public TicketDto(String sportName, DateTime gameDate, int ticketNumber, double price, String seat, String section,
 			boolean available) {

@@ -12,9 +12,10 @@ import ca.ulaval.glo4003.domain.tickets.state.UnassignedTicketState;
 
 @Component
 public class TicketFactory {
+	private static final String GENERAL_SECTION = "Générale";
 
 	public PersistableTicket instantiateTicket() {
-		return instantiateTicket(new TicketDto(null, null, 0, 0, true));
+		return instantiateTicket(new TicketDto(null, GENERAL_SECTION, null, 0, 0, true));
 	}
 
 	public PersistableTicket instantiateTicket(String seat, String section, boolean available) {
@@ -29,7 +30,7 @@ public class TicketFactory {
 	}
 
 	private boolean sectionIsGeneral(String section) {
-		return section == null;
+		return section.equals(GENERAL_SECTION);
 	}
 
 	private TicketAssignationState createAssignationState(TicketDto data) {

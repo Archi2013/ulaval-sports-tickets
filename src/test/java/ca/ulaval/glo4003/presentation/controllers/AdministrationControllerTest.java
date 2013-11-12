@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.web.controllers;
+package ca.ulaval.glo4003.presentation.controllers;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
