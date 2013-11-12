@@ -5,6 +5,7 @@ import org.joda.time.DateTime;
 public class SectionForSearchDto {
 	public String sport;
 	public String opponents;
+	public String location;
 	public DateTime date;
 	public String admissionType;
 	public String section;
@@ -12,18 +13,25 @@ public class SectionForSearchDto {
 	public Double price;
 	public String url;
 	
-	public SectionForSearchDto(String sport, String opponents, DateTime date,
+	public SectionForSearchDto(String sport, String opponents, String location, DateTime date,
 			String admissionType, String section, Integer numberOfTicket,
 			Double price, String url) {
 		super();
 		this.sport = sport;
 		this.opponents = opponents;
+		this.location = location;
 		this.date = date;
 		this.admissionType = admissionType;
 		this.section = section;
 		this.numberOfTicket = numberOfTicket;
 		this.price = price;
 		this.url = url;
+	}
+	
+	public SectionForSearchDto(SectionDto sectionDto, GameDto gameDto, String sportName, String url) {
+		this(sportName, gameDto.getOpponents(), gameDto.getLocation(), gameDto.getGameDate(),
+				sectionDto.getAdmissionType(), sectionDto.getSectionName(),
+				sectionDto.getNumberOfTickets(), sectionDto.getPrice(), url);
 	}
 
 	public String getSport() {
@@ -40,6 +48,14 @@ public class SectionForSearchDto {
 
 	public void setOpponents(String opponents) {
 		this.opponents = opponents;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public DateTime getDate() {

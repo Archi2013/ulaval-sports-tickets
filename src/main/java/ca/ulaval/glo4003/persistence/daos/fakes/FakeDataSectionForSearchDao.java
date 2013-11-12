@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.persistence.daos.fakes;
+/*package ca.ulaval.glo4003.persistence.daos.fakes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +18,13 @@ public class FakeDataSectionForSearchDao implements SectionForSearchDao {
 	public List<SectionForSearchDto> getSections(TicketSearchPreferenceDto ticketSearchPreferenceDto) {
 		// Faire qqc avec ticketSearchPreferenceDto
 		
-		SectionForSearchDto t1 = new SectionForSearchDto("Baseball Masculin", "Radiants", DateTime.now(),
+		SectionForSearchDto t1 = new SectionForSearchDto("Baseball Masculin", "Radiants", "ULAVAL", DateTime.now(),
 				"Générale", "Générale", new Integer(3), new Double(16.9), "/sport/volleyball-feminin/match/40/billets/generale-generale");
-		SectionForSearchDto t2 = new SectionForSearchDto("Soccer Masculin", "Endormis", DateTime.now(),
+		SectionForSearchDto t2 = new SectionForSearchDto("Soccer Masculin", "Endormis", "ULAVAL", DateTime.now(),
 				"Générale", "Générale", new Integer(22), new Double(23.0), "/sport/volleyball-feminin/match/40/billets/generale-generale");
-		SectionForSearchDto t3 = new SectionForSearchDto("Volleyball Féminin", "Kira", DateTime.now(),
+		SectionForSearchDto t3 = new SectionForSearchDto("Volleyball Féminin", "Kira", "ULAVAL", DateTime.now(),
 				"VIP", "Orange", new Integer(7), new Double(16.9505), "/sport/volleyball-feminin/match/1/billets/vip-front-row");
-		SectionForSearchDto t4 = new SectionForSearchDto("Volleyball Féminin", "Kira", DateTime.now(),
+		SectionForSearchDto t4 = new SectionForSearchDto("Volleyball Féminin", "Kira", "ULAVAL", DateTime.now(),
 				"VIP", "Rouge", new Integer(4), new Double(17.95), "/sport/volleyball-feminin/match/1/billets/vip-front-row");
 		List<SectionForSearchDto> sections = new ArrayList<>();
 		sections.add(t1);
@@ -35,3 +35,4 @@ public class FakeDataSectionForSearchDao implements SectionForSearchDao {
 	}
 
 }
+*/
