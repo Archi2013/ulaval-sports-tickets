@@ -33,7 +33,6 @@ public class SectionForPaymentViewModelFactory {
 		} else {
 			sectionForPaymentVM.setTicketKind(TicketKind.WITH_SEAT);
 		}
-		sectionForPaymentVM.setAdmissionType(sectionDto.getAdmissionType());
 		sectionForPaymentVM.setSectionName(sectionDto.getSectionName());
 		sectionForPaymentVM.setDate(constants.toLongDateTimeFormatFR(gameDto.getGameDate()));
 		sectionForPaymentVM.setOpponents(gameDto.getOpponents());

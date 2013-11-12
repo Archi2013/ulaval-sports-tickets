@@ -7,7 +7,6 @@ public class SectionForPaymentViewModel {
 	public String selectedSeats;
 	
 	public TicketKind ticketKind;
-	public String admissionType;
 	public String sectionName;
 	public String date;
 	public String opponents;
@@ -44,14 +43,6 @@ public class SectionForPaymentViewModel {
 	
 	public void setTicketKind(TicketKind ticketKind) {
 		this.ticketKind = ticketKind;
-	}
-	
-	public String getAdmissionType() {
-		return admissionType;
-	}
-	
-	public void setAdmissionType(String admissionType) {
-		this.admissionType = admissionType;
 	}
 	
 	public String getSectionName() {

@@ -7,21 +7,19 @@ public class SectionForSearchDto {
 	public String opponents;
 	public String location;
 	public DateTime date;
-	public String admissionType;
 	public String section;
 	public Integer numberOfTicket;
 	public Double price;
 	public String url;
 	
 	public SectionForSearchDto(String sport, String opponents, String location, DateTime date,
-			String admissionType, String section, Integer numberOfTicket,
+			String section, Integer numberOfTicket,
 			Double price, String url) {
 		super();
 		this.sport = sport;
 		this.opponents = opponents;
 		this.location = location;
 		this.date = date;
-		this.admissionType = admissionType;
 		this.section = section;
 		this.numberOfTicket = numberOfTicket;
 		this.price = price;
@@ -64,14 +62,6 @@ public class SectionForSearchDto {
 
 	public void setDate(DateTime date) {
 		this.date = date;
-	}
-
-	public String getAdmissionType() {
-		return admissionType;
-	}
-
-	public void setAdmissionType(String admissionType) {
-		this.admissionType = admissionType;
 	}
 
 	public String getSection() {

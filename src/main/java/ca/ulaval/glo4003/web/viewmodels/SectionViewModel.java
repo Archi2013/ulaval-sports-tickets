@@ -4,7 +4,6 @@ import java.util.List;
 
 public class SectionViewModel {
 
-	public String admissionType;
 	public String sectionName;
 	public int numberOfTickets;
 	public String price;
@@ -13,9 +12,8 @@ public class SectionViewModel {
 	public String url;
 	public List<String> seats;
 
-	public SectionViewModel(String admissionType, String sectionName, int numberOfTickets, String price, String date,
+	public SectionViewModel(String sectionName, int numberOfTickets, String price, String date,
 			String opponents, String url, List<String> seats) {
-		this.admissionType = admissionType;
 		this.sectionName = sectionName;
 		this.numberOfTickets = numberOfTickets;
 		this.price = price;
@@ -23,10 +21,6 @@ public class SectionViewModel {
 		this.opponents = opponents;
 		this.url = url;
 		this.seats = seats;
-	}
-
-	public String getAdmissionType() {
-		return admissionType;
 	}
 
 	public String getSectionName() {

@@ -6,7 +6,7 @@
 	pageEncoding="UTF-8"%>
 
 <c:set var="pageTitle"
-	value="Fiche de la section: ${section.admissionType}, ${section.sectionName}" />
+	value="Fiche de la section: ${section.sectionName}" />
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -37,7 +37,6 @@
 	        </h3>
 			<div class="ticket-date-info">${section.date}</div>
 			<div class="ticket-seat-info">
-				Type d'admission : <strong>${section.admissionType}</strong><br>
 				<c:choose>
 				    <c:when test="${section.isGeneralAdmission()}"></c:when>
 				    <c:otherwise>

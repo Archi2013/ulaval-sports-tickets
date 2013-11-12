@@ -19,7 +19,6 @@
 		<table class="standard-table margin-25">
 			<thead>
 				<tr>
-					<th>Type d'admission</th>
 					<th>Section</th>
 					<th>Nombre de billets</th>
 					<th>Prix (${currency})</th>
@@ -29,7 +28,6 @@
 			<tbody>
 				<c:forEach items="${gameSections.sections}" var="section">
 					<tr>
-						<td>${section.admissionType}</td>
 						<td>${section.sectionName}</td>
 						<td>${section.numberOfTickets}</td>
 						<td>${section.price}</td>

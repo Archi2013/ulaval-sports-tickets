@@ -27,7 +27,6 @@
                     <th>Sport</th>
                     <th>Date</th>
                     <th>Opposants</th>
-                    <th>Type d'admission</th>
                     <c:choose>
                         <c:when test="${section.isGeneralAdmission()}">
                             <th>Nombre de billets</th>
@@ -45,7 +44,6 @@
                     <td>${section.sport}</td>
                     <td>${section.date}</td>
                     <td>${section.opponents}</td>
-                    <td>${section.admissionType}</td>
                     <c:choose>
                         <c:when test="${section.isGeneralAdmission()}">
                             <td>${section.numberOfTicketsToBuy}</td>

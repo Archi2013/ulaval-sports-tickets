@@ -1,17 +1,23 @@
 package ca.ulaval.glo4003.domain.dtos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SectionDto {
 
-	private String admissionType;
 	private String sectionName;
 	private int numberOfTickets;
 	private double price;
 	private List<String> seats;
+	
+	public SectionDto(int numberOfTickets, double price) {
+		this.sectionName = "Générale";
+		this.numberOfTickets = numberOfTickets;
+		this.price = price;
+		this.seats = new ArrayList<>();
+	}
 
-	public SectionDto(String admissionType, String sectionName, int numberOfTickets, double price, List<String> seats) {
-		this.admissionType = admissionType;
+	public SectionDto(String sectionName, int numberOfTickets, double price, List<String> seats) {
 		this.sectionName = sectionName;
 		this.numberOfTickets = numberOfTickets;
 		this.price = price;
@@ -20,10 +26,6 @@ public class SectionDto {
 
 	public boolean isGeneralAdmission() {
 		return sectionName == null;
-	}
-	
-	public String getAdmissionType() {
-		return admissionType;
 	}
 
 	public String getSectionName() {

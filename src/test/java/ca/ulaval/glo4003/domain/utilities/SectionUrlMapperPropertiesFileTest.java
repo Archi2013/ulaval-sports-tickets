@@ -61,7 +61,6 @@ public class SectionUrlMapperPropertiesFileTest {
 			throws SectionDoesntExistInPropertiesFileException {
 		TicketType type = sectionUrlMapper.getTicketType(SECTION_URL);
 
-		assertEquals(type.admissionType, ADMISSION_TYPE);
 		assertEquals(type.sectionName, SECTION_NAME);
 	}
 
@@ -91,7 +90,6 @@ public class SectionUrlMapperPropertiesFileTest {
 	public void when_second_use_getTicketType_should_return_the_ticket_type() throws SectionDoesntExistInPropertiesFileException {
 		TicketType type = sectionUrlMapper.getTicketType(SECTION_URL);
 
-		assertEquals(type.admissionType, ADMISSION_TYPE);
 		assertEquals(type.sectionName, SECTION_NAME);
 	}
 

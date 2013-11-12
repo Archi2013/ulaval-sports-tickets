@@ -37,7 +37,8 @@ public class XmlSectionDao implements SectionDao {
 
 	@Override
 	public SectionDto get(Long gameId, String sectionName) throws SectionDoesntExistException {
-		String xPath = "/base/tickets/ticket[gameID=\"" + gameId + "\"][section=\"" + sectionName + "\"]";
+		String sectionClause = GENERAL_KEYWORD.equals(sectionName) ? "[not(section)]" : "[section=\"" + sectionName + "\"]";
+		String xPath = "/base/tickets/ticket[gameID=\"" + gameId + "\"]" + sectionClause;
 
 		try {
 			int numberOfTickets = database.countNode(xPath);
@@ -45,17 +46,17 @@ public class XmlSectionDao implements SectionDao {
 				throw new SectionDoesntExistException();
 			}
 			String price = database.extractPath(xPath + "/price");
-			String admissionType = database.extractPath(xPath + "/type");
+			List<SimpleNode> nodes = database.extractNodeSet(xPath);
 
-			// TODO à remplacer par des vrais sièges
 			List<String> seats = new ArrayList<>();
-			seats.add("2A");
-			seats.add("375");
-			seats.add("X1");
-			seats.add("L87A");
+			for (SimpleNode node : nodes) {
+				if (node.hasNode("seat")) {
+					seats.add(node.getNodeValue("seat"));
+				}
+			}
 
-			return new SectionDto(admissionType, sectionName, numberOfTickets, Double.parseDouble(price), seats);
-		} catch (XPathExpressionException e) {
+			return new SectionDto(sectionName, numberOfTickets, Double.parseDouble(price), seats);
+		} catch (XPathExpressionException | NoSuchAttributeException e) {
 			throw new XmlIntegrityException(e);
 		}
 	}
@@ -122,7 +123,6 @@ public class XmlSectionDao implements SectionDao {
 			sectionCache.put(gameId, new LinkedHashSet<String>());
 		}
 		Set<String> sections = sectionCache.get(gameId);
-		String section = node.getNodeValue("section");
-		sections.add(section == null ? GENERAL_KEYWORD : section);
+		sections.add(node.hasNode("section") ? node.getNodeValue("section") : GENERAL_KEYWORD);
 	}
 }
