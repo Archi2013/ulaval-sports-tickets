@@ -22,7 +22,6 @@ public class Section {
 	public boolean isGeneralAdmission() {
 
 		boolean generalAdmission = sectionName.equals(GENERAL_SECTION);
-		System.out.println("IsGeneralAdmission? " + generalAdmission);
 		return generalAdmission;
 	}
 

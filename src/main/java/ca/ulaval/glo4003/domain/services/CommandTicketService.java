@@ -2,6 +2,8 @@ package ca.ulaval.glo4003.domain.services;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,10 @@ import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @Service
 public class CommandTicketService {
+	@Inject
 	private ITicketRepository ticketRepository;
+
+	@Inject
 	private IGameRepository gameRepository;
 
 	// TODO est là pour corriger le bogue
@@ -49,13 +54,22 @@ public class CommandTicketService {
 		gameRepository.commit();
 	}
 
-	public void makeTicketsUnavailable(GameDto game, SectionDto section, List<String> seats) throws GameDoesntExistException,
-			GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
-		for (String seat : seats) {
-			Ticket ticket = ticketRepository.recoverTicket(game.getSportName(), game.getGameDate(), seat);
-			ticket.makeUnavailable();
+	public void makeTicketsUnavailable(GameDto game, SectionDto section, int numberOfSeats, List<String> seats)
+			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
+
+		if (section.isGeneralAdmission()) {
+			List<Ticket> tickets = ticketRepository.recoverNGeneralTickets(game.getId(), numberOfSeats);
+			for (Ticket ticket : tickets) {
+				ticket.makeUnavailable();
+			}
+		} else {
+			for (String seat : seats) {
+				Ticket ticket = ticketRepository.recoverTicket(game.getSportName(), game.getGameDate(), seat);
+				ticket.makeUnavailable();
+			}
 		}
-		gameRepository.commit();
+
+		ticketRepository.commit();
 
 	}
 }

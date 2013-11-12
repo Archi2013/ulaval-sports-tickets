@@ -108,8 +108,7 @@ public class PaymentService {
 		CreditCard creditCard = creditCardFactory.createCreditCard(paymentVM);
 		if (currentCart.containTickets()) {
 			creditCard.pay(currentCart.getCumulativePrice());
-			// TODO
-			// cartService.makeTicketsUnavailableToOtherPeople(currentCart);
+			cartService.makeTicketsUnavailableToOtherPeople(currentCart);
 		}
 	}
 

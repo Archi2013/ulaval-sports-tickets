@@ -9,6 +9,13 @@ import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 public abstract class PersistableTicket extends Ticket implements Persistable<TicketDto> {
 
 	private TicketAssignationState associationState;
+	public double price;
+	public String section;
+	public String seat;
+	public String sportName;
+	public DateTime gameDate;
+	public int ticketNumber;
+	public boolean available;
 
 	public PersistableTicket(TicketAssignationState associationState) {
 		this.associationState = associationState;
@@ -27,7 +34,6 @@ public abstract class PersistableTicket extends Ticket implements Persistable<Ti
 
 	@Override
 	public TicketDto saveDataInDTO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TicketDto(sportName, gameDate, ticketNumber, price, seat, section, available);
 	}
 }
