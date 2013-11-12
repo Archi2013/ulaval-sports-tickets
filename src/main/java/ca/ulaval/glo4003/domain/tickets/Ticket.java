@@ -2,16 +2,29 @@ package ca.ulaval.glo4003.domain.tickets;
 
 import org.joda.time.DateTime;
 
-public interface Ticket {
+public abstract class Ticket {
 
-	boolean isSame(Ticket ticketToAdd);
+	protected boolean available;
 
-	boolean isAssignable();
+	public abstract boolean isSame(Ticket ticketToAdd);
 
-	void assign(String sport, DateTime date, int ticketNumber);
+	public abstract boolean isAssignable();
 
-	boolean isSeat(String seat);
+	public abstract void assign(String sport, DateTime date, int ticketNumber);
 
-	boolean isSection(String section);
+	public abstract boolean isSeat(String seat);
 
+	public abstract boolean isSection(String section);
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void makeUnavailable() {
+		this.available = false;
+	}
+
+	public void makeAvailable() {
+		this.available = true;
+	}
 }

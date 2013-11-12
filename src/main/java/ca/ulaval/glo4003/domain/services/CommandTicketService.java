@@ -42,19 +42,18 @@ public class CommandTicketService {
 		gameRepository.commit();
 	}
 
-	public void addSeatedTicket(String sport, DateTime date, String section, String seat)
-			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
+	public void addSeatedTicket(String sport, DateTime date, String section, String seat) throws GameDoesntExistException,
+			GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
 		Game gameToUse = gameRepository.recoverGame(sport, date);
 		gameToUse.addTicket(ticketRepository.instantiateNewTicket(section, seat));
 		gameRepository.commit();
 	}
 
-	public void makeTicketsUnavailable(GameDto game, SectionDto section, List<String> seats)
-			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
-		Game gameToUse = gameRepository.recoverGame(game.getSportName(), game.getGameDate());
+	public void makeTicketsUnavailable(GameDto game, SectionDto section, List<String> seats) throws GameDoesntExistException,
+			GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
 		for (String seat : seats) {
 			Ticket ticket = ticketRepository.recoverTicket(game.getSportName(), game.getGameDate(), seat);
-			gameToUse.removeTicket(ticket);
+			ticket.makeUnavailable();
 		}
 		gameRepository.commit();
 

@@ -6,12 +6,13 @@ import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.pojos.persistable.Persistable;
 import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 
-public abstract class PersistableTicket implements Ticket, Persistable<TicketDto> {
+public abstract class PersistableTicket extends Ticket implements Persistable<TicketDto> {
 
 	private TicketAssignationState associationState;
 
 	public PersistableTicket(TicketAssignationState associationState) {
 		this.associationState = associationState;
+		this.available = true;
 	}
 
 	@Override
@@ -29,5 +30,4 @@ public abstract class PersistableTicket implements Ticket, Persistable<TicketDto
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
