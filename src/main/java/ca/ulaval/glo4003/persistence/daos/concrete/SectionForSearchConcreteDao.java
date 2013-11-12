@@ -15,6 +15,8 @@ import ca.ulaval.glo4003.domain.dtos.SectionForSearchDto;
 import ca.ulaval.glo4003.domain.dtos.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
+import ca.ulaval.glo4003.domain.utilities.TicketTypeUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
@@ -33,6 +35,12 @@ class SectionForSearchConcreteDao implements SectionForSearchDao {
 	
 	@Inject
 	SectionDao sectionDao;
+	
+	@Inject
+	TicketTypeUrlMapper ticketTypeUrlMapper;
+	
+	@Inject
+	SportUrlMapper sportUrlMapper;
 	
 	@Override
 	public List<SectionForSearchDto> getSections(TicketSearchPreferenceDto ticketSearchPreferenceDto) {
@@ -98,7 +106,7 @@ class SectionForSearchConcreteDao implements SectionForSearchDao {
 						List<SectionDto> sectionDtos = sectionDao.getAll(gameDto.getId());
 						
 						for (SectionDto sectionDto : sectionDtos) {
-							String url = "/";
+							String url = createUrl(sportName, gameDto.getId(), sectionDto.getSectionName());
 							SectionForSearchDto sectionFSDto = new SectionForSearchDto(sectionDto, gameDto, sportName, url);
 							sectionFSDtos.add(sectionFSDto);
 						}
@@ -112,4 +120,7 @@ class SectionForSearchConcreteDao implements SectionForSearchDao {
 		}
 	}
 
+	private String createUrl(String sportName, Long gameId, String sectionName) {
+		return String.format("/sport/%s/match/%s/billets/%s", sportUrlMapper.getUrl(sportName), gameId, ticketTypeUrlMapper.getUrl(sectionName));
+	}
 }
