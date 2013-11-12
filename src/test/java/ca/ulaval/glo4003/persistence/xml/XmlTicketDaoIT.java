@@ -15,6 +15,7 @@ import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 public class XmlTicketDaoIT {
 
+	private static final boolean AVAILABLE = true;
 	private XmlTicketDao ticketDao;
 	private AtomicInteger atomicInt;
 
@@ -29,26 +30,26 @@ public class XmlTicketDaoIT {
 
 	private void createMultipleTicket(long gameId, float price, String section, int number) throws Exception {
 		for (int i = 0; i < number; i++) {
-			ticketDao.add(createTicket(gameId, price, section));
+			ticketDao.add(createTicket(gameId, price, section, true));
 		}
 	}
 
-	private TicketDto createTicket(long gameId, float price, String section) {
-		if ("Générale".equals(section)){
-			return new TicketDto(gameId, atomicInt.incrementAndGet(), price);
+	private TicketDto createTicket(long gameId, float price, String section, boolean available) {
+		if ("Générale".equals(section)) {
+			return new TicketDto(gameId, atomicInt.incrementAndGet(), price, available);
 		}
 		int ticketId = atomicInt.incrementAndGet();
-		char letter = (char)((int)'A' + ticketId / 10);
+		char letter = (char) ((int) 'A' + ticketId / 10);
 		int number = ticketId % 10;
 		String code = letter + "-" + number;
-		return new TicketDto(gameId, ticketId, price, section, code);
-    }
+		return new TicketDto(gameId, ticketId, price, section, code, available);
+	}
 
 	@Test
 	public void testGetTicket() throws Exception {
 		TicketDto actual = ticketDao.get(1);
 
-		TicketDto expected = new TicketDto(1, 1, 15.00f);
+		TicketDto expected = new TicketDto(1, 1, 15.00f, AVAILABLE);
 		assertTicket(expected, actual);
 	}
 
@@ -61,12 +62,12 @@ public class XmlTicketDaoIT {
 	public void testGetTicketsForGame() throws Exception {
 		List<TicketDto> tickets = ticketDao.getTicketsForGame(2L);
 
-		TicketDto expected0 = new TicketDto(2, 5, 15.00f);
-		TicketDto expected1 = new TicketDto(2, 6, 15.00f);
-		TicketDto expected2 = new TicketDto(2, 7, 15.00f);
-		TicketDto expected3 = new TicketDto(2, 8, 15.00f);
-		TicketDto expected4 = new TicketDto(2, 9, 22.00f, "Section 100", "A-9");
-		TicketDto expected5 = new TicketDto(2, 10, 22.00f, "Section 100", "B-0");
+		TicketDto expected0 = new TicketDto(2, 5, 15.00f, AVAILABLE);
+		TicketDto expected1 = new TicketDto(2, 6, 15.00f, AVAILABLE);
+		TicketDto expected2 = new TicketDto(2, 7, 15.00f, AVAILABLE);
+		TicketDto expected3 = new TicketDto(2, 8, 15.00f, AVAILABLE);
+		TicketDto expected4 = new TicketDto(2, 9, 22.00f, "Section 100", "A-9", AVAILABLE);
+		TicketDto expected5 = new TicketDto(2, 10, 22.00f, "Section 100", "B-0", AVAILABLE);
 
 		Assert.assertEquals(6, tickets.size());
 
@@ -87,8 +88,8 @@ public class XmlTicketDaoIT {
 	public void testGetTicketsForSection() throws Exception {
 		List<TicketDto> tickets = ticketDao.getTicketsForSection(2, "Section 100");
 
-		TicketDto expected0 = new TicketDto(2, 9, 22.00f, "Section 100", "A-9");
-		TicketDto expected1 = new TicketDto(2, 10, 22.00f, "Section 100", "B-0");
+		TicketDto expected0 = new TicketDto(2, 9, 22.00f, "Section 100", "A-9", AVAILABLE);
+		TicketDto expected1 = new TicketDto(2, 10, 22.00f, "Section 100", "B-0", AVAILABLE);
 
 		Assert.assertEquals(2, tickets.size());
 
@@ -103,7 +104,7 @@ public class XmlTicketDaoIT {
 
 	@Test
 	public void testAddDto() throws Exception {
-		TicketDto toAdd = new TicketDto(1, 1000, 20.00f);
+		TicketDto toAdd = new TicketDto(1, 1000, 20.00f, AVAILABLE);
 
 		ticketDao.add(toAdd);
 
@@ -115,7 +116,7 @@ public class XmlTicketDaoIT {
 
 	@Test(expected = TicketAlreadyExistException.class)
 	public void testAddExistingShouldThrow() throws Exception {
-		TicketDto toAdd = new TicketDto(2, 3, 35.00f, "Front Row", "C-01");
+		TicketDto toAdd = new TicketDto(2, 3, 35.00f, "Front Row", "C-01", AVAILABLE);
 
 		ticketDao.add(toAdd);
 	}

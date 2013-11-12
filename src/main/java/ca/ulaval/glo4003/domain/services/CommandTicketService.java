@@ -45,7 +45,7 @@ public class CommandTicketService {
 	public void addSeatedTicket(String sport, DateTime date, String section, String seat) throws GameDoesntExistException,
 			GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
 		Game gameToUse = gameRepository.recoverGame(sport, date);
-		gameToUse.addTicket(ticketRepository.instantiateNewTicket(section, seat));
+		gameToUse.addTicket(ticketRepository.instantiateNewTicket(section, seat, true));
 		gameRepository.commit();
 	}
 

@@ -1,10 +1,7 @@
 package ca.ulaval.glo4003.domain.services;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -22,6 +19,7 @@ import ca.ulaval.glo4003.domain.tickets.Ticket;
 @RunWith(MockitoJUnitRunner.class)
 public class CommandTicketServiceTest {
 
+	private static final boolean AVAILABLE = true;
 	public static final String A_SPORT = "Sport";
 	public static final String A_SECTION = "Section";
 	public static final String A_SEAT = "Seat";
@@ -46,7 +44,7 @@ public class CommandTicketServiceTest {
 	@Before
 	public void setup() {
 		when(ticketRepository.instantiateNewTicket()).thenReturn(ticketToAdd);
-		when(ticketRepository.instantiateNewTicket(A_SECTION, A_SEAT)).thenReturn(ticketToAdd);
+		when(ticketRepository.instantiateNewTicket(A_SECTION, A_SEAT, AVAILABLE)).thenReturn(ticketToAdd);
 		when(gameRepository.recoverGame(A_SPORT, A_DATE)).thenReturn(game);
 	}
 
@@ -104,7 +102,7 @@ public class CommandTicketServiceTest {
 	public void repository_in_addGeneralTickets_intantiates_ticket_with_section_and_seat() throws Exception {
 		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT);
 
-		verify(ticketRepository).instantiateNewTicket(A_SECTION, A_SEAT);
+		verify(ticketRepository).instantiateNewTicket(A_SECTION, A_SEAT, AVAILABLE);
 	}
 
 	@Test

@@ -12,7 +12,7 @@ public interface ITicketRepository {
 
 	Ticket instantiateNewTicket();
 
-	Ticket instantiateNewTicket(String section, String seat);
+	Ticket instantiateNewTicket(String section, String seat, boolean available);
 
 	Ticket recoverTicket(String sport, DateTime Date, int ticketNumber);
 

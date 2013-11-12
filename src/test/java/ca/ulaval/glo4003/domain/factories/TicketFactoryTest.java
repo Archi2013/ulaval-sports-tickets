@@ -13,6 +13,7 @@ import ca.ulaval.glo4003.domain.tickets.SeatedTicket;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TicketFactoryTest {
+	private static final boolean AVAILABLE = true;
 	private static final String A_SEAT = "seat";
 	private static final String A_SECTION = "section";
 
@@ -33,7 +34,7 @@ public class TicketFactoryTest {
 
 	@Test
 	public void instantiation_with_seat_and_section_parameters_returns_a_seated_ticket() {
-		PersistableTicket ticket = factory.instantiateTicket(A_SEAT, A_SECTION);
+		PersistableTicket ticket = factory.instantiateTicket(A_SEAT, A_SECTION, AVAILABLE);
 
 		Assert.assertSame(SeatedTicket.class, ticket.getClass());
 	}
