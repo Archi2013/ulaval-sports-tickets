@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.base.Function;
 
 import ca.ulaval.glo4003.domain.dtos.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.domain.dtos.UserPreferencesDto;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
@@ -67,5 +68,17 @@ public class TicketSearchPreferenceFactory {
 		ticketSearchVM.setLocalGameOnly(isLocalGameOnly);
 		ticketSearchVM.setSelectedTicketKinds(selectedTicketKinds);
 		return ticketSearchVM;
+	}
+	
+	public TicketSearchViewModel createViewModelFromUserPreferencesDto(UserPreferencesDto userPrefDto) {
+		DisplayedPeriod displayPeriod = userPrefDto.getDisplayedPeriod();
+		List<TicketKind> selectedTicketKinds = transform(userPrefDto.getSelectedTicketKinds(), new Function<String, TicketKind>() {
+			@Override
+			public TicketKind apply(String ticketKind) {
+				return TicketKind.valueOf(ticketKind);
+			}
+		});
+		return createTicketSearchViewModel(
+				userPrefDto.getSelectedSports(), displayPeriod, userPrefDto.isLocalGameOnly(), selectedTicketKinds);
 	}
 }

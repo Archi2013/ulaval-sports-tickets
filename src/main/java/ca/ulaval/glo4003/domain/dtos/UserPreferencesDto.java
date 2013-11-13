@@ -3,16 +3,18 @@ package ca.ulaval.glo4003.domain.dtos;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
+
 public class UserPreferencesDto {
 
 	public String username;
 	public List<String> selectedSports;
-	private String displayedPeriod;
+	private DisplayedPeriod displayedPeriod;
 	public boolean localGameOnly;
 	public List<String> selectedTicketKinds;
 	
 	public UserPreferencesDto(String username,List<String> selectedSports,
-			String displayedPeriod, boolean localGameOnly,
+			DisplayedPeriod displayedPeriod, boolean localGameOnly,
 			List<String> selectedTicketKinds) {
 		super();
 		if (selectedSports == null) {
@@ -39,11 +41,11 @@ public class UserPreferencesDto {
 		this.selectedSports = selectedSports;
 	}
 
-	public String getDisplayedPeriod() {
+	public DisplayedPeriod getDisplayedPeriod() {
 		return displayedPeriod;
 	}
 
-	public void setDisplayedPeriod(String displayedPeriod) {
+	public void setDisplayedPeriod(DisplayedPeriod displayedPeriod) {
 		this.displayedPeriod = displayedPeriod;
 	}
 

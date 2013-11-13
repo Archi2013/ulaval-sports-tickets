@@ -13,6 +13,6 @@ public interface UserPreferencesDao {
 	
 	public UserPreferencesDto get(String username);
 
-	void add(User username, TicketSearchPreferenceDto userPreferences);
+	void save(User username, TicketSearchPreferenceDto userPreferences);
 	
 }

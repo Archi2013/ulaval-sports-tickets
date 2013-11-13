@@ -27,7 +27,10 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 		sportsName.add("Football");
 
 		add(new UserPreferencesDto("mo", sportsName,
-				DisplayedPeriod.ONE_DAY.toString(), true, listTicket));
+				DisplayedPeriod.ALL, true, listTicket));
+		
+		add(new UserPreferencesDto("test", sportsName,
+				DisplayedPeriod.ONE_DAY, false, listTicket));
 
 	}
 
@@ -38,12 +41,19 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 
 	@Override
 	public UserPreferencesDto get(String username) {
-		System.out.println(userPrefList.get(0).getDisplayedPeriod());
+		for(int i=0; i < userPrefList.size(); i++)
+		{
+			if(userPrefList.get(i).username.equals(username))
+			{
+				return userPrefList.get(i);
+			}
+		}
+		
 		return userPrefList.get(0);
 	}
 
 	@Override
-	public void add(User username, TicketSearchPreferenceDto userPreferences) {
+	public void save(User username, TicketSearchPreferenceDto userPreferences) {
 		// TODO Auto-generated method stub
 
 	}

@@ -28,10 +28,8 @@ public class UserPreferencesService {
 	
 	public TicketSearchViewModel getUserPreferencesForUser(User currentUser){
 		
-		UserPreferencesDto userPref= userPreferencesDao.get(currentUser.getUsername());
-		
-		TicketSearchPreferenceDto ticketSearchDto= new TicketSearchPreferenceDto(userPref.selectedSports, "ONE_DAY", userPref.isLocalGameOnly(), userPref.getSelectedTicketKinds());
-		TicketSearchViewModel ticketSearchVModel=ticketSearchFactory.createViewModel(ticketSearchDto);
+		UserPreferencesDto userPref= userPreferencesDao.get(currentUser.getUsername());	
+		TicketSearchViewModel ticketSearchVModel=ticketSearchFactory.createViewModelFromUserPreferencesDto(userPref);
 				
 		// get UserPreference with currentUser info
 		// transform userPreferenceDto, return viewModel

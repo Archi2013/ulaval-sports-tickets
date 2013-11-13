@@ -48,8 +48,9 @@ public class SearchController {
 		
 		if (connectedUser) {
 			// mettre les pr��f��rences de l'usager
+			
+			
 			ticketSearchVM = userPreferencesService.getUserPreferencesForUser(currentUser);
-			// TicketSearchViewModel ticketSearchVM = userPreferenceService.getUserPreference(currentUser)
 			logger.info("Preference SAVE :"+ ticketSearchVM.selectedSports);
 		}
 		
