@@ -26,16 +26,6 @@ public class CommandTicketService {
 	@Inject
 	private IGameRepository gameRepository;
 
-	// TODO est là pour corriger le bogue
-	public CommandTicketService() {
-
-	}
-
-	public CommandTicketService(ITicketRepository ticketRepository, IGameRepository gameRepository) {
-		this.ticketRepository = ticketRepository;
-		this.gameRepository = gameRepository;
-	}
-
 	public void addGeneralTickets(String sport, DateTime date, int numberOfTickets) throws GameDoesntExistException,
 			GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
 		Game game = gameRepository.recoverGame(sport, date);
@@ -47,15 +37,17 @@ public class CommandTicketService {
 		gameRepository.commit();
 	}
 
-	public void addSeatedTicket(String sport, DateTime date, String section, String seat) throws GameDoesntExistException,
-			GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
+	public void addSeatedTicket(String sport, DateTime date, String section, String seat)
+			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
+			TicketDoesntExistException {
 		Game gameToUse = gameRepository.recoverGame(sport, date);
 		gameToUse.addTicket(ticketRepository.instantiateNewTicket(section, seat, true));
 		gameRepository.commit();
 	}
 
 	public void makeTicketsUnavailable(GameDto game, SectionDto section, int numberOfSeats, List<String> seats)
-			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
+			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
+			TicketDoesntExistException {
 
 		if (section.isGeneralAdmission()) {
 			List<Ticket> tickets = ticketRepository.recoverNGeneralTickets(game.getId(), numberOfSeats);

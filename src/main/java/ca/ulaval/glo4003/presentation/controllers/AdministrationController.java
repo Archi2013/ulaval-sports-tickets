@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.CommandGameService;
+import ca.ulaval.glo4003.domain.services.CommandTicketService;
 import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
@@ -42,6 +43,9 @@ public class AdministrationController {
 
 	@Inject
 	SportService sportService;
+
+	@Inject
+	CommandTicketService ticketService;
 
 	@Inject
 	private DateParser dateParser;
@@ -100,7 +104,7 @@ public class AdministrationController {
 		logger.info("Adminisatration : Page to add new tickets for a sport");
 
 		ModelAndView mav = new ModelAndView("admin/addTickets-chooseSport", "command", new SelectSportViewModel());
-		
+
 		manageUserConnection(mav);
 
 		mav.addObject("sportsVM", sportService.getSports());
@@ -116,7 +120,7 @@ public class AdministrationController {
 		logger.info("Ticket is of type : " + selectSportVM.getTypeBillet());
 
 		ModelAndView mav;
-		
+
 		if (selectSportVM.getTypeBillet() == TicketKind.GENERAL_ADMISSION) {
 			mav = new ModelAndView("admin/addTickets-General", "command", new GeneralTicketsToAddViewModel());
 		} else {
@@ -136,7 +140,14 @@ public class AdministrationController {
 		logger.info("Adminisatration :Adding " + ticketsToAddVM.getNumberOfTickets() + "new general tickets to game"
 				+ ticketsToAddVM.getGameDate());
 
-		ModelAndView mav = new ModelAndView("/admin/tickets-added");
+		ModelAndView mav;
+		try {
+			ticketService.addGeneralTickets(ticketsToAddVM.getSportName(),
+					dateParser.parseDate(ticketsToAddVM.getGameDate()), ticketsToAddVM.getNumberOfTickets());
+		} catch (GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException e) {
+			mav = new ModelAndView("/admin/tickets-added-date-error");
+		}
+		mav = new ModelAndView("/admin/tickets-added");
 
 		manageUserConnection(mav);
 
@@ -144,27 +155,34 @@ public class AdministrationController {
 	}
 
 	@RequestMapping(value = "/ajout-billets-seated", method = RequestMethod.POST)
-	public ModelAndView addTickets_seated(@ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM, Model model)
-			throws SportDoesntExistException, GameDoesntExistException {
+	public ModelAndView addTickets_seated(@ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM,
+			Model model) throws SportDoesntExistException, GameDoesntExistException {
 		logger.info("Adminisatration: adding a seated ticket to game on " + ticketsToAddVM.getGameDate() + " in seat "
 				+ ticketsToAddVM.getSeat() + " of section " + ticketsToAddVM.getSection());
 
-		ModelAndView mav = new ModelAndView("/admin/tickets-added");
-		
+		ModelAndView mav;
+		try {
+			ticketService.addSeatedTicket(ticketsToAddVM.getSportName(),
+					dateParser.parseDate(ticketsToAddVM.getGameDate()), ticketsToAddVM.getSection(),
+					ticketsToAddVM.getSeat());
+		} catch (GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException e) {
+			mav = new ModelAndView("/admin/tickets-added-date-error");
+		}
+		mav = new ModelAndView("/admin/tickets-added");
+
 		manageUserConnection(mav);
-		
+
 		return mav;
 	}
-	
-	private void addConnectedUserToModelAndView(ModelAndView mav,
-			Boolean connectedUser) {
+
+	private void addConnectedUserToModelAndView(ModelAndView mav, Boolean connectedUser) {
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 		} else {
 			mav.addObject("connectedUser", false);
 		}
 	}
-	
+
 	private void addLogOfUserConnection(Boolean connectedUser) {
 		if (connectedUser) {
 			logger.info("usagé connecté");
@@ -172,12 +190,12 @@ public class AdministrationController {
 			logger.info("usagé non connecté");
 		}
 	}
-	
+
 	private void manageUserConnection(ModelAndView mav) {
 		Boolean connectedUser = currentUser.isLogged();
 
 		addConnectedUserToModelAndView(mav, connectedUser);
-		
+
 		addLogOfUserConnection(connectedUser);
 	}
 }
