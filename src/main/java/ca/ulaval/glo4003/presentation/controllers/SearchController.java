@@ -72,7 +72,6 @@ public class SearchController {
 		
 		userPreferencesService.saveUserPreference(currentUser,ticketSearchVM);
 		ModelAndView mav = home();
-		
 		mav.addObject("preferencesSaved", true);
 		
 		return mav;

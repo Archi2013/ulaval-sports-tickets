@@ -16,7 +16,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SearchService;
+import ca.ulaval.glo4003.domain.services.UserPreferencesService;
 import ca.ulaval.glo4003.domain.utilities.user.User;
+import ca.ulaval.glo4003.persistence.daos.fakes.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.controllers.SearchController;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
@@ -28,6 +30,9 @@ public class SearchControllerTest {
 	
 	@Mock
 	private SearchService searchService;
+	
+	@Mock
+	private UserPreferencesService userPreferencesService;
 	
 	@Mock
 	private User currentUser;
@@ -82,9 +87,12 @@ public class SearchControllerTest {
 	}
 	
 	@Test
-	public void when_user_is_logged_home_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
+	public void when_user_is_logged_home_should_add_connectedUser_at_true() throws UserDoesntHaveSavedPreferences   {
+		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
 		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(userPreferencesService.getUserPreferencesForUser(currentUser)).thenReturn(ticketSearchVM);
+
 		ModelAndView mav = controller.home();
 		ModelMap modelMap = mav.getModelMap();
 		
@@ -106,10 +114,12 @@ public class SearchControllerTest {
 	@Test
 	public void savePreferences_should_set_preferencesSaved_to_true() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
+
 		
 		ModelAndView mav = controller.savePreferences(ticketSearchVM);
 		ModelMap modelMap = mav.getModelMap();
 		
+		assertTrue(true);
 		assertTrue(modelMap.containsAttribute("preferencesSaved"));
 		assertTrue((boolean) modelMap.get("preferencesSaved"));
 	}
