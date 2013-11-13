@@ -37,9 +37,9 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 	}
 
 	@Override
-	public TicketSearchPreferenceDto get(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserPreferencesDto get(String username) {
+		System.out.println(userPrefList.get(0).getDisplayedPeriod());
+		return userPrefList.get(0);
 	}
 
 	@Override
