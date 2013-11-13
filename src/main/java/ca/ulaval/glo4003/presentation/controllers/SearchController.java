@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SearchService;
+import ca.ulaval.glo4003.domain.services.UserPreferencesService;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
@@ -23,6 +24,10 @@ public class SearchController {
 	
 	@Inject
 	SearchService searchService;
+	
+	@Inject
+	UserPreferencesService userPreferencesService;
+	
 	
 	@Autowired
 	private User currentUser;
@@ -42,8 +47,9 @@ public class SearchController {
 		addLogOfUserConnection(connectedUser);
 		
 		if (connectedUser) {
-			// mettre les préférences de l'usager
-			// TicketSearchViewModel ticketSearchVM = 
+			// mettre les pr��f��rences de l'usager
+			// TicketSearchViewModel ticketSearchVM = userPreferenceService.getUserPreference(currentUser)
+			logger.info("Preference SAVE :"+ userPreferencesService.getUserPreferencesForUser(currentUser));
 		}
 		
 		mav.addObject("ticketSearchForm", ticketSearchVM);
@@ -57,7 +63,7 @@ public class SearchController {
 	
 	@RequestMapping(value="sauvegarde-preferences", method=RequestMethod.POST)
 	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
-		logger.info("Recherche : enregistre les préférences de recherche");
+		logger.info("Recherche : enregistre les pr��f��rences de recherche");
 		
 		// Enregistrement de ticketSearchVM | il faut le transformer en TicketSearchPreferenceDto
 		
@@ -94,9 +100,9 @@ public class SearchController {
 	
 	private void addLogOfUserConnection(Boolean connectedUser) {
 		if (connectedUser) {
-			logger.info("usagé connecté");
+			logger.info("usag�� connect��");
 		} else {
-			logger.info("usagé non connecté");
+			logger.info("usag�� non connect��");
 		}
 	}
 }

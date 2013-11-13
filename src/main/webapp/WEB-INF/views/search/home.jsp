@@ -47,7 +47,7 @@
                 </div>
             </div>
             <c:if test="${connectedUser}">
-                <input type="submit" value="Sauvegarder" class="standard-button-rounded-border orange-button"/>
+                <input type="submit" action="/recherche/sauvegarde-preferences" method="POST" value="Sauvegarder" class="standard-button-rounded-border orange-button"/>
             </c:if>
         </form:form>
     </section>
