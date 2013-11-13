@@ -135,15 +135,16 @@ public class AdministrationController {
 	}
 
 	@RequestMapping(value = "/ajout-billets-general", method = RequestMethod.POST)
-	public ModelAndView addTickets_general(@ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel ticketsToAddVM,
+	public ModelAndView addTickets_general(@ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel viewModel,
 			Model model) throws SportDoesntExistException, GameDoesntExistException {
-		logger.info("Adminisatration :Adding " + ticketsToAddVM.getNumberOfTickets() + "new general tickets to game"
-				+ ticketsToAddVM.getGameDate());
+		logger.info("Adminisatration :Adding " + viewModel.getNumberOfTickets() + "new general tickets to game"
+				+ viewModel.getGameDate());
 
 		ModelAndView mav;
 		try {
-			ticketService.addGeneralTickets(ticketsToAddVM.getSportName(),
-					dateParser.parseDate(ticketsToAddVM.getGameDate()), ticketsToAddVM.getNumberOfTickets());
+			ticketService.addGeneralTickets(viewModel.getSportName(), dateParser.parseDate(viewModel.getGameDate()),
+					viewModel.getNumberOfTickets());
+
 		} catch (GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException e) {
 			mav = new ModelAndView("/admin/tickets-added-date-error");
 		}

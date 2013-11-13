@@ -162,6 +162,7 @@ public class TicketRepositoryTest {
 	public void commit_notify_dao_of_transaction_end() throws Exception {
 		repository.commit();
 
-		verify(ticketDao, times(1)).endTransaction();
+		verify(ticketDao, times(1)).commit();
+		;
 	}
 }

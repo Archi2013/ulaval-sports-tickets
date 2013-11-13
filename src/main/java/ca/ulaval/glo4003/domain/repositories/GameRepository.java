@@ -38,19 +38,12 @@ public class GameRepository implements IGameRepository {
 	public Game recoverGame(String sport, DateTime date) {
 		GameDto gameDto = gameDao.get(sport, date);
 		List<Ticket> tickets = getTicketsForGame(sport, date);
-		PersistableGame game = gameFactory.instantiateGame(gameDto.getOpponents(), gameDto.getGameDate(), tickets);
-		existingActiveGames.add(game);
-		return game;
-	}
 
-	private List<Ticket> getTicketsForGame(String sport, DateTime date) {
-		List<Ticket> tickets;
-		try {
-			tickets = ticketRepository.recoverAllTicketsForGame(sport, date);
-		} catch (GameDoesntExistException e) {
-			tickets = new ArrayList<>();
-		}
-		return tickets;
+		PersistableGame game = gameFactory.instantiateGame(gameDto.getOpponents(), gameDto.getGameDate(), tickets);
+
+		existingActiveGames.add(game);
+
+		return game;
 	}
 
 	@Override
@@ -66,6 +59,16 @@ public class GameRepository implements IGameRepository {
 		List<Game> gameList = new ArrayList<>();
 		gameList.addAll(games);
 		return gameList;
+	}
+
+	private List<Ticket> getTicketsForGame(String sport, DateTime date) {
+		List<Ticket> tickets;
+		try {
+			tickets = ticketRepository.recoverAllTicketsForGame(sport, date);
+		} catch (GameDoesntExistException e) {
+			tickets = new ArrayList<>();
+		}
+		return tickets;
 	}
 
 	public Game instantiateNewGame(String opponents, DateTime date) {

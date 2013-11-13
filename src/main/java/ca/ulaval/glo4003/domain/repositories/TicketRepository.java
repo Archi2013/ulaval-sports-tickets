@@ -28,17 +28,7 @@ public class TicketRepository implements ITicketRepository {
 	private TicketDao dao;
 
 	List<Persistable<TicketDto>> newTickets = new ArrayList<>();
-	List<Persistable<TicketDto>> oldTickets = new ArrayList<>();
-
-	// TODO règle le bogue. À supprimer plus tard.
-	public TicketRepository() {
-
-	}
-
-	public TicketRepository(TicketFactory factory, TicketDao dao) {
-		this.factory = factory;
-		this.dao = dao;
-	}
+	List<Persistable<TicketDto>> ticketsInDao = new ArrayList<>();
 
 	@Override
 	public Ticket instantiateNewTicket() {
@@ -57,17 +47,17 @@ public class TicketRepository implements ITicketRepository {
 	@Override
 	public Ticket recoverTicket(String sport, DateTime date, int ticketNumber) throws TicketDoesntExistException {
 		TicketDto data = dao.get(sport, date, ticketNumber);
-		PersistableTicket oldTicket = factory.instantiateTicket(data);
-		oldTickets.add(oldTicket);
-		return oldTicket;
+		PersistableTicket recoveredTicket = factory.instantiateTicket(data);
+		ticketsInDao.add(recoveredTicket);
+		return recoveredTicket;
 	}
 
 	@Override
 	public Ticket recoverTicket(String sport, DateTime date, String seat) {
 		TicketDto data = dao.get(sport, date, seat);
-		PersistableTicket oldTicket = factory.instantiateTicket(data.getSeat(), data.getSection(), true);
-		oldTickets.add(oldTicket);
-		return oldTicket;
+		PersistableTicket recoveredTicket = factory.instantiateTicket(data.getSeat(), data.getSection(), true);
+		ticketsInDao.add(recoveredTicket);
+		return recoveredTicket;
 	}
 
 	@Override
@@ -76,10 +66,10 @@ public class TicketRepository implements ITicketRepository {
 
 		List<TicketDto> datas = dao.getTicketsForGame(sport, Date);
 		for (TicketDto data : datas) {
-			PersistableTicket newTicket = factory.instantiateTicket(data);
-			oldTickets.add(newTicket);
+			PersistableTicket recoveredTicket = factory.instantiateTicket(data);
+			ticketsInDao.add(recoveredTicket);
 
-			ticketsToReturn.add(newTicket);
+			ticketsToReturn.add(recoveredTicket);
 		}
 		return ticketsToReturn;
 	}
@@ -88,22 +78,22 @@ public class TicketRepository implements ITicketRepository {
 	public void commit() throws TicketAlreadyExistException, TicketDoesntExistException {
 		saveChangesToOldTickets();
 		persistsNewTickets();
-		dao.endTransaction();
+		dao.commit();
+	}
+
+	private void saveChangesToOldTickets() throws TicketDoesntExistException {
+		for (Persistable<TicketDto> ticket : ticketsInDao) {
+			dao.update(ticket.saveDataInDTO());
+		}
+		dao.commit();
 	}
 
 	private void persistsNewTickets() throws TicketAlreadyExistException {
 		for (Persistable<TicketDto> ticket : newTickets) {
 			dao.add(ticket.saveDataInDTO());
-			oldTickets.add(ticket);
+			ticketsInDao.add(ticket);
 		}
 		newTickets.clear();
-	}
-
-	private void saveChangesToOldTickets() throws TicketDoesntExistException {
-		for (Persistable<TicketDto> ticket : oldTickets) {
-			dao.update(ticket.saveDataInDTO());
-		}
-		dao.commit();
 	}
 
 	@Override
@@ -113,7 +103,7 @@ public class TicketRepository implements ITicketRepository {
 		List<Ticket> ticketsToReturn = new ArrayList<>();
 		for (TicketDto ticket : availableTickets) {
 			PersistableTicket newTicket = factory.instantiateTicket(ticket);
-			oldTickets.add(newTicket);
+			ticketsInDao.add(newTicket);
 			ticketsToReturn.add(newTicket);
 		}
 		return ticketsToReturn.subList(0, numberOfSeats);

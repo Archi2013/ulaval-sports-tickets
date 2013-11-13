@@ -26,9 +26,9 @@ public class CommandTicketService {
 	@Inject
 	private IGameRepository gameRepository;
 
-	public void addGeneralTickets(String sport, DateTime date, int numberOfTickets) throws GameDoesntExistException,
+	public void addGeneralTickets(String sportName, DateTime gameDate, int numberOfTickets) throws GameDoesntExistException,
 			GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
-		Game game = gameRepository.recoverGame(sport, date);
+		Game game = gameRepository.recoverGame(sportName, gameDate);
 
 		for (int i = 0; i < numberOfTickets; i++) {
 			game.addTicket(ticketRepository.instantiateNewTicket());
@@ -64,4 +64,5 @@ public class CommandTicketService {
 		ticketRepository.commit();
 
 	}
+
 }
