@@ -19,7 +19,6 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 
 	private List<UserPreferencesDto> userPrefList;
 
-
 	public FakeDataUserPreferencesDao() {
 		this.userPrefList = new ArrayList<UserPreferencesDto>();
 
@@ -27,11 +26,11 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 		List<String> sportsName = new ArrayList<String>();
 		sportsName.add("Football");
 
-		add(new UserPreferencesDto("mo", sportsName,
-				DisplayedPeriod.ALL, true, listTicket));
-		
-		add(new UserPreferencesDto("test", sportsName,
-				DisplayedPeriod.ONE_DAY, false, listTicket));
+		add(new UserPreferencesDto("mo", sportsName, DisplayedPeriod.ALL, true,
+				listTicket));
+
+		add(new UserPreferencesDto("test", sportsName, DisplayedPeriod.ONE_DAY,
+				false, listTicket));
 
 	}
 
@@ -42,50 +41,49 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 
 	@Override
 	public UserPreferencesDto get(String username) throws UserDoesntHaveSavedPreferences {
-		
-		
-		for(UserPreferencesDto userPref: this.userPrefList)
-		{
-			if(userPref.username.equals(username))
-			{
+
+		for (UserPreferencesDto userPref : this.userPrefList) {
+			if (userPref.username.equals(username)) {
 				return userPref;
 			}
 		}
-		
+
 		throw new UserDoesntHaveSavedPreferences();
 	}
 
 	@Override
 	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) {
-		
-		DisplayedPeriod DispPeriod=DisplayedPeriod.valueOf(userPreferences.getDisplayedPeriod());
-		UserPreferencesDto userPrefDto = new UserPreferencesDto(currentUser.getUsername(), userPreferences.selectedSports, DispPeriod, userPreferences.localGameOnly, userPreferences.selectedTicketKinds);
-		
-		int index=indexOfUserPositionInUserPreferencesList(currentUser.getUsername());
 
-		if(index>=0){
-			//Overwrite current preferences
+		DisplayedPeriod DispPeriod = DisplayedPeriod.valueOf(userPreferences.getDisplayedPeriod());
+		
+		UserPreferencesDto userPrefDto = new UserPreferencesDto(currentUser.getUsername(), 
+				userPreferences.selectedSports,
+				DispPeriod, userPreferences.localGameOnly,
+				userPreferences.selectedTicketKinds);
+		
+		int index = indexOfUserPositionInUserPreferencesList(currentUser.getUsername());
+
+		if (index >= 0) {
+			// Overwrite current preferences
 			userPrefList.remove(index);
 			userPrefList.add(index, userPrefDto);
-		}
-		else{
-			//Add preferences (never been saved before for this user)
+		} else {
+			// Add preferences (never been saved before for this user)
 			userPrefList.add(userPrefDto);
 
 		}
 	}
-	
-	private int indexOfUserPositionInUserPreferencesList(String username){
-		for(int i=0;i<this.userPrefList.size();i++){
-			if(userPrefList.get(i).username.equals(username))
-			{
+
+	private int indexOfUserPositionInUserPreferencesList(String username) {
+		for (int i = 0; i < this.userPrefList.size(); i++) {
+			if (userPrefList.get(i).username.equals(username)) {
 				return i;
 			}
 		}
 		return -1;
 	}
 
-	public void commit(){
-		
+	public void commit() {
+
 	}
 }
