@@ -55,6 +55,7 @@ public class XmlUserDao implements UserDao {
 		}
 	}
 
+	
 	@Override
 	public void add(UserDto user) throws UserAlreadyExistException {
 		if (isIdExist(user.getUsername())) {
