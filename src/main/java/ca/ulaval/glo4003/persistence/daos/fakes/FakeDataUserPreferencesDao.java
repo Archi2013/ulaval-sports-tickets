@@ -85,4 +85,7 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 		return -1;
 	}
 
+	public void commit(){
+		
+	}
 }

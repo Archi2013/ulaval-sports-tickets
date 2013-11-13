@@ -16,4 +16,5 @@ public interface UserPreferencesDao {
 
 	void save(User username, TicketSearchPreferenceDto userPreferences);
 	
+	public void commit();
 }
