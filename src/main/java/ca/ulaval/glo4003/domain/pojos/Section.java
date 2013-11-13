@@ -5,7 +5,8 @@ import java.util.List;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
 
 public class Section {
-	
+
+	private static final String GENERAL_SECTION = "Générale";
 	private String sectionName;
 	private int numberOfTickets;
 	private double price;
@@ -19,11 +20,13 @@ public class Section {
 	}
 
 	public boolean isGeneralAdmission() {
-		return sectionName == null;
+
+		boolean generalAdmission = sectionName.equals(GENERAL_SECTION);
+		return generalAdmission;
 	}
-	
+
 	public Boolean isValidElements(Integer numberOfTicketsToBuy, List<String> selectedSeats) {
-		Boolean result; 
+		Boolean result;
 		if (isGeneralAdmission()) {
 			result = isValidGeneralAdmissionInformations(numberOfTicketsToBuy);
 		} else {
@@ -38,7 +41,7 @@ public class Section {
 		}
 		return true;
 	}
-	
+
 	private Boolean isValidWithSeatAdmissionInformations(List<String> selectedSeats) {
 		Integer numberOfSelectedSeatTicketsToBuy = selectedSeats.size();
 		if (numberOfSelectedSeatTicketsToBuy < 1 || numberOfSelectedSeatTicketsToBuy > this.numberOfTickets) {
@@ -50,6 +53,22 @@ public class Section {
 			}
 		}
 		return true;
+	}
+
+	public String getSectionName() {
+		return sectionName;
+	}
+
+	public int getNumberOfTickets() {
+		return numberOfTickets;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public List<String> getSeats() {
+		return seats;
 	}
 
 }

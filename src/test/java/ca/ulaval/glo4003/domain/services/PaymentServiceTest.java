@@ -1,6 +1,7 @@
 package ca.ulaval.glo4003.domain.services;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -104,7 +105,7 @@ public class PaymentServiceTest {
 		PayableItemsViewModel payableItemsVM = mock(PayableItemsViewModel.class);
 
 		when(gameDao.get(GAME_ID)).thenReturn(gameDto);
-		when(sectionDao.get(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
+		when(sectionDao.getAvailable(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
 		when(payableItemsViewModelFactory.createViewModel(chooseTicketsVM, gameDto, sectionDto)).thenReturn(payableItemsVM);
 
 		PayableItemsViewModel actual = paymentService.getPayableItemsViewModel(chooseTicketsVM);
@@ -118,7 +119,7 @@ public class PaymentServiceTest {
 		GameDto gameDto = mock(GameDto.class);
 
 		when(gameDao.get(GAME_ID)).thenReturn(gameDto);
-		when(sectionDao.get(GAME_ID, SECTION_NAME)).thenThrow(new SectionDoesntExistException());
+		when(sectionDao.getAvailable(GAME_ID, SECTION_NAME)).thenThrow(new SectionDoesntExistException());
 
 		paymentService.getPayableItemsViewModel(chooseTicketsVM);
 	}
@@ -141,9 +142,10 @@ public class PaymentServiceTest {
 		SectionDto sectionDto = mock(SectionDto.class);
 
 		when(gameDao.get(GAME_ID)).thenReturn(gameDto);
-		when(sectionDao.get(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
+		when(sectionDao.getAvailable(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
 		when(sectionDto.isGeneralAdmission()).thenReturn(true);
-		when(calculator.calculateCumulativePriceForGeneralAdmission(any(Integer.class), any(Double.class))).thenReturn(CUMULATIVE_PRICE);
+		when(calculator.calculateCumulativePriceForGeneralAdmission(any(Integer.class), any(Double.class))).thenReturn(
+				CUMULATIVE_PRICE);
 
 		paymentService.saveToCart(chooseTicketsVM);
 
@@ -171,7 +173,7 @@ public class PaymentServiceTest {
 		GameDto gameDto = mock(GameDto.class);
 		when(gameDao.get(GAME_ID)).thenReturn(gameDto);
 
-		when(sectionDao.get(GAME_ID, SECTION_NAME)).thenThrow(new SectionDoesntExistException());
+		when(sectionDao.getAvailable(GAME_ID, SECTION_NAME)).thenThrow(new SectionDoesntExistException());
 
 		paymentService.saveToCart(chooseTicketsVM);
 	}
@@ -211,7 +213,7 @@ public class PaymentServiceTest {
 
 	@Ignore
 	@Test
-	public void given_a_paymentViewModel_buyTicketsInCart_should_call_pay_of_a_credit_card() throws InvalidCreditCardException {
+	public void given_a_paymentViewModel_buyTicketsInCart_should_call_pay_of_a_credit_card() throws InvalidCreditCardException, NoTicketsInCartException {
 		PaymentViewModel paymentVM = new PaymentViewModel();
 		MisterCard creditCard = mock(MisterCard.class);
 
@@ -227,7 +229,7 @@ public class PaymentServiceTest {
 
 	@Ignore
 	@Test
-	public void buyTicketsInCart_should_make_tickets_unavailable_to_other_people() throws InvalidCreditCardException {
+	public void buyTicketsInCart_should_make_tickets_unavailable_to_other_people() throws InvalidCreditCardException, NoTicketsInCartException {
 		PaymentViewModel paymentVM = new PaymentViewModel();
 		MisterCard creditCard = mock(MisterCard.class);
 

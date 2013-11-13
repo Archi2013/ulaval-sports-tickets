@@ -29,33 +29,34 @@ import com.google.common.collect.Iterables;
 
 @Repository
 class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
-	
+
 	@Inject
 	GameDao gameDao;
-	
+
 	@Inject
 	SectionDao sectionDao;
-	
+
 	@Inject
 	TicketTypeUrlMapper ticketTypeUrlMapper;
-	
+
 	@Inject
 	SportUrlMapper sportUrlMapper;
-	
+
 	@Override
 	public List<SectionForSearchDto> getSections(TicketSearchPreferenceDto ticketSearchPreferenceDto) {
 		List<String> sportNames = ticketSearchPreferenceDto.getSelectedSports();
 		List<SectionForSearchDto> sectionFSDtos = createFullListForSelectedSports(sportNames);
-		
+
 		final Boolean localGameOnly = ticketSearchPreferenceDto.isLocalGameOnly();
-		final List<TicketKind> ticketKinds = transform(ticketSearchPreferenceDto.getSelectedTicketKinds(), new Function<String, TicketKind>() {
-			@Override
-			public TicketKind apply(String ticketKind) {
-				return TicketKind.valueOf(ticketKind);
-			}
-		});
+		final List<TicketKind> ticketKinds = transform(ticketSearchPreferenceDto.getSelectedTicketKinds(),
+				new Function<String, TicketKind>() {
+					@Override
+					public TicketKind apply(String ticketKind) {
+						return TicketKind.valueOf(ticketKind);
+					}
+				});
 		final DateTime endDateTime = calculateEndDateTime(DisplayedPeriod.valueOf(ticketSearchPreferenceDto.getDisplayedPeriod()));
-		
+
 		sectionFSDtos = newArrayList(Iterables.filter(sectionFSDtos, new Predicate<SectionForSearchDto>() {
 
 			@Override
@@ -73,11 +74,11 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 		}));
 		return sectionFSDtos;
 	}
-	
+
 	private DateTime calculateEndDateTime(DisplayedPeriod displayedPeriod) {
 		DateTime result = DateTime.now();
-		
-		switch(displayedPeriod) {
+
+		switch (displayedPeriod) {
 		case ONE_DAY:
 			return result.plusDays(1);
 		case ONE_WEEK:
@@ -94,23 +95,23 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 			return result.plusYears(2);
 		}
 	}
-	
+
 	private List<SectionForSearchDto> createFullListForSelectedSports(List<String> sportNames) {
 		List<SectionForSearchDto> sectionFSDtos = newArrayList();
-		
+
 		try {
 			for (String sportName : sportNames) {
-					List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
-					
-					for (GameDto gameDto : gameDtos) {
-						List<SectionDto> sectionDtos = sectionDao.getAll(gameDto.getId());
-						
-						for (SectionDto sectionDto : sectionDtos) {
-							String url = createUrl(sportName, gameDto.getId(), sectionDto.getSectionName());
-							SectionForSearchDto sectionFSDto = new SectionForSearchDto(sectionDto, gameDto, sportName, url);
-							sectionFSDtos.add(sectionFSDto);
-						}
+				List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
+
+				for (GameDto gameDto : gameDtos) {
+					List<SectionDto> sectionDtos = sectionDao.getAllAvailable(gameDto.getId());
+
+					for (SectionDto sectionDto : sectionDtos) {
+						String url = createUrl(sportName, gameDto.getId(), sectionDto.getSectionName());
+						SectionForSearchDto sectionFSDto = new SectionForSearchDto(sectionDto, gameDto, sportName, url);
+						sectionFSDtos.add(sectionFSDto);
 					}
+				}
 			}
 			return sectionFSDtos;
 		} catch (SportDoesntExistException | GameDoesntExistException e) {
@@ -121,6 +122,7 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 	}
 
 	private String createUrl(String sportName, Long gameId, String sectionName) {
-		return String.format("/sport/%s/match/%s/billets/%s", sportUrlMapper.getUrl(sportName), gameId, ticketTypeUrlMapper.getUrl(sectionName));
+		return String.format("/sport/%s/match/%s/billets/%s", sportUrlMapper.getUrl(sportName), gameId,
+				ticketTypeUrlMapper.getUrl(sectionName));
 	}
 }

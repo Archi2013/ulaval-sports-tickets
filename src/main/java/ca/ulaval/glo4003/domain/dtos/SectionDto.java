@@ -5,13 +5,14 @@ import java.util.List;
 
 public class SectionDto {
 
+	private static final String GENERAL_SECTION = "Générale";
 	private String sectionName;
 	private int numberOfTickets;
 	private double price;
 	private List<String> seats;
-	
+
 	public SectionDto(int numberOfTickets, double price) {
-		this.sectionName = "Générale";
+		this.sectionName = GENERAL_SECTION;
 		this.numberOfTickets = numberOfTickets;
 		this.price = price;
 		this.seats = new ArrayList<>();
@@ -25,7 +26,7 @@ public class SectionDto {
 	}
 
 	public boolean isGeneralAdmission() {
-		return sectionName == null;
+		return sectionName.equals(GENERAL_SECTION);
 	}
 
 	public String getSectionName() {

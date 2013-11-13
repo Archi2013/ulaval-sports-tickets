@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.web.converters;
+package ca.ulaval.glo4003.presentation.converters;
 
 import static com.google.common.collect.Lists.*;
 import static org.junit.Assert.*;

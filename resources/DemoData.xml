@@ -331,14 +331,14 @@
 			<location>Paris</location>
 			<oponents>Tour Eiffel</oponents>
 			<sportName>Démonstration</sportName>
-			<date>2013/11/13 08:00 EDT</date>
+			<date>2014/05/02 21:00 EDT</date>
 		</game>
 		<game>
 			<id>20000</id>
 			<location>Tôkyô</location>
 			<oponents>Tôkyô Tower</oponents>
 			<sportName>Démonstration</sportName>
-			<date>2013/11/18 15:45 EDT</date>
+			<date>2014/02/01 20:30 EDT</date>
 		</game>
 		<game>
 			<id>30000</id>
@@ -352,14 +352,14 @@
 			<location>Canberra</location>
 			<oponents>Kangourou</oponents>
 			<sportName>Démonstration</sportName>
-			<date>2014/02/01 20:30 EDT</date>
+			<date>2013/11/21 15:45 EDT</date>
 		</game>
 		<game>
 			<id>50000</id>
 			<location>Johannesbourg</location>
 			<oponents>Vouvouzela</oponents>
 			<sportName>Démonstration</sportName>
-			<date>2014/05/02 21:00 EDT</date>
+			<date>2013/11/16 08:00 EDT</date>
 		</game>
 	</games>
 	<tickets>
@@ -2165,13 +2165,13 @@
 			<id>245</id>
 			<price>5.0</price>
 			<gameID>12</gameID>
-			<available>true</available>
+			<available>false</available>
 		</ticket>
 		<ticket>
 			<id>246</id>
 			<price>5.0</price>
 			<gameID>12</gameID>
-			<available>true</available>
+			<available>false</available>
 		</ticket>
 		<ticket>
 			<id>247</id>

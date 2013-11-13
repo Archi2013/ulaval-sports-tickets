@@ -40,13 +40,25 @@ public class XmlSectionDao implements SectionDao {
 		String sectionClause = GENERAL_KEYWORD.equals(sectionName) ? "[not(section)]" : "[section=\"" + sectionName + "\"]";
 		String xPath = "/base/tickets/ticket[gameID=\"" + gameId + "\"]" + sectionClause;
 
+		return getWithClause(sectionName, xPath);
+	}
+
+	@Override
+	public SectionDto getAvailable(Long gameId, String sectionName) throws SectionDoesntExistException {
+		String sectionClause = GENERAL_KEYWORD.equals(sectionName) ? "[not(section)]" : "[section=\"" + sectionName + "\"]";
+		String xPath = "/base/tickets/ticket[gameID=\"" + gameId + "\"]" + sectionClause + "[available='true']";
+
+		return getWithClause(sectionName, xPath);
+	}
+
+	private SectionDto getWithClause(String sectionName, String xPathClause) throws SectionDoesntExistException {
 		try {
-			int numberOfTickets = database.countNode(xPath);
+			int numberOfTickets = database.countNode(xPathClause);
 			if (numberOfTickets == 0) {
 				throw new SectionDoesntExistException();
 			}
-			String price = database.extractPath(xPath + "/price");
-			List<SimpleNode> nodes = database.extractNodeSet(xPath);
+			String price = database.extractPath(xPathClause + "/price");
+			List<SimpleNode> nodes = database.extractNodeSet(xPathClause);
 
 			List<String> seats = new ArrayList<>();
 			for (SimpleNode node : nodes) {
@@ -72,6 +84,16 @@ public class XmlSectionDao implements SectionDao {
 	}
 
 	@Override
+	public List<SectionDto> getAllAvailable(Long gameId) throws GameDoesntExistException {
+		try {
+			Set<String> sections = getSections(gameId);
+			return convertToAvailableSectionDtos(gameId, sections);
+		} catch (SectionDoesntExistException | NoSuchAttributeException e) {
+			throw new XmlIntegrityException(e);
+		}
+	}
+
+	@Override
 	public Set<String> getAllSections() {
 		if (sectionCache == null) {
 			initCache();
@@ -88,6 +110,16 @@ public class XmlSectionDao implements SectionDao {
 		List<SectionDto> sections = new ArrayList<>();
 		for (String sectionName : sectionNames) {
 			SectionDto section = get(gameId, sectionName);
+			sections.add(section);
+		}
+		return sections;
+	}
+
+	private List<SectionDto> convertToAvailableSectionDtos(Long gameId, Set<String> sectionNames)
+			throws SectionDoesntExistException, NoSuchAttributeException {
+		List<SectionDto> sections = new ArrayList<>();
+		for (String sectionName : sectionNames) {
+			SectionDto section = getAvailable(gameId, sectionName);
 			sections.add(section);
 		}
 		return sections;
@@ -125,4 +157,5 @@ public class XmlSectionDao implements SectionDao {
 		Set<String> sections = sectionCache.get(gameId);
 		sections.add(node.hasNode("section") ? node.getNodeValue("section") : GENERAL_KEYWORD);
 	}
+
 }

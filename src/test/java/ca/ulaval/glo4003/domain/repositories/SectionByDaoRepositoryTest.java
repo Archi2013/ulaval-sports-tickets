@@ -11,14 +11,14 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.domain.factories.ISectionFactory;
+import ca.ulaval.glo4003.domain.factories.SectionFactory;
 import ca.ulaval.glo4003.domain.pojos.Section;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SectionRepositoryTest {
+public class SectionByDaoRepositoryTest {
 
 	private static final String SECTION_NAME = "Indigo";
 
@@ -28,10 +28,10 @@ public class SectionRepositoryTest {
 	private SectionDao sectionDao;
 	
 	@Mock
-	private ISectionFactory sectionFactory;
+	private SectionFactory sectionFactory;
 	
 	@InjectMocks
-	SectionRepository sectionRepository;
+	SectionByDaoRepository sectionRepository;
 
 	@Before
 	public void setUp() throws SportDoesntExistException {

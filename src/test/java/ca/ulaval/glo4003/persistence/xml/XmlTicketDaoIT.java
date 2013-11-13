@@ -15,6 +15,7 @@ import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 public class XmlTicketDaoIT {
 
+	private static final boolean NOT_AVAILABLE = false;
 	private static final boolean AVAILABLE = true;
 	private XmlTicketDao ticketDao;
 	private AtomicInteger atomicInt;
@@ -60,7 +61,7 @@ public class XmlTicketDaoIT {
 
 	@Test
 	public void testGetTicketsForGame() throws Exception {
-		List<TicketDto> tickets = ticketDao.getTicketsForGame(2L);
+		List<TicketDto> tickets = ticketDao.getAvailableTicketsForGame(2L);
 
 		TicketDto expected0 = new TicketDto(2, 5, 15.00f, AVAILABLE);
 		TicketDto expected1 = new TicketDto(2, 6, 15.00f, AVAILABLE);
@@ -81,7 +82,7 @@ public class XmlTicketDaoIT {
 
 	@Test(expected = GameDoesntExistException.class)
 	public void testGetTicketsForInvalidGameShouldThrow() throws Exception {
-		ticketDao.getTicketsForGame(-1L);
+		ticketDao.getAvailableTicketsForGame(-1L);
 	}
 
 	@Test

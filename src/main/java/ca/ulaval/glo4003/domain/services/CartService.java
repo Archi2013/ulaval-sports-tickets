@@ -25,11 +25,12 @@ public class CartService {
 			GameDto game = cart.getGameDto();
 			SectionDto section = cart.getSectionDto();
 			List<String> seats = cart.getSelectedSeats();
+			int numberOfSeats = cart.getNumberOfTicketsToBuy();
 
-			ticketService.makeTicketsUnavailable(game, section, seats);
+			ticketService.makeTicketsUnavailable(game, section, numberOfSeats, seats);
 
 		} catch (GameDoesntExistException | GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException e) {
-			// TODO Do nothing for now
+			throw new CartException();
 		}
 	}
 }

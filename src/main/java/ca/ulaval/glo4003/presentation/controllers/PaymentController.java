@@ -182,6 +182,11 @@ public class PaymentController {
 			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_INVALID_CREDIT_CARD, new Object[] {}, null);
 			mav.addObject("errorMessage", errorMessage);
 			return mav;
+		} catch (NoTicketsInCartException e) {
+			mav.setViewName(ERROR_PAGE);
+			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NO_TICKETS, new Object[] {}, null);
+			mav.addObject("errorMessage", errorMessage);
+			logger.info("Exception : " + e.getClass().getSimpleName() + " : pas de tickets dans le panier d'achat");
 		}
 
 		paymentService.emptyCart();

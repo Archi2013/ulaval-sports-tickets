@@ -31,7 +31,6 @@ public class XmlGameDao implements GameDao {
 
 	private static AtomicLong nextId;
 
-	// @Inject
 	private XmlDatabase database;
 
 	public XmlGameDao() {
@@ -116,7 +115,8 @@ public class XmlGameDao implements GameDao {
 		throw new GameDoesntExistException();
 	}
 
-	private List<GameDto> convertNodesToGames(List<SimpleNode> nodes) throws NoSuchAttributeException, GameDoesntExistException {
+	private List<GameDto> convertNodesToGames(List<SimpleNode> nodes) throws NoSuchAttributeException,
+			GameDoesntExistException {
 		List<GameDto> games = new ArrayList<>();
 		for (SimpleNode node : nodes) {
 			games.add(convertNodeToGame(node));

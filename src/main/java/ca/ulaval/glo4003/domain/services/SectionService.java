@@ -31,7 +31,7 @@ public class SectionService {
 
 	@Inject
 	private SectionViewModelFactory sectionFactory;
-	
+
 	@Inject
 	private ChooseTicketsViewModelFactory chooseTicketsViewModelFactory;
 
@@ -41,7 +41,20 @@ public class SectionService {
 			GameDto game = gameDao.get(gameId);
 			SectionDto section = sectionDao.get(gameId, sectionName);
 			SectionViewModel sectionViewModel = sectionFactory.createViewModel(section, game);
-			
+
+			return sectionViewModel;
+		} catch (GameDoesntExistException | NoTicketTypeForUrlException e) {
+			throw new SectionDoesntExistException();
+		}
+	}
+
+	public SectionViewModel getAvailableSection(Long gameId, String sectionUrl) throws SectionDoesntExistException {
+		try {
+			String sectionName = ticketTypeUrlMapper.getTicketType(sectionUrl);
+			GameDto game = gameDao.get(gameId);
+			SectionDto section = sectionDao.getAvailable(gameId, sectionName);
+			SectionViewModel sectionViewModel = sectionFactory.createViewModel(section, game);
+
 			return sectionViewModel;
 		} catch (GameDoesntExistException | NoTicketTypeForUrlException e) {
 			throw new SectionDoesntExistException();
@@ -53,7 +66,20 @@ public class SectionService {
 			String sectionName = ticketTypeUrlMapper.getTicketType(sectionUrl);
 			GameDto gameDto = gameDao.get(gameId);
 			SectionDto sectionDto = sectionDao.get(gameId, sectionName);
-			
+
+			return chooseTicketsViewModelFactory.createViewModel(gameDto, sectionDto);
+		} catch (GameDoesntExistException | NoTicketTypeForUrlException e) {
+			throw new SectionDoesntExistException();
+		}
+	}
+
+	public ChooseTicketsViewModel getAvailableChooseTicketsViewModel(Long gameId, String sectionUrl)
+			throws SectionDoesntExistException {
+		try {
+			String sectionName = ticketTypeUrlMapper.getTicketType(sectionUrl);
+			GameDto gameDto = gameDao.get(gameId);
+			SectionDto sectionDto = sectionDao.getAvailable(gameId, sectionName);
+
 			return chooseTicketsViewModelFactory.createViewModel(gameDto, sectionDto);
 		} catch (GameDoesntExistException | NoTicketTypeForUrlException e) {
 			throw new SectionDoesntExistException();

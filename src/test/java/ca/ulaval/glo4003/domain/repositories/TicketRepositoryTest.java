@@ -1,6 +1,8 @@
 package ca.ulaval.glo4003.domain.repositories;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,9 @@ import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.factories.TicketFactory;
 import ca.ulaval.glo4003.domain.tickets.PersistableTicket;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketDao;
+import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TicketRepositoryTest {
@@ -59,12 +63,13 @@ public class TicketRepositoryTest {
 	private TicketRepository repository;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws GameDoesntExistException, TicketDoesntExistException {
 		datas = new ArrayList<>();
 		datas.add(firstTicketData);
 		datas.add(secondTicketData);
 		when(ticketFactory.instantiateTicket()).thenReturn(ticketGeneratedWithNoParameter);
-		when(ticketFactory.instantiateTicket(A_NEW_SEAT, A_NEW_SECTION, AVAILABLE)).thenReturn(ticketGeneratedWithParameter);
+		when(ticketFactory.instantiateTicket(A_NEW_SEAT, A_NEW_SECTION, AVAILABLE)).thenReturn(
+				ticketGeneratedWithParameter);
 		when(ticketDao.get(A_SPORT, A_DATE, A_TICKET_NUMBER)).thenReturn(firstTicketData);
 		when(ticketDao.getTicketsForGame(A_SPORT, A_DATE)).thenReturn(datas);
 		when(ticketFactory.instantiateTicket(firstTicketData)).thenReturn(ticketWithDataFromDao);
@@ -85,14 +90,15 @@ public class TicketRepositoryTest {
 	}
 
 	@Test
-	public void recoverTicket_returns_ticket_built_in_factory_with_data_from_dao() {
+	public void recoverTicket_returns_ticket_built_in_factory_with_data_from_dao() throws TicketDoesntExistException {
 		Ticket ticketReturned = repository.recoverTicket(A_SPORT, A_DATE, A_TICKET_NUMBER);
 
 		Assert.assertSame(ticketWithDataFromDao, ticketReturned);
 	}
 
 	@Test
-	public void recoverAllTicketsForGame_returns_tickets_built_in_factory_with_data_from_dao() {
+	public void recoverAllTicketsForGame_returns_tickets_built_in_factory_with_data_from_dao()
+			throws GameDoesntExistException {
 		List<Ticket> ticketsReturned = repository.recoverAllTicketsForGame(A_SPORT, A_DATE);
 
 		Assert.assertSame(ticketWithDataFromDao, ticketsReturned.get(0));
@@ -156,6 +162,7 @@ public class TicketRepositoryTest {
 	public void commit_notify_dao_of_transaction_end() throws Exception {
 		repository.commit();
 
-		verify(ticketDao, times(1)).endTransaction();
+		verify(ticketDao, times(1)).commit();
+		;
 	}
 }

@@ -25,7 +25,7 @@ public class SectionController {
 
 	@Inject
 	private SectionService sectionService;
-	
+
 	@Autowired
 	private User currentUser;
 
@@ -33,36 +33,35 @@ public class SectionController {
 	public ModelAndView getSectionForGame(@PathVariable Long gameId, @PathVariable String ticketType) {
 		try {
 			logger.info("Getting ticket section : " + ticketType);
-			
+
 			ModelAndView mav = new ModelAndView("section/details");
 			mav.addObject("currency", Constants.CURRENCY);
-			
+
 			manageUserConnection(mav);
-			
-			SectionViewModel section = sectionService.getSection(gameId, ticketType);
-			
+
+			SectionViewModel section = sectionService.getAvailableSection(gameId, ticketType);
+
 			mav.addObject("section", section);
-			
+
 			ChooseTicketsViewModel chooseTicketsVM = sectionService.getChooseTicketsViewModel(gameId, ticketType);
-			
+
 			mav.addObject("chooseTicketsForm", chooseTicketsVM);
-			
+
 			return mav;
 		} catch (SectionDoesntExistException e) {
 			logger.info("Exception : " + e.getClass().getSimpleName() + " : la section n'existe pas");
 			return new ModelAndView("error/404");
 		}
 	}
-	
-	private void addConnectedUserToModelAndView(ModelAndView mav,
-			Boolean connectedUser) {
+
+	private void addConnectedUserToModelAndView(ModelAndView mav, Boolean connectedUser) {
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 		} else {
 			mav.addObject("connectedUser", false);
 		}
 	}
-	
+
 	private void addLogOfUserConnection(Boolean connectedUser) {
 		if (connectedUser) {
 			logger.info("usagé connecté");
@@ -70,12 +69,12 @@ public class SectionController {
 			logger.info("usagé non connecté");
 		}
 	}
-	
+
 	private void manageUserConnection(ModelAndView mav) {
 		Boolean connectedUser = currentUser.isLogged();
 
 		addConnectedUserToModelAndView(mav, connectedUser);
-		
+
 		addLogOfUserConnection(connectedUser);
 	}
 }
