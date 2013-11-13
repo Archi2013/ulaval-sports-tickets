@@ -41,6 +41,8 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 
 	@Override
 	public UserPreferencesDto get(String username) {
+		System.out.println(userPrefList.size());
+		
 		for(int i=0; i < userPrefList.size(); i++)
 		{
 			if(userPrefList.get(i).username.equals(username))
@@ -53,9 +55,31 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 	}
 
 	@Override
-	public void save(User username, TicketSearchPreferenceDto userPreferences) {
-		// TODO Auto-generated method stub
+	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) {
+		
+		DisplayedPeriod DispPeriod=DisplayedPeriod.valueOf(userPreferences.getDisplayedPeriod());
+		UserPreferencesDto userPrefDto = new UserPreferencesDto(currentUser.getUsername(), userPreferences.selectedSports, DispPeriod, userPreferences.localGameOnly, userPreferences.selectedTicketKinds);
+		
+		int index=indexOfUserPositionInUserPreferencesList(currentUser.getUsername());
+		System.out.println("index:"+index);
+		if(index>=0){
+			userPrefList.remove(index);
+			userPrefList.add(index, userPrefDto);
+		}
+		else{
+			userPrefList.add(userPrefDto);
 
+		}
+	}
+	
+	private int indexOfUserPositionInUserPreferencesList(String username){
+		for(int i=0;i<this.userPrefList.size();i++){
+			if(userPrefList.get(i).username.equals(username))
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }

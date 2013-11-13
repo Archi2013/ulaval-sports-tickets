@@ -36,9 +36,12 @@ public class UserPreferencesService {
 		return ticketSearchVModel;
 	}
 	
-	public void saveUserPreference(){
+	public void saveUserPreference(User currentUser, TicketSearchViewModel userPreferences){
 		
-		//userPreferencesDao.save();
+		
+		TicketSearchPreferenceDto ticketSearchDto = ticketSearchFactory.createPreferenceDto(userPreferences);
+		
+		userPreferencesDao.save(currentUser,ticketSearchDto);
 	}
 	
 	

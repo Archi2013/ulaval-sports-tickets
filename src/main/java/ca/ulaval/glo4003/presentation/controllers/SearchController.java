@@ -49,7 +49,6 @@ public class SearchController {
 		if (connectedUser) {
 			// mettre les pr��f��rences de l'usager
 			
-			
 			ticketSearchVM = userPreferencesService.getUserPreferencesForUser(currentUser);
 			logger.info("Preference SAVE :"+ ticketSearchVM.selectedSports);
 		}
@@ -68,7 +67,7 @@ public class SearchController {
 		logger.info("Recherche : enregistre les pr��f��rences de recherche");
 		
 		// Enregistrement de ticketSearchVM | il faut le transformer en TicketSearchPreferenceDto
-		
+		userPreferencesService.saveUserPreference(currentUser,ticketSearchVM);
 		ModelAndView mav = home();
 		
 		mav.addObject("preferencesSaved", true);
