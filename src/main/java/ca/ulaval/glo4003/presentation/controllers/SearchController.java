@@ -15,6 +15,9 @@ import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.services.UserPreferencesService;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.user.User;
+import ca.ulaval.glo4003.domain.utilities.user.UserDoesntExistException;
+import ca.ulaval.glo4003.domain.utilities.user.UsernameAndPasswordDoesntMatchException;
+import ca.ulaval.glo4003.persistence.daos.fakes.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 
 @Controller
@@ -47,10 +50,11 @@ public class SearchController {
 		addLogOfUserConnection(connectedUser);
 		
 		if (connectedUser) {
-			// mettre les pr��f��rences de l'usager
-			
+			try{
 			ticketSearchVM = userPreferencesService.getUserPreferencesForUser(currentUser);
-			logger.info("Preference SAVE :"+ ticketSearchVM.selectedSports);
+			}catch (UserDoesntHaveSavedPreferences e){
+				logger.info("no preferences saved");
+			}
 		}
 		
 		mav.addObject("ticketSearchForm", ticketSearchVM);
@@ -66,7 +70,6 @@ public class SearchController {
 	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
 		logger.info("Recherche : enregistre les pr��f��rences de recherche");
 		
-		// Enregistrement de ticketSearchVM | il faut le transformer en TicketSearchPreferenceDto
 		userPreferencesService.saveUserPreference(currentUser,ticketSearchVM);
 		ModelAndView mav = home();
 		

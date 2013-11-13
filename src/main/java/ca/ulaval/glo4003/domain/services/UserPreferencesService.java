@@ -13,6 +13,7 @@ import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
 import ca.ulaval.glo4003.persistence.daos.UserPreferencesDao;
 import ca.ulaval.glo4003.persistence.daos.fakes.FakeDataUserPreferencesDao;
+import ca.ulaval.glo4003.persistence.daos.fakes.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
 
@@ -26,14 +27,12 @@ public class UserPreferencesService {
 	TicketSearchPreferenceFactory ticketSearchFactory;
 	
 	
-	public TicketSearchViewModel getUserPreferencesForUser(User currentUser){
+	public TicketSearchViewModel getUserPreferencesForUser(User currentUser) throws UserDoesntHaveSavedPreferences{
 		
 		UserPreferencesDto userPref= userPreferencesDao.get(currentUser.getUsername());	
 		TicketSearchViewModel ticketSearchVModel=ticketSearchFactory.createViewModelFromUserPreferencesDto(userPref);
-				
-		// get UserPreference with currentUser info
-		// transform userPreferenceDto, return viewModel
 		return ticketSearchVModel;
+				
 	}
 	
 	public void saveUserPreference(User currentUser, TicketSearchViewModel userPreferences){

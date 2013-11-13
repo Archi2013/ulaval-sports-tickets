@@ -11,6 +11,7 @@ import ca.ulaval.glo4003.domain.dtos.UserPreferencesDto;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
 import ca.ulaval.glo4003.domain.utilities.user.User;
+import ca.ulaval.glo4003.domain.utilities.user.UserDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.UserPreferencesDao;
 
 @Repository
@@ -40,18 +41,18 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 	}
 
 	@Override
-	public UserPreferencesDto get(String username) {
-		System.out.println(userPrefList.size());
+	public UserPreferencesDto get(String username) throws UserDoesntHaveSavedPreferences {
 		
-		for(int i=0; i < userPrefList.size(); i++)
+		
+		for(UserPreferencesDto userPref: this.userPrefList)
 		{
-			if(userPrefList.get(i).username.equals(username))
+			if(userPref.username.equals(username))
 			{
-				return userPrefList.get(i);
+				return userPref;
 			}
 		}
 		
-		return userPrefList.get(0);
+		throw new UserDoesntHaveSavedPreferences();
 	}
 
 	@Override
@@ -61,12 +62,14 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 		UserPreferencesDto userPrefDto = new UserPreferencesDto(currentUser.getUsername(), userPreferences.selectedSports, DispPeriod, userPreferences.localGameOnly, userPreferences.selectedTicketKinds);
 		
 		int index=indexOfUserPositionInUserPreferencesList(currentUser.getUsername());
-		System.out.println("index:"+index);
+
 		if(index>=0){
+			//Overwrite current preferences
 			userPrefList.remove(index);
 			userPrefList.add(index, userPrefDto);
 		}
 		else{
+			//Add preferences (never been saved before for this user)
 			userPrefList.add(userPrefDto);
 
 		}
