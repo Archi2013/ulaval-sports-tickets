@@ -55,4 +55,20 @@ public class Section {
 		return true;
 	}
 
+	public String getSectionName() {
+		return sectionName;
+	}
+
+	public int getNumberOfTickets() {
+		return numberOfTickets;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public List<String> getSeats() {
+		return seats;
+	}
+
 }

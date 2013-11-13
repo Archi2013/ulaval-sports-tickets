@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.domain.factories.ISectionFactory;
+import ca.ulaval.glo4003.domain.factories.SectionFactory;
 import ca.ulaval.glo4003.domain.pojos.Section;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
@@ -28,7 +28,7 @@ public class SectionByDaoRepositoryTest {
 	private SectionDao sectionDao;
 	
 	@Mock
-	private ISectionFactory sectionFactory;
+	private SectionFactory sectionFactory;
 	
 	@InjectMocks
 	SectionByDaoRepository sectionRepository;
