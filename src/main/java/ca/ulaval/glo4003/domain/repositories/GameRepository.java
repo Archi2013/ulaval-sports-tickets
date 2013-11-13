@@ -37,10 +37,20 @@ public class GameRepository implements IGameRepository {
 	@Override
 	public Game recoverGame(String sport, DateTime date) {
 		GameDto gameDto = gameDao.get(sport, date);
-		List<Ticket> tickets = ticketRepository.recoverAllTicketsForGame(sport, date);
+		List<Ticket> tickets = getTicketsForGame(sport, date);
 		PersistableGame game = gameFactory.instantiateGame(gameDto.getOpponents(), gameDto.getGameDate(), tickets);
 		existingActiveGames.add(game);
 		return game;
+	}
+
+	private List<Ticket> getTicketsForGame(String sport, DateTime date) {
+		List<Ticket> tickets;
+		try {
+			tickets = ticketRepository.recoverAllTicketsForGame(sport, date);
+		} catch (GameDoesntExistException e) {
+			tickets = new ArrayList<>();
+		}
+		return tickets;
 	}
 
 	@Override
@@ -48,7 +58,7 @@ public class GameRepository implements IGameRepository {
 		List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
 		List<PersistableGame> games = new ArrayList<>();
 		for (GameDto dto : gameDtos) {
-			List<Ticket> tickets = ticketRepository.recoverAllTicketsForGame(sportName, dto.getGameDate());
+			List<Ticket> tickets = getTicketsForGame(sportName, dto.getGameDate());
 			PersistableGame newGame = gameFactory.instantiateGame(dto.getOpponents(), dto.getGameDate(), tickets);
 			games.add(newGame);
 		}
@@ -65,7 +75,8 @@ public class GameRepository implements IGameRepository {
 
 	}
 
-	public void commit() throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException {
+	public void commit() throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
+			TicketDoesntExistException {
 		for (Persistable<GameDto> game : existingActiveGames) {
 			GameDto dto = game.saveDataInDTO();
 			gameDao.update(dto);

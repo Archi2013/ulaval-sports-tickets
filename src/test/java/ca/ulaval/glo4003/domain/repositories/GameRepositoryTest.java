@@ -23,6 +23,7 @@ import ca.ulaval.glo4003.domain.pojos.Game;
 import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -69,7 +70,7 @@ public class GameRepositoryTest {
 	GameRepository gameRepository;
 
 	@Before
-	public void setUp() throws SportDoesntExistException {
+	public void setUp() throws SportDoesntExistException, GameDoesntExistException {
 		setUpListsOfDtos();
 
 		when(gameDaoMock.get(A_SPORT, A_DATE)).thenReturn(gameDto1);

@@ -15,11 +15,11 @@ public interface ITicketRepository {
 
 	Ticket instantiateNewTicket(String section, String seat, boolean available);
 
-	Ticket recoverTicket(String sport, DateTime Date, int ticketNumber);
+	Ticket recoverTicket(String sport, DateTime Date, int ticketNumber) throws TicketDoesntExistException;
 
 	Ticket recoverTicket(String sportName, DateTime gameDate, String seat);
 
-	List<Ticket> recoverAllTicketsForGame(String sport, DateTime Date);
+	List<Ticket> recoverAllTicketsForGame(String sport, DateTime Date) throws GameDoesntExistException;
 
 	void commit() throws TicketAlreadyExistException, TicketDoesntExistException;
 

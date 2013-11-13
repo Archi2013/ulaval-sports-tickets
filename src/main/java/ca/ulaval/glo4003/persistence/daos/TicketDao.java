@@ -12,7 +12,7 @@ public interface TicketDao {
 
 	public TicketDto get(int ticketId) throws TicketDoesntExistException;
 
-	public TicketDto get(String sportName, DateTime gameDate, int ticketNumber);
+	public TicketDto get(String sportName, DateTime gameDate, int ticketNumber) throws TicketDoesntExistException;
 
 	public TicketDto get(String sport, DateTime date, String seat);
 
@@ -20,7 +20,7 @@ public interface TicketDao {
 
 	public List<TicketDto> getTicketsForSection(int gameID, String sectionName) throws SectionDoesntExistException;
 
-	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate);
+	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
 	public void add(TicketDto ticket) throws TicketAlreadyExistException;
 
@@ -29,5 +29,7 @@ public interface TicketDao {
 	public void endTransaction();
 
 	public void commit();
+
+	List<TicketDto> getAllTicketsForGame(Long gameID) throws GameDoesntExistException;
 
 }
