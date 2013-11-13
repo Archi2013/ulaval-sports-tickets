@@ -12,8 +12,10 @@ public class User {
 	private String password;
 	private Boolean logged;
 
+
 	public User() {
 		this.logged = false;
+		
 	}
 
 	public User(String username, String password) {

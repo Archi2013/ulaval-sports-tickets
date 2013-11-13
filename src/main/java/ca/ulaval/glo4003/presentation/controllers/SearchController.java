@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SearchService;
+import ca.ulaval.glo4003.domain.services.UserPreferencesService;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.user.User;
+import ca.ulaval.glo4003.domain.utilities.user.UserDoesntExistException;
+import ca.ulaval.glo4003.domain.utilities.user.UsernameAndPasswordDoesntMatchException;
+import ca.ulaval.glo4003.persistence.daos.fakes.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 
 @Controller
@@ -23,6 +27,10 @@ public class SearchController {
 	
 	@Inject
 	SearchService searchService;
+	
+	@Inject
+	UserPreferencesService userPreferencesService;
+	
 	
 	@Autowired
 	private User currentUser;
@@ -42,8 +50,11 @@ public class SearchController {
 		addLogOfUserConnection(connectedUser);
 		
 		if (connectedUser) {
-			// mettre les préférences de l'usager
-			// TicketSearchViewModel ticketSearchVM = 
+			try{
+			ticketSearchVM = userPreferencesService.getUserPreferencesForUser(currentUser);
+			}catch (UserDoesntHaveSavedPreferences e){
+				logger.info("no preferences saved");
+			}
 		}
 		
 		mav.addObject("ticketSearchForm", ticketSearchVM);
@@ -57,12 +68,10 @@ public class SearchController {
 	
 	@RequestMapping(value="sauvegarde-preferences", method=RequestMethod.POST)
 	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
-		logger.info("Recherche : enregistre les préférences de recherche");
+		logger.info("Recherche : enregistre les pr��f��rences de recherche");
 		
-		// Enregistrement de ticketSearchVM | il faut le transformer en TicketSearchPreferenceDto
-		
+		userPreferencesService.saveUserPreference(currentUser,ticketSearchVM);
 		ModelAndView mav = home();
-		
 		mav.addObject("preferencesSaved", true);
 		
 		return mav;
@@ -94,9 +103,9 @@ public class SearchController {
 	
 	private void addLogOfUserConnection(Boolean connectedUser) {
 		if (connectedUser) {
-			logger.info("usagé connecté");
+			logger.info("usag�� connect��");
 		} else {
-			logger.info("usagé non connecté");
+			logger.info("usag�� non connect��");
 		}
 	}
 }
