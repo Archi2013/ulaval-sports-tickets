@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.domain.utilities.user.UserPreferences;
+import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
 import ca.ulaval.glo4003.persistence.daos.UserPreferencesDao;
 
@@ -14,11 +15,11 @@ import ca.ulaval.glo4003.persistence.daos.UserPreferencesDao;
 public class UserPreferencesService {
 
 	@Inject
-	private UserPreferencesDao userPreferencesDao;
+	UserPreferencesDao userPreferencesDao;
 	
 	public String getUserPreferencesForUser(User currentUser){
 		
-		//userPreferencesDao.get(currentUser.getUsername());
+		userPreferencesDao.get(currentUser.getUsername());
 		
 		// get UserPreference with currentUser info
 		// transform userPreferenceDto, return viewModel
