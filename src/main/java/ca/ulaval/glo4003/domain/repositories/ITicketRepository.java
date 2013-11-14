@@ -21,7 +21,7 @@ public interface ITicketRepository {
 
 	List<Ticket> recoverAllTicketsForGame(String sport, DateTime Date) throws GameDoesntExistException;
 
-	void commit() throws TicketAlreadyExistException, TicketDoesntExistException;
+	void commit() throws TicketAlreadyExistException, TicketDoesntExistException, GameDoesntExistException;
 
 	List<Ticket> recoverNGeneralTickets(Long id, int numberOfSeats) throws GameDoesntExistException;
 

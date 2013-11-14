@@ -41,6 +41,6 @@ public class UnassignedTicketStateTest {
 
 		Assert.assertSame(null, data.sportName);
 		Assert.assertSame(null, data.gameDate);
-		Assert.assertEquals(0, data.ticketNumber);
+		Assert.assertEquals(0, data.ticketId);
 	}
 }

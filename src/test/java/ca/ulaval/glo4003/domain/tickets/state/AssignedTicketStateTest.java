@@ -40,6 +40,6 @@ public class AssignedTicketStateTest {
 
 		Assert.assertSame(A_SPORT, data.sportName);
 		Assert.assertSame(A_DATE, data.gameDate);
-		Assert.assertEquals(A_TICKET_NUMBER, data.ticketNumber);
+		Assert.assertEquals(A_TICKET_NUMBER, data.getTicketId());
 	}
 }

@@ -63,7 +63,6 @@ public class TicketRepository implements ITicketRepository {
 	@Override
 	public List<Ticket> recoverAllTicketsForGame(String sport, DateTime Date) throws GameDoesntExistException {
 		List<Ticket> ticketsToReturn = new ArrayList<>();
-
 		List<TicketDto> datas = dao.getTicketsForGame(sport, Date);
 		for (TicketDto data : datas) {
 			PersistableTicket recoveredTicket = factory.instantiateTicket(data);
@@ -75,7 +74,7 @@ public class TicketRepository implements ITicketRepository {
 	}
 
 	@Override
-	public void commit() throws TicketAlreadyExistException, TicketDoesntExistException {
+	public void commit() throws TicketAlreadyExistException, TicketDoesntExistException, GameDoesntExistException {
 		saveChangesToOldTickets();
 		persistsNewTickets();
 		dao.commit();
@@ -87,7 +86,7 @@ public class TicketRepository implements ITicketRepository {
 		}
 	}
 
-	private void persistsNewTickets() throws TicketAlreadyExistException {
+	private void persistsNewTickets() throws TicketAlreadyExistException, GameDoesntExistException {
 		for (Persistable<TicketDto> ticket : newTickets) {
 			dao.add(ticket.saveDataInDTO());
 			ticketsInDao.add(ticket);

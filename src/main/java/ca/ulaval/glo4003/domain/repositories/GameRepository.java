@@ -37,6 +37,12 @@ public class GameRepository implements IGameRepository {
 	@Override
 	public Game recoverGame(String sport, DateTime date) throws GameDoesntExistException {
 		GameDto gameDto = gameDao.get(sport, date);
+		System.out.println("Repository: location: " + gameDto.getLocation());
+		System.out.println("Repository: nextTicketNumber: " + gameDto.getNextTicketNumber());
+		System.out.println("Repository: opponents: " + gameDto.getOpponents());
+		System.out.println("Repository: sportName" + gameDto.getSportName());
+		System.out.println("Repository: id" + gameDto.getId());
+		System.out.println("Repository: gameDate" + gameDto.getGameDate().toString());
 		List<Ticket> tickets = getTicketsForGame(sport, date);
 		PersistableGame game = gameFactory.instantiateGame(gameDto, tickets);
 

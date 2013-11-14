@@ -30,7 +30,7 @@ public class AssignedTicketState implements TicketAssignationState {
 	public void fillDataInDto(TicketDto data) {
 		data.sportName = sportName;
 		data.gameDate = gameDate;
-		data.ticketNumber = ticketNumber;
+		data.ticketId = ticketNumber;
 	}
 
 }

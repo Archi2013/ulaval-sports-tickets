@@ -83,8 +83,13 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	@Override
-	public void add(TicketDto ticket) throws TicketAlreadyExistException {
-		if (isIdExist(ticket.getTicketId())) {
+	public void add(TicketDto ticket) throws TicketAlreadyExistException, GameDoesntExistException {
+		System.out.println("SportName a la sauvegarde: " + ticket.sportName);
+		System.out.println("Gamedate a la sauvegarde : " + ticket.gameDate);
+		ticket.gameId = getGameID(ticket.sportName, ticket.gameDate);
+		System.out.println("TicketId a la sauvegarde: " + ticket.ticketId);
+		System.out.println("GameId a la sauvegarde  : " + ticket.gameId);
+		if (isIdExist(ticket.getTicketId(), ticket.gameId)) {
 			throw new TicketAlreadyExistException();
 		}
 		SimpleNode simpleNode = convertTicketToNode(ticket);
@@ -110,14 +115,14 @@ public class XmlTicketDao implements TicketDao {
 		}
 	}
 
-	private boolean isIdExist(int ticketId) {
-		String xPath = String.format(TICKET_XPATH_ID, ticketId);
+	private boolean isIdExist(long ticketId, long gameId) {
+		String xPath = String.format(TICKET_XPATH_UNIQUE_ID, ticketId, gameId);
 		return database.exist(xPath);
 	}
 
 	private SimpleNode convertTicketToNode(TicketDto ticket) {
 		Map<String, String> nodes = new HashMap<>();
-		nodes.put("id", Integer.toString(ticket.getTicketId()));
+		nodes.put("id", Long.toString(ticket.getTicketId()));
 		nodes.put("gameID", Long.toString(ticket.getGameId()));
 		nodes.put("price", Double.toString(ticket.getPrice()));
 		nodes.put("available", Boolean.toString(ticket.isAvailable()));
@@ -175,19 +180,31 @@ public class XmlTicketDao implements TicketDao {
 	@Override
 	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate) throws GameDoesntExistException {
 		Long gameID = getGameID(sportName, gameDate);
-		return getAllTicketsForGame(gameID);
+		System.out.println("GameID durant la lecture du dao: " + gameID);
+		List<TicketDto> toReturn = getAllTicketsForGame(gameID);
+		for (TicketDto data : toReturn) {
+			data.sportName = sportName;
+			data.gameDate = gameDate;
+		}
+		return toReturn;
 	}
 
 	@Override
 	public void update(TicketDto dto) throws TicketDoesntExistException {
-		String xPath = String.format(TICKET_XPATH_ID, dto.getTicketId());
+		try {
+			dto.gameId = getGameID(dto.sportName, dto.gameDate);
+		} catch (GameDoesntExistException e1) {
+			throw new TicketDoesntExistException();
+		}
+		System.out.println("Le ticket id est: " + dto.ticketId);
+		String xPath = String.format(TICKET_XPATH_UNIQUE_ID, dto.getTicketId(), dto.gameId);
 		if (!database.exist(xPath)) {
 			throw new TicketDoesntExistException();
 		}
 		try {
 			database.remove(xPath);
 			add(dto);
-		} catch (XPathExpressionException | TicketAlreadyExistException e) {
+		} catch (XPathExpressionException | TicketAlreadyExistException | GameDoesntExistException e) {
 			throw new XmlIntegrityException(e);
 		}
 	}

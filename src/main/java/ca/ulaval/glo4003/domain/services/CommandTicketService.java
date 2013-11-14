@@ -29,6 +29,9 @@ public class CommandTicketService {
 	public void addGeneralTickets(String sportName, DateTime gameDate, int numberOfTickets)
 			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
 			TicketDoesntExistException {
+		System.out.println("Service: sportName: " + sportName);
+		System.out.println("Service: gameDate: " + gameDate.toString());
+		System.out.println("Service: numberOftickets: " + numberOfTickets);
 		Game game = gameRepository.recoverGame(sportName, gameDate);
 
 		for (int i = 0; i < numberOfTickets; i++) {

@@ -148,7 +148,9 @@ public class XmlGameDao implements GameDao {
 
 	@Override
 	public GameDto get(String sportName, DateTime gameDate) throws GameDoesntExistException {
-		return get(new Long(1));
+		String xPath = String.format(GAME_XPATH_SPORT_NAME_GAMEDATE, sportName, gameDate.toString(DATE_PATTERN));
+		System.out.println("Dao: Le xPath est: " + xPath);
+		return makeGameWithPath(xPath);
 	}
 
 	@Override

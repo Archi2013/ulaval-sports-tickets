@@ -5,31 +5,29 @@ import org.joda.time.DateTime;
 public class TicketDto {
 
 	public long gameId;
-	public int ticketId;
+	public long ticketId;
 	public double price;
 	public String section;
 	public String seat;
 	public String sportName;
 	public DateTime gameDate;
-	public long ticketNumber;
 	public boolean available;
 
-	public TicketDto(String sportName, String section, DateTime gameDate, long ticketNumber, double price,
-			boolean available) {
+	public TicketDto(String sportName, String section, DateTime gameDate, long ticketId, double price, boolean available) {
 		this.sportName = sportName;
 		this.section = section;
 		this.gameDate = gameDate;
-		this.ticketNumber = ticketNumber;
+		this.ticketId = ticketId;
 		this.price = price;
 		this.available = available;
 	}
 
-	public TicketDto(String sportName, DateTime gameDate, long ticketNumber, double price, String seat, String section,
+	public TicketDto(String sportName, DateTime gameDate, long ticketId, double price, String seat, String section,
 			boolean available) {
 		this.sportName = sportName;
 
 		this.gameDate = gameDate;
-		this.ticketNumber = ticketNumber;
+		this.ticketId = ticketId;
 		this.price = price;
 		this.section = section;
 		this.seat = seat;
@@ -52,7 +50,7 @@ public class TicketDto {
 		this.available = available;
 	}
 
-	public int getTicketId() {
+	public long getTicketId() {
 		return ticketId;
 	}
 
@@ -82,10 +80,6 @@ public class TicketDto {
 
 	public DateTime getGameDate() {
 		return gameDate;
-	}
-
-	public long getTicketNumber() {
-		return ticketNumber;
 	}
 
 	public boolean isAvailable() {

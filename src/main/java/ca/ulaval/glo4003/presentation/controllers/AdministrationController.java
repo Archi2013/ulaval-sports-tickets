@@ -19,6 +19,7 @@ import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 import ca.ulaval.glo4003.domain.utilities.DateParser;
 import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
+import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.domain.utilities.YearMonthDayHourMinuteDateParser;
 import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
@@ -50,6 +51,9 @@ public class AdministrationController {
 
 	@Inject
 	private DateParser dateParser;
+
+	@Inject
+	private SportUrlMapper sportUrlMapper;
 
 	@Inject
 	private YearMonthDayHourMinuteDateParser otherParser;
@@ -141,14 +145,16 @@ public class AdministrationController {
 
 	@RequestMapping(value = "/ajout-billets-general", method = RequestMethod.POST)
 	public ModelAndView addTickets_general(@ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel viewModel,
-			Model model) throws SportDoesntExistException, GameDoesntExistException {
+			Model model) throws SportDoesntExistException, GameDoesntExistException, NoSportForUrlException {
 		logger.info("Adminisatration :Adding " + viewModel.getNumberOfTickets() + "new general tickets to game"
 				+ viewModel.getGameDate());
-		System.out.println("Le nom du sport est:" + viewModel.getSportName());
+		System.out.println("Controleur: Le nom du sport est: " + viewModel.getSportName());
+		System.out.println("Controleur: La date de la partie est: " + viewModel.getGameDate());
+		System.out.println("Controleur: Le nombre de billets est: " + viewModel.getNumberOfTickets());
 		ModelAndView mav;
 		try {
-			ticketService.addGeneralTickets(viewModel.getSportName(), dateParser.parseDate(viewModel.getGameDate()),
-					viewModel.getNumberOfTickets());
+			ticketService.addGeneralTickets(sportUrlMapper.getSportName(viewModel.getSportName()),
+					dateParser.parseDate(viewModel.getGameDate()), viewModel.getNumberOfTickets());
 
 		} catch (GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException e) {
 			mav = new ModelAndView("/admin/tickets-added-date-error");
