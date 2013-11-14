@@ -14,7 +14,7 @@ public interface GameDao {
 
 	public GameDto get(Long id) throws GameDoesntExistException;
 
-	public GameDto get(String sportName, DateTime gameDate);
+	public GameDto get(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
 	public void add(GameDto game) throws GameAlreadyExistException;
 

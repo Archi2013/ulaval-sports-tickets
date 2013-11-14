@@ -21,13 +21,13 @@ import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 public class CommandGameServiceTest {
 	private static final String A_OPPONENT = "Opponent";
 	private static final String A_SPORT_NAME = "Sport";
+	private static final String A_LOCATION = "La lune";
 	private static final DateTime A_DATE = new DateTime(100);
 	@Mock
 	private PersistableSport sport;
 
 	@Mock
 	private PersistableGame game;
-
 	@Mock
 	private IGameRepository gameRepositoryMock;
 
@@ -43,23 +43,22 @@ public class CommandGameServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		when(sportRepositoryMock.getSportByName(A_SPORT_NAME)).thenReturn(sport);
-		when(gameRepositoryMock.instantiateNewGame(A_OPPONENT, A_DATE)).thenReturn(game);
+		when(gameRepositoryMock.instantiateNewGame(A_OPPONENT, A_LOCATION)).thenReturn(game);
 		when(sportUrlMapper.getSportName(A_SPORT_NAME)).thenReturn(A_SPORT_NAME);
 	}
 
 	@Test
 	public void addGameToCalendar_add_the_game_to_the_sport() throws Exception {
-		gameService.createNewGame(A_SPORT_NAME, A_OPPONENT, A_DATE);
+		gameService.createNewGame(A_SPORT_NAME, A_OPPONENT, A_LOCATION, A_DATE);
 
-		verify(sport).addGameToCalendar(game);
+		verify(sport).addGameToCalendar(game, A_DATE);
 
 	}
 
 	@Test
 	public void addGameToCalendar_commits_its_changes() throws Exception {
-		gameService.createNewGame(A_SPORT_NAME, A_OPPONENT, A_DATE);
+		gameService.createNewGame(A_SPORT_NAME, A_OPPONENT, A_LOCATION, A_DATE);
 
 		verify(sportRepositoryMock).commit();
-		verify(gameRepositoryMock).commit();
 	}
 }

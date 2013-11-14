@@ -15,10 +15,11 @@ public interface IGameRepository {
 
 	List<Game> recoverAllGamesForSport(String sportName) throws SportDoesntExistException;
 
-	public Game instantiateNewGame(String opponents, DateTime date);
+	public Game instantiateNewGame(String opponents, String location);
 
-	Game recoverGame(String aSport, DateTime a_DATE);
+	Game recoverGame(String aSport, DateTime a_DATE) throws GameDoesntExistException;
 
-	public void commit() throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException;
+	public void commit() throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
+			TicketDoesntExistException;
 
 }

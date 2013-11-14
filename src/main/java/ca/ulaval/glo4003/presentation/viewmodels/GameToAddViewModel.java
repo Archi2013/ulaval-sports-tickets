@@ -3,6 +3,7 @@ package ca.ulaval.glo4003.presentation.viewmodels;
 public class GameToAddViewModel {
 	String sport;
 	String opponents;
+	String location;
 	String date;
 
 	public String getSport() {
@@ -19,6 +20,14 @@ public class GameToAddViewModel {
 
 	public void setOpponents(String opponents) {
 		this.opponents = opponents;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public String getDate() {

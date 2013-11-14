@@ -1,7 +1,10 @@
 package ca.ulaval.glo4003.domain.services;
 
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -15,6 +18,7 @@ import ca.ulaval.glo4003.domain.pojos.Game;
 import ca.ulaval.glo4003.domain.repositories.IGameRepository;
 import ca.ulaval.glo4003.domain.repositories.ITicketRepository;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
+import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandTicketServiceTest {
@@ -42,7 +46,7 @@ public class CommandTicketServiceTest {
 	private CommandTicketService ticketService;
 
 	@Before
-	public void setup() {
+	public void setup() throws GameDoesntExistException {
 		when(ticketRepository.instantiateNewTicket()).thenReturn(ticketToAdd);
 		when(ticketRepository.instantiateNewTicket(A_SECTION, A_SEAT, AVAILABLE)).thenReturn(ticketToAdd);
 		when(gameRepository.recoverGame(A_SPORT, A_DATE)).thenReturn(game);

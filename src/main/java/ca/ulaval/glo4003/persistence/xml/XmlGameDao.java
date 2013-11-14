@@ -28,6 +28,7 @@ public class XmlGameDao implements GameDao {
 	private static final String GAME_XPATH = GAMES_XPATH + "/game";
 	private static final String GAME_XPATH_ID = GAME_XPATH + "[id=\"%d\"]";
 	private static final String GAME_XPATH_SPORT_NAME = GAME_XPATH + "[sportName=\"%s\"]";
+	private static final String GAME_XPATH_SPORT_NAME_GAMEDATE = GAME_XPATH_SPORT_NAME + "[date=\"%s\"]";
 
 	private static AtomicLong nextId;
 
@@ -57,6 +58,10 @@ public class XmlGameDao implements GameDao {
 	@Override
 	public GameDto get(Long id) throws GameDoesntExistException {
 		String xPath = String.format(GAME_XPATH_ID, id);
+		return makeGameWithPath(xPath);
+	}
+
+	private GameDto makeGameWithPath(String xPath) throws GameDoesntExistException {
 		try {
 			SimpleNode node = database.extractNode(xPath);
 			return convertNodeToGame(node);
@@ -130,9 +135,8 @@ public class XmlGameDao implements GameDao {
 	}
 
 	@Override
-	public GameDto get(String sportName, DateTime gameDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public GameDto get(String sportName, DateTime gameDate) throws GameDoesntExistException {
+		return get(new Long(1));
 	}
 
 	@Override
@@ -143,9 +147,30 @@ public class XmlGameDao implements GameDao {
 		}
 		try {
 			database.remove(xPath);
-			add(dto);
-		} catch (XPathExpressionException | GameAlreadyExistException e) {
+			replace(dto);
+		} catch (XPathExpressionException e) {
 			throw new XmlIntegrityException(e);
 		}
+	}
+
+	private void replace(GameDto dto) {
+		try {
+			SimpleNode simpleNode = convertGameToNodeWithCurrentID(dto);
+			database.addNode(GAMES_XPATH, simpleNode);
+		} catch (XPathExpressionException e) {
+			throw new XmlIntegrityException(e);
+		}
+
+	}
+
+	private SimpleNode convertGameToNodeWithCurrentID(GameDto dto) {
+		Map<String, String> nodes = new HashMap<>();
+		nodes.put("id", Long.toString(dto.getId()));
+		nodes.put("oponents", dto.getOpponents());
+		nodes.put("date", dto.getGameDate().toString(DATE_PATTERN));
+		nodes.put("sportName", dto.getSportName());
+		nodes.put("location", dto.getLocation());
+		SimpleNode simpleNode = new SimpleNode("game", nodes);
+		return simpleNode;
 	}
 }

@@ -27,16 +27,17 @@ public class CommandGameService {
 	@Inject
 	private SportUrlMapper sportUrlMapper;
 
-	public void createNewGame(String sportName, String opponent, DateTime date) throws SportDoesntExistException,
-			GameDoesntExistException, GameAlreadyExistException, NoSportForUrlException, TicketAlreadyExistException, TicketDoesntExistException {
+	public void createNewGame(String sportName, String opponent, String location, DateTime date)
+			throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
+			NoSportForUrlException, TicketAlreadyExistException, TicketDoesntExistException {
 
 		String domainSportName = sportUrlMapper.getSportName(sportName);
-		Game game = gameRepository.instantiateNewGame(opponent, date);
+		Game game = gameRepository.instantiateNewGame(opponent, location);
 		Sport sport = sportRepository.getSportByName(domainSportName);
 
-		sport.addGameToCalendar(game);
+		sport.addGameToCalendar(game, date);
 
-		gameRepository.commit();
+		// gameRepository.commit();
 		sportRepository.commit();
 	}
 

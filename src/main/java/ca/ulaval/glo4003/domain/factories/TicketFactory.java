@@ -30,6 +30,9 @@ public class TicketFactory {
 	}
 
 	private boolean sectionIsGeneral(String section) {
+		if (section == null) {
+			return false;
+		}
 		return section.equals(GENERAL_SECTION);
 	}
 

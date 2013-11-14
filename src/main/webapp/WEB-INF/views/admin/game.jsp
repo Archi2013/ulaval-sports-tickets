@@ -22,7 +22,10 @@
             </c:forEach>
         </form:select><br>
         <form:label path="opponents">Opposants : </form:label><form:input path="opponents" /><br>
-        <form:label path="date">Date de la rencontre : </form:label><form:input path="date" type="date" value="2014-01-01"/><br>
+        <form:label path="location"> Lieu: </form:label><form:input path="location"/><br>
+        <form:label path="date">Date de la rencontre(aaaa-mm-jj hh:mm) : </form:label>
+        	<form:input path="date" type="date" value="2014-01-01 13:00"/>
+
         <input type="submit" value="Ajouter" class="standard-button-rounded-border orange-button"/>
     </form:form>
     

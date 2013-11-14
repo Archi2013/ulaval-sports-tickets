@@ -46,7 +46,6 @@ public class SportRepository implements ISportRepository {
 	@Override
 	public void commit() throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
 			TicketAlreadyExistException, TicketDoesntExistException {
-		gameRepository.commit();
 
 		for (Persistable<SportDto> sport : activeSports) {
 			try {
@@ -56,6 +55,7 @@ public class SportRepository implements ISportRepository {
 			}
 		}
 		sportDao.commit();
+		gameRepository.commit();
 	}
 
 }

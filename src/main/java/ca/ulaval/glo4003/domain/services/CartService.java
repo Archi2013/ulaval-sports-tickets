@@ -29,7 +29,8 @@ public class CartService {
 
 			ticketService.makeTicketsUnavailable(game, section, numberOfSeats, seats);
 
-		} catch (GameDoesntExistException | GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException e) {
+		} catch (GameDoesntExistException | GameAlreadyExistException | TicketAlreadyExistException
+				| TicketDoesntExistException e) {
 			throw new CartException();
 		}
 	}

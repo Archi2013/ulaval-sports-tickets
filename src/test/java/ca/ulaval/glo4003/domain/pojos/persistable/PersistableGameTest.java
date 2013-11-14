@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.domain.pojos.persistable;
 
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -15,16 +16,16 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.GameDto;
+import ca.ulaval.glo4003.domain.game.GameScheduleState;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersistableGameTest {
 	private static final Long AN_ID = 0L;
 	private static final String AN_OPPONENT = "Opponent";
-	private static final DateTime A_DATE = new DateTime(100);
 	private static final String A_SPORT = "sport";
+	private static final DateTime A_DATE = new DateTime(100);
 	private static final String A_LOCATION = "Stade Telus";
-	private static final String ANOTHER_SPORT = "Another sport";
 
 	private List<Ticket> tickets;
 
@@ -36,51 +37,40 @@ public class PersistableGameTest {
 	private Ticket unassignableTicket;
 	@Mock
 	private Ticket okayTicket;
+	@Mock
+	private GameScheduleState assignationState;
 
-	PersistableGame fullyInitiatedGame;
-	PersistableGame partlyInitiatedGame;
 	PersistableGame gameWithTickets;
 
 	@Before
 	public void setUp() {
 		initializeTickets();
+		gameWithTickets = new PersistableGame(AN_ID, AN_OPPONENT, A_LOCATION, assignationState, tickets);
 
-		fullyInitiatedGame = new PersistableGame(AN_ID, AN_OPPONENT, A_DATE, A_SPORT, A_LOCATION);
-		partlyInitiatedGame = new PersistableGame(AN_OPPONENT, A_DATE);
-		gameWithTickets = new PersistableGame(AN_ID, AN_OPPONENT, A_DATE, A_SPORT, A_LOCATION, tickets);
-
-	}
-
-	private void initializeTickets() {
-		when(baseTicket.isSame(sameTicket)).thenReturn(true);
-		when(baseTicket.isSame(unassignableTicket)).thenReturn(false);
-		when(baseTicket.isSame(okayTicket)).thenReturn(false);
-		when(sameTicket.isAssignable()).thenReturn(false);
-		when(unassignableTicket.isAssignable()).thenReturn(false);
-		when(okayTicket.isAssignable()).thenReturn(true);
-
-		tickets = new ArrayList<>();
-		tickets.add(baseTicket);
 	}
 
 	@Test
-	public void acceptsToBeScheduled_return_false_if_the_game_is_scheduled_and_true_if_not() {
-		Assert.assertEquals(false, fullyInitiatedGame.acceptsToBeScheduled());
-		Assert.assertEquals(true, partlyInitiatedGame.acceptsToBeScheduled());
+	public void acceptsToBeScheduled_return_the_value_returned_by_the_assignementState() {
+		when(assignationState.isSchedulable()).thenReturn(true);
+		Assert.assertEquals(true, gameWithTickets.acceptsToBeScheduled());
+		when(assignationState.isSchedulable()).thenReturn(false);
+		Assert.assertEquals(false, gameWithTickets.acceptsToBeScheduled());
 	}
 
 	@Test
-	public void beSecheduledToThisSport_schedules_the_game_if_it_has_not_been_scheduled_before() {
-		partlyInitiatedGame.beScheduledToThisSport(A_SPORT);
+	public void if_game_is_assignable_then_beSecheduledToThisSport_assigns_the_game_with_the_state() {
+		when(assignationState.isSchedulable()).thenReturn(true);
+		gameWithTickets.beScheduledToThisSport(A_SPORT, A_DATE);
 
-		Assert.assertEquals(A_SPORT, partlyInitiatedGame.saveDataInDTO().getSportName());
+		verify(assignationState).assign(A_SPORT, A_DATE);
 	}
 
 	@Test
-	public void beScheduledToThisSport_does_nothing_if_the_game_already_has_a_sport_set() {
-		fullyInitiatedGame.beScheduledToThisSport(ANOTHER_SPORT);
+	public void if_game_is_not_assignable_then_beScheduledToThisSport_does_nothing() {
+		when(assignationState.isSchedulable()).thenReturn(false);
+		gameWithTickets.beScheduledToThisSport(A_SPORT, A_DATE);
 
-		Assert.assertEquals(A_SPORT, fullyInitiatedGame.saveDataInDTO().getSportName());
+		verify(assignationState, never()).assign(A_SPORT, A_DATE);
 	}
 
 	@Test
@@ -89,7 +79,13 @@ public class PersistableGameTest {
 
 		Assert.assertEquals(2, tickets.size());
 		Assert.assertSame(okayTicket, tickets.get(1));
-		verify(okayTicket).assign(A_SPORT, A_DATE, tickets.size() - 1);
+	}
+
+	@Test
+	public void when_added_to_the_list_a_ticket_is_assigned_to_the_game_schedule() {
+		gameWithTickets.addTicket(okayTicket);
+
+		verify(assignationState).assignThisTicketToSchedule(okayTicket, tickets.size() - 1);
 	}
 
 	@Test
@@ -107,22 +103,30 @@ public class PersistableGameTest {
 	}
 
 	@Test
-	public void saveDataInDto_return_a_valid_Dto_if_game_is_fully_initiated() {
-		GameDto dto = fullyInitiatedGame.saveDataInDTO();
+	public void saveDataInDto_ask_schedule_to_fill_schedule_data() {
+		GameDto dto = gameWithTickets.saveDataInDTO();
 
-		Assert.assertEquals(AN_ID, dto.getId());
-		Assert.assertEquals(AN_OPPONENT, dto.getOpponents());
-		Assert.assertEquals(A_DATE, dto.getGameDate());
-		Assert.assertEquals(A_SPORT, dto.getSportName());
+		verify(assignationState).saveTheScheduleInThisDto(dto);
 	}
 
 	@Test
-	public void saveDataInDto_return_a_valid_Dto_if_game_is_partially_initiated() {
-		GameDto dto = partlyInitiatedGame.saveDataInDTO();
+	public void game_saves_own_data_in_dto_when_saveDataInDto_is_called() {
+		GameDto dto = gameWithTickets.saveDataInDTO();
 
-		Assert.assertEquals(PersistableGame.DEFAULT_ID, dto.getId());
 		Assert.assertEquals(AN_OPPONENT, dto.getOpponents());
-		Assert.assertEquals(A_DATE, dto.getGameDate());
-		Assert.assertEquals(PersistableGame.NO_SPORT_SET, dto.getSportName());
+		Assert.assertEquals(A_LOCATION, dto.getLocation());
 	}
+
+	private void initializeTickets() {
+		when(baseTicket.isSame(sameTicket)).thenReturn(true);
+		when(baseTicket.isSame(unassignableTicket)).thenReturn(false);
+		when(baseTicket.isSame(okayTicket)).thenReturn(false);
+		when(sameTicket.isAssignable()).thenReturn(false);
+		when(unassignableTicket.isAssignable()).thenReturn(false);
+		when(okayTicket.isAssignable()).thenReturn(true);
+
+		tickets = new ArrayList<>();
+		tickets.add(baseTicket);
+	}
+
 }

@@ -2,6 +2,8 @@ package ca.ulaval.glo4003.domain.pojos.persistable;
 
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import ca.ulaval.glo4003.domain.dtos.SportDto;
 import ca.ulaval.glo4003.domain.pojos.Game;
 import ca.ulaval.glo4003.domain.pojos.Sport;
@@ -16,9 +18,9 @@ public class PersistableSport implements Sport, Persistable<SportDto> {
 		this.gameCalendar = gameCalendar;
 	}
 
-	public void addGameToCalendar(Game gameToAdd) {
+	public void addGameToCalendar(Game gameToAdd, DateTime gameDate) {
 		if (gameToAdd.acceptsToBeScheduled()) {
-			gameToAdd.beScheduledToThisSport(sportName);
+			gameToAdd.beScheduledToThisSport(sportName, gameDate);
 			gameCalendar.add(gameToAdd);
 		}
 	}

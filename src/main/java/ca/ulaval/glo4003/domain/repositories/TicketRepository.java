@@ -85,7 +85,6 @@ public class TicketRepository implements ITicketRepository {
 		for (Persistable<TicketDto> ticket : ticketsInDao) {
 			dao.update(ticket.saveDataInDTO());
 		}
-		dao.commit();
 	}
 
 	private void persistsNewTickets() throws TicketAlreadyExistException {

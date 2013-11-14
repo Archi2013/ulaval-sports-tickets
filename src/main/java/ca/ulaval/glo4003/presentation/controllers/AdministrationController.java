@@ -19,6 +19,7 @@ import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 import ca.ulaval.glo4003.domain.utilities.DateParser;
 import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
+import ca.ulaval.glo4003.domain.utilities.YearMonthDayHourMinuteDateParser;
 import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
@@ -49,6 +50,9 @@ public class AdministrationController {
 
 	@Inject
 	private DateParser dateParser;
+
+	@Inject
+	private YearMonthDayHourMinuteDateParser otherParser;
 
 	@Autowired
 	private User currentUser;
@@ -88,8 +92,8 @@ public class AdministrationController {
 		mav.addObject("game", gameToAddVM);
 
 		try {
-			gameService.createNewGame(gameToAddVM.getSport(), gameToAddVM.getOpponents(),
-					dateParser.parseDate(gameToAddVM.getDate()));
+			gameService.createNewGame(gameToAddVM.getSport(), gameToAddVM.getOpponents(), gameToAddVM.getLocation(),
+					otherParser.parseDate(gameToAddVM.getDate()));
 		} catch (SportDoesntExistException | GameDoesntExistException | GameAlreadyExistException
 				| NoSportForUrlException | TicketAlreadyExistException | TicketDoesntExistException e) {
 			e.printStackTrace();
@@ -130,6 +134,7 @@ public class AdministrationController {
 		manageUserConnection(mav);
 
 		mav.addObject("gamesVM", sportService.getGamesForSport(selectSportVM.getSport()));
+		mav.addObject("sportName", selectSportVM.getSport());
 
 		return mav;
 	}
@@ -139,7 +144,7 @@ public class AdministrationController {
 			Model model) throws SportDoesntExistException, GameDoesntExistException {
 		logger.info("Adminisatration :Adding " + viewModel.getNumberOfTickets() + "new general tickets to game"
 				+ viewModel.getGameDate());
-
+		System.out.println("Le nom du sport est:" + viewModel.getSportName());
 		ModelAndView mav;
 		try {
 			ticketService.addGeneralTickets(viewModel.getSportName(), dateParser.parseDate(viewModel.getGameDate()),
