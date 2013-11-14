@@ -3793,31 +3793,31 @@
 			<available>true</available>
 		</ticket>
 		<ticket>
-			<id>1001</id>
+			<id>1</id>
 			<price>100.11</price>
 			<gameID>10000</gameID>
 			<available>true</available>
 		</ticket>
 		<ticket>
-			<id>1002</id>
+			<id>1</id>
 			<price>90.99</price>
 			<gameID>20000</gameID>
 			<available>true</available>
 		</ticket>
 		<ticket>
-			<id>1003</id>
+			<id>1</id>
 			<price>80.88</price>
 			<gameID>30000</gameID>
 			<available>true</available>
 		</ticket>
 		<ticket>
-			<id>1004</id>
+			<id>1</id>
 			<price>70.77</price>
 			<gameID>40000</gameID>
 			<available>true</available>
 		</ticket>
 		<ticket>
-			<id>1005</id>
+			<id>1</id>
 			<price>60.66</price>
 			<gameID>50000</gameID>
 			<available>true</available>
