@@ -2,10 +2,18 @@ package ca.ulaval.glo4003.domain.tickets.state;
 
 import org.joda.time.DateTime;
 
+import ca.ulaval.glo4003.domain.dtos.TicketDto;
+
 public class AssignedTicketState implements TicketAssignationState {
 
-	public AssignedTicketState(String sport, DateTime date, int ticketNumber) {
-		// TODO Auto-generated constructor stub
+	private String sportName;
+	private DateTime gameDate;
+	private long ticketNumber;
+
+	public AssignedTicketState(String sportName, DateTime gameDate, long ticketNumber) {
+		this.sportName = sportName;
+		this.gameDate = gameDate;
+		this.ticketNumber = ticketNumber;
 	}
 
 	@Override
@@ -14,8 +22,15 @@ public class AssignedTicketState implements TicketAssignationState {
 	}
 
 	@Override
-	public TicketAssignationState assign(String sport, DateTime date, int ticketNumber) {
+	public TicketAssignationState assign(String sport, DateTime date, long ticketNumber) {
 		return this;
+	}
+
+	@Override
+	public void fillDataInDto(TicketDto data) {
+		data.sportName = sportName;
+		data.gameDate = gameDate;
+		data.ticketNumber = ticketNumber;
 	}
 
 }

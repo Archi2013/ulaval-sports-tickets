@@ -10,7 +10,7 @@ public abstract class Ticket {
 
 	public abstract boolean isAssignable();
 
-	public abstract void assign(String sport, DateTime date, int ticketNumber);
+	public abstract void assign(String sport, DateTime date, long ticketNumber);
 
 	public abstract boolean isSeat(String seat);
 

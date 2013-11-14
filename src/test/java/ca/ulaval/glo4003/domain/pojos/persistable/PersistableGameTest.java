@@ -26,6 +26,7 @@ public class PersistableGameTest {
 	private static final String A_SPORT = "sport";
 	private static final DateTime A_DATE = new DateTime(100);
 	private static final String A_LOCATION = "Stade Telus";
+	private static final long A_NEXT_TICKET_NUMBER = 10;
 
 	private List<Ticket> tickets;
 
@@ -45,7 +46,8 @@ public class PersistableGameTest {
 	@Before
 	public void setUp() {
 		initializeTickets();
-		gameWithTickets = new PersistableGame(AN_ID, AN_OPPONENT, A_LOCATION, assignationState, tickets);
+		gameWithTickets = new PersistableGame(AN_ID, AN_OPPONENT, A_LOCATION, A_NEXT_TICKET_NUMBER, assignationState,
+				tickets);
 
 	}
 
@@ -85,7 +87,15 @@ public class PersistableGameTest {
 	public void when_added_to_the_list_a_ticket_is_assigned_to_the_game_schedule() {
 		gameWithTickets.addTicket(okayTicket);
 
-		verify(assignationState).assignThisTicketToSchedule(okayTicket, tickets.size() - 1);
+		verify(assignationState).assignThisTicketToSchedule(okayTicket, A_NEXT_TICKET_NUMBER);
+	}
+
+	@Test
+	public void when_a_ticket_is_added_the_next_ticket_number_is_incremented() {
+		gameWithTickets.addTicket(okayTicket);
+		gameWithTickets.addTicket(okayTicket);
+
+		verify(assignationState).assignThisTicketToSchedule(okayTicket, A_NEXT_TICKET_NUMBER + 1);
 	}
 
 	@Test

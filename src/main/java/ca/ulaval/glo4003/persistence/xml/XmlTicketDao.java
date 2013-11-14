@@ -193,12 +193,6 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	@Override
-	public void endTransaction() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void commit() {
 		database.commit();
 	}

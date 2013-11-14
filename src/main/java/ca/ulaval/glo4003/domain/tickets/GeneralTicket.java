@@ -5,8 +5,8 @@ import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 
 public class GeneralTicket extends PersistableTicket {
 
-	public GeneralTicket(TicketAssignationState associationState) {
-		super(associationState);
+	public GeneralTicket(double price, TicketAssignationState associationState) {
+		super(associationState, price);
 	}
 
 	@Override

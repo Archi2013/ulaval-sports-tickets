@@ -11,7 +11,7 @@ public interface GameScheduleState {
 
 	GameScheduleState assign(String sport, DateTime gameDate);
 
-	void assignThisTicketToSchedule(Ticket ticket, int ticketNumber);
+	void assignThisTicketToSchedule(Ticket ticket, long aNextTicketNumber);
 
 	void saveTheScheduleInThisDto(GameDto dto);
 }

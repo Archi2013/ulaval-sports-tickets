@@ -18,7 +18,7 @@ public class UnscheduledState implements GameScheduleState {
 	}
 
 	@Override
-	public void assignThisTicketToSchedule(Ticket ticket, int ticketNumber) {
+	public void assignThisTicketToSchedule(Ticket ticket, long ticketNumber) {
 
 	}
 

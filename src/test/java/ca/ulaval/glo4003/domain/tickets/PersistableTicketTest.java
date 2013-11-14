@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.domain.tickets;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -11,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -22,6 +24,7 @@ public class PersistableTicketTest {
 	public static final String ANOTHER_SEAT = "Another seat";
 	public static final String A_SECTION = "section";
 	public static final String ANOTHER_SECTION = "Another section";
+	public static final long A_PRICE = 25;
 
 	@Mock
 	TicketAssignationState firstAssociationState;
@@ -37,7 +40,7 @@ public class PersistableTicketTest {
 	@Before
 	public void setup() {
 
-		ticket = new PersistableTicketImpl(firstAssociationState);
+		ticket = new PersistableTicketImpl(firstAssociationState, A_PRICE);
 	}
 
 	@Test
@@ -64,10 +67,25 @@ public class PersistableTicketTest {
 		verify(secondAssociationState).assign(A_SPORT, A_DATE, A_TICKET_NUMBER);
 	}
 
+	@Test
+	public void saveDataInDto_stores_own_data_in_dto() {
+		TicketDto data = ticket.saveDataInDTO();
+
+		Assert.assertTrue(data.available);
+		Assert.assertEquals(A_PRICE, data.price, 1);
+	}
+
+	@Test
+	public void saveDataInDto_asks_assignationState_to_fill_its_share() {
+		ticket.saveDataInDTO();
+
+		verify(firstAssociationState).fillDataInDto(any(TicketDto.class));
+	}
+
 	private class PersistableTicketImpl extends PersistableTicket {
 
-		public PersistableTicketImpl(TicketAssignationState associationState) {
-			super(associationState);
+		public PersistableTicketImpl(TicketAssignationState associationState, double price) {
+			super(associationState, price);
 
 		}
 

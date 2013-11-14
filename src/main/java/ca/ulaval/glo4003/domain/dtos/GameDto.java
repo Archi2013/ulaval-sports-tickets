@@ -10,7 +10,8 @@ public class GameDto {
 	private DateTime gameDate;
 	private String location;
 	private int numberOfTickets;
-	
+	private long nextTicketNumber;
+
 	public GameDto(long id, String opponents, DateTime gameDate, String sportName, String location) {
 		this(new Long(id), opponents, gameDate, sportName, location);
 	}
@@ -21,6 +22,12 @@ public class GameDto {
 		this.opponents = opponents;
 		this.gameDate = gameDate;
 		this.location = location;
+	}
+
+	public GameDto(Long id, String opponents, DateTime gameDate, String sportName, String location,
+			long nextTicketNumber) {
+		this(id, opponents, gameDate, sportName, location);
+		this.nextTicketNumber = nextTicketNumber;
 	}
 
 	public String getSportName() {
@@ -70,4 +77,13 @@ public class GameDto {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
+	public long getNextTicketNumber() {
+		return nextTicketNumber;
+	}
+
+	public void setNextTicketNumber(long nextTicketNumber) {
+		this.nextTicketNumber = nextTicketNumber;
+	}
+
 }

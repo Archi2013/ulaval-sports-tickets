@@ -26,7 +26,7 @@ public class ScheduledState implements GameScheduleState {
 	}
 
 	@Override
-	public void assignThisTicketToSchedule(Ticket ticket, int ticketNumber) {
+	public void assignThisTicketToSchedule(Ticket ticket, long ticketNumber) {
 		ticket.assign(sport, gameDate, ticketNumber);
 
 	}

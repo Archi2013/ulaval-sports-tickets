@@ -17,13 +17,15 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 	private String location;
 	private List<Ticket> tickets;
 	private GameScheduleState assignationState;
+	private long nextTicketNumber;
 
-	public PersistableGame(Long id, String opponents, String location, GameScheduleState assignationState,
-			List<Ticket> tickets) {
+	public PersistableGame(Long id, String opponents, String location, long nextTicketNumber,
+			GameScheduleState assignationState, List<Ticket> tickets) {
 		this.id = id;
 		this.opponents = opponents;
 		this.location = location;
 		this.assignationState = assignationState;
+		this.nextTicketNumber = nextTicketNumber;
 		this.tickets = tickets;
 	}
 
@@ -50,7 +52,8 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 	@Override
 	public void addTicket(Ticket ticketToAdd) {
 		if (!alreadyInTicketList(ticketToAdd) && ticketToAdd.isAssignable()) {
-			assignationState.assignThisTicketToSchedule(ticketToAdd, tickets.size());
+			assignationState.assignThisTicketToSchedule(ticketToAdd, nextTicketNumber);
+			nextTicketNumber++;
 			tickets.add(ticketToAdd);
 		}
 	}

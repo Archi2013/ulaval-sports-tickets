@@ -11,10 +11,11 @@ public class TicketDto {
 	public String seat;
 	public String sportName;
 	public DateTime gameDate;
-	public int ticketNumber;
+	public long ticketNumber;
 	public boolean available;
-	
-	public TicketDto(String sportName, String section, DateTime gameDate, int ticketNumber, double price, boolean available) {
+
+	public TicketDto(String sportName, String section, DateTime gameDate, long ticketNumber, double price,
+			boolean available) {
 		this.sportName = sportName;
 		this.section = section;
 		this.gameDate = gameDate;
@@ -23,7 +24,7 @@ public class TicketDto {
 		this.available = available;
 	}
 
-	public TicketDto(String sportName, DateTime gameDate, int ticketNumber, double price, String seat, String section,
+	public TicketDto(String sportName, DateTime gameDate, long ticketNumber, double price, String seat, String section,
 			boolean available) {
 		this.sportName = sportName;
 
@@ -83,7 +84,7 @@ public class TicketDto {
 		return gameDate;
 	}
 
-	public int getTicketNumber() {
+	public long getTicketNumber() {
 		return ticketNumber;
 	}
 

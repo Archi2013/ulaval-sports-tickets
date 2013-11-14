@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -14,17 +13,18 @@ import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 @RunWith(MockitoJUnitRunner.class)
 public class GeneralTicketTest {
 	private static final String A_SEAT = "seat";
+	private static final double A_PRICE = 1478;
 	@Mock
 	private TicketAssignationState assignationState;
 
 	@Mock
 	private Ticket otherTicket;
 
-	@InjectMocks
 	private GeneralTicket ticket;
 
 	@Before
 	public void setup() {
+		ticket = new GeneralTicket(A_PRICE, assignationState);
 	}
 
 	@Test

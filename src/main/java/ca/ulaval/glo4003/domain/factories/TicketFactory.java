@@ -24,9 +24,9 @@ public class TicketFactory {
 
 	public PersistableTicket instantiateTicket(TicketDto data) {
 		if (sectionIsGeneral(data.getSection())) {
-			return new GeneralTicket(createAssignationState(data));
+			return new GeneralTicket(data.getPrice(), createAssignationState(data));
 		}
-		return new SeatedTicket(data.getSeat(), data.getSection(), createAssignationState(data));
+		return new SeatedTicket(data.getSeat(), data.getSection(), data.getPrice(), createAssignationState(data));
 	}
 
 	private boolean sectionIsGeneral(String section) {

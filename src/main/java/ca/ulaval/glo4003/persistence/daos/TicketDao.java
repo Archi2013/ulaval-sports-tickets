@@ -26,8 +26,6 @@ public interface TicketDao {
 
 	public void update(TicketDto firstTicketData) throws TicketDoesntExistException;
 
-	public void endTransaction();
-
 	public void commit();
 
 	List<TicketDto> getAllTicketsForGame(Long gameID) throws GameDoesntExistException;

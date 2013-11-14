@@ -29,8 +29,8 @@ public class GameFactory implements IGameFactory {
 
 	@Override
 	public PersistableGame instantiateGame(GameDto data, List<Ticket> tickets) {
-		return new PersistableGame(data.getId(), data.getOpponents(), data.getLocation(), createAssignationState(data),
-				tickets);
+		return new PersistableGame(data.getId(), data.getOpponents(), data.getLocation(), data.getNextTicketNumber(),
+				createAssignationState(data), tickets);
 	}
 
 	private GameScheduleState createAssignationState(GameDto data) {

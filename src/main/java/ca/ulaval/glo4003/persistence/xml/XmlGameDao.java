@@ -30,6 +30,8 @@ public class XmlGameDao implements GameDao {
 	private static final String GAME_XPATH_SPORT_NAME = GAME_XPATH + "[sportName=\"%s\"]";
 	private static final String GAME_XPATH_SPORT_NAME_GAMEDATE = GAME_XPATH_SPORT_NAME + "[date=\"%s\"]";
 
+	private final static String TICKET_XPATH_GAME_ID = "/base/tickets" + "[gameID=\"%s\"]";
+
 	private static AtomicLong nextId;
 
 	private XmlDatabase database;
@@ -115,9 +117,19 @@ public class XmlGameDao implements GameDao {
 			DateTime gameDate = DateTime.parse(node.getNodeValue("date"), format);
 			String sportName = node.getNodeValue("sportName");
 			String location = node.getNodeValue("location");
+			long nextTicketNumber = getNextTicketNumber(node.getNodeValue("id"));
 			return new GameDto(id, opponents, gameDate, sportName, location);
 		}
 		throw new GameDoesntExistException();
+	}
+
+	private long getNextTicketNumber(String id) {
+		String xPath = String.format(TICKET_XPATH_GAME_ID, id);
+		try {
+			return database.getMaxValue(TICKET_XPATH_GAME_ID, id);
+		} catch (XPathExpressionException e) {
+			return 0;
+		}
 	}
 
 	private List<GameDto> convertNodesToGames(List<SimpleNode> nodes) throws NoSuchAttributeException,

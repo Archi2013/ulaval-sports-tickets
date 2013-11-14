@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -21,6 +22,7 @@ public class SeatedTicketTest {
 	public static final String ANOTHER_SEAT = "Another seat";
 	public static final String A_SECTION = "section";
 	public static final String ANOTHER_SECTION = "Another section";
+	public static final double A_PRICE = 145;
 
 	@Mock
 	TicketAssignationState firstAssociationState;
@@ -36,7 +38,7 @@ public class SeatedTicketTest {
 	@Before
 	public void setup() {
 
-		ticket = new SeatedTicket(A_SEAT, A_SECTION, firstAssociationState);
+		ticket = new SeatedTicket(A_SEAT, A_SECTION, A_PRICE, firstAssociationState);
 	}
 
 	@Test
@@ -69,5 +71,14 @@ public class SeatedTicketTest {
 	public void isSection_returns_true_if_equals_to_own_section_and_false_otherwise() {
 		Assert.assertTrue(ticket.isSection(A_SECTION));
 		Assert.assertFalse(ticket.isSection(ANOTHER_SECTION));
+	}
+
+	@Test
+	public void saveDataInDto_adds_seats_and_section_to_dto_filled_by_superclass() {
+		TicketDto data = ticket.saveDataInDTO();
+
+		Assert.assertEquals(A_PRICE, data.price, 1);
+		Assert.assertEquals(A_SEAT, data.seat);
+		Assert.assertEquals(A_SECTION, data.section);
 	}
 }
