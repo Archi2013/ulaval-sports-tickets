@@ -30,7 +30,7 @@ public class TicketFactory {
 	}
 
 	private boolean sectionIsGeneral(String section) {
-		return section.equals(GENERAL_SECTION);
+		return section == null || section.equals(GENERAL_SECTION);
 	}
 
 	private TicketAssignationState createAssignationState(TicketDto data) {

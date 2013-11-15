@@ -128,8 +128,7 @@ public class XmlTicketDao implements TicketDao {
 		return new SimpleNode("ticket", nodes);
 	}
 
-	private TicketDto convertNodeToTicket(SimpleNode parent) throws NoSuchAttributeException,
-			TicketDoesntExistException {
+	private TicketDto convertNodeToTicket(SimpleNode parent) throws NoSuchAttributeException, TicketDoesntExistException {
 		if (parent.hasNode("id", "gameID", "price")) {
 			int ticketId = Integer.parseInt(parent.getNodeValue("id"));
 			long gameId = Long.parseLong(parent.getNodeValue("gameID"));
