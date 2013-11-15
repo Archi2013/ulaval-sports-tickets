@@ -19,7 +19,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.CommandGameService;
+import ca.ulaval.glo4003.domain.services.CommandTicketService;
 import ca.ulaval.glo4003.domain.services.SportService;
+import ca.ulaval.glo4003.domain.utilities.Constants;
+import ca.ulaval.glo4003.domain.utilities.DateParser;
 import ca.ulaval.glo4003.domain.utilities.YearMonthDayHourMinuteDateParser;
 import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
@@ -33,13 +36,22 @@ public class AdministrationControllerTest {
 	private static final String A_STRING_DATE = "date";
 
 	@Mock
+	private Constants constants;
+
+	@Mock
+	CommandTicketService ticketService;
+
+	@Mock
 	private CommandGameService gameService;
 
 	@Mock
 	private SportService sportService;
 
 	@Mock
-	private YearMonthDayHourMinuteDateParser dateParser;
+	private YearMonthDayHourMinuteDateParser otherParser;
+
+	@Mock
+	private DateParser dateParser;
 
 	@Mock
 	private SportsViewModel sportsVM;
@@ -54,7 +66,7 @@ public class AdministrationControllerTest {
 
 	@Before
 	public void setUp() {
-		when(dateParser.parseDate(any(String.class))).thenReturn(A_DATE);
+		when(otherParser.parseDate(any(String.class))).thenReturn(A_DATE);
 		gameToAddVM.setDate(A_STRING_DATE);
 	}
 
