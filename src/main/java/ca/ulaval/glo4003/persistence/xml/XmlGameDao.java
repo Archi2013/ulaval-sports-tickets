@@ -30,7 +30,7 @@ public class XmlGameDao implements GameDao {
 	private static final String GAME_XPATH_SPORT_NAME = GAME_XPATH + "[sportName=\"%s\"]";
 	private static final String GAME_XPATH_SPORT_NAME_GAMEDATE = GAME_XPATH_SPORT_NAME + "[date=\"%s\"]";
 
-	private final static String TICKET_XPATH_GAME_ID = "/base/tickets" + "[gameID=\"%s\"]";
+	private final static String TICKET_XPATH_GAME_ID = "/base/tickets/ticket" + "[gameID=\"%s\"]";
 
 	private static AtomicLong nextId;
 
@@ -118,15 +118,17 @@ public class XmlGameDao implements GameDao {
 			String sportName = node.getNodeValue("sportName");
 			String location = node.getNodeValue("location");
 			long nextTicketNumber = getNextTicketNumber(node.getNodeValue("id"));
-			return new GameDto(id, opponents, gameDate, sportName, location);
+			return new GameDto(id, opponents, gameDate, sportName, location, nextTicketNumber);
 		}
 		throw new GameDoesntExistException();
 	}
 
-	private long getNextTicketNumber(String id) {
-		String xPath = String.format(TICKET_XPATH_GAME_ID, id);
+	private long getNextTicketNumber(String gameId) {
+		String xPath = String.format(TICKET_XPATH_GAME_ID, gameId);
 		try {
-			return database.getMaxValue(TICKET_XPATH_GAME_ID, id);
+			long toReturn = database.getMaxValue(xPath, "id") + 1;
+			System.out.println("XmlGameDao: Calcul reussi du nextTicketNumber: " + toReturn);
+			return toReturn;
 		} catch (XPathExpressionException e) {
 			return 0;
 		}
@@ -155,6 +157,7 @@ public class XmlGameDao implements GameDao {
 
 	@Override
 	public void update(GameDto dto) throws GameDoesntExistException {
+		System.out.println("XmlGameDao: gameID a la mise a jour: " + dto.getId());
 		String xPath = String.format(GAME_XPATH_ID, dto.getId());
 		if (!database.exist(xPath)) {
 			throw new GameDoesntExistException();

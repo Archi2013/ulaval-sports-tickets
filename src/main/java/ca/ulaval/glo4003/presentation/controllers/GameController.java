@@ -15,6 +15,7 @@ import ca.ulaval.glo4003.domain.services.QueryGameService;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.xml.XmlIntegrityException;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;
 
 @Controller
@@ -24,7 +25,7 @@ public class GameController {
 
 	@Autowired
 	private User currentUser;
-	
+
 	@Inject
 	private QueryGameService gameService;
 
@@ -32,11 +33,11 @@ public class GameController {
 	public ModelAndView getTicketsForGame(@PathVariable Long gameId, @PathVariable String sportNameUrl) {
 		try {
 			logger.info("Getting all tickets for game : " + gameId);
-			
+
 			ModelAndView mav = new ModelAndView("game/sections");
-			
+
 			manageUserConnection(mav);
-			
+
 			mav.addObject("currency", Constants.CURRENCY);
 
 			SectionsViewModel sectionsViewModel = gameService.getAvailableSectionsForGame(gameId);
@@ -46,18 +47,19 @@ public class GameController {
 		} catch (GameDoesntExistException e) {
 			logger.info("==> Impossible to get all tickets for game : " + gameId);
 			return new ModelAndView("error/404");
+		} catch (XmlIntegrityException e) {
+			return new ModelAndView("game/no-ticket");
 		}
 	}
-	
-	private void addConnectedUserToModelAndView(ModelAndView mav,
-			Boolean connectedUser) {
+
+	private void addConnectedUserToModelAndView(ModelAndView mav, Boolean connectedUser) {
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 		} else {
 			mav.addObject("connectedUser", false);
 		}
 	}
-	
+
 	private void addLogOfUserConnection(Boolean connectedUser) {
 		if (connectedUser) {
 			logger.info("usagé connecté");
@@ -65,12 +67,12 @@ public class GameController {
 			logger.info("usagé non connecté");
 		}
 	}
-	
+
 	private void manageUserConnection(ModelAndView mav) {
 		Boolean connectedUser = currentUser.isLogged();
 
 		addConnectedUserToModelAndView(mav, connectedUser);
-		
+
 		addLogOfUserConnection(connectedUser);
 	}
 }

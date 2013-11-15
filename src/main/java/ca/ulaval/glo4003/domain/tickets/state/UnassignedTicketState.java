@@ -6,6 +6,10 @@ import ca.ulaval.glo4003.domain.dtos.TicketDto;
 
 public class UnassignedTicketState implements TicketAssignationState {
 
+	public UnassignedTicketState() {
+		System.out.println("UnassignedTicketState: initiation");
+	}
+
 	@Override
 	public boolean isAssignable() {
 		return true;
@@ -13,6 +17,9 @@ public class UnassignedTicketState implements TicketAssignationState {
 
 	@Override
 	public TicketAssignationState assign(String sport, DateTime date, long ticketNumber) {
+		System.out.println("UnassignedTicketState: assignation avec donnees: " + sport);
+		System.out.println(date.toString());
+		System.out.println(ticketNumber);
 		return new AssignedTicketState(sport, date, ticketNumber);
 	}
 

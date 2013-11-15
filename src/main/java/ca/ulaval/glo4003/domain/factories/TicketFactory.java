@@ -24,6 +24,7 @@ public class TicketFactory {
 
 	public PersistableTicket instantiateTicket(TicketDto data) {
 		if (sectionIsGeneral(data.getSection())) {
+			System.out.println("TicketFactory: creation d'un ticket general non assigne");
 			return new GeneralTicket(data.getPrice(), createAssignationState(data));
 		}
 		return new SeatedTicket(data.getSeat(), data.getSection(), data.getPrice(), createAssignationState(data));

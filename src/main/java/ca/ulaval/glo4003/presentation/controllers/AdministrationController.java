@@ -168,18 +168,21 @@ public class AdministrationController {
 
 	@RequestMapping(value = "/ajout-billets-seated", method = RequestMethod.POST)
 	public ModelAndView addTickets_seated(@ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM,
-			Model model) throws SportDoesntExistException, GameDoesntExistException {
+			Model model) throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
+			TicketAlreadyExistException, TicketDoesntExistException, NoSportForUrlException {
 		logger.info("Adminisatration: adding a seated ticket to game on " + ticketsToAddVM.getGameDate() + " in seat "
 				+ ticketsToAddVM.getSeat() + " of section " + ticketsToAddVM.getSection());
 
 		ModelAndView mav;
-		try {
-			ticketService.addSeatedTicket(ticketsToAddVM.getSportName(),
-					dateParser.parseDate(ticketsToAddVM.getGameDate()), ticketsToAddVM.getSection(),
-					ticketsToAddVM.getSeat());
-		} catch (GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException e) {
-			mav = new ModelAndView("/admin/tickets-added-date-error");
-		}
+		// try {
+		ticketService.addSeatedTicket(sportUrlMapper.getSportName(ticketsToAddVM.getSportName()),
+				dateParser.parseDate(ticketsToAddVM.getGameDate()), ticketsToAddVM.getSection(),
+				ticketsToAddVM.getSeat());
+		// } catch (GameAlreadyExistException | TicketAlreadyExistException |
+		// TicketDoesntExistException
+		// | NoSportForUrlException e) {
+		// return new ModelAndView("/admin/tickets-added-date-error");
+		// }
 		mav = new ModelAndView("/admin/tickets-added");
 
 		manageUserConnection(mav);
