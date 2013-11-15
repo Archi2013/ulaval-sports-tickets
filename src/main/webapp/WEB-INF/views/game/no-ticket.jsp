@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<c:set var="pageTitle" value="${games.sportName} : Aucun match disponible" />
+<c:set var="pageTitle" value="Aucun match disponible" />
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -12,10 +12,8 @@
     <%@include file="../layout/header.jsp" %>
     <%@include file="../layout/menu.jsp" %>
     
-    <h2>${games.sportName}</h2>
-    
     <div class="information-block-error-skin margin-25-50">
-        Aucun ticket n'est disponible pour ce match.
+        Aucun ticket n'est disponible pour ce match. Vous pouvez toujours chercher un autre match afin de trouver des billets.
     </div>
     
     <%@include file="../layout/footer.jsp" %>
