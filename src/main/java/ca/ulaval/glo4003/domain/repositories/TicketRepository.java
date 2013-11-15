@@ -108,7 +108,6 @@ public class TicketRepository implements ITicketRepository {
 			PersistableTicket newTicket = factory.instantiateTicket(ticket);
 			newTicket.assign(ticket.getSportName(), ticket.getGameDate(), ticket.getTicketId());
 			newTicket.gameId = ticket.gameId;
-			newTicket.price = ticket.price;
 			ticketsInDao.add(newTicket);
 			ticketsToReturn.add(newTicket);
 		}

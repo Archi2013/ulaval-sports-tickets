@@ -9,10 +9,8 @@ import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 public abstract class PersistableTicket extends Ticket implements Persistable<TicketDto> {
 
 	private TicketAssignationState associationState;
-	public double price;
-	public boolean available;
-	public String section;
-	public String seat;
+	private double price;
+	private boolean available;
 	public long gameId;
 
 	public long getGameId() {
