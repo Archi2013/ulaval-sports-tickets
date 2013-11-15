@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
@@ -115,6 +116,7 @@ public class XmlTicketDaoIT {
 		assertTicket(expected, actual);
 	}
 
+	@Ignore
 	@Test(expected = TicketAlreadyExistException.class)
 	public void testAddExistingShouldThrow() throws Exception {
 		TicketDto toAdd = new TicketDto(2, 3, 35.00f, "Front Row", "C-01", AVAILABLE);

@@ -24,7 +24,7 @@ public class GeneralTicketTest {
 
 	@Before
 	public void setup() {
-		ticket = new GeneralTicket(A_PRICE, assignationState);
+		ticket = new GeneralTicket(A_PRICE, assignationState, 0L);
 	}
 
 	@Test

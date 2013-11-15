@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.domain.tickets;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.joda.time.DateTime;
 import org.junit.Assert;
@@ -38,7 +38,7 @@ public class SeatedTicketTest {
 	@Before
 	public void setup() {
 
-		ticket = new SeatedTicket(A_SEAT, A_SECTION, A_PRICE, firstAssociationState);
+		ticket = new SeatedTicket(A_SEAT, A_SECTION, A_PRICE, firstAssociationState, 0L);
 	}
 
 	@Test
