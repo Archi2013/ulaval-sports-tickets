@@ -83,7 +83,10 @@ public class TicketRepository implements ITicketRepository {
 
 	private void saveChangesToOldTickets() throws TicketDoesntExistException {
 		for (Persistable<TicketDto> ticket : ticketsInDao) {
-			dao.update(ticket.saveDataInDTO());
+			TicketDto dto = ticket.saveDataInDTO();
+			// TODO hack de ticketId
+			// dto.ticketId = dto.ticketNumber;
+			dao.update(dto);
 		}
 	}
 
@@ -101,7 +104,11 @@ public class TicketRepository implements ITicketRepository {
 
 		List<Ticket> ticketsToReturn = new ArrayList<>();
 		for (TicketDto ticket : availableTickets) {
+			// TODO ticketId à la place de ticketNumber...
 			PersistableTicket newTicket = factory.instantiateTicket(ticket);
+			newTicket.assign(ticket.getSportName(), ticket.getGameDate(), ticket.getTicketId());
+			newTicket.gameId = ticket.gameId;
+			newTicket.price = ticket.price;
 			ticketsInDao.add(newTicket);
 			ticketsToReturn.add(newTicket);
 		}

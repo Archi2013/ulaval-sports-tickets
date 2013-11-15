@@ -11,6 +11,17 @@ public abstract class PersistableTicket extends Ticket implements Persistable<Ti
 	private TicketAssignationState associationState;
 	public double price;
 	public boolean available;
+	public String section;
+	public String seat;
+	public long gameId;
+
+	public long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
+	}
 
 	public PersistableTicket(TicketAssignationState associationState, double price) {
 		this.associationState = associationState;
@@ -33,5 +44,6 @@ public abstract class PersistableTicket extends Ticket implements Persistable<Ti
 		TicketDto data = new TicketDto(null, null, 0, price, null, null, available);
 		associationState.fillDataInDto(data);
 		return data;
+
 	}
 }
