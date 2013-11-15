@@ -22,6 +22,7 @@ import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
 import ca.ulaval.glo4003.persistence.daos.SectionForSearchDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.persistence.xml.XmlIntegrityException;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -104,12 +105,18 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 				List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
 
 				for (GameDto gameDto : gameDtos) {
-					List<SectionDto> sectionDtos = sectionDao.getAllAvailable(gameDto.getId());
-
-					for (SectionDto sectionDto : sectionDtos) {
-						String url = createUrl(sportName, gameDto.getId(), sectionDto.getSectionName());
-						SectionForSearchDto sectionFSDto = new SectionForSearchDto(sectionDto, gameDto, sportName, url);
-						sectionFSDtos.add(sectionFSDto);
+					try {
+						List<SectionDto> sectionDtos = sectionDao.getAllAvailable(gameDto.getId());
+	
+						for (SectionDto sectionDto : sectionDtos) {
+							String url = createUrl(sportName, gameDto.getId(), sectionDto.getSectionName());
+							SectionForSearchDto sectionFSDto = new SectionForSearchDto(sectionDto, gameDto, sportName, url);
+							sectionFSDtos.add(sectionFSDto);
+						}
+					} catch (XmlIntegrityException e) {
+						// TODO s'occuper de la cause de cette exception
+						System.out.println("Exception : " + e.getCause().getClass().getSimpleName());
+						e.getCause().printStackTrace();
 					}
 				}
 			}
