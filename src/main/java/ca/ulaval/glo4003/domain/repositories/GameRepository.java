@@ -34,8 +34,12 @@ public class GameRepository implements IGameRepository {
 	private List<Persistable<GameDto>> existingActiveGames = new ArrayList<>();
 	private List<Persistable<GameDto>> newActiveGames = new ArrayList<>();
 
+	int numberOfCallsToRepository = 0;
+
 	@Override
 	public Game recoverGame(String sport, DateTime date) throws GameDoesntExistException {
+		numberOfCallsToRepository++;
+		System.out.println("Le repository a ete appele: " + numberOfCallsToRepository);
 		GameDto gameDto = gameDao.get(sport, date);
 		System.out.println("Repository: location: " + gameDto.getLocation());
 		System.out.println("Repository: nextTicketNumber: " + gameDto.getNextTicketNumber());
@@ -53,6 +57,8 @@ public class GameRepository implements IGameRepository {
 
 	@Override
 	public List<Game> recoverAllGamesForSport(String sportName) throws SportDoesntExistException {
+		numberOfCallsToRepository++;
+		System.out.println("Le repository a ete appele: " + numberOfCallsToRepository);
 		List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
 		List<PersistableGame> games = new ArrayList<>();
 		for (GameDto dto : gameDtos) {
@@ -98,6 +104,14 @@ public class GameRepository implements IGameRepository {
 		existingActiveGames.addAll(newActiveGames);
 		newActiveGames.clear();
 		ticketRepository.commit();
+	}
+
+	@Override
+	public void clearCache() {
+		existingActiveGames.clear();
+		newActiveGames.clear();
+		ticketRepository.clearCache();
+
 	}
 
 }

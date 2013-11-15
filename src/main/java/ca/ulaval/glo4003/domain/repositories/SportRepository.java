@@ -58,4 +58,11 @@ public class SportRepository implements ISportRepository {
 		gameRepository.commit();
 	}
 
+	@Override
+	public void clearCache() {
+		activeSports.clear();
+		gameRepository.clearCache();
+
+	}
+
 }

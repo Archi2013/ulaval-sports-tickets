@@ -22,4 +22,6 @@ public interface IGameRepository {
 	public void commit() throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
 			TicketDoesntExistException;
 
+	void clearCache();
+
 }

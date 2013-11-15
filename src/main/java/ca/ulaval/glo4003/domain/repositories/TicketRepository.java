@@ -115,4 +115,11 @@ public class TicketRepository implements ITicketRepository {
 		return ticketsToReturn.subList(0, numberOfSeats);
 	}
 
+	@Override
+	public void clearCache() {
+		ticketsInDao.clear();
+		newTickets.clear();
+
+	}
+
 }

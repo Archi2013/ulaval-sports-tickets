@@ -13,4 +13,6 @@ public interface ISportRepository {
 
 	void commit() throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
 			TicketAlreadyExistException, TicketDoesntExistException;
+
+	void clearCache();
 }

@@ -39,6 +39,7 @@ public class CommandTicketService {
 		}
 
 		gameRepository.commit();
+		gameRepository.clearCache();
 	}
 
 	public void addSeatedTicket(String sport, DateTime date, String section, String seat, double price)
@@ -47,6 +48,7 @@ public class CommandTicketService {
 		Game gameToUse = gameRepository.recoverGame(sport, date);
 		gameToUse.addTicket(ticketRepository.instantiateNewTicket(seat, section, price, true));
 		gameRepository.commit();
+		gameRepository.clearCache();
 	}
 
 	public void makeTicketsUnavailable(GameDto game, SectionDto section, int numberOfSeats, List<String> seats)
@@ -66,6 +68,7 @@ public class CommandTicketService {
 		}
 
 		ticketRepository.commit();
+		ticketRepository.clearCache();
 
 	}
 

@@ -25,4 +25,6 @@ public interface ITicketRepository {
 
 	List<Ticket> recoverNGeneralTickets(Long id, int numberOfSeats) throws GameDoesntExistException;
 
+	void clearCache();
+
 }

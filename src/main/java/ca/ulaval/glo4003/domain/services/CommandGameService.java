@@ -39,6 +39,7 @@ public class CommandGameService {
 
 		// gameRepository.commit();
 		sportRepository.commit();
+		sportRepository.clearCache();
 	}
 
 }
