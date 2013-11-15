@@ -86,7 +86,8 @@ public class XmlTicketDao implements TicketDao {
 	public void add(TicketDto ticket) throws TicketAlreadyExistException, GameDoesntExistException {
 		System.out.println("SportName a la sauvegarde: " + ticket.sportName);
 		System.out.println("Gamedate a la sauvegarde : " + ticket.gameDate);
-		ticket.gameId = getGameID(ticket.sportName, ticket.gameDate);
+		ticket.gameId = ticket.gameId;// getGameID(ticket.sportName,
+										// ticket.gameDate);
 		System.out.println("TicketId a la sauvegarde: " + ticket.ticketId);
 		System.out.println("GameId a la sauvegarde  : " + ticket.gameId);
 		if (isIdExist(ticket.getTicketId(), ticket.gameId)) {
@@ -191,7 +192,9 @@ public class XmlTicketDao implements TicketDao {
 	@Override
 	public void update(TicketDto dto) throws TicketDoesntExistException {
 		try {
-			dto.gameId = getGameID(dto.sportName, dto.gameDate);
+			if (dto.gameId == 0) {
+				dto.gameId = getGameID(dto.sportName, dto.gameDate);
+			}
 		} catch (GameDoesntExistException e1) {
 			throw new TicketDoesntExistException();
 		}

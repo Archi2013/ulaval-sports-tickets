@@ -57,8 +57,8 @@ public class PaymentService {
 	@Inject
 	private SectionRepository sectionRepository;
 
-	public Boolean isValidChooseTicketsViewModel(ChooseTicketsViewModel chooseTicketsVM)
-			throws GameDoesntExistException, SectionDoesntExistException {
+	public Boolean isValidChooseTicketsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException,
+			SectionDoesntExistException {
 		Section section = sectionRepository.getAvailable(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
 		return section.isValidElements(chooseTicketsVM.getNumberOfTicketsToBuy(), chooseTicketsVM.getSelectedSeats());
 	}
@@ -71,19 +71,18 @@ public class PaymentService {
 		return payableItemsViewModelFactory.createViewModel(chooseTicketsVM, gameDto, sectionDto);
 	}
 
-	public void saveToCart(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException,
-			SectionDoesntExistException {
+	public void saveToCart(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
 		GameDto gameDto = gameDao.get(chooseTicketsVM.getGameId());
 		SectionDto sectionDto = sectionDao.getAvailable(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
 
 		Double cumulativePrice = 0.0;
 
 		if (sectionDto.isGeneralAdmission()) {
-			cumulativePrice = calculator.calculateCumulativePriceForGeneralAdmission(
-					chooseTicketsVM.getNumberOfTicketsToBuy(), sectionDto.getPrice());
+			cumulativePrice = calculator.calculateCumulativePriceForGeneralAdmission(chooseTicketsVM.getNumberOfTicketsToBuy(),
+					sectionDto.getPrice());
 		} else {
-			cumulativePrice = calculator.calculateCumulativePriceForWithSeatAdmission(
-					chooseTicketsVM.getSelectedSeats(), sectionDto.getPrice());
+			cumulativePrice = calculator.calculateCumulativePriceForWithSeatAdmission(chooseTicketsVM.getSelectedSeats(),
+					sectionDto.getPrice());
 		}
 
 		currentCart.setNumberOfTicketsToBuy(chooseTicketsVM.getNumberOfTicketsToBuy());
@@ -105,12 +104,11 @@ public class PaymentService {
 		}
 	}
 
-	public void buyTicketsInCart(PaymentViewModel paymentVM) throws InvalidCreditCardException,
-			NoTicketsInCartException {
+	public void buyTicketsInCart(PaymentViewModel paymentVM) throws InvalidCreditCardException, NoTicketsInCartException {
 		CreditCard creditCard = creditCardFactory.createCreditCard(paymentVM);
 		if (currentCart.containTickets()) {
 			creditCard.pay(currentCart.getCumulativePrice());
-			// cartService.makeTicketsUnavailableToOtherPeople(currentCart);
+			cartService.makeTicketsUnavailableToOtherPeople(currentCart);
 		} else {
 			throw new NoTicketsInCartException();
 		}

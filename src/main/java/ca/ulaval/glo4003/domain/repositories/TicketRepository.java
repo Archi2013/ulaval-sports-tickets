@@ -55,8 +55,7 @@ public class TicketRepository implements ITicketRepository {
 	@Override
 	public Ticket recoverTicket(String sport, DateTime date, String seat) {
 		TicketDto data = dao.get(sport, date, seat);
-		PersistableTicket recoveredTicket = factory.instantiateTicket(data.getSeat(), data.getSection(),
-				data.getPrice(), true);
+		PersistableTicket recoveredTicket = factory.instantiateTicket(data.getSeat(), data.getSection(), data.getPrice(), true);
 		ticketsInDao.add(recoveredTicket);
 		return recoveredTicket;
 	}
@@ -84,8 +83,6 @@ public class TicketRepository implements ITicketRepository {
 	private void saveChangesToOldTickets() throws TicketDoesntExistException {
 		for (Persistable<TicketDto> ticket : ticketsInDao) {
 			TicketDto dto = ticket.saveDataInDTO();
-			// TODO hack de ticketId
-			// dto.ticketId = dto.ticketNumber;
 			dao.update(dto);
 		}
 	}

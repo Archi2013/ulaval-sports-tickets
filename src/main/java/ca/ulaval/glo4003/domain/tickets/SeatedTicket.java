@@ -8,10 +8,11 @@ public class SeatedTicket extends PersistableTicket {
 	private String seat;
 	private String section;
 
-	public SeatedTicket(String seat, String section, double price, TicketAssignationState associationState) {
+	public SeatedTicket(String seat, String section, double price, TicketAssignationState associationState, long ticketId) {
 		super(associationState, price);
 		this.seat = seat;
 		this.section = section;
+		this.ticketId = ticketId;
 	}
 
 	@Override
