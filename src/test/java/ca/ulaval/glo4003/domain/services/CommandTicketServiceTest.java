@@ -29,6 +29,7 @@ public class CommandTicketServiceTest {
 	public static final String A_SEAT = "Seat";
 	public static DateTime A_DATE = new DateTime(100);
 	public static final int A_NUMBER_OF_TICKETS = 100;
+	public static final double A_PRICE = 12;
 
 	@Mock
 	private Game game;
@@ -47,14 +48,14 @@ public class CommandTicketServiceTest {
 
 	@Before
 	public void setup() throws GameDoesntExistException {
-		when(ticketRepository.instantiateNewTicket()).thenReturn(ticketToAdd);
-		when(ticketRepository.instantiateNewTicket(A_SECTION, A_SEAT, AVAILABLE)).thenReturn(ticketToAdd);
+		when(ticketRepository.instantiateNewTicket(A_PRICE)).thenReturn(ticketToAdd);
+		when(ticketRepository.instantiateNewTicket(A_SEAT, A_SECTION, A_PRICE, AVAILABLE)).thenReturn(ticketToAdd);
 		when(gameRepository.recoverGame(A_SPORT, A_DATE)).thenReturn(game);
 	}
 
 	@Test
 	public void addGeneralTickets_adds_n_tickets_to_a_sport() throws Exception {
-		ticketService.addGeneralTickets(A_SPORT, A_DATE, A_NUMBER_OF_TICKETS);
+		ticketService.addGeneralTickets(A_SPORT, A_DATE, A_NUMBER_OF_TICKETS, A_PRICE);
 
 		verify(game, times(A_NUMBER_OF_TICKETS)).addTicket(any(Ticket.class));
 	}
@@ -62,63 +63,63 @@ public class CommandTicketServiceTest {
 	@Test
 	public void tickets_added_by_addGeneralTickets_are_instantiated_by_a_repository() throws Exception {
 
-		ticketService.addGeneralTickets(A_SPORT, A_DATE, A_NUMBER_OF_TICKETS);
+		ticketService.addGeneralTickets(A_SPORT, A_DATE, A_NUMBER_OF_TICKETS, A_PRICE);
 
 		verify(game, atLeastOnce()).addTicket(ticketToAdd);
 	}
 
 	@Test
 	public void repository_in_addGeneralTickets_intantiates_default_tickets() throws Exception {
-		ticketService.addGeneralTickets(A_SPORT, A_DATE, A_NUMBER_OF_TICKETS);
+		ticketService.addGeneralTickets(A_SPORT, A_DATE, A_NUMBER_OF_TICKETS, A_PRICE);
 
-		verify(ticketRepository, atLeastOnce()).instantiateNewTicket();
+		verify(ticketRepository, atLeastOnce()).instantiateNewTicket(A_PRICE);
 	}
 
 	@Test
 	public void game_used_by_addGeneralTickets_is_obtained_from_a_repository() throws Exception {
-		ticketService.addGeneralTickets(A_SPORT, A_DATE, A_NUMBER_OF_TICKETS);
+		ticketService.addGeneralTickets(A_SPORT, A_DATE, A_NUMBER_OF_TICKETS, A_PRICE);
 
 		verify(gameRepository).recoverGame(A_SPORT, A_DATE);
 	}
 
 	@Test
 	public void addGeneralTickets_commits_on_the_game_repository() throws Exception {
-		ticketService.addGeneralTickets(A_SPORT, A_DATE, A_NUMBER_OF_TICKETS);
+		ticketService.addGeneralTickets(A_SPORT, A_DATE, A_NUMBER_OF_TICKETS, A_PRICE);
 
 		verify(gameRepository).commit();
 	}
 
 	@Test
 	public void addSeatedTicket_add_a_single_ticket_to_the_game() throws Exception {
-		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT);
+		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT, A_PRICE);
 
 		verify(game, times(1)).addTicket(any(Ticket.class));
 	}
 
 	@Test
 	public void ticket_added_by_addSeatedTicket_is_instantiated_by_a_repository() throws Exception {
-		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT);
+		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT, A_PRICE);
 
 		verify(game, atLeastOnce()).addTicket(ticketToAdd);
 	}
 
 	@Test
 	public void repository_in_addGeneralTickets_intantiates_ticket_with_section_and_seat() throws Exception {
-		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT);
+		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT, A_PRICE);
 
-		verify(ticketRepository).instantiateNewTicket(A_SECTION, A_SEAT, AVAILABLE);
+		verify(ticketRepository).instantiateNewTicket(A_SEAT, A_SECTION, A_PRICE, AVAILABLE);
 	}
 
 	@Test
 	public void game_used_by_addSeatedTicket_is_obtained_from_repository() throws Exception {
-		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT);
+		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT, A_PRICE);
 
 		verify(gameRepository).recoverGame(A_SPORT, A_DATE);
 	}
 
 	@Test
 	public void addSeatedTicket_commits_on_gameRepository() throws Exception {
-		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT);
+		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT, A_PRICE);
 
 		verify(gameRepository).commit();
 	}

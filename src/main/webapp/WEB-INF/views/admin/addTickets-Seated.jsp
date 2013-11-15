@@ -24,6 +24,7 @@
                 <form:option value="${game.date}">Partie du ${game.date} contre ${game.opponents }</form:option>
             </c:forEach>
         </form:select><br>
+               <form:label path="price">Prix : </form:label><form:input path="price"/><br>
         <form:label path="section">Section : </form:label><form:input path="section"/><br>
         <form:label path="seat">Siège : </form:label><form:input path="seat"/><br>
         <input type="submit" value="Ajouter" class="standard-button-rounded-border orange-button"/>

@@ -5,6 +5,7 @@ public class SeatedTicketsToAddViewModel {
 	String section;
 	String seat;
 	String sportName;
+	String price;
 
 	public String getGameDate() {
 		return gameDate;
@@ -37,4 +38,13 @@ public class SeatedTicketsToAddViewModel {
 	public void setSportName(String sportName) {
 		this.sportName = sportName;
 	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
 }

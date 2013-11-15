@@ -33,6 +33,7 @@ public class TicketRepositoryTest {
 	private static final int A_TICKET_NUMBER = 145;
 	private static final String A_NEW_SEAT = "Seat";
 	private static final String A_NEW_SECTION = "Section";
+	private static final double A_PRICE = 12;
 
 	private List<TicketDto> datas;
 	@Mock
@@ -67,8 +68,8 @@ public class TicketRepositoryTest {
 		datas = new ArrayList<>();
 		datas.add(firstTicketData);
 		datas.add(secondTicketData);
-		when(ticketFactory.instantiateTicket()).thenReturn(ticketGeneratedWithNoParameter);
-		when(ticketFactory.instantiateTicket(A_NEW_SEAT, A_NEW_SECTION, AVAILABLE)).thenReturn(
+		when(ticketFactory.instantiateTicket(A_PRICE)).thenReturn(ticketGeneratedWithNoParameter);
+		when(ticketFactory.instantiateTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE)).thenReturn(
 				ticketGeneratedWithParameter);
 		when(ticketDao.get(A_SPORT, A_DATE, A_TICKET_NUMBER)).thenReturn(firstTicketData);
 		when(ticketDao.getTicketsForGame(A_SPORT, A_DATE)).thenReturn(datas);
@@ -82,8 +83,8 @@ public class TicketRepositoryTest {
 
 	@Test
 	public void InstantiateTicket_returns_ticket_made_by_factory() {
-		Ticket ticketReturned1 = repository.instantiateNewTicket();
-		Ticket ticketReturned2 = repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION, AVAILABLE);
+		Ticket ticketReturned1 = repository.instantiateNewTicket(A_PRICE);
+		Ticket ticketReturned2 = repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE);
 
 		Assert.assertSame(ticketGeneratedWithNoParameter, ticketReturned1);
 		Assert.assertSame(ticketGeneratedWithParameter, ticketReturned2);
@@ -107,8 +108,8 @@ public class TicketRepositoryTest {
 
 	@Test
 	public void commit_adds_the_new_tickets_to_the_dao() throws Exception {
-		repository.instantiateNewTicket();
-		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION, AVAILABLE);
+		repository.instantiateNewTicket(A_PRICE);
+		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE);
 		repository.commit();
 
 		verify(ticketDao).add(firstTicketData);
@@ -117,8 +118,8 @@ public class TicketRepositoryTest {
 
 	@Test
 	public void after_two_commits_new_tickets_are_added_only_once() throws Exception {
-		repository.instantiateNewTicket();
-		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION, AVAILABLE);
+		repository.instantiateNewTicket(A_PRICE);
+		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE);
 		repository.commit();
 		repository.commit();
 
@@ -147,8 +148,8 @@ public class TicketRepositoryTest {
 
 	@Test
 	public void after_new_tickets_have_been_added_to_dao_other_commits_save_changes() throws Exception {
-		repository.instantiateNewTicket();
-		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION, AVAILABLE);
+		repository.instantiateNewTicket(A_PRICE);
+		repository.instantiateNewTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE);
 
 		repository.commit();
 		repository.commit();

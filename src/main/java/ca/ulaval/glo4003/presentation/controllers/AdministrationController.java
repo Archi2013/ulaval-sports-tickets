@@ -154,7 +154,8 @@ public class AdministrationController {
 		ModelAndView mav;
 		try {
 			ticketService.addGeneralTickets(sportUrlMapper.getSportName(viewModel.getSportName()),
-					dateParser.parseDate(viewModel.getGameDate()), viewModel.getNumberOfTickets());
+					dateParser.parseDate(viewModel.getGameDate()), viewModel.getNumberOfTickets(),
+					Double.parseDouble(viewModel.getPrice()));
 
 		} catch (GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException e) {
 			mav = new ModelAndView("/admin/tickets-added-date-error");
@@ -174,15 +175,14 @@ public class AdministrationController {
 				+ ticketsToAddVM.getSeat() + " of section " + ticketsToAddVM.getSection());
 
 		ModelAndView mav;
-		// try {
-		ticketService.addSeatedTicket(sportUrlMapper.getSportName(ticketsToAddVM.getSportName()),
-				dateParser.parseDate(ticketsToAddVM.getGameDate()), ticketsToAddVM.getSection(),
-				ticketsToAddVM.getSeat());
-		// } catch (GameAlreadyExistException | TicketAlreadyExistException |
-		// TicketDoesntExistException
-		// | NoSportForUrlException e) {
-		// return new ModelAndView("/admin/tickets-added-date-error");
-		// }
+		try {
+			ticketService.addSeatedTicket(sportUrlMapper.getSportName(ticketsToAddVM.getSportName()),
+					dateParser.parseDate(ticketsToAddVM.getGameDate()), ticketsToAddVM.getSection(),
+					ticketsToAddVM.getSeat(), Double.parseDouble(ticketsToAddVM.getPrice()));
+		} catch (GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException
+				| NoSportForUrlException e) {
+			return new ModelAndView("/admin/tickets-added-date-error");
+		}
 		mav = new ModelAndView("/admin/tickets-added");
 
 		manageUserConnection(mav);

@@ -30,6 +30,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
 public class AdministrationControllerTest {
 
 	private static final DateTime A_DATE = new DateTime(100);
+	private static final String A_STRING_DATE = "date";
 
 	@Mock
 	private CommandGameService gameService;
@@ -54,6 +55,7 @@ public class AdministrationControllerTest {
 	@Before
 	public void setUp() {
 		when(dateParser.parseDate(any(String.class))).thenReturn(A_DATE);
+		gameToAddVM.setDate(A_STRING_DATE);
 	}
 
 	@Test

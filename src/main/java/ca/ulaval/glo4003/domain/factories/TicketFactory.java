@@ -14,12 +14,12 @@ import ca.ulaval.glo4003.domain.tickets.state.UnassignedTicketState;
 public class TicketFactory {
 	private static final String GENERAL_SECTION = "Générale";
 
-	public PersistableTicket instantiateTicket() {
-		return instantiateTicket(new TicketDto(null, GENERAL_SECTION, null, 0, 0, true));
+	public PersistableTicket instantiateTicket(double price) {
+		return instantiateTicket(new TicketDto(null, GENERAL_SECTION, null, 0, price, true));
 	}
 
-	public PersistableTicket instantiateTicket(String seat, String section, boolean available) {
-		return instantiateTicket(new TicketDto(null, null, 0, 0, seat, section, available));
+	public PersistableTicket instantiateTicket(String seat, String section, double price, boolean available) {
+		return instantiateTicket(new TicketDto(null, null, 0, price, seat, section, available));
 	}
 
 	public PersistableTicket instantiateTicket(TicketDto data) {

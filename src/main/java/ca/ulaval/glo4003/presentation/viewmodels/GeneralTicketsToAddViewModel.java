@@ -4,6 +4,7 @@ public class GeneralTicketsToAddViewModel {
 	int numberOfTickets;
 	String gameDate;
 	String sportName;
+	String price;
 
 	public int getNumberOfTickets() {
 		return numberOfTickets;
@@ -27,6 +28,14 @@ public class GeneralTicketsToAddViewModel {
 
 	public void setSportName(String sportname) {
 		this.sportName = sportname;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
 	}
 
 }
