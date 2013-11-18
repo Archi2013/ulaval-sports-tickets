@@ -3,7 +3,7 @@
 		<label for="usernameParam">Nom d'utilisateur : </label><input type="text" name="usernameParam" id="usernameParam"/><br>
 		<label for="passwordParam">Mot de passe : </label><input type="password" name="passwordParam" id="passwordParam"/><br>
 		<div style="text-align:center;">
-		   <input type="submit" class="standard-button-rounded-border orange-button"/>
+		   <input type="submit" class="standard-button-rounded-border orange-button" value="Se connecter"/>
 		</div>
 	</div>
 </div>
