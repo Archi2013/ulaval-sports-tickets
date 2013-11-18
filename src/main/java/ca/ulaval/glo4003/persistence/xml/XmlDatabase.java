@@ -71,7 +71,7 @@ public class XmlDatabase {
 		return extractor.count(xPath);
 	}
 
-	public int getMaxValue(String baseXPath, String idName) throws XPathExpressionException {
+	public long getMaxValue(String baseXPath, String idName) throws XPathExpressionException {
 		return extractor.max(baseXPath, idName);
 	}
 
