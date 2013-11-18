@@ -99,8 +99,8 @@ public class TicketRepository implements ITicketRepository {
 	}
 
 	@Override
-	public List<Ticket> recoverNGeneralTickets(Long gameId, int numberOfSeats) throws GameDoesntExistException {
-		List<TicketDto> availableTickets = dao.getAvailableTicketsForGame(gameId);
+	public List<Ticket> recoverNGeneralTickets(String sportName, DateTime gameDate, int numberOfSeats) throws GameDoesntExistException {
+		List<TicketDto> availableTickets = dao.getAvailableTicketsForGame(sportName, gameDate);
 
 		List<Ticket> ticketsToReturn = new ArrayList<>();
 		for (TicketDto ticket : availableTickets) {

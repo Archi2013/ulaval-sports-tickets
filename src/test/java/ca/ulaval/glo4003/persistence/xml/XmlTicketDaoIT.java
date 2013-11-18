@@ -3,6 +3,7 @@ package ca.ulaval.glo4003.persistence.xml;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,7 +62,7 @@ public class XmlTicketDaoIT {
 
 	@Test
 	public void testGetTicketsForGame() throws Exception {
-		List<TicketDto> tickets = ticketDao.getAvailableTicketsForGame(2L);
+		List<TicketDto> tickets = ticketDao.getAvailableTicketsForGame("", DateTime.now());
 
 		TicketDto expected0 = new TicketDto(2, 5, 15.00f, AVAILABLE);
 		TicketDto expected1 = new TicketDto(2, 6, 15.00f, AVAILABLE);
@@ -82,12 +83,12 @@ public class XmlTicketDaoIT {
 
 	@Test(expected = GameDoesntExistException.class)
 	public void testGetTicketsForInvalidGameShouldThrow() throws Exception {
-		ticketDao.getAvailableTicketsForGame(-1L);
+		ticketDao.getAvailableTicketsForGame("INVALIDE", DateTime.now());
 	}
 
 	@Test
 	public void testGetTicketsForSection() throws Exception {
-		List<TicketDto> tickets = ticketDao.getTicketsForSection(2, "Section 100");
+		List<TicketDto> tickets = ticketDao.getTicketsForSection("", DateTime.now(), "Section 100");
 
 		TicketDto expected0 = new TicketDto(2, 9, 22.00f, "Section 100", "A-9", AVAILABLE);
 		TicketDto expected1 = new TicketDto(2, 10, 22.00f, "Section 100", "B-0", AVAILABLE);
@@ -100,7 +101,7 @@ public class XmlTicketDaoIT {
 
 	@Test(expected = SectionDoesntExistException.class)
 	public void testGetTicketsForInvalidSectionShouldThrow() throws Exception {
-		ticketDao.getTicketsForSection(2, "Général");
+		ticketDao.getTicketsForSection("", DateTime.now(), "Général");
 	}
 
 	@Test

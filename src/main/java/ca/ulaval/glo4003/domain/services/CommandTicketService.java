@@ -56,7 +56,7 @@ public class CommandTicketService {
 			TicketDoesntExistException {
 
 		if (section.isGeneralAdmission()) {
-			List<Ticket> tickets = ticketRepository.recoverNGeneralTickets(game.getId(), numberOfSeats);
+			List<Ticket> tickets = ticketRepository.recoverNGeneralTickets(game.getSportName(), game.getGameDate(), numberOfSeats);
 			for (Ticket ticket : tickets) {
 				ticket.makeUnavailable();
 			}

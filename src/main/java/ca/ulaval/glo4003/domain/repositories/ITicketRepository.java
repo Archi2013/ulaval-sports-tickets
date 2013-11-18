@@ -23,8 +23,8 @@ public interface ITicketRepository {
 
 	void commit() throws TicketAlreadyExistException, TicketDoesntExistException, GameDoesntExistException;
 
-	List<Ticket> recoverNGeneralTickets(Long id, int numberOfSeats) throws GameDoesntExistException;
-
 	void clearCache();
+
+	List<Ticket> recoverNGeneralTickets(String sportName, DateTime gameDate, int numberOfSeats) throws GameDoesntExistException;
 
 }

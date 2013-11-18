@@ -62,6 +62,13 @@ public class SimpleNode {
 		}
 		throw new NoSuchAttributeException();
 	}
+	
+	public void setNodeValue(String nodeName, String nodeValue) {
+		if (subNodes.containsKey(nodeName)) {
+			subNodes.put(nodeName, nodeValue);
+		}
+		attributeValues.put(nodeName, nodeValue);
+	}
 
 	public Node toNode(Document document) {
 		Node node = document.createElement(name);
