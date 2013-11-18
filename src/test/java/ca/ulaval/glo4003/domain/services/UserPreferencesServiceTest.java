@@ -14,8 +14,8 @@ import ca.ulaval.glo4003.domain.dtos.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.dtos.UserDto;
 import ca.ulaval.glo4003.domain.dtos.UserPreferencesDto;
 import ca.ulaval.glo4003.domain.users.User;
+import ca.ulaval.glo4003.persistence.daos.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.persistence.daos.UserPreferencesDao;
-import ca.ulaval.glo4003.persistence.daos.fakes.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
 

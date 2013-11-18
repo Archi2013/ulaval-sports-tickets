@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.persistence.daos.fakes;
+package ca.ulaval.glo4003.persistence.daos;
 
 public class UserDoesntHaveSavedPreferences extends Exception {
 
