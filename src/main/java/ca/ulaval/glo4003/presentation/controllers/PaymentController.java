@@ -3,8 +3,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -47,8 +45,6 @@ public class PaymentController {
 	private static final String MODE_OF_PAYMENT_PAGE = "payment/mode-of-payment";
 
 	private static final String VALIDATION_SUCCES_PAGE = "payment/succes";
-
-	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 
 	@Inject
 	SearchService searchService;
