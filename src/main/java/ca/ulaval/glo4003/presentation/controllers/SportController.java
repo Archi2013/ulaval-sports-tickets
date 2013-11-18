@@ -2,8 +2,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +20,6 @@ import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
 @RequestMapping(value = "/sport", method = RequestMethod.GET)
 public class SportController {
 
-	private static final Logger logger = LoggerFactory.getLogger(SportController.class);
-
 	@Inject
 	private SportService service;
 
@@ -32,18 +28,14 @@ public class SportController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView getSports() {
-		logger.info("Getting all sports");
-
 		ModelAndView mav = new ModelAndView("sport/list");
 
 		Boolean connectedUser = currentUser.isLogged();
 
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
 		} else {
 			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
 		}
 
 		SportsViewModel sports = service.getSports();
@@ -53,7 +45,6 @@ public class SportController {
 
 	@RequestMapping(value = "/{sportUrl}/matchs", method = RequestMethod.GET)
 	public ModelAndView getSportGames(@PathVariable String sportUrl) {
-		logger.info("Getting games for sport: " + sportUrl);
 
 		ModelAndView mav = new ModelAndView("sport/games");
 
@@ -61,10 +52,8 @@ public class SportController {
 
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
 		} else {
 			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
 		}
 
 		try {
@@ -78,7 +67,6 @@ public class SportController {
 				return mav;
 			}
 		} catch (RuntimeException | SportDoesntExistException | GameDoesntExistException e) {
-			logger.info("==> Impossible to get games for sport: " + sportUrl);
 			e.printStackTrace();
 			mav.setViewName("error/404");
 			return mav;

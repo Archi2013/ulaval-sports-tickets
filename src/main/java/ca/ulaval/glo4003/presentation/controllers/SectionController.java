@@ -2,8 +2,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +19,6 @@ import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
 @Controller
 @RequestMapping(value = "/sport/{sportNameUrl}/match/{gameId}", method = RequestMethod.GET)
 public class SectionController {
-	private static final Logger logger = LoggerFactory.getLogger(SectionController.class);
 
 	@Inject
 	private SectionService sectionService;
@@ -32,8 +29,6 @@ public class SectionController {
 	@RequestMapping(value = "/billets/{ticketType}", method = RequestMethod.GET)
 	public ModelAndView getSectionForGame(@PathVariable Long gameId, @PathVariable String ticketType) {
 		try {
-			logger.info("Getting ticket section : " + ticketType);
-
 			ModelAndView mav = new ModelAndView("section/details");
 			mav.addObject("currency", Constants.CURRENCY);
 
@@ -49,7 +44,6 @@ public class SectionController {
 
 			return mav;
 		} catch (SectionDoesntExistException e) {
-			logger.info("Exception : " + e.getClass().getSimpleName() + " : la section n'existe pas");
 			return new ModelAndView("error/404");
 		}
 	}
@@ -62,19 +56,9 @@ public class SectionController {
 		}
 	}
 
-	private void addLogOfUserConnection(Boolean connectedUser) {
-		if (connectedUser) {
-			logger.info("usagé connecté");
-		} else {
-			logger.info("usagé non connecté");
-		}
-	}
-
 	private void manageUserConnection(ModelAndView mav) {
 		Boolean connectedUser = currentUser.isLogged();
 
 		addConnectedUserToModelAndView(mav, connectedUser);
-
-		addLogOfUserConnection(connectedUser);
 	}
 }

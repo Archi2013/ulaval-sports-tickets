@@ -2,8 +2,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +18,9 @@ public class HomeController {
  
 	@Autowired
 	private User currentUser;
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale) {
-		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		ModelAndView mav = new ModelAndView("home");
 
@@ -45,19 +40,9 @@ public class HomeController {
 		}
 	}
 	
-	private void addLogOfUserConnection(Boolean connectedUser) {
-		if (connectedUser) {
-			logger.info("usagé connecté");
-		} else {
-			logger.info("usagé non connecté");
-		}
-	}
-	
 	private void manageUserConnection(ModelAndView mav) {
 		Boolean connectedUser = currentUser.isLogged();
 
 		addConnectedUserToModelAndView(mav, connectedUser);
-		
-		addLogOfUserConnection(connectedUser);
 	}
 }

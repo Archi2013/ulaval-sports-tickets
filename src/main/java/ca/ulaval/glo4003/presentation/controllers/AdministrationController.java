@@ -2,8 +2,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +33,6 @@ import ca.ulaval.glo4003.presentation.viewmodels.SelectSportViewModel;
 @Controller
 @RequestMapping(value = "/admin", method = RequestMethod.GET)
 public class AdministrationController {
-	private static final Logger logger = LoggerFactory.getLogger(AdministrationController.class);
 
 	@Inject
 	private Constants constants;
@@ -63,8 +60,6 @@ public class AdministrationController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home() {
-		logger.info("Adminisatration : Home");
-
 		ModelAndView mav = new ModelAndView("admin/home");
 
 		manageUserConnection(mav);
@@ -74,8 +69,6 @@ public class AdministrationController {
 
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
 	public ModelAndView game() {
-		logger.info("Adminisatration : Page to add a new game for a sport");
-
 		ModelAndView mav = new ModelAndView("admin/game", "command", new GameToAddViewModel());
 
 		manageUserConnection(mav);
@@ -87,8 +80,6 @@ public class AdministrationController {
 
 	@RequestMapping(value = "/ajout-match", method = RequestMethod.POST)
 	public ModelAndView addGame(@ModelAttribute("SpringWeb") GameToAddViewModel gameToAddVM) {
-		logger.info("Adminisatration : Add a new game for a sport : " + gameToAddVM.getSport());
-
 		ModelAndView mav = new ModelAndView("admin/game-added");
 
 		manageUserConnection(mav);
@@ -109,8 +100,6 @@ public class AdministrationController {
 
 	@RequestMapping(value = "/billets/choisir-sport", method = RequestMethod.GET)
 	public ModelAndView tickets() {
-		logger.info("Adminisatration : Page to add new tickets for a sport");
-
 		ModelAndView mav = new ModelAndView("admin/addTickets-chooseSport", "command", new SelectSportViewModel());
 
 		manageUserConnection(mav);
@@ -124,8 +113,6 @@ public class AdministrationController {
 	@RequestMapping(value = "/billets", method = RequestMethod.POST)
 	public ModelAndView addTickets_selectSport(@ModelAttribute("SpringWeb") SelectSportViewModel selectSportVM,
 			Model model) throws SportDoesntExistException, GameDoesntExistException {
-		logger.info("Adminisatration : Add new tickets for a sport : " + selectSportVM.getSport());
-		logger.info("Ticket is of type : " + selectSportVM.getTypeBillet());
 
 		ModelAndView mav;
 
@@ -146,11 +133,6 @@ public class AdministrationController {
 	@RequestMapping(value = "/ajout-billets-general", method = RequestMethod.POST)
 	public ModelAndView addTickets_general(@ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel viewModel,
 			Model model) throws SportDoesntExistException, GameDoesntExistException, NoSportForUrlException {
-		logger.info("Adminisatration :Adding " + viewModel.getNumberOfTickets() + "new general tickets to game"
-				+ viewModel.getGameDate());
-		System.out.println("Controleur: Le nom du sport est: " + viewModel.getSportName());
-		System.out.println("Controleur: La date de la partie est: " + viewModel.getGameDate());
-		System.out.println("Controleur: Le nombre de billets est: " + viewModel.getNumberOfTickets());
 		ModelAndView mav;
 		try {
 			ticketService.addGeneralTickets(sportUrlMapper.getSportName(viewModel.getSportName()),
@@ -171,8 +153,6 @@ public class AdministrationController {
 	public ModelAndView addTickets_seated(@ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM,
 			Model model) throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
 			TicketAlreadyExistException, TicketDoesntExistException, NoSportForUrlException {
-		logger.info("Adminisatration: adding a seated ticket to game on " + ticketsToAddVM.getGameDate() + " in seat "
-				+ ticketsToAddVM.getSeat() + " of section " + ticketsToAddVM.getSection());
 
 		ModelAndView mav;
 		try {
@@ -198,19 +178,9 @@ public class AdministrationController {
 		}
 	}
 
-	private void addLogOfUserConnection(Boolean connectedUser) {
-		if (connectedUser) {
-			logger.info("usagé connecté");
-		} else {
-			logger.info("usagé non connecté");
-		}
-	}
-
 	private void manageUserConnection(ModelAndView mav) {
 		Boolean connectedUser = currentUser.isLogged();
 
 		addConnectedUserToModelAndView(mav, connectedUser);
-
-		addLogOfUserConnection(connectedUser);
 	}
 }

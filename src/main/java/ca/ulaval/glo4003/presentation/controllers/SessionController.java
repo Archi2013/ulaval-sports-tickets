@@ -2,8 +2,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,11 +28,8 @@ public class SessionController {
 	@Autowired
 	private User currentUser;
 	
-	private static final Logger logger = LoggerFactory.getLogger(SessionController.class);
-	
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public ModelAndView signIn() {
-		logger.info("Sign In");
 		
 		ModelAndView mav = new ModelAndView("session/logged");
 
@@ -52,8 +47,6 @@ public class SessionController {
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public ModelAndView signUp() {
-		logger.info("Sign Up");
-		
 		ModelAndView mav = new ModelAndView("session/logged");
 		
 		mav.addObject("user", currentUser);
@@ -70,8 +63,6 @@ public class SessionController {
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public ModelAndView submitSignIn(@RequestParam String usernameParam, @RequestParam String passwordParam){
-		logger.info("Authentification");
-		
 		ModelAndView mav = new ModelAndView("session/success");
 		
 		try {
@@ -80,7 +71,6 @@ public class SessionController {
 			mav.addObject("connectedUser", true);
 	        return mav;
 		} catch (UserDoesntExistException | UsernameAndPasswordDoesntMatchException e) {
-			logger.info("==> Impossible to Sign In : " + usernameParam);
 			mav.addObject("connectedUser", false);
 			mav.setViewName("session/retry");
 			return mav;
@@ -137,19 +127,9 @@ public class SessionController {
 		}
 	}
 	
-	private void addLogOfUserConnection(Boolean connectedUser) {
-		if (connectedUser) {
-			logger.info("usagé connecté");
-		} else {
-			logger.info("usagé non connecté");
-		}
-	}
-	
 	private void manageUserConnection(ModelAndView mav) {
 		Boolean connectedUser = currentUser.isLogged();
 
 		addConnectedUserToModelAndView(mav, connectedUser);
-		
-		addLogOfUserConnection(connectedUser);
 	}
 }

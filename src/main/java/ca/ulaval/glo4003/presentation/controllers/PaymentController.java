@@ -65,15 +65,11 @@ public class PaymentController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ModelAndView home(@ModelAttribute("chooseTicketsForm") @Valid ChooseTicketsViewModel chooseTicketsVM,
 			BindingResult result) {
-		logger.info("Paiement : accueil");
-		
 		Boolean connectedUser = currentUser.isLogged();
 
 		ModelAndView mav = new ModelAndView(HOME_PAGE);
 
 		addConnectedUserToModelAndView(connectedUser, mav);
-
-		addLogOfUserConnection(connectedUser);
 
 		if (!connectedUser) {
 			modifyModelAndViewToShowNotConnectedUserPage(mav);
@@ -101,7 +97,6 @@ public class PaymentController {
 		} catch (GameDoesntExistException | SectionDoesntExistException e) {
 			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_FOUND_TICKET, new Object[] {}, null);
 			mav.addObject("errorMessage", errorMessage);
-			logger.info("Exception : " + e.getClass().getSimpleName() + " : ticket introuvable");
 		}
 
 		return mav;
@@ -109,15 +104,11 @@ public class PaymentController {
 
 	@RequestMapping(value = "mode-de-paiement", method = RequestMethod.GET)
 	public ModelAndView modeOfPayment() {
-		logger.info("Paiement : choix du mode de paiement");
-		
 		ModelAndView mav = new ModelAndView(MODE_OF_PAYMENT_PAGE);
 
 		Boolean connectedUser = currentUser.isLogged();
 
 		addConnectedUserToModelAndView(connectedUser, mav);
-
-		addLogOfUserConnection(connectedUser);
 
 		if (!connectedUser) {
 			modifyModelAndViewToShowNotConnectedUserPage(mav);
@@ -134,7 +125,6 @@ public class PaymentController {
 			mav.setViewName(ERROR_PAGE);
 			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NO_TICKETS, new Object[] {}, null);
 			mav.addObject("errorMessage", errorMessage);
-			logger.info("Exception : " + e.getClass().getSimpleName() + " : pas de tickets dans le panier d'achat");
 		}
 
 		return mav;
@@ -142,15 +132,12 @@ public class PaymentController {
 
 	@RequestMapping(value = "validation-achat", method = RequestMethod.POST)
 	public ModelAndView validate(@ModelAttribute("paymentForm") @Valid PaymentViewModel paymentVM, BindingResult result) {
-		logger.info("Paiement : validation de la carte de crédit et du paiement");
 		
 		ModelAndView mav = new ModelAndView(VALIDATION_SUCCES_PAGE);
 
 		Boolean userIsconnected = currentUser.isLogged();
 
 		addConnectedUserToModelAndView(userIsconnected, mav);
-
-		addLogOfUserConnection(userIsconnected);
 
 		if (!userIsconnected) {
 			modifyModelAndViewToShowNotConnectedUserPage(mav);
@@ -162,7 +149,6 @@ public class PaymentController {
 		try {
 			mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
 		} catch (NoTicketsInCartException e) {
-			logger.info("Exception : " + e.getClass().getSimpleName() + " pas de tickets dans le panier d'achat");
 			mav.setViewName(ERROR_PAGE);
 			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NO_TICKETS, new Object[] {}, null);
 			mav.addObject("errorMessage", errorMessage);
@@ -177,7 +163,6 @@ public class PaymentController {
 		try {
 			paymentService.buyTicketsInCart(paymentVM);
 		} catch (InvalidCreditCardException e) {
-			logger.info("Exception : " + e.getClass().getSimpleName() + " : carte de crédit invalide");
 			modifyModelAndViewToRetryModeOfPayment(paymentVM, mav);
 			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_INVALID_CREDIT_CARD, new Object[] {}, null);
 			mav.addObject("errorMessage", errorMessage);
@@ -186,13 +171,9 @@ public class PaymentController {
 			mav.setViewName(ERROR_PAGE);
 			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NO_TICKETS, new Object[] {}, null);
 			mav.addObject("errorMessage", errorMessage);
-			logger.info("Exception : " + e.getClass().getSimpleName() + " : pas de tickets dans le panier d'achat");
 		}
 
 		paymentService.emptyCart();
-
-		logger.info("Paiement effectué et panier d'achat vidé");
-		
 		return mav;
 	}
 
@@ -200,14 +181,6 @@ public class PaymentController {
 		mav.setViewName(ERROR_PAGE);
 		String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_CONNECTED_USER, new Object[] {}, null);
 		mav.addObject("errorMessage", errorMessage);
-	}
-
-	private void addLogOfUserConnection(Boolean connectedUser) {
-		if (connectedUser) {
-			logger.info("usagé connecté");
-		} else {
-			logger.info("usagé non connecté");
-		}
 	}
 
 	private void addConnectedUserToModelAndView(Boolean connectedUser, ModelAndView mav) {

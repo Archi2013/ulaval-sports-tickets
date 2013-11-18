@@ -2,8 +2,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +19,6 @@ import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 @Controller
 @RequestMapping(value = "/recherche", method = RequestMethod.GET)
 public class SearchController {
-	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 	
 	@Inject
 	SearchService searchService;
@@ -35,8 +32,6 @@ public class SearchController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home() {
-		logger.info("Recherche : accueil");
-		
 		ModelAndView mav = new ModelAndView("search/home");
 		mav.addObject("currency", Constants.CURRENCY);
 		
@@ -45,13 +40,11 @@ public class SearchController {
 		TicketSearchViewModel ticketSearchVM = searchService.getInitialisedTicketSearchViewModel();
 		
 		addConnectedUserToModelAndView(mav, connectedUser);
-		addLogOfUserConnection(connectedUser);
 		
 		if (connectedUser) {
 			try{
 			ticketSearchVM = userPreferencesService.getUserPreferencesForUser(currentUser);
 			}catch (UserDoesntHaveSavedPreferences e){
-				logger.info("no preferences saved");
 			}
 		}
 		
@@ -66,8 +59,6 @@ public class SearchController {
 	
 	@RequestMapping(value="sauvegarde-preferences", method=RequestMethod.POST)
 	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
-		logger.info("Recherche : enregistre les préférences de recherche");
-		
 		userPreferencesService.saveUserPreference(currentUser,ticketSearchVM);
 		ModelAndView mav = home();
 		mav.addObject("preferencesSaved", true);
@@ -77,8 +68,6 @@ public class SearchController {
 	
 	@RequestMapping(value="list", method=RequestMethod.POST)
     public ModelAndView getList(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
-		logger.info("Recherche : recherche des billets...");
-
 		ModelAndView mav = new ModelAndView("search/list");
 		
 		mav.addObject("currency", Constants.CURRENCY);
@@ -96,14 +85,6 @@ public class SearchController {
 			mav.addObject("connectedUser", true);
 		} else {
 			mav.addObject("connectedUser", false);
-		}
-	}
-	
-	private void addLogOfUserConnection(Boolean connectedUser) {
-		if (connectedUser) {
-			logger.info("usagé connecté");
-		} else {
-			logger.info("usagé non connecté");
 		}
 	}
 }
