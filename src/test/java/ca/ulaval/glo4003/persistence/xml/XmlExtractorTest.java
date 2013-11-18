@@ -106,8 +106,8 @@ public class XmlExtractorTest {
 
 	@Test
 	public void testMaxValue() throws Exception {
-		int actual = extractor.max(ITEM_XPATH, "id");
-		int expected = 2;
+		long actual = extractor.max(ITEM_XPATH, "id");
+		long expected = 2L;
 
 		Assert.assertEquals(expected, actual);
 	}
