@@ -82,10 +82,10 @@ public class XmlExtractor {
 		return (int) result;
 	}
 
-	public int max(String baseXPath, String idName) throws XPathExpressionException {
+	public long max(String baseXPath, String idName) throws XPathExpressionException {
 		String xPath = baseXPath + "[not(" + baseXPath + "/" + idName + " > " + idName + ")]/" + idName;
 		double result = (double) extract(xPath, XPathConstants.NUMBER);
-		return (int) result;
+		return (long) result;
 	}
 
 	public void createNode(String xPath, SimpleNode simpleNode) throws XPathExpressionException {
