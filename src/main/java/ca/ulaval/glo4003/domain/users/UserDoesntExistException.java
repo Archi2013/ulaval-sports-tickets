@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.utilities.user;
+package ca.ulaval.glo4003.domain.users;
 
 public class UserDoesntExistException extends Exception {
 	

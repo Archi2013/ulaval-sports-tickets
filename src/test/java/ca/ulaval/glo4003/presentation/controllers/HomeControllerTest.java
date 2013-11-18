@@ -14,7 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.utilities.user.User;
+import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.presentation.controllers.HomeController;
 
 @RunWith(MockitoJUnitRunner.class)

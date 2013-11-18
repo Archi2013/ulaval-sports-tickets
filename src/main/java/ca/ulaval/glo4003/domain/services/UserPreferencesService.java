@@ -2,12 +2,11 @@ package ca.ulaval.glo4003.domain.services;
 
 import javax.inject.Inject;
 
-
 import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.dtos.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.dtos.UserPreferencesDto;
-import ca.ulaval.glo4003.domain.utilities.user.User;
+import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
 import ca.ulaval.glo4003.persistence.daos.UserPreferencesDao;

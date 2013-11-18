@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.utilities.user;
+package ca.ulaval.glo4003.domain.utilities.users;
 
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.stereotype.Component;

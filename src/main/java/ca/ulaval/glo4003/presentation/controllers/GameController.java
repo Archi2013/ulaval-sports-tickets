@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.QueryGameService;
+import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.utilities.Constants;
-import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.xml.XmlIntegrityException;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;

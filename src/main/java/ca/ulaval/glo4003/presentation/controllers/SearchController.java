@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.services.UserPreferencesService;
+import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.utilities.Constants;
-import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.persistence.daos.fakes.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.ulaval.glo4003.domain.dtos.UserDto;
-import ca.ulaval.glo4003.domain.utilities.user.UserDoesntExistException;
+import ca.ulaval.glo4003.domain.users.UserDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
 
 //@Repository

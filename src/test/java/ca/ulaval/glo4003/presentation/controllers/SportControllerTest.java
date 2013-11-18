@@ -13,9 +13,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SportService;
+import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
-import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.controllers.SportController;

@@ -11,11 +11,11 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.dtos.UserDto;
-import ca.ulaval.glo4003.domain.utilities.user.Encryption;
-import ca.ulaval.glo4003.domain.utilities.user.User;
-import ca.ulaval.glo4003.domain.utilities.user.UserAlreadyExistException;
-import ca.ulaval.glo4003.domain.utilities.user.UserDoesntExistException;
-import ca.ulaval.glo4003.domain.utilities.user.UsernameAndPasswordDoesntMatchException;
+import ca.ulaval.glo4003.domain.users.User;
+import ca.ulaval.glo4003.domain.users.UserAlreadyExistException;
+import ca.ulaval.glo4003.domain.users.UserDoesntExistException;
+import ca.ulaval.glo4003.domain.users.UsernameAndPasswordDoesntMatchException;
+import ca.ulaval.glo4003.domain.utilities.users.Encryption;
 import ca.ulaval.glo4003.persistence.daos.UserDao;
 import ca.ulaval.glo4003.presentation.viewmodels.UserViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.UserViewModelFactory;
