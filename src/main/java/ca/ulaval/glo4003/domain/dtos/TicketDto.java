@@ -12,7 +12,24 @@ public class TicketDto {
 	public String sportName;
 	public DateTime gameDate;
 	public boolean available;
+	
+	public TicketDto(String sportName, DateTime gameDate, String section, String seat, double price,
+            boolean available) {
+		this(null, sportName, gameDate, section, seat, price, available);
+    }
 
+	public TicketDto(Long ticketId, String sportName, DateTime gameDate, String section, String seat, double price,
+            boolean available) {
+		this.ticketId = ticketId;
+	    this.sportName = sportName;
+	    this.gameDate = gameDate;
+	    this.section = section;
+	    this.seat = seat;
+	    this.price = price;
+	    this.available = available;
+    }
+
+	@Deprecated
 	public TicketDto(String sportName, String section, DateTime gameDate, long ticketId, double price, boolean available) {
 		this.sportName = sportName;
 		this.section = section;
@@ -22,6 +39,7 @@ public class TicketDto {
 		this.available = available;
 	}
 
+	@Deprecated
 	public TicketDto(String sportName, DateTime gameDate, long ticketId, double price, String seat, String section,
 			boolean available) {
 		this.sportName = sportName;
@@ -34,6 +52,7 @@ public class TicketDto {
 		this.available = available;
 	}
 
+	@Deprecated
 	public TicketDto(long gameId, int ticketId, double price, String section, String seat, boolean available) {
 		this.ticketId = ticketId;
 		this.price = price;
@@ -43,6 +62,7 @@ public class TicketDto {
 		this.available = available;
 	}
 
+	@Deprecated
 	public TicketDto(long gameId, int ticketId, double price, boolean available) {
 		this.ticketId = ticketId;
 		this.price = price;
@@ -86,7 +106,12 @@ public class TicketDto {
 		return available;
 	}
 
+	@Deprecated
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
+	
+	public boolean isGeneralSection() {
+	    return "Générale".equals(section);
+    }
 }
