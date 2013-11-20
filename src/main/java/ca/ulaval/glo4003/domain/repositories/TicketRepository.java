@@ -55,8 +55,7 @@ public class TicketRepository implements ITicketRepository {
 	@Override
 	public Ticket recoverTicket(String sport, DateTime date, String seat) {
 		TicketDto data = dao.get(sport, date, seat);
-		PersistableTicket recoveredTicket = factory.instantiateTicket(data.getSection(), data.getSeat(),
-				data.getPrice(), true);
+		PersistableTicket recoveredTicket = factory.instantiateTicket(data.section, data.seat, data.price, true);
 		ticketsInDao.add(recoveredTicket);
 		return recoveredTicket;
 	}
@@ -99,15 +98,15 @@ public class TicketRepository implements ITicketRepository {
 	}
 
 	@Override
-	public List<Ticket> recoverNGeneralTickets(String sportName, DateTime gameDate, int numberOfSeats) throws GameDoesntExistException {
+	public List<Ticket> recoverNGeneralTickets(String sportName, DateTime gameDate, int numberOfSeats)
+			throws GameDoesntExistException {
 		List<TicketDto> availableTickets = dao.getAvailableTicketsForGame(sportName, gameDate);
 
 		List<Ticket> ticketsToReturn = new ArrayList<>();
 		for (TicketDto ticket : availableTickets) {
 			// TODO ticketId à la place de ticketNumber...
 			PersistableTicket newTicket = factory.instantiateTicket(ticket);
-			newTicket.assign(ticket.getSportName(), ticket.getGameDate(), ticket.getTicketId());
-			newTicket.gameId = ticket.gameId;
+			newTicket.assign(ticket.sportName, ticket.gameDate, ticket.ticketId);
 			ticketsInDao.add(newTicket);
 			ticketsToReturn.add(newTicket);
 		}

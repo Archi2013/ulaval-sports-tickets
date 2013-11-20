@@ -4,7 +4,6 @@ import org.joda.time.DateTime;
 
 public class TicketDto {
 
-	public Long gameId;
 	public Long ticketId;
 	public double price;
 	public String section;
@@ -26,42 +25,6 @@ public class TicketDto {
 		this.seat = seat;
 		this.price = price;
 		this.available = available;
-	}
-
-	public long getTicketId() {
-		return ticketId;
-	}
-
-	public void setID(Long ticketID) {
-		this.ticketId = ticketID;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public String getSection() {
-		return section;
-	}
-
-	public long getGameId() {
-		return gameId;
-	}
-
-	public String getSeat() {
-		return seat;
-	}
-
-	public String getSportName() {
-		return sportName;
-	}
-
-	public DateTime getGameDate() {
-		return gameDate;
-	}
-
-	public boolean isAvailable() {
-		return available;
 	}
 
 	public boolean isGeneralSection() {

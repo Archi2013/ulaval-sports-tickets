@@ -23,11 +23,11 @@ public class TicketFactory {
 	}
 
 	public PersistableTicket instantiateTicket(TicketDto data) {
-		if (sectionIsGeneral(data.getSection())) {
+		if (sectionIsGeneral(data.section)) {
 			System.out.println("TicketFactory: creation d'un ticket general non assigne");
-			return new GeneralTicket(data.getPrice(), createAssignationState(data));
+			return new GeneralTicket(data.price, createAssignationState(data));
 		}
-		return new SeatedTicket(data.getSeat(), data.getSection(), data.getPrice(), createAssignationState(data));
+		return new SeatedTicket(data.seat, data.section, data.price, createAssignationState(data));
 	}
 
 	private boolean sectionIsGeneral(String section) {
@@ -35,10 +35,10 @@ public class TicketFactory {
 	}
 
 	private TicketAssignationState createAssignationState(TicketDto data) {
-		if (data.getSportName() == null || data.getGameDate() == null || data.getTicketId() < 0) {
+		if (data.sportName == null || data.gameDate == null || data.ticketId < 0) {
 			return new UnassignedTicketState();
 		}
-		return new AssignedTicketState(data.getSportName(), data.getGameDate(), data.getTicketId());
+		return new AssignedTicketState(data.sportName, data.gameDate, data.ticketId);
 	}
 
 }

@@ -13,7 +13,7 @@ import ca.ulaval.glo4003.domain.dtos.TicketDto;
 public class AssignedTicketStateTest {
 	public static final String A_SPORT = "Sport";
 	public static final DateTime A_DATE = new DateTime(100);
-	public static final int A_TICKET_NUMBER = 86;
+	public static final Long A_TICKET_NUMBER = Long.valueOf(86);
 	AssignedTicketState state;
 
 	@Before
@@ -41,6 +41,6 @@ public class AssignedTicketStateTest {
 
 		Assert.assertSame(A_SPORT, data.sportName);
 		Assert.assertSame(A_DATE, data.gameDate);
-		Assert.assertEquals(A_TICKET_NUMBER, data.getTicketId());
+		Assert.assertEquals(A_TICKET_NUMBER, data.ticketId);
 	}
 }

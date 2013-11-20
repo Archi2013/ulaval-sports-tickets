@@ -131,10 +131,9 @@ public class XmlTicketDaoIT {
 	}
 
 	private void assertTicket(TicketDto expected, TicketDto actual) {
-		Assert.assertEquals(expected.getTicketId(), actual.getTicketId());
-		Assert.assertEquals(expected.getGameId(), actual.getGameId());
-		Assert.assertEquals(expected.getPrice(), actual.getPrice(), 0.01f);
-		Assert.assertEquals(expected.getSection(), actual.getSection());
-		Assert.assertEquals(expected.getSeat(), actual.getSeat());
+		Assert.assertEquals(expected.ticketId, actual.ticketId);
+		Assert.assertEquals(expected.price, actual.price, 0.01f);
+		Assert.assertEquals(expected.section, actual.section);
+		Assert.assertEquals(expected.seat, actual.seat);
 	}
 }

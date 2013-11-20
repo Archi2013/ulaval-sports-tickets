@@ -98,7 +98,8 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	@Override
-	public List<TicketDto> getTicketsForSection(String sportName, DateTime gameDate, String sectionName) throws SectionDoesntExistException {
+	public List<TicketDto> getTicketsForSection(String sportName, DateTime gameDate, String sectionName)
+			throws SectionDoesntExistException {
 		String xPath = String.format(TICKET_XPATH_SECTION, sportName, toString(gameDate), sectionName);
 
 		try {
@@ -119,14 +120,14 @@ public class XmlTicketDao implements TicketDao {
 
 	private SimpleNode convertTicketToNode(TicketDto ticket) {
 		Map<String, String> nodes = new HashMap<>();
-		nodes.put("id", Long.toString(ticket.getTicketId()));
-		nodes.put("price", Double.toString(ticket.getPrice()));
-		nodes.put("available", Boolean.toString(ticket.isAvailable()));
-		nodes.put("sportName", ticket.getSportName());
-		nodes.put("gameDate", toString(ticket.getGameDate()));
-		if (ticket.getSection() != null && ticket.getSeat() != null) {
-			nodes.put("section", ticket.getSection());
-			nodes.put("seat", ticket.getSeat());
+		nodes.put("id", Long.toString(ticket.ticketId));
+		nodes.put("price", Double.toString(ticket.price));
+		nodes.put("available", Boolean.toString(ticket.available));
+		nodes.put("sportName", ticket.sportName);
+		nodes.put("gameDate", toString(ticket.gameDate));
+		if (ticket.section != null && ticket.seat != null) {
+			nodes.put("section", ticket.section);
+			nodes.put("seat", ticket.seat);
 		}
 		return new SimpleNode("ticket", nodes);
 	}
@@ -188,12 +189,12 @@ public class XmlTicketDao implements TicketDao {
 			throw new XmlIntegrityException(e);
 		}
 	}
-	
+
 	private DateTime parseDate(String dateString) {
 		DateTimeFormatter format = DateTimeFormat.forPattern(DATE_PATTERN);
 		return DateTime.parse(dateString, format);
 	}
-	
+
 	private String toString(DateTime date) {
 		return date.toString(DATE_PATTERN);
 	}
