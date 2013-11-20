@@ -3,7 +3,7 @@ package ca.ulaval.glo4003.domain.tickets;
 import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 
-public class GeneralTicket extends PersistableTicket {
+public class GeneralTicket extends Ticket {
 
 	public GeneralTicket(double price, TicketAssignationState associationState) {
 		super(associationState, price);

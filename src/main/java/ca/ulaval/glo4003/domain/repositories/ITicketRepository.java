@@ -11,20 +11,27 @@ import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 public interface ITicketRepository {
 
+	@Deprecated
 	Ticket instantiateNewTicket(double price);
 
+	@Deprecated
 	Ticket instantiateNewTicket(String section, String seat, double price, boolean available);
 
-	Ticket recoverTicket(String sport, DateTime Date, int ticketNumber) throws TicketDoesntExistException;
+	Ticket createGeneralTicket(double price, boolean available);
 
-	Ticket recoverTicket(String sportName, DateTime gameDate, String seat);
+	Ticket createSeatedTicket(String section, String seat, double price, boolean available);
 
-	List<Ticket> recoverAllTicketsForGame(String sport, DateTime Date) throws GameDoesntExistException;
+	Ticket getWithId(String sport, DateTime Date, int ticketNumber) throws TicketDoesntExistException;
+
+	Ticket getWithSeat(String sportName, DateTime gameDate, String seat);
+
+	List<Ticket> getAll(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
 	void commit() throws TicketAlreadyExistException, TicketDoesntExistException, GameDoesntExistException;
 
 	void clearCache();
 
+	@Deprecated
 	List<Ticket> recoverNGeneralTickets(String sportName, DateTime gameDate, int numberOfSeats) throws GameDoesntExistException;
 
 }

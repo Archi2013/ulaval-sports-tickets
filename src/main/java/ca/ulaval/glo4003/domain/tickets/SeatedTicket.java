@@ -3,7 +3,7 @@ package ca.ulaval.glo4003.domain.tickets;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 
-public class SeatedTicket extends PersistableTicket {
+public class SeatedTicket extends Ticket {
 
 	private String seat;
 	private String section;

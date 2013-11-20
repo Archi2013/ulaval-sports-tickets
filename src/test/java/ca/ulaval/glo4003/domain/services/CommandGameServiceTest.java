@@ -42,8 +42,8 @@ public class CommandGameServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		when(sportRepositoryMock.getSportByName(A_SPORT_NAME)).thenReturn(sport);
-		when(gameRepositoryMock.instantiateNewGame(A_OPPONENT, A_LOCATION)).thenReturn(game);
+		when(sportRepositoryMock.get(A_SPORT_NAME)).thenReturn(sport);
+		when(gameRepositoryMock.create(A_OPPONENT, A_LOCATION)).thenReturn(game);
 		when(sportUrlMapper.getSportName(A_SPORT_NAME)).thenReturn(A_SPORT_NAME);
 	}
 

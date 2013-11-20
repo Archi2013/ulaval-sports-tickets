@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.factories.TicketFactory;
 import ca.ulaval.glo4003.domain.pojos.persistable.Persistable;
-import ca.ulaval.glo4003.domain.tickets.PersistableTicket;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
@@ -31,41 +30,43 @@ public class TicketRepository implements ITicketRepository {
 	List<Persistable<TicketDto>> ticketsInDao = new ArrayList<>();
 
 	@Override
+	@Deprecated
 	public Ticket instantiateNewTicket(double price) {
-		PersistableTicket newTicket = factory.instantiateTicket(price);
+		Ticket newTicket = factory.instantiateTicket(price);
 		newTickets.add(newTicket);
 		return newTicket;
 	}
 
 	@Override
+	@Deprecated
 	public Ticket instantiateNewTicket(String seat, String section, double price, boolean available) {
-		PersistableTicket newTicket = factory.instantiateTicket(section, seat, price, available);
+		Ticket newTicket = factory.instantiateTicket(section, seat, price, available);
 		newTickets.add(newTicket);
 		return newTicket;
 	}
 
 	@Override
-	public Ticket recoverTicket(String sport, DateTime date, int ticketNumber) throws TicketDoesntExistException {
+	public Ticket getWithId(String sport, DateTime date, int ticketNumber) throws TicketDoesntExistException {
 		TicketDto data = dao.get(sport, date, ticketNumber);
-		PersistableTicket recoveredTicket = factory.instantiateTicket(data);
+		Ticket recoveredTicket = factory.instantiateTicket(data);
 		ticketsInDao.add(recoveredTicket);
 		return recoveredTicket;
 	}
 
 	@Override
-	public Ticket recoverTicket(String sport, DateTime date, String seat) {
+	public Ticket getWithSeat(String sport, DateTime date, String seat) {
 		TicketDto data = dao.get(sport, date, seat);
-		PersistableTicket recoveredTicket = factory.instantiateTicket(data.section, data.seat, data.price, true);
+		Ticket recoveredTicket = factory.instantiateTicket(data.section, data.seat, data.price, true);
 		ticketsInDao.add(recoveredTicket);
 		return recoveredTicket;
 	}
 
 	@Override
-	public List<Ticket> recoverAllTicketsForGame(String sport, DateTime Date) throws GameDoesntExistException {
+	public List<Ticket> getAll(String sport, DateTime Date) throws GameDoesntExistException {
 		List<Ticket> ticketsToReturn = new ArrayList<>();
 		List<TicketDto> datas = dao.getTicketsForGame(sport, Date);
 		for (TicketDto data : datas) {
-			PersistableTicket recoveredTicket = factory.instantiateTicket(data);
+			Ticket recoveredTicket = factory.instantiateTicket(data);
 			ticketsInDao.add(recoveredTicket);
 
 			ticketsToReturn.add(recoveredTicket);
@@ -105,7 +106,7 @@ public class TicketRepository implements ITicketRepository {
 		List<Ticket> ticketsToReturn = new ArrayList<>();
 		for (TicketDto ticket : availableTickets) {
 			// TODO ticketId à la place de ticketNumber...
-			PersistableTicket newTicket = factory.instantiateTicket(ticket);
+			Ticket newTicket = factory.instantiateTicket(ticket);
 			newTicket.assign(ticket.sportName, ticket.gameDate, ticket.ticketId);
 			ticketsInDao.add(newTicket);
 			ticketsToReturn.add(newTicket);
@@ -118,6 +119,18 @@ public class TicketRepository implements ITicketRepository {
 		ticketsInDao.clear();
 		newTickets.clear();
 
+	}
+
+	@Override
+	public Ticket createGeneralTicket(double price, boolean available) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Ticket createSeatedTicket(String section, String seat, double price, boolean available) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

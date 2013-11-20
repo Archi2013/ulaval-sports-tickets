@@ -75,8 +75,8 @@ public class GameRepositoryTest {
 		setUpListsOfDtos();
 
 		when(gameDaoMock.get(A_SPORT, A_DATE)).thenReturn(gameDto1);
-		when(ticketRepository.recoverAllTicketsForGame(A_SPORT, A_DATE)).thenReturn(ticketList1);
-		when(ticketRepository.recoverAllTicketsForGame(A_SPORT, ANOTHER_DATE)).thenReturn(ticketList2);
+		when(ticketRepository.getAll(A_SPORT, A_DATE)).thenReturn(ticketList1);
+		when(ticketRepository.getAll(A_SPORT, ANOTHER_DATE)).thenReturn(ticketList2);
 		when(gameFactoryMock.instantiateGame(gameDto1, ticketList1)).thenReturn(existingGameMock1);
 		when(gameFactoryMock.instantiateGame(gameDto2, ticketList2)).thenReturn(existingGameMock2);
 		when(gameFactoryMock.instantiateGame(AN_OPPONENT, A_LOCATION)).thenReturn(newGameMock1);
@@ -91,7 +91,7 @@ public class GameRepositoryTest {
 	public void if_one_game_is_scheduled_getGamesScheduledForSport_return_one_game() throws SportDoesntExistException {
 		when(gameDaoMock.getGamesForSport(A_SPORT)).thenReturn(listWithOneGameDto);
 
-		List<Game> gamesReturned = gameRepository.recoverAllGamesForSport(A_SPORT);
+		List<Game> gamesReturned = gameRepository.getAll(A_SPORT);
 
 		Assert.assertEquals(1, gamesReturned.size());
 		Assert.assertSame(existingGameMock1, gamesReturned.get(0));
@@ -102,7 +102,7 @@ public class GameRepositoryTest {
 			throws SportDoesntExistException {
 		when(gameDaoMock.getGamesForSport(A_SPORT)).thenReturn(listWithTwoGameDtos);
 
-		List<Game> gamesReturned = gameRepository.recoverAllGamesForSport(A_SPORT);
+		List<Game> gamesReturned = gameRepository.getAll(A_SPORT);
 
 		Assert.assertEquals(2, gamesReturned.size());
 		Assert.assertSame(existingGameMock1, gamesReturned.get(0));
@@ -111,14 +111,14 @@ public class GameRepositoryTest {
 
 	@Test
 	public void getGame_returns_the_game_with_correct_sport_name_and_date() throws GameDoesntExistException {
-		Game gameReturned = gameRepository.recoverGame(A_SPORT, A_DATE);
+		Game gameReturned = gameRepository.get(A_SPORT, A_DATE);
 
 		Assert.assertSame(existingGameMock1, gameReturned);
 	}
 
 	@Test
 	public void game_returned_by_getGame_is_committed_correctly() throws Exception {
-		gameRepository.recoverGame(A_SPORT, A_DATE);
+		gameRepository.get(A_SPORT, A_DATE);
 
 		gameRepository.commit();
 
@@ -130,7 +130,7 @@ public class GameRepositoryTest {
 	public void instantiateNewGame_return_game_instantiated_by_factory() {
 		when(gameFactoryMock.instantiateGame(AN_OPPONENT, A_LOCATION)).thenReturn(existingGameMock1);
 
-		Game gameReturned = gameRepository.instantiateNewGame(AN_OPPONENT, A_LOCATION);
+		Game gameReturned = gameRepository.create(AN_OPPONENT, A_LOCATION);
 
 		Assert.assertSame(gameReturned, existingGameMock1);
 	}
@@ -139,7 +139,7 @@ public class GameRepositoryTest {
 	public void commit_sends_data_of_every_existing_active_object_to_Dao() throws Exception {
 		when(gameDaoMock.getGamesForSport(A_SPORT)).thenReturn(listWithTwoGameDtos);
 
-		gameRepository.recoverAllGamesForSport(A_SPORT);
+		gameRepository.getAll(A_SPORT);
 		gameRepository.commit();
 
 		verify(gameDaoMock).update(gameDto1);
@@ -149,8 +149,8 @@ public class GameRepositoryTest {
 
 	@Test
 	public void commit_sends_data_of_every_new_active_object_to_dao() throws Exception {
-		gameRepository.instantiateNewGame(AN_OPPONENT, A_LOCATION);
-		gameRepository.instantiateNewGame(ANOTHER_OPPONENT, ANOTHER_LOCATION);
+		gameRepository.create(AN_OPPONENT, A_LOCATION);
+		gameRepository.create(ANOTHER_OPPONENT, ANOTHER_LOCATION);
 
 		gameRepository.commit();
 
@@ -160,8 +160,8 @@ public class GameRepositoryTest {
 
 	@Test
 	public void after_a_commit_new_objects_are_considered_as_existing() throws Exception {
-		gameRepository.instantiateNewGame(AN_OPPONENT, A_LOCATION);
-		gameRepository.instantiateNewGame(ANOTHER_OPPONENT, ANOTHER_LOCATION);
+		gameRepository.create(AN_OPPONENT, A_LOCATION);
+		gameRepository.create(ANOTHER_OPPONENT, ANOTHER_LOCATION);
 
 		gameRepository.commit();
 		gameRepository.commit();
@@ -174,8 +174,8 @@ public class GameRepositoryTest {
 	@Test
 	public void if_one_object_is_new_and_one_is_not_committing_twice_works_fine() throws Exception {
 		when(gameDaoMock.getGamesForSport(A_SPORT)).thenReturn(listWithOneGameDto);
-		gameRepository.recoverAllGamesForSport(A_SPORT);
-		gameRepository.instantiateNewGame(ANOTHER_OPPONENT, ANOTHER_LOCATION);
+		gameRepository.getAll(A_SPORT);
+		gameRepository.create(ANOTHER_OPPONENT, ANOTHER_LOCATION);
 
 		gameRepository.commit();
 		gameRepository.commit();

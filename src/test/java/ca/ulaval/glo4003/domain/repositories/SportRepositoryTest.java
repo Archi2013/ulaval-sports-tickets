@@ -51,20 +51,20 @@ public class SportRepositoryTest {
 		sportDto = new SportDto(DTO_SPORT);
 		when(sportDao.get(PARAMETER_SPORT)).thenReturn(sportDto);
 		when(sportFactory.instantiateSport(DTO_SPORT, gameList)).thenReturn(sport);
-		when(gameRepository.recoverAllGamesForSport(PARAMETER_SPORT)).thenReturn(gameList);
+		when(gameRepository.getAll(PARAMETER_SPORT)).thenReturn(gameList);
 		when(sport.saveDataInDTO()).thenReturn(sportDto);
 	}
 
 	@Test
 	public void getSportByName_instantiate_sport_using_factory() throws Exception {
-		repository.getSportByName(PARAMETER_SPORT);
+		repository.get(PARAMETER_SPORT);
 
 		verify(sportFactory).instantiateSport(DTO_SPORT, gameList);
 	}
 
 	@Test
 	public void getSportByName_returns_sport_instantiated_by_factory() throws Exception {
-		Sport sportReturned = repository.getSportByName(PARAMETER_SPORT);
+		Sport sportReturned = repository.get(PARAMETER_SPORT);
 
 		Assert.assertSame(sport, sportReturned);
 	}
@@ -78,7 +78,7 @@ public class SportRepositoryTest {
 
 	@Test
 	public void commit_sends_active_objects_to_dao_to_save_changes() throws Exception {
-		repository.getSportByName(PARAMETER_SPORT);
+		repository.get(PARAMETER_SPORT);
 
 		repository.commit();
 

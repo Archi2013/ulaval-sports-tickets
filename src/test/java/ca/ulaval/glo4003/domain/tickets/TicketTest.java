@@ -1,8 +1,7 @@
 package ca.ulaval.glo4003.domain.tickets;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import org.joda.time.DateTime;
 import org.junit.Assert;
@@ -16,7 +15,7 @@ import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PersistableTicketTest {
+public class TicketTest {
 	public static final String A_SPORT = "Sport";
 	public static final DateTime A_DATE = new DateTime(100);
 	public static final int A_TICKET_NUMBER = 120;
@@ -35,12 +34,12 @@ public class PersistableTicketTest {
 	@Mock
 	Ticket otherTicket;
 
-	PersistableTicket ticket;
+	Ticket ticket;
 
 	@Before
 	public void setup() {
 
-		ticket = new PersistableTicketImpl(firstAssociationState, A_PRICE);
+		ticket = new TicketImpl(firstAssociationState, A_PRICE);
 	}
 
 	@Test
@@ -82,9 +81,9 @@ public class PersistableTicketTest {
 		verify(firstAssociationState).fillDataInDto(any(TicketDto.class));
 	}
 
-	private class PersistableTicketImpl extends PersistableTicket {
+	private class TicketImpl extends Ticket {
 
-		public PersistableTicketImpl(TicketAssignationState associationState, double price) {
+		public TicketImpl(TicketAssignationState associationState, double price) {
 			super(associationState, price);
 
 		}

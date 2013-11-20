@@ -9,7 +9,7 @@ import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 public interface ISportRepository {
 
-	Sport getSportByName(String sportName) throws SportDoesntExistException;
+	Sport get(String sportName) throws SportDoesntExistException;
 
 	void commit() throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
 			TicketAlreadyExistException, TicketDoesntExistException;

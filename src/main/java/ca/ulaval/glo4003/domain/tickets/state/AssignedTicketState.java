@@ -11,10 +11,6 @@ public class AssignedTicketState implements TicketAssignationState {
 	private long ticketNumber;
 
 	public AssignedTicketState(String sportName, DateTime gameDate, long ticketNumber) {
-		System.out.println("AssignedTicketState: initiation avec donnees: " + sportName);
-		System.out.println(gameDate.toString());
-		System.out.println(ticketNumber);
-		System.out.println();
 		this.sportName = sportName;
 		this.gameDate = gameDate;
 		this.ticketNumber = ticketNumber;

@@ -32,8 +32,8 @@ public class CommandGameService {
 			NoSportForUrlException, TicketAlreadyExistException, TicketDoesntExistException {
 
 		String domainSportName = sportUrlMapper.getSportName(sportName);
-		Game game = gameRepository.instantiateNewGame(opponent, location);
-		Sport sport = sportRepository.getSportByName(domainSportName);
+		Game game = gameRepository.create(opponent, location);
+		Sport sport = sportRepository.get(domainSportName);
 
 		sport.addGameToCalendar(game, date);
 

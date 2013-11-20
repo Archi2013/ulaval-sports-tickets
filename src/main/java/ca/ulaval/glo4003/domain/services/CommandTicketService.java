@@ -32,7 +32,7 @@ public class CommandTicketService {
 		System.out.println("Service: sportName: " + sportName);
 		System.out.println("Service: gameDate: " + gameDate.toString());
 		System.out.println("Service: numberOftickets: " + numberOfTickets);
-		Game game = gameRepository.recoverGame(sportName, gameDate);
+		Game game = gameRepository.get(sportName, gameDate);
 
 		for (int i = 0; i < numberOfTickets; i++) {
 			game.addTicket(ticketRepository.instantiateNewTicket(price));
@@ -45,7 +45,7 @@ public class CommandTicketService {
 	public void addSeatedTicket(String sport, DateTime date, String section, String seat, double price)
 			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
 			TicketDoesntExistException {
-		Game gameToUse = gameRepository.recoverGame(sport, date);
+		Game gameToUse = gameRepository.get(sport, date);
 		gameToUse.addTicket(ticketRepository.instantiateNewTicket(seat, section, price, true));
 		gameRepository.commit();
 		gameRepository.clearCache();
@@ -62,7 +62,7 @@ public class CommandTicketService {
 			}
 		} else {
 			for (String seat : seats) {
-				Ticket ticket = ticketRepository.recoverTicket(game.getSportName(), game.getGameDate(), seat);
+				Ticket ticket = ticketRepository.getWithSeat(game.getSportName(), game.getGameDate(), seat);
 				ticket.makeUnavailable();
 			}
 		}

@@ -13,11 +13,11 @@ import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 public interface IGameRepository {
 
-	List<Game> recoverAllGamesForSport(String sportName) throws SportDoesntExistException;
+	List<Game> getAll(String sportName) throws SportDoesntExistException;
 
-	public Game instantiateNewGame(String opponents, String location);
+	Game get(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
-	Game recoverGame(String aSport, DateTime a_DATE) throws GameDoesntExistException;
+	public Game create(String opponents, String location);
 
 	public void commit() throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
 			TicketDoesntExistException;
