@@ -31,7 +31,7 @@ public class SectionByDaoRepositoryTest {
 	private SectionFactory sectionFactory;
 	
 	@InjectMocks
-	SectionByDaoRepository sectionRepository;
+	SectionRepository sectionRepository;
 
 	@Before
 	public void setUp() throws SportDoesntExistException {

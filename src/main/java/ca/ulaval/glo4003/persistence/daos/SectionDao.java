@@ -3,17 +3,19 @@ package ca.ulaval.glo4003.persistence.daos;
 import java.util.List;
 import java.util.Set;
 
+import org.joda.time.DateTime;
+
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
 
 public interface SectionDao {
 
-	public SectionDto get(String sportName, String gameDate, String sectionName) throws SectionDoesntExistException;
+	public SectionDto get(String sportName, DateTime gameDate, String sectionName) throws SectionDoesntExistException;
 
-	public SectionDto getAvailable(String sportName, String gameDate, String sectionName) throws SectionDoesntExistException;
+	public SectionDto getAvailable(String sportName, DateTime gameDate, String sectionName) throws SectionDoesntExistException;
 
-	public List<SectionDto> getAll(String sportName, String gameDate) throws GameDoesntExistException;
+	public List<SectionDto> getAll(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
-	public List<SectionDto> getAllAvailable(String sportName, String gameDate) throws GameDoesntExistException;
+	public List<SectionDto> getAllAvailable(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
 	public Set<String> getAllSections();
 

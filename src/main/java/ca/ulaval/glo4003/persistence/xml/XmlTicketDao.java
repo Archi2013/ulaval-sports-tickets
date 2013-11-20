@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
@@ -38,9 +37,6 @@ public class XmlTicketDao implements TicketDao {
 	private final static String TICKET_XPATH_SPORT_AND_SECTION = TICKET_XPATH_SPORT + "[section=\"%s\"]";
 
 	private XmlDatabase database;
-
-	@Inject
-	private XmlGameDao gameDao;
 
 	public XmlTicketDao() {
 		database = XmlDatabase.getInstance();

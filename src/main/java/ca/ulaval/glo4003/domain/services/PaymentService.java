@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import ca.ulaval.glo4003.domain.dtos.GameDto;
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.domain.pojos.Section;
-import ca.ulaval.glo4003.domain.repositories.SectionRepository;
+import ca.ulaval.glo4003.domain.repositories.ISectionRepository;
 import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
@@ -55,7 +55,7 @@ public class PaymentService {
 	private Cart currentCart;
 
 	@Inject
-	private SectionRepository sectionRepository;
+	private ISectionRepository sectionRepository;
 
 	public Boolean isValidChooseTicketsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException,
 			SectionDoesntExistException {

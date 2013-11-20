@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.dtos.SectionDto;
@@ -21,7 +22,7 @@ import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 
 @Component
 public class XmlSectionDao implements SectionDao {
-
+	public static final String DATE_PATTERN = "yyyy/MM/dd HH:mm z";
 	private static final String GENERAL_KEYWORD = "Générale";
 	private static final String SECTIONS_XPATH = "/base/tickets";
 	private final static String SECTION_XPATH = SECTIONS_XPATH + "/ticket";
@@ -42,19 +43,19 @@ public class XmlSectionDao implements SectionDao {
 	}
 
 	@Override
-	public SectionDto get(String sportName, String gameDate, String sectionName) throws SectionDoesntExistException {
-		String xPath = String.format(SECTION_XPATH_SPORT, sportName, gameDate, sectionName);
+	public SectionDto get(String sportName, DateTime gameDate, String sectionName) throws SectionDoesntExistException {
+		String xPath = String.format(SECTION_XPATH_SPORT, sportName, toString(gameDate), sectionName);
 		return getWithClause(sectionName, xPath);
 	}
 
 	@Override
-	public SectionDto getAvailable(String sportName, String gameDate, String sectionName) throws SectionDoesntExistException {
-		String xPath = String.format(SECTION_XPATH_AVAILABLE_SPORT, sportName, gameDate, sectionName, true);
+	public SectionDto getAvailable(String sportName, DateTime gameDate, String sectionName) throws SectionDoesntExistException {
+		String xPath = String.format(SECTION_XPATH_AVAILABLE_SPORT, sportName, toString(gameDate), sectionName, true);
 		return getWithClause(sectionName, xPath);
 	}
 
 	@Override
-	public List<SectionDto> getAll(String sportName, String gameDate) throws GameDoesntExistException {
+	public List<SectionDto> getAll(String sportName, DateTime gameDate) throws GameDoesntExistException {
 		try {
 			return convertToSectionDtos(sportName, gameDate, getAllSections());
 		} catch (NoSuchAttributeException | SectionDoesntExistException e) {
@@ -63,7 +64,7 @@ public class XmlSectionDao implements SectionDao {
 	}
 
 	@Override
-	public List<SectionDto> getAllAvailable(String sportName, String gameDate) throws GameDoesntExistException {
+	public List<SectionDto> getAllAvailable(String sportName, DateTime gameDate) throws GameDoesntExistException {
 		try {
 			return convertToAvailableSectionDtos(sportName, gameDate, getAllSections());
 		} catch (NoSuchAttributeException | SectionDoesntExistException e) {
@@ -71,7 +72,7 @@ public class XmlSectionDao implements SectionDao {
 		}
 	}
 
-	private List<SectionDto> convertToSectionDtos(String sportName, String gameDate, Set<String> sectionNames)
+	private List<SectionDto> convertToSectionDtos(String sportName, DateTime gameDate, Set<String> sectionNames)
 			throws SectionDoesntExistException, NoSuchAttributeException {
 		List<SectionDto> sections = new ArrayList<>();
 		for (String sectionName : sectionNames) {
@@ -81,7 +82,7 @@ public class XmlSectionDao implements SectionDao {
 		return sections;
 	}
 
-	private List<SectionDto> convertToAvailableSectionDtos(String sportName, String gameDate, Set<String> sectionNames)
+	private List<SectionDto> convertToAvailableSectionDtos(String sportName, DateTime gameDate, Set<String> sectionNames)
 			throws SectionDoesntExistException, NoSuchAttributeException {
 		List<SectionDto> sections = new ArrayList<>();
 		for (String sectionName : sectionNames) {
@@ -156,6 +157,13 @@ public class XmlSectionDao implements SectionDao {
 			sections.addAll(section);
 		}
 		return sections;
+	}
+
+	private String toString(DateTime date) {
+		if (date == null) {
+			return "";
+		}
+		return date.toString(DATE_PATTERN);
 	}
 
 	@Deprecated
