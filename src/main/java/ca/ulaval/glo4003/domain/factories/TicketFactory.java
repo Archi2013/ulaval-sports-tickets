@@ -15,11 +15,11 @@ public class TicketFactory {
 	private static final String GENERAL_SECTION = "Générale";
 
 	public PersistableTicket instantiateTicket(double price) {
-		return instantiateTicket(new TicketDto(null, GENERAL_SECTION, null, 0, price, true));
+		return instantiateTicket(new TicketDto(null, null, GENERAL_SECTION, null, price, true));
 	}
 
-	public PersistableTicket instantiateTicket(String seat, String section, double price, boolean available) {
-		return instantiateTicket(new TicketDto(null, null, 0, price, seat, section, available));
+	public PersistableTicket instantiateTicket(String section, String seat, double price, boolean available) {
+		return instantiateTicket(new TicketDto(null, null, section, seat, price, available));
 	}
 
 	public PersistableTicket instantiateTicket(TicketDto data) {

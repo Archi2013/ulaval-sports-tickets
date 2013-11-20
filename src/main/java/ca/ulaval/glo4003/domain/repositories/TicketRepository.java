@@ -39,7 +39,7 @@ public class TicketRepository implements ITicketRepository {
 
 	@Override
 	public Ticket instantiateNewTicket(String seat, String section, double price, boolean available) {
-		PersistableTicket newTicket = factory.instantiateTicket(seat, section, price, available);
+		PersistableTicket newTicket = factory.instantiateTicket(section, seat, price, available);
 		newTickets.add(newTicket);
 		return newTicket;
 	}
@@ -55,7 +55,7 @@ public class TicketRepository implements ITicketRepository {
 	@Override
 	public Ticket recoverTicket(String sport, DateTime date, String seat) {
 		TicketDto data = dao.get(sport, date, seat);
-		PersistableTicket recoveredTicket = factory.instantiateTicket(data.getSeat(), data.getSection(),
+		PersistableTicket recoveredTicket = factory.instantiateTicket(data.getSection(), data.getSeat(),
 				data.getPrice(), true);
 		ticketsInDao.add(recoveredTicket);
 		return recoveredTicket;

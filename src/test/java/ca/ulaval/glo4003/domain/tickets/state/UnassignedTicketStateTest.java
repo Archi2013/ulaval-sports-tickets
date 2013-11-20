@@ -35,7 +35,7 @@ public class UnassignedTicketStateTest {
 
 	@Test
 	public void fillDataInDto_fills_no_data() {
-		TicketDto data = new TicketDto(null, null, null, 0, 0, false);
+		TicketDto data = new TicketDto(null, null, null, null, 0, false);
 
 		state.fillDataInDto(data);
 

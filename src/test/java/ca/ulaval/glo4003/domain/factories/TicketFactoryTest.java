@@ -35,7 +35,7 @@ public class TicketFactoryTest {
 
 	@Test
 	public void instantiation_with_seat_and_section_parameters_returns_a_seated_ticket() {
-		PersistableTicket ticket = factory.instantiateTicket(A_SEAT, A_SECTION, A_PRICE, AVAILABLE);
+		PersistableTicket ticket = factory.instantiateTicket(A_SECTION, A_SEAT, A_PRICE, AVAILABLE);
 
 		Assert.assertSame(SeatedTicket.class, ticket.getClass());
 	}

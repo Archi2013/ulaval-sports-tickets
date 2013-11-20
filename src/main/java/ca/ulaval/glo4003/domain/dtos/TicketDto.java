@@ -12,29 +12,18 @@ public class TicketDto {
 	public String sportName;
 	public DateTime gameDate;
 	public boolean available;
-	
-	public TicketDto(String sportName, DateTime gameDate, String section, String seat, double price,
-            boolean available) {
+
+	public TicketDto(String sportName, DateTime gameDate, String section, String seat, double price, boolean available) {
 		this(null, sportName, gameDate, section, seat, price, available);
-    }
+	}
 
 	public TicketDto(Long ticketId, String sportName, DateTime gameDate, String section, String seat, double price,
-            boolean available) {
+			boolean available) {
 		this.ticketId = ticketId;
-	    this.sportName = sportName;
-	    this.gameDate = gameDate;
-	    this.section = section;
-	    this.seat = seat;
-	    this.price = price;
-	    this.available = available;
-    }
-
-	@Deprecated
-	public TicketDto(String sportName, String section, DateTime gameDate, long ticketId, double price, boolean available) {
 		this.sportName = sportName;
-		this.section = section;
 		this.gameDate = gameDate;
-		this.ticketId = ticketId;
+		this.section = section;
+		this.seat = seat;
 		this.price = price;
 		this.available = available;
 	}
@@ -110,8 +99,8 @@ public class TicketDto {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
-	
+
 	public boolean isGeneralSection() {
-	    return "Générale".equals(section);
-    }
+		return "Générale".equals(section);
+	}
 }

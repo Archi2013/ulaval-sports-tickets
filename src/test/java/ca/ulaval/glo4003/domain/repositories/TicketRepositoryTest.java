@@ -69,7 +69,7 @@ public class TicketRepositoryTest {
 		datas.add(firstTicketData);
 		datas.add(secondTicketData);
 		when(ticketFactory.instantiateTicket(A_PRICE)).thenReturn(ticketGeneratedWithNoParameter);
-		when(ticketFactory.instantiateTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE)).thenReturn(
+		when(ticketFactory.instantiateTicket(A_NEW_SECTION, A_NEW_SEAT, A_PRICE, AVAILABLE)).thenReturn(
 				ticketGeneratedWithParameter);
 		when(ticketDao.get(A_SPORT, A_DATE, A_TICKET_NUMBER)).thenReturn(firstTicketData);
 		when(ticketDao.getTicketsForGame(A_SPORT, A_DATE)).thenReturn(datas);
