@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SportService;
@@ -20,13 +21,14 @@ import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
 
 @Controller
 @RequestMapping(value = "/sport", method = RequestMethod.GET)
+@SessionAttributes({ "currentUser" })
 public class SportController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SportController.class);
 
 	@Inject
 	private SportService service;
-	
+
 	@Autowired
 	private User currentUser;
 
@@ -35,9 +37,9 @@ public class SportController {
 		logger.info("Getting all sports");
 
 		ModelAndView mav = new ModelAndView("sport/list");
-		
+
 		Boolean connectedUser = currentUser.isLogged();
-		
+
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
@@ -45,7 +47,7 @@ public class SportController {
 			mav.addObject("connectedUser", false);
 			logger.info("usagé non connecté");
 		}
-		
+
 		SportsViewModel sports = service.getSports();
 		mav.addObject("sports", sports);
 		return mav;
@@ -56,9 +58,9 @@ public class SportController {
 		logger.info("Getting games for sport: " + sportUrl);
 
 		ModelAndView mav = new ModelAndView("sport/games");
-		
+
 		Boolean connectedUser = currentUser.isLogged();
-		
+
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
@@ -66,7 +68,7 @@ public class SportController {
 			mav.addObject("connectedUser", false);
 			logger.info("usagé non connecté");
 		}
-		
+
 		try {
 			GamesViewModel games = service.getGamesForSport(sportUrl);
 			mav.addObject("games", games);

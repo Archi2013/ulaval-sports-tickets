@@ -26,10 +26,10 @@ public class UserService {
 
 	@Inject
 	private UserDao userDao;
-	
+
 	@Inject
 	private UserViewModelFactory userViewModelFactory;
-	
+
 	@Inject
 	private Encryption encryption;
 
@@ -37,16 +37,17 @@ public class UserService {
 		currentUser.setUsername(user.getUsername());
 		currentUser.setPassword(user.getPassword());
 		currentUser.setLogged(true);
+		currentUser.setAdmin(user.isAdmin());
 	}
 
 	public void signUp(String username, String password) throws UserAlreadyExistException {
-		
+
 		if (!(userDao.doesUserExist(username)))
 			userDao.add(makeUser(username, password));
 		else
 			throw new UserAlreadyExistException();
 	}
-	
+
 	private UserDto makeUser(String username, String password) {
 		return new UserDto(username, encryption.encrypt(password));
 	}

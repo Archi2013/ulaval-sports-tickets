@@ -1,1245 +1,1247 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <base>
-<sports>
-<sport>
-<name>Volleyball féminin</name>
-</sport>
-<sport>
-<name>Baseball masculin</name>
-</sport>
-<sport>
-<name>Basketball masculin</name>
-</sport>
-<sport>
-<name>Soccer masculin</name>
-</sport>
-<sport>
-<name>Football féminin</name>
-</sport>
-<sport>
-<name>Natation masculine</name>
-</sport>
-<sport>
-<name>Handball féminin</name>
-</sport>
-</sports>
-<games>
-<game>
-<id>1</id>
-<sportName>Volleyball féminin</sportName>
-<oponents>Carabins</oponents>
-<date>2013/12/12 18:30 EST</date>
-</game>
-<game>
-<id>2</id>
-<sportName>Volleyball féminin</sportName>
-<oponents>Redmen</oponents>
-<date>2013/12/12 18:30 EST</date>
-</game>
-<game>
-<id>40</id>
-<sportName>Volleyball féminin</sportName>
-<oponents>Blue Dragoon</oponents>
-<date>2013/12/12 18:30 EST</date>
-</game>
-<game>
-<id>41</id>
-<sportName>Baseball masculin</sportName>
-<oponents>Phoenix rouge</oponents>
-<date>2013/12/12 18:30 EST</date>
-</game>
-<game>
-<id>42</id>
-<sportName>Baseball masculin</sportName>
-<oponents>Emeraude vif</oponents>
-<date>2013/12/12 18:30 EST</date>
-</game>
-</games>
-<games-sections>
-<game-section gameID="1">
-<sections>
-<section name="Front Row" />
-<section name="Générale" />
-<section name="Rouges" />
-</sections>
-</game-section>
-<game-section gameID="2">
-<sections>
-<section name="Front Row" />
-<section name="Rouges" />
-</sections>
-</game-section>
-<game-section gameID="40">
-<sections>
-<section name="Indigo" />
-<section name="Générale" />
-<section name="Loge Sud-Est" />
-<section name="Loge Nord-Est" />
-</sections>
-</game-section>
-<game-section gameID="41">
-<sections>
-<section name="Poupres" />
-<section name="Bordeaux" />
-<section name="Générale" />
-<section name="Loge A" />
-<section name="Loge B" />
-<section name="Loge C" />
-<section name="Loge E" />
-</sections>
-</game-section>
-<game-section gameID="42">
-<sections>
-</sections>
-</game-section>
-</games-sections>
-<tickets>
-<ticket>
-<id>1</id>
-<gameID>1</gameID>
-<price>35.00</price>
-<type>VIP</type>
-<section>Front Row</section>
-</ticket>
-<ticket>
-<id>2</id>
-<gameID>1</gameID>
-<price>35.00</price>
-<type>VIP</type>
-<section>Front Row</section>
-</ticket>
-<ticket>
-<id>3</id>
-<gameID>2</gameID>
-<price>35.00</price>
-<type>VIP</type>
-<section>Front Row</section>
-</ticket>
-<ticket>
-<id>4</id>
-<gameID>2</gameID>
-<price>35.00</price>
-<type>VIP</type>
-<section>Front Row</section>
-</ticket>
-<ticket>
-<id>5</id>
-<gameID>2</gameID>
-<price>35.00</price>
-<type>VIP</type>
-<section>Front Row</section>
-</ticket>
-<ticket>
-<id>6</id>
-<gameID>1</gameID>
-<price>15.50</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>7</id>
-<gameID>1</gameID>
-<price>15.50</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>8</id>
-<gameID>1</gameID>
-<price>20.00</price>
-<type>VIP</type>
-<section>Rouges</section>
-</ticket>
-<ticket>
-<id>9</id>
-<gameID>1</gameID>
-<price>20.00</price>
-<type>VIP</type>
-<section>Rouges</section>
-</ticket>
-<ticket>
-<id>10</id>
-<gameID>1</gameID>
-<price>20.00</price>
-<type>VIP</type>
-<section>Rouges</section>
-</ticket>
-<ticket>
-<id>11</id>
-<gameID>1</gameID>
-<price>20.00</price>
-<type>VIP</type>
-<section>Rouges</section>
-</ticket>
-<ticket>
-<id>12</id>
-<gameID>1</gameID>
-<price>20.00</price>
-<type>VIP</type>
-<section>Rouges</section>
-</ticket>
-<ticket>
-<id>13</id>
-<gameID>2</gameID>
-<price>20.00</price>
-<type>VIP</type>
-<section>Rouges</section>
-</ticket>
-<ticket>
-<id>14</id>
-<gameID>2</gameID>
-<price>20.00</price>
-<type>VIP</type>
-<section>Rouges</section>
-</ticket>
-<ticket>
-<id>15</id>
-<gameID>2</gameID>
-<price>20.00</price>
-<type>VIP</type>
-<section>Rouges</section>
-</ticket>
-<ticket>
-<id>16</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>17</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>18</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>19</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>20</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>21</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>22</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>23</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>24</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>25</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>26</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>27</id>
-<gameID>40</gameID>
-<price>5.95</price>
-<type>VIP</type>
-<section>Indigo</section>
-</ticket>
-<ticket>
-<id>28</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>29</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>30</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>31</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>32</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>33</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>34</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>35</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>36</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>37</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>38</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>39</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>40</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>41</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>42</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>43</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>44</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>45</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>46</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>47</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>48</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>49</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>50</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>51</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>52</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>53</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>54</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>55</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>56</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>57</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>58</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>59</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>60</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>61</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>62</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>63</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>64</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>65</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>66</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>67</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>68</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>69</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>70</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>71</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>72</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>73</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>74</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>75</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>76</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>77</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>78</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>79</id>
-<gameID>40</gameID>
-<price>6.95</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>80</id>
-<gameID>41</gameID>
-<price>25.95</price>
-<type>VIP</type>
-<section>Poupres</section>
-</ticket>
-<ticket>
-<id>81</id>
-<gameID>41</gameID>
-<price>25.95</price>
-<type>VIP</type>
-<section>Poupres</section>
-</ticket>
-<ticket>
-<id>82</id>
-<gameID>41</gameID>
-<price>25.95</price>
-<type>VIP</type>
-<section>Poupres</section>
-</ticket>
-<ticket>
-<id>83</id>
-<gameID>41</gameID>
-<price>25.95</price>
-<type>VIP</type>
-<section>Poupres</section>
-</ticket>
-<ticket>
-<id>84</id>
-<gameID>41</gameID>
-<price>25.95</price>
-<type>VIP</type>
-<section>Poupres</section>
-</ticket>
-<ticket>
-<id>85</id>
-<gameID>41</gameID>
-<price>25.95</price>
-<type>VIP</type>
-<section>Poupres</section>
-</ticket>
-<ticket>
-<id>86</id>
-<gameID>41</gameID>
-<price>25.95</price>
-<type>VIP</type>
-<section>Poupres</section>
-</ticket>
-<ticket>
-<id>87</id>
-<gameID>41</gameID>
-<price>25.95</price>
-<type>VIP</type>
-<section>Poupres</section>
-</ticket>
-<ticket>
-<id>88</id>
-<gameID>41</gameID>
-<price>25.95</price>
-<type>VIP</type>
-<section>Poupres</section>
-</ticket>
-<ticket>
-<id>89</id>
-<gameID>41</gameID>
-<price>25.95</price>
-<type>VIP</type>
-<section>Poupres</section>
-</ticket>
-<ticket>
-<id>90</id>
-<gameID>41</gameID>
-<price>25.95</price>
-<type>VIP</type>
-<section>Poupres</section>
-</ticket>
-<ticket>
-<id>91</id>
-<gameID>41</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Bordeaux</section>
-</ticket>
-<ticket>
-<id>92</id>
-<gameID>41</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Bordeaux</section>
-</ticket>
-<ticket>
-<id>93</id>
-<gameID>41</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Bordeaux</section>
-</ticket>
-<ticket>
-<id>94</id>
-<gameID>41</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Bordeaux</section>
-</ticket>
-<ticket>
-<id>95</id>
-<gameID>41</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Bordeaux</section>
-</ticket>
-<ticket>
-<id>96</id>
-<gameID>41</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Bordeaux</section>
-</ticket>
-<ticket>
-<id>97</id>
-<gameID>41</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Bordeaux</section>
-</ticket>
-<ticket>
-<id>98</id>
-<gameID>41</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Bordeaux</section>
-</ticket>
-<ticket>
-<id>99</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>100</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>101</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>102</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>103</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>104</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>105</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>106</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>107</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>108</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>109</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>110</id>
-<gameID>41</gameID>
-<price>15.45</price>
-<type>Générale</type>
-<section>Générale</section>
-</ticket>
-<ticket>
-<id>111</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>112</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>113</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>114</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>115</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>116</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>117</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>118</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>119</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>120</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>121</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>122</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>123</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>124</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>125</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>126</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>127</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>128</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>129</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>130</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>131</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>132</id>
-<gameID>42</gameID>
-<price>15.95</price>
-<type>VIP</type>
-<section>Olive</section>
-</ticket>
-<ticket>
-<id>133</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>134</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>135</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>136</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>137</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>138</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>139</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>140</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>141</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>142</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>143</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>144</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>145</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>46</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>147</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>148</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>149</id>
-<gameID>42</gameID>
-<price>20.05</price>
-<type>VIP</type>
-<section>Turquoise</section>
-</ticket>
-<ticket>
-<id>150</id>
-<gameID>42</gameID>
-<price>5.45</price>
-<type>VIP</type>
-<section>Basilic</section>
-</ticket>
-<ticket>
-<id>151</id>
-<gameID>42</gameID>
-<price>5.45</price>
-<type>VIP</type>
-<section>Basilic</section>
-</ticket>
-<ticket>
-<id>152</id>
-<gameID>40</gameID>
-<price>15.50</price>
-<type>VIP</type>
-<section>Loge Sud-Est</section>
-</ticket>
-<ticket>
-<id>153</id>
-<gameID>40</gameID>
-<price>15.50</price>
-<type>VIP</type>
-<section>Loge Nord-Est</section>
-</ticket>
-<ticket>
-<id>154</id>
-<gameID>41</gameID>
-<price>30.70</price>
-<type>VIP</type>
-<section>Loge A</section>
-</ticket>
-<ticket>
-<id>155</id>
-<gameID>41</gameID>
-<price>30.70</price>
-<type>VIP</type>
-<section>Loge A</section>
-</ticket>
-<ticket>
-<id>156</id>
-<gameID>41</gameID>
-<price>30.70</price>
-<type>VIP</type>
-<section>Loge B</section>
-</ticket>
-<ticket>
-<id>157</id>
-<gameID>41</gameID>
-<price>30.70</price>
-<type>VIP</type>
-<section>Loge C</section>
-</ticket>
-<ticket>
-<id>158</id>
-<gameID>41</gameID>
-<price>30.70</price>
-<type>VIP</type>
-<section>Loge E</section>
-</ticket>
-<ticket>
-<id>159</id>
-<gameID>42</gameID>
-<price>30.70</price>
-<type>VIP</type>
-<section>Loge 3C</section>
-</ticket>
-<ticket>
-<id>160</id>
-<gameID>42</gameID>
-<price>30.70</price>
-<type>VIP</type>
-<section>Loge 1A</section>
-</ticket>
-<ticket>
-<id>161</id>
-<gameID>42</gameID>
-<price>30.70</price>
-<type>VIP</type>
-<section>Loge 4D</section>
-</ticket>
-<ticket>
-<id>162</id>
-<gameID>42</gameID>
-<price>30.70</price>
-<type>VIP</type>
-<section>Loge 1A</section>
-</ticket>
-<ticket>
-<id>163</id>
-<gameID>42</gameID>
-<price>30.70</price>
-<type>VIP</type>
-<section>Loge 5E</section>
-</ticket>
-</tickets>
-<users>
-<user>
-<username>admin</username>
-<password>8omCTTvQa3k0hbJ2WfwTNA1ZguhcFIB0sTm2C3hDuP4BPCihnzJXXVna06uUf01A</password><!-- admin -->
-</user>
-</users>
+  <sports>
+    <sport>
+      <name>Volleyball féminin</name>
+    </sport>
+    <sport>
+      <name>Baseball masculin</name>
+    </sport>
+    <sport>
+      <name>Basketball masculin</name>
+    </sport>
+    <sport>
+      <name>Soccer masculin</name>
+    </sport>
+    <sport>
+      <name>Football féminin</name>
+    </sport>
+    <sport>
+      <name>Natation masculine</name>
+    </sport>
+    <sport>
+      <name>Handball féminin</name>
+    </sport>
+  </sports>
+  <games>
+    <game>
+      <id>1</id>
+      <sportName>Volleyball féminin</sportName>
+      <oponents>Carabins</oponents>
+      <date>2013/12/12 18:30 EST</date>
+    </game>
+    <game>
+      <id>2</id>
+      <sportName>Volleyball féminin</sportName>
+      <oponents>Redmen</oponents>
+      <date>2013/12/12 18:30 EST</date>
+    </game>
+    <game>
+      <id>40</id>
+      <sportName>Volleyball féminin</sportName>
+      <oponents>Blue Dragoon</oponents>
+      <date>2013/12/12 18:30 EST</date>
+    </game>
+    <game>
+      <id>41</id>
+      <sportName>Baseball masculin</sportName>
+      <oponents>Phoenix rouge</oponents>
+      <date>2013/12/12 18:30 EST</date>
+    </game>
+    <game>
+      <id>42</id>
+      <sportName>Baseball masculin</sportName>
+      <oponents>Emeraude vif</oponents>
+      <date>2013/12/12 18:30 EST</date>
+    </game>
+  </games>
+  <games-sections>
+    <game-section gameID="1">
+      <sections>
+        <section name="Front Row" />
+        <section name="Générale" />
+        <section name="Rouges" />
+      </sections>
+    </game-section>
+    <game-section gameID="2">
+      <sections>
+        <section name="Front Row" />
+        <section name="Rouges" />
+      </sections>
+    </game-section>
+    <game-section gameID="40">
+      <sections>
+        <section name="Indigo" />
+        <section name="Générale" />
+        <section name="Loge Sud-Est" />
+        <section name="Loge Nord-Est" />
+      </sections>
+    </game-section>
+    <game-section gameID="41">
+      <sections>
+        <section name="Poupres" />
+        <section name="Bordeaux" />
+        <section name="Générale" />
+        <section name="Loge A" />
+        <section name="Loge B" />
+        <section name="Loge C" />
+        <section name="Loge E" />
+      </sections>
+    </game-section>
+    <game-section gameID="42">
+      <sections>
+      </sections>
+    </game-section>
+  </games-sections>
+  <tickets>
+    <ticket>
+      <id>1</id>
+      <gameID>1</gameID>
+      <price>35.00</price>
+      <type>VIP</type>
+      <section>Front Row</section>
+    </ticket>
+    <ticket>
+      <id>2</id>
+      <gameID>1</gameID>
+      <price>35.00</price>
+      <type>VIP</type>
+      <section>Front Row</section>
+    </ticket>
+    <ticket>
+      <id>3</id>
+      <gameID>2</gameID>
+      <price>35.00</price>
+      <type>VIP</type>
+      <section>Front Row</section>
+    </ticket>
+    <ticket>
+      <id>4</id>
+      <gameID>2</gameID>
+      <price>35.00</price>
+      <type>VIP</type>
+      <section>Front Row</section>
+    </ticket>
+    <ticket>
+      <id>5</id>
+      <gameID>2</gameID>
+      <price>35.00</price>
+      <type>VIP</type>
+      <section>Front Row</section>
+    </ticket>
+    <ticket>
+      <id>6</id>
+      <gameID>1</gameID>
+      <price>15.50</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>7</id>
+      <gameID>1</gameID>
+      <price>15.50</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>8</id>
+      <gameID>1</gameID>
+      <price>20.00</price>
+      <type>VIP</type>
+      <section>Rouges</section>
+    </ticket>
+    <ticket>
+      <id>9</id>
+      <gameID>1</gameID>
+      <price>20.00</price>
+      <type>VIP</type>
+      <section>Rouges</section>
+    </ticket>
+    <ticket>
+      <id>10</id>
+      <gameID>1</gameID>
+      <price>20.00</price>
+      <type>VIP</type>
+      <section>Rouges</section>
+    </ticket>
+    <ticket>
+      <id>11</id>
+      <gameID>1</gameID>
+      <price>20.00</price>
+      <type>VIP</type>
+      <section>Rouges</section>
+    </ticket>
+    <ticket>
+      <id>12</id>
+      <gameID>1</gameID>
+      <price>20.00</price>
+      <type>VIP</type>
+      <section>Rouges</section>
+    </ticket>
+    <ticket>
+      <id>13</id>
+      <gameID>2</gameID>
+      <price>20.00</price>
+      <type>VIP</type>
+      <section>Rouges</section>
+    </ticket>
+    <ticket>
+      <id>14</id>
+      <gameID>2</gameID>
+      <price>20.00</price>
+      <type>VIP</type>
+      <section>Rouges</section>
+    </ticket>
+    <ticket>
+      <id>15</id>
+      <gameID>2</gameID>
+      <price>20.00</price>
+      <type>VIP</type>
+      <section>Rouges</section>
+    </ticket>
+    <ticket>
+      <id>16</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>17</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>18</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>19</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>20</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>21</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>22</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>23</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>24</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>25</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>26</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>27</id>
+      <gameID>40</gameID>
+      <price>5.95</price>
+      <type>VIP</type>
+      <section>Indigo</section>
+    </ticket>
+    <ticket>
+      <id>28</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>29</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>30</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>31</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>32</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>33</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>34</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>35</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>36</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>37</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>38</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>39</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>40</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>41</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>42</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>43</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>44</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>45</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>46</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>47</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>48</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>49</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>50</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>51</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>52</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>53</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>54</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>55</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>56</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>57</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>58</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>59</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>60</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>61</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>62</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>63</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>64</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>65</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>66</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>67</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>68</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>69</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>70</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>71</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>72</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>73</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>74</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>75</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>76</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>77</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>78</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>79</id>
+      <gameID>40</gameID>
+      <price>6.95</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>80</id>
+      <gameID>41</gameID>
+      <price>25.95</price>
+      <type>VIP</type>
+      <section>Poupres</section>
+    </ticket>
+    <ticket>
+      <id>81</id>
+      <gameID>41</gameID>
+      <price>25.95</price>
+      <type>VIP</type>
+      <section>Poupres</section>
+    </ticket>
+    <ticket>
+      <id>82</id>
+      <gameID>41</gameID>
+      <price>25.95</price>
+      <type>VIP</type>
+      <section>Poupres</section>
+    </ticket>
+    <ticket>
+      <id>83</id>
+      <gameID>41</gameID>
+      <price>25.95</price>
+      <type>VIP</type>
+      <section>Poupres</section>
+    </ticket>
+    <ticket>
+      <id>84</id>
+      <gameID>41</gameID>
+      <price>25.95</price>
+      <type>VIP</type>
+      <section>Poupres</section>
+    </ticket>
+    <ticket>
+      <id>85</id>
+      <gameID>41</gameID>
+      <price>25.95</price>
+      <type>VIP</type>
+      <section>Poupres</section>
+    </ticket>
+    <ticket>
+      <id>86</id>
+      <gameID>41</gameID>
+      <price>25.95</price>
+      <type>VIP</type>
+      <section>Poupres</section>
+    </ticket>
+    <ticket>
+      <id>87</id>
+      <gameID>41</gameID>
+      <price>25.95</price>
+      <type>VIP</type>
+      <section>Poupres</section>
+    </ticket>
+    <ticket>
+      <id>88</id>
+      <gameID>41</gameID>
+      <price>25.95</price>
+      <type>VIP</type>
+      <section>Poupres</section>
+    </ticket>
+    <ticket>
+      <id>89</id>
+      <gameID>41</gameID>
+      <price>25.95</price>
+      <type>VIP</type>
+      <section>Poupres</section>
+    </ticket>
+    <ticket>
+      <id>90</id>
+      <gameID>41</gameID>
+      <price>25.95</price>
+      <type>VIP</type>
+      <section>Poupres</section>
+    </ticket>
+    <ticket>
+      <id>91</id>
+      <gameID>41</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Bordeaux</section>
+    </ticket>
+    <ticket>
+      <id>92</id>
+      <gameID>41</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Bordeaux</section>
+    </ticket>
+    <ticket>
+      <id>93</id>
+      <gameID>41</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Bordeaux</section>
+    </ticket>
+    <ticket>
+      <id>94</id>
+      <gameID>41</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Bordeaux</section>
+    </ticket>
+    <ticket>
+      <id>95</id>
+      <gameID>41</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Bordeaux</section>
+    </ticket>
+    <ticket>
+      <id>96</id>
+      <gameID>41</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Bordeaux</section>
+    </ticket>
+    <ticket>
+      <id>97</id>
+      <gameID>41</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Bordeaux</section>
+    </ticket>
+    <ticket>
+      <id>98</id>
+      <gameID>41</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Bordeaux</section>
+    </ticket>
+    <ticket>
+      <id>99</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>100</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>101</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>102</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>103</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>104</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>105</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>106</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>107</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>108</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>109</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>110</id>
+      <gameID>41</gameID>
+      <price>15.45</price>
+      <type>Générale</type>
+      <section>Générale</section>
+    </ticket>
+    <ticket>
+      <id>111</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>112</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>113</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>114</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>115</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>116</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>117</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>118</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>119</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>120</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>121</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>122</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>123</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>124</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>125</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>126</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>127</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>128</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>129</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>130</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>131</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>132</id>
+      <gameID>42</gameID>
+      <price>15.95</price>
+      <type>VIP</type>
+      <section>Olive</section>
+    </ticket>
+    <ticket>
+      <id>133</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>134</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>135</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>136</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>137</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>138</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>139</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>140</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>141</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>142</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>143</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>144</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>145</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>46</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>147</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>148</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>149</id>
+      <gameID>42</gameID>
+      <price>20.05</price>
+      <type>VIP</type>
+      <section>Turquoise</section>
+    </ticket>
+    <ticket>
+      <id>150</id>
+      <gameID>42</gameID>
+      <price>5.45</price>
+      <type>VIP</type>
+      <section>Basilic</section>
+    </ticket>
+    <ticket>
+      <id>151</id>
+      <gameID>42</gameID>
+      <price>5.45</price>
+      <type>VIP</type>
+      <section>Basilic</section>
+    </ticket>
+    <ticket>
+      <id>152</id>
+      <gameID>40</gameID>
+      <price>15.50</price>
+      <type>VIP</type>
+      <section>Loge Sud-Est</section>
+    </ticket>
+    <ticket>
+      <id>153</id>
+      <gameID>40</gameID>
+      <price>15.50</price>
+      <type>VIP</type>
+      <section>Loge Nord-Est</section>
+    </ticket>
+    <ticket>
+      <id>154</id>
+      <gameID>41</gameID>
+      <price>30.70</price>
+      <type>VIP</type>
+      <section>Loge A</section>
+    </ticket>
+    <ticket>
+      <id>155</id>
+      <gameID>41</gameID>
+      <price>30.70</price>
+      <type>VIP</type>
+      <section>Loge A</section>
+    </ticket>
+    <ticket>
+      <id>156</id>
+      <gameID>41</gameID>
+      <price>30.70</price>
+      <type>VIP</type>
+      <section>Loge B</section>
+    </ticket>
+    <ticket>
+      <id>157</id>
+      <gameID>41</gameID>
+      <price>30.70</price>
+      <type>VIP</type>
+      <section>Loge C</section>
+    </ticket>
+    <ticket>
+      <id>158</id>
+      <gameID>41</gameID>
+      <price>30.70</price>
+      <type>VIP</type>
+      <section>Loge E</section>
+    </ticket>
+    <ticket>
+      <id>159</id>
+      <gameID>42</gameID>
+      <price>30.70</price>
+      <type>VIP</type>
+      <section>Loge 3C</section>
+    </ticket>
+    <ticket>
+      <id>160</id>
+      <gameID>42</gameID>
+      <price>30.70</price>
+      <type>VIP</type>
+      <section>Loge 1A</section>
+    </ticket>
+    <ticket>
+      <id>161</id>
+      <gameID>42</gameID>
+      <price>30.70</price>
+      <type>VIP</type>
+      <section>Loge 4D</section>
+    </ticket>
+    <ticket>
+      <id>162</id>
+      <gameID>42</gameID>
+      <price>30.70</price>
+      <type>VIP</type>
+      <section>Loge 1A</section>
+    </ticket>
+    <ticket>
+      <id>163</id>
+      <gameID>42</gameID>
+      <price>30.70</price>
+      <type>VIP</type>
+      <section>Loge 5E</section>
+    </ticket>
+  </tickets>
+  <users>
+    <user>
+      <username>admin</username>
+      <password>8omCTTvQa3k0hbJ2WfwTNA1ZguhcFIB0sTm2C3hDuP4BPCihnzJXXVna06uUf01A
+      </password>
+      <admin>true</admin><!-- admin -->
+    </user>
+  </users>
 </base>

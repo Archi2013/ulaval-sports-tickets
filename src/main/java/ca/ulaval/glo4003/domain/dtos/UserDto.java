@@ -8,26 +8,41 @@ public class UserDto implements Serializable {
 	private String username;
 	private String password;
 	private Boolean logged;
+	private Boolean admin;
 
-	public UserDto(String name, String password){
+	public UserDto(String name, String password) {
 		this.username = name;
 		this.password = password;
 		this.logged = false;
+		this.admin = false;
 	}
-	
-	public String getUsername(){
+
+	public UserDto(String username, String password, Boolean admin) {
+		this(username, password);
+		this.admin = admin;
+	}
+
+	public String getUsername() {
 		return this.username;
 	}
-	
-	public String getPassword(){
+
+	public String getPassword() {
 		return this.password;
 	}
-	
-	public Boolean isLogged(){
+
+	public Boolean isLogged() {
 		return this.logged;
 	}
-	
-	public void setLogged(Boolean value){
+
+	public void setLogged(Boolean value) {
 		this.logged = value;
+	}
+
+	public Boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 }

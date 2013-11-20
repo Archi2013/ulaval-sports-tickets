@@ -10,15 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.CommandGameService;
 import ca.ulaval.glo4003.domain.services.SportService;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
-import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.domain.utilities.DateParser;
 import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
+import ca.ulaval.glo4003.domain.utilities.user.User;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
@@ -29,6 +30,7 @@ import ca.ulaval.glo4003.web.viewmodels.SelectSportViewModel;
 
 @Controller
 @RequestMapping(value = "/admin", method = RequestMethod.GET)
+@SessionAttributes({ "currentUser" })
 public class AdministrationController {
 	private static final Logger logger = LoggerFactory.getLogger(AdministrationController.class);
 
@@ -43,18 +45,18 @@ public class AdministrationController {
 
 	@Inject
 	private DateParser dateParser;
-	
+
 	@Autowired
 	private User currentUser;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home() {
 		logger.info("Adminisatration : Home");
-		
+
 		ModelAndView mav = new ModelAndView("admin/home");
-		
+
 		Boolean connectedUser = currentUser.isLogged();
-		
+
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
@@ -62,7 +64,7 @@ public class AdministrationController {
 			mav.addObject("connectedUser", false);
 			logger.info("usagé non connecté");
 		}
-		
+
 		return mav;
 	}
 
@@ -71,9 +73,9 @@ public class AdministrationController {
 		logger.info("Adminisatration : Page to add a new game for a sport");
 
 		ModelAndView mav = new ModelAndView("admin/game", "command", new GameToAddViewModel());
-		
+
 		Boolean connectedUser = currentUser.isLogged();
-		
+
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
@@ -92,9 +94,9 @@ public class AdministrationController {
 		logger.info("Adminisatration : Add a new game for a sport : " + gameToAddVM.getSport());
 
 		ModelAndView mav = new ModelAndView("admin/game-added");
-		
+
 		Boolean connectedUser = currentUser.isLogged();
-		
+
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
@@ -102,7 +104,7 @@ public class AdministrationController {
 			mav.addObject("connectedUser", false);
 			logger.info("usagé non connecté");
 		}
-		
+
 		mav.addObject("game", gameToAddVM);
 
 		try {
@@ -124,7 +126,7 @@ public class AdministrationController {
 		ModelAndView mav = new ModelAndView("admin/addTickets-chooseSport", "command", new SelectSportViewModel());
 
 		Boolean connectedUser = currentUser.isLogged();
-		
+
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
@@ -132,7 +134,7 @@ public class AdministrationController {
 			mav.addObject("connectedUser", false);
 			logger.info("usagé non connecté");
 		}
-		
+
 		mav.addObject("sportsVM", sportService.getSports());
 		mav.addObject("ticketKinds", constants.getTicketKinds());
 
@@ -153,7 +155,7 @@ public class AdministrationController {
 		}
 
 		Boolean connectedUser = currentUser.isLogged();
-		
+
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
@@ -161,7 +163,7 @@ public class AdministrationController {
 			mav.addObject("connectedUser", false);
 			logger.info("usagé non connecté");
 		}
-		
+
 		mav.addObject("gamesVM", sportService.getGamesForSport(selectSportVM.getSport()));
 
 		return mav;
@@ -174,9 +176,9 @@ public class AdministrationController {
 				+ ticketsToAddVM.getGameDate());
 
 		ModelAndView mav = new ModelAndView("/admin/tickets-added");
-		
+
 		Boolean connectedUser = currentUser.isLogged();
-		
+
 		if (connectedUser) {
 			mav.addObject("connectedUser", true);
 			logger.info("usagé connecté");
@@ -184,7 +186,7 @@ public class AdministrationController {
 			mav.addObject("connectedUser", false);
 			logger.info("usagé non connecté");
 		}
-		
+
 		return mav;
 	}
 
