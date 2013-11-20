@@ -17,9 +17,6 @@ public class UnassignedTicketState implements TicketAssignationState {
 
 	@Override
 	public TicketAssignationState assign(String sport, DateTime date, long ticketNumber) {
-		System.out.println("UnassignedTicketState: assignation avec donnees: " + sport);
-		System.out.println(date.toString());
-		System.out.println(ticketNumber);
 		return new AssignedTicketState(sport, date, ticketNumber);
 	}
 

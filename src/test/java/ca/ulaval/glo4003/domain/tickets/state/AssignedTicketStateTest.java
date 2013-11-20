@@ -35,7 +35,8 @@ public class AssignedTicketStateTest {
 
 	@Test
 	public void fillDataInDto_places_data_in_dto() {
-		TicketDto data = new TicketDto(null, null, 0, 0, null, null, false);
+		TicketDto data = new TicketDto(null, null, null, null, 0, false);
+
 		state.fillDataInDto(data);
 
 		Assert.assertSame(A_SPORT, data.sportName);

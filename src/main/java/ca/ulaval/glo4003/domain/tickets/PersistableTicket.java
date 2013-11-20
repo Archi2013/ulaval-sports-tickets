@@ -39,7 +39,7 @@ public abstract class PersistableTicket extends Ticket implements Persistable<Ti
 
 	@Override
 	public TicketDto saveDataInDTO() {
-		TicketDto data = new TicketDto(null, null, 0, price, null, null, available);
+		TicketDto data = new TicketDto(null, null, null, null, price, available);
 		associationState.fillDataInDto(data);
 		return data;
 

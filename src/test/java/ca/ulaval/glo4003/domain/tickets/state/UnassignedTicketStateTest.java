@@ -35,12 +35,12 @@ public class UnassignedTicketStateTest {
 
 	@Test
 	public void fillDataInDto_fills_no_data() {
-		TicketDto data = new TicketDto(null, null, null, null, 0, false);
+		TicketDto data = new TicketDto(0L, null, null, null, null, 0, false);
 
 		state.fillDataInDto(data);
 
 		Assert.assertSame(null, data.sportName);
 		Assert.assertSame(null, data.gameDate);
-		Assert.assertEquals(0, data.ticketId);
+		Assert.assertEquals(Long.valueOf(0L), data.ticketId);
 	}
 }

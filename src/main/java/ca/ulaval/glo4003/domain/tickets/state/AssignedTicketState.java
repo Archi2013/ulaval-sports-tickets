@@ -32,10 +32,6 @@ public class AssignedTicketState implements TicketAssignationState {
 
 	@Override
 	public void fillDataInDto(TicketDto data) {
-		System.out.println("AssignedTicketState: sauvegarde avec donnees: " + sportName);
-		System.out.println(gameDate.toString());
-		System.out.println(ticketNumber);
-		System.out.println();
 		data.sportName = sportName;
 		data.gameDate = gameDate;
 		data.ticketId = ticketNumber;
