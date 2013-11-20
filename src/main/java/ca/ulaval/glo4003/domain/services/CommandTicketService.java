@@ -16,7 +16,7 @@ import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @Service
@@ -28,7 +28,7 @@ public class CommandTicketService {
 	private IGameRepository gameRepository;
 
 	public void addGeneralTickets(String sportName, DateTime gameDate, int numberOfTickets, double price)
-			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException,
+			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, TicketDoesntExistException,
 			SportDoesntExistException {
 		Game game = gameRepository.get(sportName, gameDate);
 
@@ -41,7 +41,7 @@ public class CommandTicketService {
 	}
 
 	public void addSeatedTicket(String sport, DateTime date, String section, String seat, double price)
-			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException,
+			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, TicketDoesntExistException,
 			SportDoesntExistException {
 		Game gameToUse = gameRepository.get(sport, date);
 		gameToUse.addTicket(ticketRepository.createSeatedTicket(seat, section, price, true));
@@ -50,7 +50,7 @@ public class CommandTicketService {
 	}
 
 	public void makeTicketsUnavailable(GameDto game, SectionDto section, int numberOfSeats, List<String> seats)
-			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException,
+			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, TicketDoesntExistException,
 			SportDoesntExistException {
 
 		if (section.isGeneralAdmission()) {
@@ -61,7 +61,7 @@ public class CommandTicketService {
 			}
 		} else {
 			for (String seat : seats) {
-				Ticket ticket = ticketRepository.getWithSeat(game.getSportName(), game.getGameDate(), seat);
+				Ticket ticket = ticketRepository.get(game.getSportName(), game.getGameDate(), seat);
 				ticket.makeUnavailable();
 			}
 		}

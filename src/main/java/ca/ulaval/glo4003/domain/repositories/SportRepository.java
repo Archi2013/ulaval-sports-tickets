@@ -18,7 +18,7 @@ import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDao;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @Repository
@@ -45,7 +45,7 @@ public class SportRepository implements ISportRepository {
 
 	@Override
 	public void commit() throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
-			TicketAlreadyExistException, TicketDoesntExistException {
+			TicketAlreadyExistsException, TicketDoesntExistException {
 
 		for (Persistable<SportDto> sport : activeSports) {
 			try {

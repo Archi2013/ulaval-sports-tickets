@@ -18,7 +18,7 @@ import ca.ulaval.glo4003.domain.dtos.SeatedTicketDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.persistence.daos.TicketDao;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
@@ -85,9 +85,9 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	@Override
-	public void add(TicketDto ticket) throws TicketAlreadyExistException, GameDoesntExistException {
+	public void add(TicketDto ticket) throws TicketAlreadyExistsException, GameDoesntExistException {
 		if (isIdExist(ticket)) {
-			throw new TicketAlreadyExistException();
+			throw new TicketAlreadyExistsException();
 		}
 		SimpleNode simpleNode = convertTicketToNode(ticket);
 		try {
@@ -185,7 +185,7 @@ public class XmlTicketDao implements TicketDao {
 		try {
 			database.remove(xPath);
 			add(ticket);
-		} catch (XPathExpressionException | TicketAlreadyExistException | GameDoesntExistException e) {
+		} catch (XPathExpressionException | TicketAlreadyExistsException | GameDoesntExistException e) {
 			throw new XmlIntegrityException(e);
 		}
 	}

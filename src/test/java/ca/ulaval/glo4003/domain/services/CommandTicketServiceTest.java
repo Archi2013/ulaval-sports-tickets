@@ -16,6 +16,7 @@ import ca.ulaval.glo4003.domain.repositories.IGameRepository;
 import ca.ulaval.glo4003.domain.repositories.ITicketRepository;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandTicketServiceTest {
@@ -44,7 +45,7 @@ public class CommandTicketServiceTest {
 	private CommandTicketService ticketService;
 
 	@Before
-	public void setup() throws GameDoesntExistException {
+	public void setup() throws GameDoesntExistException, TicketAlreadyExistsException {
 		when(ticketRepository.createGeneralTicket(A_PRICE, AVAILABLE)).thenReturn(ticketToAdd);
 		when(ticketRepository.createSeatedTicket(A_SEAT, A_SECTION, A_PRICE, AVAILABLE)).thenReturn(ticketToAdd);
 		when(gameRepository.get(A_SPORT, A_DATE)).thenReturn(game);

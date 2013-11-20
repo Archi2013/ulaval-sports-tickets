@@ -12,7 +12,7 @@ import ca.ulaval.glo4003.domain.utilities.payment.Cart;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @Service
@@ -30,7 +30,7 @@ public class CartService {
 
 			ticketService.makeTicketsUnavailable(game, section, numberOfSeats, seats);
 
-		} catch (GameDoesntExistException | GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException
+		} catch (GameDoesntExistException | GameAlreadyExistException | TicketAlreadyExistsException | TicketDoesntExistException
 				| SportDoesntExistException e) {
 			throw new CartException();
 		}

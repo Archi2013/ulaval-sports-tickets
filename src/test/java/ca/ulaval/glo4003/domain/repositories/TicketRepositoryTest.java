@@ -1,12 +1,12 @@
 package ca.ulaval.glo4003.domain.repositories;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +32,6 @@ public class TicketRepositoryTest {
 	private static final String A_NEW_SECTION = "Section";
 	private static final double A_PRICE = 12;
 
-	private List<TicketDto> datas;
 	@Mock
 	private TicketDto firstTicketData;
 
@@ -62,16 +61,12 @@ public class TicketRepositoryTest {
 
 	@Before
 	public void setUp() throws GameDoesntExistException, TicketDoesntExistException {
-		datas = new ArrayList<>();
-		datas.add(firstTicketData);
-		datas.add(secondTicketData);
-		when(ticketFactory.createGeneralTicket(A_PRICE, AVAILABLE)).thenReturn(ticketGeneratedWithNoParameter);
-		when(ticketFactory.createSeatedTicket(A_NEW_SECTION, A_NEW_SEAT, A_PRICE, AVAILABLE)).thenReturn(
-				ticketGeneratedWithParameter);
+
 		when(ticketDao.get(A_SPORT, A_DATE, A_TICKET_NUMBER)).thenReturn(firstTicketData);
-		when(ticketDao.getTicketsForGame(A_SPORT, A_DATE)).thenReturn(datas);
+
 		when(ticketFactory.createTicket(firstTicketData)).thenReturn(ticketWithDataFromDao);
 		when(ticketFactory.createTicket(secondTicketData)).thenReturn(anotherTicketWithDataFromDao);
+
 		when(ticketGeneratedWithNoParameter.saveDataInDTO()).thenReturn(firstTicketData);
 		when(ticketGeneratedWithParameter.saveDataInDTO()).thenReturn(secondTicketData);
 		when(ticketWithDataFromDao.saveDataInDTO()).thenReturn(firstTicketData);
@@ -79,31 +74,78 @@ public class TicketRepositoryTest {
 	}
 
 	@Test
-	public void InstantiateTicket_returns_ticket_made_by_factory() {
-		Ticket ticketReturned1 = repository.createGeneralTicket(A_PRICE, AVAILABLE);
-		Ticket ticketReturned2 = repository.createSeatedTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE);
+	public void createGeneralTicket_returns_ticket_created_by_factory() {
+		when(ticketFactory.createGeneralTicket(A_PRICE, AVAILABLE)).thenReturn(ticketGeneratedWithNoParameter);
 
-		Assert.assertSame(ticketGeneratedWithNoParameter, ticketReturned1);
-		Assert.assertSame(ticketGeneratedWithParameter, ticketReturned2);
+		Ticket ticketReturned = repository.createGeneralTicket(A_PRICE, AVAILABLE);
+
+		assertSame(ticketGeneratedWithNoParameter, ticketReturned);
 	}
 
 	@Test
-	public void recoverTicket_returns_ticket_built_in_factory_with_data_from_dao() throws TicketDoesntExistException {
-		Ticket ticketReturned = repository.getWithId(A_SPORT, A_DATE, A_TICKET_NUMBER);
+	public void createGenerealTicket_adds_new_ticket_to_new_ticket_list() {
+		when(ticketFactory.createGeneralTicket(A_PRICE, AVAILABLE)).thenReturn(ticketGeneratedWithNoParameter);
 
-		Assert.assertSame(ticketWithDataFromDao, ticketReturned);
+		Ticket ticketReturned = repository.createGeneralTicket(A_PRICE, AVAILABLE);
+
+		assertTrue(repository.getNewTickets().contains(ticketReturned));
+		assertEquals(1, repository.getNewTickets().size());
 	}
 
 	@Test
-	public void recoverAllTicketsForGame_returns_tickets_built_in_factory_with_data_from_dao() throws GameDoesntExistException {
+	public void createSeatedTicket_returns_ticket_created_by_factory() {
+		when(ticketFactory.createSeatedTicket(A_NEW_SECTION, A_NEW_SEAT, A_PRICE, AVAILABLE)).thenReturn(
+				ticketGeneratedWithParameter);
+
+		Ticket ticketReturned = repository.createSeatedTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE);
+
+		assertSame(ticketGeneratedWithParameter, ticketReturned);
+	}
+
+	@Test
+	public void createSeatedTicket_adds_new_ticket_to_new_ticket_list() {
+		when(ticketFactory.createSeatedTicket(A_NEW_SECTION, A_NEW_SEAT, A_PRICE, AVAILABLE)).thenReturn(
+				ticketGeneratedWithParameter);
+
+		Ticket ticketReturned = repository.createSeatedTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE);
+
+		assertTrue(repository.getNewTickets().contains(ticketReturned));
+		assertEquals(1, repository.getNewTickets().size());
+	}
+
+	@Test
+	public void getAll_returns_tickets_built_in_factory_with_data_from_dao() throws GameDoesntExistException {
+		List<TicketDto> datas = new ArrayList<>();
+		datas.add(firstTicketData);
+		datas.add(secondTicketData);
+		when(ticketDao.getTicketsForGame(A_SPORT, A_DATE)).thenReturn(datas);
+
 		List<Ticket> ticketsReturned = repository.getAll(A_SPORT, A_DATE);
 
-		Assert.assertSame(ticketWithDataFromDao, ticketsReturned.get(0));
-		Assert.assertSame(anotherTicketWithDataFromDao, ticketsReturned.get(1));
+		assertSame(ticketWithDataFromDao, ticketsReturned.get(0));
+		assertSame(anotherTicketWithDataFromDao, ticketsReturned.get(1));
+	}
+
+	@Test
+	public void getAll_add_tickets_to_ticket_list() throws GameDoesntExistException {
+		List<TicketDto> datas = new ArrayList<>();
+		datas.add(firstTicketData);
+		datas.add(secondTicketData);
+		when(ticketDao.getTicketsForGame(A_SPORT, A_DATE)).thenReturn(datas);
+
+		repository.getAll(A_SPORT, A_DATE);
+
+		assertTrue(repository.getTicketsInDao().contains(ticketWithDataFromDao));
+		assertTrue(repository.getTicketsInDao().contains(anotherTicketWithDataFromDao));
+		assertEquals(2, repository.getTicketsInDao().size());
 	}
 
 	@Test
 	public void commit_adds_the_new_tickets_to_the_dao() throws Exception {
+		when(ticketFactory.createGeneralTicket(A_PRICE, AVAILABLE)).thenReturn(ticketGeneratedWithNoParameter);
+		when(ticketFactory.createSeatedTicket(A_NEW_SECTION, A_NEW_SEAT, A_PRICE, AVAILABLE)).thenReturn(
+				ticketGeneratedWithParameter);
+
 		repository.createGeneralTicket(A_PRICE, AVAILABLE);
 		repository.createSeatedTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE);
 		repository.commit();
@@ -114,6 +156,10 @@ public class TicketRepositoryTest {
 
 	@Test
 	public void after_two_commits_new_tickets_are_added_only_once() throws Exception {
+		when(ticketFactory.createGeneralTicket(A_PRICE, AVAILABLE)).thenReturn(ticketGeneratedWithNoParameter);
+		when(ticketFactory.createSeatedTicket(A_NEW_SECTION, A_NEW_SEAT, A_PRICE, AVAILABLE)).thenReturn(
+				ticketGeneratedWithParameter);
+
 		repository.createGeneralTicket(A_PRICE, AVAILABLE);
 		repository.createSeatedTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE);
 		repository.commit();
@@ -124,16 +170,12 @@ public class TicketRepositoryTest {
 	}
 
 	@Test
-	public void commit_save_changes_of_single_recovered_tickets_to_dao() throws Exception {
-		repository.getWithId(A_SPORT, A_DATE, A_TICKET_NUMBER);
-		repository.commit();
-
-		verify(ticketDao).update(firstTicketData);
-		verify(ticketDao, times(1)).commit();
-	}
-
-	@Test
 	public void commit_save_changes_of_group_of_recovered_tickets_to_dao() throws Exception {
+		List<TicketDto> datas = new ArrayList<>();
+		datas.add(firstTicketData);
+		datas.add(secondTicketData);
+		when(ticketDao.getTicketsForGame(A_SPORT, A_DATE)).thenReturn(datas);
+
 		repository.getAll(A_SPORT, A_DATE);
 		repository.commit();
 
@@ -144,6 +186,10 @@ public class TicketRepositoryTest {
 
 	@Test
 	public void after_new_tickets_have_been_added_to_dao_other_commits_save_changes() throws Exception {
+		when(ticketFactory.createGeneralTicket(A_PRICE, AVAILABLE)).thenReturn(ticketGeneratedWithNoParameter);
+		when(ticketFactory.createSeatedTicket(A_NEW_SECTION, A_NEW_SEAT, A_PRICE, AVAILABLE)).thenReturn(
+				ticketGeneratedWithParameter);
+
 		repository.createGeneralTicket(A_PRICE, AVAILABLE);
 		repository.createSeatedTicket(A_NEW_SEAT, A_NEW_SECTION, A_PRICE, AVAILABLE);
 
@@ -160,6 +206,5 @@ public class TicketRepositoryTest {
 		repository.commit();
 
 		verify(ticketDao, times(1)).commit();
-		;
 	}
 }

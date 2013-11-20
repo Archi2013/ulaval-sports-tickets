@@ -23,7 +23,7 @@ import ca.ulaval.glo4003.domain.utilities.YearMonthDayHourMinuteDateParser;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.GameToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.GeneralTicketsToAddViewModel;
@@ -90,7 +90,7 @@ public class AdministrationController {
 			gameService.createNewGame(gameToAddVM.getSport(), gameToAddVM.getOpponents(), gameToAddVM.getLocation(),
 					otherParser.parseDate(gameToAddVM.getDate()));
 		} catch (SportDoesntExistException | GameDoesntExistException | GameAlreadyExistException
-				| NoSportForUrlException | TicketAlreadyExistException | TicketDoesntExistException e) {
+				| NoSportForUrlException | TicketAlreadyExistsException | TicketDoesntExistException e) {
 			e.printStackTrace();
 			return new ModelAndView("admin/game-added-data-error");
 		}
@@ -139,7 +139,7 @@ public class AdministrationController {
 					dateParser.parseDate(viewModel.getGameDate()), viewModel.getNumberOfTickets(),
 					Double.parseDouble(viewModel.getPrice()));
 
-		} catch (GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException e) {
+		} catch (GameAlreadyExistException | TicketAlreadyExistsException | TicketDoesntExistException e) {
 			mav = new ModelAndView("/admin/tickets-added-date-error");
 		}
 		mav = new ModelAndView("/admin/tickets-added");
@@ -152,14 +152,14 @@ public class AdministrationController {
 	@RequestMapping(value = "/ajout-billets-seated", method = RequestMethod.POST)
 	public ModelAndView addTickets_seated(@ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM,
 			Model model) throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
-			TicketAlreadyExistException, TicketDoesntExistException, NoSportForUrlException {
+			TicketAlreadyExistsException, TicketDoesntExistException, NoSportForUrlException {
 
 		ModelAndView mav;
 		try {
 			ticketService.addSeatedTicket(sportUrlMapper.getSportName(ticketsToAddVM.getSportName()),
 					dateParser.parseDate(ticketsToAddVM.getGameDate()), ticketsToAddVM.getSection(),
 					ticketsToAddVM.getSeat(), Double.parseDouble(ticketsToAddVM.getPrice()));
-		} catch (GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException
+		} catch (GameAlreadyExistException | TicketAlreadyExistsException | TicketDoesntExistException
 				| NoSportForUrlException e) {
 			return new ModelAndView("/admin/tickets-added-date-error");
 		}

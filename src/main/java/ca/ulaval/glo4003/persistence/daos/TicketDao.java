@@ -18,7 +18,7 @@ public interface TicketDao {
 
 	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
-	public void add(TicketDto ticket) throws TicketAlreadyExistException, GameDoesntExistException;
+	public void add(TicketDto ticket) throws TicketAlreadyExistsException, GameDoesntExistException;
 
 	public void update(TicketDto firstTicketData) throws TicketDoesntExistException;
 

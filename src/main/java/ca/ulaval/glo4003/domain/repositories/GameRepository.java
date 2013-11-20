@@ -18,7 +18,7 @@ import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @Repository
@@ -89,7 +89,7 @@ public class GameRepository implements IGameRepository {
 
 	}
 
-	public void commit() throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
+	public void commit() throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException,
 			TicketDoesntExistException {
 		for (Persistable<GameDto> game : existingActiveGames) {
 			GameDto dto = game.saveDataInDTO();

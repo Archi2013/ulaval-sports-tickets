@@ -14,7 +14,7 @@ import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @Service
@@ -29,7 +29,7 @@ public class CommandGameService {
 
 	public void createNewGame(String sportName, String opponent, String location, DateTime date)
 			throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
-			NoSportForUrlException, TicketAlreadyExistException, TicketDoesntExistException {
+			NoSportForUrlException, TicketAlreadyExistsException, TicketDoesntExistException {
 
 		String domainSportName = sportUrlMapper.getSportName(sportName);
 		Game game = gameRepository.create(opponent, location);

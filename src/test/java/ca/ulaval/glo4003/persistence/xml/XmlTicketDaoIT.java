@@ -14,7 +14,7 @@ import ca.ulaval.glo4003.domain.dtos.SeatedTicketDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
+import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
 @Ignore
@@ -125,7 +125,7 @@ public class XmlTicketDaoIT {
 		assertTicket(expected, actual);
 	}
 
-	@Test(expected = TicketAlreadyExistException.class)
+	@Test(expected = TicketAlreadyExistsException.class)
 	public void testAddExistingShouldThrow() throws Exception {
 		TicketDto toAdd = new SeatedTicketDto(3L, null, null, "Front Row", "C-01", 35.00f, AVAILABLE);
 
