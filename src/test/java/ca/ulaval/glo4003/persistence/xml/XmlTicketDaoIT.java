@@ -70,7 +70,7 @@ public class XmlTicketDaoIT {
 	@Test
 	// TODO REVIEW TESTS TICKETS. WAS USING GAMEIDS.
 	public void testGetTicketsForGame() throws Exception {
-		List<TicketDto> tickets = ticketDao.getAvailableTicketsForGame("", DateTime.now());
+		List<TicketDto> tickets = ticketDao.getAllAvailable("", DateTime.now());
 
 		TicketDto expected0 = new SeatedTicketDto(5L, null, null, null, null, 15.00f, AVAILABLE);
 		TicketDto expected1 = new SeatedTicketDto(6L, null, null, null, null, 15.00f, AVAILABLE);
@@ -91,12 +91,12 @@ public class XmlTicketDaoIT {
 
 	@Test(expected = GameDoesntExistException.class)
 	public void testGetTicketsForInvalidGameShouldThrow() throws Exception {
-		ticketDao.getAvailableTicketsForGame("INVALIDE", DateTime.now());
+		ticketDao.getAllAvailable("INVALIDE", DateTime.now());
 	}
 
 	@Test
 	public void testGetTicketsForSection() throws Exception {
-		List<TicketDto> tickets = ticketDao.getTicketsForSection("", DateTime.now(), "Section 100");
+		List<TicketDto> tickets = ticketDao.getAllInSection("", DateTime.now(), "Section 100");
 
 		TicketDto expected0 = new SeatedTicketDto(9L, null, null, "Section 100", "A-9", 22.00f, AVAILABLE);
 		TicketDto expected1 = new SeatedTicketDto(10L, null, null, "Section 100", "B-0", 22.00f, AVAILABLE);
@@ -109,7 +109,7 @@ public class XmlTicketDaoIT {
 
 	@Test(expected = SectionDoesntExistException.class)
 	public void testGetTicketsForInvalidSectionShouldThrow() throws Exception {
-		ticketDao.getTicketsForSection("", DateTime.now(), "Général");
+		ticketDao.getAllInSection("", DateTime.now(), "Général");
 	}
 
 	@Test

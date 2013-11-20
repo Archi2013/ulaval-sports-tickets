@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><base>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<base>
 	<sports>
 		<sport>
 			<name>Démonstration</name>
@@ -325,12 +326,75 @@
 			<sportName>Rugby féminin</sportName>
 			<date>2014/10/13 14:00 EDT</date>
 		</game>
-		
-		
-		
-		
-		
-	<game><id>30000</id><location>Londres</location><oponents>Big Ben</oponents><sportName>Démonstration</sportName><date>2013/12/10 18:50 EST</date></game><game><id>40000</id><location>Canberra</location><oponents>Kangourou</oponents><sportName>Démonstration</sportName><date>2013/11/21 15:45 EST</date></game><game><id>50000</id><location>Johannesbourg</location><oponents>Vouvouzela</oponents><sportName>Démonstration</sportName><date>2013/11/16 08:00 EST</date></game><game><id>10000</id><location>Paris</location><oponents>Tour Eiffel</oponents><sportName>Démonstration</sportName><date>2014/05/02 21:00 EDT</date></game><game><id>20000</id><location>Tôkyô</location><oponents>Tôkyô Tower</oponents><sportName>Démonstration</sportName><date>2014/02/01 20:30 EST</date></game><game><id>50002</id><location>Lambdaland</location><oponents>MegaLambda</oponents><sportName>Démonstration</sportName><date>2014/01/01 14:00 EST</date></game><game><id>50001</id><location>La lune</location><oponents>Les gros lols</oponents><sportName>Démonstration</sportName><date>2014/01/01 13:00 EST</date></game><game><id>50004</id><location>Le terrain</location><oponents>Les pas fins</oponents><sportName>Démonstration</sportName><date>2014/10/01 13:00 EDT</date></game><game><id>50003</id><location>Le terrain</location><oponents>les pas fin</oponents><sportName>Démonstration</sportName><date>2014/08/01 13:00 EDT</date></game></games>
+
+
+
+
+
+		<game>
+			<id>30000</id>
+			<location>Londres</location>
+			<oponents>Big Ben</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2013/12/10 18:50 EST</date>
+		</game>
+		<game>
+			<id>40000</id>
+			<location>Canberra</location>
+			<oponents>Kangourou</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2013/11/21 15:45 EST</date>
+		</game>
+		<game>
+			<id>50000</id>
+			<location>Johannesbourg</location>
+			<oponents>Vouvouzela</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2013/11/16 08:00 EST</date>
+		</game>
+		<game>
+			<id>10000</id>
+			<location>Paris</location>
+			<oponents>Tour Eiffel</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/05/02 21:00 EDT</date>
+		</game>
+		<game>
+			<id>20000</id>
+			<location>Tôkyô</location>
+			<oponents>Tôkyô Tower</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/02/01 20:30 EST</date>
+		</game>
+		<game>
+			<id>50002</id>
+			<location>Lambdaland</location>
+			<oponents>MegaLambda</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/01/01 14:00 EST</date>
+		</game>
+		<game>
+			<id>50001</id>
+			<location>La lune</location>
+			<oponents>Les gros lols</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/01/01 13:00 EST</date>
+		</game>
+		<game>
+			<id>50004</id>
+			<location>Le terrain</location>
+			<oponents>Les pas fins</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/10/01 13:00 EDT</date>
+		</game>
+		<game>
+			<id>50003</id>
+			<location>Le terrain</location>
+			<oponents>les pas fin</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/08/01 13:00 EDT</date>
+		</game>
+	</games>
 	<tickets>
 		<ticket>
 			<id>1</id>
@@ -2135,31 +2199,46 @@
 			<price>5.0</price>
 			<gameID>12</gameID>
 			<available>false</available>
+			<sportName>Soccer masculin</sportName>
+			<gameDate>2014/08/19 16:00 EDT</gameDate>
 		</ticket>
 		<ticket>
 			<id>246</id>
 			<price>5.0</price>
 			<gameID>12</gameID>
 			<available>false</available>
+			<sportName>Soccer masculin</sportName>
+			<gameDate>2014/08/19 16:00 EDT</gameDate>
 		</ticket>
 		<ticket>
 			<id>247</id>
 			<price>5.0</price>
-			<gameID>12</gameID>
+			<seat>Générale</seat>
+			<sportName>Soccer masculin</sportName>
 			<available>true</available>
+			<section>Générale</section>
+			<gameDate>2014/08/19 16:00 EDT</gameDate>
 		</ticket>
 		<ticket>
 			<id>248</id>
 			<price>5.0</price>
-			<gameID>12</gameID>
+			<seat>Générale</seat>
+			<sportName>Soccer masculin</sportName>
 			<available>true</available>
+			<section>Générale</section>
+			<gameDate>2014/08/19 16:00 EDT</gameDate>
 		</ticket>
 		<ticket>
 			<id>249</id>
 			<price>5.0</price>
-			<gameID>12</gameID>
+			<seat>Générale</seat>
+			<sportName>Soccer masculin</sportName>
 			<available>true</available>
+			<section>Générale</section>
+			<gameDate>2014/08/19 16:00 EDT</gameDate>
 		</ticket>
+
+
 		<ticket>
 			<id>250</id>
 			<price>5.0</price>
@@ -3792,10 +3871,113 @@
 			<gameID>44</gameID>
 			<available>true</available>
 		</ticket>
-		
-		
-		
-		
-		
-	<ticket><id>1</id><price>80.88</price><gameID>30000</gameID><available>true</available></ticket><ticket><id>1</id><price>70.77</price><gameID>40000</gameID><available>true</available></ticket><ticket><id>1</id><price>60.66</price><gameID>50000</gameID><available>true</available></ticket><ticket><id>1</id><price>100.11</price><gameID>10000</gameID><available>true</available></ticket><ticket><id>1</id><price>25.0</price><gameID>20000</gameID><available>true</available></ticket><ticket><id>1</id><price>20.0</price><gameID>50001</gameID><available>true</available></ticket><ticket><id>2</id><price>20.0</price><gameID>50001</gameID><available>true</available></ticket><ticket><id>1</id><price>25.0</price><gameID>50003</gameID><available>true</available></ticket><ticket><id>2</id><price>25.0</price><gameID>50003</gameID><available>true</available></ticket><ticket><id>3</id><price>25.0</price><gameID>50003</gameID><available>true</available></ticket><ticket><id>4</id><price>25.0</price><gameID>50003</gameID><available>true</available></ticket><ticket><id>5</id><price>25.0</price><gameID>50003</gameID><available>true</available></ticket><ticket><id>6</id><price>25.0</price><gameID>50003</gameID><available>true</available></ticket><ticket><id>7</id><price>25.0</price><gameID>50003</gameID><available>true</available></ticket><ticket><id>8</id><price>25.0</price><gameID>50003</gameID><available>true</available></ticket><ticket><id>9</id><price>25.0</price><gameID>50003</gameID><available>true</available></ticket><ticket><id>10</id><price>25.0</price><gameID>50003</gameID><available>true</available></ticket></tickets>
+
+
+
+
+
+		<ticket>
+			<id>1</id>
+			<price>80.88</price>
+			<gameID>30000</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>1</id>
+			<price>70.77</price>
+			<gameID>40000</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>1</id>
+			<price>60.66</price>
+			<gameID>50000</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>1</id>
+			<price>100.11</price>
+			<gameID>10000</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>1</id>
+			<price>25.0</price>
+			<gameID>20000</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>1</id>
+			<price>20.0</price>
+			<gameID>50001</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>2</id>
+			<price>20.0</price>
+			<gameID>50001</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>1</id>
+			<price>25.0</price>
+			<gameID>50003</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>2</id>
+			<price>25.0</price>
+			<gameID>50003</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>3</id>
+			<price>25.0</price>
+			<gameID>50003</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>4</id>
+			<price>25.0</price>
+			<gameID>50003</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>5</id>
+			<price>25.0</price>
+			<gameID>50003</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>6</id>
+			<price>25.0</price>
+			<gameID>50003</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>7</id>
+			<price>25.0</price>
+			<gameID>50003</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>8</id>
+			<price>25.0</price>
+			<gameID>50003</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>9</id>
+			<price>25.0</price>
+			<gameID>50003</gameID>
+			<available>true</available>
+		</ticket>
+		<ticket>
+			<id>10</id>
+			<price>25.0</price>
+			<gameID>50003</gameID>
+			<available>true</available>
+		</ticket>
+
+	</tickets>
 </base>

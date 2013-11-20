@@ -10,13 +10,16 @@ import ca.ulaval.glo4003.domain.dtos.TicketDto;
 @Repository
 public interface TicketDao {
 
+	public List<TicketDto> getAll(String sportName, DateTime gameDate) throws GameDoesntExistException;
+
+	public List<TicketDto> getAllAvailable(String sportName, DateTime gameDate) throws GameDoesntExistException;
+
+	public List<TicketDto> getAllInSection(String sportName, DateTime gameDate, String sectionName)
+			throws SectionDoesntExistException;
+
 	public TicketDto get(int ticketId) throws TicketDoesntExistException;
 
-	public TicketDto get(String sportName, DateTime gameDate, int ticketNumber) throws TicketDoesntExistException;
-
-	public TicketDto get(String sport, DateTime date, String seat);
-
-	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate) throws GameDoesntExistException;
+	public TicketDto get(String sportName, DateTime gameDate, String section, String seat) throws TicketDoesntExistException;
 
 	public void add(TicketDto ticket) throws TicketAlreadyExistsException, GameDoesntExistException;
 
@@ -24,10 +27,13 @@ public interface TicketDao {
 
 	public void commit();
 
-	public List<TicketDto> getAllTicketsForGame(String sportName, DateTime gameDate) throws GameDoesntExistException;
+	@Deprecated
+	public TicketDto get(String sport, DateTime date, String seat);
 
-	public List<TicketDto> getAvailableTicketsForGame(String sportName, DateTime gameDate) throws GameDoesntExistException;
+	@Deprecated
+	public TicketDto get(String sportName, DateTime gameDate, int ticketNumber) throws TicketDoesntExistException;
 
-	public List<TicketDto> getTicketsForSection(String sportName, DateTime gameDate, String sectionName) throws SectionDoesntExistException;
+	@Deprecated
+	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
 }

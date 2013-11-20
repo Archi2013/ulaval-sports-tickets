@@ -61,7 +61,7 @@ public class CommandTicketService {
 			}
 		} else {
 			for (String seat : seats) {
-				Ticket ticket = ticketRepository.get(game.getSportName(), game.getGameDate(), seat);
+				Ticket ticket = ticketRepository.get(game.getSportName(), game.getGameDate(), section.getSectionName(), seat);
 				ticket.makeUnavailable();
 			}
 		}

@@ -23,6 +23,12 @@ import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 public class XmlSectionDao implements SectionDao {
 
 	private static final String GENERAL_KEYWORD = "Générale";
+	private static final String SECTIONS_XPATH = "/base/tickets";
+	private final static String SECTION_XPATH = SECTIONS_XPATH + "/ticket";
+
+	private final static String SECTION_XPATH_SPORT = SECTION_XPATH + "[sportName=\"%s\"][gameDate=\"%s\"][section=\"%s\"]";
+	private final static String SECTION_XPATH_AVAILABLE_SPORT = SECTION_XPATH
+			+ "[sportName=\"%s\"][gameDate=\"%s\"][section=\"%s\"][available=\"%s\"]";
 
 	private XmlDatabase database;
 	private Map<Long, Set<String>> sectionCache;
@@ -36,19 +42,53 @@ public class XmlSectionDao implements SectionDao {
 	}
 
 	@Override
-	public SectionDto get(Long gameId, String sectionName) throws SectionDoesntExistException {
-		String sectionClause = GENERAL_KEYWORD.equals(sectionName) ? "[not(section)]" : "[section=\"" + sectionName + "\"]";
-		String xPath = "/base/tickets/ticket[gameID=\"" + gameId + "\"]" + sectionClause;
-
+	public SectionDto get(String sportName, String gameDate, String sectionName) throws SectionDoesntExistException {
+		String xPath = String.format(SECTION_XPATH_SPORT, sportName, gameDate, sectionName);
 		return getWithClause(sectionName, xPath);
 	}
 
 	@Override
-	public SectionDto getAvailable(Long gameId, String sectionName) throws SectionDoesntExistException {
-		String sectionClause = GENERAL_KEYWORD.equals(sectionName) ? "[not(section)]" : "[section=\"" + sectionName + "\"]";
-		String xPath = "/base/tickets/ticket[gameID=\"" + gameId + "\"]" + sectionClause + "[available='true']";
-
+	public SectionDto getAvailable(String sportName, String gameDate, String sectionName) throws SectionDoesntExistException {
+		String xPath = String.format(SECTION_XPATH_AVAILABLE_SPORT, sportName, gameDate, sectionName, true);
 		return getWithClause(sectionName, xPath);
+	}
+
+	@Override
+	public List<SectionDto> getAll(String sportName, String gameDate) throws GameDoesntExistException {
+		try {
+			return convertToSectionDtos(sportName, gameDate, getAllSections());
+		} catch (NoSuchAttributeException | SectionDoesntExistException e) {
+			throw new XmlIntegrityException(e);
+		}
+	}
+
+	@Override
+	public List<SectionDto> getAllAvailable(String sportName, String gameDate) throws GameDoesntExistException {
+		try {
+			return convertToAvailableSectionDtos(sportName, gameDate, getAllSections());
+		} catch (NoSuchAttributeException | SectionDoesntExistException e) {
+			throw new XmlIntegrityException(e);
+		}
+	}
+
+	private List<SectionDto> convertToSectionDtos(String sportName, String gameDate, Set<String> sectionNames)
+			throws SectionDoesntExistException, NoSuchAttributeException {
+		List<SectionDto> sections = new ArrayList<>();
+		for (String sectionName : sectionNames) {
+			SectionDto section = get(sportName, gameDate, sectionName);
+			sections.add(section);
+		}
+		return sections;
+	}
+
+	private List<SectionDto> convertToAvailableSectionDtos(String sportName, String gameDate, Set<String> sectionNames)
+			throws SectionDoesntExistException, NoSuchAttributeException {
+		List<SectionDto> sections = new ArrayList<>();
+		for (String sectionName : sectionNames) {
+			SectionDto section = getAvailable(sportName, gameDate, sectionName);
+			sections.add(section);
+		}
+		return sections;
 	}
 
 	private SectionDto getWithClause(String sectionName, String xPathClause) throws SectionDoesntExistException {
@@ -71,58 +111,6 @@ public class XmlSectionDao implements SectionDao {
 		} catch (XPathExpressionException | NoSuchAttributeException e) {
 			throw new XmlIntegrityException(e);
 		}
-	}
-
-	@Override
-	public List<SectionDto> getAll(Long gameId) throws GameDoesntExistException {
-		try {
-			Set<String> sections = getSections(gameId);
-			return convertToSectionDtos(gameId, sections);
-		} catch (SectionDoesntExistException | NoSuchAttributeException e) {
-			throw new XmlIntegrityException(e);
-		}
-	}
-
-	@Override
-	public List<SectionDto> getAllAvailable(Long gameId) throws GameDoesntExistException {
-		try {
-			Set<String> sections = getSections(gameId);
-			return convertToAvailableSectionDtos(gameId, sections);
-		} catch (SectionDoesntExistException | NoSuchAttributeException e) {
-			throw new XmlIntegrityException(e);
-		}
-	}
-
-	@Override
-	public Set<String> getAllSections() {
-		if (sectionCache == null) {
-			initCache();
-		}
-		Set<String> sections = new HashSet<>();
-		for (Set<String> section : sectionCache.values()) {
-			sections.addAll(section);
-		}
-		return sections;
-	}
-
-	private List<SectionDto> convertToSectionDtos(Long gameId, Set<String> sectionNames) throws SectionDoesntExistException,
-			NoSuchAttributeException {
-		List<SectionDto> sections = new ArrayList<>();
-		for (String sectionName : sectionNames) {
-			SectionDto section = get(gameId, sectionName);
-			sections.add(section);
-		}
-		return sections;
-	}
-
-	private List<SectionDto> convertToAvailableSectionDtos(Long gameId, Set<String> sectionNames)
-			throws SectionDoesntExistException, NoSuchAttributeException {
-		List<SectionDto> sections = new ArrayList<>();
-		for (String sectionName : sectionNames) {
-			SectionDto section = getAvailable(gameId, sectionName);
-			sections.add(section);
-		}
-		return sections;
 	}
 
 	private Set<String> getSections(Long gameId) throws SectionDoesntExistException {
@@ -156,6 +144,80 @@ public class XmlSectionDao implements SectionDao {
 		}
 		Set<String> sections = sectionCache.get(gameId);
 		sections.add(node.hasNode("section") ? node.getNodeValue("section") : GENERAL_KEYWORD);
+	}
+
+	@Override
+	public Set<String> getAllSections() {
+		if (sectionCache == null) {
+			initCache();
+		}
+		Set<String> sections = new HashSet<>();
+		for (Set<String> section : sectionCache.values()) {
+			sections.addAll(section);
+		}
+		return sections;
+	}
+
+	@Deprecated
+	private List<SectionDto> convertToSectionDtos(Long gameId, Set<String> sectionNames) throws SectionDoesntExistException,
+			NoSuchAttributeException {
+		List<SectionDto> sections = new ArrayList<>();
+		for (String sectionName : sectionNames) {
+			SectionDto section = get(gameId, sectionName);
+			sections.add(section);
+		}
+		return sections;
+	}
+
+	@Deprecated
+	private List<SectionDto> convertToAvailableSectionDtos(Long gameId, Set<String> sectionNames)
+			throws SectionDoesntExistException, NoSuchAttributeException {
+		List<SectionDto> sections = new ArrayList<>();
+		for (String sectionName : sectionNames) {
+			SectionDto section = getAvailable(gameId, sectionName);
+			sections.add(section);
+		}
+		return sections;
+	}
+
+	@Override
+	@Deprecated
+	public SectionDto get(Long gameId, String sectionName) throws SectionDoesntExistException {
+		String sectionClause = GENERAL_KEYWORD.equals(sectionName) ? "[not(section)]" : "[section=\"" + sectionName + "\"]";
+		String xPath = "/base/tickets/ticket[gameID=\"" + gameId + "\"]" + sectionClause;
+
+		return getWithClause(sectionName, xPath);
+	}
+
+	@Override
+	@Deprecated
+	public SectionDto getAvailable(Long gameId, String sectionName) throws SectionDoesntExistException {
+		String sectionClause = GENERAL_KEYWORD.equals(sectionName) ? "[not(section)]" : "[section=\"" + sectionName + "\"]";
+		String xPath = "/base/tickets/ticket[gameID=\"" + gameId + "\"]" + sectionClause + "[available='true']";
+
+		return getWithClause(sectionName, xPath);
+	}
+
+	@Override
+	@Deprecated
+	public List<SectionDto> getAll(Long gameId) throws GameDoesntExistException {
+		try {
+			Set<String> sections = getSections(gameId);
+			return convertToSectionDtos(gameId, sections);
+		} catch (SectionDoesntExistException | NoSuchAttributeException e) {
+			throw new XmlIntegrityException(e);
+		}
+	}
+
+	@Override
+	@Deprecated
+	public List<SectionDto> getAllAvailable(Long gameId) throws GameDoesntExistException {
+		try {
+			Set<String> sections = getSections(gameId);
+			return convertToAvailableSectionDtos(gameId, sections);
+		} catch (SectionDoesntExistException | NoSuchAttributeException e) {
+			throw new XmlIntegrityException(e);
+		}
 	}
 
 }

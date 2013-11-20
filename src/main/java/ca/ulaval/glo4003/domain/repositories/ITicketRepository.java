@@ -13,7 +13,7 @@ public interface ITicketRepository extends Repository {
 
 	List<Ticket> getAll(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
-	Ticket get(String sportName, DateTime gameDate, String seat) throws TicketDoesntExistException;
+	Ticket get(String sportName, DateTime gameDate, String section, String seat) throws TicketDoesntExistException;
 
 	Ticket createGeneralTicket(double price, boolean available);
 

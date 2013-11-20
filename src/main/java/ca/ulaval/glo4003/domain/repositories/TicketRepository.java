@@ -43,8 +43,8 @@ public class TicketRepository implements ITicketRepository {
 	}
 
 	@Override
-	public Ticket get(String sportName, DateTime gameDate, String seat) {
-		TicketDto data = dao.get(sportName, gameDate, seat);
+	public Ticket get(String sportName, DateTime gameDate, String section, String seat) throws TicketDoesntExistException {
+		TicketDto data = dao.get(sportName, gameDate, section, seat);
 		Ticket recoveredTicket = factory.createTicket(data);
 		ticketsInDao.add(recoveredTicket);
 		return recoveredTicket;
@@ -97,7 +97,7 @@ public class TicketRepository implements ITicketRepository {
 	@Deprecated
 	public List<Ticket> recoverNGeneralTickets(String sportName, DateTime gameDate, int numberOfSeats)
 			throws GameDoesntExistException {
-		List<TicketDto> availableTickets = dao.getAvailableTicketsForGame(sportName, gameDate);
+		List<TicketDto> availableTickets = dao.getAllAvailable(sportName, gameDate);
 
 		List<Ticket> ticketsToReturn = new ArrayList<>();
 		for (TicketDto ticket : availableTickets) {
