@@ -11,6 +11,10 @@ public class GeneralTicketDto extends TicketDto {
 		super(ticketId, sportName, gameDate, GENERAL_SECTION, GENERAL_SEAT, price, available);
 	}
 
+	public GeneralTicketDto(double price, boolean available) {
+		super(null, null, GENERAL_SECTION, GENERAL_SEAT, price, available);
+	}
+
 	@Override
 	public boolean isGeneralSection() {
 		return true;

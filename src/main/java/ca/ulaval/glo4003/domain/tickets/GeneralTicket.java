@@ -1,5 +1,7 @@
 package ca.ulaval.glo4003.domain.tickets;
 
+import ca.ulaval.glo4003.domain.dtos.GeneralTicketDto;
+import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
 
@@ -15,13 +17,21 @@ public class GeneralTicket extends Ticket {
 	}
 
 	@Override
-	public boolean isSeat(String seat) {
+	public boolean hasSeat(String seat) {
 		return false;
 	}
 
 	@Override
-	public boolean isSection(String section) {
+	public boolean hasSection(String section) {
 		return section.equals(TicketKind.GENERAL_ADMISSION.toString());
+	}
+
+	@Override
+	public TicketDto saveDataInDTO() {
+		TicketDto data = new GeneralTicketDto(price, available);
+		associationState.fillDataInDto(data);
+		return data;
+
 	}
 
 }

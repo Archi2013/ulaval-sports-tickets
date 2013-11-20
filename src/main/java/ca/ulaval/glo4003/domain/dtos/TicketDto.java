@@ -2,7 +2,7 @@ package ca.ulaval.glo4003.domain.dtos;
 
 import org.joda.time.DateTime;
 
-public class TicketDto {
+public abstract class TicketDto {
 
 	public Long ticketId;
 	public double price;
@@ -12,11 +12,11 @@ public class TicketDto {
 	public DateTime gameDate;
 	public boolean available;
 
-	public TicketDto(String sportName, DateTime gameDate, String section, String seat, double price, boolean available) {
+	protected TicketDto(String sportName, DateTime gameDate, String section, String seat, double price, boolean available) {
 		this(null, sportName, gameDate, section, seat, price, available);
 	}
 
-	public TicketDto(Long ticketId, String sportName, DateTime gameDate, String section, String seat, double price,
+	protected TicketDto(Long ticketId, String sportName, DateTime gameDate, String section, String seat, double price,
 			boolean available) {
 		this.ticketId = ticketId;
 		this.sportName = sportName;
@@ -27,7 +27,5 @@ public class TicketDto {
 		this.available = available;
 	}
 
-	public boolean isGeneralSection() {
-		return "Générale".equals(section);
-	}
+	public abstract boolean isGeneralSection();
 }

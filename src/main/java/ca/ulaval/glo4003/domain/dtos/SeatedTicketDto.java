@@ -9,6 +9,10 @@ public class SeatedTicketDto extends TicketDto {
 		super(ticketId, sportName, gameDate, section, seat, price, available);
 	}
 
+	public SeatedTicketDto(String section, String seat, double price, boolean available) {
+		super(null, null, section, seat, price, available);
+	}
+
 	@Override
 	public boolean isGeneralSection() {
 		return false;

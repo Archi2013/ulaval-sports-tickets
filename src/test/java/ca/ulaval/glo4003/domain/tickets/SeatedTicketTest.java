@@ -43,8 +43,8 @@ public class SeatedTicketTest {
 
 	@Test
 	public void if_other_ticket_has_same_seat_and_section_isSame_returns_true() {
-		when(otherTicket.isSeat(A_SEAT)).thenReturn(true);
-		when(otherTicket.isSection(A_SECTION)).thenReturn(true);
+		when(otherTicket.hasSeat(A_SEAT)).thenReturn(true);
+		when(otherTicket.hasSection(A_SECTION)).thenReturn(true);
 
 		boolean result = ticket.isSame(otherTicket);
 
@@ -53,8 +53,8 @@ public class SeatedTicketTest {
 
 	@Test
 	public void if_other_ticket_has_not_same_seat_and_section_isForSameSeat_returns_false() {
-		when(otherTicket.isSeat(A_SEAT)).thenReturn(false);
-		when(otherTicket.isSection(A_SECTION)).thenReturn(true);
+		when(otherTicket.hasSeat(A_SEAT)).thenReturn(false);
+		when(otherTicket.hasSection(A_SECTION)).thenReturn(true);
 
 		boolean result = ticket.isSame(otherTicket);
 
@@ -63,14 +63,14 @@ public class SeatedTicketTest {
 
 	@Test
 	public void isSeat_return_true_if_equals_to_own_seat_and_false_otherwise() {
-		Assert.assertTrue(ticket.isSeat(A_SEAT));
-		Assert.assertFalse(ticket.isSeat(ANOTHER_SEAT));
+		Assert.assertTrue(ticket.hasSeat(A_SEAT));
+		Assert.assertFalse(ticket.hasSeat(ANOTHER_SEAT));
 	}
 
 	@Test
 	public void isSection_returns_true_if_equals_to_own_section_and_false_otherwise() {
-		Assert.assertTrue(ticket.isSection(A_SECTION));
-		Assert.assertFalse(ticket.isSection(ANOTHER_SECTION));
+		Assert.assertTrue(ticket.hasSection(A_SECTION));
+		Assert.assertFalse(ticket.hasSection(ANOTHER_SECTION));
 	}
 
 	@Test

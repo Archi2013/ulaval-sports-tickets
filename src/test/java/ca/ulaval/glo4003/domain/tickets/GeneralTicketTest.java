@@ -34,12 +34,12 @@ public class GeneralTicketTest {
 
 	@Test
 	public void a_general_ticket_section_is_always_the_same() {
-		Assert.assertTrue(ticket.isSection(TicketKind.GENERAL_ADMISSION.toString()));
+		Assert.assertTrue(ticket.hasSection(TicketKind.GENERAL_ADMISSION.toString()));
 	}
 
 	@Test
 	public void a_general_ticket_never_has_the_same_seat() {
-		Assert.assertFalse(ticket.isSeat(A_SEAT));
+		Assert.assertFalse(ticket.hasSeat(A_SEAT));
 	}
 
 }

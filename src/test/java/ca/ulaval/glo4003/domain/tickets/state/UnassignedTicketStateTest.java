@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.domain.dtos.SeatedTicketDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -35,7 +36,7 @@ public class UnassignedTicketStateTest {
 
 	@Test
 	public void fillDataInDto_fills_no_data() {
-		TicketDto data = new TicketDto(0L, null, null, null, null, 0, false);
+		TicketDto data = new SeatedTicketDto(0L, null, null, null, null, 0, false);
 
 		state.fillDataInDto(data);
 

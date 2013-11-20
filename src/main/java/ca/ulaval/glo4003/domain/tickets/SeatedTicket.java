@@ -1,5 +1,6 @@
 package ca.ulaval.glo4003.domain.tickets;
 
+import ca.ulaval.glo4003.domain.dtos.SeatedTicketDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 
@@ -16,25 +17,25 @@ public class SeatedTicket extends Ticket {
 
 	@Override
 	public boolean isSame(Ticket ticketToAdd) {
-		return ticketToAdd.isSeat(seat) && ticketToAdd.isSection(section);
+		return ticketToAdd.hasSeat(seat) && ticketToAdd.hasSection(section);
 	}
 
 	@Override
-	public boolean isSeat(String seat) {
+	public boolean hasSeat(String seat) {
 		return this.seat.equals(seat);
 	}
 
 	@Override
-	public boolean isSection(String section) {
+	public boolean hasSection(String section) {
 		return this.section.equals(section);
 	}
 
 	@Override
 	public TicketDto saveDataInDTO() {
-		TicketDto data = super.saveDataInDTO();
-		data.seat = seat;
-		data.section = section;
+		TicketDto data = new SeatedTicketDto(null, null, null, section, seat, price, available);
+		associationState.fillDataInDto(data);
 		return data;
+
 	}
 
 }

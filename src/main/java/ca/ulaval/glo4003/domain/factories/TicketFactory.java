@@ -2,6 +2,8 @@ package ca.ulaval.glo4003.domain.factories;
 
 import org.springframework.stereotype.Component;
 
+import ca.ulaval.glo4003.domain.dtos.GeneralTicketDto;
+import ca.ulaval.glo4003.domain.dtos.SeatedTicketDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.domain.tickets.GeneralTicket;
 import ca.ulaval.glo4003.domain.tickets.SeatedTicket;
@@ -15,11 +17,11 @@ public class TicketFactory {
 	private static final String GENERAL_SECTION = "Générale";
 
 	public Ticket instantiateTicket(double price) {
-		return instantiateTicket(new TicketDto(null, null, GENERAL_SECTION, null, price, true));
+		return instantiateTicket(new GeneralTicketDto(price, true));
 	}
 
 	public Ticket instantiateTicket(String section, String seat, double price, boolean available) {
-		return instantiateTicket(new TicketDto(null, null, section, seat, price, available));
+		return instantiateTicket(new SeatedTicketDto(section, seat, price, available));
 	}
 
 	public Ticket instantiateTicket(TicketDto data) {

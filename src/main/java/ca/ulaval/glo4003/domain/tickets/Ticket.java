@@ -8,10 +8,9 @@ import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 
 public abstract class Ticket implements Persistable<TicketDto> {
 
-	public long gameId;
-	protected boolean available;
 	protected TicketAssignationState associationState;
 	protected double price;
+	protected boolean available;
 
 	public Ticket(TicketAssignationState associationState, double price) {
 		this.associationState = associationState;
@@ -21,24 +20,16 @@ public abstract class Ticket implements Persistable<TicketDto> {
 
 	public abstract boolean isSame(Ticket ticketToAdd);
 
+	public abstract boolean hasSeat(String seat);
+
+	public abstract boolean hasSection(String section);
+
 	public boolean isAssignable() {
 		return associationState.isAssignable();
 	}
 
 	public void assign(String sport, DateTime date, long ticketNumber) {
 		associationState = associationState.assign(sport, date, ticketNumber);
-	}
-
-	public abstract boolean isSeat(String seat);
-
-	public abstract boolean isSection(String section);
-
-	@Override
-	public TicketDto saveDataInDTO() {
-		TicketDto data = new TicketDto(null, null, null, null, price, available);
-		associationState.fillDataInDto(data);
-		return data;
-
 	}
 
 	public boolean isAvailable() {
@@ -51,13 +42,5 @@ public abstract class Ticket implements Persistable<TicketDto> {
 
 	public void makeAvailable() {
 		this.available = true;
-	}
-
-	public long getGameId() {
-		return gameId;
-	}
-
-	public void setGameId(long gameId) {
-		this.gameId = gameId;
 	}
 }

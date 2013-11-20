@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import ca.ulaval.glo4003.domain.dtos.GeneralTicketDto;
+import ca.ulaval.glo4003.domain.dtos.SeatedTicketDto;
 import ca.ulaval.glo4003.domain.dtos.TicketDto;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
@@ -40,7 +42,7 @@ public class XmlTicketDaoIT {
 	// TODO Remove gameId...
 	private TicketDto createTicket(long gameId, float price, String section, boolean available) {
 		if ("Générale".equals(section)) {
-			return new TicketDto(atomicLong.incrementAndGet(), null, null, section, null, price, available);
+			return new GeneralTicketDto(atomicLong.incrementAndGet(), null, null, price, available);
 		}
 		long ticketId = atomicLong.incrementAndGet();
 		char letter = (char) ((int) 'A' + ticketId / 10);
@@ -49,14 +51,14 @@ public class XmlTicketDaoIT {
 		// return new TicketDto(atomicLong.incrementAndGet(), null, null,
 		// section, null, price, available);
 
-		return new TicketDto(atomicLong.incrementAndGet(), null, null, section, code, price, available);
+		return new SeatedTicketDto(atomicLong.incrementAndGet(), null, null, section, code, price, available);
 	}
 
 	@Test
 	public void testGetTicket() throws Exception {
 		TicketDto actual = ticketDao.get(1);
 
-		TicketDto expected = new TicketDto(1L, null, null, null, null, 15.00f, AVAILABLE);
+		TicketDto expected = new SeatedTicketDto(1L, null, null, null, null, 15.00f, AVAILABLE);
 		assertTicket(expected, actual);
 	}
 
@@ -70,12 +72,12 @@ public class XmlTicketDaoIT {
 	public void testGetTicketsForGame() throws Exception {
 		List<TicketDto> tickets = ticketDao.getAvailableTicketsForGame("", DateTime.now());
 
-		TicketDto expected0 = new TicketDto(5L, null, null, null, null, 15.00f, AVAILABLE);
-		TicketDto expected1 = new TicketDto(6L, null, null, null, null, 15.00f, AVAILABLE);
-		TicketDto expected2 = new TicketDto(7L, null, null, null, null, 15.00f, AVAILABLE);
-		TicketDto expected3 = new TicketDto(8L, null, null, null, null, 15.00f, AVAILABLE);
-		TicketDto expected4 = new TicketDto(9L, null, null, "Section 100", "A-9", 22.00f, AVAILABLE);
-		TicketDto expected5 = new TicketDto(10L, null, null, "Section 100", "B-0", 22.00f, AVAILABLE);
+		TicketDto expected0 = new SeatedTicketDto(5L, null, null, null, null, 15.00f, AVAILABLE);
+		TicketDto expected1 = new SeatedTicketDto(6L, null, null, null, null, 15.00f, AVAILABLE);
+		TicketDto expected2 = new SeatedTicketDto(7L, null, null, null, null, 15.00f, AVAILABLE);
+		TicketDto expected3 = new SeatedTicketDto(8L, null, null, null, null, 15.00f, AVAILABLE);
+		TicketDto expected4 = new SeatedTicketDto(9L, null, null, "Section 100", "A-9", 22.00f, AVAILABLE);
+		TicketDto expected5 = new SeatedTicketDto(10L, null, null, "Section 100", "B-0", 22.00f, AVAILABLE);
 
 		Assert.assertEquals(6, tickets.size());
 
@@ -96,8 +98,8 @@ public class XmlTicketDaoIT {
 	public void testGetTicketsForSection() throws Exception {
 		List<TicketDto> tickets = ticketDao.getTicketsForSection("", DateTime.now(), "Section 100");
 
-		TicketDto expected0 = new TicketDto(9L, null, null, "Section 100", "A-9", 22.00f, AVAILABLE);
-		TicketDto expected1 = new TicketDto(10L, null, null, "Section 100", "B-0", 22.00f, AVAILABLE);
+		TicketDto expected0 = new SeatedTicketDto(9L, null, null, "Section 100", "A-9", 22.00f, AVAILABLE);
+		TicketDto expected1 = new SeatedTicketDto(10L, null, null, "Section 100", "B-0", 22.00f, AVAILABLE);
 
 		Assert.assertEquals(2, tickets.size());
 
@@ -113,7 +115,7 @@ public class XmlTicketDaoIT {
 	@Test
 	// TODO REMOVE USING GAMEID
 	public void testAddDto() throws Exception {
-		TicketDto toAdd = new TicketDto(1000L, null, null, null, null, 20.00f, AVAILABLE);
+		TicketDto toAdd = new SeatedTicketDto(1000L, null, null, null, null, 20.00f, AVAILABLE);
 
 		ticketDao.add(toAdd);
 
@@ -125,7 +127,7 @@ public class XmlTicketDaoIT {
 
 	@Test(expected = TicketAlreadyExistException.class)
 	public void testAddExistingShouldThrow() throws Exception {
-		TicketDto toAdd = new TicketDto(3L, null, null, "Front Row", "C-01", 35.00f, AVAILABLE);
+		TicketDto toAdd = new SeatedTicketDto(3L, null, null, "Front Row", "C-01", 35.00f, AVAILABLE);
 
 		ticketDao.add(toAdd);
 	}
