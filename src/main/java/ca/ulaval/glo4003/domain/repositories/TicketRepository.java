@@ -30,17 +30,15 @@ public class TicketRepository implements ITicketRepository {
 	List<Persistable<TicketDto>> ticketsInDao = new ArrayList<>();
 
 	@Override
-	@Deprecated
-	public Ticket instantiateNewTicket(double price) {
-		Ticket newTicket = factory.instantiateTicket(price);
+	public Ticket createGeneralTicket(double price, boolean available) {
+		Ticket newTicket = factory.createGeneralTicket(price, available);
 		newTickets.add(newTicket);
 		return newTicket;
 	}
 
 	@Override
-	@Deprecated
-	public Ticket instantiateNewTicket(String seat, String section, double price, boolean available) {
-		Ticket newTicket = factory.instantiateTicket(section, seat, price, available);
+	public Ticket createSeatedTicket(String seat, String section, double price, boolean available) {
+		Ticket newTicket = factory.createSeatedTicket(section, seat, price, available);
 		newTickets.add(newTicket);
 		return newTicket;
 	}
@@ -48,7 +46,7 @@ public class TicketRepository implements ITicketRepository {
 	@Override
 	public Ticket getWithId(String sport, DateTime date, int ticketNumber) throws TicketDoesntExistException {
 		TicketDto data = dao.get(sport, date, ticketNumber);
-		Ticket recoveredTicket = factory.instantiateTicket(data);
+		Ticket recoveredTicket = factory.createTicket(data);
 		ticketsInDao.add(recoveredTicket);
 		return recoveredTicket;
 	}
@@ -56,7 +54,7 @@ public class TicketRepository implements ITicketRepository {
 	@Override
 	public Ticket getWithSeat(String sport, DateTime date, String seat) {
 		TicketDto data = dao.get(sport, date, seat);
-		Ticket recoveredTicket = factory.instantiateTicket(data.section, data.seat, data.price, true);
+		Ticket recoveredTicket = factory.createSeatedTicket(data.section, data.seat, data.price, true);
 		ticketsInDao.add(recoveredTicket);
 		return recoveredTicket;
 	}
@@ -66,7 +64,7 @@ public class TicketRepository implements ITicketRepository {
 		List<Ticket> ticketsToReturn = new ArrayList<>();
 		List<TicketDto> datas = dao.getTicketsForGame(sport, Date);
 		for (TicketDto data : datas) {
-			Ticket recoveredTicket = factory.instantiateTicket(data);
+			Ticket recoveredTicket = factory.createTicket(data);
 			ticketsInDao.add(recoveredTicket);
 
 			ticketsToReturn.add(recoveredTicket);
@@ -106,7 +104,7 @@ public class TicketRepository implements ITicketRepository {
 		List<Ticket> ticketsToReturn = new ArrayList<>();
 		for (TicketDto ticket : availableTickets) {
 			// TODO ticketId à la place de ticketNumber...
-			Ticket newTicket = factory.instantiateTicket(ticket);
+			Ticket newTicket = factory.createTicket(ticket);
 			newTicket.assign(ticket.sportName, ticket.gameDate, ticket.ticketId);
 			ticketsInDao.add(newTicket);
 			ticketsToReturn.add(newTicket);
@@ -120,17 +118,4 @@ public class TicketRepository implements ITicketRepository {
 		newTickets.clear();
 
 	}
-
-	@Override
-	public Ticket createGeneralTicket(double price, boolean available) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Ticket createSeatedTicket(String section, String seat, double price, boolean available) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

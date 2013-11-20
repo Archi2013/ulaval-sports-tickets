@@ -14,26 +14,20 @@ import ca.ulaval.glo4003.domain.tickets.state.UnassignedTicketState;
 
 @Component
 public class TicketFactory {
-	private static final String GENERAL_SECTION = "Générale";
 
-	public Ticket instantiateTicket(double price) {
-		return instantiateTicket(new GeneralTicketDto(price, true));
+	public Ticket createGeneralTicket(double price, boolean available) {
+		return createTicket(new GeneralTicketDto(price, available));
 	}
 
-	public Ticket instantiateTicket(String section, String seat, double price, boolean available) {
-		return instantiateTicket(new SeatedTicketDto(section, seat, price, available));
+	public Ticket createSeatedTicket(String section, String seat, double price, boolean available) {
+		return createTicket(new SeatedTicketDto(section, seat, price, available));
 	}
 
-	public Ticket instantiateTicket(TicketDto data) {
-		if (sectionIsGeneral(data.section)) {
-			System.out.println("TicketFactory: creation d'un ticket general non assigne");
+	public Ticket createTicket(TicketDto data) {
+		if (data.isGeneral()) {
 			return new GeneralTicket(data.price, createAssignationState(data));
 		}
 		return new SeatedTicket(data.seat, data.section, data.price, createAssignationState(data));
-	}
-
-	private boolean sectionIsGeneral(String section) {
-		return section == null || section.equals(GENERAL_SECTION);
 	}
 
 	private TicketAssignationState createAssignationState(TicketDto data) {

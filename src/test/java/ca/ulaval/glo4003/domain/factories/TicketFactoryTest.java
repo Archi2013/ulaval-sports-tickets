@@ -28,21 +28,21 @@ public class TicketFactoryTest {
 
 	@Test
 	public void instantiation_without_parameter_returns_a_general_ticket() {
-		Ticket ticket = factory.instantiateTicket(A_PRICE);
+		Ticket ticket = factory.createGeneralTicket(A_PRICE, AVAILABLE);
 
 		Assert.assertSame(GeneralTicket.class, ticket.getClass());
 	}
 
 	@Test
 	public void instantiation_with_seat_and_section_parameters_returns_a_seated_ticket() {
-		Ticket ticket = factory.instantiateTicket(A_SECTION, A_SEAT, A_PRICE, AVAILABLE);
+		Ticket ticket = factory.createSeatedTicket(A_SECTION, A_SEAT, A_PRICE, AVAILABLE);
 
 		Assert.assertSame(SeatedTicket.class, ticket.getClass());
 	}
 
 	@Test
 	public void instantiation_with_section_parameter_to_general_returns_a_general_ticket() {
-		Ticket ticket = factory.instantiateTicket(A_PRICE);
+		Ticket ticket = factory.createGeneralTicket(A_PRICE, AVAILABLE);
 
 		Assert.assertSame(GeneralTicket.class, ticket.getClass());
 

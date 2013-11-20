@@ -15,6 +15,7 @@ import ca.ulaval.glo4003.domain.repositories.ITicketRepository;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
@@ -27,15 +28,12 @@ public class CommandTicketService {
 	private IGameRepository gameRepository;
 
 	public void addGeneralTickets(String sportName, DateTime gameDate, int numberOfTickets, double price)
-			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
-			TicketDoesntExistException {
-		System.out.println("Service: sportName: " + sportName);
-		System.out.println("Service: gameDate: " + gameDate.toString());
-		System.out.println("Service: numberOftickets: " + numberOfTickets);
+			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException,
+			SportDoesntExistException {
 		Game game = gameRepository.get(sportName, gameDate);
 
 		for (int i = 0; i < numberOfTickets; i++) {
-			game.addTicket(ticketRepository.instantiateNewTicket(price));
+			game.addTicket(ticketRepository.createGeneralTicket(price, true));
 		}
 
 		gameRepository.commit();
@@ -43,20 +41,21 @@ public class CommandTicketService {
 	}
 
 	public void addSeatedTicket(String sport, DateTime date, String section, String seat, double price)
-			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
-			TicketDoesntExistException {
+			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException,
+			SportDoesntExistException {
 		Game gameToUse = gameRepository.get(sport, date);
-		gameToUse.addTicket(ticketRepository.instantiateNewTicket(seat, section, price, true));
+		gameToUse.addTicket(ticketRepository.createSeatedTicket(seat, section, price, true));
 		gameRepository.commit();
 		gameRepository.clearCache();
 	}
 
 	public void makeTicketsUnavailable(GameDto game, SectionDto section, int numberOfSeats, List<String> seats)
-			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException,
-			TicketDoesntExistException {
+			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistException, TicketDoesntExistException,
+			SportDoesntExistException {
 
 		if (section.isGeneralAdmission()) {
-			List<Ticket> tickets = ticketRepository.recoverNGeneralTickets(game.getSportName(), game.getGameDate(), numberOfSeats);
+			List<Ticket> tickets = ticketRepository
+					.recoverNGeneralTickets(game.getSportName(), game.getGameDate(), numberOfSeats);
 			for (Ticket ticket : tickets) {
 				ticket.makeUnavailable();
 			}

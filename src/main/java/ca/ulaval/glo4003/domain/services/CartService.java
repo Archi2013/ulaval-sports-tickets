@@ -11,6 +11,7 @@ import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.domain.utilities.payment.Cart;
 import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistException;
 import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
 
@@ -29,8 +30,8 @@ public class CartService {
 
 			ticketService.makeTicketsUnavailable(game, section, numberOfSeats, seats);
 
-		} catch (GameDoesntExistException | GameAlreadyExistException | TicketAlreadyExistException
-				| TicketDoesntExistException e) {
+		} catch (GameDoesntExistException | GameAlreadyExistException | TicketAlreadyExistException | TicketDoesntExistException
+				| SportDoesntExistException e) {
 			throw new CartException();
 		}
 	}

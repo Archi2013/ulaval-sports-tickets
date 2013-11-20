@@ -5,11 +5,11 @@ import org.joda.time.DateTime;
 public abstract class TicketDto {
 
 	public Long ticketId;
-	public double price;
-	public String section;
-	public String seat;
 	public String sportName;
 	public DateTime gameDate;
+	public String section;
+	public String seat;
+	public double price;
 	public boolean available;
 
 	protected TicketDto(String sportName, DateTime gameDate, String section, String seat, double price, boolean available) {
@@ -27,5 +27,5 @@ public abstract class TicketDto {
 		this.available = available;
 	}
 
-	public abstract boolean isGeneralSection();
+	public abstract boolean isGeneral();
 }

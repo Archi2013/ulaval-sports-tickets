@@ -14,7 +14,7 @@ public class SeatedTicketDto extends TicketDto {
 	}
 
 	@Override
-	public boolean isGeneralSection() {
+	public boolean isGeneral() {
 		return false;
 	}
 }
