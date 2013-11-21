@@ -51,19 +51,13 @@ public class AdministrationController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home() {
-		logger.info("Adminisatration : Home");
+		logger.info("Administration : Home");
+
+		if (!currentUser.isAdmin()) {
+			return new ModelAndView("redirect:/");
+		}
 
 		ModelAndView mav = new ModelAndView("admin/home");
-
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
-		}
 
 		return mav;
 	}
@@ -74,14 +68,8 @@ public class AdministrationController {
 
 		ModelAndView mav = new ModelAndView("admin/game", "command", new GameToAddViewModel());
 
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
+		if (!currentUser.isAdmin()) {
+			return new ModelAndView("redirect:/");
 		}
 
 		mav.addObject("sportsVM", sportService.getSports());
@@ -95,14 +83,8 @@ public class AdministrationController {
 
 		ModelAndView mav = new ModelAndView("admin/game-added");
 
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
+		if (!currentUser.isAdmin()) {
+			return new ModelAndView("redirect:/");
 		}
 
 		mav.addObject("game", gameToAddVM);
@@ -125,14 +107,8 @@ public class AdministrationController {
 
 		ModelAndView mav = new ModelAndView("admin/addTickets-chooseSport", "command", new SelectSportViewModel());
 
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
+		if (!currentUser.isAdmin()) {
+			return new ModelAndView("redirect:/");
 		}
 
 		mav.addObject("sportsVM", sportService.getSports());
@@ -154,14 +130,8 @@ public class AdministrationController {
 			mav = new ModelAndView("admin/addTickets-Seated", "command", new SeatedTicketsToAddViewModel());
 		}
 
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
+		if (!currentUser.isAdmin()) {
+			return new ModelAndView("redirect:/");
 		}
 
 		mav.addObject("gamesVM", sportService.getGamesForSport(selectSportVM.getSport()));
@@ -175,17 +145,11 @@ public class AdministrationController {
 		logger.info("Adminisatration :Adding " + ticketsToAddVM.getNumberOfTickets() + "new general tickets to game"
 				+ ticketsToAddVM.getGameDate());
 
-		ModelAndView mav = new ModelAndView("/admin/tickets-added");
-
-		Boolean connectedUser = currentUser.isLogged();
-
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-			logger.info("usagé connecté");
-		} else {
-			mav.addObject("connectedUser", false);
-			logger.info("usagé non connecté");
+		if (!currentUser.isAdmin()) {
+			return new ModelAndView("redirect:/");
 		}
+
+		ModelAndView mav = new ModelAndView("/admin/tickets-added");
 
 		return mav;
 	}
