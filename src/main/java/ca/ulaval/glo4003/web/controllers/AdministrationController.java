@@ -53,7 +53,7 @@ public class AdministrationController {
 	public ModelAndView home() {
 		logger.info("Administration : Home");
 
-		if (!currentUser.isAdmin()) {
+		if (!currentUser.isAdmin() || !currentUser.isLogged()) {
 			return new ModelAndView("redirect:/");
 		}
 
@@ -68,7 +68,7 @@ public class AdministrationController {
 
 		ModelAndView mav = new ModelAndView("admin/game", "command", new GameToAddViewModel());
 
-		if (!currentUser.isAdmin()) {
+		if (!currentUser.isAdmin() || !currentUser.isLogged()) {
 			return new ModelAndView("redirect:/");
 		}
 
@@ -83,7 +83,7 @@ public class AdministrationController {
 
 		ModelAndView mav = new ModelAndView("admin/game-added");
 
-		if (!currentUser.isAdmin()) {
+		if (!currentUser.isAdmin() || !currentUser.isLogged()) {
 			return new ModelAndView("redirect:/");
 		}
 
@@ -107,7 +107,7 @@ public class AdministrationController {
 
 		ModelAndView mav = new ModelAndView("admin/addTickets-chooseSport", "command", new SelectSportViewModel());
 
-		if (!currentUser.isAdmin()) {
+		if (!currentUser.isAdmin() || !currentUser.isLogged()) {
 			return new ModelAndView("redirect:/");
 		}
 
@@ -130,7 +130,7 @@ public class AdministrationController {
 			mav = new ModelAndView("admin/addTickets-Seated", "command", new SeatedTicketsToAddViewModel());
 		}
 
-		if (!currentUser.isAdmin()) {
+		if (!currentUser.isAdmin() || !currentUser.isLogged()) {
 			return new ModelAndView("redirect:/");
 		}
 
@@ -145,7 +145,7 @@ public class AdministrationController {
 		logger.info("Adminisatration :Adding " + ticketsToAddVM.getNumberOfTickets() + "new general tickets to game"
 				+ ticketsToAddVM.getGameDate());
 
-		if (!currentUser.isAdmin()) {
+		if (!currentUser.isAdmin() || !currentUser.isLogged()) {
 			return new ModelAndView("redirect:/");
 		}
 

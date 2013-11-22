@@ -30,10 +30,10 @@ import ca.ulaval.glo4003.web.viewmodels.SportsViewModel;
 public class AdministrationControllerTest {
 
 	private static final DateTime A_DATE = new DateTime(100);
-	
+
 	@Mock
 	private CommandGameService gameService;
-	
+
 	@Mock
 	private SportService sportService;
 
@@ -42,10 +42,10 @@ public class AdministrationControllerTest {
 
 	@Mock
 	private SportsViewModel sportsVM;
-	
+
 	@Mock
 	private User currentUser;
-	
+
 	private GameToAddViewModel gameToAddVM = new GameToAddViewModel();
 
 	@InjectMocks
@@ -57,36 +57,38 @@ public class AdministrationControllerTest {
 	}
 
 	@Test
-	public void home_returns_the_home_administration_view() {
+	public void home_returns_the_home_administration_view_when_admin() {
+		when(currentUser.isAdmin()).thenReturn(true);
+		when(currentUser.isLogged()).thenReturn(true);
+
 		ModelAndView mav = controller.home();
 
 		Assert.assertEquals("admin/home", mav.getViewName());
 	}
 
 	@Test
-	public void when_user_is_logged_home_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
-		
+	public void home_redirect_site_home_when_not_admin() {
+		when(currentUser.isAdmin()).thenReturn(false);
 		ModelAndView mav = controller.home();
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
+
+		assertEquals("redirect:/", mav.getViewName());
 	}
-	
+
 	@Test
 	public void when_user_isnt_logged_home_should_add_connectedUser_at_false() {
+		when(currentUser.isAdmin()).thenReturn(true);
 		when(currentUser.isLogged()).thenReturn(false);
-		
+
 		ModelAndView mav = controller.home();
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
+
+		assertEquals("redirect:/", mav.getViewName());
 	}
-	
+
 	@Test
 	public void game_returns_the_form_to_add_a_game() {
+		when(currentUser.isAdmin()).thenReturn(true);
+		when(currentUser.isLogged()).thenReturn(true);
+
 		ModelAndView mav = controller.game();
 
 		Assert.assertEquals("admin/game", mav.getViewName());
@@ -94,36 +96,42 @@ public class AdministrationControllerTest {
 
 	@Test
 	public void game_adds_a_sportsVM_to_model() {
+		when(currentUser.isAdmin()).thenReturn(true);
+		when(currentUser.isLogged()).thenReturn(true);
+
 		ModelAndView model = controller.game();
 		ModelMap modelMap = model.getModelMap();
 
 		Assert.assertTrue(modelMap.containsAttribute("sportsVM"));
 	}
-	
+
 	@Test
 	public void when_user_is_logged_game_should_add_connectedUser_at_true() {
 		when(currentUser.isLogged()).thenReturn(true);
-		
+		when(currentUser.isAdmin()).thenReturn(true);
+
 		ModelAndView mav = controller.game();
 		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
+
+		assertTrue(modelMap.containsAttribute("sportsVM"));
+		assertEquals(modelMap.get("sportsVM"), sportService.getSports());
 	}
-	
+
 	@Test
 	public void when_user_isnt_logged_game_should_add_connectedUser_at_false() {
 		when(currentUser.isLogged()).thenReturn(false);
-		
+		when(currentUser.isAdmin()).thenReturn(true);
+
 		ModelAndView mav = controller.game();
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
+
+		assertEquals("redirect:/", mav.getViewName());
 	}
-	
+
 	@Test
 	public void addGame_adds_game_to_add_to_model() {
+		when(currentUser.isAdmin()).thenReturn(true);
+		when(currentUser.isLogged()).thenReturn(true);
+
 		ModelAndView mav = controller.addGame(gameToAddVM);
 		ModelMap modelMap = mav.getModelMap();
 
@@ -133,6 +141,9 @@ public class AdministrationControllerTest {
 
 	@Test
 	public void addGame_returns_confirmation_view_if_service_throws_nothing() {
+		when(currentUser.isAdmin()).thenReturn(true);
+		when(currentUser.isLogged()).thenReturn(true);
+
 		ModelAndView mav = controller.addGame(gameToAddVM);
 
 		Assert.assertEquals("admin/game-added", mav.getViewName());
@@ -143,30 +154,32 @@ public class AdministrationControllerTest {
 			GameDoesntExistException, GameAlreadyExistException, NoSportForUrlException {
 		doThrow(new SportDoesntExistException()).when(gameService).createNewGame(any(String.class), any(String.class),
 				any(DateTime.class));
+		when(currentUser.isAdmin()).thenReturn(true);
+		when(currentUser.isLogged()).thenReturn(true);
+
 		ModelAndView mav = controller.addGame(gameToAddVM);
 
 		Assert.assertEquals("admin/game-added-data-error", mav.getViewName());
 	}
-	
+
 	@Test
 	public void when_user_is_logged_addGame_should_add_connectedUser_at_true() {
 		when(currentUser.isLogged()).thenReturn(true);
-		
+		when(currentUser.isAdmin()).thenReturn(true);
+
 		ModelAndView mav = controller.addGame(gameToAddVM);
 		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
+
+		assertTrue(modelMap.containsAttribute("game"));
+		assertEquals(modelMap.get("game"), gameToAddVM);
 	}
-	
+
 	@Test
 	public void when_user_isnt_logged_addGame_should_add_connectedUser_at_false() {
 		when(currentUser.isLogged()).thenReturn(false);
-		
+
 		ModelAndView mav = controller.addGame(gameToAddVM);
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
+
+		assertEquals("redirect:/", mav.getViewName());
 	}
 }
