@@ -8,11 +8,19 @@ public class UserDto implements Serializable {
 	private String username;
 	private String password;
 	private Boolean logged;
+	private Boolean admin;
 
 	public UserDto(String name, String password){
 		this.username = name;
 		this.password = password;
 		this.logged = false;
+		this.setAdmin(false);
+	}
+	
+	public UserDto(String name, String password, Boolean admin)
+	{
+		this(name, password);
+		this.setAdmin(admin);
 	}
 	
 	public String getUsername(){
@@ -29,5 +37,13 @@ public class UserDto implements Serializable {
 	
 	public void setLogged(Boolean value){
 		this.logged = value;
+	}
+
+	public Boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 }

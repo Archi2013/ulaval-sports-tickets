@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SearchService;
@@ -17,6 +18,7 @@ import ca.ulaval.glo4003.persistence.daos.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 
 @Controller
+@SessionAttributes({ "currentUser" })
 @RequestMapping(value = "/recherche", method = RequestMethod.GET)
 public class SearchController {
 	

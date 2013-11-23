@@ -37,6 +37,7 @@ public class UserService {
 		currentUser.setUsername(user.getUsername());
 		currentUser.setPassword(user.getPassword());
 		currentUser.setLogged(true);
+		currentUser.setAdmin(user.isAdmin());
 	}
 
 	public void signUp(String username, String password) throws UserAlreadyExistException {

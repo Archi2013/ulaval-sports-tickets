@@ -4,9 +4,12 @@ import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.UserService;
@@ -18,8 +21,8 @@ import ca.ulaval.glo4003.presentation.viewmodels.UserViewModel;
 
 
 @Controller
-
 @RequestMapping(value = "/session", method = RequestMethod.GET)
+@SessionAttributes({ "currentUser" })
 public class SessionController {
 	
 	@Inject
@@ -62,13 +65,14 @@ public class SessionController {
 	}
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
-	public ModelAndView submitSignIn(@RequestParam String usernameParam, @RequestParam String passwordParam){
+	public ModelAndView submitSignIn(Model model, @RequestParam String usernameParam, @RequestParam String passwordParam){
 		ModelAndView mav = new ModelAndView("session/success");
 		
 		try {
 			UserViewModel userViewModel = userService.signIn(usernameParam, passwordParam);
 			mav.addObject("user", userViewModel); 
 			mav.addObject("connectedUser", true);
+			model.addAttribute("currentUser", currentUser);
 	        return mav;
 		} catch (UserDoesntExistException | UsernameAndPasswordDoesntMatchException e) {
 			mav.addObject("connectedUser", false);
@@ -78,14 +82,14 @@ public class SessionController {
 	}
 	
 	@RequestMapping(value="/save",method = RequestMethod.POST)    
-    public ModelAndView registerUser(@RequestParam String usernameParam, @RequestParam String passwordParam) { 
+    public ModelAndView registerUser(Model model, @RequestParam String usernameParam, @RequestParam String passwordParam) { 
 		ModelAndView mav = new ModelAndView("session/signin");
 		
 		manageUserConnection(mav);
 		
 		try {
 			userService.signUp(usernameParam, passwordParam);
-	        return submitSignIn(usernameParam, passwordParam);
+	        return submitSignIn(model, usernameParam, passwordParam);
 		} catch (UserAlreadyExistException e) {
 			mav.setViewName("session/exist");
 			return mav;
@@ -93,8 +97,9 @@ public class SessionController {
     } 
 	
 	@RequestMapping(value="/logout",method = RequestMethod.GET)    
-    public ModelAndView logoutUser() {
+    public ModelAndView logoutUser(SessionStatus sessionStatus) {
 		userService.logOutCurrentUser(); 
+		sessionStatus.setComplete();
 		
 		ModelAndView mav = new ModelAndView("session/logout");
 		

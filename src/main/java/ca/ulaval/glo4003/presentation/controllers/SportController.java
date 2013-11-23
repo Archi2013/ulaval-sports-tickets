@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.SportViewService;
@@ -18,6 +19,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
 
 @Controller
 @RequestMapping(value = "/sport", method = RequestMethod.GET)
+@SessionAttributes({ "currentUser" })
 public class SportController {
 
 	@Inject

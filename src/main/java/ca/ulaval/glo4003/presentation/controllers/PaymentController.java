@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.NoTicketsInCartException;
@@ -24,6 +25,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 
 @Controller
+@SessionAttributes({ "currentUser" })
 @RequestMapping(value = "/paiement", method = RequestMethod.GET)
 public class PaymentController {
 	private static final String ERROR_MESSAGE_INVALID_CREDIT_CARD = "error-message.payment.invalid-credit-card";

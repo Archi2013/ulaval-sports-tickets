@@ -98,7 +98,7 @@ public aspect ControllersLoggers {
 	}
 	
 	pointcut AdmnistrationController_addTickets_selectSport() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddGameController.addTickets_selectSport(..));
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddTicketsController.addTickets_selectSport(..));
 	
 	before() : AdmnistrationController_addTickets_selectSport() {
 		SelectSportViewModel selectSportViewModel = (SelectSportViewModel) thisJoinPoint.getArgs()[0];
@@ -107,7 +107,7 @@ public aspect ControllersLoggers {
 	}
 	
 	pointcut AdmnistrationController_addTickets_general() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddGameController.addTickets_general(..));
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddTicketsController.addTickets_general(..));
 	
 	before() : AdmnistrationController_addTickets_general() {
 		GeneralTicketsToAddViewModel generalTicketsToAddViewModel = (GeneralTicketsToAddViewModel) thisJoinPoint.getArgs()[0];
@@ -123,7 +123,7 @@ public aspect ControllersLoggers {
 	}
 	
 	pointcut AdmnistrationController_addTickets_seated() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddGameController.addTickets_seated(..));
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddTicketsController.addTickets_seated(..));
 	
 	before() : AdmnistrationController_addTickets_seated() {
 		SeatedTicketsToAddViewModel seatedTicketsToAddViewModel = (SeatedTicketsToAddViewModel) thisJoinPoint.getArgs()[0];

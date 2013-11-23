@@ -19,7 +19,9 @@
 	</form>
 	<div class="text-align-center margin-25">
 		<p class="">Vous n'avez pas encore de compte ?</p>
-		<a href="/session/signup" class="standard-button-round orange-button margin-25">S'inscrire !</a>
+		<a href="/session/signup"
+			class="standard-button-round orange-button margin-25">S'inscrire
+			!</a>
 	</div>
 
 
