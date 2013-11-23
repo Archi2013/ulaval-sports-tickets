@@ -1,17 +1,19 @@
 package ca.ulaval.glo4003.presentation.viewmodels;
 
+import ca.ulaval.glo4003.utilities.time.DisplayDate;
+
 public class SeatedTicketsToAddViewModel {
-	String gameDate;
+	DisplayDate gameDate;
 	String section;
 	String seat;
 	String sportName;
 	String price;
 
-	public String getGameDate() {
+	public DisplayDate getGameDate() {
 		return gameDate;
 	}
 
-	public void setGameDate(String gameDate) {
+	public void setGameDate(DisplayDate gameDate) {
 		this.gameDate = gameDate;
 	}
 

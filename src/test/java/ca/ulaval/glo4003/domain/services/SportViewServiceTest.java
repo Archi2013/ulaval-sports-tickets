@@ -27,7 +27,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.factories.GamesViewModelFactory
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SportsViewModelFactory;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SportServiceTest {
+public class SportViewServiceTest {
 
 	private static final String SPORT_NAME = "Baseball Masculin";
 	private static final String SPORT_URL = "baseball-masculin";
@@ -51,7 +51,7 @@ public class SportServiceTest {
 	private GamesViewModelFactory gamesViewModelFactoryMock;
 
 	@InjectMocks
-	private SportService service = new SportService();
+	private SportViewService service = new SportViewService();
 
 	private List<SportDto> sports;
 	private List<GameDto> games;

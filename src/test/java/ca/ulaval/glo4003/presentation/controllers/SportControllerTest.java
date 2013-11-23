@@ -12,7 +12,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.SportService;
+import ca.ulaval.glo4003.domain.services.SportViewService;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
 import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
@@ -32,7 +32,7 @@ public class SportControllerTest {
 	private SportUrlMapper sportUrlMapper;
 
 	@Mock
-	private SportService sportService;
+	private SportViewService sportService;
 
 	@Mock
 	private User currentUser;

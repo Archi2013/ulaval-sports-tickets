@@ -1,10 +1,12 @@
 package ca.ulaval.glo4003.presentation.viewmodels;
 
+import ca.ulaval.glo4003.utilities.time.InputDate;
+
 public class GameToAddViewModel {
 	String sport;
 	String opponents;
 	String location;
-	String date;
+	InputDate date;
 
 	public String getSport() {
 		return sport;
@@ -30,11 +32,11 @@ public class GameToAddViewModel {
 		this.location = location;
 	}
 
-	public String getDate() {
+	public InputDate getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(InputDate date) {
 		this.date = date;
 	}
 }

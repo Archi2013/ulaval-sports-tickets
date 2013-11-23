@@ -4,7 +4,7 @@ import org.slf4j.LoggerFactory;
 
 import ca.ulaval.glo4003.domain.services.NoTicketsInCartException;
 import ca.ulaval.glo4003.domain.utilities.payment.InvalidCreditCardException;
-import ca.ulaval.glo4003.presentation.controllers.AdministrationController;
+import ca.ulaval.glo4003.presentation.controllers.AddGameController;
 import ca.ulaval.glo4003.presentation.controllers.GameController;
 import ca.ulaval.glo4003.presentation.controllers.PaymentController;
 import ca.ulaval.glo4003.presentation.controllers.SearchController;
@@ -24,7 +24,7 @@ public aspect ControllersLoggers {
 	private static final Logger GameControllerLogger = LoggerFactory.getLogger(GameController.class);
 	private static final Logger SectionControllerLogger = LoggerFactory.getLogger(SectionController.class);
 	private static final Logger SessionControllerLogger = LoggerFactory.getLogger(SessionController.class);
-	private static final Logger AdministrationControllerLogger = LoggerFactory.getLogger(AdministrationController.class);
+	private static final Logger AdministrationControllerLogger = LoggerFactory.getLogger(AddGameController.class);
 	private static final Logger SearchControllerLogger = LoggerFactory.getLogger(SearchController.class);
 	private static final Logger PaymentControllerLogger = LoggerFactory.getLogger(PaymentController.class);
 	
@@ -83,7 +83,7 @@ public aspect ControllersLoggers {
 	
 	
 	pointcut AdmnistrationController_addConnectedUserToModelAndView() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AdministrationController.addGame(..));
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddGameController.addGame(..));
 	
 	before() : AdmnistrationController_addConnectedUserToModelAndView() {
 		GameToAddViewModel gameToAddViewModel = (GameToAddViewModel) thisJoinPoint.getArgs()[0];
@@ -98,7 +98,7 @@ public aspect ControllersLoggers {
 	}
 	
 	pointcut AdmnistrationController_addTickets_selectSport() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AdministrationController.addTickets_selectSport(..));
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddGameController.addTickets_selectSport(..));
 	
 	before() : AdmnistrationController_addTickets_selectSport() {
 		SelectSportViewModel selectSportViewModel = (SelectSportViewModel) thisJoinPoint.getArgs()[0];
@@ -107,7 +107,7 @@ public aspect ControllersLoggers {
 	}
 	
 	pointcut AdmnistrationController_addTickets_general() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AdministrationController.addTickets_general(..));
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddGameController.addTickets_general(..));
 	
 	before() : AdmnistrationController_addTickets_general() {
 		GeneralTicketsToAddViewModel generalTicketsToAddViewModel = (GeneralTicketsToAddViewModel) thisJoinPoint.getArgs()[0];
@@ -123,7 +123,7 @@ public aspect ControllersLoggers {
 	}
 	
 	pointcut AdmnistrationController_addTickets_seated() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AdministrationController.addTickets_seated(..));
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddGameController.addTickets_seated(..));
 	
 	before() : AdmnistrationController_addTickets_seated() {
 		SeatedTicketsToAddViewModel seatedTicketsToAddViewModel = (SeatedTicketsToAddViewModel) thisJoinPoint.getArgs()[0];

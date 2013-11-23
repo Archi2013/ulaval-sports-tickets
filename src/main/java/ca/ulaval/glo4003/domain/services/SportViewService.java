@@ -22,7 +22,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.factories.GamesViewModelFactory
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SportsViewModelFactory;
 
 @Service
-public class SportService {
+public class SportViewService {
 	@Inject
 	private SportDao sportDao;
 

@@ -20,8 +20,8 @@
     		<form:option value = "${sportName}"> ${sportName} </form:option>
     	</form:select><br>
         <form:label path="gameDate">Match : </form:label><form:select path="gameDate">
-            <c:forEach items="${gamesVM.games}" var="game">
-                <form:option value="${game.date}">Partie du ${game.date} contre ${game.opponents }</form:option>
+            <c:forEach items="${gameSelectionVM}" var="game">
+                <form:option value="${game.gameDate}">Partie du ${game.gameDate} contre ${game.opponents }</form:option>
             </c:forEach>
         </form:select><br>
                <form:label path="price">Prix : </form:label><form:input path="price"/><br>

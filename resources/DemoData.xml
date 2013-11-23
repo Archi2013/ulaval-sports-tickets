@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<base>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><base>
 	<sports>
 		<sport>
 			<name>Démonstration</name>
@@ -331,70 +330,16 @@
 
 
 
-		<game>
-			<id>30000</id>
-			<location>Londres</location>
-			<oponents>Big Ben</oponents>
-			<sportName>Démonstration</sportName>
-			<date>2013/12/10 18:50 EST</date>
-		</game>
-		<game>
-			<id>40000</id>
-			<location>Canberra</location>
-			<oponents>Kangourou</oponents>
-			<sportName>Démonstration</sportName>
-			<date>2013/11/21 15:45 EST</date>
-		</game>
-		<game>
-			<id>50000</id>
-			<location>Johannesbourg</location>
-			<oponents>Vouvouzela</oponents>
-			<sportName>Démonstration</sportName>
-			<date>2013/11/16 08:00 EST</date>
-		</game>
-		<game>
-			<id>10000</id>
-			<location>Paris</location>
-			<oponents>Tour Eiffel</oponents>
-			<sportName>Démonstration</sportName>
-			<date>2014/05/02 21:00 EDT</date>
-		</game>
-		<game>
-			<id>20000</id>
-			<location>Tôkyô</location>
-			<oponents>Tôkyô Tower</oponents>
-			<sportName>Démonstration</sportName>
-			<date>2014/02/01 20:30 EST</date>
-		</game>
-		<game>
-			<id>50002</id>
-			<location>Lambdaland</location>
-			<oponents>MegaLambda</oponents>
-			<sportName>Démonstration</sportName>
-			<date>2014/01/01 14:00 EST</date>
-		</game>
-		<game>
-			<id>50001</id>
-			<location>La lune</location>
-			<oponents>Les gros lols</oponents>
-			<sportName>Démonstration</sportName>
-			<date>2014/01/01 13:00 EST</date>
-		</game>
-		<game>
-			<id>50004</id>
-			<location>Le terrain</location>
-			<oponents>Les pas fins</oponents>
-			<sportName>Démonstration</sportName>
-			<date>2014/10/01 13:00 EDT</date>
-		</game>
-		<game>
-			<id>50003</id>
-			<location>Le terrain</location>
-			<oponents>les pas fin</oponents>
-			<sportName>Démonstration</sportName>
-			<date>2014/08/01 13:00 EDT</date>
-		</game>
-	</games>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	<game><id>30000</id><location>Londres</location><oponents>Big Ben</oponents><sportName>Démonstration</sportName><date>2013/12/10 18:50 EST</date></game><game><id>40000</id><location>Canberra</location><oponents>Kangourou</oponents><sportName>Démonstration</sportName><date>2013/11/21 15:45 EST</date></game><game><id>50000</id><location>Johannesbourg</location><oponents>Vouvouzela</oponents><sportName>Démonstration</sportName><date>2013/11/16 08:00 EST</date></game><game><id>10000</id><location>Paris</location><oponents>Tour Eiffel</oponents><sportName>Démonstration</sportName><date>2014/05/02 21:00 EDT</date></game><game><id>20000</id><location>Tôkyô</location><oponents>Tôkyô Tower</oponents><sportName>Démonstration</sportName><date>2014/02/01 20:30 EST</date></game><game><id>50002</id><location>Lambdaland</location><oponents>MegaLambda</oponents><sportName>Démonstration</sportName><date>2014/01/01 14:00 EST</date></game><game><id>50001</id><location>La lune</location><oponents>Les gros lols</oponents><sportName>Démonstration</sportName><date>2014/01/01 13:00 EST</date></game><game><id>50004</id><location>Le terrain</location><oponents>Les pas fins</oponents><sportName>Démonstration</sportName><date>2014/10/01 13:00 EDT</date></game><game><id>50003</id><location>Le terrain</location><oponents>les pas fin</oponents><sportName>Démonstration</sportName><date>2014/08/01 13:00 EDT</date></game><game><id>50005</id><location>La lune</location><oponents>Lolz</oponents><sportName>Démonstration</sportName><date>2014/01/01 13:00 EST</date></game></games>
 	<tickets>
 		<ticket>
 			<id>1</id>

@@ -20,23 +20,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.CommandGameService;
 import ca.ulaval.glo4003.domain.services.CommandTicketService;
-import ca.ulaval.glo4003.domain.services.SportService;
+import ca.ulaval.glo4003.domain.services.SportViewService;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.domain.utilities.Constants;
-import ca.ulaval.glo4003.domain.utilities.DateParser;
-import ca.ulaval.glo4003.domain.utilities.YearMonthDayHourMinuteDateParser;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.GameToAddViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
+import ca.ulaval.glo4003.utilities.time.InputDate;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AdministrationControllerTest {
-
-	private static final DateTime A_DATE = new DateTime(100);
-	private static final String A_STRING_DATE = "date";
+public class AddGameControllerTest {
 
 	@Mock
-	private Constants constants;
+	private InputDate AN_INPUT_DATE;
 
 	@Mock
 	CommandTicketService ticketService;
@@ -45,16 +39,7 @@ public class AdministrationControllerTest {
 	private CommandGameService gameService;
 
 	@Mock
-	private SportService sportService;
-
-	@Mock
-	private YearMonthDayHourMinuteDateParser otherParser;
-
-	@Mock
-	private DateParser dateParser;
-
-	@Mock
-	private SportsViewModel sportsVM;
+	private SportViewService sportService;
 
 	@Mock
 	private User currentUser;
@@ -62,12 +47,11 @@ public class AdministrationControllerTest {
 	private GameToAddViewModel gameToAddVM = new GameToAddViewModel();
 
 	@InjectMocks
-	private AdministrationController controller;
+	private AddGameController controller;
 
 	@Before
 	public void setUp() {
-		when(otherParser.parseDate(any(String.class))).thenReturn(A_DATE);
-		gameToAddVM.setDate(A_STRING_DATE);
+		gameToAddVM.setDate(AN_INPUT_DATE);
 	}
 
 	@Test

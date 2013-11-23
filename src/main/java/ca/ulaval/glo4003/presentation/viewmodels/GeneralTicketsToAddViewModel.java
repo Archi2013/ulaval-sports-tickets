@@ -1,8 +1,10 @@
 package ca.ulaval.glo4003.presentation.viewmodels;
 
+import ca.ulaval.glo4003.utilities.time.DisplayDate;
+
 public class GeneralTicketsToAddViewModel {
 	int numberOfTickets;
-	String gameDate;
+	DisplayDate gameDate;
 	String sportName;
 	String price;
 
@@ -14,11 +16,11 @@ public class GeneralTicketsToAddViewModel {
 		this.numberOfTickets = numberOfTickets;
 	}
 
-	public String getGameDate() {
+	public DisplayDate getGameDate() {
 		return gameDate;
 	}
 
-	public void setGameDate(String gameDate) {
+	public void setGameDate(DisplayDate gameDate) {
 		this.gameDate = gameDate;
 	}
 

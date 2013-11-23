@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.SportService;
+import ca.ulaval.glo4003.domain.services.SportViewService;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
@@ -21,7 +21,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
 public class SportController {
 
 	@Inject
-	private SportService service;
+	private SportViewService service;
 
 	@Autowired
 	private User currentUser;
