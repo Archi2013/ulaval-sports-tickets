@@ -11,10 +11,12 @@ public class User {
 	private String username;
 	private String password;
 	private Boolean logged;
+	private Boolean admin;
 
 
 	public User() {
 		this.logged = false;
+		this.setAdmin(false);
 		
 	}
 
@@ -46,5 +48,13 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 
+	}
+
+	public Boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 }

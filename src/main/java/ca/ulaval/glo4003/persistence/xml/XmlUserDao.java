@@ -88,6 +88,7 @@ public class XmlUserDao implements UserDao {
 		Map<String, String> nodes = new HashMap<>();
 		nodes.put("username", user.getUsername());
 		nodes.put("password", user.getPassword());
+		nodes.put("admin", user.isAdmin().toString());
 		SimpleNode simpleNode = new SimpleNode("user", nodes);
 		return simpleNode;
 	}
@@ -96,7 +97,8 @@ public class XmlUserDao implements UserDao {
 		if (node.hasNode("username", "password")) {
 			String username = node.getNodeValue("username");
 			String password = node.getNodeValue("password");
-			return new UserDto(username, password);
+			Boolean admin = Boolean.valueOf(node.getNodeValue("admin"));
+			return new UserDto(username, password, admin);
 		}
 		throw new UserDoesntExistException();
 	}

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.CommandGameService;
@@ -31,6 +32,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.SeatedTicketsToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SelectSportViewModel;
 
 @Controller
+@SessionAttributes({ "currentUser" })
 @RequestMapping(value = "/admin", method = RequestMethod.GET)
 public class AdministrationController {
 
