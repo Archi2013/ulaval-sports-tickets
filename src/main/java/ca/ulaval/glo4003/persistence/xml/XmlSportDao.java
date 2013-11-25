@@ -26,7 +26,6 @@ public class XmlSportDao implements SportDao {
 	private static final String SPORT_XPATH = SPORTS_XPATH + "/sport";
 	private static final String SPORT_XPATH_ID = SPORT_XPATH + "[name=\"%s\"]";
 
-	// @Inject
 	private XmlDatabase database;
 
 	public XmlSportDao() {

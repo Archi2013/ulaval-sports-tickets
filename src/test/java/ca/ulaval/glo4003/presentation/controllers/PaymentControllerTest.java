@@ -1,36 +1,23 @@
 package ca.ulaval.glo4003.presentation.controllers;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.NoTicketsInCartException;
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.domain.utilities.Constants;
-import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
-import ca.ulaval.glo4003.domain.utilities.payment.InvalidCreditCardException;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
-import ca.ulaval.glo4003.presentation.controllers.PaymentController;
 import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 
 @Ignore
 @RunWith(MockitoJUnitRunner.class)
@@ -77,7 +64,6 @@ public class PaymentControllerTest {
 		selectedSeats = new ArrayList<>();
 		selectedSeats.add("X3");
 		selectedSeats.add("X7");
-		when(chooseTicketsVM.getGameId()).thenReturn(GAME_ID);
 		when(chooseTicketsVM.getSectionName()).thenReturn(SECTION_NAME);
 		when(chooseTicketsVM.getNumberOfTicketsToBuy()).thenReturn(NUMBER_OF_TICKETS_TO_BUY);
 		when(chooseTicketsVM.getSelectedSeats()).thenReturn(selectedSeats);

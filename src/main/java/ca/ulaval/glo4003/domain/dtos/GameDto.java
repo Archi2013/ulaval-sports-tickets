@@ -5,28 +5,22 @@ import org.joda.time.DateTime;
 public class GameDto {
 
 	private String sportName;
-	private Long id;
 	private String opponents;
 	private DateTime gameDate;
 	private String location;
 	private int numberOfTickets;
 	private long nextTicketNumber;
 
-	public GameDto(long id, String opponents, DateTime gameDate, String sportName, String location) {
-		this(new Long(id), opponents, gameDate, sportName, location);
-	}
-
-	public GameDto(Long id, String opponents, DateTime gameDate, String sportName, String location) {
+	public GameDto(String opponents, DateTime gameDate, String sportName, String location) {
 		this.sportName = sportName;
-		this.id = id;
 		this.opponents = opponents;
 		this.gameDate = gameDate;
 		this.location = location;
 	}
 
-	public GameDto(Long id, String opponents, DateTime gameDate, String sportName, String location,
+	public GameDto(String opponents, DateTime gameDate, String sportName, String location,
 			long nextTicketNumber) {
-		this(id, opponents, gameDate, sportName, location);
+		this(opponents, gameDate, sportName, location);
 		this.nextTicketNumber = nextTicketNumber;
 	}
 
@@ -36,14 +30,6 @@ public class GameDto {
 
 	public void setSportName(String sportName) {
 		this.sportName = sportName;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public int getNumberOfTickets() {

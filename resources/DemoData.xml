@@ -1,2236 +1,340 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <base>
-  <sports>
-    <sport>
-      <name>Démonstration</name>
-    </sport>
-    <sport>
-      <name>Soccer masculin</name>
-    </sport>
-    <sport>
-      <name>Soccer féminin</name>
-    </sport>
-    <sport>
-      <name>Rugby féminin</name>
-    </sport>
-    <sport>
-      <name>Football</name>
-    </sport>
-  </sports>
-  <games>
-    <game>
-      <id>1</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Dinos de Calgary</oponents>
-      <sportName>Football</sportName>
-      <date>2014/08/24 13:00 EDT</date>
-    </game>
-    <game>
-      <id>2</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Redmen de McGill</oponents>
-      <sportName>Football</sportName>
-      <date>2014/08/31 19:00 EDT</date>
-    </game>
-    <game>
-      <id>3</id>
-      <location>Sherbrooke</location>
-      <oponents>Vert &amp; Or de Sherbrooke</oponents>
-      <sportName>Football</sportName>
-      <date>2014/09/07 13:00 EDT</date>
-    </game>
-    <game>
-      <id>4</id>
-      <location>Wolfville, N.-Écosse</location>
-      <oponents>Axemen d'Acadia</oponents>
-      <sportName>Football</sportName>
-      <date>2014/09/14 13:00 EDT</date>
-    </game>
-    <game>
-      <id>5</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Carabins de Montréal</oponents>
-      <sportName>Football</sportName>
-      <date>2014/09/22 13:00 EDT</date>
-    </game>
-    <game>
-      <id>6</id>
-      <location>Lennoxville</location>
-      <oponents>Gaiters de Bishop's</oponents>
-      <sportName>Football</sportName>
-      <date>2014/09/28 13:00 EDT</date>
-    </game>
-    <game>
-      <id>7</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Stingers de Concordia</oponents>
-      <sportName>Football</sportName>
-      <date>2014/10/06 13:30 EDT</date>
-    </game>
-    <game>
-      <id>8</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Vert &amp; Or de Sherbrooke</oponents>
-      <sportName>Football</sportName>
-      <date>2014/10/20 13:30 EDT</date>
-    </game>
-    <game>
-      <id>9</id>
-      <location>CEPSUM</location>
-      <oponents>Carabins de Montréal</oponents>
-      <sportName>Football</sportName>
-      <date>2014/10/26 13:00 EDT</date>
-    </game>
-    <game>
-      <id>10</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Vert &amp; Or de Sherbrooke</oponents>
-      <sportName>Football</sportName>
-      <date>2014/11/02 13:00 EST</date>
-    </game>
-    <game>
-      <id>11</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Carabins de Montréal</oponents>
-      <sportName>Football</sportName>
-      <date>2014/11/03 13:00 EST</date>
-    </game>
-    <game>
-      <id>12</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Dawson College</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/08/19 16:00 EDT</date>
-    </game>
-    <game>
-      <id>13</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Queen's</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/08/20 13:00 EDT</date>
-    </game>
-    <game>
-      <id>14</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>UQAM</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/06 20:00 EDT</date>
-    </game>
-    <game>
-      <id>15</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>UQTR</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/08 13:00 EDT</date>
-    </game>
-    <game>
-      <id>16</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Sherbrooke</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/13 20:00 EDT</date>
-    </game>
-    <game>
-      <id>17</id>
-      <location>Montréal</location>
-      <oponents>Concordia</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/20 18:30 EDT</date>
-    </game>
-    <game>
-      <id>18</id>
-      <location>CEPSUM</location>
-      <oponents>Montréal</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/22 15:00 EDT</date>
-    </game>
-    <game>
-      <id>19</id>
-      <location>Montréal</location>
-      <oponents>McGill</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/27 20:30 EDT</date>
-    </game>
-    <game>
-      <id>20</id>
-      <location>Montréal</location>
-      <oponents>UQAM</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/10/04 20:00 EDT</date>
-    </game>
-    <game>
-      <id>21</id>
-      <location>Trois-Rivières</location>
-      <oponents>UQTR</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/06 13:00 EDT</date>
-    </game>
-    <game>
-      <id>22</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Montréal</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/10/18 20:00 EDT</date>
-    </game>
-    <game>
-      <id>23</id>
-      <location>Sherbrooke</location>
-      <oponents>Sherbrooke</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/10/20 13:00 EDT</date>
-    </game>
-    <game>
-      <id>24</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Concordia</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/10/25 20:00 EDT</date>
-    </game>
-    <game>
-      <id>25</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>UQAM</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/06 18:00 EDT</date>
-    </game>
-    <game>
-      <id>26</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>UQTR</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/08 15:00 EDT</date>
-    </game>
-    <game>
-      <id>27</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Sherbrooke</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/13 18:00 EDT</date>
-    </game>
-    <game>
-      <id>28</id>
-      <location>Sherbrooke</location>
-      <oponents>Bishop's</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/15 13:00 EDT</date>
-    </game>
-    <game>
-      <id>29</id>
-      <location>Montréal</location>
-      <oponents>Concordia</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/20 20:30 EDT</date>
-    </game>
-    <game>
-      <id>30</id>
-      <location>CEPSUM</location>
-      <oponents>Montréal</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/22 13:00 EDT</date>
-    </game>
-    <game>
-      <id>31</id>
-      <location>Montréal</location>
-      <oponents>McGill</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/27 18:30 EDT</date>
-    </game>
-    <game>
-      <id>32</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Bishop's</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/29 16:00 EDT</date>
-    </game>
-    <game>
-      <id>33</id>
-      <location>Montréal</location>
-      <oponents>UQAM</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/10/04 18:00 EDT</date>
-    </game>
-    <game>
-      <id>34</id>
-      <location>Trois-Rivières</location>
-      <oponents>UQTR</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/06 15:00 EDT</date>
-    </game>
-    <game>
-      <id>35</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Montréal</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/10/18 18:00 EDT</date>
-    </game>
-    <game>
-      <id>36</id>
-      <location>Sherbrooke</location>
-      <oponents>Sherbrooke</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/10/20 15:00 EDT</date>
-    </game>
-    <game>
-      <id>37</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Concordia</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/10/25 18:00 EDT</date>
-    </game>
-    <game>
-      <id>38</id>
-      <location>CEPSUM</location>
-      <oponents>Montréal</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/09/02 15:00 EDT</date>
-    </game>
-    <game>
-      <id>39</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Ottawa</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/09/07 15:00 EDT</date>
-    </game>
-    <game>
-      <id>40</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Concordia</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/09/14 13:00 EDT</date>
-    </game>
-    <game>
-      <id>41</id>
-      <location>Sherbrooke</location>
-      <oponents>Bishop's</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/09/20 18:15 EDT</date>
-    </game>
-    <game>
-      <id>42</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Sherbrooke</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/09/28 13:00 EDT</date>
-    </game>
-    <game>
-      <id>43</id>
-      <location>Montréal</location>
-      <oponents>McGill</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/10/06 13:00 EDT</date>
-    </game>
-    <game>
-      <id>44</id>
-      <location>Ottawa</location>
-      <oponents>Carleton</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/10/13 14:00 EDT</date>
-    </game>
-    <game>
-      <id>30000</id>
-      <location>Londres</location>
-      <oponents>Big Ben</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2013/12/10 18:50 EST</date>
-    </game>
-    <game>
-      <id>40000</id>
-      <location>Canberra</location>
-      <oponents>Kangourou</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2013/11/21 15:45 EST</date>
-    </game>
-    <game>
-      <id>50000</id>
-      <location>Johannesbourg</location>
-      <oponents>Vouvouzela</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2013/11/16 08:00 EST</date>
-    </game>
-    <game>
-      <id>10000</id>
-      <location>Paris</location>
-      <oponents>Tour Eiffel</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/05/02 21:00 EDT</date>
-    </game>
-    <game>
-      <id>20000</id>
-      <location>Tôkyô</location>
-      <oponents>Tôkyô Tower</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/02/01 20:30 EST</date>
-    </game>
-    <game>
-      <id>50002</id>
-      <location>Lambdaland</location>
-      <oponents>MegaLambda</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/01/01 14:00 EST</date>
-    </game>
-    <game>
-      <id>50001</id>
-      <location>La lune</location>
-      <oponents>Les gros lols</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/01/01 13:00 EST</date>
-    </game>
-    <game>
-      <id>50004</id>
-      <location>Le terrain</location>
-      <oponents>Les pas fins</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/10/01 13:00 EDT</date>
-    </game>
-    <game>
-      <id>50003</id>
-      <location>Le terrain</location>
-      <oponents>les pas fin</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/08/01 13:00 EDT</date>
-    </game>
-  </games>
-  <tickets>
-    <ticket>
-      <id>1</id>
-      <price>15.0</price>
-      <gameID>1</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>2</id>
-      <price>15.0</price>
-      <gameID>1</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>3</id>
-      <price>15.0</price>
-      <gameID>1</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>4</id>
-      <price>22.0</price>
-      <seat>A-4</seat>
-      <gameID>1</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>5</id>
-      <price>22.0</price>
-      <seat>A-5</seat>
-      <gameID>1</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>6</id>
-      <price>22.0</price>
-      <seat>A-6</seat>
-      <gameID>1</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>7</id>
-      <price>22.0</price>
-      <seat>A-7</seat>
-      <gameID>1</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>8</id>
-      <price>30.0</price>
-      <seat>A-8</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>9</id>
-      <price>30.0</price>
-      <seat>A-9</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>10</id>
-      <price>30.0</price>
-      <seat>B-0</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>11</id>
-      <price>30.0</price>
-      <seat>B-1</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>12</id>
-      <price>30.0</price>
-      <seat>B-2</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>13</id>
-      <price>30.0</price>
-      <seat>B-3</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>14</id>
-      <price>30.0</price>
-      <seat>B-4</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>15</id>
-      <price>30.0</price>
-      <seat>B-5</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>16</id>
-      <price>30.0</price>
-      <seat>B-6</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>17</id>
-      <price>30.0</price>
-      <seat>B-7</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>18</id>
-      <price>30.0</price>
-      <seat>B-8</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>19</id>
-      <price>30.0</price>
-      <seat>B-9</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>20</id>
-      <price>30.0</price>
-      <seat>C-0</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>21</id>
-      <price>30.0</price>
-      <seat>C-1</seat>
-      <gameID>1</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>22</id>
-      <price>15.0</price>
-      <gameID>2</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>23</id>
-      <price>15.0</price>
-      <gameID>2</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>24</id>
-      <price>15.0</price>
-      <gameID>2</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>25</id>
-      <price>15.0</price>
-      <gameID>2</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>26</id>
-      <price>15.0</price>
-      <gameID>2</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>27</id>
-      <price>15.0</price>
-      <gameID>2</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>28</id>
-      <price>15.0</price>
-      <gameID>2</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>29</id>
-      <price>15.0</price>
-      <gameID>2</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>30</id>
-      <price>15.0</price>
-      <gameID>2</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>31</id>
-      <price>15.0</price>
-      <gameID>2</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>32</id>
-      <price>15.0</price>
-      <gameID>2</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>33</id>
-      <price>22.0</price>
-      <seat>D-3</seat>
-      <gameID>2</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>34</id>
-      <price>22.0</price>
-      <seat>D-4</seat>
-      <gameID>2</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>35</id>
-      <price>30.0</price>
-      <seat>D-5</seat>
-      <gameID>2</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>36</id>
-      <price>30.0</price>
-      <seat>D-6</seat>
-      <gameID>2</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>37</id>
-      <price>30.0</price>
-      <seat>D-7</seat>
-      <gameID>2</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>38</id>
-      <price>30.0</price>
-      <seat>D-8</seat>
-      <gameID>2</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>39</id>
-      <price>30.0</price>
-      <seat>D-9</seat>
-      <gameID>2</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>40</id>
-      <price>30.0</price>
-      <seat>E-0</seat>
-      <gameID>2</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>41</id>
-      <price>30.0</price>
-      <seat>E-1</seat>
-      <gameID>2</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>42</id>
-      <price>30.0</price>
-      <seat>E-2</seat>
-      <gameID>2</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>43</id>
-      <price>30.0</price>
-      <seat>E-3</seat>
-      <gameID>2</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>44</id>
-      <price>30.0</price>
-      <seat>E-4</seat>
-      <gameID>2</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>45</id>
-      <price>15.0</price>
-      <gameID>3</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>46</id>
-      <price>15.0</price>
-      <gameID>3</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>47</id>
-      <price>15.0</price>
-      <gameID>3</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>48</id>
-      <price>15.0</price>
-      <gameID>3</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>49</id>
-      <price>15.0</price>
-      <gameID>3</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>50</id>
-      <price>15.0</price>
-      <gameID>3</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>51</id>
-      <price>15.0</price>
-      <gameID>3</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>52</id>
-      <price>15.0</price>
-      <gameID>3</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>53</id>
-      <price>22.0</price>
-      <seat>F-3</seat>
-      <gameID>3</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>54</id>
-      <price>30.0</price>
-      <seat>F-4</seat>
-      <gameID>3</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>55</id>
-      <price>30.0</price>
-      <seat>F-5</seat>
-      <gameID>3</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>56</id>
-      <price>30.0</price>
-      <seat>F-6</seat>
-      <gameID>3</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>57</id>
-      <price>30.0</price>
-      <seat>F-7</seat>
-      <gameID>3</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>58</id>
-      <price>30.0</price>
-      <seat>F-8</seat>
-      <gameID>3</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>59</id>
-      <price>30.0</price>
-      <seat>F-9</seat>
-      <gameID>3</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>60</id>
-      <price>30.0</price>
-      <seat>G-0</seat>
-      <gameID>3</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>61</id>
-      <price>30.0</price>
-      <seat>G-1</seat>
-      <gameID>3</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>62</id>
-      <price>15.0</price>
-      <gameID>4</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>63</id>
-      <price>15.0</price>
-      <gameID>4</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>64</id>
-      <price>15.0</price>
-      <gameID>4</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>65</id>
-      <price>15.0</price>
-      <gameID>4</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>66</id>
-      <price>15.0</price>
-      <gameID>4</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>67</id>
-      <price>15.0</price>
-      <gameID>4</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>68</id>
-      <price>15.0</price>
-      <gameID>4</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>69</id>
-      <price>15.0</price>
-      <gameID>4</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>70</id>
-      <price>22.0</price>
-      <seat>H-0</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>71</id>
-      <price>22.0</price>
-      <seat>H-1</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>72</id>
-      <price>22.0</price>
-      <seat>H-2</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>73</id>
-      <price>22.0</price>
-      <seat>H-3</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>74</id>
-      <price>22.0</price>
-      <seat>H-4</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>75</id>
-      <price>22.0</price>
-      <seat>H-5</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>76</id>
-      <price>22.0</price>
-      <seat>H-6</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>77</id>
-      <price>22.0</price>
-      <seat>H-7</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>78</id>
-      <price>22.0</price>
-      <seat>H-8</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>79</id>
-      <price>22.0</price>
-      <seat>H-9</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>80</id>
-      <price>22.0</price>
-      <seat>I-0</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>81</id>
-      <price>22.0</price>
-      <seat>I-1</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>82</id>
-      <price>22.0</price>
-      <seat>I-2</seat>
-      <gameID>4</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>83</id>
-      <price>30.0</price>
-      <seat>I-3</seat>
-      <gameID>4</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>84</id>
-      <price>30.0</price>
-      <seat>I-4</seat>
-      <gameID>4</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>85</id>
-      <price>22.0</price>
-      <seat>I-5</seat>
-      <gameID>5</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>86</id>
-      <price>22.0</price>
-      <seat>I-6</seat>
-      <gameID>5</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>87</id>
-      <price>22.0</price>
-      <seat>I-7</seat>
-      <gameID>5</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>88</id>
-      <price>22.0</price>
-      <seat>I-8</seat>
-      <gameID>5</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>89</id>
-      <price>30.0</price>
-      <seat>I-9</seat>
-      <gameID>5</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>90</id>
-      <price>30.0</price>
-      <seat>J-0</seat>
-      <gameID>5</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>91</id>
-      <price>30.0</price>
-      <seat>J-1</seat>
-      <gameID>5</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>92</id>
-      <price>30.0</price>
-      <seat>J-2</seat>
-      <gameID>5</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>93</id>
-      <price>30.0</price>
-      <seat>J-3</seat>
-      <gameID>5</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>94</id>
-      <price>30.0</price>
-      <seat>J-4</seat>
-      <gameID>5</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>95</id>
-      <price>30.0</price>
-      <seat>J-5</seat>
-      <gameID>5</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>96</id>
-      <price>30.0</price>
-      <seat>J-6</seat>
-      <gameID>5</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>97</id>
-      <price>30.0</price>
-      <seat>J-7</seat>
-      <gameID>5</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>98</id>
-      <price>15.0</price>
-      <gameID>6</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>99</id>
-      <price>15.0</price>
-      <gameID>6</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>100</id>
-      <price>15.0</price>
-      <gameID>6</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>101</id>
-      <price>15.0</price>
-      <gameID>6</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>102</id>
-      <price>15.0</price>
-      <gameID>6</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>103</id>
-      <price>22.0</price>
-      <seat>K-3</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>104</id>
-      <price>22.0</price>
-      <seat>K-4</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>105</id>
-      <price>22.0</price>
-      <seat>K-5</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>106</id>
-      <price>22.0</price>
-      <seat>K-6</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>107</id>
-      <price>22.0</price>
-      <seat>K-7</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>108</id>
-      <price>22.0</price>
-      <seat>K-8</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>109</id>
-      <price>22.0</price>
-      <seat>K-9</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>110</id>
-      <price>22.0</price>
-      <seat>L-0</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>111</id>
-      <price>22.0</price>
-      <seat>L-1</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>112</id>
-      <price>22.0</price>
-      <seat>L-2</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>113</id>
-      <price>22.0</price>
-      <seat>L-3</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>114</id>
-      <price>22.0</price>
-      <seat>L-4</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>115</id>
-      <price>22.0</price>
-      <seat>L-5</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>116</id>
-      <price>22.0</price>
-      <seat>L-6</seat>
-      <gameID>6</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>117</id>
-      <price>30.0</price>
-      <seat>L-7</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>118</id>
-      <price>30.0</price>
-      <seat>L-8</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>119</id>
-      <price>30.0</price>
-      <seat>L-9</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>120</id>
-      <price>30.0</price>
-      <seat>M-0</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>121</id>
-      <price>30.0</price>
-      <seat>M-1</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>122</id>
-      <price>30.0</price>
-      <seat>M-2</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>123</id>
-      <price>30.0</price>
-      <seat>M-3</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>124</id>
-      <price>30.0</price>
-      <seat>M-4</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>125</id>
-      <price>30.0</price>
-      <seat>M-5</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>126</id>
-      <price>30.0</price>
-      <seat>M-6</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>127</id>
-      <price>30.0</price>
-      <seat>M-7</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>128</id>
-      <price>30.0</price>
-      <seat>M-8</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>129</id>
-      <price>30.0</price>
-      <seat>M-9</seat>
-      <gameID>6</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>130</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>131</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>132</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>133</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>134</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>135</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>136</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>137</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>138</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>139</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>140</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>141</id>
-      <price>15.0</price>
-      <gameID>7</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>142</id>
-      <price>22.0</price>
-      <seat>O-2</seat>
-      <gameID>7</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>143</id>
-      <price>22.0</price>
-      <seat>O-3</seat>
-      <gameID>7</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>144</id>
-      <price>30.0</price>
-      <seat>O-4</seat>
-      <gameID>7</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>145</id>
-      <price>30.0</price>
-      <seat>O-5</seat>
-      <gameID>7</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>146</id>
-      <price>30.0</price>
-      <seat>O-6</seat>
-      <gameID>7</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>147</id>
-      <price>30.0</price>
-      <seat>O-7</seat>
-      <gameID>7</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>148</id>
-      <price>30.0</price>
-      <seat>O-8</seat>
-      <gameID>7</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>149</id>
-      <price>30.0</price>
-      <seat>O-9</seat>
-      <gameID>7</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>150</id>
-      <price>15.0</price>
-      <gameID>8</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>151</id>
-      <price>15.0</price>
-      <gameID>8</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>152</id>
-      <price>15.0</price>
-      <gameID>8</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>153</id>
-      <price>15.0</price>
-      <gameID>8</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>154</id>
-      <price>15.0</price>
-      <gameID>8</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>155</id>
-      <price>15.0</price>
-      <gameID>8</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>156</id>
-      <price>15.0</price>
-      <gameID>8</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>157</id>
-      <price>22.0</price>
-      <seat>P-7</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>158</id>
-      <price>22.0</price>
-      <seat>P-8</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>159</id>
-      <price>22.0</price>
-      <seat>P-9</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>160</id>
-      <price>22.0</price>
-      <seat>Q-0</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>161</id>
-      <price>22.0</price>
-      <seat>Q-1</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>162</id>
-      <price>22.0</price>
-      <seat>Q-2</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>163</id>
-      <price>22.0</price>
-      <seat>Q-3</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>164</id>
-      <price>22.0</price>
-      <seat>Q-4</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>165</id>
-      <price>22.0</price>
-      <seat>Q-5</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>166</id>
-      <price>22.0</price>
-      <seat>Q-6</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>167</id>
-      <price>22.0</price>
-      <seat>Q-7</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>168</id>
-      <price>22.0</price>
-      <seat>Q-8</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>169</id>
-      <price>22.0</price>
-      <seat>Q-9</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>170</id>
-      <price>22.0</price>
-      <seat>R-0</seat>
-      <gameID>8</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>171</id>
-      <price>30.0</price>
-      <seat>R-1</seat>
-      <gameID>8</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>172</id>
-      <price>30.0</price>
-      <seat>R-2</seat>
-      <gameID>8</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>173</id>
-      <price>30.0</price>
-      <seat>R-3</seat>
-      <gameID>8</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>174</id>
-      <price>30.0</price>
-      <seat>R-4</seat>
-      <gameID>8</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>175</id>
-      <price>30.0</price>
-      <seat>R-5</seat>
-      <gameID>8</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>176</id>
-      <price>30.0</price>
-      <seat>R-6</seat>
-      <gameID>8</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>177</id>
-      <price>30.0</price>
-      <seat>R-7</seat>
-      <gameID>8</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>178</id>
-      <price>30.0</price>
-      <seat>R-8</seat>
-      <gameID>8</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>179</id>
-      <price>30.0</price>
-      <seat>R-9</seat>
-      <gameID>8</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>180</id>
-      <price>15.0</price>
-      <gameID>9</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>181</id>
-      <price>15.0</price>
-      <gameID>9</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>182</id>
-      <price>15.0</price>
-      <gameID>9</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>183</id>
-      <price>15.0</price>
-      <gameID>9</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>184</id>
-      <price>15.0</price>
-      <gameID>9</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>185</id>
-      <price>15.0</price>
-      <gameID>9</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>186</id>
-      <price>22.0</price>
-      <seat>S-6</seat>
-      <gameID>9</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>187</id>
-      <price>22.0</price>
-      <seat>S-7</seat>
-      <gameID>9</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>188</id>
-      <price>22.0</price>
-      <seat>S-8</seat>
-      <gameID>9</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>189</id>
-      <price>22.0</price>
-      <seat>S-9</seat>
-      <gameID>9</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>190</id>
-      <price>22.0</price>
-      <seat>T-0</seat>
-      <gameID>9</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>191</id>
-      <price>22.0</price>
-      <seat>T-1</seat>
-      <gameID>9</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>192</id>
-      <price>30.0</price>
-      <seat>T-2</seat>
-      <gameID>9</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>193</id>
-      <price>30.0</price>
-      <seat>T-3</seat>
-      <gameID>9</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>194</id>
-      <price>30.0</price>
-      <seat>T-4</seat>
-      <gameID>9</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>195</id>
-      <price>30.0</price>
-      <seat>T-5</seat>
-      <gameID>9</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>196</id>
-      <price>30.0</price>
-      <seat>T-6</seat>
-      <gameID>9</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>197</id>
-      <price>30.0</price>
-      <seat>T-7</seat>
-      <gameID>9</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>198</id>
-      <price>30.0</price>
-      <seat>T-8</seat>
-      <gameID>9</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>199</id>
-      <price>30.0</price>
-      <seat>T-9</seat>
-      <gameID>9</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>200</id>
-      <price>15.0</price>
-      <gameID>10</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>201</id>
-      <price>15.0</price>
-      <gameID>10</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>202</id>
-      <price>15.0</price>
-      <gameID>10</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>203</id>
-      <price>15.0</price>
-      <gameID>10</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>204</id>
-      <price>22.0</price>
-      <seat>U-4</seat>
-      <gameID>10</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>205</id>
-      <price>22.0</price>
-      <seat>U-5</seat>
-      <gameID>10</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>206</id>
-      <price>22.0</price>
-      <seat>U-6</seat>
-      <gameID>10</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>207</id>
-      <price>22.0</price>
-      <seat>U-7</seat>
-      <gameID>10</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>208</id>
-      <price>22.0</price>
-      <seat>U-8</seat>
-      <gameID>10</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>209</id>
-      <price>22.0</price>
-      <seat>U-9</seat>
-      <gameID>10</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>210</id>
-      <price>30.0</price>
-      <seat>V-0</seat>
-      <gameID>10</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>211</id>
-      <price>30.0</price>
-      <seat>V-1</seat>
-      <gameID>10</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>212</id>
-      <price>30.0</price>
-      <seat>V-2</seat>
-      <gameID>10</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>213</id>
-      <price>30.0</price>
-      <seat>V-3</seat>
-      <gameID>10</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>214</id>
-      <price>30.0</price>
-      <seat>V-4</seat>
-      <gameID>10</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>215</id>
-      <price>30.0</price>
-      <seat>V-5</seat>
-      <gameID>10</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>216</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>217</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>218</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>219</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>220</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>221</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>222</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>223</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>224</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>225</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>226</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>227</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>228</id>
-      <price>15.0</price>
-      <gameID>11</gameID>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>229</id>
-      <price>22.0</price>
-      <seat>W-9</seat>
-      <gameID>11</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>230</id>
-      <price>22.0</price>
-      <seat>X-0</seat>
-      <gameID>11</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>231</id>
-      <price>22.0</price>
-      <seat>X-1</seat>
-      <gameID>11</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>232</id>
-      <price>22.0</price>
-      <seat>X-2</seat>
-      <gameID>11</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>233</id>
-      <price>22.0</price>
-      <seat>X-3</seat>
-      <gameID>11</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>234</id>
-      <price>22.0</price>
-      <seat>X-4</seat>
-      <gameID>11</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>235</id>
-      <price>22.0</price>
-      <seat>X-5</seat>
-      <gameID>11</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>236</id>
-      <price>22.0</price>
-      <seat>X-6</seat>
-      <gameID>11</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>237</id>
-      <price>22.0</price>
-      <seat>X-7</seat>
-      <gameID>11</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>238</id>
-      <price>22.0</price>
-      <seat>X-8</seat>
-      <gameID>11</gameID>
-      <section>Section 100</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>239</id>
-      <price>30.0</price>
-      <seat>X-9</seat>
-      <gameID>11</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>240</id>
-      <price>30.0</price>
-      <seat>Y-0</seat>
-      <gameID>11</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>241</id>
-      <price>30.0</price>
-      <seat>Y-1</seat>
-      <gameID>11</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>242</id>
-      <price>30.0</price>
-      <seat>Y-2</seat>
-      <gameID>11</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>243</id>
-      <price>30.0</price>
-      <seat>Y-3</seat>
-      <gameID>11</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>244</id>
-      <price>30.0</price>
-      <seat>Y-4</seat>
-      <gameID>11</gameID>
-      <section>Section 200</section>
-      <available>true</available>
-    </ticket>
-    <ticket>
-      <id>245</id>
-      <price>5.0</price>
-      <gameID>12</gameID>
-      <available>false</available>
-      <sportName>Soccer masculin</sportName>
-      <gameDate>2014/08/19 16:00 EDT</gameDate>
-    </ticket>
-    <ticket>
-      <id>246</id>
-      <price>5.0</price>
-      <gameID>12</gameID>
-      <available>false</available>
-      <sportName>Soccer masculin</sportName>
-      <gameDate>2014/08/19 16:00 EDT</gameDate>
-    </ticket>
-    <ticket>
-      <id>247</id>
-      <price>5.0</price>
-      <seat>Générale</seat>
-      <sportName>Soccer masculin</sportName>
-      <available>true</available>
-      <section>Générale</section>
-      <gameDate>2014/08/19 16:00 EDT</gameDate>
-    </ticket>
-    <ticket>
-      <id>248</id>
-      <price>5.0</price>
-      <seat>Générale</seat>
-      <sportName>Soccer masculin</sportName>
-      <available>true</available>
-      <section>Générale</section>
-      <gameDate>2014/08/19 16:00 EDT</gameDate>
-    </ticket>
-    <ticket>
-      <id>249</id>
-      <price>5.0</price>
-      <seat>Générale</seat>
-      <sportName>Soccer masculin</sportName>
-      <available>true</available>
-      <section>Générale</section>
-      <gameDate>2014/08/19 16:00 EDT</gameDate>
-    </ticket>
-  </tickets>
+	<sports>
+		<sport>
+			<name>Démonstration</name>
+		</sport>
+		<sport>
+			<name>Soccer masculin</name>
+		</sport>
+		<sport>
+			<name>Soccer féminin</name>
+		</sport>
+		<sport>
+			<name>Rugby féminin</name>
+		</sport>
+		<sport>
+			<name>Football</name>
+		</sport>
+	</sports>
+	<games>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Dinos de Calgary</oponents>
+			<sportName>Football</sportName>
+			<date>2014/08/24 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Redmen de McGill</oponents>
+			<sportName>Football</sportName>
+			<date>2014/08/31 19:00 EDT</date>
+		</game>
+		<game>
+			<location>Sherbrooke</location>
+			<oponents>Vert &amp; Or de Sherbrooke</oponents>
+			<sportName>Football</sportName>
+			<date>2014/09/07 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Wolfville, N.-Écosse</location>
+			<oponents>Axemen d'Acadia</oponents>
+			<sportName>Football</sportName>
+			<date>2014/09/14 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Carabins de Montréal</oponents>
+			<sportName>Football</sportName>
+			<date>2014/09/22 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Lennoxville</location>
+			<oponents>Gaiters de Bishop's</oponents>
+			<sportName>Football</sportName>
+			<date>2014/09/28 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Stingers de Concordia</oponents>
+			<sportName>Football</sportName>
+			<date>2014/10/06 13:30 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Vert &amp; Or de Sherbrooke</oponents>
+			<sportName>Football</sportName>
+			<date>2014/10/20 13:30 EDT</date>
+		</game>
+		<game>
+			<location>CEPSUM</location>
+			<oponents>Carabins de Montréal</oponents>
+			<sportName>Football</sportName>
+			<date>2014/10/26 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Vert &amp; Or de Sherbrooke</oponents>
+			<sportName>Football</sportName>
+			<date>2014/11/02 13:00 EST</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Carabins de Montréal</oponents>
+			<sportName>Football</sportName>
+			<date>2014/11/03 13:00 EST</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Dawson College</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/08/19 16:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Queen's</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/08/20 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>UQAM</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/06 20:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>UQTR</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/08 13:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Sherbrooke</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/13 20:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>Concordia</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/20 18:30 EDT</date>
+		</game>
+		<game>
+			<location>CEPSUM</location>
+			<oponents>Montréal</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/22 15:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>McGill</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/27 20:30 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>UQAM</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/10/04 20:00 EDT</date>
+		</game>
+		<game>
+			<location>Trois-Rivières</location>
+			<oponents>UQTR</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/06 13:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Montréal</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/10/18 20:00 EDT</date>
+		</game>
+		<game>
+			<location>Sherbrooke</location>
+			<oponents>Sherbrooke</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/10/20 13:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Concordia</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/10/25 20:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>UQAM</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/06 18:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>UQTR</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/08 15:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Sherbrooke</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/13 18:00 EDT</date>
+		</game>
+		<game>
+			<location>Sherbrooke</location>
+			<oponents>Bishop's</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/15 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>Concordia</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/20 20:30 EDT</date>
+		</game>
+		<game>
+			<location>CEPSUM</location>
+			<oponents>Montréal</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/22 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>McGill</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/27 18:30 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Bishop's</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/29 16:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>UQAM</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/10/04 18:00 EDT</date>
+		</game>
+		<game>
+			<location>Trois-Rivières</location>
+			<oponents>UQTR</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/06 15:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Montréal</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/10/18 18:00 EDT</date>
+		</game>
+		<game>
+			<location>Sherbrooke</location>
+			<oponents>Sherbrooke</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/10/20 15:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Concordia</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/10/25 18:00 EDT</date>
+		</game>
+		<game>
+			<location>CEPSUM</location>
+			<oponents>Montréal</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/09/02 15:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Ottawa</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/09/07 15:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Concordia</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/09/14 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Sherbrooke</location>
+			<oponents>Bishop's</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/09/20 18:15 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Sherbrooke</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/09/28 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>McGill</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/10/06 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Ottawa</location>
+			<oponents>Carleton</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/10/13 14:00 EDT</date>
+		</game>
+		<game>
+			<location>Londres</location>
+			<oponents>Big Ben</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2013/12/10 18:50 EST</date>
+		</game>
+		<game>
+			<location>Canberra</location>
+			<oponents>Kangourou</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2013/11/21 15:45 EST</date>
+		</game>
+		<game>
+			<location>Johannesbourg</location>
+			<oponents>Vouvouzela</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2013/11/16 08:00 EST</date>
+		</game>
+		<game>
+			<location>Paris</location>
+			<oponents>Tour Eiffel</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/05/02 21:00 EDT</date>
+		</game>
+		<game>
+			<location>Tôkyô</location>
+			<oponents>Tôkyô Tower</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/02/01 20:30 EST</date>
+		</game>
+		<game>
+			<location>Lambdaland</location>
+			<oponents>MegaLambda</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/01/01 14:00 EST</date>
+		</game>
+		<game>
+			<location>La lune</location>
+			<oponents>Les gros lols</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/01/01 13:00 EST</date>
+		</game>
+		<game>
+			<location>Le terrain</location>
+			<oponents>Les pas fins</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/10/01 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Le terrain</location>
+			<oponents>les pas fin</oponents>
+			<sportName>Démonstration</sportName>
+			<date>2014/08/01 13:00 EDT</date>
+		</game>
+	</games>
 </base>

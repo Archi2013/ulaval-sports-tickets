@@ -61,7 +61,8 @@
 				<form:form id="choose-tickets-form" commandName="chooseTicketsForm"
 					action="${chooseAction}" method="POST">
 					<form:hidden path="sectionName" />
-					<form:hidden path="gameId" />
+					<form:hidden path="sportName" />
+					<form:hidden path="gameDate" />
 					<c:choose>
 						<c:when test="${section.isGeneralAdmission()}">
 							<form:hidden path="selectedSeats" />

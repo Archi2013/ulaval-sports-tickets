@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
@@ -26,13 +25,8 @@ public class XmlGameDao implements GameDao {
 	public static final String DATE_PATTERN = "yyyy/MM/dd HH:mm z";
 	private static final String GAMES_XPATH = "/base/games";
 	private static final String GAME_XPATH = GAMES_XPATH + "/game";
-	private static final String GAME_XPATH_ID = GAME_XPATH + "[id=\"%d\"]";
 	private static final String GAME_XPATH_SPORT_NAME = GAME_XPATH + "[sportName=\"%s\"]";
 	private static final String GAME_XPATH_SPORT_NAME_GAMEDATE = GAME_XPATH_SPORT_NAME + "[date=\"%s\"]";
-
-	private final static String TICKET_XPATH_GAME_ID = "/base/tickets/ticket" + "[gameID=\"%s\"]";
-
-	private static AtomicLong nextId;
 
 	private XmlDatabase database;
 
@@ -42,7 +36,6 @@ public class XmlGameDao implements GameDao {
 
 	XmlGameDao(String filename) {
 		database = XmlDatabase.getUniqueInstance(filename);
-		nextId = null;
 	}
 
 	@Override
@@ -57,12 +50,6 @@ public class XmlGameDao implements GameDao {
 		}
 	}
 
-	@Override
-	public GameDto get(Long id) throws GameDoesntExistException {
-		String xPath = String.format(GAME_XPATH_ID, id);
-		return makeGameWithPath(xPath);
-	}
-
 	private GameDto makeGameWithPath(String xPath) throws GameDoesntExistException {
 		try {
 			SimpleNode node = database.extractNode(xPath);
@@ -74,7 +61,7 @@ public class XmlGameDao implements GameDao {
 
 	@Override
 	public void add(GameDto game) throws GameAlreadyExistException {
-		if (game.getId() != null && isIdExist(game.getId())) {
+		if (isGameExist(game.getSportName(), game.getGameDate())) {
 			throw new GameAlreadyExistException();
 		}
 		try {
@@ -85,22 +72,17 @@ public class XmlGameDao implements GameDao {
 		}
 	}
 
-	synchronized private long getNextId() throws XPathExpressionException {
-		if (nextId == null) {
-			long next = (long) database.getMaxValue(GAME_XPATH, "id");
-			nextId = new AtomicLong(next);
-		}
-		return nextId.incrementAndGet();
-	}
-
-	private boolean isIdExist(long id) {
-		String xPath = String.format(GAME_XPATH_ID, id);
-		return database.exist(xPath);
-	}
+	private boolean isGameExist(String sportName, DateTime gameDate) {
+		try {
+	        get(sportName, gameDate);
+	        return true;
+        } catch (GameDoesntExistException e) {
+	        return false;
+        }
+    }
 
 	private SimpleNode convertGameToNode(GameDto game) throws XPathExpressionException {
 		Map<String, String> nodes = new HashMap<>();
-		nodes.put("id", Long.toString(getNextId()));
 		nodes.put("oponents", game.getOpponents());
 		nodes.put("date", game.getGameDate().toString(DATE_PATTERN));
 		nodes.put("sportName", game.getSportName());
@@ -110,21 +92,20 @@ public class XmlGameDao implements GameDao {
 	}
 
 	private GameDto convertNodeToGame(SimpleNode node) throws NoSuchAttributeException, GameDoesntExistException {
-		if (node.hasNode("id", "oponents", "date", "sportName", "location")) {
-			long id = Long.parseLong(node.getNodeValue("id"));
+		if (node.hasNode("oponents", "date", "sportName", "location")) {
 			String opponents = node.getNodeValue("oponents");
 			DateTimeFormatter format = DateTimeFormat.forPattern(DATE_PATTERN);
 			DateTime gameDate = DateTime.parse(node.getNodeValue("date"), format);
 			String sportName = node.getNodeValue("sportName");
 			String location = node.getNodeValue("location");
-			long nextTicketNumber = getNextTicketNumber(node.getNodeValue("id"));
-			return new GameDto(id, opponents, gameDate, sportName, location, nextTicketNumber);
+			long nextTicketNumber = getNextTicketNumber(sportName, gameDate);
+			return new GameDto(opponents, gameDate, sportName, location, nextTicketNumber);
 		}
 		throw new GameDoesntExistException();
 	}
 
-	private long getNextTicketNumber(String gameId) {
-		String xPath = String.format(TICKET_XPATH_GAME_ID, gameId);
+	private long getNextTicketNumber(String sportName, DateTime gameDate) {
+		String xPath = String.format(GAME_XPATH_SPORT_NAME_GAMEDATE, sportName, gameDate);
 		try {
 			long toReturn = database.getMaxValue(xPath, "id") + 1;
 			System.out.println("XmlGameDao: Calcul reussi du nextTicketNumber: " + toReturn);
@@ -157,8 +138,7 @@ public class XmlGameDao implements GameDao {
 
 	@Override
 	public void update(GameDto dto) throws GameDoesntExistException {
-		System.out.println("XmlGameDao: gameID a la mise a jour: " + dto.getId());
-		String xPath = String.format(GAME_XPATH_ID, dto.getId());
+		String xPath = String.format(GAME_XPATH_SPORT_NAME_GAMEDATE, dto.getSportName(), dto.getGameDate().toString(DATE_PATTERN));
 		if (!database.exist(xPath)) {
 			throw new GameDoesntExistException();
 		}
@@ -182,7 +162,6 @@ public class XmlGameDao implements GameDao {
 
 	private SimpleNode convertGameToNodeWithCurrentID(GameDto dto) {
 		Map<String, String> nodes = new HashMap<>();
-		nodes.put("id", Long.toString(dto.getId()));
 		nodes.put("oponents", dto.getOpponents());
 		nodes.put("date", dto.getGameDate().toString(DATE_PATTERN));
 		nodes.put("sportName", dto.getSportName());

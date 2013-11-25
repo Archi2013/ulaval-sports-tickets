@@ -15,7 +15,9 @@ public class GameConverter extends AbstractConverter<GameDto, GameViewModel> {
 	Constants constants;
 
 	public GameViewModel convert(GameDto gameDto) {
-		return new GameViewModel(gameDto.getId(), gameDto.getOpponents(),
+		return new GameViewModel(
+				gameDto.getGameDate(),
+				gameDto.getOpponents(),
 				gameDto.getLocation(),
 				constants.toLongDateTimeFormatFR(gameDto.getGameDate()),
 				gameDto.getNumberOfTickets());

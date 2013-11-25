@@ -50,12 +50,12 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 
 		final Boolean localGameOnly = ticketSearchPreferenceDto.isLocalGameOnly();
 		final List<TicketKind> ticketKinds = transform(ticketSearchPreferenceDto.getSelectedTicketKinds(),
-				new Function<String, TicketKind>() {
-					@Override
-					public TicketKind apply(String ticketKind) {
-						return TicketKind.valueOf(ticketKind);
-					}
-				});
+		        new Function<String, TicketKind>() {
+			        @Override
+			        public TicketKind apply(String ticketKind) {
+				        return TicketKind.valueOf(ticketKind);
+			        }
+		        });
 		final DateTime endDateTime = calculateEndDateTime(DisplayedPeriod.valueOf(ticketSearchPreferenceDto.getDisplayedPeriod()));
 
 		sectionFSDtos = newArrayList(Iterables.filter(sectionFSDtos, new Predicate<SectionForSearchDto>() {
@@ -106,10 +106,10 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 
 				for (GameDto gameDto : gameDtos) {
 					try {
-						List<SectionDto> sectionDtos = sectionDao.getAllAvailable(gameDto.getId());
-	
+						List<SectionDto> sectionDtos = sectionDao.getAllAvailable(gameDto.getSportName(), gameDto.getGameDate());
+
 						for (SectionDto sectionDto : sectionDtos) {
-							String url = createUrl(sportName, gameDto.getId(), sectionDto.getSectionName());
+							String url = createUrl(sportName, gameDto.getGameDate(), sectionDto.getSectionName());
 							SectionForSearchDto sectionFSDto = new SectionForSearchDto(sectionDto, gameDto, sportName, url);
 							sectionFSDtos.add(sectionFSDto);
 						}
@@ -127,8 +127,8 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 		}
 	}
 
-	private String createUrl(String sportName, Long gameId, String sectionName) {
-		return String.format("/sport/%s/match/%s/billets/%s", sportUrlMapper.getUrl(sportName), gameId,
-				ticketTypeUrlMapper.getUrl(sectionName));
+	private String createUrl(String sportName, DateTime gameDate, String sectionName) {
+		return String.format("/sport/%s/match/%s/billets/%s", sportUrlMapper.getUrl(sportName), gameDate,
+		        ticketTypeUrlMapper.getUrl(sectionName));
 	}
 }

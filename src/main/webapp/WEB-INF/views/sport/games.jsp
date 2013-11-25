@@ -29,11 +29,11 @@
 			<tbody>
 				<c:forEach items="${games.games}" var="game">
 					<tr>
-						<td><span style="display: none;">${game.id}</span>${game.date}</td>
+						<td>${game.date}</td>
 						<td>${game.opponents}</td>
 						<td>${game.location}</td>
 						<td>${game.getNumberOfTickets()}</td>
-						<td class="action-column"><a href="match/${game.id}/billets"
+						<td class="action-column"><a href="match/${game.gameDate.toString('yyyyMMddHHmmz')}/billets"
 							class="standard-button-round orange-button">Consulter</a></td>
 					</tr>
 				</c:forEach>

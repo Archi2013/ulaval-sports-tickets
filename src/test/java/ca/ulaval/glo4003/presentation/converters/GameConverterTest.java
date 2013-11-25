@@ -33,8 +33,8 @@ public class GameConverterTest {
 
 	@Before
 	public void setUp() {
-		gameDto1 = new GameDto(1, "", DateTime.now().plusDays(6), "", "");
-		gameDto2 = new GameDto(2, "", DateTime.now().plusDays(11), "", "");
+		gameDto1 = new GameDto("", DateTime.now().plusDays(6), "", "");
+		gameDto2 = new GameDto("", DateTime.now().plusDays(11), "", "");
 
 		gameDtos = newArrayList();
 		gameDtos.add(gameDto1);
@@ -45,7 +45,7 @@ public class GameConverterTest {
 	public void given_a_GameDto_convert_should_return_a_GameSimpleViewModel() {
 		GameViewModel gameSVM = gameConverter.convert(gameDto1);
 
-		assertEquals(gameSVM.id, new Long(gameDto1.getId()));
+		assertEquals(gameSVM.getGameDate(), gameDto1.getGameDate());
 		assertEquals(gameSVM.opponents, gameDto1.getOpponents());
 	}
 
@@ -54,7 +54,7 @@ public class GameConverterTest {
 		List<GameViewModel> gameSVMs = gameConverter.convert(gameDtos);
 
 		for (int i = 0; i < gameDtos.size(); i++) {
-			assertEquals(new Long(gameDtos.get(i).getId()), gameSVMs.get(i).id);
+			assertEquals(gameDtos.get(i).getGameDate(), gameSVMs.get(i).getGameDate());
 			assertEquals(gameDtos.get(i).getOpponents(), gameSVMs.get(i).opponents);
 		}
 	}

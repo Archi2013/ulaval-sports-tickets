@@ -16,8 +16,8 @@ public class ChooseTicketsViewModelFactory {
 		chooseTicketsVM.setNumberOfTicketsToBuy(1);
 		chooseTicketsVM.setSelectedSeats(new ArrayList<String>());
 		chooseTicketsVM.setSectionName(sectionDto.getSectionName());
-		chooseTicketsVM.setGameId(gameDto.getId());
-		
+		chooseTicketsVM.setSportName(gameDto.getSportName());
+		chooseTicketsVM.setGameDate(gameDto.getGameDate());
 		return chooseTicketsVM;
 	}
 }

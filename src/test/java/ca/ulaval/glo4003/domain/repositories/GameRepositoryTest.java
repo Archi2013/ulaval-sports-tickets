@@ -30,8 +30,6 @@ import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
 public class GameRepositoryTest {
 
 	private static final String A_SPORT = "Sport";
-	private static final int AN_ID = 1234;
-	private static final int ANOTHER_ID = 2345;
 	private static final String AN_OPPONENT = "Opponent";
 	private static final String ANOTHER_OPPONENT = "Another";
 	private static final String A_LOCATION = "Stade Telus";
@@ -194,8 +192,8 @@ public class GameRepositoryTest {
 	}
 
 	private void setUpListsOfDtos() {
-		gameDto1 = new GameDto(AN_ID, AN_OPPONENT, A_DATE, A_SPORT, A_LOCATION);
-		gameDto2 = new GameDto(ANOTHER_ID, ANOTHER_OPPONENT, ANOTHER_DATE, A_SPORT, A_LOCATION);
+		gameDto1 = new GameDto(AN_OPPONENT, A_DATE, A_SPORT, A_LOCATION);
+		gameDto2 = new GameDto(ANOTHER_OPPONENT, ANOTHER_DATE, A_SPORT, A_LOCATION);
 		listWithOneGameDto = new ArrayList<>();
 		listWithOneGameDto.add(gameDto1);
 		listWithTwoGameDtos = new ArrayList<>();
