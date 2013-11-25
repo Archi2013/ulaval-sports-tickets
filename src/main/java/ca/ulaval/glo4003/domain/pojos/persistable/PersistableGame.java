@@ -12,17 +12,15 @@ import ca.ulaval.glo4003.domain.tickets.Ticket;
 public class PersistableGame implements Game, Persistable<GameDto> {
 	public static final String NO_SPORT_SET = "The sport has not yet been set in this new game";
 	public static final String NO_LOCATION_SET = "The location has not yet been set in this new game";
-	private Long id;
 	private String opponents;
 	private String location;
 	private List<Ticket> tickets;
 	private GameScheduleState assignationState;
 	private long nextTicketNumber;
 
-	public PersistableGame(Long id, String opponents, String location, long nextTicketNumber,
+	public PersistableGame(String opponents, String location, long nextTicketNumber,
 			GameScheduleState assignationState, List<Ticket> tickets) {
 		System.out.println("PersistableGame: instantiation avec nextTicketNumber: " + nextTicketNumber);
-		this.id = id;
 		this.opponents = opponents;
 		this.location = location;
 		this.assignationState = assignationState;
@@ -33,7 +31,7 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 	@Override
 	public GameDto saveDataInDTO() {
 		System.out.println("PersistableGame: Debut de la sauvegarde");
-		GameDto dto = new GameDto(id, opponents, null, null, location);
+		GameDto dto = new GameDto(opponents, null, null, location);
 		assignationState.saveTheScheduleInThisDto(dto);
 		return dto;
 	}

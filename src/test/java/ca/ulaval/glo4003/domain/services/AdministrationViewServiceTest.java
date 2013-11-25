@@ -39,9 +39,11 @@ public class AdministrationViewServiceTest {
 	@Before
 	public void setUp() throws SportDoesntExistException {
 		games = new ArrayList<GameDto>() {
+            private static final long serialVersionUID = 1L;
+
 			{
-				add(new GameDto(0, AN_OPPONENT, A_DATE, A_SPORT, null));
-				add(new GameDto(0, ANOTHER_OPPONENT, ANOTHER_DATE, A_SPORT, null));
+				add(new GameDto(AN_OPPONENT, A_DATE, A_SPORT, null));
+				add(new GameDto(ANOTHER_OPPONENT, ANOTHER_DATE, A_SPORT, null));
 			}
 		};
 		when(gameDao.getGamesForSport(A_SPORT)).thenReturn(games);

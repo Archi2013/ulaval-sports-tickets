@@ -21,7 +21,6 @@ import ca.ulaval.glo4003.domain.tickets.Ticket;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersistableGameTest {
-	private static final Long AN_ID = 0L;
 	private static final String AN_OPPONENT = "Opponent";
 	private static final String A_SPORT = "sport";
 	private static final DateTime A_DATE = new DateTime(100);
@@ -46,7 +45,7 @@ public class PersistableGameTest {
 	@Before
 	public void setUp() {
 		initializeTickets();
-		gameWithTickets = new PersistableGame(AN_ID, AN_OPPONENT, A_LOCATION, A_NEXT_TICKET_NUMBER, assignationState,
+		gameWithTickets = new PersistableGame(AN_OPPONENT, A_LOCATION, A_NEXT_TICKET_NUMBER, assignationState,
 				tickets);
 
 	}

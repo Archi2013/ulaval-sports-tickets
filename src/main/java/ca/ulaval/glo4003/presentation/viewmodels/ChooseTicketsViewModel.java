@@ -3,21 +3,24 @@ package ca.ulaval.glo4003.presentation.viewmodels;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.joda.time.DateTime;
 
 public class ChooseTicketsViewModel {
 	
 	public Integer numberOfTicketsToBuy;
 	public List<String> selectedSeats;
+	
+	@NotNull @NotEmpty
+	public String sportName;
+	
+	@NotNull
+	public DateTime gameDate;
 
 	@NotNull @NotEmpty
 	public String sectionName;
-	
-	@NotNull @Min(1)
-	public Long gameId;
 	
 	public ChooseTicketsViewModel() {
 		this.selectedSeats = new ArrayList<String>();
@@ -49,11 +52,19 @@ public class ChooseTicketsViewModel {
 		this.sectionName = sectionName;
 	}
 
-	public Long getGameId() {
-		return gameId;
+	public String getSportName() {
+		return sportName;
 	}
 
-	public void setGameId(Long gameId) {
-		this.gameId = gameId;
+	public void setSportName(String sportName) {
+		this.sportName = sportName;
+	}
+
+	public DateTime getGameDate() {
+		return gameDate;
+	}
+
+	public void setGameDate(DateTime gameDate) {
+		this.gameDate = gameDate;
 	}
 }

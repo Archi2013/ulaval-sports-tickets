@@ -17,7 +17,7 @@ public class GameFactory implements IGameFactory {
 
 	@Override
 	public PersistableGame instantiateGame(String opponents, String location) {
-		return instantiateGame(new GameDto(0, opponents, null, null, location), new ArrayList<Ticket>());
+		return instantiateGame(new GameDto(opponents, null, null, location), new ArrayList<Ticket>());
 	}
 
 	// @Override
@@ -29,7 +29,7 @@ public class GameFactory implements IGameFactory {
 
 	@Override
 	public PersistableGame instantiateGame(GameDto data, List<Ticket> tickets) {
-		return new PersistableGame(data.getId(), data.getOpponents(), data.getLocation(), data.getNextTicketNumber(),
+		return new PersistableGame(data.getOpponents(), data.getLocation(), data.getNextTicketNumber(),
 				createAssignationState(data), tickets);
 	}
 

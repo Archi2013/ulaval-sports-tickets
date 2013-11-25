@@ -29,19 +29,19 @@ import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModel
 
 @Service
 public class PaymentService {
-	
+
 	private static final String ERROR_PAGE = "payment/error-page";
-	
+
 	private static final String ERROR_MESSAGE_TRAFFICKED_PAGE = "error-message.payment.trafficked-page";
-	
+
 	private static final String ERROR_MESSAGE_NOT_FOUND_TICKET = "error-message.payment.not-found-ticket";
-	
+
 	private static final String ERROR_MESSAGE_INVALID_CHOOSE_TICKETS_VIEW_MODEL = "error-message.payment.invalid-choose-tickets-view-model";
-	
+
 	private static final String ERROR_MESSAGE_NO_TICKETS = "error-message.payment.no-tickets";
-	
+
 	private static final String ERROR_MESSAGE_INVALID_CREDIT_CARD = "error-message.payment.invalid-credit-card";
-	
+
 	private static final String MODE_OF_PAYMENT_PAGE = "payment/mode-of-payment";
 
 	@Inject
@@ -70,19 +70,18 @@ public class PaymentService {
 
 	@Inject
 	private ISectionRepository sectionRepository;
-	
+
 	@Inject
 	private MessageSource messageSource;
 
-	public void prepareCartViewAndCart(ModelAndView mav,
-			BindingResult result, ChooseTicketsViewModel chooseTicketsVM) {
+	public void prepareCartViewAndCart(ModelAndView mav, BindingResult result, ChooseTicketsViewModel chooseTicketsVM) {
 		if (result.hasErrors()) {
 			prepareErrorPage(mav, ERROR_MESSAGE_TRAFFICKED_PAGE);
 			return;
 		}
 
 		mav.addObject("currency", Constants.CURRENCY);
-		
+
 		try {
 			if (!isValidChooseTicketsViewModel(chooseTicketsVM)) {
 				prepareErrorPage(mav, ERROR_MESSAGE_INVALID_CHOOSE_TICKETS_VIEW_MODEL);
@@ -104,33 +103,36 @@ public class PaymentService {
 		String errorMessage = this.messageSource.getMessage(message, new Object[] {}, null);
 		mav.addObject("errorMessage", errorMessage);
 	}
-	
+
 	private Boolean isValidChooseTicketsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException,
-			SectionDoesntExistException {
-		Section section = sectionRepository.getAvailable(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
+	        SectionDoesntExistException {
+		Section section = sectionRepository.getAvailable(chooseTicketsVM.getSportName(), chooseTicketsVM.getGameDate(),
+		        chooseTicketsVM.getSectionName());
 		return section.isValidElements(chooseTicketsVM.getNumberOfTicketsToBuy(), chooseTicketsVM.getSelectedSeats());
 	}
 
-	private PayableItemsViewModel getPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM)
-			throws GameDoesntExistException, SectionDoesntExistException {
-		GameDto gameDto = gameDao.get(chooseTicketsVM.getGameId());
-		SectionDto sectionDto = sectionDao.getAvailable(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
+	private PayableItemsViewModel getPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException,
+	        SectionDoesntExistException {
+		GameDto gameDto = gameDao.get(chooseTicketsVM.getSportName(), chooseTicketsVM.getGameDate());
+		SectionDto sectionDto = sectionDao.getAvailable(chooseTicketsVM.getSportName(), chooseTicketsVM.getGameDate(),
+		        chooseTicketsVM.getSectionName());
 
 		return payableItemsViewModelFactory.createViewModel(chooseTicketsVM, gameDto, sectionDto);
 	}
 
 	private void saveToCart(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException, SectionDoesntExistException {
-		GameDto gameDto = gameDao.get(chooseTicketsVM.getGameId());
-		SectionDto sectionDto = sectionDao.getAvailable(chooseTicketsVM.getGameId(), chooseTicketsVM.getSectionName());
+		GameDto gameDto = gameDao.get(chooseTicketsVM.getSportName(), chooseTicketsVM.getGameDate());
+		SectionDto sectionDto = sectionDao.getAvailable(chooseTicketsVM.getSportName(), chooseTicketsVM.getGameDate(),
+		        chooseTicketsVM.getSectionName());
 
 		Double cumulativePrice = 0.0;
 
 		if (sectionDto.isGeneralAdmission()) {
 			cumulativePrice = calculator.calculateCumulativePriceForGeneralAdmission(chooseTicketsVM.getNumberOfTicketsToBuy(),
-					sectionDto.getPrice());
+			        sectionDto.getPrice());
 		} else {
 			cumulativePrice = calculator.calculateCumulativePriceForWithSeatAdmission(chooseTicketsVM.getSelectedSeats(),
-					sectionDto.getPrice());
+			        sectionDto.getPrice());
 		}
 
 		currentCart.setNumberOfTicketsToBuy(chooseTicketsVM.getNumberOfTicketsToBuy());
@@ -151,7 +153,7 @@ public class PaymentService {
 			prepareErrorPage(mav, ERROR_MESSAGE_NO_TICKETS);
 		}
 	}
-	
+
 	private String getCumulativePriceFR() throws NoTicketsInCartException {
 		if (currentCart.containTickets()) {
 			return calculator.toPriceFR(currentCart.getCumulativePrice());
@@ -160,8 +162,7 @@ public class PaymentService {
 		}
 	}
 
-	public void prepareValidationViewAndCart(ModelAndView mav,
-			BindingResult result, PaymentViewModel paymentVM) {
+	public void prepareValidationViewAndCart(ModelAndView mav, BindingResult result, PaymentViewModel paymentVM) {
 		mav.addObject("currency", Constants.CURRENCY);
 
 		if (result.hasErrors()) {
@@ -183,7 +184,7 @@ public class PaymentService {
 
 		emptyCart();
 	}
-	
+
 	private void buyTicketsInCart(PaymentViewModel paymentVM) throws InvalidCreditCardException, NoTicketsInCartException {
 		if (currentCart.containTickets()) {
 			CreditCard creditCard = creditCardFactory.createCreditCard(paymentVM);
@@ -201,7 +202,7 @@ public class PaymentService {
 	private void emptyCart() {
 		currentCart.empty();
 	}
-	
+
 	private void modifyModelAndViewToRetryModeOfPayment(PaymentViewModel paymentVM, ModelAndView mav) {
 		mav.setViewName(MODE_OF_PAYMENT_PAGE);
 		mav.addObject("paymentForm", paymentVM);

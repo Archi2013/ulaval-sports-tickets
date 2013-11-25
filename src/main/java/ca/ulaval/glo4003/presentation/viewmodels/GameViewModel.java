@@ -1,26 +1,20 @@
 package ca.ulaval.glo4003.presentation.viewmodels;
 
+import org.joda.time.DateTime;
+
 public class GameViewModel {
-	public Long id;
+	public DateTime gameDate;
 	public String opponents;
 	public String location;
 	public String date;
 	public Integer numberOfTickets;
 
-	public GameViewModel(Long id, String opponents, String location, String date, Integer numberOfTickets) {
-		this.id = id;
+	public GameViewModel(DateTime gameDate, String opponents, String location, String date, Integer numberOfTickets) {
+		this.gameDate = gameDate;
 		this.opponents = opponents;
 		this.location = location;
 		this.date = date;
 		this.numberOfTickets = numberOfTickets;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getOpponents() {
@@ -53,6 +47,14 @@ public class GameViewModel {
 
 	public void setNumberOfTickets(Integer numberOfTickets) {
 		this.numberOfTickets = numberOfTickets;
+	}
+
+	public DateTime getGameDate() {
+		return gameDate;
+	}
+
+	public void setGameDate(DateTime gameDate) {
+		this.gameDate = gameDate;
 	}
 
 }

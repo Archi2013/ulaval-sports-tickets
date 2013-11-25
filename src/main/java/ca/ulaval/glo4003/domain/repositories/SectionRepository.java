@@ -31,19 +31,4 @@ public class SectionRepository implements ISectionRepository {
 		SectionDto sectionDto = sectionDao.getAvailable(sportName, gameDate, sectionName);
 		return sectionFactory.createSection(sectionDto);
 	}
-
-	@Override
-	@Deprecated
-	public Section get(Long gameId, String sectionName) throws SectionDoesntExistException {
-		SectionDto sectionDto = sectionDao.get(gameId, sectionName);
-		return sectionFactory.createSection(sectionDto);
-	}
-
-	@Override
-	@Deprecated
-	public Section getAvailable(Long gameId, String sectionName) throws SectionDoesntExistException {
-		SectionDto sectionDto = sectionDao.getAvailable(gameId, sectionName);
-		return sectionFactory.createSection(sectionDto);
-	}
-
 }

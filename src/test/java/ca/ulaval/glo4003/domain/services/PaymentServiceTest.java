@@ -1,8 +1,7 @@
 package ca.ulaval.glo4003.domain.services;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,22 +14,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.domain.dtos.SectionDto;
 import ca.ulaval.glo4003.domain.utilities.Calculator;
 import ca.ulaval.glo4003.domain.utilities.Constants;
-import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
 import ca.ulaval.glo4003.domain.utilities.payment.Cart;
 import ca.ulaval.glo4003.domain.utilities.payment.CreditCardFactory;
-import ca.ulaval.glo4003.domain.utilities.payment.InvalidCreditCardException;
-import ca.ulaval.glo4003.domain.utilities.payment.MisterCard;
 import ca.ulaval.glo4003.persistence.daos.GameDao;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
 import ca.ulaval.glo4003.persistence.daos.SectionDao;
-import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModelFactory;
 
 @Ignore
@@ -40,8 +30,6 @@ public class PaymentServiceTest {
 	private static final int NUMBER_OF_TICKETS_TO_BUY = 4;
 
 	private static final String SECTION_NAME = "Turquoise";
-
-	private static final Long GAME_ID = 23L;
 
 	private static final String PRICE_FR = "36,70";
 
@@ -86,7 +74,6 @@ public class PaymentServiceTest {
 		selectedSeats = new ArrayList<>();
 		selectedSeats.add("X3");
 		selectedSeats.add("X7");
-		when(chooseTicketsVM.getGameId()).thenReturn(GAME_ID);
 		when(chooseTicketsVM.getSectionName()).thenReturn(SECTION_NAME);
 		when(chooseTicketsVM.getNumberOfTicketsToBuy()).thenReturn(NUMBER_OF_TICKETS_TO_BUY);
 		when(chooseTicketsVM.getSelectedSeats()).thenReturn(selectedSeats);

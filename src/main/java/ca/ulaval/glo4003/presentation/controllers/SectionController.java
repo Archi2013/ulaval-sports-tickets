@@ -2,6 +2,8 @@ package ca.ulaval.glo4003.presentation.controllers;
 
 import javax.inject.Inject;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +21,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
 
 @Controller
 @SessionAttributes({ "currentUser" })
-@RequestMapping(value = "/sport/{sportNameUrl}/match/{gameId}", method = RequestMethod.GET)
+@RequestMapping(value = "/sport/{sportNameUrl}/match/{dateString}", method = RequestMethod.GET)
 public class SectionController {
 
 	@Inject
@@ -29,18 +31,19 @@ public class SectionController {
 	private User currentUser;
 
 	@RequestMapping(value = "/billets/{ticketType}", method = RequestMethod.GET)
-	public ModelAndView getSectionForGame(@PathVariable Long gameId, @PathVariable String ticketType) {
+	public ModelAndView getSectionForGame(@PathVariable String dateString, @PathVariable String sportNameUrl, @PathVariable String ticketType) {
 		try {
+			DateTime gameDate = DateTime.parse(dateString, DateTimeFormat.forPattern("yyyyMMddHHmmz"));
 			ModelAndView mav = new ModelAndView("section/details");
 			mav.addObject("currency", Constants.CURRENCY);
 
 			manageUserConnection(mav);
 
-			SectionViewModel section = sectionService.getAvailableSection(gameId, ticketType);
+			SectionViewModel section = sectionService.getAvailableSection(sportNameUrl, gameDate, ticketType);
 
 			mav.addObject("section", section);
 
-			ChooseTicketsViewModel chooseTicketsVM = sectionService.getChooseTicketsViewModel(gameId, ticketType);
+			ChooseTicketsViewModel chooseTicketsVM = sectionService.getChooseTicketsViewModel(sportNameUrl, gameDate, ticketType);
 
 			mav.addObject("chooseTicketsForm", chooseTicketsVM);
 

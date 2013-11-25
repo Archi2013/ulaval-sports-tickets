@@ -18,17 +18,4 @@ public interface SectionDao {
 	public List<SectionDto> getAllAvailable(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
 	public Set<String> getAllSections();
-
-	@Deprecated
-	public SectionDto get(Long gameId, String sectionName) throws SectionDoesntExistException;
-
-	@Deprecated
-	public SectionDto getAvailable(Long gameId, String sectionName) throws SectionDoesntExistException;
-
-	@Deprecated
-	public List<SectionDto> getAll(Long gameId) throws GameDoesntExistException;
-
-	@Deprecated
-	public List<SectionDto> getAllAvailable(Long gameId) throws GameDoesntExistException;
-
 }

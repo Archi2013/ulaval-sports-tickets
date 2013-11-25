@@ -18,13 +18,11 @@ public class GameIsInFutureFilterTest {
 	private static final DateTime A_DATE = new DateTime(100);
 	private static final DateTime A_DATE_BEFORE = new DateTime(75);
 	private static final DateTime A_DATE_AFTER = new DateTime(125);
-	private static final int AN_ID = 123;
-	private static final int ANOTHER_ID = 234;
 	private static final String AN_OPPONENT = "Opponent";
 	private static final String A_SPORT_NAME = "BaseketBall";
 	private static final String A_LOCATION = "Stade Telus";
-	private static final GameDto A_GAME_AFTER = new GameDto(AN_ID, AN_OPPONENT, A_DATE_AFTER, A_SPORT_NAME, A_LOCATION);
-	private static final GameDto A_GAME_BEFORE = new GameDto(ANOTHER_ID, AN_OPPONENT, A_DATE_BEFORE, A_SPORT_NAME, A_LOCATION);
+	private static final GameDto A_GAME_AFTER = new GameDto(AN_OPPONENT, A_DATE_AFTER, A_SPORT_NAME, A_LOCATION);
+	private static final GameDto A_GAME_BEFORE = new GameDto(AN_OPPONENT, A_DATE_BEFORE, A_SPORT_NAME, A_LOCATION);
 	private GameIsInFutureFilter filter;
 
 	@Before

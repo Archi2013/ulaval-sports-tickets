@@ -45,7 +45,6 @@ public class GameRepository implements IGameRepository {
 		System.out.println("Repository: nextTicketNumber: " + gameDto.getNextTicketNumber());
 		System.out.println("Repository: opponents: " + gameDto.getOpponents());
 		System.out.println("Repository: sportName" + gameDto.getSportName());
-		System.out.println("Repository: id" + gameDto.getId());
 		System.out.println("Repository: gameDate" + gameDto.getGameDate().toString());
 		List<Ticket> tickets = getTicketsForGame(sport, date);
 		PersistableGame game = gameFactory.instantiateGame(gameDto, tickets);
