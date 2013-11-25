@@ -57,7 +57,7 @@
 	<c:choose>
 		<c:when test="${connectedUser}">
 			<div class="wrapper-choose-tickets-form padding-20">
-				<c:url value="/paiement" var="chooseAction" />
+				<c:url value="/panier/ajout-billets" var="chooseAction" />
 				<form:form id="choose-tickets-form" commandName="chooseTicketsForm"
 					action="${chooseAction}" method="POST">
 					<form:hidden path="sectionName" />

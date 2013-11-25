@@ -15,21 +15,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.services.PaymentService;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
 
 @Controller
 @SessionAttributes({ "currentUser" })
-@RequestMapping(value = "/paiement", method = RequestMethod.GET)
-public class PaymentController {
+@RequestMapping(value = "/panier", method = RequestMethod.GET)
+public class CartController {
 	
 	private static final String ERROR_MESSAGE_NOT_CONNECTED_USER = "error-message.payment.not-connected-user";
+	
+	private static final String ERROR_PAGE = "cart/error-page";
 
-	private static final String ERROR_PAGE = "payment/error-page";
-
-	private static final String MODE_OF_PAYMENT_PAGE = "payment/mode-of-payment";
-
-	private static final String VALIDATION_SUCCES_PAGE = "payment/succes";
-
+	private static final String ADD_TICKETS_PAGE = "cart/add-tickets";
+	
 	@Inject
 	PaymentService paymentService;
 
@@ -39,11 +37,12 @@ public class PaymentController {
 	@Inject
 	private MessageSource messageSource;
 
-	@RequestMapping(value = "mode-de-paiement", method = RequestMethod.GET)
-	public ModelAndView modeOfPayment() {
-		ModelAndView mav = new ModelAndView(MODE_OF_PAYMENT_PAGE);
-
+	@RequestMapping(value = "ajout-billets", method = RequestMethod.POST)
+	public ModelAndView addToCart(@ModelAttribute("chooseTicketsForm") @Valid ChooseTicketsViewModel chooseTicketsVM,
+			BindingResult result) {
 		Boolean connectedUser = currentUser.isLogged();
+
+		ModelAndView mav = new ModelAndView(ADD_TICKETS_PAGE);
 
 		addConnectedUserToModelAndView(connectedUser, mav);
 
@@ -52,30 +51,11 @@ public class PaymentController {
 			return mav;
 		}
 		
-		paymentService.prepareModeOfPaymentView(mav);
+		paymentService.prepareCartViewAndCart(mav, result, chooseTicketsVM);
 
 		return mav;
 	}
-
-	@RequestMapping(value = "validation-achat", method = RequestMethod.POST)
-	public ModelAndView validate(@ModelAttribute("paymentForm") @Valid PaymentViewModel paymentVM, BindingResult result) {
-		
-		ModelAndView mav = new ModelAndView(VALIDATION_SUCCES_PAGE);
-
-		Boolean connectedUser = currentUser.isLogged();
-
-		addConnectedUserToModelAndView(connectedUser, mav);
-
-		if (!connectedUser) {
-			prepareErrorPageToShowNotConnectedUserMessage(mav);
-			return mav;
-		}
-
-		paymentService.prepareValidationViewAndCart(mav, result, paymentVM);
-		
-		return mav;
-	}
-
+	
 	private void prepareErrorPageToShowNotConnectedUserMessage(ModelAndView mav) {
 		mav.setViewName(ERROR_PAGE);
 		String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_CONNECTED_USER, new Object[] {}, null);
