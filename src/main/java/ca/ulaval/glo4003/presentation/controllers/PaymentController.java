@@ -19,8 +19,6 @@ import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.utilities.Constants;
 import ca.ulaval.glo4003.domain.utilities.payment.InvalidCreditCardException;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 
@@ -28,16 +26,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 @SessionAttributes({ "currentUser" })
 @RequestMapping(value = "/paiement", method = RequestMethod.GET)
 public class PaymentController {
-	private static final String ERROR_MESSAGE_INVALID_CREDIT_CARD = "error-message.payment.invalid-credit-card";
-
-	private static final String ERROR_MESSAGE_NO_TICKETS = "error-message.payment.no-tickets";
-
-	private static final String ERROR_MESSAGE_NOT_FOUND_TICKET = "error-message.payment.not-found-ticket";
-
-	private static final String ERROR_MESSAGE_INVALID_CHOOSE_TICKETS_VIEW_MODEL = "error-message.payment.invalid-choose-tickets-view-model";
-
-	private static final String ERROR_MESSAGE_TRAFFICKED_PAGE = "error-message.payment.trafficked-page";
-
+	
 	private static final String ERROR_MESSAGE_NOT_CONNECTED_USER = "error-message.payment.not-connected-user";
 
 	private static final String ERROR_PAGE = "payment/error-page";
@@ -61,7 +50,7 @@ public class PaymentController {
 	private MessageSource messageSource;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ModelAndView home(@ModelAttribute("chooseTicketsForm") @Valid ChooseTicketsViewModel chooseTicketsVM,
+	public ModelAndView cart(@ModelAttribute("chooseTicketsForm") @Valid ChooseTicketsViewModel chooseTicketsVM,
 			BindingResult result) {
 		Boolean connectedUser = currentUser.isLogged();
 
@@ -70,32 +59,11 @@ public class PaymentController {
 		addConnectedUserToModelAndView(connectedUser, mav);
 
 		if (!connectedUser) {
-			modifyModelAndViewToShowNotConnectedUserPage(mav);
+			prepareErrorPageToShowNotConnectedUserMessage(mav);
 			return mav;
 		}
-
-		if (result.hasErrors()) {
-			mav.setViewName(ERROR_PAGE);
-			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_TRAFFICKED_PAGE, new Object[] {}, null);
-			mav.addObject("errorMessage", errorMessage);
-			return mav;
-		}
-
-		mav.addObject("currency", Constants.CURRENCY);
-
-		try {
-			if (!paymentService.isValidChooseTicketsViewModel(chooseTicketsVM)) {
-				String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_INVALID_CHOOSE_TICKETS_VIEW_MODEL,
-						new Object[] {}, null);
-				mav.addObject("errorMessage", errorMessage);
-				return mav;
-			}
-			mav.addObject("payableItems", paymentService.getPayableItemsViewModel(chooseTicketsVM));
-			paymentService.saveToCart(chooseTicketsVM);
-		} catch (GameDoesntExistException | SectionDoesntExistException e) {
-			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_FOUND_TICKET, new Object[] {}, null);
-			mav.addObject("errorMessage", errorMessage);
-		}
+		
+		paymentService.prepareCartViewAndCart(mav, result, chooseTicketsVM);
 
 		return mav;
 	}
@@ -109,21 +77,11 @@ public class PaymentController {
 		addConnectedUserToModelAndView(connectedUser, mav);
 
 		if (!connectedUser) {
-			modifyModelAndViewToShowNotConnectedUserPage(mav);
+			prepareErrorPageToShowNotConnectedUserMessage(mav);
 			return mav;
 		}
-
-		mav.addObject("currency", Constants.CURRENCY);
-
-		mav.addObject("paymentForm", new PaymentViewModel());
-		mav.addObject("creditCardTypes", paymentService.getCreditCardTypes());
-		try {
-			mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
-		} catch (NoTicketsInCartException e) {
-			mav.setViewName(ERROR_PAGE);
-			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NO_TICKETS, new Object[] {}, null);
-			mav.addObject("errorMessage", errorMessage);
-		}
+		
+		paymentService.prepareModeOfPaymentView(mav);
 
 		return mav;
 	}
@@ -133,49 +91,21 @@ public class PaymentController {
 		
 		ModelAndView mav = new ModelAndView(VALIDATION_SUCCES_PAGE);
 
-		Boolean userIsconnected = currentUser.isLogged();
+		Boolean connectedUser = currentUser.isLogged();
 
-		addConnectedUserToModelAndView(userIsconnected, mav);
+		addConnectedUserToModelAndView(connectedUser, mav);
 
-		if (!userIsconnected) {
-			modifyModelAndViewToShowNotConnectedUserPage(mav);
+		if (!connectedUser) {
+			prepareErrorPageToShowNotConnectedUserMessage(mav);
 			return mav;
 		}
 
-		mav.addObject("currency", Constants.CURRENCY);
-
-		try {
-			mav.addObject("cumulativePrice", paymentService.getCumulativePriceFR());
-		} catch (NoTicketsInCartException e) {
-			mav.setViewName(ERROR_PAGE);
-			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NO_TICKETS, new Object[] {}, null);
-			mav.addObject("errorMessage", errorMessage);
-			return mav;
-		}
-
-		if (result.hasErrors()) {
-			modifyModelAndViewToRetryModeOfPayment(paymentVM, mav);
-			return mav;
-		}
-
-		try {
-			paymentService.buyTicketsInCart(paymentVM);
-		} catch (InvalidCreditCardException e) {
-			modifyModelAndViewToRetryModeOfPayment(paymentVM, mav);
-			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_INVALID_CREDIT_CARD, new Object[] {}, null);
-			mav.addObject("errorMessage", errorMessage);
-			return mav;
-		} catch (NoTicketsInCartException e) {
-			mav.setViewName(ERROR_PAGE);
-			String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NO_TICKETS, new Object[] {}, null);
-			mav.addObject("errorMessage", errorMessage);
-		}
-
-		paymentService.emptyCart();
+		paymentService.prepareValidationViewAndCart(mav, result, paymentVM);
+		
 		return mav;
 	}
 
-	private void modifyModelAndViewToShowNotConnectedUserPage(ModelAndView mav) {
+	private void prepareErrorPageToShowNotConnectedUserMessage(ModelAndView mav) {
 		mav.setViewName(ERROR_PAGE);
 		String errorMessage = this.messageSource.getMessage(ERROR_MESSAGE_NOT_CONNECTED_USER, new Object[] {}, null);
 		mav.addObject("errorMessage", errorMessage);
@@ -187,11 +117,5 @@ public class PaymentController {
 		} else {
 			mav.addObject("connectedUser", false);
 		}
-	}
-
-	private void modifyModelAndViewToRetryModeOfPayment(PaymentViewModel paymentVM, ModelAndView mav) {
-		mav.setViewName(MODE_OF_PAYMENT_PAGE);
-		mav.addObject("paymentForm", paymentVM);
-		mav.addObject("creditCardTypes", paymentService.getCreditCardTypes());
 	}
 }
