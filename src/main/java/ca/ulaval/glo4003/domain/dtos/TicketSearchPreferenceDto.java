@@ -8,7 +8,7 @@ public class TicketSearchPreferenceDto {
 	private String displayedPeriod;
 	public boolean localGameOnly;
 	public List<String> selectedTicketKinds;
-	
+
 	public TicketSearchPreferenceDto(List<String> selectedSports,
 			String displayedPeriod, boolean localGameOnly,
 			List<String> selectedTicketKinds) {

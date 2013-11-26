@@ -38,11 +38,11 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 	}
 
 	@Override
-	public UserPreferencesDto get(String username) throws UserDoesntHaveSavedPreferences {
+	public TicketSearchPreferenceDto get(String username) throws UserDoesntHaveSavedPreferences {
 
 		for (UserPreferencesDto userPref : this.userPrefList) {
 			if (userPref.username.equals(username)) {
-				return userPref;
+				return new TicketSearchPreferenceDto(userPref.selectedSports, "ONE_DAY", userPref.localGameOnly, userPref.selectedTicketKinds);
 			}
 		}
 

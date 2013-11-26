@@ -27,8 +27,8 @@ public class UserPreferencesService {
 	
 	public TicketSearchViewModel getUserPreferencesForUser(User currentUser) throws UserDoesntHaveSavedPreferences{
 		
-		UserPreferencesDto userPref= userPreferencesDao.get(currentUser.getUsername());	
-		TicketSearchViewModel ticketSearchVModel=ticketSearchFactory.createViewModelFromUserPreferencesDto(userPref);
+		TicketSearchPreferenceDto ticketSPDto= userPreferencesDao.get(currentUser.getUsername());	
+		TicketSearchViewModel ticketSearchVModel=ticketSearchFactory.createViewModel(ticketSPDto);
 		return ticketSearchVModel;
 				
 	}

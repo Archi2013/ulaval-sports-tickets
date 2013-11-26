@@ -11,7 +11,7 @@ public interface UserPreferencesDao {
 
 	
 	
-	public UserPreferencesDto get(String username) throws UserDoesntHaveSavedPreferences;
+	public TicketSearchPreferenceDto get(String username) throws UserDoesntHaveSavedPreferences;
 
 	void save(User username, TicketSearchPreferenceDto userPreferences);
 	
