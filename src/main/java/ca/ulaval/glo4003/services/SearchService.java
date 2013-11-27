@@ -9,9 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
-import ca.ulaval.glo4003.domain.sections.SectionForSearchDao;
-import ca.ulaval.glo4003.domain.sections.SectionForSearchDto;
-import ca.ulaval.glo4003.domain.tickets.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.domain.search.SectionForSearchDao;
+import ca.ulaval.glo4003.domain.search.SectionForSearchDto;
+import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionForSearchViewModelFactory;

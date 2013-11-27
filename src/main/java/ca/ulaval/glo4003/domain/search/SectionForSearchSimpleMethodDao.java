@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.sections;
+package ca.ulaval.glo4003.domain.search;
 
 import static com.google.common.collect.Lists.*;
 
@@ -13,8 +13,9 @@ import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
 import ca.ulaval.glo4003.domain.game.GameDao;
 import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.domain.sections.SectionDao;
+import ca.ulaval.glo4003.domain.sections.SectionDto;
 import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
-import ca.ulaval.glo4003.domain.tickets.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.tickets.TicketTypeUrlMapper;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;

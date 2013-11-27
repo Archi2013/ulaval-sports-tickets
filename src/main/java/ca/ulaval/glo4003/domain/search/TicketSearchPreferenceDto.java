@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.tickets;
+package ca.ulaval.glo4003.domain.search;
 
 import java.util.ArrayList;
 import java.util.List;

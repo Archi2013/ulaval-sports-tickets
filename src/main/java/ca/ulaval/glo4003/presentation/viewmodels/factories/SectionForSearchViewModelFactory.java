@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.sections.SectionForSearchDto;
+import ca.ulaval.glo4003.domain.search.SectionForSearchDto;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;

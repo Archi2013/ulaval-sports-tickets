@@ -10,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.tickets.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.users.UserDto;
 import ca.ulaval.glo4003.domain.users.UserPreferencesDao;

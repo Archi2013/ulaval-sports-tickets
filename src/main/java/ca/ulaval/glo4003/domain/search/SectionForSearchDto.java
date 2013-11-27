@@ -1,8 +1,9 @@
-package ca.ulaval.glo4003.domain.sections;
+package ca.ulaval.glo4003.domain.search;
 
 import org.joda.time.DateTime;
 
 import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.domain.sections.SectionDto;
 
 public class SectionForSearchDto {
 	private static final String GENERAL_SECTION = "Générale";
