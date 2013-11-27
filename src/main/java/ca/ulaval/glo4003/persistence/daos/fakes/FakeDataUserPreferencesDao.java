@@ -16,7 +16,7 @@ import ca.ulaval.glo4003.persistence.daos.UserPreferencesDao;
 public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 
 	private List<UserPreferencesDto> userPrefList;
-
+	
 	public FakeDataUserPreferencesDao() {
 		this.userPrefList = new ArrayList<UserPreferencesDto>();
 

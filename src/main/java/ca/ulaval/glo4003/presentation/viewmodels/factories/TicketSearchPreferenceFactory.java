@@ -70,15 +70,5 @@ public class TicketSearchPreferenceFactory {
 		return ticketSearchVM;
 	}
 	
-	public TicketSearchViewModel createViewModelFromUserPreferencesDto(UserPreferencesDto userPrefDto) {
-		DisplayedPeriod displayPeriod = userPrefDto.getDisplayedPeriod();
-		List<TicketKind> selectedTicketKinds = transform(userPrefDto.getSelectedTicketKinds(), new Function<String, TicketKind>() {
-			@Override
-			public TicketKind apply(String ticketKind) {
-				return TicketKind.valueOf(ticketKind);
-			}
-		});
-		return createTicketSearchViewModel(
-				userPrefDto.getSelectedSports(), displayPeriod, userPrefDto.isLocalGameOnly(), selectedTicketKinds);
-	}
+
 }
