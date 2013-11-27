@@ -7,8 +7,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
-import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
+import ca.ulaval.glo4003.constants.TicketKind;
+import ca.ulaval.glo4003.domain.tickets.GeneralTicket;
+import ca.ulaval.glo4003.domain.tickets.Ticket;
+import ca.ulaval.glo4003.domain.tickets.TicketAssignationState;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GeneralTicketTest {

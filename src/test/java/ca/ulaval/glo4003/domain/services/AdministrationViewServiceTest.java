@@ -15,10 +15,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.persistence.daos.GameDao;
-import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.domain.game.GameDao;
+import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.GameSelectionViewModel;
+import ca.ulaval.glo4003.services.AdministrationViewService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdministrationViewServiceTest {

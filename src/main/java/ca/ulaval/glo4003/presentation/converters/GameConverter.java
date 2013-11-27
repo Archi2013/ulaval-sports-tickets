@@ -4,9 +4,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.domain.utilities.Constants;
+import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.presentation.viewmodels.GameViewModel;
+import ca.ulaval.glo4003.utilities.Constants;
 
 @Component
 public class GameConverter extends AbstractConverter<GameDto, GameViewModel> {

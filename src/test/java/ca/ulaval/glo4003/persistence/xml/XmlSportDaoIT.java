@@ -6,9 +6,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.ulaval.glo4003.domain.dtos.SportDto;
-import ca.ulaval.glo4003.persistence.daos.SportAlreadyExistException;
-import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.domain.sports.SportDto;
+import ca.ulaval.glo4003.domain.sports.XmlSportDao;
+import ca.ulaval.glo4003.exceptions.SportAlreadyExistException;
+import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 
 public class XmlSportDaoIT {
 	private XmlSportDao sportDao;

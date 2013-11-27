@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.dtos.SportDto;
+import ca.ulaval.glo4003.domain.sports.SportDto;
 import ca.ulaval.glo4003.presentation.converters.SportConverter;
 import ca.ulaval.glo4003.presentation.viewmodels.SportViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;

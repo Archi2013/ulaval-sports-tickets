@@ -18,11 +18,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.SectionService;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
+import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
+import ca.ulaval.glo4003.services.SectionService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SectionControllerTest {

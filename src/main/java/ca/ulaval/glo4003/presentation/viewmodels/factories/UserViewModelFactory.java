@@ -2,7 +2,7 @@ package ca.ulaval.glo4003.presentation.viewmodels.factories;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.dtos.UserDto;
+import ca.ulaval.glo4003.domain.users.UserDto;
 import ca.ulaval.glo4003.presentation.viewmodels.UserViewModel;
 
 @Component

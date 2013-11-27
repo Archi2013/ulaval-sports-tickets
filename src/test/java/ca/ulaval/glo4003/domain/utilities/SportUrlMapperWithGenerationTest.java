@@ -13,7 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.persistence.daos.SportDao;
+import ca.ulaval.glo4003.domain.sports.SportDao;
+import ca.ulaval.glo4003.domain.sports.SportUrlMapperWithGeneration;
+import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportUrlMapperWithGenerationTest {

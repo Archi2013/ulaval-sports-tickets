@@ -9,13 +9,14 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import ca.ulaval.glo4003.domain.dtos.GeneralTicketDto;
-import ca.ulaval.glo4003.domain.dtos.SeatedTicketDto;
-import ca.ulaval.glo4003.domain.dtos.TicketDto;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
-import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
+import ca.ulaval.glo4003.domain.tickets.GeneralTicketDto;
+import ca.ulaval.glo4003.domain.tickets.SeatedTicketDto;
+import ca.ulaval.glo4003.domain.tickets.TicketDto;
+import ca.ulaval.glo4003.domain.tickets.XmlTicketDao;
+import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
+import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
+import ca.ulaval.glo4003.exceptions.TicketAlreadyExistsException;
+import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
 
 @Ignore
 public class XmlTicketDaoIT {

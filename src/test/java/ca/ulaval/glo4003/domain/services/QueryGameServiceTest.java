@@ -15,13 +15,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.persistence.daos.GameDao;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.SectionDao;
+import ca.ulaval.glo4003.domain.game.GameDao;
+import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.domain.sections.SectionDao;
+import ca.ulaval.glo4003.domain.sections.SectionDto;
+import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionsViewModelFactory;
+import ca.ulaval.glo4003.services.QueryGameService;
 
 @Ignore
 @RunWith(MockitoJUnitRunner.class)

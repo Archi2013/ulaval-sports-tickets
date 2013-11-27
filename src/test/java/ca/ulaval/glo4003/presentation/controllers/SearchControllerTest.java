@@ -15,13 +15,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.SearchService;
-import ca.ulaval.glo4003.domain.services.UserPreferencesService;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.persistence.daos.UserDoesntHaveSavedPreferences;
+import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.controllers.SearchController;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
+import ca.ulaval.glo4003.services.SearchService;
+import ca.ulaval.glo4003.services.UserPreferencesService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchControllerTest {

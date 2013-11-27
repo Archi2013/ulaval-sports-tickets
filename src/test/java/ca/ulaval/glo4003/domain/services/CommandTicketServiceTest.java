@@ -11,12 +11,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.pojos.Game;
-import ca.ulaval.glo4003.domain.repositories.IGameRepository;
-import ca.ulaval.glo4003.domain.repositories.ITicketRepository;
+import ca.ulaval.glo4003.domain.game.Game;
+import ca.ulaval.glo4003.domain.game.IGameRepository;
+import ca.ulaval.glo4003.domain.tickets.ITicketRepository;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
+import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
+import ca.ulaval.glo4003.exceptions.TicketAlreadyExistsException;
+import ca.ulaval.glo4003.services.CommandTicketService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandTicketServiceTest {

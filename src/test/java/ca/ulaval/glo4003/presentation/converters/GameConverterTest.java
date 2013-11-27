@@ -13,10 +13,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.domain.utilities.Constants;
+import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.presentation.converters.GameConverter;
 import ca.ulaval.glo4003.presentation.viewmodels.GameViewModel;
+import ca.ulaval.glo4003.utilities.Constants;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameConverterTest {

@@ -12,15 +12,15 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.SportViewService;
+import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
-import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
+import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
+import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.controllers.SportController;
 import ca.ulaval.glo4003.presentation.viewmodels.GamesViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
+import ca.ulaval.glo4003.services.SportViewService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportControllerTest {

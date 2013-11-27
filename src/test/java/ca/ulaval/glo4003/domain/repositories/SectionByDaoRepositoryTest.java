@@ -11,12 +11,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.domain.factories.SectionFactory;
-import ca.ulaval.glo4003.domain.pojos.Section;
-import ca.ulaval.glo4003.persistence.daos.SectionDao;
-import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.domain.sections.Section;
+import ca.ulaval.glo4003.domain.sections.SectionDao;
+import ca.ulaval.glo4003.domain.sections.SectionDto;
+import ca.ulaval.glo4003.domain.sections.SectionFactory;
+import ca.ulaval.glo4003.domain.sections.SectionRepository;
+import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
+import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SectionByDaoRepositoryTest {

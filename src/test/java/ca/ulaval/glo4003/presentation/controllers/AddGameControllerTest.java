@@ -18,12 +18,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.CommandGameService;
-import ca.ulaval.glo4003.domain.services.CommandTicketService;
-import ca.ulaval.glo4003.domain.services.SportViewService;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.GameToAddViewModel;
+import ca.ulaval.glo4003.services.CommandGameService;
+import ca.ulaval.glo4003.services.CommandTicketService;
+import ca.ulaval.glo4003.services.SportViewService;
 import ca.ulaval.glo4003.utilities.time.InputDate;
 
 @RunWith(MockitoJUnitRunner.class)

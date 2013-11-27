@@ -1,8 +1,5 @@
 package ca.ulaval.glo4003.domain.tickets;
 
-import ca.ulaval.glo4003.domain.dtos.SeatedTicketDto;
-import ca.ulaval.glo4003.domain.dtos.TicketDto;
-import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
 
 public class SeatedTicket extends Ticket {
 

@@ -14,12 +14,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.dtos.SportDto;
-import ca.ulaval.glo4003.domain.factories.SportFactory;
-import ca.ulaval.glo4003.domain.pojos.Game;
-import ca.ulaval.glo4003.domain.pojos.Sport;
-import ca.ulaval.glo4003.domain.pojos.persistable.PersistableSport;
-import ca.ulaval.glo4003.persistence.daos.SportDao;
+import ca.ulaval.glo4003.domain.game.Game;
+import ca.ulaval.glo4003.domain.game.IGameRepository;
+import ca.ulaval.glo4003.domain.sports.PersistableSport;
+import ca.ulaval.glo4003.domain.sports.Sport;
+import ca.ulaval.glo4003.domain.sports.SportDao;
+import ca.ulaval.glo4003.domain.sports.SportDto;
+import ca.ulaval.glo4003.domain.sports.SportFactory;
+import ca.ulaval.glo4003.domain.sports.SportRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportRepositoryTest {

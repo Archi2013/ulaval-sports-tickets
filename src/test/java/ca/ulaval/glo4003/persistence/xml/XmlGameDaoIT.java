@@ -10,9 +10,10 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.domain.game.XmlGameDao;
+import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
+import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 
 @Ignore
 public class XmlGameDaoIT {

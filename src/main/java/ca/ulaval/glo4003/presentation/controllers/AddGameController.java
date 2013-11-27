@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.CommandGameService;
-import ca.ulaval.glo4003.domain.services.CommandTicketService;
-import ca.ulaval.glo4003.domain.services.SportViewService;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
-import ca.ulaval.glo4003.persistence.daos.GameAlreadyExistException;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketAlreadyExistsException;
-import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
+import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
+import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
+import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
+import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
+import ca.ulaval.glo4003.exceptions.TicketAlreadyExistsException;
+import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.GameToAddViewModel;
+import ca.ulaval.glo4003.services.CommandGameService;
+import ca.ulaval.glo4003.services.CommandTicketService;
+import ca.ulaval.glo4003.services.SportViewService;
 
 @Controller
 @SessionAttributes({ "currentUser" })

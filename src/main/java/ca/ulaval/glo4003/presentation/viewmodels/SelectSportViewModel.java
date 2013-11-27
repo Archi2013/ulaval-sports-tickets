@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.presentation.viewmodels;
 
-import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
+import ca.ulaval.glo4003.constants.TicketKind;
 
 public class SelectSportViewModel {
 	String sport;

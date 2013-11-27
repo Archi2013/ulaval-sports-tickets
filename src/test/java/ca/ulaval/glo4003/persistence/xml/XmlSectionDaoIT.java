@@ -3,7 +3,8 @@ package ca.ulaval.glo4003.persistence.xml;
 import org.junit.Assert;
 import org.junit.Before;
 
-import ca.ulaval.glo4003.domain.dtos.SectionDto;
+import ca.ulaval.glo4003.domain.sections.SectionDto;
+import ca.ulaval.glo4003.domain.sections.XmlSectionDao;
 
 public class XmlSectionDaoIT {
 

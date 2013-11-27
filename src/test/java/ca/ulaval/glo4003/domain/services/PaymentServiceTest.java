@@ -14,14 +14,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.utilities.Calculator;
-import ca.ulaval.glo4003.domain.utilities.Constants;
-import ca.ulaval.glo4003.domain.utilities.payment.Cart;
-import ca.ulaval.glo4003.domain.utilities.payment.CreditCardFactory;
-import ca.ulaval.glo4003.persistence.daos.GameDao;
-import ca.ulaval.glo4003.persistence.daos.SectionDao;
+import ca.ulaval.glo4003.domain.game.GameDao;
+import ca.ulaval.glo4003.domain.payment.Cart;
+import ca.ulaval.glo4003.domain.payment.CreditCardFactory;
+import ca.ulaval.glo4003.domain.sections.SectionDao;
 import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModelFactory;
+import ca.ulaval.glo4003.services.CartService;
+import ca.ulaval.glo4003.services.PaymentService;
+import ca.ulaval.glo4003.utilities.Calculator;
+import ca.ulaval.glo4003.utilities.Constants;
 
 @Ignore
 @RunWith(MockitoJUnitRunner.class)

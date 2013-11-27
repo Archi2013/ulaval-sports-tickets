@@ -11,11 +11,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.pojos.persistable.PersistableGame;
-import ca.ulaval.glo4003.domain.pojos.persistable.PersistableSport;
-import ca.ulaval.glo4003.domain.repositories.IGameRepository;
-import ca.ulaval.glo4003.domain.repositories.ISportRepository;
-import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
+import ca.ulaval.glo4003.domain.game.IGameRepository;
+import ca.ulaval.glo4003.domain.game.PersistableGame;
+import ca.ulaval.glo4003.domain.sports.ISportRepository;
+import ca.ulaval.glo4003.domain.sports.PersistableSport;
+import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
+import ca.ulaval.glo4003.services.CommandGameService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandGameServiceTest {

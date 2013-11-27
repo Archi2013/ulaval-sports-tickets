@@ -2,27 +2,27 @@ package ca.ulaval.glo4003.presentation.viewmodels;
 
 import java.util.List;
 
-import ca.ulaval.glo4003.domain.utilities.Constants.TicketKind;
-import ca.ulaval.glo4003.domain.utilities.Constants.DisplayedPeriod;
+import ca.ulaval.glo4003.constants.DisplayedPeriod;
+import ca.ulaval.glo4003.constants.TicketKind;
 
 public class TicketSearchViewModel {
 	public List<String> selectedSports;
 	private DisplayedPeriod displayedPeriod;
 	public boolean localGameOnly;
 	public List<TicketKind> selectedTicketKinds;
-	
+
 	public List<String> getSelectedSports() {
 		return selectedSports;
 	}
-	
+
 	public void setSelectedSports(List<String> selectedSports) {
 		this.selectedSports = selectedSports;
 	}
-	
+
 	public DisplayedPeriod getDisplayedPeriod() {
 		return displayedPeriod;
 	}
-	
+
 	public void setDisplayedPeriod(DisplayedPeriod displayedPeriod2) {
 		this.displayedPeriod = displayedPeriod2;
 	}

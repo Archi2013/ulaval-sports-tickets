@@ -23,6 +23,9 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import ca.ulaval.glo4003.utilities.persistence.SimpleNode;
+import ca.ulaval.glo4003.utilities.persistence.XmlExtractor;
+
 @RunWith(MockitoJUnitRunner.class)
 public class SimpleNodeTest {
 	

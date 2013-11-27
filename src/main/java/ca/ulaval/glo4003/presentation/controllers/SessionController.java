@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.UserService;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.users.UserAlreadyExistException;
 import ca.ulaval.glo4003.domain.users.UserDoesntExistException;
 import ca.ulaval.glo4003.domain.users.UsernameAndPasswordDoesntMatchException;
 import ca.ulaval.glo4003.presentation.viewmodels.UserViewModel;
+import ca.ulaval.glo4003.services.UserService;
 
 
 @Controller

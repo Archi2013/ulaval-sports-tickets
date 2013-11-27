@@ -14,11 +14,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.QueryGameService;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
+import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.presentation.controllers.GameController;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;
+import ca.ulaval.glo4003.services.QueryGameService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameControllerTest {

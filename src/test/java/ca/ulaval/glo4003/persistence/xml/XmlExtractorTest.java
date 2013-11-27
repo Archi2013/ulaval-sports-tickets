@@ -16,6 +16,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.utilities.persistence.SimpleNode;
+import ca.ulaval.glo4003.utilities.persistence.XmlExtractor;
+
 @RunWith(MockitoJUnitRunner.class)
 public class XmlExtractorTest {
 

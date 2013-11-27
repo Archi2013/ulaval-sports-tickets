@@ -14,18 +14,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.domain.utilities.NoTicketTypeForUrlException;
-import ca.ulaval.glo4003.domain.utilities.TicketTypeUrlMapper;
-import ca.ulaval.glo4003.persistence.daos.GameDao;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.SectionDao;
-import ca.ulaval.glo4003.persistence.daos.SectionDoesntExistException;
+import ca.ulaval.glo4003.domain.game.GameDao;
+import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.domain.sections.SectionDao;
+import ca.ulaval.glo4003.domain.sections.SectionDto;
+import ca.ulaval.glo4003.domain.tickets.TicketTypeUrlMapper;
+import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
+import ca.ulaval.glo4003.exceptions.NoTicketTypeForUrlException;
+import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.ChooseTicketsViewModelFactory;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionViewModelFactory;
+import ca.ulaval.glo4003.services.SectionService;
 
 @Ignore
 @RunWith(MockitoJUnitRunner.class)

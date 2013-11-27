@@ -7,26 +7,35 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import ca.ulaval.glo4003.domain.utilities.Constants.CreditCardType;
+import ca.ulaval.glo4003.constants.CreditCardType;
 
 public class PaymentViewModel {
-	
+
 	@NotNull
 	private CreditCardType creditCardType;
-	
-	@NotNull @Min(1000000000000L) @Max(9999999999999999L) // doit être 13 ou 16 chiffres
+
+	@NotNull
+	@Min(1000000000000L)
+	@Max(9999999999999999L)
+	// doit être 13 ou 16 chiffres
 	private Long creditCardNumber;
-	
-	@NotNull @Min(100) @Max(9999)
+
+	@NotNull
+	@Min(100)
+	@Max(9999)
 	private Integer securityCode;
-	
-	@NotEmpty @Size(min=2, max=20)
+
+	@NotEmpty
+	@Size(min = 2, max = 20)
 	private String creditCardUserName;
-	
-	@NotNull @Min(1) @Max(12)
+
+	@NotNull
+	@Min(1)
+	@Max(12)
 	private Integer expirationMonth;
-	
-	@NotNull @Min(2013)
+
+	@NotNull
+	@Min(2013)
 	private Integer expirationYear;
 
 	public CreditCardType getCreditCardType() {

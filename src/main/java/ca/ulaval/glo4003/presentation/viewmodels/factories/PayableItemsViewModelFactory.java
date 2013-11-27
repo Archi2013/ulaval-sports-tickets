@@ -4,12 +4,12 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.domain.utilities.Calculator;
+import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.domain.sections.SectionDto;
 import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForPaymentViewModel;
+import ca.ulaval.glo4003.utilities.Calculator;
 
 @Component
 public class PayableItemsViewModelFactory {

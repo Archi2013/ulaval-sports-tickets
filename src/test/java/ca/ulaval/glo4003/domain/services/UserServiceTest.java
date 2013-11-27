@@ -10,15 +10,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.dtos.UserDto;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.users.UserAlreadyExistException;
+import ca.ulaval.glo4003.domain.users.UserDao;
 import ca.ulaval.glo4003.domain.users.UserDoesntExistException;
+import ca.ulaval.glo4003.domain.users.UserDto;
 import ca.ulaval.glo4003.domain.users.UsernameAndPasswordDoesntMatchException;
-import ca.ulaval.glo4003.domain.utilities.users.Encryption;
-import ca.ulaval.glo4003.persistence.daos.UserDao;
 import ca.ulaval.glo4003.presentation.viewmodels.UserViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.UserViewModelFactory;
+import ca.ulaval.glo4003.services.UserService;
+import ca.ulaval.glo4003.utilities.encryptions.Encryption;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {

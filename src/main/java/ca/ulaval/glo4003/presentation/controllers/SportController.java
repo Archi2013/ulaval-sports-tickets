@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.services.SportViewService;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
+import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.GamesViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
+import ca.ulaval.glo4003.services.SportViewService;
 
 @Controller
 @RequestMapping(value = "/sport", method = RequestMethod.GET)

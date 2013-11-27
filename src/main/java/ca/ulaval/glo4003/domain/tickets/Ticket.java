@@ -2,9 +2,7 @@ package ca.ulaval.glo4003.domain.tickets;
 
 import org.joda.time.DateTime;
 
-import ca.ulaval.glo4003.domain.dtos.TicketDto;
-import ca.ulaval.glo4003.domain.pojos.persistable.Persistable;
-import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
+import ca.ulaval.glo4003.utilities.persistence.Persistable;
 
 public abstract class Ticket implements Persistable<TicketDto> {
 

@@ -14,10 +14,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 
-import ca.ulaval.glo4003.domain.services.PaymentService;
-import ca.ulaval.glo4003.domain.services.SearchService;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.services.PaymentService;
+import ca.ulaval.glo4003.services.SearchService;
 
 @Ignore
 @RunWith(MockitoJUnitRunner.class)

@@ -14,12 +14,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.dtos.TicketDto;
-import ca.ulaval.glo4003.domain.factories.TicketFactory;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
-import ca.ulaval.glo4003.persistence.daos.GameDoesntExistException;
-import ca.ulaval.glo4003.persistence.daos.TicketDao;
-import ca.ulaval.glo4003.persistence.daos.TicketDoesntExistException;
+import ca.ulaval.glo4003.domain.tickets.TicketDao;
+import ca.ulaval.glo4003.domain.tickets.TicketDto;
+import ca.ulaval.glo4003.domain.tickets.TicketFactory;
+import ca.ulaval.glo4003.domain.tickets.TicketRepository;
+import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
+import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TicketRepositoryTest {

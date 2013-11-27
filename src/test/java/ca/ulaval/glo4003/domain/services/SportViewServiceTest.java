@@ -13,18 +13,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.datafilters.GameIsInFutureFilter;
-import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.domain.dtos.SportDto;
-import ca.ulaval.glo4003.domain.utilities.NoSportForUrlException;
-import ca.ulaval.glo4003.domain.utilities.SportUrlMapper;
-import ca.ulaval.glo4003.persistence.daos.GameDao;
-import ca.ulaval.glo4003.persistence.daos.SportDao;
-import ca.ulaval.glo4003.persistence.daos.SportDoesntExistException;
+import ca.ulaval.glo4003.domain.game.GameDao;
+import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.domain.sports.SportDao;
+import ca.ulaval.glo4003.domain.sports.SportDto;
+import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
+import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
+import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.GamesViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.GamesViewModelFactory;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SportsViewModelFactory;
+import ca.ulaval.glo4003.services.SportViewService;
+import ca.ulaval.glo4003.utilities.datafilters.GameIsInFutureFilter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportViewServiceTest {

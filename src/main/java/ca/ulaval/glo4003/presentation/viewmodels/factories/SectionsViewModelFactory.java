@@ -6,10 +6,10 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.dtos.GameDto;
-import ca.ulaval.glo4003.domain.dtos.SectionDto;
-import ca.ulaval.glo4003.domain.utilities.Constants;
+import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.domain.sections.SectionDto;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;
+import ca.ulaval.glo4003.utilities.Constants;
 
 @Component
 public class SectionsViewModelFactory {

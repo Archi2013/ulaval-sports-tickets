@@ -12,8 +12,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.dtos.TicketDto;
-import ca.ulaval.glo4003.domain.tickets.state.TicketAssignationState;
+import ca.ulaval.glo4003.domain.tickets.Ticket;
+import ca.ulaval.glo4003.domain.tickets.TicketAssignationState;
+import ca.ulaval.glo4003.domain.tickets.TicketDto;
 
 @Ignore
 @RunWith(MockitoJUnitRunner.class)
