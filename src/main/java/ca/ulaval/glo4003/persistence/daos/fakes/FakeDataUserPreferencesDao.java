@@ -24,17 +24,13 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 		List<String> sportsName = new ArrayList<String>();
 		sportsName.add("Football");
 
-		add(new UserPreferencesDto("mo", sportsName, DisplayedPeriod.ALL, true,
-				listTicket));
-
-		add(new UserPreferencesDto("test", sportsName, DisplayedPeriod.ONE_DAY,
-				false, listTicket));
+		add(new UserPreferencesDto("mo", sportsName, "ALL", true,listTicket));
+		add(new UserPreferencesDto("test", sportsName, "ONE_DAY",false, listTicket));
 
 	}
 
 	private void add(UserPreferencesDto userPreferencesDto) {
 		this.userPrefList.add(userPreferencesDto);
-
 	}
 
 	@Override
@@ -42,7 +38,7 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 
 		for (UserPreferencesDto userPref : this.userPrefList) {
 			if (userPref.username.equals(username)) {
-				return new TicketSearchPreferenceDto(userPref.selectedSports, "ONE_DAY", userPref.localGameOnly, userPref.selectedTicketKinds);
+				return new TicketSearchPreferenceDto(userPref.selectedSports, userPref.getDisplayedPeriod(), userPref.localGameOnly, userPref.selectedTicketKinds);
 			}
 		}
 
@@ -52,11 +48,9 @@ public class FakeDataUserPreferencesDao implements UserPreferencesDao {
 	@Override
 	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) {
 
-		DisplayedPeriod DispPeriod = DisplayedPeriod.valueOf(userPreferences.getDisplayedPeriod());
-		
 		UserPreferencesDto userPrefDto = new UserPreferencesDto(currentUser.getUsername(), 
 				userPreferences.selectedSports,
-				DispPeriod, userPreferences.localGameOnly,
+				userPreferences.getDisplayedPeriod(), userPreferences.localGameOnly,
 				userPreferences.selectedTicketKinds);
 		
 		int index = indexOfUserPositionInUserPreferencesList(currentUser.getUsername());
