@@ -46,19 +46,7 @@ public class PaymentService {
 	private static final String MODE_OF_PAYMENT_PAGE = "payment/mode-of-payment";
 
 	@Inject
-	private GameDao gameDao;
-
-	@Inject
-	private SectionDao sectionDao;
-
-	@Inject
-	private PayableItemsViewModelFactory payableItemsViewModelFactory;
-
-	@Inject
 	private Calculator calculator;
-
-	@Inject
-	private Constants constants;
 
 	@Inject
 	private CreditCardFactory creditCardFactory;
@@ -70,30 +58,7 @@ public class PaymentService {
 	private Cart currentCart;
 
 	@Inject
-	private ISectionRepository sectionRepository;
-
-	@Inject
 	private MessageSource messageSource;
-
-	public void prepareCartViewAndCart(ModelAndView mav, BindingResult result, ChooseTicketsViewModel chooseTicketsVM) {
-		if (result.hasErrors()) {
-			prepareErrorPage(mav, ERROR_MESSAGE_TRAFFICKED_PAGE);
-			return;
-		}
-
-		mav.addObject("currency", Constants.CURRENCY);
-
-		try {
-			if (!isValidChooseTicketsViewModel(chooseTicketsVM)) {
-				prepareErrorPage(mav, ERROR_MESSAGE_INVALID_CHOOSE_TICKETS_VIEW_MODEL);
-				return;
-			}
-			mav.addObject("payableItems", getPayableItemsViewModel(chooseTicketsVM));
-			saveToCart(chooseTicketsVM);
-		} catch (GameDoesntExistException | SectionDoesntExistException e) {
-			prepareErrorPage(mav, ERROR_MESSAGE_NOT_FOUND_TICKET);
-		}
-	}
 
 	private void prepareErrorPage(ModelAndView mav, String message) {
 		mav.setViewName(ERROR_PAGE);
@@ -103,45 +68,6 @@ public class PaymentService {
 	private void addErrorMessageToModel(ModelAndView mav, String message) {
 		String errorMessage = this.messageSource.getMessage(message, new Object[] {}, null);
 		mav.addObject("errorMessage", errorMessage);
-	}
-
-	private Boolean isValidChooseTicketsViewModel(ChooseTicketsViewModel chooseTicketsVM)
-			throws GameDoesntExistException, SectionDoesntExistException {
-		Section section = sectionRepository.getAvailable(chooseTicketsVM.getSportName(), chooseTicketsVM.getGameDate(),
-				chooseTicketsVM.getSectionName());
-		return section.isValidElements(chooseTicketsVM.getNumberOfTicketsToBuy(), chooseTicketsVM.getSelectedSeats());
-	}
-
-	private PayableItemsViewModel getPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM)
-			throws GameDoesntExistException, SectionDoesntExistException {
-		GameDto gameDto = gameDao.get(chooseTicketsVM.getSportName(), chooseTicketsVM.getGameDate());
-		SectionDto sectionDto = sectionDao.getAvailable(chooseTicketsVM.getSportName(), chooseTicketsVM.getGameDate(),
-				chooseTicketsVM.getSectionName());
-
-		return payableItemsViewModelFactory.createViewModel(chooseTicketsVM, gameDto, sectionDto);
-	}
-
-	private void saveToCart(ChooseTicketsViewModel chooseTicketsVM) throws GameDoesntExistException,
-			SectionDoesntExistException {
-		GameDto gameDto = gameDao.get(chooseTicketsVM.getSportName(), chooseTicketsVM.getGameDate());
-		SectionDto sectionDto = sectionDao.getAvailable(chooseTicketsVM.getSportName(), chooseTicketsVM.getGameDate(),
-				chooseTicketsVM.getSectionName());
-
-		Double cumulativePrice = 0.0;
-
-		if (sectionDto.isGeneralAdmission()) {
-			cumulativePrice = calculator.calculateCumulativePriceForGeneralAdmission(
-					chooseTicketsVM.getNumberOfTicketsToBuy(), sectionDto.getPrice());
-		} else {
-			cumulativePrice = calculator.calculateCumulativePriceForWithSeatAdmission(
-					chooseTicketsVM.getSelectedSeats(), sectionDto.getPrice());
-		}
-
-		currentCart.setNumberOfTicketsToBuy(chooseTicketsVM.getNumberOfTicketsToBuy());
-		currentCart.setSelectedSeats(chooseTicketsVM.getSelectedSeats());
-		currentCart.setGameDto(gameDto);
-		currentCart.setSectionDto(sectionDto);
-		currentCart.setCumulativePrice(cumulativePrice);
 	}
 
 	public void prepareModeOfPaymentView(ModelAndView mav) {
@@ -199,7 +125,7 @@ public class PaymentService {
 	}
 
 	private void makeTicketsUnavailable() {
-		cartService.makeTicketsUnavailableToOtherPeople(currentCart);
+		cartService.makeTicketsUnavailableToOtherPeople();
 	}
 
 	private void emptyCart() {
