@@ -10,10 +10,10 @@ public abstract class Ticket implements Persistable<TicketDto> {
 	protected double price;
 	protected boolean available;
 
-	public Ticket(TicketAssignationState associationState, double price) {
+	public Ticket(TicketAssignationState associationState, double price, boolean available) {
 		this.associationState = associationState;
 		this.price = price;
-		this.available = true;
+		this.available = available;
 	}
 
 	public abstract boolean isSame(Ticket ticketToAdd);

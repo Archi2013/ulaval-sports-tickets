@@ -10,7 +10,6 @@
 <html lang="fr">
 <%@include file="../layout/head.jsp"%>
 <body>
-<<<<<<< HEAD
     <%@include file="../layout/header.jsp" %>
     <%@include file="../layout/menu.jsp" %>
     

@@ -1,5 +1,8 @@
 package ca.ulaval.glo4003.domain.tickets;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,14 +11,12 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.constants.TicketKind;
-import ca.ulaval.glo4003.domain.tickets.GeneralTicket;
-import ca.ulaval.glo4003.domain.tickets.Ticket;
-import ca.ulaval.glo4003.domain.tickets.TicketAssignationState;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GeneralTicketTest {
 	private static final String A_SEAT = "seat";
 	private static final double A_PRICE = 1478;
+	private static final boolean AN_AVAILABILITY = false;
 	@Mock
 	private TicketAssignationState assignationState;
 
@@ -26,7 +27,7 @@ public class GeneralTicketTest {
 
 	@Before
 	public void setup() {
-		ticket = new GeneralTicket(A_PRICE, assignationState);
+		ticket = new GeneralTicket(A_PRICE, AN_AVAILABILITY, assignationState);
 	}
 
 	@Test
@@ -44,4 +45,25 @@ public class GeneralTicketTest {
 		Assert.assertFalse(ticket.hasSeat(A_SEAT));
 	}
 
+	@Test
+	public void saveDataInDto_returns_a_GeneralTicketDTO() {
+		TicketDto data = ticket.saveDataInDTO();
+
+		Assert.assertSame(GeneralTicketDto.class, data.getClass());
+	}
+
+	@Test
+	public void data_returned_by_saveDataInDto_has_correct_price_and_availability() {
+		TicketDto data = ticket.saveDataInDTO();
+
+		Assert.assertEquals(A_PRICE, data.price, 1);
+		Assert.assertEquals(AN_AVAILABILITY, data.available);
+	}
+
+	@Test
+	public void saveDataInDto_asks_assignation_state_to_fill_its_share() {
+		ticket.saveDataInDTO();
+
+		verify(assignationState).fillDataInDto(any(TicketDto.class));
+	}
 }

@@ -1,5 +1,7 @@
 package ca.ulaval.glo4003.domain.tickets;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.joda.time.DateTime;
@@ -9,11 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import ca.ulaval.glo4003.domain.tickets.SeatedTicket;
-import ca.ulaval.glo4003.domain.tickets.Ticket;
-import ca.ulaval.glo4003.domain.tickets.TicketAssignationState;
-import ca.ulaval.glo4003.domain.tickets.TicketDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SeatedTicketTest {
@@ -25,12 +22,10 @@ public class SeatedTicketTest {
 	public static final String A_SECTION = "section";
 	public static final String ANOTHER_SECTION = "Another section";
 	public static final double A_PRICE = 145;
+	public static final boolean AN_AVAILABILITY = false;
 
 	@Mock
-	TicketAssignationState firstAssociationState;
-
-	@Mock
-	TicketAssignationState secondAssociationState;
+	TicketAssignationState firstAssignationState;
 
 	@Mock
 	Ticket otherTicket;
@@ -40,7 +35,7 @@ public class SeatedTicketTest {
 	@Before
 	public void setup() {
 
-		ticket = new SeatedTicket(A_SEAT, A_SECTION, A_PRICE, firstAssociationState);
+		ticket = new SeatedTicket(A_SEAT, A_SECTION, A_PRICE, AN_AVAILABILITY, firstAssignationState);
 	}
 
 	@Test
@@ -82,5 +77,29 @@ public class SeatedTicketTest {
 		Assert.assertEquals(A_PRICE, data.price, 1);
 		Assert.assertEquals(A_SEAT, data.seat);
 		Assert.assertEquals(A_SECTION, data.section);
+	}
+
+	@Test
+	public void saveDataInDto_returns_a_GeneralTicketDTO() {
+		TicketDto data = ticket.saveDataInDTO();
+
+		Assert.assertSame(SeatedTicketDto.class, data.getClass());
+	}
+
+	@Test
+	public void data_returned_by_saveDataInDto_has_correct_price_and_availability() {
+		TicketDto data = ticket.saveDataInDTO();
+
+		Assert.assertEquals(A_PRICE, data.price, 1);
+		Assert.assertEquals(AN_AVAILABILITY, data.available);
+		Assert.assertEquals(A_SEAT, data.seat);
+		Assert.assertEquals(A_SECTION, data.section);
+	}
+
+	@Test
+	public void saveDataInDto_asks_assignation_state_to_fill_its_share() {
+		ticket.saveDataInDTO();
+
+		verify(firstAssignationState).fillDataInDto(any(TicketDto.class));
 	}
 }

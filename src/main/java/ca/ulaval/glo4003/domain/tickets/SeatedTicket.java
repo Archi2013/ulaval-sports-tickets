@@ -1,13 +1,13 @@
 package ca.ulaval.glo4003.domain.tickets;
 
-
 public class SeatedTicket extends Ticket {
 
 	private String seat;
 	private String section;
 
-	public SeatedTicket(String seat, String section, double price, TicketAssignationState associationState) {
-		super(associationState, price);
+	public SeatedTicket(String seat, String section, double price, boolean availability,
+			TicketAssignationState associationState) {
+		super(associationState, price, availability);
 		this.seat = seat;
 		this.section = section;
 	}

@@ -15,9 +15,9 @@ public class TicketFactory {
 
 	public Ticket createTicket(TicketDto data) {
 		if (data.isGeneral()) {
-			return new GeneralTicket(data.price, createAssignationState(data));
+			return new GeneralTicket(data.price, data.available, createAssignationState(data));
 		}
-		return new SeatedTicket(data.seat, data.section, data.price, createAssignationState(data));
+		return new SeatedTicket(data.seat, data.section, data.price, data.available, createAssignationState(data));
 	}
 
 	private TicketAssignationState createAssignationState(TicketDto data) {

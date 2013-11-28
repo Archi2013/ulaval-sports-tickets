@@ -1,22 +1,16 @@
 package ca.ulaval.glo4003.domain.tickets;
 
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.tickets.Ticket;
-import ca.ulaval.glo4003.domain.tickets.TicketAssignationState;
-import ca.ulaval.glo4003.domain.tickets.TicketDto;
-
-@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class TicketTest {
 	public static final String A_SPORT = "Sport";
@@ -27,6 +21,7 @@ public class TicketTest {
 	public static final String A_SECTION = "section";
 	public static final String ANOTHER_SECTION = "Another section";
 	public static final long A_PRICE = 25;
+	public static final boolean AN_AVAILABILITY = false;
 
 	@Mock
 	TicketAssignationState firstAssociationState;
@@ -42,7 +37,7 @@ public class TicketTest {
 	@Before
 	public void setup() {
 
-		ticket = new TicketImpl(firstAssociationState, A_PRICE);
+		ticket = new TicketImpl(firstAssociationState, A_PRICE, AN_AVAILABILITY);
 	}
 
 	@Test
@@ -70,24 +65,34 @@ public class TicketTest {
 	}
 
 	@Test
-	public void saveDataInDto_stores_own_data_in_dto() {
-		TicketDto data = ticket.saveDataInDTO();
+	public void isAvailable_returns_current_state_of_availability() {
+		boolean availability = ticket.isAvailable();
 
-		Assert.assertTrue(data.available);
-		Assert.assertEquals(A_PRICE, data.price, 1);
+		Assert.assertEquals(AN_AVAILABILITY, availability);
 	}
 
 	@Test
-	public void saveDataInDto_asks_assignationState_to_fill_its_share() {
-		ticket.saveDataInDTO();
+	public void makeAvailable_makes_the_ticket_available() {
+		ticket.makeUnavailable();
+		ticket.makeAvailable();
+		boolean availability = ticket.isAvailable();
 
-		verify(firstAssociationState).fillDataInDto(any(TicketDto.class));
+		Assert.assertEquals(true, availability);
+	}
+
+	@Test
+	public void makeUnavailable_makes_the_ticket_unavailable() {
+		ticket.makeAvailable();
+		ticket.makeUnavailable();
+		boolean availability = ticket.isAvailable();
+
+		Assert.assertEquals(false, availability);
 	}
 
 	private class TicketImpl extends Ticket {
 
-		public TicketImpl(TicketAssignationState associationState, double price) {
-			super(associationState, price);
+		public TicketImpl(TicketAssignationState associationState, double price, boolean available) {
+			super(associationState, price, available);
 
 		}
 
