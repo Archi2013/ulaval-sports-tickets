@@ -6,7 +6,7 @@
 
 <c:set var="pageTitle" value="Recherche de billets" />
 
-<!-- Ne pas reformater cette page -->
+<!-- Ne pas reformater cette page sinon la suppressions des espaces blancs ne fonctionnera pas -->
 
 <!DOCTYPE html>
 <html lang="fr">

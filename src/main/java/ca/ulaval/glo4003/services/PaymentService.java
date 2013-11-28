@@ -9,22 +9,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.constants.CreditCardType;
-import ca.ulaval.glo4003.domain.game.GameDao;
-import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.domain.payment.Cart;
 import ca.ulaval.glo4003.domain.payment.CreditCard;
 import ca.ulaval.glo4003.domain.payment.CreditCardFactory;
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
-import ca.ulaval.glo4003.domain.sections.ISectionRepository;
-import ca.ulaval.glo4003.domain.sections.Section;
-import ca.ulaval.glo4003.domain.sections.SectionDao;
-import ca.ulaval.glo4003.domain.sections.SectionDto;
-import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
-import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
-import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModelFactory;
 import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;
 
