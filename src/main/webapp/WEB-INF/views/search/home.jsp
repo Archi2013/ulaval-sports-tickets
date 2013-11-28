@@ -6,6 +6,8 @@
 
 <c:set var="pageTitle" value="Recherche de billets" />
 
+<!-- Ne pas reformater cette page -->
+
 <!DOCTYPE html>
 <html lang="fr">
 <%@include file="../layout/head.jsp"%>
@@ -25,10 +27,8 @@
 					<form:checkboxes delimiter="<br>" items="${sportList}"
 						path="selectedSports" onclick="doAjaxPost();" />
 				</div>
-			</div>
-			<!-- important supprime espace blanc
-            -->
-			<div class="search-criterion">
+			</div><!-- important supprime espace blanc
+            --><div class="search-criterion">
 				<h4 class="search-criterion-title">Période affichée</h4>
 				<div class="search-criterion-elements">
 					<c:forEach items="${displayedPeriods}" var="period">
@@ -37,20 +37,16 @@
 						<br>
 					</c:forEach>
 				</div>
-			</div>
-			<!-- important supprime espace blanc
-            -->
-			<div class="search-criterion">
+			</div><!-- important supprime espace blanc
+            --><div class="search-criterion">
 				<h4 class="search-criterion-title">Localisation</h4>
 				<div class="search-criterion-elements">
 					<form:checkbox path="localGameOnly" onclick="doAjaxPost();"
 						id="localGameOnly" />
 					<form:label path="localGameOnly">à domicile seulement</form:label>
 				</div>
-			</div>
-			<!-- important supprime espace blanc
-            -->
-			<div class="search-criterion">
+			</div><!-- important supprime espace blanc
+            --><div class="search-criterion">
 				<h4 class="search-criterion-title">Type de billet</h4>
 				<div class="search-criterion-elements">
 					<c:forEach items="${ticketKinds}" var="kind">
@@ -60,7 +56,7 @@
 					</c:forEach>
 				</div>
 			</div>
-			<c:if test="${connectedUser}">
+			<c:if test="${currentUser.isLogged()}">
 				<input type="submit" value="Sauvegarder"
 					class="standard-button-rounded-border orange-button" />
 			</c:if>

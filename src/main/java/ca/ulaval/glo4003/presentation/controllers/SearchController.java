@@ -2,7 +2,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,23 +26,16 @@ public class SearchController {
 	
 	@Inject
 	UserPreferencesService userPreferencesService;
-	
-	
-	@Autowired
-	private User currentUser;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView home() {
+	public ModelAndView home(@ModelAttribute("currentUser") User currentUser) {
 		ModelAndView mav = new ModelAndView("search/home");
-		mav.addObject("currency", Constants.CURRENCY);
 		
-		Boolean connectedUser = currentUser.isLogged();
+		mav.addObject("currency", Constants.CURRENCY);
 		
 		TicketSearchViewModel ticketSearchVM = searchService.getInitialisedTicketSearchViewModel();
 		
-		addConnectedUserToModelAndView(mav, connectedUser);
-		
-		if (connectedUser) {
+		if (currentUser.isLogged()) {
 			try{
 			ticketSearchVM = userPreferencesService.getUserPreferencesForUser(currentUser);
 			}catch (UserDoesntHaveSavedPreferences e){
@@ -60,9 +52,10 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="sauvegarde-preferences", method=RequestMethod.POST)
-	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
+	public ModelAndView savePreferences(@ModelAttribute("currentUser") User currentUser,
+			@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
 		userPreferencesService.saveUserPreference(currentUser,ticketSearchVM);
-		ModelAndView mav = home();
+		ModelAndView mav = home(currentUser);
 		mav.addObject("preferencesSaved", true);
 		
 		return mav;
@@ -80,13 +73,4 @@ public class SearchController {
 		
 		return mav;
     }
-	
-	private void addConnectedUserToModelAndView(ModelAndView mav,
-			Boolean connectedUser) {
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-		} else {
-			mav.addObject("connectedUser", false);
-		}
-	}
 }

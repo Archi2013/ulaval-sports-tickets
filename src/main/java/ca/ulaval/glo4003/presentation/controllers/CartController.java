@@ -4,7 +4,6 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,7 +25,6 @@ import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModelFactory;
 import ca.ulaval.glo4003.services.CartService;
 import ca.ulaval.glo4003.services.InvalidTicketsException;
-import ca.ulaval.glo4003.services.PaymentService;
 import ca.ulaval.glo4003.services.TicketsNotFoundException;
 import ca.ulaval.glo4003.utilities.Constants;
 
@@ -44,13 +42,7 @@ public class CartController {
 	private SectionDao sectionDao;
 	
 	@Inject
-	PaymentService paymentService;
-	
-	@Inject
 	CartService cartService;
-
-	@Autowired
-	private User currentUser;
 	
 	@Inject
 	private PayableItemsViewModelFactory payableItemsViewModelFactory;
@@ -59,15 +51,12 @@ public class CartController {
 	private CartErrorManager cartErrorManager;
 
 	@RequestMapping(value = "ajout-billets", method = RequestMethod.POST)
-	public ModelAndView addToCart(@ModelAttribute("chooseTicketsForm") @Valid ChooseTicketsViewModel chooseTicketsVM,
+	public ModelAndView addToCart(@ModelAttribute("currentUser") User currentUser,
+			@ModelAttribute("chooseTicketsForm") @Valid ChooseTicketsViewModel chooseTicketsVM,
 			BindingResult result) {
-		Boolean connectedUser = currentUser.isLogged();
-
 		ModelAndView mav = new ModelAndView(ADD_TICKETS_PAGE);
 
-		addConnectedUserToModelAndView(connectedUser, mav);
-
-		if (!connectedUser) {
+		if (!currentUser.isLogged()) {
 			cartErrorManager.prepareErrorPageToShowNotConnectedUserMessage(mav);
 			return mav;
 		}
@@ -86,14 +75,6 @@ public class CartController {
 		}
 
 		return mav;
-	}
-
-	private void addConnectedUserToModelAndView(Boolean connectedUser, ModelAndView mav) {
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-		} else {
-			mav.addObject("connectedUser", false);
-		}
 	}
 
 	public PayableItemsViewModel getPayableItemsViewModel(ChooseTicketsViewModel chooseTicketsVM)
