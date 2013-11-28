@@ -20,6 +20,7 @@ public class AdministrationViewService {
 	private GameDao gameDao;
 
 	public List<GameSelectionViewModel> getGameSelectionForSport(String sport) throws SportDoesntExistException {
+		System.out.println("AdministrationViewService: le sport demande est" + sport);
 		List<GameDto> gameDtos = gameDao.getGamesForSport(sport);
 
 		List<GameSelectionViewModel> toReturn = new ArrayList<>();

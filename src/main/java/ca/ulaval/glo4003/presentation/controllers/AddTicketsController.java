@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.constants.TicketKind;
-import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
@@ -40,9 +39,6 @@ public class AddTicketsController {
 
 	@Inject
 	CommandTicketService ticketService;
-
-	@Inject
-	private SportUrlMapper sportUrlMapper;
 
 	@Inject
 	private AdministrationViewService viewService;
@@ -94,9 +90,8 @@ public class AddTicketsController {
 		ModelAndView mav;
 		System.out.println("Date Retournee par la vue: " + viewModel.getGameDate().toString());
 		try {
-			ticketService.addGeneralTickets(sportUrlMapper.getSportName(viewModel.getSportName()), viewModel
-					.getGameDate().getDateTime(), viewModel.getNumberOfTickets(), Double.parseDouble(viewModel
-					.getPrice()));
+			ticketService.addGeneralTickets(viewModel.getSportName(), viewModel.getGameDate().getDateTime(),
+					viewModel.getNumberOfTickets(), Double.parseDouble(viewModel.getPrice()));
 
 		} catch (GameAlreadyExistException | TicketAlreadyExistsException | TicketDoesntExistException e) {
 			mav = new ModelAndView("/admin/tickets-added-date-error");
@@ -115,11 +110,10 @@ public class AddTicketsController {
 
 		ModelAndView mav;
 		try {
-			ticketService.addSeatedTicket(sportUrlMapper.getSportName(ticketsToAddVM.getSportName()), ticketsToAddVM
-					.getGameDate().getDateTime(), ticketsToAddVM.getSection(), ticketsToAddVM.getSeat(), Double
-					.parseDouble(ticketsToAddVM.getPrice()));
-		} catch (GameAlreadyExistException | TicketAlreadyExistsException | TicketDoesntExistException
-				| NoSportForUrlException e) {
+			ticketService.addSeatedTicket(ticketsToAddVM.getSportName(), ticketsToAddVM.getGameDate().getDateTime(),
+					ticketsToAddVM.getSection(), ticketsToAddVM.getSeat(),
+					Double.parseDouble(ticketsToAddVM.getPrice()));
+		} catch (GameAlreadyExistException | TicketAlreadyExistsException | TicketDoesntExistException e) {
 			return new ModelAndView("/admin/tickets-added-date-error");
 		}
 		mav = new ModelAndView("/admin/tickets-added");

@@ -66,6 +66,8 @@ public class SportViewService {
 			try {
 				game.setNumberOfTickets(ticketDao.getAllAvailable(game.getSportName(), game.getGameDate()).size());
 			} catch (Exception e) {
+				System.out.println("SportViewService: La partie du: " + game.getGameDate() + " contre: "
+						+ game.getOpponents() + "A lance une exception");
 				game.setNumberOfTickets(0);
 			}
 		}
