@@ -23,6 +23,7 @@ public class Constants {
 	}
 
 	public String toLongDateTimeFormatFR(DateTime dateTime) {
-		return dateTime.toString(LONG_DATE_TIME_FORMAT_FR);
+		return dateTime.toString(Constants.LONG_DATE_TIME_FORMAT_FR);
 	}
+
 }
