@@ -33,12 +33,6 @@ public class PaymentService {
 
 	private static final String ERROR_PAGE = "payment/error-page";
 
-	private static final String ERROR_MESSAGE_TRAFFICKED_PAGE = "error-message.payment.trafficked-page";
-
-	private static final String ERROR_MESSAGE_NOT_FOUND_TICKET = "error-message.payment.not-found-ticket";
-
-	private static final String ERROR_MESSAGE_INVALID_CHOOSE_TICKETS_VIEW_MODEL = "error-message.payment.invalid-choose-tickets-view-model";
-
 	private static final String ERROR_MESSAGE_NO_TICKETS = "error-message.payment.no-tickets";
 
 	private static final String ERROR_MESSAGE_INVALID_CREDIT_CARD = "error-message.payment.invalid-credit-card";
