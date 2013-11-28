@@ -9,7 +9,6 @@ import ca.ulaval.glo4003.domain.game.Game;
 import ca.ulaval.glo4003.domain.game.IGameRepository;
 import ca.ulaval.glo4003.domain.sports.ISportRepository;
 import ca.ulaval.glo4003.domain.sports.Sport;
-import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
 import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
@@ -24,16 +23,13 @@ public class CommandGameService {
 	private IGameRepository gameRepository;
 	@Inject
 	private ISportRepository sportRepository;
-	@Inject
-	private SportUrlMapper sportUrlMapper;
 
 	public void createNewGame(String sportName, String opponent, String location, DateTime date)
 			throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
 			NoSportForUrlException, TicketAlreadyExistsException, TicketDoesntExistException {
 
-		String domainSportName = sportUrlMapper.getSportName(sportName);
 		Game game = gameRepository.create(opponent, location);
-		Sport sport = sportRepository.get(domainSportName);
+		Sport sport = sportRepository.get(sportName);
 
 		sport.addGameToCalendar(game, date);
 

@@ -20,7 +20,7 @@
 		<form:label path="sport">Sport : </form:label>
 		<form:select path="sport">
 			<c:forEach items="${sportsVM.sports}" var="sport">
-				<form:option value="${sport.url}">${sport.name}</form:option>
+				<form:option value="${sport.name}">${sport.name}</form:option>
 			</c:forEach>
 		</form:select>
 		<br>
