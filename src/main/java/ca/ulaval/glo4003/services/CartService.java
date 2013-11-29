@@ -130,4 +130,8 @@ public class CartService {
 			throw new NoTicketsInCartException();
 		}
 	}
+
+	public Set<SectionForCart> getSectionsInCart() {
+		return currentCart.getSections();
+	}
 }

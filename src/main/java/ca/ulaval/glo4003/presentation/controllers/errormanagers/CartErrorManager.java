@@ -4,12 +4,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.services.exceptions.InvalidTicketsException;
+import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 import ca.ulaval.glo4003.services.exceptions.TicketsNotFoundException;
 
 @Component
 public class CartErrorManager extends ErrorMessageAdder {
 
 	private static final String ERROR_PAGE = "cart/error-page";
+	
+	private static final String ERROR_MESSAGE_NO_TICKETS = "error-message.cart.no-tickets";
 	
 	private static final String ERROR_MESSAGE_INVALID_TICKETS = "error-message.cart.invalid-tickets";
 
@@ -26,6 +29,8 @@ public class CartErrorManager extends ErrorMessageAdder {
 			prepareErrorPageForCart(mav, ERROR_MESSAGE_INVALID_TICKETS);
 		} else if (e instanceof TicketsNotFoundException) {
 			prepareErrorPageForCart(mav, ERROR_MESSAGE_NOT_FOUND_TICKETS);
+		} else if (e instanceof NoTicketsInCartException) {
+			prepareErrorPageForCart(mav, ERROR_MESSAGE_NO_TICKETS);
 		} else {
 			prepareErrorPageForCart(mav, ERROR_MESSAGE_UNKNOWN_ERROR);
 		}

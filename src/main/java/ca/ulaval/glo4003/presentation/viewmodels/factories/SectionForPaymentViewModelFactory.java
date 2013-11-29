@@ -1,15 +1,14 @@
 package ca.ulaval.glo4003.presentation.viewmodels.factories;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.constants.TicketKind;
-import ca.ulaval.glo4003.domain.game.GameDto;
-import ca.ulaval.glo4003.domain.sections.SectionDto;
-import ca.ulaval.glo4003.presentation.viewmodels.ChosenTicketsViewModel;
+import ca.ulaval.glo4003.domain.cart.SectionForCart;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForPaymentViewModel;
 import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;
@@ -22,54 +21,43 @@ public class SectionForPaymentViewModelFactory {
 
 	@Inject
 	private Constants constants;
-
-	public SectionForPaymentViewModel createViewModel(ChosenTicketsViewModel chosenTicketsVM, GameDto gameDto,
-			SectionDto sectionDto) {
+	
+	public SectionForPaymentViewModel createViewModel(SectionForCart sectionFC) {
 		SectionForPaymentViewModel sectionForPaymentVM = new SectionForPaymentViewModel();
-		sectionForPaymentVM.setNumberOfTicketsToBuy(chosenTicketsVM.getNumberOfTicketsToBuy());
-		sectionForPaymentVM.setSelectedSeats(toString(chosenTicketsVM.getSelectedSeats()));
-		if (sectionDto.isGeneralAdmission()) {
-			sectionForPaymentVM.setTicketKind(TicketKind.GENERAL_ADMISSION);
-		} else {
-			sectionForPaymentVM.setTicketKind(TicketKind.WITH_SEAT);
-		}
-		sectionForPaymentVM.setSectionName(sectionDto.getSectionName());
-		sectionForPaymentVM.setDate(constants.toLongDateTimeFormatFR(gameDto.getGameDate()));
-		sectionForPaymentVM.setOpponents(gameDto.getOpponents());
-		sectionForPaymentVM.setSport(gameDto.getSportName());
-
-		Double subtotal = 0.0;
-
-		if (sectionDto.isGeneralAdmission()) {
-			subtotal = chosenTicketsVM.getNumberOfTicketsToBuy() * sectionDto.getPrice();
-		} else {
-			subtotal = chosenTicketsVM.getSelectedSeats().size() * sectionDto.getPrice();
-		}
-
-		String subtotalFR = calculator.toPriceFR(subtotal);
-
-		sectionForPaymentVM.setSubtotal(subtotalFR);
-
-		return sectionForPaymentVM;
+		
+		sectionForPaymentVM.setGeneralAdmission(sectionFC.getGeneralAdmission());
+		
+		sectionForPaymentVM.setNumberOfTicketsToBuy(sectionFC.getNumberOfTicketsToBuy());
+		sectionForPaymentVM.setSelectedSeats(toString(sectionFC.getSelectedSeats()));
+		
+		sectionForPaymentVM.setSportName(sectionFC.getSportName());
+		sectionForPaymentVM.setGameDate(constants.toLongDateTimeFormatFR(sectionFC.getGameDate()));
+		sectionForPaymentVM.setSectionName(sectionFC.getSectionName());
+		
+		sectionForPaymentVM.setOpponents(sectionFC.getOpponents());
+		sectionForPaymentVM.setLocation(sectionFC.getLocation());
+		sectionForPaymentVM.setSubtotal(calculator.toPriceFR(sectionFC.getSubtotal()));
+		
+		return null;
 	}
 
 	private String toString(Set<String> selectedSeats) {
 		String result = "";
-		if (selectedSeats.size() == 0) {
+		List<String> seats = new ArrayList<>(selectedSeats);
+		if (seats.size() == 0) {
 			return "Erreur : la liste de sièges ne doit pas être vide";
-		} else if (selectedSeats.size() == 1) {
-			return selectedSeats.get(0);
+		} else if (seats.size() == 1) {
+			return seats.get(0);
 		} else {
-			for (int i = 0; i < (selectedSeats.size() - 1); i++) {
-				result += selectedSeats.get(i);
-				if (i < selectedSeats.size() - 2) {
+			for (int i = 0; i < (seats.size() - 1); i++) {
+				result += seats.get(i);
+				if (i < seats.size() - 2) {
 					result += ", ";
 				}
 			}
 			result += " et ";
-			result += selectedSeats.get(selectedSeats.size() - 1);
+			result += seats.get(seats.size() - 1);
 			return result;
 		}
 	}
-
 }

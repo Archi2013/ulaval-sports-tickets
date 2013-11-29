@@ -61,7 +61,7 @@ public class SectionForCart {
 	}
 	
 	public void addElements(SectionForCart sectionForCart) {
-		if (isGeneralAdmission()) {
+		if (getGeneralAdmission()) {
 			this.numberOfTicketsToBuy += sectionForCart.getNumberOfTicketsToBuy();
 		} else {
 			this.selectedSeats.addAll(sectionForCart.getSelectedSeats());
@@ -93,7 +93,7 @@ public class SectionForCart {
 				.append(this.gameDate).append(this.sectionName).toHashCode();
 	}
 	
-	public Boolean isGeneralAdmission() {
+	public Boolean getGeneralAdmission() {
 		return generalAdmission;
 	}
 
@@ -130,7 +130,7 @@ public class SectionForCart {
 	}
 
 	public Double getSubtotal() {
-		if (isGeneralAdmission()) {
+		if (getGeneralAdmission()) {
 			return calculator
 					.calculateCumulativePriceForGeneralAdmission(
 							this.numberOfTicketsToBuy,

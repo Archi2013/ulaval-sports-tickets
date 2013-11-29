@@ -1,10 +1,9 @@
 package ca.ulaval.glo4003.presentation.viewmodels;
 
-import java.util.List;
+import java.util.Set;
 
 public class SectionViewModel {
 
-	private static final String GENERAL_SECTION = "Générale";
 	public String sectionName;
 	public int numberOfTickets;
 	public String price;
@@ -12,10 +11,11 @@ public class SectionViewModel {
 	private String opponents;
 	private String location;
 	public String url;
-	public List<String> seats;
+	public Set<String> seats;
+	private Boolean generalAdmission;
 
 	public SectionViewModel(String sectionName, int numberOfTickets, String price, String date, String opponents,
-			String location, String url, List<String> seats) {
+			String location, String url, Set<String> seats, Boolean generalAdmission) {
 		this.sectionName = sectionName;
 		this.numberOfTickets = numberOfTickets;
 		this.price = price;
@@ -24,10 +24,11 @@ public class SectionViewModel {
 		this.location = location;
 		this.url = url;
 		this.seats = seats;
+		this.generalAdmission = generalAdmission;
 	}
 
-	public boolean isGeneralAdmission() {
-		return sectionName.equals(GENERAL_SECTION);
+	public Boolean getGeneralAdmission() {
+		return generalAdmission;
 	}
 
 	public String getSectionName() {
@@ -58,7 +59,7 @@ public class SectionViewModel {
 		return url;
 	}
 
-	public List<String> getSeats() {
+	public Set<String> getSeats() {
 		return seats;
 	}
 }

@@ -1,7 +1,8 @@
 package ca.ulaval.glo4003.domain.cart;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -20,10 +21,10 @@ public class Cart {
 	private GameDto gameDto;
 	private SectionDto sectionDto;
 	
-	private List<SectionForCart> sections;
+	private Set<SectionForCart> sections;
 
 	public Cart() {
-		this.sections = new ArrayList<SectionForCart>();
+		this.sections = new HashSet<SectionForCart>();
 	}
 	
 	public Boolean containTickets() {
@@ -62,6 +63,10 @@ public class Cart {
 		this.sectionDto = sectionDto;
 	}
 
+	public Set<SectionForCart> getSections() {
+		return sections;
+	}
+
 	public Double getCumulativePrice() {
 		Double cumulativePrice = 0.0;
 		for (SectionForCart section : this.sections) {
@@ -75,7 +80,7 @@ public class Cart {
 	}
 
 	public void empty() {
-		this.sections = new ArrayList<SectionForCart>();
+		this.sections = new HashSet<SectionForCart>();
 	}
 
 	public void addSection(SectionForCart sectionForCart) {
