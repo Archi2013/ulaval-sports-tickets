@@ -89,24 +89,6 @@ public class CartService {
 		}
 	}
 	
-	private boolean isValidGeneralTickets(String sportName, DateTime gameDate,
-			String sectionName, Integer numberOfTicketsToBuy) throws SectionDoesntExistException {
-		Section section = sectionRepository.getAvailable(sportName, gameDate, sectionName);
-		if (section.isGeneralAdmission()) {
-			return section.isValidNumberOfTicketsForGeneralTickets(numberOfTicketsToBuy);
-		}
-		return false;
-	}
-	
-	private boolean isValidWithSeatTickets(String sportName, DateTime gameDate,
-			String sectionName, Set<String> selectedSeats) throws SectionDoesntExistException {
-		Section section = sectionRepository.getAvailable(sportName, gameDate, sectionName);
-		if (!section.isGeneralAdmission()) {
-			return section.isValidSelectedSeatsForWithSeatTickets(selectedSeats);
-		}
-		return false;
-	}
-	
 	public void makeTicketsUnavailableToOtherPeople() {
 		try {
 			ticketService.makeTicketsUnavailable(currentCart.getSections());
@@ -134,5 +116,23 @@ public class CartService {
 	public void emptyCart() {
 		currentCart.empty();
 		
+	}
+	
+	private boolean isValidGeneralTickets(String sportName, DateTime gameDate,
+			String sectionName, Integer numberOfTicketsToBuy) throws SectionDoesntExistException {
+		Section section = sectionRepository.getAvailable(sportName, gameDate, sectionName);
+		if (section.isGeneralAdmission()) {
+			return section.isValidNumberOfTicketsForGeneralTickets(numberOfTicketsToBuy);
+		}
+		return false;
+	}
+	
+	private boolean isValidWithSeatTickets(String sportName, DateTime gameDate,
+			String sectionName, Set<String> selectedSeats) throws SectionDoesntExistException {
+		Section section = sectionRepository.getAvailable(sportName, gameDate, sectionName);
+		if (!section.isGeneralAdmission()) {
+			return section.isValidSelectedSeatsForWithSeatTickets(selectedSeats);
+		}
+		return false;
 	}
 }
