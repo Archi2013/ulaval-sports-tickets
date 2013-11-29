@@ -15,9 +15,9 @@ import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 import ca.ulaval.glo4003.exceptions.NoTicketTypeForUrlException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
-import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.factories.ChooseTicketsViewModelFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.ChosenTicketsViewModelFactory;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionViewModelFactory;
 
 @Service
@@ -36,7 +36,7 @@ public class SectionService {
 	private SectionViewModelFactory sectionFactory;
 
 	@Inject
-	private ChooseTicketsViewModelFactory chooseTicketsViewModelFactory;
+	private ChosenTicketsViewModelFactory chooseTicketsViewModelFactory;
 	
 	@Inject
 	private SportUrlMapper sportUrlMapper;
@@ -69,7 +69,7 @@ public class SectionService {
 		}
 	}
 
-	public ChooseTicketsViewModel getChooseTicketsViewModel(String sportNameUrl, DateTime gameDate, String sectionUrl) throws SectionDoesntExistException {
+	public ChosenTicketsViewModel getChooseTicketsViewModel(String sportNameUrl, DateTime gameDate, String sectionUrl) throws SectionDoesntExistException {
 		try {
 			String sectionName = ticketTypeUrlMapper.getTicketType(sectionUrl);
 			String sportName = sportUrlMapper.getSportName(sportNameUrl);
@@ -82,7 +82,7 @@ public class SectionService {
 		}
 	}
 
-	public ChooseTicketsViewModel getAvailableChooseTicketsViewModel(String sportName, DateTime gameDate, String sectionUrl)
+	public ChosenTicketsViewModel getAvailableChooseTicketsViewModel(String sportName, DateTime gameDate, String sectionUrl)
 			throws SectionDoesntExistException {
 		try {
 			String sectionName = ticketTypeUrlMapper.getTicketType(sectionUrl);

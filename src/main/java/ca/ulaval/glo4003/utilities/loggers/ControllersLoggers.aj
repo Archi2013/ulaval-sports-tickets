@@ -14,7 +14,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.GameToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.GeneralTicketsToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SeatedTicketsToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SelectSportViewModel;
-import ca.ulaval.glo4003.services.NoTicketsInCartException;
+import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 
 import org.springframework.web.servlet.ModelAndView;
 

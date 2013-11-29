@@ -14,11 +14,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.domain.cart.Cart;
 import ca.ulaval.glo4003.domain.game.GameDao;
-import ca.ulaval.glo4003.domain.payment.Cart;
 import ca.ulaval.glo4003.domain.payment.CreditCardFactory;
 import ca.ulaval.glo4003.domain.sections.SectionDao;
-import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModelFactory;
 import ca.ulaval.glo4003.services.CartService;
 import ca.ulaval.glo4003.services.PaymentService;
@@ -66,13 +66,13 @@ public class PaymentServiceTest {
 	@InjectMocks
 	private PaymentService paymentService;
 
-	private ChooseTicketsViewModel chooseTicketsVM;
+	private ChosenTicketsViewModel chooseTicketsVM;
 
 	private List<String> selectedSeats;
 
 	@Before
 	public void setUp() throws Exception {
-		chooseTicketsVM = mock(ChooseTicketsViewModel.class);
+		chooseTicketsVM = mock(ChosenTicketsViewModel.class);
 		selectedSeats = new ArrayList<>();
 		selectedSeats.add("X3");
 		selectedSeats.add("X7");

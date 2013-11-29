@@ -22,9 +22,9 @@ import ca.ulaval.glo4003.domain.tickets.TicketTypeUrlMapper;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoTicketTypeForUrlException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
-import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.factories.ChooseTicketsViewModelFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.ChosenTicketsViewModelFactory;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionViewModelFactory;
 import ca.ulaval.glo4003.services.SectionService;
 
@@ -50,7 +50,7 @@ public class SectionServiceTest {
 	private SectionViewModelFactory sectionFactoryMock;
 	
 	@Mock
-	private ChooseTicketsViewModelFactory chooseTicketsViewModelFactoryMock;
+	private ChosenTicketsViewModelFactory chooseTicketsViewModelFactoryMock;
 
 	@InjectMocks
 	private SectionService service;
@@ -166,10 +166,10 @@ public class SectionServiceTest {
 		when(sectionDaoMock.get(SPORT_NAME, GAME_DATE, SECTION_NAME)).thenReturn(sectionDto);
 		GameDto gameDto = mock(GameDto.class);
 		when(gameDaoMock.get(SPORT_NAME, GAME_DATE)).thenReturn(gameDto);
-		ChooseTicketsViewModel expectedViewModel = mock(ChooseTicketsViewModel.class);
+		ChosenTicketsViewModel expectedViewModel = mock(ChosenTicketsViewModel.class);
 		when(chooseTicketsViewModelFactoryMock.createViewModel(gameDto, sectionDto)).thenReturn(expectedViewModel);
 
-		ChooseTicketsViewModel viewModel = service.getChooseTicketsViewModel(SPORT_NAME, GAME_DATE, SECTION_URL);
+		ChosenTicketsViewModel viewModel = service.getChooseTicketsViewModel(SPORT_NAME, GAME_DATE, SECTION_URL);
 
 		assertEquals(expectedViewModel, viewModel);
 	}

@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.domain.sections;
 
-import java.util.List;
+import java.util.Set;
 
 public class Section {
 
@@ -8,7 +8,7 @@ public class Section {
 	private String sectionName;
 	private int numberOfTickets;
 	private double price;
-	private List<String> seats;
+	private Set<String> seats;
 
 	public Section(SectionDto sectionDto) {
 		sectionName = sectionDto.getSectionName();
@@ -18,29 +18,18 @@ public class Section {
 	}
 
 	public boolean isGeneralAdmission() {
-
 		boolean generalAdmission = sectionName.equals(GENERAL_SECTION);
 		return generalAdmission;
 	}
 
-	public Boolean isValidElements(Integer numberOfTicketsToBuy, List<String> selectedSeats) {
-		Boolean result;
-		if (isGeneralAdmission()) {
-			result = isValidGeneralAdmissionInformations(numberOfTicketsToBuy);
-		} else {
-			result = isValidWithSeatAdmissionInformations(selectedSeats);
-		}
-		return result;
-	}
-
-	private Boolean isValidGeneralAdmissionInformations(Integer numberOfTicketsToBuy) {
+	public Boolean isValidNumberOfTicketsForGeneralTickets(Integer numberOfTicketsToBuy) {
 		if (numberOfTicketsToBuy < 1 || numberOfTicketsToBuy > this.numberOfTickets) {
 			return false;
 		}
 		return true;
 	}
 
-	private Boolean isValidWithSeatAdmissionInformations(List<String> selectedSeats) {
+	public Boolean isValidSelectedSeatsForWithSeatTickets(Set<String> selectedSeats) {
 		Integer numberOfSelectedSeatTicketsToBuy = selectedSeats.size();
 		if (numberOfSelectedSeatTicketsToBuy < 1 || numberOfSelectedSeatTicketsToBuy > this.numberOfTickets) {
 			return false;
@@ -65,7 +54,7 @@ public class Section {
 		return price;
 	}
 
-	public List<String> getSeats() {
+	public Set<String> getSeats() {
 		return seats;
 	}
 

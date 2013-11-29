@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.presentation.viewmodels.factories;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import ca.ulaval.glo4003.constants.TicketKind;
 import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.domain.sections.SectionDto;
-import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForPaymentViewModel;
 import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;
@@ -23,11 +23,11 @@ public class SectionForPaymentViewModelFactory {
 	@Inject
 	private Constants constants;
 
-	public SectionForPaymentViewModel createViewModel(ChooseTicketsViewModel chooseTicketsVM, GameDto gameDto,
+	public SectionForPaymentViewModel createViewModel(ChosenTicketsViewModel chosenTicketsVM, GameDto gameDto,
 			SectionDto sectionDto) {
 		SectionForPaymentViewModel sectionForPaymentVM = new SectionForPaymentViewModel();
-		sectionForPaymentVM.setNumberOfTicketsToBuy(chooseTicketsVM.getNumberOfTicketsToBuy());
-		sectionForPaymentVM.setSelectedSeats(toString(chooseTicketsVM.getSelectedSeats()));
+		sectionForPaymentVM.setNumberOfTicketsToBuy(chosenTicketsVM.getNumberOfTicketsToBuy());
+		sectionForPaymentVM.setSelectedSeats(toString(chosenTicketsVM.getSelectedSeats()));
 		if (sectionDto.isGeneralAdmission()) {
 			sectionForPaymentVM.setTicketKind(TicketKind.GENERAL_ADMISSION);
 		} else {
@@ -41,9 +41,9 @@ public class SectionForPaymentViewModelFactory {
 		Double subtotal = 0.0;
 
 		if (sectionDto.isGeneralAdmission()) {
-			subtotal = chooseTicketsVM.getNumberOfTicketsToBuy() * sectionDto.getPrice();
+			subtotal = chosenTicketsVM.getNumberOfTicketsToBuy() * sectionDto.getPrice();
 		} else {
-			subtotal = chooseTicketsVM.getSelectedSeats().size() * sectionDto.getPrice();
+			subtotal = chosenTicketsVM.getSelectedSeats().size() * sectionDto.getPrice();
 		}
 
 		String subtotalFR = calculator.toPriceFR(subtotal);
@@ -53,7 +53,7 @@ public class SectionForPaymentViewModelFactory {
 		return sectionForPaymentVM;
 	}
 
-	private String toString(List<String> selectedSeats) {
+	private String toString(Set<String> selectedSeats) {
 		String result = "";
 		if (selectedSeats.size() == 0) {
 			return "Erreur : la liste de sièges ne doit pas être vide";

@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
-import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
 import ca.ulaval.glo4003.services.SectionService;
 
@@ -65,7 +65,7 @@ public class SectionControllerTest {
 
 	@Test
 	public void getSectionForGame_should_add_a_chooseTicketsForm_to_model() throws SectionDoesntExistException {
-		ChooseTicketsViewModel chooseTicketsVM = mock(ChooseTicketsViewModel.class);
+		ChosenTicketsViewModel chooseTicketsVM = mock(ChosenTicketsViewModel.class);
 		when(sectionService.getChooseTicketsViewModel(SPORT_NAME, GAME_DATE, TICKET_TYPE)).thenReturn(chooseTicketsVM);
 
 		ModelAndView mav = sectionController.getSectionForGame(GAME_DATE_STR, SPORT_NAME, TICKET_TYPE);

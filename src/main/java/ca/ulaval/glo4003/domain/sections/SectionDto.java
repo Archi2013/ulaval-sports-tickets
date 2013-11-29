@@ -1,7 +1,7 @@
 package ca.ulaval.glo4003.domain.sections;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SectionDto {
 
@@ -9,16 +9,16 @@ public class SectionDto {
 	private String sectionName;
 	private int numberOfTickets;
 	private double price;
-	private List<String> seats;
+	private Set<String> seats;
 
 	public SectionDto(int numberOfTickets, double price) {
 		this.sectionName = GENERAL_SECTION;
 		this.numberOfTickets = numberOfTickets;
 		this.price = price;
-		this.seats = new ArrayList<>();
+		this.seats = new HashSet<>();
 	}
 
-	public SectionDto(String sectionName, int numberOfTickets, double price, List<String> seats) {
+	public SectionDto(String sectionName, int numberOfTickets, double price, Set<String> seats) {
 		this.sectionName = sectionName;
 		this.numberOfTickets = numberOfTickets;
 		this.price = price;
@@ -41,7 +41,7 @@ public class SectionDto {
 		return price;
 	}
 
-	public List<String> getSeats() {
+	public Set<String> getSeats() {
 		return seats;
 	}
 }

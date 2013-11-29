@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.constants.CreditCardType;
-import ca.ulaval.glo4003.domain.payment.Cart;
+import ca.ulaval.glo4003.domain.cart.Cart;
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.presentation.controllers.errormanagers.PaymentErrorManager;
 import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 import ca.ulaval.glo4003.services.CartService;
-import ca.ulaval.glo4003.services.NoTicketsInCartException;
 import ca.ulaval.glo4003.services.PaymentService;
+import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;
 

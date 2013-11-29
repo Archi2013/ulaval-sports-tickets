@@ -3,7 +3,7 @@ package ca.ulaval.glo4003.presentation.controllers.errormanagers;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.services.NoTicketsInCartException;
+import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 
 @Component
 public class PaymentErrorManager extends ErrorMessageAdder {

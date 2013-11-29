@@ -1,5 +1,6 @@
-package ca.ulaval.glo4003.domain.payment;
+package ca.ulaval.glo4003.domain.cart;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.annotation.Scope;
@@ -18,14 +19,15 @@ public class Cart {
 	
 	private GameDto gameDto;
 	private SectionDto sectionDto;
-	private Double cumulativePrice;
+	
+	private List<SectionForCart> sections;
 
+	public Cart() {
+		this.sections = new ArrayList<SectionForCart>();
+	}
+	
 	public Boolean containTickets() {
-		if (gameDto != null && sectionDto != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return (sections.size() != 0) ? true : false;
 	}
 	
 	public Integer getNumberOfTicketsToBuy() {
@@ -61,19 +63,31 @@ public class Cart {
 	}
 
 	public Double getCumulativePrice() {
+		Double cumulativePrice = 0.0;
+		for (SectionForCart section : this.sections) {
+			cumulativePrice += section.getSubtotal();
+		}
 		return cumulativePrice;
 	}
 
 	public void setCumulativePrice(Double cumulativePrice) {
-		this.cumulativePrice = cumulativePrice;
+		
 	}
 
 	public void empty() {
-		this.cumulativePrice = 0.0;
-		this.gameDto = null;
-		this.sectionDto = null;
-		this.numberOfTicketsToBuy = 0;
-		this.selectedSeats = null;
+		this.sections = new ArrayList<SectionForCart>();
+	}
+
+	public void addSection(SectionForCart sectionForCart) {
+		if (!this.sections.contains(sectionForCart)) {
+			this.sections.add(sectionForCart);
+		} else {
+			for (SectionForCart sectionInList : this.sections) {
+				if (sectionInList.equals(sectionForCart)) {
+					sectionInList.addElements(sectionForCart);
+				}
+			}
+		}
 	}
 }
 

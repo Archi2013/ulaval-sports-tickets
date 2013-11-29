@@ -15,7 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenTicketsViewModel;
 import ca.ulaval.glo4003.services.PaymentService;
 import ca.ulaval.glo4003.services.SearchService;
 
@@ -54,13 +54,13 @@ public class PaymentControllerTest {
 	@InjectMocks
 	private PaymentController controller;
 
-	private ChooseTicketsViewModel chooseTicketsVM;
+	private ChosenTicketsViewModel chooseTicketsVM;
 	
 	private List<String> selectedSeats;
 	
 	@Before
 	public void setUp() {
-		chooseTicketsVM = mock(ChooseTicketsViewModel.class);
+		chooseTicketsVM = mock(ChosenTicketsViewModel.class);
 		selectedSeats = new ArrayList<>();
 		selectedSeats.add("X3");
 		selectedSeats.add("X7");

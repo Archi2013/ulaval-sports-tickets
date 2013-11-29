@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.utilities;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ public class Calculator {
 		return numberOfTicketsToBuy * price;
 	}
 
-	public Double calculateCumulativePriceForWithSeatAdmission(List<String> selectedSeats, Double price) {
+	public Double calculateCumulativePriceForWithSeatAdmission(Set<String> selectedSeats, Double price) {
 		return selectedSeats.size() * price;
 	}
 	
