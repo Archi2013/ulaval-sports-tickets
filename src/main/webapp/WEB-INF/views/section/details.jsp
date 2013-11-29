@@ -46,7 +46,7 @@
 			<div class="ticket-location-info">${section.location}</div>
 			<div class="ticket-seat-info">
 				<c:choose>
-					<c:when test="${section.isGeneralAdmission()}">Admission : <strong>Générale</strong>
+					<c:when test="${section.generalAdmission}">Admission : <strong>Générale</strong>
 					</c:when>
 					<c:otherwise>
 				        Section : <strong>${section.sectionName}</strong>
@@ -59,7 +59,7 @@
 		<c:when test="${currentUser.isLogged()}">
 			<div class="wrapper-choose-tickets-form padding-20">
 				<c:choose>
-					<c:when test="${section.isGeneralAdmission()}">
+					<c:when test="${section.generalAdmission}">
 						<c:url value="/panier/ajout-billets-generaux" var="addActionUrl" />
 						<c:set value="chosenGeneralTicketsForm" var="addFormCommandName" />
 					</c:when>

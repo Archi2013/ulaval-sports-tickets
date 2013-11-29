@@ -15,7 +15,8 @@ import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 import ca.ulaval.glo4003.exceptions.NoTicketTypeForUrlException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
-import ca.ulaval.glo4003.presentation.viewmodels.ChosenTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenGeneralTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenWithSeatTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.ChosenTicketsViewModelFactory;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionViewModelFactory;
@@ -36,7 +37,7 @@ public class SectionService {
 	private SectionViewModelFactory sectionFactory;
 
 	@Inject
-	private ChosenTicketsViewModelFactory chooseTicketsViewModelFactory;
+	private ChosenTicketsViewModelFactory chosenTicketsViewModelFactory;
 	
 	@Inject
 	private SportUrlMapper sportUrlMapper;
@@ -69,27 +70,27 @@ public class SectionService {
 		}
 	}
 
-	public ChosenTicketsViewModel getChooseTicketsViewModel(String sportNameUrl, DateTime gameDate, String sectionUrl) throws SectionDoesntExistException {
-		try {
-			String sectionName = ticketTypeUrlMapper.getTicketType(sectionUrl);
-			String sportName = sportUrlMapper.getSportName(sportNameUrl);
-			GameDto gameDto = gameDao.get(sportName, gameDate);
-			SectionDto sectionDto = sectionDao.get(sportName, gameDate, sectionName);
-
-			return chooseTicketsViewModelFactory.createViewModel(gameDto, sectionDto);
-		} catch (GameDoesntExistException | NoTicketTypeForUrlException | NoSportForUrlException e) {
-			throw new SectionDoesntExistException();
-		}
-	}
-
-	public ChosenTicketsViewModel getAvailableChooseTicketsViewModel(String sportName, DateTime gameDate, String sectionUrl)
+	public ChosenGeneralTicketsViewModel getChosenGeneralTicketsViewModel(String sportName, DateTime gameDate, String sectionUrl)
 			throws SectionDoesntExistException {
 		try {
 			String sectionName = ticketTypeUrlMapper.getTicketType(sectionUrl);
 			GameDto gameDto = gameDao.get(sportName, gameDate);
 			SectionDto sectionDto = sectionDao.getAvailable(sportName, gameDate, sectionName);
 
-			return chooseTicketsViewModelFactory.createViewModel(gameDto, sectionDto);
+			return chosenTicketsViewModelFactory.createViewModelForGeneralTickets(gameDto, sectionDto);
+		} catch (GameDoesntExistException | NoTicketTypeForUrlException e) {
+			throw new SectionDoesntExistException();
+		}
+	}
+	
+	public ChosenWithSeatTicketsViewModel getChosenWithSeatTicketsViewModel(String sportName, DateTime gameDate, String sectionUrl)
+			throws SectionDoesntExistException {
+		try {
+			String sectionName = ticketTypeUrlMapper.getTicketType(sectionUrl);
+			GameDto gameDto = gameDao.get(sportName, gameDate);
+			SectionDto sectionDto = sectionDao.getAvailable(sportName, gameDate, sectionName);
+
+			return chosenTicketsViewModelFactory.createViewModelForWithSeatTickets(gameDto, sectionDto);
 		} catch (GameDoesntExistException | NoTicketTypeForUrlException e) {
 			throw new SectionDoesntExistException();
 		}

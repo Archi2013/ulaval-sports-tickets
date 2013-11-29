@@ -18,7 +18,8 @@ public class SectionDto {
 		this.seats = new HashSet<>();
 	}
 
-	public SectionDto(String sectionName, int numberOfTickets, double price, Set<String> seats) {
+	public SectionDto(String sectionName, int numberOfTickets,
+			double price, Set<String> seats) {
 		this.sectionName = sectionName;
 		this.numberOfTickets = numberOfTickets;
 		this.price = price;

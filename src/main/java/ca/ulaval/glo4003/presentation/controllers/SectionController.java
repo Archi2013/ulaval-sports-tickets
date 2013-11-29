@@ -4,7 +4,6 @@ import javax.inject.Inject;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
-import ca.ulaval.glo4003.presentation.viewmodels.ChosenTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenGeneralTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenWithSeatTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
 import ca.ulaval.glo4003.services.SectionService;
 import ca.ulaval.glo4003.utilities.Constants;
@@ -38,9 +37,13 @@ public class SectionController {
 
 			mav.addObject("section", section);
 
-			ChosenTicketsViewModel chooseTicketsVM = sectionService.getChooseTicketsViewModel(sportNameUrl, gameDate, ticketType);
-
-			mav.addObject("chooseTicketsForm", chooseTicketsVM);
+			if (section.getGeneralAdmission()) {
+				ChosenGeneralTicketsViewModel chosenGeneralTicketsVM = sectionService.getChosenGeneralTicketsViewModel(sportNameUrl, gameDate, ticketType);
+				mav.addObject("chosenGeneralTicketsForm", chosenGeneralTicketsVM);
+			} else {
+				ChosenWithSeatTicketsViewModel chosenWithSeatTicketsVM = sectionService.getChosenWithSeatTicketsViewModel(sportNameUrl, gameDate, ticketType);
+				mav.addObject("chosenWithSeatTicketsForm", chosenWithSeatTicketsVM);
+			}
 
 			return mav;
 		} catch (SectionDoesntExistException e) {

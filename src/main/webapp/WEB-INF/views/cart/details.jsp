@@ -28,8 +28,9 @@
 					<th>Sport</th>
 					<th>Date</th>
 					<th>Opposants</th>
+					<th>Lieu</th>
 					<c:choose>
-						<c:when test="${section.isGeneralAdmission()}">
+						<c:when test="${section.generalAdmission}">
 							<th>Nombre de billets</th>
 						</c:when>
 						<c:otherwise>
@@ -42,11 +43,12 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>${section.sport}</td>
-					<td>${section.date}</td>
+					<td>${section.sportName}</td>
+					<td>${section.gameDate}</td>
 					<td>${section.opponents}</td>
+					<td>${section.location}</td>
 					<c:choose>
-						<c:when test="${section.isGeneralAdmission()}">
+						<c:when test="${section.generalAdmission}">
 							<td>${section.numberOfTicketsToBuy}</td>
 						</c:when>
 						<c:otherwise>

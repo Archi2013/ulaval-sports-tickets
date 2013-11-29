@@ -2,16 +2,14 @@ package ca.ulaval.glo4003.domain.sections;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import ca.ulaval.glo4003.domain.sections.SectionSimpleFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SectionSimpleFactoryTest {
@@ -25,11 +23,11 @@ public class SectionSimpleFactoryTest {
 	@InjectMocks
 	private SectionSimpleFactory sectionSimpleFactory;
 	
-	private List<String> seats;
+	private Set<String> seats;
 	
 	@Before
 	public void setUp() throws Exception {
-		seats = new ArrayList<String>();
+		seats = new HashSet<String>();
 	}
 
 	@Test

@@ -72,13 +72,13 @@ public class PaymentServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		chooseTicketsVM = mock(ChosenTicketsViewModel.class);
+		/*chooseTicketsVM = mock(ChosenTicketsViewModel.class);
 		selectedSeats = new ArrayList<>();
 		selectedSeats.add("X3");
 		selectedSeats.add("X7");
 		when(chooseTicketsVM.getSectionName()).thenReturn(SECTION_NAME);
 		when(chooseTicketsVM.getNumberOfTicketsToBuy()).thenReturn(NUMBER_OF_TICKETS_TO_BUY);
-		when(chooseTicketsVM.getSelectedSeats()).thenReturn(selectedSeats);
+		when(chooseTicketsVM.getSelectedSeats()).thenReturn(selectedSeats);*/
 	}
 
 	@Ignore("Il devrait y avoir un objet du domaine Section pour effectuer cette tâche")
