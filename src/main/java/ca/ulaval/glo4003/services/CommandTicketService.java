@@ -1,16 +1,16 @@
 package ca.ulaval.glo4003.services;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
+import ca.ulaval.glo4003.domain.cart.SectionForCart;
 import ca.ulaval.glo4003.domain.game.Game;
-import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.domain.game.IGameRepository;
-import ca.ulaval.glo4003.domain.sections.SectionDto;
 import ca.ulaval.glo4003.domain.tickets.ITicketRepository;
 import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
@@ -49,26 +49,24 @@ public class CommandTicketService {
 		gameRepository.clearCache();
 	}
 
-	public void makeTicketsUnavailable(GameDto game, SectionDto section, int numberOfSeats, List<String> seats)
-			throws GameDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, TicketDoesntExistException,
-			SportDoesntExistException {
-
-		if (section.isGeneralAdmission()) {
-			List<Ticket> tickets = ticketRepository
-					.recoverNGeneralTickets(game.getSportName(), game.getGameDate(), numberOfSeats);
-			for (Ticket ticket : tickets) {
-				ticket.makeUnavailable();
-			}
-		} else {
-			for (String seat : seats) {
-				Ticket ticket = ticketRepository.get(game.getSportName(), game.getGameDate(), section.getSectionName(), seat);
-				ticket.makeUnavailable();
+	public void makeTicketsUnavailable(Set<SectionForCart> sections) throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException {
+		for(SectionForCart sectionFC : sections) {
+			if (sectionFC.getGeneralAdmission()) {
+				List<Ticket> tickets = ticketRepository
+						.recoverNGeneralTickets(sectionFC.getSportName(), sectionFC.getGameDate(), sectionFC.getNumberOfTicketsToBuy());
+				for (Ticket ticket : tickets) {
+					ticket.makeUnavailable();
+				}
+			} else {
+				for (String seat : sectionFC.getSelectedSeats()) {
+					Ticket ticket = ticketRepository.get(sectionFC.getSportName(), sectionFC.getGameDate(), sectionFC.getSectionName(), seat);
+					ticket.makeUnavailable();
+				}
 			}
 		}
-
+		
 		ticketRepository.commit();
 		ticketRepository.clearCache();
-
 	}
 
 }

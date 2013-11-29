@@ -3,22 +3,23 @@ package ca.ulaval.glo4003.domain.payment;
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.constants.CreditCardType;
-import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 
 @Component
 public class CreditCardFactory {
 
-	public CreditCard createCreditCard(PaymentViewModel paymentVM) throws InvalidCreditCardException {
-		CreditCardType type = paymentVM.getCreditCardType();
-		if (type.equals(CreditCardType.MISTERCARD)) {
-			return new MisterCard(paymentVM.getCreditCardNumber(), paymentVM.getSecurityCode(),
-					paymentVM.getCreditCardUserName(), paymentVM.getExpirationMonth(), paymentVM.getExpirationYear());
-		} else if (type.equals(CreditCardType.VASI)) {
-			return new VasiCard(paymentVM.getCreditCardNumber(), paymentVM.getSecurityCode(),
-					paymentVM.getCreditCardUserName(), paymentVM.getExpirationMonth(), paymentVM.getExpirationYear());
-		} else if (type.equals(CreditCardType.AMERICANEXPRESSO)) {
-			return new AmericanExpressoCard(paymentVM.getCreditCardNumber(), paymentVM.getSecurityCode(),
-					paymentVM.getCreditCardUserName(), paymentVM.getExpirationMonth(), paymentVM.getExpirationYear());
+	public CreditCard createCreditCard(CreditCardType creditCardType,
+			Long creditCardNumber, Integer securityCode,
+			String creditCardUserName, Integer expirationMonth,
+			Integer expirationYear) throws InvalidCreditCardException {
+		if (creditCardType.equals(CreditCardType.MISTERCARD)) {
+			return new MisterCard(creditCardNumber, securityCode,
+					creditCardUserName, expirationMonth, expirationYear);
+		} else if (creditCardType.equals(CreditCardType.VASI)) {
+			return new VasiCard(creditCardNumber, securityCode,
+					creditCardUserName, expirationMonth, expirationYear);
+		} else if (creditCardType.equals(CreditCardType.AMERICANEXPRESSO)) {
+			return new AmericanExpressoCard(creditCardNumber, securityCode,
+					creditCardUserName, expirationMonth, expirationYear);
 		} else {
 			throw new InvalidCreditCardException();
 		}

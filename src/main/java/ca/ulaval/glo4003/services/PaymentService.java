@@ -2,14 +2,12 @@ package ca.ulaval.glo4003.services;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ca.ulaval.glo4003.domain.cart.Cart;
+import ca.ulaval.glo4003.constants.CreditCardType;
 import ca.ulaval.glo4003.domain.payment.CreditCard;
 import ca.ulaval.glo4003.domain.payment.CreditCardFactory;
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
-import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 
 @Service
@@ -21,18 +19,21 @@ public class PaymentService {
 	@Inject
 	private CartService cartService;
 
-	@Autowired
-	private Cart currentCart;
-
-	public void buyTicketsInCart(PaymentViewModel paymentVM) throws InvalidCreditCardException,
+	public void buyTicketsInCart(CreditCardType creditCardType,
+			Long creditCardNumber, Integer securityCode,
+			String creditCardUserName, Integer expirationMonth,
+			Integer expirationYear) throws InvalidCreditCardException,
 			NoTicketsInCartException {
-		if (currentCart.containTickets()) {
-			CreditCard creditCard = creditCardFactory.createCreditCard(paymentVM);
-			creditCard.pay(currentCart.getCumulativePrice());
+		if (cartService.cartContainsTickets()) {
+			CreditCard creditCard = creditCardFactory.createCreditCard(creditCardType,
+					creditCardNumber, securityCode,
+					creditCardUserName, expirationMonth,
+					expirationYear);
+			creditCard.pay(cartService.getCumulativePrice());
 			makeTicketsUnavailable();
-			currentCart.empty();
+			cartService.emptyCart();
 		} else {
-			currentCart.empty();
+			cartService.emptyCart();
 			throw new NoTicketsInCartException();
 		}
 	}

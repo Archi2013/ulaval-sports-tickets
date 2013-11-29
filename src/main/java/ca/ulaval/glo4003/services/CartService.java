@@ -1,6 +1,5 @@
 package ca.ulaval.glo4003.services;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -110,15 +109,8 @@ public class CartService {
 	
 	public void makeTicketsUnavailableToOtherPeople() {
 		try {
-			GameDto game = currentCart.getGameDto();
-			SectionDto section = currentCart.getSectionDto();
-			List<String> seats = currentCart.getSelectedSeats();
-			int numberOfSeats = currentCart.getNumberOfTicketsToBuy();
-
-			ticketService.makeTicketsUnavailable(game, section, numberOfSeats, seats);
-
-		} catch (GameDoesntExistException | GameAlreadyExistException | TicketAlreadyExistsException | TicketDoesntExistException
-				| SportDoesntExistException e) {
+			ticketService.makeTicketsUnavailable(currentCart.getSections());
+		} catch (GameDoesntExistException | TicketDoesntExistException | GameAlreadyExistException | TicketAlreadyExistsException | SportDoesntExistException e) {
 			throw new CartException();
 		}
 	}
@@ -133,5 +125,14 @@ public class CartService {
 
 	public Set<SectionForCart> getSectionsInCart() {
 		return currentCart.getSections();
+	}
+
+	public boolean cartContainsTickets() {
+		return currentCart.containTickets();
+	}
+
+	public void emptyCart() {
+		currentCart.empty();
+		
 	}
 }

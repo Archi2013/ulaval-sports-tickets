@@ -3,7 +3,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.constants.CreditCardType;
-import ca.ulaval.glo4003.domain.cart.Cart;
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.presentation.controllers.errormanagers.PaymentErrorManager;
@@ -85,7 +83,7 @@ public class PaymentController {
 
 		try {
 			mav.addObject("cumulativePrice", getCumulativePriceFR());
-			paymentService.buyTicketsInCart(paymentVM);
+			buyTicketsInCart(paymentVM);
 		} catch (InvalidCreditCardException e) {
 			ModelAndView mavToReturn = returnModelAndViewToRetryModeOfPayment(paymentVM, currentUser);
 			paymentErrorManager.addErrorMessageInvalidCreditCardToModel(mavToReturn);
@@ -95,6 +93,12 @@ public class PaymentController {
 		}
 		
 		return mav;
+	}
+
+	private void buyTicketsInCart(PaymentViewModel paymentVM)
+			throws InvalidCreditCardException, NoTicketsInCartException {
+		paymentService.buyTicketsInCart(paymentVM.getCreditCardType(), paymentVM.getCreditCardNumber(), paymentVM.getSecurityCode(),
+				paymentVM.getCreditCardUserName(), paymentVM.getExpirationMonth(), paymentVM.getExpirationYear());
 	}
 	
 	private ModelAndView returnModelAndViewToRetryModeOfPayment(PaymentViewModel paymentVM, User currentUser) {

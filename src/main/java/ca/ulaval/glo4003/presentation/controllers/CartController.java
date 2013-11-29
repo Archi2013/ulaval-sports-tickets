@@ -42,6 +42,25 @@ public class CartController {
 	@Inject
 	private CartErrorManager cartErrorManager;
 
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public ModelAndView showDetails(@ModelAttribute("currentUser") User currentUser) {
+		ModelAndView mav = new ModelAndView(CART_DETAIL_PAGE);
+		
+		if (!currentUser.isLogged()) {
+			cartErrorManager.prepareErrorPageToShowNotConnectedUserMessage(mav);
+			return mav;
+		}
+		
+		try {
+			mav.addObject("payableItems", getPayableItemsViewModel());
+			mav.addObject("currency", Constants.CURRENCY);
+		} catch (NoTicketsInCartException e) {
+			cartErrorManager.prepareErrorPage(mav, e);
+		}
+		
+		return mav;
+	}
+	
 	@RequestMapping(value = "ajout-billets-generaux", method = RequestMethod.POST)
 	public ModelAndView addGeneralTicketsToCart(@ModelAttribute("currentUser") User currentUser,
 			@ModelAttribute("chosenGeneralTicketsForm") @Valid ChosenGeneralTicketsViewModel chosenGeneralTicketsVM,
