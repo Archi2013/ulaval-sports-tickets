@@ -29,16 +29,14 @@ public class PaymentService {
 			CreditCard creditCard = creditCardFactory.createCreditCard(paymentVM);
 			creditCard.pay(currentCart.getCumulativePrice());
 			makeTicketsUnavailable();
+			currentCart.empty();
 		} else {
+			currentCart.empty();
 			throw new NoTicketsInCartException();
 		}
 	}
 
 	private void makeTicketsUnavailable() {
 		cartService.makeTicketsUnavailableToOtherPeople();
-	}
-
-	public void emptyCart() {
-		currentCart.empty();
 	}
 }

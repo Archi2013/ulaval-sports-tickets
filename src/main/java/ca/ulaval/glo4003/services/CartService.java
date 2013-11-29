@@ -102,4 +102,12 @@ public class CartService {
 			throw new CartException();
 		}
 	}
+	
+	public Double getCumulativePrice() throws NoTicketsInCartException {
+		if (currentCart.containTickets()) {
+			return currentCart.getCumulativePrice();
+		} else {
+			throw new NoTicketsInCartException();
+		}
+	}
 }

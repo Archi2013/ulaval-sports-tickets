@@ -18,6 +18,7 @@ import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.presentation.controllers.errormanagers.PaymentErrorManager;
 import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
+import ca.ulaval.glo4003.services.CartService;
 import ca.ulaval.glo4003.services.NoTicketsInCartException;
 import ca.ulaval.glo4003.services.PaymentService;
 import ca.ulaval.glo4003.utilities.Calculator;
@@ -35,8 +36,8 @@ public class PaymentController {
 	@Inject
 	PaymentService paymentService;
 	
-	@Autowired
-	private Cart currentCart;
+	@Inject
+	CartService cartService;
 	
 	@Inject
 	private Calculator calculator;
@@ -85,25 +86,15 @@ public class PaymentController {
 		try {
 			mav.addObject("cumulativePrice", getCumulativePriceFR());
 			paymentService.buyTicketsInCart(paymentVM);
-			paymentService.emptyCart();
 		} catch (InvalidCreditCardException e) {
 			ModelAndView mavToReturn = returnModelAndViewToRetryModeOfPayment(paymentVM, currentUser);
 			paymentErrorManager.addErrorMessageInvalidCreditCardToModel(mavToReturn);
 			return mavToReturn;
 		} catch (NoTicketsInCartException e) {
 			paymentErrorManager.prepareErrorPage(mav, e);
-			paymentService.emptyCart();
 		}
 		
 		return mav;
-	}
-	
-	private String getCumulativePriceFR() throws NoTicketsInCartException {
-		if (currentCart.containTickets()) {
-			return calculator.toPriceFR(currentCart.getCumulativePrice());
-		} else {
-			throw new NoTicketsInCartException();
-		}
 	}
 	
 	private ModelAndView returnModelAndViewToRetryModeOfPayment(PaymentViewModel paymentVM, User currentUser) {
@@ -111,4 +102,9 @@ public class PaymentController {
 		mav.addObject("paymentForm", paymentVM);
 		return mav;
 	}
+	
+	private String getCumulativePriceFR() throws NoTicketsInCartException {
+		return calculator.toPriceFR(cartService.getCumulativePrice());
+	}
+	
 }
