@@ -3,6 +3,9 @@ package ca.ulaval.glo4003.domain.services;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -11,6 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.constants.DisplayedPeriod;
+import ca.ulaval.glo4003.constants.TicketKind;
 import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.users.UserPreferencesDao;
@@ -45,7 +50,7 @@ public class UserPreferencesServiceTest {
 	private TicketSearchViewModel ticketSearchViewModel;
 	
 	@Before
-	public void setup() throws UserDoesntHaveSavedPreferences{
+	public void setUp() throws UserDoesntHaveSavedPreferences{
 		
 		when(currentUser.getUsername()).thenReturn(USERNAME);
 		
@@ -53,9 +58,19 @@ public class UserPreferencesServiceTest {
 		when(userPreferencesDaoMock.get(USERNAME)).thenReturn(ticketSPDto);
 		
 		ticketSearchViewModel = new TicketSearchViewModel();
+		List<String> selectedSports = new ArrayList<>();
+		List<TicketKind> ticketKinds = new ArrayList<>();
+		ticketSearchViewModel.selectedSports = selectedSports;
+		ticketSearchViewModel.selectedTicketKinds = ticketKinds;
+		ticketSearchViewModel.setLocalGameOnly(true);
+		ticketSearchViewModel.setDisplayedPeriod(DisplayedPeriod.ALL);
 		when(ticketSearchFactoryMock.createViewModel(ticketSPDto)).thenReturn(ticketSearchViewModel);
 	
-		when(ticketSearchFactoryMock.createPreferenceDto(ticketSearchViewModel)).thenReturn(ticketSPDto);
+		when(ticketSearchFactoryMock.createPreferenceDto(
+				ticketSearchViewModel.getSelectedSports(),
+				ticketSearchViewModel.getDisplayedPeriod(),
+				ticketSearchViewModel.isLocalGameOnly(),
+				ticketSearchViewModel.getSelectedTicketKinds())).thenReturn(ticketSPDto);
 	}
 	
 	@Test

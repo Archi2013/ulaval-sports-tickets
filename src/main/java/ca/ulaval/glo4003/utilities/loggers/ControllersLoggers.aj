@@ -1,9 +1,11 @@
 package ca.ulaval.glo4003.utilities.loggers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.presentation.controllers.AddGameController;
+import ca.ulaval.glo4003.presentation.controllers.CartController;
 import ca.ulaval.glo4003.presentation.controllers.GameController;
 import ca.ulaval.glo4003.presentation.controllers.PaymentController;
 import ca.ulaval.glo4003.presentation.controllers.SearchController;
@@ -16,8 +18,6 @@ import ca.ulaval.glo4003.presentation.viewmodels.SeatedTicketsToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SelectSportViewModel;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 
-import org.springframework.web.servlet.ModelAndView;
-
 public aspect ControllersLoggers {
 	
 	private static final Logger SportControllerLogger = LoggerFactory.getLogger(SportController.class);
@@ -27,6 +27,7 @@ public aspect ControllersLoggers {
 	private static final Logger AdministrationControllerLogger = LoggerFactory.getLogger(AddGameController.class);
 	private static final Logger SearchControllerLogger = LoggerFactory.getLogger(SearchController.class);
 	private static final Logger PaymentControllerLogger = LoggerFactory.getLogger(PaymentController.class);
+	private static final Logger CartControllerLogger = LoggerFactory.getLogger(CartController.class);
 	
 	pointcut SportController_getSportGames() :
 		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SportController.getSportGames(..));
@@ -142,16 +143,55 @@ public aspect ControllersLoggers {
 		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SearchController.home(..));
 	
 	after() throwing(Exception exception) : SearchController_home(){
-		SearchControllerLogger.info("no preferences saved");
+		SearchControllerLogger.info("l'usager ne possède pas de préférences");
 		exception.printStackTrace();
 	}
 	
-	pointcut PaymentController_home() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.PaymentController.home(..));
+	pointcut SearchController_savePreferences() :
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SearchController.savePreferences(..));
 	
-	after() throwing(Exception exception) : PaymentController_home(){
-		PaymentControllerLogger.info("Exception : " + exception.getClass().getSimpleName() + " : ticket introuvable");
-		exception.printStackTrace();
+	after() : SearchController_savePreferences(){
+		SearchControllerLogger.info("préférences de l'usager sauvegardées");
+	}
+	
+	pointcut SearchController_getList() :
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SearchController.getList(..));
+	
+	after() : SearchController_getList(){
+		SearchControllerLogger.info("mise à jour de la liste des éléments recherchés terminée");
+	}
+	
+	pointcut CartController_showDetails() :
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.CartController.showDetails(..));
+	
+	before() : CartController_showDetails(){
+		CartControllerLogger.info("affichage du panier d'achat");
+	}
+	
+	after() throwing(Exception exception) : CartController_showDetails(){
+		CartControllerLogger.info("Exception : " + exception.getClass().getSimpleName());
+	}
+	
+	pointcut CartController_addGeneralTicketsToCart() :
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.CartController.addGeneralTicketsToCart(..));
+	
+	before() : CartController_addGeneralTicketsToCart(){
+		CartControllerLogger.info("ajout de billets généraux au panier d'achat");
+	}
+	
+	after() throwing(Exception exception) : CartController_addGeneralTicketsToCart(){
+		CartControllerLogger.info("Exception : " + exception.getClass().getSimpleName());
+	}
+	
+	pointcut CartController_addWithSeatTicketsToCart() :
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.CartController.addWithSeatTicketsToCart(..));
+	
+	before() : CartController_addWithSeatTicketsToCart(){
+		CartControllerLogger.info("ajout de billets avec siège au panier d'achat");
+	}
+	
+	after() throwing(Exception exception) : CartController_addWithSeatTicketsToCart(){
+		CartControllerLogger.info("Exception : " + exception.getClass().getSimpleName());
 	}
 	
 	pointcut PaymentController_modeOfPayment() :
