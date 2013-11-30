@@ -2,6 +2,7 @@ package ca.ulaval.glo4003.presentation.controllers;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,11 @@ public class SearchController {
 	@Inject
 	UserPreferencesService userPreferencesService;
 
+	@Autowired
+	User currentUser;
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView home(@ModelAttribute("currentUser") User currentUser) {
+	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("search/home");
 		
 		mav.addObject("currency", Constants.CURRENCY);
@@ -52,10 +56,9 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="sauvegarde-preferences", method=RequestMethod.POST)
-	public ModelAndView savePreferences(@ModelAttribute("currentUser") User currentUser,
-			@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
+	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
 		userPreferencesService.saveUserPreference(currentUser,ticketSearchVM);
-		ModelAndView mav = home(currentUser);
+		ModelAndView mav = home();
 		mav.addObject("preferencesSaved", true);
 		
 		return mav;

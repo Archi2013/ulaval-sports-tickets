@@ -46,7 +46,7 @@ public class SearchControllerTest {
 
 	@Test
 	public void home_should_return_the_good_search_home_page() {
-		ModelAndView mav = controller.home(currentUser);
+		ModelAndView mav = controller.home();
 
 		assertEquals(SEARCH_HOME_PAGE, mav.getViewName());
 	}
@@ -57,7 +57,7 @@ public class SearchControllerTest {
 		
 		when(searchService.getInitialisedTicketSearchViewModel()).thenReturn(ticketSearchVM);
 		
-		ModelAndView mav = controller.home(currentUser);
+		ModelAndView mav = controller.home();
 		ModelMap modelMap = mav.getModelMap();
 
 		assertTrue(modelMap.containsAttribute("ticketSearchForm"));
@@ -66,7 +66,7 @@ public class SearchControllerTest {
 	
 	@Test
 	public void home_should_initialise_the_ModelAndView_with_search_criterions() {
-		ModelAndView mav = controller.home(currentUser);
+		ModelAndView mav = controller.home();
 		
 		verify(searchService, times(1)).initSearchCriterions(mav);
 	}
@@ -79,7 +79,7 @@ public class SearchControllerTest {
 		when(searchService.getInitialisedTicketSearchViewModel()).thenReturn(ticketSearchVM);
 		when(searchService.getSections(ticketSearchVM)).thenReturn(tickets);
 		
-		ModelAndView mav = controller.home(currentUser);
+		ModelAndView mav = controller.home();
 		ModelMap modelMap = mav.getModelMap();
 
 		assertTrue(modelMap.containsAttribute("sections"));
@@ -91,7 +91,7 @@ public class SearchControllerTest {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
 
 		
-		ModelAndView mav = controller.savePreferences(currentUser, ticketSearchVM);
+		ModelAndView mav = controller.savePreferences(ticketSearchVM);
 		ModelMap modelMap = mav.getModelMap();
 		
 		assertTrue(true);
