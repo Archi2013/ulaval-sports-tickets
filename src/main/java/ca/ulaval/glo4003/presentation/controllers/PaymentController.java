@@ -3,6 +3,7 @@ package ca.ulaval.glo4003.presentation.controllers;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,9 +43,12 @@ public class PaymentController {
 	
 	@Inject
 	private PaymentErrorManager paymentErrorManager;
+	
+	@Autowired
+	private User currentUser;
 
 	@RequestMapping(value = "mode-de-paiement", method = RequestMethod.GET)
-	public ModelAndView modeOfPayment(@ModelAttribute("currentUser") User currentUser) {
+	public ModelAndView modeOfPayment() {
 		ModelAndView mav = new ModelAndView(MODE_OF_PAYMENT_PAGE);
 		
 		if (!currentUser.isLogged()) {
@@ -65,8 +69,7 @@ public class PaymentController {
 	}
 
 	@RequestMapping(value = "validation-achat", method = RequestMethod.POST)
-	public ModelAndView validate(@ModelAttribute("currentUser") User currentUser,
-			@ModelAttribute("paymentForm") @Valid PaymentViewModel paymentVM,
+	public ModelAndView validate(@ModelAttribute("paymentForm") @Valid PaymentViewModel paymentVM,
 			BindingResult result) {
 		ModelAndView mav = new ModelAndView(VALIDATION_SUCCES_PAGE);
 
@@ -78,14 +81,14 @@ public class PaymentController {
 		mav.addObject("currency", Constants.CURRENCY);
 
 		if (result.hasErrors()) {
-			return returnModelAndViewToRetryModeOfPayment(paymentVM, currentUser);
+			return returnModelAndViewToRetryModeOfPayment(paymentVM);
 		}
 
 		try {
 			mav.addObject("cumulativePrice", getCumulativePriceFR());
 			buyTicketsInCart(paymentVM);
 		} catch (InvalidCreditCardException e) {
-			ModelAndView mavToReturn = returnModelAndViewToRetryModeOfPayment(paymentVM, currentUser);
+			ModelAndView mavToReturn = returnModelAndViewToRetryModeOfPayment(paymentVM);
 			paymentErrorManager.addErrorMessageInvalidCreditCardToModel(mavToReturn);
 			return mavToReturn;
 		} catch (NoTicketsInCartException e) {
@@ -101,8 +104,8 @@ public class PaymentController {
 				paymentVM.getCreditCardUserName(), paymentVM.getExpirationMonth(), paymentVM.getExpirationYear());
 	}
 	
-	private ModelAndView returnModelAndViewToRetryModeOfPayment(PaymentViewModel paymentVM, User currentUser) {
-		ModelAndView mav = modeOfPayment(currentUser);
+	private ModelAndView returnModelAndViewToRetryModeOfPayment(PaymentViewModel paymentVM) {
+		ModelAndView mav = modeOfPayment();
 		mav.addObject("paymentForm", paymentVM);
 		return mav;
 	}

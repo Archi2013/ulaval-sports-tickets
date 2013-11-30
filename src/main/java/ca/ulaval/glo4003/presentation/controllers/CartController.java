@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,9 +42,12 @@ public class CartController {
 	
 	@Inject
 	private CartErrorManager cartErrorManager;
+	
+	@Autowired
+	private User currentUser;
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ModelAndView showDetails(@ModelAttribute("currentUser") User currentUser) {
+	public ModelAndView showDetails() {
 		ModelAndView mav = new ModelAndView(CART_DETAIL_PAGE);
 		
 		if (!currentUser.isLogged()) {
@@ -62,8 +66,7 @@ public class CartController {
 	}
 	
 	@RequestMapping(value = "ajout-billets-generaux", method = RequestMethod.POST)
-	public ModelAndView addGeneralTicketsToCart(@ModelAttribute("currentUser") User currentUser,
-			@ModelAttribute("chosenGeneralTicketsForm") @Valid ChosenGeneralTicketsViewModel chosenGeneralTicketsVM,
+	public ModelAndView addGeneralTicketsToCart(@ModelAttribute("chosenGeneralTicketsForm") @Valid ChosenGeneralTicketsViewModel chosenGeneralTicketsVM,
 			BindingResult result) {
 		ModelAndView mav = new ModelAndView(CART_DETAIL_PAGE);
 
@@ -89,8 +92,7 @@ public class CartController {
 	}
 
 	@RequestMapping(value = "ajout-billets-avec-siege", method = RequestMethod.POST)
-	public ModelAndView addWithSeatTicketsToCart(@ModelAttribute("currentUser") User currentUser,
-			@ModelAttribute("chosenWithSeatTicketsForm") @Valid ChosenWithSeatTicketsViewModel chosenWithSeatTicketsVM,
+	public ModelAndView addWithSeatTicketsToCart(@ModelAttribute("chosenWithSeatTicketsForm") @Valid ChosenWithSeatTicketsViewModel chosenWithSeatTicketsVM,
 			BindingResult result) {
 		ModelAndView mav = new ModelAndView(CART_DETAIL_PAGE);
 
