@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.utilities.Calculator;
 
-@Component
 public class SectionForCart {
 	private String sportName;
 	private DateTime gameDate;

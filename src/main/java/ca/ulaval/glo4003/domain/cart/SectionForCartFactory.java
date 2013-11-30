@@ -3,7 +3,9 @@ package ca.ulaval.glo4003.domain.cart;
 import java.util.Set;
 
 import org.joda.time.DateTime;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SectionForCartFactory {
 
 	public SectionForCart createSectionForGeneralTickets(String sportName,
