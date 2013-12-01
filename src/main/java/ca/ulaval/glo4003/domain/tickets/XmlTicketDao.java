@@ -185,26 +185,6 @@ public class XmlTicketDao implements TicketDao {
 		return tickets;
 	}
 
-	@Override
-	@Deprecated
-	public TicketDto get(String sportName, DateTime date, int ticketID) throws TicketDoesntExistException {
-		String xPath = String.format(TICKET_XPATH_ID_AND_SPORT, ticketID, sportName, toString(date));
-		return convertNodeToTicket(xPath);
-	}
-
-	@Override
-	@Deprecated
-	public TicketDto get(String sport, DateTime date, String seat) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	@Deprecated
-	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate) throws GameDoesntExistException {
-		return getAll(sportName, gameDate);
-	}
-
 	private DateTime parseDate(String dateString) {
 		DateTimeFormatter format = DateTimeFormat.forPattern(DATE_PATTERN);
 		return DateTime.parse(dateString, format);

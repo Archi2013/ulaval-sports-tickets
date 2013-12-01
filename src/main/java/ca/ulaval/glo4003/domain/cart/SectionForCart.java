@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.joda.time.DateTime;
-import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.utilities.Calculator;
 

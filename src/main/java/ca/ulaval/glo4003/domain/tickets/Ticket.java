@@ -6,12 +6,13 @@ import ca.ulaval.glo4003.utilities.persistence.Persistable;
 
 public abstract class Ticket implements Persistable<TicketDto> {
 
-	protected TicketAssignationState associationState;
+	protected TicketAssignationState assignationState;
 	protected double price;
 	protected boolean available;
 
-	public Ticket(TicketAssignationState associationState, double price, boolean available) {
-		this.associationState = associationState;
+
+	public Ticket(TicketAssignationState assignationState, double price, boolean available) {
+		this.assignationState = assignationState;
 		this.price = price;
 		this.available = available;
 	}
@@ -23,11 +24,11 @@ public abstract class Ticket implements Persistable<TicketDto> {
 	public abstract boolean hasSection(String section);
 
 	public boolean isAssignable() {
-		return associationState.isAssignable();
+		return assignationState.isAssignable();
 	}
 
 	public void assign(String sport, DateTime date, long ticketNumber) {
-		associationState = associationState.assign(sport, date, ticketNumber);
+		assignationState = assignationState.assign(sport, date, ticketNumber);
 	}
 
 	public boolean isAvailable() {
@@ -40,5 +41,10 @@ public abstract class Ticket implements Persistable<TicketDto> {
 
 	public void makeAvailable() {
 		this.available = true;
+	}
+
+	// Tests only
+	void setAssignationState(TicketAssignationState assignationState) {
+		this.assignationState = assignationState;
 	}
 }

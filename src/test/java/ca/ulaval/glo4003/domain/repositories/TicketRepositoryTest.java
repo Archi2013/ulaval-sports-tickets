@@ -28,7 +28,6 @@ public class TicketRepositoryTest {
 	private static final boolean AVAILABLE = true;
 	private static final String A_SPORT = "Sport";
 	private static final DateTime A_DATE = new DateTime(100);
-	private static final int A_TICKET_NUMBER = 145;
 	private static final String A_NEW_SEAT = "Seat";
 	private static final String A_NEW_SECTION = "Section";
 	private static final double A_PRICE = 12;
@@ -62,8 +61,6 @@ public class TicketRepositoryTest {
 
 	@Before
 	public void setUp() throws GameDoesntExistException, TicketDoesntExistException {
-
-		when(ticketDao.get(A_SPORT, A_DATE, A_TICKET_NUMBER)).thenReturn(firstTicketData);
 
 		when(ticketFactory.createTicket(firstTicketData)).thenReturn(ticketWithDataFromDao);
 		when(ticketFactory.createTicket(secondTicketData)).thenReturn(anotherTicketWithDataFromDao);
@@ -119,7 +116,7 @@ public class TicketRepositoryTest {
 		List<TicketDto> datas = new ArrayList<>();
 		datas.add(firstTicketData);
 		datas.add(secondTicketData);
-		when(ticketDao.getTicketsForGame(A_SPORT, A_DATE)).thenReturn(datas);
+		when(ticketDao.getAll(A_SPORT, A_DATE)).thenReturn(datas);
 
 		List<Ticket> ticketsReturned = repository.getAll(A_SPORT, A_DATE);
 
@@ -132,7 +129,7 @@ public class TicketRepositoryTest {
 		List<TicketDto> datas = new ArrayList<>();
 		datas.add(firstTicketData);
 		datas.add(secondTicketData);
-		when(ticketDao.getTicketsForGame(A_SPORT, A_DATE)).thenReturn(datas);
+		when(ticketDao.getAll(A_SPORT, A_DATE)).thenReturn(datas);
 
 		repository.getAll(A_SPORT, A_DATE);
 
@@ -175,7 +172,7 @@ public class TicketRepositoryTest {
 		List<TicketDto> datas = new ArrayList<>();
 		datas.add(firstTicketData);
 		datas.add(secondTicketData);
-		when(ticketDao.getTicketsForGame(A_SPORT, A_DATE)).thenReturn(datas);
+		when(ticketDao.getAll(A_SPORT, A_DATE)).thenReturn(datas);
 
 		repository.getAll(A_SPORT, A_DATE);
 		repository.commit();

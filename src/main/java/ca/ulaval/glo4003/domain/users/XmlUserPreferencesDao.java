@@ -1,6 +1,5 @@
 package ca.ulaval.glo4003.domain.users;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +7,10 @@ import java.util.Map;
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.hamcrest.core.IsAnything;
 import org.springframework.stereotype.Component;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
@@ -28,7 +29,7 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 
 
 	private XmlDatabase database;
-
+	
 
 	public XmlUserPreferencesDao() {
 		database = XmlDatabase.getInstance(DEFAULT_FILE);
@@ -51,25 +52,20 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 	}
 
 	private TicketSearchPreferenceDto convertNodeToUserPreferences(SimpleNode node) throws NoSuchAttributeException {
+		Gson gson = new Gson();
 		
 		String displayedPeriod = node.getNodeValue("displayedPeriod");
 		Boolean localGameOnly = Boolean.valueOf(node.getNodeValue("localGameOnly"));
+		List<String> listTicket = gson.fromJson(node.getNodeValue("listTicket"), new TypeToken<List<String>>(){}.getType());
+		List<String> sportsName = gson.fromJson(node.getNodeValue("sportsName"), new TypeToken<List<String>>(){}.getType());
 
-		//TODO En attendant les listes
-		List<String> listTicket = new ArrayList<String>();
-		List<String> sportsName = new ArrayList<String>();
-		sportsName.add("Football");
-		
 		return new TicketSearchPreferenceDto(sportsName, displayedPeriod, localGameOnly, listTicket);
 	}
 
 	@Override
 	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) {
 		SimpleNode simpleNode = convertUserPreferencesToNode(userPreferences);
-		String xPath = String.format(USER_XPATH_ID, currentUser.getUsername());
-		//TODO remove
-		System.out.println(database.exist(xPath + "/userPreferences"));
-		
+		String xPath = String.format(USER_XPATH_ID, currentUser.getUsername());		
 		try {
 			if (isUserPreferencesAlreadySaved(xPath)) {
 				database.remove(xPath + "/userPreferences");
@@ -79,15 +75,19 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 	private SimpleNode convertUserPreferencesToNode(TicketSearchPreferenceDto userPreferences) {
+		Gson gson = new Gson();
 		Map<String, String> nodes = new HashMap<>();
+		
 		nodes.put("displayedPeriod", userPreferences.getDisplayedPeriod());
 		nodes.put("localGameOnly", userPreferences.isLocalGameOnly().toString());
-
-		// TODO: Ajouter les liste
-
+		nodes.put("sportsName", gson.toJson(userPreferences.getSelectedSports()));
+		nodes.put("listTicket", gson.toJson(userPreferences.getSelectedTicketKinds()));
+		
 		SimpleNode simpleNode = new SimpleNode("userPreferences", nodes);
 		return simpleNode;
 
