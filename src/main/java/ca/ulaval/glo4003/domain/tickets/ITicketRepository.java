@@ -19,7 +19,7 @@ public interface ITicketRepository extends Repository {
 
 	Ticket createSeatedTicket(String section, String seat, double price, boolean available) throws TicketAlreadyExistsException;
 
-	@Deprecated
-	List<Ticket> recoverNGeneralTickets(String sportName, DateTime gameDate, int numberOfSeats) throws GameDoesntExistException;
+	List<Ticket> getMultipleGeneralTickets(String sportName, DateTime gameDate, int numberOfSeats)
+			throws GameDoesntExistException;
 
 }
