@@ -67,8 +67,9 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) {
 		SimpleNode simpleNode = convertUserPreferencesToNode(userPreferences);
 		String xPath = String.format(USER_XPATH_ID, currentUser.getUsername());
-		System.out.println(xPath);
+		//TODO remove
 		System.out.println(database.exist(xPath + "/userPreferences"));
+		
 		try {
 			if (isUserPreferencesAlreadySaved(xPath)) {
 				database.remove(xPath + "/userPreferences");
@@ -78,11 +79,9 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		database.commit();
 	}
 
-	private SimpleNode convertUserPreferencesToNode(
-			TicketSearchPreferenceDto userPreferences) {
+	private SimpleNode convertUserPreferencesToNode(TicketSearchPreferenceDto userPreferences) {
 		Map<String, String> nodes = new HashMap<>();
 		nodes.put("displayedPeriod", userPreferences.getDisplayedPeriod());
 		nodes.put("localGameOnly", userPreferences.isLocalGameOnly().toString());
