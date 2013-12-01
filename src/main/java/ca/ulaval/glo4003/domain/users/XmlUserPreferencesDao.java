@@ -42,9 +42,7 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 	public TicketSearchPreferenceDto get(String username) throws UserDoesntHaveSavedPreferences {
 		String xPath = String.format(USER_XPATH_ID, username);
 		try {
-			SimpleNode node = database.extractNode(xPath+"/userPreferences");
-			
-			System.out.println("ICIIIIIIIII");
+			SimpleNode node = database.extractNode(xPath+"/userPreferences");	
 			return convertNodeToUserPreferences(node);
 		} catch (XPathExpressionException | NoSuchAttributeException e) {
 			System.out.println(e);
@@ -55,8 +53,9 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 	private TicketSearchPreferenceDto convertNodeToUserPreferences(SimpleNode node) throws NoSuchAttributeException {
 		
 		String displayedPeriod = node.getNodeValue("displayedPeriod");
-		boolean localGameOnly = true; //Boolean.getBoolean(node.getNodeValue("true"));
-		
+		Boolean localGameOnly = Boolean.valueOf(node.getNodeValue("localGameOnly"));
+
+		//TODO En attendant les listes
 		List<String> listTicket = new ArrayList<String>();
 		List<String> sportsName = new ArrayList<String>();
 		sportsName.add("Football");

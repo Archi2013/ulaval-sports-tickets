@@ -22,15 +22,12 @@ public class UserPreferencesService {
 	TicketSearchPreferenceFactory ticketSearchFactory;
 	
 	@Inject
-	XmlUserPreferencesDao xmlDao;
+	XmlUserPreferencesDao xmlUserPreferencesDao;
 	
 	
 	public TicketSearchViewModel getUserPreferencesForUser(User currentUser) throws UserDoesntHaveSavedPreferences{
-		System.out.println("TEST TEST TEST");
-		TicketSearchPreferenceDto ticketSPDto= xmlDao.get(currentUser.getUsername());	
-		System.out.print("ticketSPDTO"+ticketSPDto.getDisplayedPeriod());
+		TicketSearchPreferenceDto ticketSPDto= xmlUserPreferencesDao.get(currentUser.getUsername());	
 		TicketSearchViewModel ticketSearchVModel=ticketSearchFactory.createViewModel(ticketSPDto);
-		System.out.println("WTF!!!!!!!!!!");
 		return ticketSearchVModel;
 				
 	}
@@ -40,8 +37,8 @@ public class UserPreferencesService {
 		TicketSearchPreferenceDto ticketSearchDto = ticketSearchFactory.createPreferenceDto(
 				userPreferences.getSelectedSports(), userPreferences.getDisplayedPeriod(),
 				userPreferences.isLocalGameOnly(), userPreferences.getSelectedTicketKinds());	
-		userPreferencesDao.save(currentUser,ticketSearchDto);
-		xmlDao.save(currentUser, ticketSearchDto);
+		
+		xmlUserPreferencesDao.save(currentUser, ticketSearchDto);
 	}
 	
 	
