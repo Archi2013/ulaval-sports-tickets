@@ -22,7 +22,6 @@ import ca.ulaval.glo4003.domain.users.UserPreferencesDao;
 import ca.ulaval.glo4003.domain.users.UserPreferencesDto;
 import ca.ulaval.glo4003.domain.users.XmlUserPreferencesDao;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
-import ca.ulaval.glo4003.fakes.FakeDataUserPreferencesDao;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
 import ca.ulaval.glo4003.services.UserPreferencesService;

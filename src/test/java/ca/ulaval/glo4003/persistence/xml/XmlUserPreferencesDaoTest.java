@@ -44,7 +44,8 @@ public class XmlUserPreferencesDaoTest {
 		xmlUserPreferencesDao.save(currentUser ,new TicketSearchPreferenceDto(sportsName, displayedPeriod, localGameOnly, listTicket));
 		TicketSearchPreferenceDto ticketSPDto = xmlUserPreferencesDao.get(currentUser.getUsername());
 		System.out.println(ticketSPDto.isLocalGameOnly());
-		Assert.assertEquals(false,ticketSPDto.isLocalGameOnly() );
+		Assert.assertEquals(false,ticketSPDto.isLocalGameOnly());
+		Assert.assertEquals("ALL",ticketSPDto.getDisplayedPeriod());
 		
 		
 	
