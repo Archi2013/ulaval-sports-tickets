@@ -1,7 +1,10 @@
-package ca.ulaval.glo4003.domain.services;
+package ca.ulaval.glo4003.services;
 
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.joda.time.DateTime;
 import org.junit.Before;

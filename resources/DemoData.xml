@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<base>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><base>
 	<sports>
 		<sport>
 			<name>Démonstration</name>
@@ -282,12 +281,7 @@
 			<sportName>Rugby féminin</sportName>
 			<date>2014/10/13 14:00 EDT</date>
 		</game>
-		<game>
-			<location>Londres</location>
-			<oponents>Big Ben</oponents>
-			<sportName>Démonstration</sportName>
-			<date>2013/12/10 18:50 EST</date>
-		</game>
+		
 		<game>
 			<location>Canberra</location>
 			<oponents>Kangourou</oponents>
@@ -336,5 +330,5 @@
 			<sportName>Démonstration</sportName>
 			<date>2014/08/01 13:00 EDT</date>
 		</game>
-	</games>
-</base>
+	<game><location>Londres</location><oponents>Big Ben</oponents><sportName>Démonstration</sportName><date>2013/12/10 18:50 EST</date></game></games>
+<tickets><ticket><id>1</id><price>20.0</price><seat>Générale</seat><sportName>Démonstration</sportName><available>true</available><section>Générale</section><gameDate>2013/12/10 18:50 EST</gameDate></ticket></tickets></base>

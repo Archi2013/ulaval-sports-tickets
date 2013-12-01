@@ -2,8 +2,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 
 import javax.inject.Inject;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,15 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
-import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
-import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;
+import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
+import ca.ulaval.glo4003.presentation.viewmodels.GamesViewModel;
 import ca.ulaval.glo4003.services.QueryGameService;
-import ca.ulaval.glo4003.utilities.Constants;
-import ca.ulaval.glo4003.utilities.persistence.XmlIntegrityException;
 
 @Controller
 @SessionAttributes({ "currentUser" })
-@RequestMapping(value = "/sport/{sportNameUrl}/match", method = RequestMethod.GET)
+@RequestMapping(value = "/sport/", method = RequestMethod.GET)
 public class GameController {
 
 	@Autowired
@@ -31,24 +27,33 @@ public class GameController {
 	@Inject
 	private QueryGameService gameService;
 
-	@RequestMapping(value = "/{dateString}/billets", method = RequestMethod.GET)
-	public ModelAndView getTicketsForGame(@PathVariable String dateString, @PathVariable String sportNameUrl) {
+	@RequestMapping(value = "/{sportUrl}/matchs", method = RequestMethod.GET)
+	public ModelAndView getGamesForSport(@PathVariable String sportUrl) {
+
+		ModelAndView mav = new ModelAndView("sport/games");
+
+		Boolean connectedUser = currentUser.isLogged();
+
+		if (connectedUser) {
+			mav.addObject("connectedUser", true);
+		} else {
+			mav.addObject("connectedUser", false);
+		}
+
 		try {
-			DateTime gameDate = DateTime.parse(dateString, DateTimeFormat.forPattern("yyyyMMddHHmmz"));
-			ModelAndView mav = new ModelAndView("game/sections");
+			GamesViewModel games = gameService.getGamesForSport(sportUrl);
+			mav.addObject("games", games);
 
-			manageUserConnection(mav);
-
-			mav.addObject("currency", Constants.CURRENCY);
-
-			SectionsViewModel sectionsViewModel = gameService.getAvailableSectionsForGame(sportNameUrl, gameDate);
-			mav.addObject("gameSections", sectionsViewModel);
+			if (games.hasGames()) {
+				return mav;
+			} else {
+				mav.setViewName("sport/no-games");
+				return mav;
+			}
+		} catch (RuntimeException | SportDoesntExistException | GameDoesntExistException e) {
+			e.printStackTrace();
+			mav.setViewName("error/404");
 			return mav;
-
-		} catch (GameDoesntExistException | NoSportForUrlException e) {
-			return new ModelAndView("error/404");
-		} catch (XmlIntegrityException e) {
-			return new ModelAndView("game/no-ticket");
 		}
 	}
 
