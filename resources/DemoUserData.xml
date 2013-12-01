@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<base>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><base>
   <users>
     <user>
       <username>Carl Belanger</username>
@@ -24,7 +23,7 @@
       <password>RDvxZJ4ZuJDIK4Ukbk0AXiFrjoJEuPSm0eE0Y+iJsAZT3ZN3q3cs6lwuzE3oQWnX
       </password>
       <admin>false</admin>
-    </user>
+        <userPreferences><displayedPeriod>THREE_MONTH</displayedPeriod><localGameOnly>false</localGameOnly></userPreferences></user>
     <user>
       <username>test</username>
       <password>WcUWDjoKBIAK8n1LxwXdMn4ZT55KRnwX6wc/qLFHLJOtTK6yIlZslJ6nPmjPyO8/
