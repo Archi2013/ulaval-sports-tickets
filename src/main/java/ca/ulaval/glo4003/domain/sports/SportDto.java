@@ -1,13 +1,13 @@
 package ca.ulaval.glo4003.domain.sports;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import ca.ulaval.glo4003.domain.game.GameDto;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SportDto implements Serializable {
 	private static final long serialVersionUID = 1L;
