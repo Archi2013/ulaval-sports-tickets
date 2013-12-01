@@ -1,5 +1,7 @@
 package ca.ulaval.glo4003.presentation.controllers;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import ca.ulaval.glo4003.constants.DisplayedPeriod;
+import ca.ulaval.glo4003.constants.TicketKind;
+import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
+import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionForSearchViewModelFactory;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
 import ca.ulaval.glo4003.services.SearchService;
 import ca.ulaval.glo4003.services.UserPreferencesService;
 import ca.ulaval.glo4003.utilities.Constants;
@@ -23,27 +31,32 @@ import ca.ulaval.glo4003.utilities.Constants;
 public class SearchController {
 	
 	@Inject
-	SearchService searchService;
+	private Constants constants;
 	
 	@Inject
-	UserPreferencesService userPreferencesService;
+	private SearchService searchService;
 	
+	@Inject
+	private UserPreferencesService userPreferencesService;
+
+	@Inject
+	private TicketSearchPreferenceFactory ticketSearchPreferenceFactory;
+	
+	@Inject
+	private SectionForSearchViewModelFactory sectionForSearchViewModelFactory;
 	
 	@Autowired
-	private User currentUser;
-
+	User currentUser;
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("search/home");
+		
 		mav.addObject("currency", Constants.CURRENCY);
 		
-		Boolean connectedUser = currentUser.isLogged();
+		TicketSearchViewModel ticketSearchVM = ticketSearchPreferenceFactory.createInitialViewModel();
 		
-		TicketSearchViewModel ticketSearchVM = searchService.getInitialisedTicketSearchViewModel();
-		
-		addConnectedUserToModelAndView(mav, connectedUser);
-		
-		if (connectedUser) {
+		if (currentUser.isLogged()) {
 			try{
 			ticketSearchVM = userPreferencesService.getUserPreferencesForUser(currentUser);
 			}catch (UserDoesntHaveSavedPreferences e){
@@ -52,9 +65,9 @@ public class SearchController {
 		
 		mav.addObject("ticketSearchForm", ticketSearchVM);
 		
-		mav.addObject("sections", searchService.getSections(ticketSearchVM));
+		mav.addObject("sections", getSectionViewModels(ticketSearchVM));
 		
-		searchService.initSearchCriterions(mav);
+		initSearchCriterions(mav);
 		
 		return mav;
 	}
@@ -74,19 +87,23 @@ public class SearchController {
 		
 		mav.addObject("currency", Constants.CURRENCY);
 		
-		mav.addObject("sections", searchService.getSections(ticketSearchVM));
+		mav.addObject("sections", getSectionViewModels(ticketSearchVM));
 		
 		mav.addObject("preferencesSaved", false);
 		
 		return mav;
     }
 	
-	private void addConnectedUserToModelAndView(ModelAndView mav,
-			Boolean connectedUser) {
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-		} else {
-			mav.addObject("connectedUser", false);
-		}
+	private void initSearchCriterions(ModelAndView mav) {
+		mav.addObject("sportList", constants.getSportList());
+		mav.addObject("displayedPeriods", DisplayedPeriod.getDisplayedPeriods());
+		mav.addObject("ticketKinds", TicketKind.getTicketKinds());
+	}
+	
+	private List<SectionForSearchViewModel> getSectionViewModels(TicketSearchViewModel ticketSearchVM) {
+		TicketSearchPreferenceDto preferenceDto = ticketSearchPreferenceFactory.createPreferenceDto(
+				ticketSearchVM.getSelectedSports(), ticketSearchVM.getDisplayedPeriod(),
+				ticketSearchVM.isLocalGameOnly(), ticketSearchVM.getSelectedTicketKinds());
+		return sectionForSearchViewModelFactory.createViewModels(searchService.getSections(preferenceDto));
 	}
 }

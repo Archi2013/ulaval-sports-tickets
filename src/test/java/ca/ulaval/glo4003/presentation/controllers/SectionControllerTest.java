@@ -1,11 +1,7 @@
 package ca.ulaval.glo4003.presentation.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -18,9 +14,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
-import ca.ulaval.glo4003.presentation.viewmodels.ChooseTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenGeneralTicketsViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.ChosenWithSeatTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
 import ca.ulaval.glo4003.services.SectionService;
 
@@ -35,21 +31,11 @@ public class SectionControllerTest {
 	@Mock
 	private SectionService sectionService;
 
-	@Mock
-	private User currentUser;
-
 	@InjectMocks
 	private SectionController sectionController;
 
 	@Before
 	public void setUp() {
-	}
-
-	@Test
-	public void getSectionForGame_should_get_sections_from_service() throws SectionDoesntExistException {
-		sectionController.getSectionForGame(GAME_DATE_STR, SPORT_NAME, TICKET_TYPE);
-
-		verify(sectionService).getAvailableSection(SPORT_NAME, GAME_DATE, TICKET_TYPE);
 	}
 
 	@Test
@@ -64,18 +50,41 @@ public class SectionControllerTest {
 	}
 
 	@Test
-	public void getSectionForGame_should_add_a_chooseTicketsForm_to_model() throws SectionDoesntExistException {
-		ChooseTicketsViewModel chooseTicketsVM = mock(ChooseTicketsViewModel.class);
-		when(sectionService.getChooseTicketsViewModel(SPORT_NAME, GAME_DATE, TICKET_TYPE)).thenReturn(chooseTicketsVM);
+	public void getSectionForGame_should_add_a_chosenGeneralTicketsForm_to_model() throws SectionDoesntExistException {
+		SectionViewModel sectionViewModel = mock(SectionViewModel.class);
+		when(sectionService.getAvailableSection(SPORT_NAME, GAME_DATE, TICKET_TYPE)).thenReturn(sectionViewModel);
+		when(sectionViewModel.getGeneralAdmission()).thenReturn(true);
+		
+		ChosenGeneralTicketsViewModel chosenGeneralTicketsVM = mock(ChosenGeneralTicketsViewModel.class);
+		when(sectionService.getChosenGeneralTicketsViewModel(SPORT_NAME, GAME_DATE, TICKET_TYPE)).thenReturn(chosenGeneralTicketsVM);
 
 		ModelAndView mav = sectionController.getSectionForGame(GAME_DATE_STR, SPORT_NAME, TICKET_TYPE);
 		ModelMap modelMap = mav.getModelMap();
 
-		assertEquals(chooseTicketsVM, modelMap.get("chooseTicketsForm"));
+		assertEquals(chosenGeneralTicketsVM, modelMap.get("chosenGeneralTicketsForm"));
+	}
+	
+	@Test
+	public void getSectionForGame_should_add_a_chosenWithSeatTicketsForm_to_model() throws SectionDoesntExistException {
+		SectionViewModel sectionViewModel = mock(SectionViewModel.class);
+		when(sectionService.getAvailableSection(SPORT_NAME, GAME_DATE, TICKET_TYPE)).thenReturn(sectionViewModel);
+		when(sectionViewModel.getGeneralAdmission()).thenReturn(false);
+		
+		ChosenWithSeatTicketsViewModel chosenWithSeatTicketsVM = mock(ChosenWithSeatTicketsViewModel.class);
+		when(sectionService.getChosenWithSeatTicketsViewModel(SPORT_NAME, GAME_DATE, TICKET_TYPE)).thenReturn(chosenWithSeatTicketsVM);
+
+		ModelAndView mav = sectionController.getSectionForGame(GAME_DATE_STR, SPORT_NAME, TICKET_TYPE);
+		ModelMap modelMap = mav.getModelMap();
+
+		assertEquals(chosenWithSeatTicketsVM, modelMap.get("chosenWithSeatTicketsForm"));
 	}
 
 	@Test
-	public void getSectionForGame_should_return_correct_view_path() {
+	public void getSectionForGame_should_return_correct_view_path() throws SectionDoesntExistException {
+		SectionViewModel sectionViewModel = mock(SectionViewModel.class);
+		when(sectionService.getAvailableSection(SPORT_NAME, GAME_DATE, TICKET_TYPE)).thenReturn(sectionViewModel);
+		when(sectionViewModel.getGeneralAdmission()).thenReturn(true);
+		
 		ModelAndView mav = sectionController.getSectionForGame(GAME_DATE_STR, SPORT_NAME, TICKET_TYPE);
 
 		assertEquals("section/details", mav.getViewName());
@@ -89,27 +98,5 @@ public class SectionControllerTest {
 		ModelAndView mav = sectionController.getSectionForGame(GAME_DATE_STR, SPORT_NAME, TICKET_TYPE);
 
 		assertEquals("error/404", mav.getViewName());
-	}
-
-	@Test
-	public void when_user_is_logged_getSectionForGame_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
-
-		ModelAndView mav = sectionController.getSectionForGame(GAME_DATE_STR, SPORT_NAME, TICKET_TYPE);
-		ModelMap modelMap = mav.getModelMap();
-
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
-	}
-
-	@Test
-	public void when_user_isnt_logged_getSectionForGame_should_add_connectedUser_at_false() {
-		when(currentUser.isLogged()).thenReturn(false);
-
-		ModelAndView mav = sectionController.getSectionForGame(GAME_DATE_STR, SPORT_NAME, TICKET_TYPE);
-		ModelMap modelMap = mav.getModelMap();
-
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
 	}
 }

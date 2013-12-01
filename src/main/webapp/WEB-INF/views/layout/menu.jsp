@@ -34,7 +34,7 @@
 	<c:choose>
         <c:when test="${currentUser.isLogged()}">
             <div class="menu-element">
-                <a href=""><spring:message code="label.main-menu.cart" /> ⊻</a>
+                <a href="/panier"><spring:message code="label.main-menu.cart" /> ⊻</a>
             </div>
         </c:when>
     </c:choose>

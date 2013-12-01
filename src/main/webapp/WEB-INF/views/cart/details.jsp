@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<c:set var="pageTitle" value="Paiement des billets" />
+<c:set var="pageTitle" value="Panier d'achat" />
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -28,8 +28,9 @@
 					<th>Sport</th>
 					<th>Date</th>
 					<th>Opposants</th>
+					<th>Lieu</th>
 					<c:choose>
-						<c:when test="${section.isGeneralAdmission()}">
+						<c:when test="${section.generalAdmission}">
 							<th>Nombre de billets</th>
 						</c:when>
 						<c:otherwise>
@@ -42,11 +43,12 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>${section.sport}</td>
-					<td>${section.date}</td>
+					<td>${section.sportName}</td>
+					<td>${section.gameDate}</td>
 					<td>${section.opponents}</td>
+					<td>${section.location}</td>
 					<c:choose>
-						<c:when test="${section.isGeneralAdmission()}">
+						<c:when test="${section.generalAdmission}">
 							<td>${section.numberOfTicketsToBuy}</td>
 						</c:when>
 						<c:otherwise>

@@ -31,7 +31,9 @@ public class UserPreferencesService {
 	
 	public void saveUserPreference(User currentUser, TicketSearchViewModel userPreferences){
 		
-		TicketSearchPreferenceDto ticketSearchDto = ticketSearchFactory.createPreferenceDto(userPreferences);	
+		TicketSearchPreferenceDto ticketSearchDto = ticketSearchFactory.createPreferenceDto(
+				userPreferences.getSelectedSports(), userPreferences.getDisplayedPeriod(),
+				userPreferences.isLocalGameOnly(), userPreferences.getSelectedTicketKinds());	
 		userPreferencesDao.save(currentUser,ticketSearchDto);
 	}
 	

@@ -53,6 +53,7 @@ public class QueryGameServiceTest {
 
 		sectionDtos = newArrayList();
 		when(sectionDaoMock.getAll(SPORT_NAME, GAME_DATE)).thenReturn(sectionDtos);
+		
 
 	}
 

@@ -97,7 +97,7 @@ public class XmlSectionDao implements SectionDao {
 			String price = database.extractPath(xPathClause + "/price");
 			List<SimpleNode> nodes = database.extractNodeSet(xPathClause);
 
-			List<String> seats = new ArrayList<>();
+			Set<String> seats = new HashSet<>();
 			for (SimpleNode node : nodes) {
 				if (node.hasNode("seat")) {
 					seats.add(node.getNodeValue("seat"));
