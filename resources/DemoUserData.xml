@@ -23,7 +23,7 @@
       <password>RDvxZJ4ZuJDIK4Ukbk0AXiFrjoJEuPSm0eE0Y+iJsAZT3ZN3q3cs6lwuzE3oQWnX
       </password>
       <admin>false</admin>
-        <userPreferences><displayedPeriod>THREE_MONTH</displayedPeriod><localGameOnly>false</localGameOnly></userPreferences></user>
+        <userPreferences><listTicket>["WITH_SEAT"]</listTicket><displayedPeriod>ONE_MONTH</displayedPeriod><localGameOnly>true</localGameOnly><sportsName>["Soccer masculin","Football"]</sportsName></userPreferences></user>
     <user>
       <username>test</username>
       <password>WcUWDjoKBIAK8n1LxwXdMn4ZT55KRnwX6wc/qLFHLJOtTK6yIlZslJ6nPmjPyO8/
@@ -53,6 +53,6 @@
       <password>KZA/qws+eWVCEE4taVa0u/unvIoW09y0sxjzKo9kpCzZVHhTC2BHCZZX+0wygdfm
       </password>
       <admin>false</admin>
-    </user>
+    <userPreferences><listTicket>["GENERAL_ADMISSION","WITH_SEAT"]</listTicket><displayedPeriod>SIX_MONTH</displayedPeriod><localGameOnly>false</localGameOnly><sportsName>["Soccer féminin","Rugby féminin"]</sportsName></userPreferences></user>
   </users>
 </base>

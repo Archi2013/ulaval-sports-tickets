@@ -11,6 +11,9 @@ import javax.xml.xpath.XPathExpressionException;
 import org.hamcrest.core.IsAnything;
 import org.springframework.stereotype.Component;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.utilities.persistence.SimpleNode;
@@ -28,7 +31,7 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 
 
 	private XmlDatabase database;
-
+	
 
 	public XmlUserPreferencesDao() {
 		database = XmlDatabase.getInstance(DEFAULT_FILE);
@@ -51,15 +54,19 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 	}
 
 	private TicketSearchPreferenceDto convertNodeToUserPreferences(SimpleNode node) throws NoSuchAttributeException {
+		Gson gson = new Gson();
 		
 		String displayedPeriod = node.getNodeValue("displayedPeriod");
 		Boolean localGameOnly = Boolean.valueOf(node.getNodeValue("localGameOnly"));
-
-		//TODO En attendant les listes
-		List<String> listTicket = new ArrayList<String>();
-		List<String> sportsName = new ArrayList<String>();
-		sportsName.add("Football");
 		
+	//	List<String> listTicket = new ArrayList<String>();
+	//	List<String> sportsName = new ArrayList<String>();
+		List<String> listTicket = gson.fromJson(node.getNodeValue("listTicket"), new TypeToken<List<String>>(){}.getType());
+		List<String> sportsName = gson.fromJson(node.getNodeValue("sportsName"), new TypeToken<List<String>>(){}.getType());
+		
+		
+		List<String> test = gson.fromJson(node.getNodeValue("listTicket"), new TypeToken<List<String>>(){}.getType());
+		System.out.println(test);
 		return new TicketSearchPreferenceDto(sportsName, displayedPeriod, localGameOnly, listTicket);
 	}
 
@@ -79,15 +86,21 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 	private SimpleNode convertUserPreferencesToNode(TicketSearchPreferenceDto userPreferences) {
+		Gson gson = new Gson();
 		Map<String, String> nodes = new HashMap<>();
+		
 		nodes.put("displayedPeriod", userPreferences.getDisplayedPeriod());
 		nodes.put("localGameOnly", userPreferences.isLocalGameOnly().toString());
-
-		// TODO: Ajouter les liste
-
+		nodes.put("sportsName", gson.toJson(userPreferences.getSelectedSports()));
+		nodes.put("listTicket", gson.toJson(userPreferences.getSelectedTicketKinds()));
+		
+	
+		
 		SimpleNode simpleNode = new SimpleNode("userPreferences", nodes);
 		return simpleNode;
 
