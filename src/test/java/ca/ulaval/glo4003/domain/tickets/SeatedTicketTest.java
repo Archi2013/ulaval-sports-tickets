@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.domain.tickets;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.joda.time.DateTime;
 import org.junit.Assert;
@@ -9,11 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import ca.ulaval.glo4003.domain.tickets.SeatedTicket;
-import ca.ulaval.glo4003.domain.tickets.Ticket;
-import ca.ulaval.glo4003.domain.tickets.TicketAssignationState;
-import ca.ulaval.glo4003.domain.tickets.TicketDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SeatedTicketTest {
@@ -57,6 +52,16 @@ public class SeatedTicketTest {
 	public void if_other_ticket_has_not_same_seat_and_section_isForSameSeat_returns_false() {
 		when(otherTicket.hasSeat(A_SEAT)).thenReturn(false);
 		when(otherTicket.hasSection(A_SECTION)).thenReturn(true);
+
+		boolean result = ticket.isSame(otherTicket);
+
+		Assert.assertFalse(result);
+	}
+
+	@Test
+	public void if_other_ticket_has_same_seat_but_not_same_section_isForSameSeat_returns_false() {
+		when(otherTicket.hasSeat(A_SEAT)).thenReturn(true);
+		when(otherTicket.hasSection(A_SECTION)).thenReturn(false);
 
 		boolean result = ticket.isSame(otherTicket);
 

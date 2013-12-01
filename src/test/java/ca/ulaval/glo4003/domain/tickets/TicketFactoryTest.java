@@ -1,13 +1,12 @@
 package ca.ulaval.glo4003.domain.tickets;
 
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import ca.ulaval.glo4003.domain.tickets.TicketFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TicketFactoryTest {
@@ -44,5 +43,50 @@ public class TicketFactoryTest {
 
 		Assert.assertSame(GeneralTicket.class, ticket.getClass());
 
+	}
+
+	@Test
+	public void createTicket_should_give_unnasigned_assignation_state_to_ticket_if_sport_name_is_null() {
+		TicketDto data = new GeneralTicketDto(5L, null, DateTime.now(), 13.00, true);
+
+		Ticket ticket = factory.createTicket(data);
+
+		Assert.assertTrue(ticket.getAssignationState().isAssignable());
+	}
+
+	@Test
+	public void createTicket_should_give_unnasigned_assignation_state_to_ticket_if_game_date_is_null() {
+		TicketDto data = new GeneralTicketDto(5L, "Baseball", null, 13.00, true);
+
+		Ticket ticket = factory.createTicket(data);
+
+		Assert.assertTrue(ticket.getAssignationState().isAssignable());
+	}
+
+	@Test
+	public void createTicket_should_give_unnasigned_assignation_state_to_ticket_if_ticket_id_is_null() {
+		TicketDto data = new GeneralTicketDto(null, "Baseball", DateTime.now(), 13.00, true);
+
+		Ticket ticket = factory.createTicket(data);
+
+		Assert.assertTrue(ticket.getAssignationState().isAssignable());
+	}
+
+	@Test
+	public void createTicket_should_give_unnasigned_assignation_state_to_ticket_if_ticket_id_is_less_than_one() {
+		TicketDto data = new GeneralTicketDto(-1L, "Baseball", DateTime.now(), 13.00, true);
+
+		Ticket ticket = factory.createTicket(data);
+
+		Assert.assertTrue(ticket.getAssignationState().isAssignable());
+	}
+
+	@Test
+	public void createTicket_should_give_asigned_assignation_state_to_ticket_if_ticket_is_assigned() {
+		TicketDto data = new GeneralTicketDto(5L, "Baseball", DateTime.now(), 13.00, true);
+
+		Ticket ticket = factory.createTicket(data);
+
+		Assert.assertFalse(ticket.getAssignationState().isAssignable());
 	}
 }

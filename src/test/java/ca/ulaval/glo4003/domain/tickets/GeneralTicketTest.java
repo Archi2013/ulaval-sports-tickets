@@ -8,9 +8,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.constants.TicketKind;
-import ca.ulaval.glo4003.domain.tickets.GeneralTicket;
-import ca.ulaval.glo4003.domain.tickets.Ticket;
-import ca.ulaval.glo4003.domain.tickets.TicketAssignationState;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GeneralTicketTest {
@@ -42,6 +39,13 @@ public class GeneralTicketTest {
 	@Test
 	public void a_general_ticket_never_has_the_same_seat() {
 		Assert.assertFalse(ticket.hasSeat(A_SEAT));
+	}
+
+	@Test
+	public void saveDataInDto_adds_seats_and_section_to_dto_filled_by_superclass() {
+		TicketDto data = ticket.saveDataInDTO();
+
+		Assert.assertEquals(A_PRICE, data.price, 1);
 	}
 
 }

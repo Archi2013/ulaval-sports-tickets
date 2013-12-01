@@ -1,6 +1,5 @@
 package ca.ulaval.glo4003.domain.users;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +7,6 @@ import java.util.Map;
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.hamcrest.core.IsAnything;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
