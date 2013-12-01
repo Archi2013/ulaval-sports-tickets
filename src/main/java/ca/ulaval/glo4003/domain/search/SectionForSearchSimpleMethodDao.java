@@ -116,7 +116,7 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 						}
 					} catch (XmlIntegrityException e) {
 						// TODO s'occuper de la cause de cette exception
-						//System.out.println("Exception : " + e.getCause().getClass().getSimpleName());
+						System.out.println("Exception : " + e.getCause().getClass().getSimpleName());
 					}
 				}
 			}
