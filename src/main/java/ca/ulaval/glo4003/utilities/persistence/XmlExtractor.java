@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -136,4 +139,29 @@ public class XmlExtractor {
 		Node node = (Node) extract(xPath, XPathConstants.NODE);
 		node.getParentNode().removeChild(node);
 	}
+
+	public Set<String> distinct(String xPath, String name) throws XPathExpressionException {
+		String lastName = xPath.substring(xPath.lastIndexOf("/") + 1) + "/" + name;
+	    String distinctXpath = xPath + "[not(" + name + " = preceding::" + lastName + ")]";
+	    
+	    NodeList nodes = (NodeList) extract(distinctXpath, XPathConstants.NODESET);
+	    return extractSingleNode(nodes, name);
+    }
+	
+	private Set<String> extractSingleNode(NodeList nodes, String name) {
+		try {
+			return innerSingleNode(nodes, name);
+        } catch (NoSuchAttributeException e) {
+            throw new XmlIntegrityException();
+        }
+	}
+
+	private Set<String> innerSingleNode(NodeList nodes, String name) throws NoSuchAttributeException {
+	    Set<String> out = new HashSet<>();
+	    for (int i = 0; i < nodes.getLength(); i++) {
+			SimpleNode s = new SimpleNode(nodes.item(i));
+			out.add(s.getNodeValue(name));
+	    }
+	    return out;
+    }
 }

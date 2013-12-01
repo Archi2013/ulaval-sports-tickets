@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -113,6 +114,16 @@ public class XmlExtractorTest {
 		long expected = 2L;
 
 		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testDistinct() throws Exception {
+		Set<String> actual = extractor.distinct(ITEM_XPATH, "Nom");
+		
+		Assert.assertEquals(2, actual.size());
+		Assert.assertTrue(actual.contains("Chemise"));
+		Assert.assertTrue(actual.contains("Chapeau"));
+		Assert.assertFalse(actual.contains("Pantalon"));
 	}
 
 	private SimpleNode initSimpleNode() {

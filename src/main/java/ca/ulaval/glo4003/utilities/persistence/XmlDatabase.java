@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -82,4 +83,8 @@ public class XmlDatabase {
 	public void remove(String xPath) throws XPathExpressionException {
 		extractor.removeParentNode(xPath);
 	}
+
+	public Set<String> distinct(String xPath, String name) throws XPathExpressionException {
+	    return extractor.distinct(xPath, name);
+    }
 }

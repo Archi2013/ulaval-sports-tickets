@@ -112,7 +112,11 @@ public class XmlSectionDao implements SectionDao {
 
 	@Override
 	public Set<String> getAllSections() {
-		return new HashSet<>();
+		try {
+	        return database.distinct(SECTION_XPATH, "section");
+        } catch (XPathExpressionException e) {
+	        throw new XmlIntegrityException();
+        }
 	}
 
 	private String toString(DateTime date) {

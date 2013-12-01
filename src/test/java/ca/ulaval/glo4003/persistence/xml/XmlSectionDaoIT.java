@@ -1,7 +1,11 @@
 package ca.ulaval.glo4003.persistence.xml;
 
+import java.util.Set;
+
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.sections.SectionDto;
 import ca.ulaval.glo4003.domain.sections.XmlSectionDao;
@@ -12,6 +16,18 @@ public class XmlSectionDaoIT {
 
 	@Before
 	public void setUp() throws Exception {
+		sectionDao = new XmlSectionDao();
+	}
+	
+	@Ignore
+	@Test
+	public void testGetAllSection() throws Exception {
+		Set<String> sections = sectionDao.getAllSections();
+		
+		Assert.assertEquals(3, sections.size());
+		Assert.assertTrue(sections.contains("Générale"));
+		Assert.assertTrue(sections.contains("Section 100"));
+		Assert.assertTrue(sections.contains("Section 200"));
 	}
 
 
