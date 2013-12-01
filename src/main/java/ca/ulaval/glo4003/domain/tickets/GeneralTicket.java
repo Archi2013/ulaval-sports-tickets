@@ -26,7 +26,7 @@ public class GeneralTicket extends Ticket {
 	@Override
 	public TicketDto saveDataInDTO() {
 		TicketDto data = new GeneralTicketDto(price, available);
-		associationState.fillDataInDto(data);
+		this.assignationState.fillDataInDto(data);
 		return data;
 
 	}

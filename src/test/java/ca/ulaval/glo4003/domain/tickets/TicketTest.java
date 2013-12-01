@@ -1,22 +1,16 @@
 package ca.ulaval.glo4003.domain.tickets;
 
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.tickets.Ticket;
-import ca.ulaval.glo4003.domain.tickets.TicketAssignationState;
-import ca.ulaval.glo4003.domain.tickets.TicketDto;
-
-@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class TicketTest {
 	public static final String A_SPORT = "Sport";
@@ -41,8 +35,9 @@ public class TicketTest {
 
 	@Before
 	public void setup() {
-
-		ticket = new TicketImpl(firstAssociationState, A_PRICE);
+		// ticket = new TicketImpl(firstAssociationState, A_PRICE);
+		ticket = Mockito.mock(Ticket.class, Mockito.CALLS_REAL_METHODS);
+		ticket.setAssignationState(firstAssociationState);
 	}
 
 	@Test
@@ -70,45 +65,16 @@ public class TicketTest {
 	}
 
 	@Test
-	public void saveDataInDto_stores_own_data_in_dto() {
-		TicketDto data = ticket.saveDataInDTO();
+	public void makeAvailable_should_make_ticket_Available() {
+		ticket.makeAvailable();
 
-		Assert.assertTrue(data.available);
-		Assert.assertEquals(A_PRICE, data.price, 1);
+		Assert.assertTrue(ticket.isAvailable());
 	}
 
 	@Test
-	public void saveDataInDto_asks_assignationState_to_fill_its_share() {
-		ticket.saveDataInDTO();
+	public void makeUnavailable_should_make_ticket_Available() {
+		ticket.makeUnavailable();
 
-		verify(firstAssociationState).fillDataInDto(any(TicketDto.class));
-	}
-
-	private class TicketImpl extends Ticket {
-
-		public TicketImpl(TicketAssignationState associationState, double price) {
-			super(associationState, price);
-
-		}
-
-		@Override
-		public boolean isSame(Ticket ticketToAdd) {
-			return false;
-		}
-
-		@Override
-		public boolean hasSeat(String seat) {
-			return false;
-		}
-
-		@Override
-		public boolean hasSection(String section) {
-			return false;
-		}
-
-		@Override
-		public TicketDto saveDataInDTO() {
-			return null;
-		}
+		Assert.assertFalse(ticket.isAvailable());
 	}
 }
