@@ -1,387 +1,287 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><base>
-  <sports>
-    <sport>
-      <name>Démonstration</name>
-    </sport>
-    <sport>
-      <name>Soccer masculin</name>
-    </sport>
-    <sport>
-      <name>Soccer féminin</name>
-    </sport>
-    <sport>
-      <name>Rugby féminin</name>
-    </sport>
-    <sport>
-      <name>Football</name>
-    </sport>
-  </sports>
-  <games>
-    <game>
-      <id>1</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Dinos de Calgary</oponents>
-      <sportName>Football</sportName>
-      <date>2014/08/24 13:00 EDT</date>
-    </game>
-    <game>
-      <id>2</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Redmen de McGill</oponents>
-      <sportName>Football</sportName>
-      <date>2014/08/31 19:00 EDT</date>
-    </game>
-    <game>
-      <id>3</id>
-      <location>Sherbrooke</location>
-      <oponents>Vert &amp; Or de Sherbrooke</oponents>
-      <sportName>Football</sportName>
-      <date>2014/09/07 13:00 EDT</date>
-    </game>
-    <game>
-      <id>4</id>
-      <location>Wolfville, N.-Écosse</location>
-      <oponents>Axemen d'Acadia</oponents>
-      <sportName>Football</sportName>
-      <date>2014/09/14 13:00 EDT</date>
-    </game>
-    <game>
-      <id>5</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Carabins de Montréal</oponents>
-      <sportName>Football</sportName>
-      <date>2014/09/22 13:00 EDT</date>
-    </game>
-    <game>
-      <id>6</id>
-      <location>Lennoxville</location>
-      <oponents>Gaiters de Bishop's</oponents>
-      <sportName>Football</sportName>
-      <date>2014/09/28 13:00 EDT</date>
-    </game>
-    <game>
-      <id>7</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Stingers de Concordia</oponents>
-      <sportName>Football</sportName>
-      <date>2014/10/06 13:30 EDT</date>
-    </game>
-    <game>
-      <id>8</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Vert &amp; Or de Sherbrooke</oponents>
-      <sportName>Football</sportName>
-      <date>2014/10/20 13:30 EDT</date>
-    </game>
-    <game>
-      <id>9</id>
-      <location>CEPSUM</location>
-      <oponents>Carabins de Montréal</oponents>
-      <sportName>Football</sportName>
-      <date>2014/10/26 13:00 EDT</date>
-    </game>
-    <game>
-      <id>10</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Vert &amp; Or de Sherbrooke</oponents>
-      <sportName>Football</sportName>
-      <date>2014/11/02 13:00 EST</date>
-    </game>
-    <game>
-      <id>11</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Carabins de Montréal</oponents>
-      <sportName>Football</sportName>
-      <date>2014/11/03 13:00 EST</date>
-    </game>
-    <game>
-      <id>12</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Dawson College</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/08/19 16:00 EDT</date>
-    </game>
-    <game>
-      <id>13</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Queen's</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/08/20 13:00 EDT</date>
-    </game>
-    <game>
-      <id>14</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>UQAM</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/06 20:00 EDT</date>
-    </game>
-    <game>
-      <id>15</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>UQTR</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/08 13:00 EDT</date>
-    </game>
-    <game>
-      <id>16</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Sherbrooke</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/13 20:00 EDT</date>
-    </game>
-    <game>
-      <id>17</id>
-      <location>Montréal</location>
-      <oponents>Concordia</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/20 18:30 EDT</date>
-    </game>
-    <game>
-      <id>18</id>
-      <location>CEPSUM</location>
-      <oponents>Montréal</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/22 15:00 EDT</date>
-    </game>
-    <game>
-      <id>19</id>
-      <location>Montréal</location>
-      <oponents>McGill</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/27 20:30 EDT</date>
-    </game>
-    <game>
-      <id>20</id>
-      <location>Montréal</location>
-      <oponents>UQAM</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/10/04 20:00 EDT</date>
-    </game>
-    <game>
-      <id>21</id>
-      <location>Trois-Rivières</location>
-      <oponents>UQTR</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/09/06 13:00 EDT</date>
-    </game>
-    <game>
-      <id>22</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Montréal</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/10/18 20:00 EDT</date>
-    </game>
-    <game>
-      <id>23</id>
-      <location>Sherbrooke</location>
-      <oponents>Sherbrooke</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/10/20 13:00 EDT</date>
-    </game>
-    <game>
-      <id>24</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Concordia</oponents>
-      <sportName>Soccer masculin</sportName>
-      <date>2014/10/25 20:00 EDT</date>
-    </game>
-    <game>
-      <id>25</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>UQAM</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/06 18:00 EDT</date>
-    </game>
-    <game>
-      <id>26</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>UQTR</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/08 15:00 EDT</date>
-    </game>
-    <game>
-      <id>27</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Sherbrooke</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/13 18:00 EDT</date>
-    </game>
-    <game>
-      <id>28</id>
-      <location>Sherbrooke</location>
-      <oponents>Bishop's</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/15 13:00 EDT</date>
-    </game>
-    <game>
-      <id>29</id>
-      <location>Montréal</location>
-      <oponents>Concordia</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/20 20:30 EDT</date>
-    </game>
-    <game>
-      <id>30</id>
-      <location>CEPSUM</location>
-      <oponents>Montréal</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/22 13:00 EDT</date>
-    </game>
-    <game>
-      <id>31</id>
-      <location>Montréal</location>
-      <oponents>McGill</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/27 18:30 EDT</date>
-    </game>
-    <game>
-      <id>32</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Bishop's</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/29 16:00 EDT</date>
-    </game>
-    <game>
-      <id>33</id>
-      <location>Montréal</location>
-      <oponents>UQAM</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/10/04 18:00 EDT</date>
-    </game>
-    <game>
-      <id>34</id>
-      <location>Trois-Rivières</location>
-      <oponents>UQTR</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/09/06 15:00 EDT</date>
-    </game>
-    <game>
-      <id>35</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Montréal</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/10/18 18:00 EDT</date>
-    </game>
-    <game>
-      <id>36</id>
-      <location>Sherbrooke</location>
-      <oponents>Sherbrooke</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/10/20 15:00 EDT</date>
-    </game>
-    <game>
-      <id>37</id>
-      <location>PEPS Terrain 6</location>
-      <oponents>Concordia</oponents>
-      <sportName>Soccer féminin</sportName>
-      <date>2014/10/25 18:00 EDT</date>
-    </game>
-    <game>
-      <id>38</id>
-      <location>CEPSUM</location>
-      <oponents>Montréal</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/09/02 15:00 EDT</date>
-    </game>
-    <game>
-      <id>39</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Ottawa</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/09/07 15:00 EDT</date>
-    </game>
-    <game>
-      <id>40</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Concordia</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/09/14 13:00 EDT</date>
-    </game>
-    <game>
-      <id>41</id>
-      <location>Sherbrooke</location>
-      <oponents>Bishop's</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/09/20 18:15 EDT</date>
-    </game>
-    <game>
-      <id>42</id>
-      <location>Stade TELUS-UL</location>
-      <oponents>Sherbrooke</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/09/28 13:00 EDT</date>
-    </game>
-    <game>
-      <id>43</id>
-      <location>Montréal</location>
-      <oponents>McGill</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/10/06 13:00 EDT</date>
-    </game>
-    <game>
-      <id>44</id>
-      <location>Ottawa</location>
-      <oponents>Carleton</oponents>
-      <sportName>Rugby féminin</sportName>
-      <date>2014/10/13 14:00 EDT</date>
-    </game>
-    
-    <game>
-      <id>40000</id>
-      <location>Canberra</location>
-      <oponents>Kangourou</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2013/11/21 15:45 EST</date>
-    </game>
-    <game>
-      <id>50000</id>
-      <location>Johannesbourg</location>
-      <oponents>Vouvouzela</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2013/11/16 08:00 EST</date>
-    </game>
-    <game>
-      <id>10000</id>
-      <location>Paris</location>
-      <oponents>Tour Eiffel</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/05/02 21:00 EDT</date>
-    </game>
-    <game>
-      <id>20000</id>
-      <location>Tôkyô</location>
-      <oponents>Tôkyô Tower</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/02/01 20:30 EST</date>
-    </game>
-    <game>
-      <id>50002</id>
-      <location>Lambdaland</location>
-      <oponents>MegaLambda</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/01/01 14:00 EST</date>
-    </game>
-    <game>
-      <id>50001</id>
-      <location>La lune</location>
-      <oponents>Les gros lols</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/01/01 13:00 EST</date>
-    </game>
-    <game>
-      <id>50004</id>
-      <location>Le terrain</location>
-      <oponents>Les pas fins</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/10/01 13:00 EDT</date>
-    </game>
-    <game>
-      <id>50003</id>
-      <location>Le terrain</location>
-      <oponents>les pas fin</oponents>
-      <sportName>Démonstration</sportName>
-      <date>2014/08/01 13:00 EDT</date>
-    </game>
-  <game><location>Londres</location><oponents>Big Ben</oponents><sportName>Démonstration</sportName><date>2013/12/10 18:50 EST</date></game></games>
-  <tickets></tickets>
-  </base>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<base>
+	<sports>
+		<sport>
+			<name>Démonstration</name>
+		</sport>
+		<sport>
+			<name>Soccer masculin</name>
+		</sport>
+		<sport>
+			<name>Soccer féminin</name>
+		</sport>
+		<sport>
+			<name>Rugby féminin</name>
+		</sport>
+		<sport>
+			<name>Football</name>
+		</sport>
+	</sports>
+	<games>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Dinos de Calgary</oponents>
+			<sportName>Football</sportName>
+			<date>2014/08/24 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Redmen de McGill</oponents>
+			<sportName>Football</sportName>
+			<date>2014/08/31 19:00 EDT</date>
+		</game>
+		<game>
+			<location>Sherbrooke</location>
+			<oponents>Vert &amp; Or de Sherbrooke</oponents>
+			<sportName>Football</sportName>
+			<date>2014/09/07 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Wolfville, N.-Écosse</location>
+			<oponents>Axemen d'Acadia</oponents>
+			<sportName>Football</sportName>
+			<date>2014/09/14 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Carabins de Montréal</oponents>
+			<sportName>Football</sportName>
+			<date>2014/09/22 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Lennoxville</location>
+			<oponents>Gaiters de Bishop's</oponents>
+			<sportName>Football</sportName>
+			<date>2014/09/28 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Stingers de Concordia</oponents>
+			<sportName>Football</sportName>
+			<date>2014/10/06 13:30 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Vert &amp; Or de Sherbrooke</oponents>
+			<sportName>Football</sportName>
+			<date>2014/10/20 13:30 EDT</date>
+		</game>
+		<game>
+			<location>CEPSUM</location>
+			<oponents>Carabins de Montréal</oponents>
+			<sportName>Football</sportName>
+			<date>2014/10/26 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Vert &amp; Or de Sherbrooke</oponents>
+			<sportName>Football</sportName>
+			<date>2014/11/02 13:00 EST</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Carabins de Montréal</oponents>
+			<sportName>Football</sportName>
+			<date>2014/11/03 13:00 EST</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Dawson College</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/08/19 16:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Queen's</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/08/20 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>UQAM</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/06 20:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>UQTR</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/08 13:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Sherbrooke</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/13 20:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>Concordia</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/20 18:30 EDT</date>
+		</game>
+		<game>
+			<location>CEPSUM</location>
+			<oponents>Montréal</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/22 15:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>McGill</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/27 20:30 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>UQAM</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/10/04 20:00 EDT</date>
+		</game>
+		<game>
+			<location>Trois-Rivières</location>
+			<oponents>UQTR</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/09/06 13:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Montréal</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/10/18 20:00 EDT</date>
+		</game>
+		<game>
+			<location>Sherbrooke</location>
+			<oponents>Sherbrooke</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/10/20 13:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Concordia</oponents>
+			<sportName>Soccer masculin</sportName>
+			<date>2014/10/25 20:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>UQAM</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/06 18:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>UQTR</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/08 15:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Sherbrooke</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/13 18:00 EDT</date>
+		</game>
+		<game>
+			<location>Sherbrooke</location>
+			<oponents>Bishop's</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/15 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>Concordia</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/20 20:30 EDT</date>
+		</game>
+		<game>
+			<location>CEPSUM</location>
+			<oponents>Montréal</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/22 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>McGill</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/27 18:30 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Bishop's</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/29 16:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>UQAM</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/10/04 18:00 EDT</date>
+		</game>
+		<game>
+			<location>Trois-Rivières</location>
+			<oponents>UQTR</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/09/06 15:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Montréal</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/10/18 18:00 EDT</date>
+		</game>
+		<game>
+			<location>Sherbrooke</location>
+			<oponents>Sherbrooke</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/10/20 15:00 EDT</date>
+		</game>
+		<game>
+			<location>PEPS Terrain 6</location>
+			<oponents>Concordia</oponents>
+			<sportName>Soccer féminin</sportName>
+			<date>2014/10/25 18:00 EDT</date>
+		</game>
+		<game>
+			<location>CEPSUM</location>
+			<oponents>Montréal</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/09/02 15:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Ottawa</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/09/07 15:00 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Concordia</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/09/14 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Sherbrooke</location>
+			<oponents>Bishop's</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/09/20 18:15 EDT</date>
+		</game>
+		<game>
+			<location>Stade TELUS-UL</location>
+			<oponents>Sherbrooke</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/09/28 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Montréal</location>
+			<oponents>McGill</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/10/06 13:00 EDT</date>
+		</game>
+		<game>
+			<location>Ottawa</location>
+			<oponents>Carleton</oponents>
+			<sportName>Rugby féminin</sportName>
+			<date>2014/10/13 14:00 EDT</date>
+		</game>
+	</games>
+	<tickets></tickets>
+</base>
