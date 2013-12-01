@@ -139,6 +139,25 @@ public class TicketRepositoryTest {
 	}
 
 	@Test
+	public void get_returns_ticket_built_in_factory_with_data_from_dao() throws TicketDoesntExistException {
+		when(ticketDao.get(A_SPORT, A_DATE, A_NEW_SECTION, A_NEW_SEAT)).thenReturn(firstTicketData);
+
+		Ticket ticketReturned = repository.get(A_SPORT, A_DATE, A_NEW_SECTION, A_NEW_SEAT);
+
+		assertSame(ticketWithDataFromDao, ticketReturned);
+	}
+
+	@Test
+	public void get_adds_ticket_to_ticket_list() throws TicketDoesntExistException {
+		when(ticketDao.get(A_SPORT, A_DATE, A_NEW_SECTION, A_NEW_SEAT)).thenReturn(firstTicketData);
+
+		repository.get(A_SPORT, A_DATE, A_NEW_SECTION, A_NEW_SEAT);
+
+		assertTrue(repository.getTicketsInDao().contains(ticketWithDataFromDao));
+		assertEquals(1, repository.getTicketsInDao().size());
+	}
+
+	@Test
 	public void commit_adds_the_new_tickets_to_the_dao() throws Exception {
 		when(ticketFactory.createGeneralTicket(A_PRICE, AVAILABLE)).thenReturn(ticketGeneratedWithNoParameter);
 		when(ticketFactory.createSeatedTicket(A_NEW_SECTION, A_NEW_SEAT, A_PRICE, AVAILABLE)).thenReturn(
@@ -204,5 +223,27 @@ public class TicketRepositoryTest {
 		repository.commit();
 
 		verify(ticketDao, times(1)).commit();
+	}
+
+	@Test
+	public void clearCache_should_empty_ticket_lists() {
+		repository.clearCache();
+
+		assertTrue(repository.getNewTickets().isEmpty());
+		assertTrue(repository.getTicketsInDao().isEmpty());
+	}
+
+	@Test
+	public void getMultipleGeneralTickets_should_get_multiple_general_tickets() throws GameDoesntExistException {
+		when(ticketFactory.createTicket(firstTicketData)).thenReturn(ticketWithDataFromDao);
+		List<TicketDto> datas = new ArrayList<>();
+		datas.add(firstTicketData);
+		datas.add(secondTicketData);
+		when(ticketDao.getAllAvailable(A_SPORT, A_DATE)).thenReturn(datas);
+
+		List<Ticket> tickets = repository.getMultipleGeneralTickets(A_SPORT, A_DATE, 1);
+
+		assertEquals(1, tickets.size());
+		assertTrue(tickets.contains(ticketWithDataFromDao));
 	}
 }

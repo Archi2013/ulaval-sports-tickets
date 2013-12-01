@@ -66,4 +66,10 @@ public class GeneralTicketTest {
 
 		verify(assignationState).fillDataInDto(any(TicketDto.class));
 	}
+	public void saveDataInDto_adds_seats_and_section_to_dto_filled_by_superclass() {
+		TicketDto data = ticket.saveDataInDTO();
+
+		Assert.assertEquals(A_PRICE, data.price, 1);
+	}
+
 }

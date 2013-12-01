@@ -47,4 +47,8 @@ public abstract class Ticket implements Persistable<TicketDto> {
 	void setAssignationState(TicketAssignationState assignationState) {
 		this.assignationState = assignationState;
 	}
+
+	TicketAssignationState getAssignationState() {
+		return assignationState;
+	}
 }

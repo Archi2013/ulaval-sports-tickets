@@ -53,7 +53,7 @@ public class CommandTicketService {
 		for(SectionForCart sectionFC : sections) {
 			if (sectionFC.getGeneralAdmission()) {
 				List<Ticket> tickets = ticketRepository
-						.recoverNGeneralTickets(sectionFC.getSportName(), sectionFC.getGameDate(), sectionFC.getNumberOfTicketsToBuy());
+						.getMultipleGeneralTickets(sectionFC.getSportName(), sectionFC.getGameDate(), sectionFC.getNumberOfTicketsToBuy());
 				for (Ticket ticket : tickets) {
 					ticket.makeUnavailable();
 				}
