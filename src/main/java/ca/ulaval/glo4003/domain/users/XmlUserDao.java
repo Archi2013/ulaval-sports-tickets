@@ -88,7 +88,7 @@ public class XmlUserDao implements UserDao {
 		nodes.put("password", user.getPassword());
 		nodes.put("admin", user.isAdmin().toString());
 		SimpleNode simpleNode = new SimpleNode("user", nodes);
-		return simpleNode;
+		return simpleNode;	
 	}
 
 	private UserDto convertNodeToUser(SimpleNode node) throws UserDoesntExistException, NoSuchAttributeException {

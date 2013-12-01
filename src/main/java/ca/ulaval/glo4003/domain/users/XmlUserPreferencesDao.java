@@ -1,0 +1,108 @@
+package ca.ulaval.glo4003.domain.users;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.naming.directory.NoSuchAttributeException;
+import javax.xml.xpath.XPathExpressionException;
+
+import org.hamcrest.core.IsAnything;
+import org.springframework.stereotype.Component;
+
+import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
+import ca.ulaval.glo4003.utilities.persistence.SimpleNode;
+import ca.ulaval.glo4003.utilities.persistence.XmlDatabase;
+
+@Component
+public class XmlUserPreferencesDao implements UserPreferencesDao {
+
+	private static final String DEFAULT_FILE = "resources/DemoUserData.xml";
+
+	private static final String USERS_XPATH = "/base/users";
+	private static final String USER_XPATH = USERS_XPATH + "/user";
+	private static final String USER_XPATH_ID = USER_XPATH+ "[username=\"%s\"]";
+	
+
+
+	private XmlDatabase database;
+
+
+	public XmlUserPreferencesDao() {
+		database = XmlDatabase.getInstance(DEFAULT_FILE);
+	}
+
+	public XmlUserPreferencesDao(String filename) {
+		database = XmlDatabase.getUniqueInstance(filename);
+	}
+
+	@Override
+	public TicketSearchPreferenceDto get(String username) throws UserDoesntHaveSavedPreferences {
+		String xPath = String.format(USER_XPATH_ID, username);
+		try {
+			SimpleNode node = database.extractNode(xPath+"/userPreferences");
+			
+			System.out.println("ICIIIIIIIII");
+			return convertNodeToUserPreferences(node);
+		} catch (XPathExpressionException | NoSuchAttributeException e) {
+			System.out.println(e);
+			throw new UserDoesntHaveSavedPreferences();
+		}
+	}
+
+	private TicketSearchPreferenceDto convertNodeToUserPreferences(SimpleNode node) throws NoSuchAttributeException {
+		
+		String displayedPeriod = node.getNodeValue("displayedPeriod");
+		boolean localGameOnly = true; //Boolean.getBoolean(node.getNodeValue("true"));
+		
+		List<String> listTicket = new ArrayList<String>();
+		List<String> sportsName = new ArrayList<String>();
+		sportsName.add("Football");
+		
+		return new TicketSearchPreferenceDto(sportsName, displayedPeriod, localGameOnly, listTicket);
+	}
+
+	@Override
+	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) {
+		SimpleNode simpleNode = convertUserPreferencesToNode(userPreferences);
+		String xPath = String.format(USER_XPATH_ID, currentUser.getUsername());
+		System.out.println(xPath);
+		System.out.println(database.exist(xPath + "/userPreferences"));
+		try {
+			if (isUserPreferencesAlreadySaved(xPath)) {
+				database.remove(xPath + "/userPreferences");
+			}
+			database.addNode(xPath, simpleNode);
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		database.commit();
+	}
+
+	private SimpleNode convertUserPreferencesToNode(
+			TicketSearchPreferenceDto userPreferences) {
+		Map<String, String> nodes = new HashMap<>();
+		nodes.put("displayedPeriod", userPreferences.getDisplayedPeriod());
+		nodes.put("localGameOnly", userPreferences.isLocalGameOnly().toString());
+
+		// TODO: Ajouter les liste
+
+		SimpleNode simpleNode = new SimpleNode("userPreferences", nodes);
+		return simpleNode;
+
+	}
+
+	@Override
+	public void commit() {
+		database.commit();
+
+	}
+
+	private boolean isUserPreferencesAlreadySaved(String xPath) {
+		return database.exist(xPath + "/userPreferences");
+	}
+
+}

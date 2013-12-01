@@ -44,7 +44,7 @@ public class TicketSearchPreferenceDto {
 		this.displayedPeriod = displayedPeriod;
 	}
 
-	public boolean isLocalGameOnly() {
+	public Boolean isLocalGameOnly() {
 		return localGameOnly;
 	}
 

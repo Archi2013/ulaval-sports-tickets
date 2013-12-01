@@ -21,6 +21,7 @@ public class UserDto implements Serializable {
 	{
 		this(name, password);
 		this.setAdmin(admin);
+		
 	}
 	
 	public String getUsername(){
