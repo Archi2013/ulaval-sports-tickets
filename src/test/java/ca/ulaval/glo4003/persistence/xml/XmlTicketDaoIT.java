@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.tickets.GeneralTicketDto;
@@ -18,9 +19,15 @@ import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
 import ca.ulaval.glo4003.exceptions.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
 
-@Ignore
 public class XmlTicketDaoIT {
 
+	private static final String AN_OTHER_SPORT_NAME = "Soccer masculin";
+	private static final String A_SPORT_NAME = "Football";
+	private static final String DATE_PATTERN = "yyyy/MM/dd HH:mm z";
+	private static final DateTimeFormatter format = DateTimeFormat.forPattern(DATE_PATTERN);
+	private static final DateTime A_GAME_DATE = format.parseDateTime("2014/08/24 13:00 EDT");
+	private static final DateTime AN_OTHER_GAME_DATE = format.parseDateTime("2014/08/31 19:00 EDT");
+	
 	private static final boolean AVAILABLE = true;
 	private XmlTicketDao ticketDao;
 	private AtomicLong atomicLong;
@@ -29,37 +36,34 @@ public class XmlTicketDaoIT {
 	public void setUp() throws Exception {
 		ticketDao = new XmlTicketDao("resources/TicketData.xml");
 		atomicLong = new AtomicLong();
-		createMultipleTicket(1, 15f, "Générale", 4);
-		createMultipleTicket(2, 15f, "Générale", 4);
-		createMultipleTicket(2, 22f, "Section 100", 2);
+		createMultipleTicket(A_SPORT_NAME, A_GAME_DATE, 15f, "Générale", 4);
+		createMultipleTicket(AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE, 15f, "Générale", 4);
+		createMultipleTicket(AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE, 22f, "Section 100", 2);
 	}
 
-	private void createMultipleTicket(long gameId, float price, String section, int number) throws Exception {
+	private void createMultipleTicket(String sportName, DateTime gameDate, float price, String section, int number) throws Exception {
 		for (int i = 0; i < number; i++) {
-			ticketDao.add(createTicket(gameId, price, section, true));
+			ticketDao.add(createTicket(sportName, gameDate, price, section, true));
 		}
 	}
 
-	// TODO Remove gameId...
-	private TicketDto createTicket(long gameId, float price, String section, boolean available) {
+	private TicketDto createTicket(String sportName, DateTime gameDate, float price, String section, boolean available) {
 		if ("Générale".equals(section)) {
-			return new GeneralTicketDto(atomicLong.incrementAndGet(), null, null, price, available);
+			return new GeneralTicketDto(atomicLong.incrementAndGet(), sportName, gameDate, price, available);
 		}
 		long ticketId = atomicLong.incrementAndGet();
 		char letter = (char) ((int) 'A' + ticketId / 10);
 		long number = ticketId % 10;
 		String code = letter + "-" + number;
-		// return new TicketDto(atomicLong.incrementAndGet(), null, null,
-		// section, null, price, available);
 
-		return new SeatedTicketDto(atomicLong.incrementAndGet(), null, null, section, code, price, available);
+		return new SeatedTicketDto(ticketId, sportName, gameDate, section, code, price, available);
 	}
 
 	@Test
 	public void testGetTicket() throws Exception {
 		TicketDto actual = ticketDao.get(1);
 
-		TicketDto expected = new SeatedTicketDto(1L, null, null, null, null, 15.00f, AVAILABLE);
+		TicketDto expected = new GeneralTicketDto(1L, A_SPORT_NAME, A_GAME_DATE, 15.00f, AVAILABLE);
 		assertTicket(expected, actual);
 	}
 
@@ -69,16 +73,15 @@ public class XmlTicketDaoIT {
 	}
 
 	@Test
-	// TODO REVIEW TESTS TICKETS. WAS USING GAMEIDS.
 	public void testGetTicketsForGame() throws Exception {
-		List<TicketDto> tickets = ticketDao.getAllAvailable("", DateTime.now());
+		List<TicketDto> tickets = ticketDao.getAllAvailable(AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE);
 
-		TicketDto expected0 = new SeatedTicketDto(5L, null, null, null, null, 15.00f, AVAILABLE);
-		TicketDto expected1 = new SeatedTicketDto(6L, null, null, null, null, 15.00f, AVAILABLE);
-		TicketDto expected2 = new SeatedTicketDto(7L, null, null, null, null, 15.00f, AVAILABLE);
-		TicketDto expected3 = new SeatedTicketDto(8L, null, null, null, null, 15.00f, AVAILABLE);
-		TicketDto expected4 = new SeatedTicketDto(9L, null, null, "Section 100", "A-9", 22.00f, AVAILABLE);
-		TicketDto expected5 = new SeatedTicketDto(10L, null, null, "Section 100", "B-0", 22.00f, AVAILABLE);
+		TicketDto expected0 = new GeneralTicketDto(5L, AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE, 15.00f, AVAILABLE);
+		TicketDto expected1 = new GeneralTicketDto(6L, AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE, 15.00f, AVAILABLE);
+		TicketDto expected2 = new GeneralTicketDto(7L, AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE, 15.00f, AVAILABLE);
+		TicketDto expected3 = new GeneralTicketDto(8L, AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE, 15.00f, AVAILABLE);
+		TicketDto expected4 = new SeatedTicketDto(9L, AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE, "Section 100", "A-9", 22.00f, AVAILABLE);
+		TicketDto expected5 = new SeatedTicketDto(10L, AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE, "Section 100", "B-0", 22.00f, AVAILABLE);
 
 		Assert.assertEquals(6, tickets.size());
 
@@ -97,10 +100,10 @@ public class XmlTicketDaoIT {
 
 	@Test
 	public void testGetTicketsForSection() throws Exception {
-		List<TicketDto> tickets = ticketDao.getAllInSection("", DateTime.now(), "Section 100");
+		List<TicketDto> tickets = ticketDao.getAllInSection(AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE, "Section 100");
 
-		TicketDto expected0 = new SeatedTicketDto(9L, null, null, "Section 100", "A-9", 22.00f, AVAILABLE);
-		TicketDto expected1 = new SeatedTicketDto(10L, null, null, "Section 100", "B-0", 22.00f, AVAILABLE);
+		TicketDto expected0 = new SeatedTicketDto(9L, AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE, "Section 100", "A-9", 22.00f, AVAILABLE);
+		TicketDto expected1 = new SeatedTicketDto(10L, AN_OTHER_SPORT_NAME, AN_OTHER_GAME_DATE, "Section 100", "B-0", 22.00f, AVAILABLE);
 
 		Assert.assertEquals(2, tickets.size());
 
@@ -114,9 +117,8 @@ public class XmlTicketDaoIT {
 	}
 
 	@Test
-	// TODO REMOVE USING GAMEID
 	public void testAddDto() throws Exception {
-		TicketDto toAdd = new SeatedTicketDto(1000L, null, null, null, null, 20.00f, AVAILABLE);
+		TicketDto toAdd = new GeneralTicketDto(1000L, A_SPORT_NAME, A_GAME_DATE, 20.00f, AVAILABLE);
 
 		ticketDao.add(toAdd);
 
@@ -128,7 +130,7 @@ public class XmlTicketDaoIT {
 
 	@Test(expected = TicketAlreadyExistsException.class)
 	public void testAddExistingShouldThrow() throws Exception {
-		TicketDto toAdd = new SeatedTicketDto(3L, null, null, "Front Row", "C-01", 35.00f, AVAILABLE);
+		TicketDto toAdd = new SeatedTicketDto(3L, A_SPORT_NAME, A_GAME_DATE, "Front Row", "C-01", 35.00f, AVAILABLE);
 
 		ticketDao.add(toAdd);
 	}
