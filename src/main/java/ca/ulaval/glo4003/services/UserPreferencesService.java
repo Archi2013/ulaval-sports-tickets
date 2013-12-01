@@ -6,24 +6,24 @@ import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.users.User;
+import ca.ulaval.glo4003.domain.users.XmlUserPreferencesDao;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
-import ca.ulaval.glo4003.fakes.FakeDataUserPreferencesDao;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
 
 @Service
 public class UserPreferencesService {
 
-	@Inject
-	FakeDataUserPreferencesDao userPreferencesDao;
-	
+
 	@Inject
 	TicketSearchPreferenceFactory ticketSearchFactory;
 	
+	@Inject
+	XmlUserPreferencesDao xmlUserPreferencesDao;
+	
 	
 	public TicketSearchViewModel getUserPreferencesForUser(User currentUser) throws UserDoesntHaveSavedPreferences{
-		
-		TicketSearchPreferenceDto ticketSPDto= userPreferencesDao.get(currentUser.getUsername());	
+		TicketSearchPreferenceDto ticketSPDto= xmlUserPreferencesDao.get(currentUser.getUsername());	
 		TicketSearchViewModel ticketSearchVModel=ticketSearchFactory.createViewModel(ticketSPDto);
 		return ticketSearchVModel;
 				
@@ -34,7 +34,9 @@ public class UserPreferencesService {
 		TicketSearchPreferenceDto ticketSearchDto = ticketSearchFactory.createPreferenceDto(
 				userPreferences.getSelectedSports(), userPreferences.getDisplayedPeriod(),
 				userPreferences.isLocalGameOnly(), userPreferences.getSelectedTicketKinds());	
-		userPreferencesDao.save(currentUser,ticketSearchDto);
+		
+		xmlUserPreferencesDao.save(currentUser, ticketSearchDto);
+		xmlUserPreferencesDao.commit();
 	}
 	
 	

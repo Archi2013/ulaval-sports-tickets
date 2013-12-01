@@ -6,11 +6,11 @@ import java.util.List;
 public class TicketSearchPreferenceDto {
 	public List<String> selectedSports;
 	private String displayedPeriod;
-	public boolean localGameOnly;
+	public Boolean localGameOnly;
 	public List<String> selectedTicketKinds;
 
 	public TicketSearchPreferenceDto(List<String> selectedSports,
-			String displayedPeriod, boolean localGameOnly,
+			String displayedPeriod, Boolean localGameOnly,
 			List<String> selectedTicketKinds) {
 		super();
 		if (selectedSports == null) {
@@ -44,7 +44,7 @@ public class TicketSearchPreferenceDto {
 		this.displayedPeriod = displayedPeriod;
 	}
 
-	public boolean isLocalGameOnly() {
+	public Boolean isLocalGameOnly() {
 		return localGameOnly;
 	}
 
