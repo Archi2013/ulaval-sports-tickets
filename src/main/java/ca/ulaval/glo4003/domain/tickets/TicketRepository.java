@@ -28,7 +28,7 @@ public class TicketRepository implements ITicketRepository {
 	@Override
 	public List<Ticket> getAll(String sportName, DateTime gameDate) throws GameDoesntExistException {
 		List<Ticket> ticketsToReturn = new ArrayList<>();
-		List<TicketDto> datas = dao.getTicketsForGame(sportName, gameDate);
+		List<TicketDto> datas = dao.getAll(sportName, gameDate);
 		for (TicketDto data : datas) {
 			Ticket recoveredTicket = factory.createTicket(data);
 			ticketsInDao.add(recoveredTicket);

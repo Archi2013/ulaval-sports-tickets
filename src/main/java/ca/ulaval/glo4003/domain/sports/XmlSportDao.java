@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.domain.sports;
 
-import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Lists.transform;
 
 import java.util.ArrayList;
 import java.util.HashMap;

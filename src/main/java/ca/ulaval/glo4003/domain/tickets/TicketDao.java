@@ -29,14 +29,4 @@ public interface TicketDao {
 	public void update(TicketDto firstTicketData) throws TicketDoesntExistException;
 
 	public void commit();
-
-	@Deprecated
-	public TicketDto get(String sport, DateTime date, String seat);
-
-	@Deprecated
-	public TicketDto get(String sportName, DateTime gameDate, int ticketNumber) throws TicketDoesntExistException;
-
-	@Deprecated
-	public List<TicketDto> getTicketsForGame(String sportName, DateTime gameDate) throws GameDoesntExistException;
-
 }
