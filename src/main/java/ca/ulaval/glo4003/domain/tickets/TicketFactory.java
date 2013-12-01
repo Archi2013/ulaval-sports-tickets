@@ -21,7 +21,7 @@ public class TicketFactory {
 	}
 
 	private TicketAssignationState createAssignationState(TicketDto data) {
-		if (data.sportName == null || data.gameDate == null || data.ticketId < 0) {
+		if (data.sportName == null || data.gameDate == null || data.ticketId == null || data.ticketId < 0) {
 			return new UnassignedTicketState();
 		}
 		return new AssignedTicketState(data.sportName, data.gameDate, data.ticketId);
