@@ -58,25 +58,16 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 		
 		String displayedPeriod = node.getNodeValue("displayedPeriod");
 		Boolean localGameOnly = Boolean.valueOf(node.getNodeValue("localGameOnly"));
-		
-	//	List<String> listTicket = new ArrayList<String>();
-	//	List<String> sportsName = new ArrayList<String>();
 		List<String> listTicket = gson.fromJson(node.getNodeValue("listTicket"), new TypeToken<List<String>>(){}.getType());
 		List<String> sportsName = gson.fromJson(node.getNodeValue("sportsName"), new TypeToken<List<String>>(){}.getType());
-		
-		
-		List<String> test = gson.fromJson(node.getNodeValue("listTicket"), new TypeToken<List<String>>(){}.getType());
-		System.out.println(test);
+
 		return new TicketSearchPreferenceDto(sportsName, displayedPeriod, localGameOnly, listTicket);
 	}
 
 	@Override
 	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) {
 		SimpleNode simpleNode = convertUserPreferencesToNode(userPreferences);
-		String xPath = String.format(USER_XPATH_ID, currentUser.getUsername());
-		//TODO remove
-		System.out.println(database.exist(xPath + "/userPreferences"));
-		
+		String xPath = String.format(USER_XPATH_ID, currentUser.getUsername());		
 		try {
 			if (isUserPreferencesAlreadySaved(xPath)) {
 				database.remove(xPath + "/userPreferences");
@@ -98,8 +89,6 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 		nodes.put("localGameOnly", userPreferences.isLocalGameOnly().toString());
 		nodes.put("sportsName", gson.toJson(userPreferences.getSelectedSports()));
 		nodes.put("listTicket", gson.toJson(userPreferences.getSelectedTicketKinds()));
-		
-	
 		
 		SimpleNode simpleNode = new SimpleNode("userPreferences", nodes);
 		return simpleNode;
