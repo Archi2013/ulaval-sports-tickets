@@ -7,7 +7,8 @@ public abstract class CreditCard {
 		super();
 	}
 
-	final public void pay(Double number) throws InvalidCreditCardException {
+	// sans «final» pour les tests
+	public void pay(Double number) throws InvalidCreditCardException {
 		if (isValid()) {
 			// Paiement
 		} else {

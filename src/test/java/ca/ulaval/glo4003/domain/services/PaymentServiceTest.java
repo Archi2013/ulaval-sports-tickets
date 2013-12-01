@@ -1,64 +1,40 @@
 package ca.ulaval.glo4003.domain.services;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.cart.Cart;
-import ca.ulaval.glo4003.domain.game.GameDao;
+import ca.ulaval.glo4003.constants.CreditCardType;
 import ca.ulaval.glo4003.domain.payment.CreditCardFactory;
-import ca.ulaval.glo4003.domain.sections.SectionDao;
-import ca.ulaval.glo4003.presentation.viewmodels.ChosenTicketsViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModelFactory;
+import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
+import ca.ulaval.glo4003.domain.payment.MisterCard;
 import ca.ulaval.glo4003.services.CartService;
 import ca.ulaval.glo4003.services.PaymentService;
-import ca.ulaval.glo4003.utilities.Calculator;
-import ca.ulaval.glo4003.utilities.Constants;
+import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 
-@Ignore
+
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentServiceTest {
 
-	private static final int NUMBER_OF_TICKETS_TO_BUY = 4;
+	private static final double PRICE = 17.5;
 
-	private static final String SECTION_NAME = "Turquoise";
+	private static final int EXPIRATION_YEAR = 2016;
 
-	private static final String PRICE_FR = "36,70";
+	private static final int EXPIRATION_MONTH = 8;
 
-	private static final Double PRICE = 36.7;
+	private static final String CREDIT_CARD_USERNAME = "Personne Inconnu";
 
-	private static final Double CUMULATIVE_PRICE = 46.7;
+	private static final int SECURITY_CODE = 1234;
 
-	@Mock
-	private GameDao gameDao;
-
-	@Mock
-	private SectionDao sectionDao;
-
-	@Mock
-	private PayableItemsViewModelFactory payableItemsViewModelFactory;
-
-	@Mock
-	private Calculator calculator;
-
-	@Mock
-	private Constants constants;
+	private static final long CREDIT_CARD_NUMBER = 123456789012345L;
 
 	@Mock
 	private CreditCardFactory creditCardFactory;
-
-	@Mock
-	private Cart currentCart;
 
 	@Mock
 	private CartService cartService;
@@ -66,179 +42,88 @@ public class PaymentServiceTest {
 	@InjectMocks
 	private PaymentService paymentService;
 
-	private ChosenTicketsViewModel chooseTicketsVM;
-
-	private List<String> selectedSeats;
-
 	@Before
 	public void setUp() throws Exception {
-		/*chooseTicketsVM = mock(ChosenTicketsViewModel.class);
-		selectedSeats = new ArrayList<>();
-		selectedSeats.add("X3");
-		selectedSeats.add("X7");
-		when(chooseTicketsVM.getSectionName()).thenReturn(SECTION_NAME);
-		when(chooseTicketsVM.getNumberOfTicketsToBuy()).thenReturn(NUMBER_OF_TICKETS_TO_BUY);
-		when(chooseTicketsVM.getSelectedSeats()).thenReturn(selectedSeats);*/
-	}
-
-	@Ignore("Il devrait y avoir un objet du domaine Section pour effectuer cette tâche")
-	@Test
-	public void isValidPayableItemsViewModel_should_assert_PayableItemsViewModel_is_valid() {
-
-	}
-
-	/*
-	@Test
-	public void given_a_ChooseTicketsViewModel_getPayableItemsViewModel_should_return_a_PayableItemsViewModel()
-			throws GameDoesntExistException, SectionDoesntExistException {
-		GameDto gameDto = mock(GameDto.class);
-		SectionDto sectionDto = mock(SectionDto.class);
-		PayableItemsViewModel payableItemsVM = mock(PayableItemsViewModel.class);
-
-		when(gameDao.get(GAME_ID)).thenReturn(gameDto);
-		when(sectionDao.getAvailable(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
-		when(payableItemsViewModelFactory.createViewModel(chooseTicketsVM, gameDto, sectionDto)).thenReturn(payableItemsVM);
-
-		PayableItemsViewModel actual = paymentService.getPayableItemsViewModel(chooseTicketsVM);
-
-		assertSame(payableItemsVM, actual);
-	}
-
-	@Test(expected = SectionDoesntExistException.class)
-	public void given_a_ChooseTicketsViewModel_getPayableItemsViewModel_should_throw_SectionDoesntExistException_when_sectionDao_throw_SectionDoesntExistException()
-			throws GameDoesntExistException, SectionDoesntExistException {
-		GameDto gameDto = mock(GameDto.class);
-
-		when(gameDao.get(GAME_ID)).thenReturn(gameDto);
-		when(sectionDao.getAvailable(GAME_ID, SECTION_NAME)).thenThrow(new SectionDoesntExistException());
-
-		paymentService.getPayableItemsViewModel(chooseTicketsVM);
-	}
-
-	@Test(expected = GameDoesntExistException.class)
-	public void given_a_ChooseTicketsViewModel_getPayableItemsViewModel_should_throw_GameDoesntExistException_when_gameDao_throw_GameDoesntExistException()
-			throws GameDoesntExistException, SectionDoesntExistException {
-		SectionDto sectionDto = mock(SectionDto.class);
-
-		when(gameDao.get(GAME_ID)).thenThrow(new GameDoesntExistException());
-		when(sectionDao.get(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
-
-		paymentService.getPayableItemsViewModel(chooseTicketsVM);
 	}
 
 	@Test
-	public void saveToCart_should_save_choose_tickets_to_current_cart() throws GameDoesntExistException,
-			SectionDoesntExistException {
-		GameDto gameDto = mock(GameDto.class);
-		SectionDto sectionDto = mock(SectionDto.class);
-
-		when(gameDao.get(GAME_ID)).thenReturn(gameDto);
-		when(sectionDao.getAvailable(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
-		when(sectionDto.isGeneralAdmission()).thenReturn(true);
-		when(calculator.calculateCumulativePriceForGeneralAdmission(any(Integer.class), any(Double.class))).thenReturn(
-				CUMULATIVE_PRICE);
-
-		paymentService.saveToCart(chooseTicketsVM);
-
-		verify(currentCart).setNumberOfTicketsToBuy(NUMBER_OF_TICKETS_TO_BUY);
-		verify(currentCart).setSelectedSeats(selectedSeats);
-		verify(currentCart).setGameDto(gameDto);
-		verify(currentCart).setSectionDto(sectionDto);
-		verify(currentCart).setCumulativePrice(CUMULATIVE_PRICE);
-	}
-
-	@Test(expected = GameDoesntExistException.class)
-	public void saveToCart_should_raise_GameDoesntExistException_when_gameDao_raise_GameDoesntExistException()
-			throws GameDoesntExistException, SectionDoesntExistException {
-		SectionDto sectionDto = mock(SectionDto.class);
-		when(sectionDao.get(GAME_ID, SECTION_NAME)).thenReturn(sectionDto);
-
-		when(gameDao.get(GAME_ID)).thenThrow(new GameDoesntExistException());
-
-		paymentService.saveToCart(chooseTicketsVM);
-	}
-
-	@Test(expected = SectionDoesntExistException.class)
-	public void saveToCart_should_raise_SectionDoesntExistException_when_sectionDao_raise_SectionDoesntExistException()
-			throws GameDoesntExistException, SectionDoesntExistException {
-		GameDto gameDto = mock(GameDto.class);
-		when(gameDao.get(GAME_ID)).thenReturn(gameDto);
-
-		when(sectionDao.getAvailable(GAME_ID, SECTION_NAME)).thenThrow(new SectionDoesntExistException());
-
-		paymentService.saveToCart(chooseTicketsVM);
-	}
-
-	@Test
-	public void getCreditCardTypes_should_return_the_a_list_of_creditCardType() {
-		List<CreditCardType> creditCardTypes = new ArrayList<>();
-
-		when(constants.getCreditCardTypes()).thenReturn(creditCardTypes);
-
-		List<CreditCardType> actual = paymentService.getCreditCardTypes();
-
-		assertSame(creditCardTypes, actual);
-	}
-
-	@Test
-	public void getCumulativePriceFR_should_return_the_FR_price_when_currentCart_contains_tickets()
-			throws NoTicketsInCartException {
-		when(currentCart.containTickets()).thenReturn(true);
-		when(currentCart.getCumulativePrice()).thenReturn(PRICE);
-		when(calculator.toPriceFR(PRICE)).thenReturn(PRICE_FR);
-
-		String actual = paymentService.getCumulativePriceFR();
-
-		assertEquals(PRICE_FR, actual);
-	}
-
-	@Test(expected = NoTicketsInCartException.class)
-	public void getCumulativePriceFR_should_throw_NoTicketsInCartException_when_currentCart_contains_no_tickets()
-			throws NoTicketsInCartException {
-		when(currentCart.containTickets()).thenReturn(false);
-		when(currentCart.getCumulativePrice()).thenReturn(PRICE);
-		when(calculator.toPriceFR(PRICE)).thenReturn(PRICE_FR);
-
-		paymentService.getCumulativePriceFR();
-	}
-
-	@Ignore
-	@Test
-	public void given_a_paymentViewModel_buyTicketsInCart_should_call_pay_of_a_credit_card() throws InvalidCreditCardException, NoTicketsInCartException {
-		PaymentViewModel paymentVM = new PaymentViewModel();
+	public void when_cartContainsTickets_buyTicketsInCart_should_pay_the_tickets_in_cart() throws InvalidCreditCardException, NoTicketsInCartException {
 		MisterCard creditCard = mock(MisterCard.class);
-
-		when(creditCardFactory.createCreditCard(paymentVM)).thenReturn(creditCard);
-		when(currentCart.containTickets()).thenReturn(true);
-		when(currentCart.getCumulativePrice()).thenReturn(CUMULATIVE_PRICE);
-		doNothing().when(creditCard).pay(CUMULATIVE_PRICE);
-
-		paymentService.buyTicketsInCart(paymentVM);
-
-		verify(creditCard).pay(CUMULATIVE_PRICE);
+		CreditCardType creditCardType = CreditCardType.MISTERCARD;
+		
+		when(cartService.cartContainsTickets()).thenReturn(true);
+		when(creditCardFactory.createCreditCard(creditCardType,
+					CREDIT_CARD_NUMBER, SECURITY_CODE,
+					CREDIT_CARD_USERNAME, EXPIRATION_MONTH,
+					EXPIRATION_YEAR)).thenReturn(creditCard);
+		when(cartService.getCumulativePrice()).thenReturn(PRICE);
+		
+		paymentService.buyTicketsInCart(creditCardType, CREDIT_CARD_NUMBER,
+				SECURITY_CODE, CREDIT_CARD_USERNAME,
+				EXPIRATION_MONTH, EXPIRATION_YEAR);
+		
+		verify(creditCard).pay(PRICE);
 	}
-
-	@Ignore
+	
 	@Test
-	public void buyTicketsInCart_should_make_tickets_unavailable_to_other_people() throws InvalidCreditCardException, NoTicketsInCartException {
-		PaymentViewModel paymentVM = new PaymentViewModel();
+	public void when_cartContainsTickets_buyTicketsInCart_should_makeTicketsUnavailable() throws InvalidCreditCardException, NoTicketsInCartException {
 		MisterCard creditCard = mock(MisterCard.class);
-
-		when(creditCardFactory.createCreditCard(paymentVM)).thenReturn(creditCard);
-		when(currentCart.containTickets()).thenReturn(true);
-		when(currentCart.getCumulativePrice()).thenReturn(CUMULATIVE_PRICE);
-		when(creditCard.isValid()).thenReturn(true);
-
-		paymentService.buyTicketsInCart(paymentVM);
-
-		verify(cartService).makeTicketsUnavailableToOtherPeople(currentCart);
+		CreditCardType creditCardType = CreditCardType.MISTERCARD;
+		
+		when(cartService.cartContainsTickets()).thenReturn(true);
+		when(creditCardFactory.createCreditCard(creditCardType,
+					CREDIT_CARD_NUMBER, SECURITY_CODE,
+					CREDIT_CARD_USERNAME, EXPIRATION_MONTH,
+					EXPIRATION_YEAR)).thenReturn(creditCard);
+		when(cartService.getCumulativePrice()).thenReturn(PRICE);
+		
+		paymentService.buyTicketsInCart(creditCardType, CREDIT_CARD_NUMBER,
+				SECURITY_CODE, CREDIT_CARD_USERNAME,
+				EXPIRATION_MONTH, EXPIRATION_YEAR);
+		
+		verify(cartService).makeTicketsUnavailableToOtherPeople();
 	}
-
+	
 	@Test
-	public void emptyCart_should_empty_currentCart() {
-		paymentService.emptyCart();
-
-		verify(currentCart).empty();
+	public void when_cartContainsTickets_buyTicketsInCart_should_empty_the_cart() throws InvalidCreditCardException, NoTicketsInCartException {
+		MisterCard creditCard = mock(MisterCard.class);
+		CreditCardType creditCardType = CreditCardType.MISTERCARD;
+		
+		when(cartService.cartContainsTickets()).thenReturn(true);
+		when(creditCardFactory.createCreditCard(creditCardType,
+					CREDIT_CARD_NUMBER, SECURITY_CODE,
+					CREDIT_CARD_USERNAME, EXPIRATION_MONTH,
+					EXPIRATION_YEAR)).thenReturn(creditCard);
+		when(cartService.getCumulativePrice()).thenReturn(PRICE);
+		
+		paymentService.buyTicketsInCart(creditCardType, CREDIT_CARD_NUMBER,
+				SECURITY_CODE, CREDIT_CARD_USERNAME,
+				EXPIRATION_MONTH, EXPIRATION_YEAR);
+		
+		verify(cartService).emptyCart();
 	}
-	*/
+	
+	@Test(expected=NoTicketsInCartException.class)
+	public void when_cartContainsNoTickets_buyTicketsInCart_should_empty_the_cart() throws InvalidCreditCardException, NoTicketsInCartException {
+		CreditCardType creditCardType = CreditCardType.MISTERCARD;
+		
+		when(cartService.cartContainsTickets()).thenReturn(false);
+		
+		paymentService.buyTicketsInCart(creditCardType, CREDIT_CARD_NUMBER,
+				SECURITY_CODE, CREDIT_CARD_USERNAME,
+				EXPIRATION_MONTH, EXPIRATION_YEAR);
+		
+		verify(cartService).emptyCart();
+	}
+	
+	@Test(expected=NoTicketsInCartException.class)
+	public void when_cartContainsNoTickets_buyTicketsInCart_should_raise_NoTicketsInCartException() throws InvalidCreditCardException, NoTicketsInCartException {
+		CreditCardType creditCardType = CreditCardType.MISTERCARD;
+		
+		when(cartService.cartContainsTickets()).thenReturn(false);
+		
+		paymentService.buyTicketsInCart(creditCardType, CREDIT_CARD_NUMBER,
+				SECURITY_CODE, CREDIT_CARD_USERNAME,
+				EXPIRATION_MONTH, EXPIRATION_YEAR);
+	}
 }
