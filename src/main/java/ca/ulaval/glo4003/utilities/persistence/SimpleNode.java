@@ -98,4 +98,15 @@ public class SimpleNode {
 			node.appendChild(attr);
 		}
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof SimpleNode) {
+			SimpleNode s = (SimpleNode)obj;
+			if (s.name == null && this.name == null) {
+				return true;
+			}
+		}
+		return super.equals(obj);
+	}
 }

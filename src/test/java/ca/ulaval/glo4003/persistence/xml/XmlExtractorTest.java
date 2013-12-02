@@ -43,6 +43,13 @@ public class XmlExtractorTest {
 	public void testExtractFail() throws Exception {
 		extractor.extractPath(INVALID_XPATH);
 	}
+	
+	@Test(expected = Exception.class)
+	public void testExceptionThrowOnInvalidXml() throws Exception {
+		String xml = "<base></base2>";
+		InputStream stream = new ByteArrayInputStream(xml.getBytes("UTF-8"));
+		new XmlExtractor(stream);
+	}
 
 	@Test
 	public void testExtractPriceOfItem() throws Exception {
@@ -81,6 +88,16 @@ public class XmlExtractorTest {
 
 		assertEquals(expected, result);
 	}
+	
+	@Test
+	public void testCreateNodeMissingParent() throws Exception {
+		extractor.createNode("/Magasin/Departement/Items", initSimpleNode());
+
+		String result = extractor.extractPath("/Magasin/Departement/Items/Item[Nom=\"Pantalon\"]/Prix");
+		String expected = "19.99";
+
+		assertEquals(expected, result);
+	}
 
 	@Test
 	public void testCountNodeWithFilter() throws Exception {
@@ -107,6 +124,12 @@ public class XmlExtractorTest {
 		boolean result = extractor.isNodeExist(PANTALON_XPATH);
 		Assert.assertFalse(result);
 	}
+	
+	@Test
+	public void testNodeExistWithInvalidPath() throws Exception {
+		boolean result = extractor.isNodeExist(INVALID_XPATH);
+		Assert.assertFalse(result);
+	}
 
 	@Test
 	public void testMaxValue() throws Exception {
@@ -124,6 +147,14 @@ public class XmlExtractorTest {
 		Assert.assertTrue(actual.contains("Chemise"));
 		Assert.assertTrue(actual.contains("Chapeau"));
 		Assert.assertFalse(actual.contains("Pantalon"));
+	}
+	
+	@Test
+	public void testRemoveNode() throws Exception  {
+		extractor.removeParentNode(CHEMISE_XPATH);
+		
+		SimpleNode result = extractor.extractNode(CHEMISE_XPATH);
+		Assert.assertEquals(new SimpleNode(null), result);
 	}
 
 	private SimpleNode initSimpleNode() {
