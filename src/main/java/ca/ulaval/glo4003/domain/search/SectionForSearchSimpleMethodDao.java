@@ -129,7 +129,7 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 	}
 
 	private String createUrl(String sportName, DateTime gameDate, String sectionName) {
-		return String.format("/sport/%s/match/%s/billets/%s", sportUrlMapper.getUrl(sportName), gameDate,
+		return String.format("/sport/%s/match/%s/billets/%s", sportUrlMapper.getUrl(sportName), gameDate.toString("yyyyMMddHHmmz"),
 				ticketTypeUrlMapper.getUrl(sectionName));
 	}
 }

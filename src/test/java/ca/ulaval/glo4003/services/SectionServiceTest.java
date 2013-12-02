@@ -85,7 +85,7 @@ public class SectionServiceTest {
 	@Test
 	public void getSection_should_get_ticket_type_from_section_url() throws SectionDoesntExistException,
 			NoTicketTypeForUrlException {
-		service.getSection(SPORT_NAME, GAME_DATE, SECTION_URL);
+		service.getAvailableSection(SPORT_NAME, GAME_DATE, SECTION_URL);
 
 		verify(ticketTypeUrlMapperMock).getTicketType(SECTION_URL);
 	}
@@ -96,19 +96,19 @@ public class SectionServiceTest {
 			throws SectionDoesntExistException, NoTicketTypeForUrlException {
 		when(ticketTypeUrlMapperMock.getTicketType(SECTION_URL)).thenThrow(NoTicketTypeForUrlException.class);
 
-		service.getSection(SPORT_NAME, GAME_DATE, SECTION_URL);
+		service.getAvailableSection(SPORT_NAME, GAME_DATE, SECTION_URL);
 	}
 
 	@Test
 	public void getSection_should_get_section_from_dao() throws SectionDoesntExistException {
-		service.getSection(SPORT_NAME, GAME_DATE, SECTION_URL);
+		service.getAvailableSection(SPORT_NAME, GAME_DATE, SECTION_URL);
 
 		verify(sectionDaoMock).get(SPORT_NAME, GAME_DATE, SECTION_NAME);
 	}
 
 	@Test
 	public void getSection_should_get_game_from_dao() throws SectionDoesntExistException, GameDoesntExistException {
-		service.getSection(SPORT_NAME, GAME_DATE, SECTION_URL);
+		service.getAvailableSection(SPORT_NAME, GAME_DATE, SECTION_URL);
 
 		verify(gameDaoMock).get(SPORT_NAME, GAME_DATE);
 	}
@@ -119,7 +119,7 @@ public class SectionServiceTest {
 			throws GameDoesntExistException, SectionDoesntExistException {
 		when(gameDaoMock.get(SPORT_NAME, GAME_DATE)).thenThrow(GameDoesntExistException.class);
 
-		service.getSection(SPORT_NAME, GAME_DATE, SECTION_URL);
+		service.getAvailableSection(SPORT_NAME, GAME_DATE, SECTION_URL);
 	}
 
 	@Test
@@ -130,7 +130,7 @@ public class SectionServiceTest {
 		GameDto gameDto = mock(GameDto.class);
 		when(gameDaoMock.get(SPORT_NAME, GAME_DATE)).thenReturn(gameDto);
 
-		service.getSection(SPORT_NAME, GAME_DATE, SECTION_URL);
+		service.getAvailableSection(SPORT_NAME, GAME_DATE, SECTION_URL);
 
 		verify(sectionFactoryMock).createViewModel(dto, gameDto);
 	}
@@ -144,7 +144,7 @@ public class SectionServiceTest {
 		SectionViewModel expectedViewModel = mock(SectionViewModel.class);
 		when(sectionFactoryMock.createViewModel(dto, gameDto)).thenReturn(expectedViewModel);
 
-		SectionViewModel viewModel = service.getSection(SPORT_NAME, GAME_DATE, SECTION_URL);
+		SectionViewModel viewModel = service.getAvailableSection(SPORT_NAME, GAME_DATE, SECTION_URL);
 
 		assertEquals(expectedViewModel, viewModel);
 	}

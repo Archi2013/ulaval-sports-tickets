@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
@@ -29,72 +30,58 @@ import ca.ulaval.glo4003.utilities.persistence.XmlIntegrityException;
 @RequestMapping(value = "/sport/{sportNameUrl}/match/{dateString}", method = RequestMethod.GET)
 public class SectionController {
 
-	@Autowired
-	private User currentUser;
-
 	@Inject
 	private SectionService sectionService;
+	
+	@Inject
+	private SportUrlMapper sportUrlMapper;
 
 	@RequestMapping(value = "/billets/{ticketType}", method = RequestMethod.GET)
-	public ModelAndView getSectionForGame(@PathVariable String dateString, @PathVariable String sportNameUrl,
+	public ModelAndView getSectionDetails(@PathVariable String dateString, @PathVariable String sportNameUrl,
 			@PathVariable String ticketType) {
 		try {
+			String sportName = sportUrlMapper.getSportName(sportNameUrl);
 			DateTime gameDate = DateTime.parse(dateString, DateTimeFormat.forPattern("yyyyMMddHHmmz"));
 			ModelAndView mav = new ModelAndView("section/details");
 			mav.addObject("currency", Constants.CURRENCY);
 
-			SectionViewModel section = sectionService.getAvailableSection(sportNameUrl, gameDate, ticketType);
+			SectionViewModel section = sectionService.getAvailableSection(sportName, gameDate, ticketType);
 
 			mav.addObject("section", section);
 
 			if (section.getGeneralAdmission()) {
 				ChosenGeneralTicketsViewModel chosenGeneralTicketsVM = sectionService.getChosenGeneralTicketsViewModel(
-						sportNameUrl, gameDate, ticketType);
+						sportName, gameDate, ticketType);
 				mav.addObject("chosenGeneralTicketsForm", chosenGeneralTicketsVM);
 			} else {
 				ChosenWithSeatTicketsViewModel chosenWithSeatTicketsVM = sectionService
-						.getChosenWithSeatTicketsViewModel(sportNameUrl, gameDate, ticketType);
+						.getChosenWithSeatTicketsViewModel(sportName, gameDate, ticketType);
 				mav.addObject("chosenWithSeatTicketsForm", chosenWithSeatTicketsVM);
 			}
 
 			return mav;
-		} catch (SectionDoesntExistException e) {
+		} catch (SectionDoesntExistException | NoSportForUrlException e) {
 			return new ModelAndView("error/404");
 		}
 	}
 
 	@RequestMapping(value = "/billets", method = RequestMethod.GET)
-	public ModelAndView getTicketsForGame(@PathVariable String dateString, @PathVariable String sportNameUrl) {
+	public ModelAndView getSectionsForGame(@PathVariable String dateString, @PathVariable String sportNameUrl) {
 		try {
+			String sportName = sportUrlMapper.getSportName(sportNameUrl);
 			DateTime gameDate = DateTime.parse(dateString, DateTimeFormat.forPattern("yyyyMMddHHmmz"));
-			ModelAndView mav = new ModelAndView("game/sections");
-
-			manageUserConnection(mav);
+			ModelAndView mav = new ModelAndView("section/list");
 
 			mav.addObject("currency", Constants.CURRENCY);
 
-			SectionsViewModel sectionsViewModel = sectionService.getAvailableSectionsForGame(sportNameUrl, gameDate);
+			SectionsViewModel sectionsViewModel = sectionService.getAvailableSectionsForGame(sportName, gameDate);
 			mav.addObject("gameSections", sectionsViewModel);
 			return mav;
 
 		} catch (GameDoesntExistException | NoSportForUrlException e) {
 			return new ModelAndView("error/404");
 		} catch (XmlIntegrityException e) {
-			return new ModelAndView("game/no-ticket");
-		}
-	}
-
-	private void manageUserConnection(ModelAndView mav) {
-		Boolean connectedUser = currentUser.isLogged();
-
-		addConnectedUserToModelAndView(mav, connectedUser);
-	}
-
-	private void addConnectedUserToModelAndView(ModelAndView mav, Boolean connectedUser) {
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-		} else {
-			mav.addObject("connectedUser", false);
+			return new ModelAndView("section/no-ticket");
 		}
 	}
 }
