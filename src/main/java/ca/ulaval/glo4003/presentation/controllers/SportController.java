@@ -14,7 +14,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
 import ca.ulaval.glo4003.services.SportViewService;
 
 @Controller
-@RequestMapping(value = "/sport", method = RequestMethod.GET)
+@RequestMapping(value = "/", method = RequestMethod.GET)
 @SessionAttributes({ "currentUser" })
 public class SportController {
 
@@ -24,7 +24,7 @@ public class SportController {
 	@Autowired
 	private User currentUser;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "sports", method = RequestMethod.GET)
 	public ModelAndView getSports() {
 		ModelAndView mav = new ModelAndView("sport/list");
 

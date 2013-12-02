@@ -12,7 +12,7 @@
 		</c:when>
 	</c:choose>
 	<div class="menu-element">
-		<a href="/sport"><spring:message code="label.main-menu.sports" /></a>
+		<a href="/sports"><spring:message code="label.main-menu.sports" /></a>
 	</div>
 	<div class="menu-element">
 		<a href="/recherche"><spring:message code="label.main-menu.search" /></a>

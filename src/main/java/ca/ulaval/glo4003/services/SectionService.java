@@ -48,6 +48,7 @@ public class SectionService {
 	public SectionsViewModel getAvailableSectionsForGame(String sportName, DateTime gameDate)
 			throws GameDoesntExistException, NoSportForUrlException {
 		GameDto game = gameDao.get(sportName, gameDate);
+		System.out.println("SPORT : " + sportName + "DATE : " + gameDate);
 		List<SectionDto> sections = sectionDao.getAllAvailable(sportName, gameDate);
 		return viewModelFactory.createViewModel(game, sections);
 	}

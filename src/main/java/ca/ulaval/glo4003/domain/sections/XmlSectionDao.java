@@ -52,38 +52,34 @@ public class XmlSectionDao implements SectionDao {
 
 	@Override
 	public List<SectionDto> getAll(String sportName, DateTime gameDate) throws GameDoesntExistException {
-		try {
-			return convertToSectionDtos(sportName, gameDate, getAllSections());
-		} catch (NoSuchAttributeException | SectionDoesntExistException e) {
-			throw new XmlIntegrityException(e);
-		}
+		return convertToSectionDtos(sportName, gameDate, getAllSections());
 	}
 
 	@Override
-	public List<SectionDto> getAllAvailable(String sportName, DateTime gameDate) throws GameDoesntExistException {
-		try {
-			return convertToAvailableSectionDtos(sportName, gameDate, getAllSections());
-		} catch (NoSuchAttributeException | SectionDoesntExistException e) {
-			throw new XmlIntegrityException(e);
-		}
+	public List<SectionDto> getAllAvailable(String sportName, DateTime gameDate) {
+		return convertToAvailableSectionDtos(sportName, gameDate, getAllSections());
 	}
 
-	private List<SectionDto> convertToSectionDtos(String sportName, DateTime gameDate, Set<String> sectionNames)
-			throws SectionDoesntExistException, NoSuchAttributeException {
+	private List<SectionDto> convertToSectionDtos(String sportName, DateTime gameDate, Set<String> sectionNames) {
 		List<SectionDto> sections = new ArrayList<>();
 		for (String sectionName : sectionNames) {
-			SectionDto section = get(sportName, gameDate, sectionName);
-			sections.add(section);
+			try {
+				SectionDto section = get(sportName, gameDate, sectionName);
+				sections.add(section);
+			} catch (SectionDoesntExistException e) {
+			}
 		}
 		return sections;
 	}
 
-	private List<SectionDto> convertToAvailableSectionDtos(String sportName, DateTime gameDate, Set<String> sectionNames)
-			throws SectionDoesntExistException, NoSuchAttributeException {
+	private List<SectionDto> convertToAvailableSectionDtos(String sportName, DateTime gameDate, Set<String> sectionNames) {
 		List<SectionDto> sections = new ArrayList<>();
 		for (String sectionName : sectionNames) {
-			SectionDto section = getAvailable(sportName, gameDate, sectionName);
-			sections.add(section);
+			try {
+				SectionDto section = getAvailable(sportName, gameDate, sectionName);
+				sections.add(section);
+			} catch (SectionDoesntExistException e) {
+			}
 		}
 		return sections;
 	}
