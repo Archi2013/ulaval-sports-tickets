@@ -56,18 +56,4 @@ public class GameController {
 			return mav;
 		}
 	}
-
-	private void addConnectedUserToModelAndView(ModelAndView mav, Boolean connectedUser) {
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-		} else {
-			mav.addObject("connectedUser", false);
-		}
-	}
-
-	private void manageUserConnection(ModelAndView mav) {
-		Boolean connectedUser = currentUser.isLogged();
-
-		addConnectedUserToModelAndView(mav, connectedUser);
-	}
 }
