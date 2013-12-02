@@ -161,6 +161,6 @@ public class XmlExtractorTest {
 		Map<String, String> map = new HashMap<>();
 		map.put("Nom", "Pantalon");
 		map.put("Prix", "19.99");
-		return new SimpleNode("Item", map, new HashMap<String, String>());
+		return new SimpleNode("Item", map);
 	}
 }

@@ -19,7 +19,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -31,8 +30,6 @@ public class SimpleNodeTest {
 	
 	private static final String NODE_TAG_VALUE = "Pantalon";
 	private static final String NODE_TAG_NAME = "Nom";
-	private static final String ATTRIBUTE_TAG_VALUE = "2";
-	private static final String ATTRIBUTE_TAG_NAME = "Id";
 	private static final String PARENT_TAG_NAME = "Item";
 	private SimpleNode emptyNode = new SimpleNode(null);
 	private SimpleNode someNode;
@@ -42,8 +39,6 @@ public class SimpleNodeTest {
 	private Document document;
 	@Mock
 	private Element parentElement;
-	@Mock
-	private Attr attribute;
 	@Mock
 	private Element childElement;
 	
@@ -72,22 +67,9 @@ public class SimpleNodeTest {
 	}
 	
 	@Test
-	public void testHasNodeWithValideAttribute() throws Exception {
-		boolean actual = someNode.hasNode(ATTRIBUTE_TAG_NAME);
-		assertTrue(actual);
-	}
-	
-	@Test
 	public void testGetNodeValue() throws Exception {
 		String actual = someNode.getNodeValue(NODE_TAG_NAME);
 		String expected = "Chemise";
-		assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testGetNodeAtribute() throws Exception {
-		String actual = someNode.getNodeValue(ATTRIBUTE_TAG_NAME);
-		String expected = "1";
 		assertEquals(expected, actual);
 	}
 	
@@ -99,18 +81,14 @@ public class SimpleNodeTest {
 	@Test
 	public void testCreateNode() throws Exception {
 		when(document.createElement(PARENT_TAG_NAME)).thenReturn(parentElement);
-		when(document.createAttribute(ATTRIBUTE_TAG_NAME)).thenReturn(attribute);
 		when(document.createElement(NODE_TAG_NAME)).thenReturn(childElement);
 		
 		createdNode.toNode(document);
 		
 		verify(document, times(1)).createElement(PARENT_TAG_NAME);
-		verify(document, times(1)).createAttribute(ATTRIBUTE_TAG_NAME);
 		verify(document, times(1)).createElement(NODE_TAG_NAME);
 		
-		verify(parentElement).appendChild(attribute);
 		verify(parentElement).appendChild(childElement);
-		verify(attribute).setValue(ATTRIBUTE_TAG_VALUE);
 		verify(childElement).setTextContent(NODE_TAG_VALUE);
 	}
 	
@@ -124,10 +102,8 @@ public class SimpleNodeTest {
 	
 	private SimpleNode createNodeFromMap() throws Exception {
 		String name = PARENT_TAG_NAME;
-		Map<String, String> attributes = new HashMap<>();
-		attributes.put(ATTRIBUTE_TAG_NAME, ATTRIBUTE_TAG_VALUE);
 		Map<String, String> subNodes = new HashMap<>();
 		subNodes.put(NODE_TAG_NAME, NODE_TAG_VALUE);
-		return new SimpleNode(name, subNodes, attributes);
+		return new SimpleNode(name, subNodes);
 	}
 }
