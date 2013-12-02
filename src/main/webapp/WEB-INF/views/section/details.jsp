@@ -70,11 +70,11 @@
 				</c:choose>
 				<form:form id="choose-tickets-form"
 					commandName="${addFormCommandName}" action="${addActionUrl}" method="POST">
-					<form:hidden path="section" />
-					<form:hidden path="sport" />
+					<form:hidden path="sectionName" />
+					<form:hidden path="sportName" />
 					<form:hidden path="gameDate" />
 					<c:choose>
-						<c:when test="${section.isGeneralAdmission()}">
+						<c:when test="${section.generalAdmission}">
 							<form:label path="numberOfTicketsToBuy">Choisir le nombre de billets :</form:label>
 							<form:input type="number" size="4" min="1"
 								max="${section.numberOfTickets}" path="numberOfTicketsToBuy" />

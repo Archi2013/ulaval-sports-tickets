@@ -22,14 +22,11 @@ public class SectionViewModelFactory {
 	private TicketTypeUrlMapper ticketTypeUrlMapper;
 	
 	@Inject
-	private Calculator calculator;
-	
-	@Inject
 	private Constants constants;
 
 	public SectionViewModel createViewModel(SectionDto section, GameDto game) {
 		String dateFR = constants.toLongDateTimeFormatFR(game.getGameDate());
-		String priceFR = calculator.toPriceFR(section.getPrice());
+		String priceFR = Calculator.toPriceFR(section.getPrice());
 		
 		return new SectionViewModel(section.getSectionName(), section.getNumberOfTickets(),
 				priceFR, dateFR, game.getOpponents(), game.getLocation(),

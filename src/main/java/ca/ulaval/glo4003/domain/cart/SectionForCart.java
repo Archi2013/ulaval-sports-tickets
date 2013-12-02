@@ -3,11 +3,10 @@ package ca.ulaval.glo4003.domain.cart;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import ca.ulaval.glo4003.utilities.Calculator;
 
@@ -21,9 +20,6 @@ public class SectionForCart {
 	private Integer numberOfTicketsToBuy;
 	private Set<String> selectedSeats;
 	private Double price;
-	
-	@Inject
-	private Calculator calculator;
 	
 	public SectionForCart(String sportName, DateTime gameDate, String sectionName,
 			String opponents, String location,
@@ -129,12 +125,12 @@ public class SectionForCart {
 
 	public Double getSubtotal() {
 		if (getGeneralAdmission()) {
-			return calculator
+			return Calculator
 					.calculateCumulativePriceForGeneralAdmission(
 							this.numberOfTicketsToBuy,
 							this.price);
 		} else {
-			return calculator
+			return Calculator
 					.calculateCumulativePriceForWithSeatAdmission(
 							this.selectedSeats,
 							this.price);

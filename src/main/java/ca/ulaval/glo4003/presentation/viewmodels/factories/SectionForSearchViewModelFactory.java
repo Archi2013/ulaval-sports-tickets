@@ -19,16 +19,13 @@ import com.google.common.base.Function;
 public class SectionForSearchViewModelFactory {
 	
 	@Inject
-	private Calculator calculator;
-	
-	@Inject
 	private Constants constants;
 
 	public List<SectionForSearchViewModel> createViewModels(List<SectionForSearchDto> ticketForSearchDtos) {
 		List<SectionForSearchViewModel> list = transform(ticketForSearchDtos, new Function<SectionForSearchDto, SectionForSearchViewModel>() {
 			public SectionForSearchViewModel apply(SectionForSearchDto section) {
 				return new SectionForSearchViewModel(section.sport, section.opponents, section.location, constants.toLongDateTimeFormatFR(section.date),
-						section.section, section.numberOfTicket, calculator.toPriceFR(section.price), section.url);
+						section.section, section.numberOfTicket, Calculator.toPriceFR(section.price), section.url);
 			}
 		});
 		return list;

@@ -39,9 +39,6 @@ public class PaymentController {
 	CartService cartService;
 	
 	@Inject
-	private Calculator calculator;
-	
-	@Inject
 	private PaymentErrorManager paymentErrorManager;
 	
 	@Autowired
@@ -111,7 +108,7 @@ public class PaymentController {
 	}
 	
 	private String getCumulativePriceFR() throws NoTicketsInCartException {
-		return calculator.toPriceFR(cartService.getCumulativePrice());
+		return Calculator.toPriceFR(cartService.getCumulativePrice());
 	}
 	
 }

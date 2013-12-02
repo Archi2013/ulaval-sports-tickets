@@ -18,9 +18,6 @@ public class PayableItemsViewModelFactory {
 	
 	@Inject
 	SectionForPaymentViewModelFactory sectionForPaymentViewModelFactory;
-	
-	@Inject
-	Calculator calculator;
 
 	public PayableItemsViewModel createViewModel(
 			Set<SectionForCart> sectionFCs, Double cumulativePrice) {
@@ -29,7 +26,7 @@ public class PayableItemsViewModelFactory {
 			sectionForPaymentVMs.add(sectionForPaymentViewModelFactory.createViewModel(sectionFC));
 		}
 		
-		String cumulativePriceFR = calculator.toPriceFR(cumulativePrice);
+		String cumulativePriceFR = Calculator.toPriceFR(cumulativePrice);
 
 		PayableItemsViewModel payableItemsVM = new PayableItemsViewModel();
 		

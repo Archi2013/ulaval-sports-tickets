@@ -21,43 +21,39 @@
 
 	<div>
 		<table class="standard-table margin-25">
-			<c:set var="section"
-				value="${payableItems.sectionForPaymentViewModel}" />
 			<thead>
 				<tr>
 					<th>Sport</th>
 					<th>Date</th>
 					<th>Opposants</th>
 					<th>Lieu</th>
-					<c:choose>
-						<c:when test="${section.generalAdmission}">
-							<th>Nombre de billets</th>
-						</c:when>
-						<c:otherwise>
-							<th>Section</th>
-							<th>Sièges</th>
-						</c:otherwise>
-					</c:choose>
+					<th>Nombre de billets</th>
+					<th>Section</th>
+					<th>Sièges</th>
 					<th>Sous-total (${currency})</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>${section.sportName}</td>
-					<td>${section.gameDate}</td>
-					<td>${section.opponents}</td>
-					<td>${section.location}</td>
-					<c:choose>
-						<c:when test="${section.generalAdmission}">
-							<td>${section.numberOfTicketsToBuy}</td>
-						</c:when>
-						<c:otherwise>
-							<td>${section.sectionName}</td>
-							<td>${section.selectedSeats}</td>
-						</c:otherwise>
-					</c:choose>
-					<td>${section.subtotal}</td>
-				</tr>
+			     <c:forEach items="${payableItems.sections}" var="section">
+				     <tr>
+	                    <td>${section.sportName}</td>
+	                    <td>${section.gameDate}</td>
+	                    <td>${section.opponents}</td>
+	                    <td>${section.location}</td>
+	                    <td>${section.numberOfTicketsToBuy}</td>
+	                    <c:choose>
+	                        <c:when test="${section.generalAdmission}">
+	                            <td>Générale</td>
+	                            <td>Libre</td>
+	                        </c:when>
+	                        <c:otherwise>
+	                            <td>${section.sectionName}</td>
+	                            <td>${section.selectedSeats}</td>
+	                        </c:otherwise>
+	                    </c:choose>
+	                    <td>${section.subtotal}</td>
+	                </tr>
+			     </c:forEach>
 			</tbody>
 		</table>
 	</div>

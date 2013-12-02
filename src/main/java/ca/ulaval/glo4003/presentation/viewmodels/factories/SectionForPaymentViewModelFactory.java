@@ -15,10 +15,7 @@ import ca.ulaval.glo4003.utilities.Constants;
 
 @Component
 public class SectionForPaymentViewModelFactory {
-
-	@Inject
-	private Calculator calculator;
-
+	
 	@Inject
 	private Constants constants;
 	
@@ -36,9 +33,9 @@ public class SectionForPaymentViewModelFactory {
 		
 		sectionForPaymentVM.setOpponents(sectionFC.getOpponents());
 		sectionForPaymentVM.setLocation(sectionFC.getLocation());
-		sectionForPaymentVM.setSubtotal(calculator.toPriceFR(sectionFC.getSubtotal()));
+		sectionForPaymentVM.setSubtotal(Calculator.toPriceFR(sectionFC.getSubtotal()));
 		
-		return null;
+		return sectionForPaymentVM;
 	}
 
 	private String toString(Set<String> selectedSeats) {

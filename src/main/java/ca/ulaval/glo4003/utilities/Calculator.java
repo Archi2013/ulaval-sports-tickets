@@ -7,15 +7,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class Calculator {
 
-	public Double calculateCumulativePriceForGeneralAdmission(Integer numberOfTicketsToBuy, Double price) {
+	public static Double calculateCumulativePriceForGeneralAdmission(Integer numberOfTicketsToBuy, Double price) {
 		return numberOfTicketsToBuy * price;
 	}
 
-	public Double calculateCumulativePriceForWithSeatAdmission(Set<String> selectedSeats, Double price) {
+	public static Double calculateCumulativePriceForWithSeatAdmission(Set<String> selectedSeats, Double price) {
 		return selectedSeats.size() * price;
 	}
 	
-	public String toPriceFR(Double number) {
+	public static String toPriceFR(Double number) {
 		return String.format("%10.2f", number).replace(".", ",");
 	}
 }
