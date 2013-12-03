@@ -3,6 +3,8 @@ package ca.ulaval.glo4003.persistence.xml;
 import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.Set;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +26,7 @@ import ca.ulaval.glo4003.utilities.persistence.XmlExtractor;
 @RunWith(MockitoJUnitRunner.class)
 public class XmlExtractorTest {
 
+	private static final String FILENAME = "resources/XmlExtractorTest.xml";
 	private static final String ITEM_XPATH = "/Magasin/Items/Item";
 	private static final String ITEMS_XPATH = "/Magasin/Items";
 	private static final String CHEMISE_XPATH = "/Magasin/Items/Item[Nom=\"Chemise\"]";
@@ -37,6 +41,14 @@ public class XmlExtractorTest {
 		String xml = "<Magasin><Items><Item><id>1</id><Nom>Chemise</Nom><Prix>9,99</Prix></Item><Item><id>2</id><Nom>Chapeau</Nom><Prix>4,99</Prix></Item></Items></Magasin>";
 		InputStream stream = new ByteArrayInputStream(xml.getBytes("UTF-8"));
 		extractor = new XmlExtractor(stream);
+	}
+	
+	@After
+	public void teardown() throws Exception {
+		File file = new File(FILENAME);
+		if (file.exists()) {
+			file.delete();
+		}
 	}
 
 	@Test(expected = XPathExpressionException.class)
@@ -155,6 +167,20 @@ public class XmlExtractorTest {
 		
 		SimpleNode result = extractor.extractNode(CHEMISE_XPATH);
 		Assert.assertEquals(new SimpleNode(null), result);
+	}
+	
+	@Test
+	public void testCommit() throws Exception {
+		File file = new File(FILENAME);
+		extractor.commit(file);
+		
+		boolean result = extractor.isNodeExist(CHEMISE_XPATH);
+		Assert.assertTrue(result);
+		
+		extractor = new XmlExtractor(new FileInputStream(file));
+		
+		result = extractor.isNodeExist(CHEMISE_XPATH);
+		Assert.assertTrue(result);
 	}
 
 	private SimpleNode initSimpleNode() {
