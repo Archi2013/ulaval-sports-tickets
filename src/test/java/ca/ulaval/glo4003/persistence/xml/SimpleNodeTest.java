@@ -14,6 +14,8 @@ import java.util.Map;
 
 import javax.naming.directory.NoSuchAttributeException;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +30,7 @@ import ca.ulaval.glo4003.utilities.persistence.XmlExtractor;
 @RunWith(MockitoJUnitRunner.class)
 public class SimpleNodeTest {
 	
+	private static final String NODE_NEW_VALUE = "Chemise";
 	private static final String NODE_TAG_VALUE = "Pantalon";
 	private static final String NODE_TAG_NAME = "Nom";
 	private static final String PARENT_TAG_NAME = "Item";
@@ -69,7 +72,7 @@ public class SimpleNodeTest {
 	@Test
 	public void testGetNodeValue() throws Exception {
 		String actual = someNode.getNodeValue(NODE_TAG_NAME);
-		String expected = "Chemise";
+		String expected = NODE_NEW_VALUE;
 		assertEquals(expected, actual);
 	}
 	
@@ -90,6 +93,24 @@ public class SimpleNodeTest {
 		
 		verify(parentElement).appendChild(childElement);
 		verify(childElement).setTextContent(NODE_TAG_VALUE);
+	}
+	
+	@Test
+	public void testSetAttribute() throws Exception {
+		someNode.setNodeValue(NODE_TAG_NAME, NODE_NEW_VALUE);
+		
+		String actual = someNode.getNodeValue(NODE_TAG_NAME);
+		String expected = NODE_NEW_VALUE;
+		
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testEquals() throws Exception {
+		Assert.assertEquals(new SimpleNode(null), emptyNode);
+		Assert.assertEquals(someNode, someNode);
+		Assert.assertNotSame(someNode, createdNode);
+		Assert.assertNotSame(someNode, new Object());
 	}
 	
 	private SimpleNode createBasicNode() throws Exception {
