@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
+
 
 @Component
 @Scope(value="session", proxyMode=ScopedProxyMode.TARGET_CLASS)
@@ -25,7 +27,11 @@ public class Cart {
 		return sections;
 	}
 
-	public Double getCumulativePrice() {
+	public Double getCumulativePrice() throws NoTicketsInCartException {
+		if (!containTickets()) {
+			throw new NoTicketsInCartException();
+		}
+		
 		Double cumulativePrice = 0.0;
 		for (SectionForCart section : this.sections) {
 			cumulativePrice += section.getSubtotal();
