@@ -4,7 +4,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
-import ca.ulaval.glo4003.presentation.controllers.AddGameController;
 import ca.ulaval.glo4003.presentation.controllers.CartController;
 import ca.ulaval.glo4003.presentation.controllers.GameController;
 import ca.ulaval.glo4003.presentation.controllers.PaymentController;
@@ -12,6 +11,7 @@ import ca.ulaval.glo4003.presentation.controllers.SearchController;
 import ca.ulaval.glo4003.presentation.controllers.SectionController;
 import ca.ulaval.glo4003.presentation.controllers.SessionController;
 import ca.ulaval.glo4003.presentation.controllers.SportController;
+import ca.ulaval.glo4003.presentation.controllers.administration.AddGameController;
 import ca.ulaval.glo4003.presentation.viewmodels.GameToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.GeneralTicketsToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SeatedTicketsToAddViewModel;

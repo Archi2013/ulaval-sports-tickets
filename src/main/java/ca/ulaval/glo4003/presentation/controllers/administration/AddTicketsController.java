@@ -1,6 +1,4 @@
-package ca.ulaval.glo4003.presentation.controllers;
-
-import java.util.List;
+package ca.ulaval.glo4003.presentation.controllers.administration;
 
 import javax.inject.Inject;
 
@@ -13,13 +11,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.constants.TicketKind;
+import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.exceptions.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
-import ca.ulaval.glo4003.presentation.viewmodels.GameSelectionViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.GeneralTicketsToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SeatedTicketsToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SelectSportViewModel;
@@ -42,7 +40,7 @@ public class AddTicketsController {
 	private AdministrationViewService viewService;
 
 	@RequestMapping(value = "/billets/choisir-sport", method = RequestMethod.GET)
-	public ModelAndView chooseSportAndTicketType() {
+	public ModelAndView chooseSportAndTicketType(@ModelAttribute("currentUser")  User currentUser) {
 		ModelAndView mav = new ModelAndView("admin/addTickets-chooseSport", "command", new SelectSportViewModel());
 
 		mav.addObject("sportsVM", sportService.getSports());
@@ -52,7 +50,7 @@ public class AddTicketsController {
 	}
 
 	@RequestMapping(value = "/billets", method = RequestMethod.POST)
-	public ModelAndView getAddTicketForm(@ModelAttribute("SpringWeb") SelectSportViewModel selectSportVM,
+	public ModelAndView getAddTicketForm(@ModelAttribute("currentUser")  User currentUser, @ModelAttribute("SpringWeb") SelectSportViewModel selectSportVM,
 			Model model) throws SportDoesntExistException, GameDoesntExistException {
 
 		ModelAndView mav;
@@ -70,7 +68,7 @@ public class AddTicketsController {
 	}
 
 	@RequestMapping(value = "/ajout-billets-general", method = RequestMethod.POST)
-	public ModelAndView addTickets_general(@ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel viewModel,
+	public ModelAndView addTickets_general(@ModelAttribute("currentUser")  User currentUser, @ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel viewModel,
 			Model model) throws SportDoesntExistException, GameDoesntExistException, NoSportForUrlException {
 		ModelAndView mav;
 		System.out.println("Date Retournee par la vue: " + viewModel.getGameDate().toString());
@@ -87,7 +85,7 @@ public class AddTicketsController {
 	}
 
 	@RequestMapping(value = "/ajout-billets-seated", method = RequestMethod.POST)
-	public ModelAndView addTickets_seated(@ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM,
+	public ModelAndView addTickets_seated(@ModelAttribute("currentUser")  User currentUser, @ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM,
 			Model model) throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
 			TicketAlreadyExistsException, TicketDoesntExistException, NoSportForUrlException {
 

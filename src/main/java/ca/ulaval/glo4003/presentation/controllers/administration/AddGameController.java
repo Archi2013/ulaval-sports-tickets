@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.presentation.controllers;
+package ca.ulaval.glo4003.presentation.controllers.administration;
 
 import javax.inject.Inject;
 
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
@@ -34,15 +35,9 @@ public class AddGameController {
 	@Inject
 	CommandTicketService ticketService;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView home() {
-		ModelAndView mav = new ModelAndView("admin/home");
-
-		return mav;
-	}
 
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
-	public ModelAndView game() {
+	public ModelAndView game(@ModelAttribute("currentUser")  User currentUser) {
 		ModelAndView mav = new ModelAndView("admin/game", "command", new GameToAddViewModel());
 
 		mav.addObject("sportsVM", sportService.getSports());
@@ -51,7 +46,7 @@ public class AddGameController {
 	}
 
 	@RequestMapping(value = "/ajout-match", method = RequestMethod.POST)
-	public ModelAndView addGame(@ModelAttribute("SpringWeb") GameToAddViewModel gameToAddVM) {
+	public ModelAndView addGame(@ModelAttribute("currentUser")  User currentUser, @ModelAttribute("SpringWeb") GameToAddViewModel gameToAddVM) {
 		ModelAndView mav = new ModelAndView("admin/game-added");
 
 		mav.addObject("game", gameToAddVM);

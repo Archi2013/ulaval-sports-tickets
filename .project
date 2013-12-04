@@ -42,6 +42,7 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>org.sonar.ide.eclipse.core.sonarNature</nature>
 		<nature>org.eclipse.ajdt.ui.ajnature</nature>
 		<nature>net.vtst.ow.eclipse.less.nature</nature>
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
