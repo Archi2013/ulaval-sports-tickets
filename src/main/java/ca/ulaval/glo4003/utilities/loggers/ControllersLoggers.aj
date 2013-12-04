@@ -21,7 +21,6 @@ import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 public aspect ControllersLoggers {
 	
 	private static final Logger SportControllerLogger = LoggerFactory.getLogger(SportController.class);
-	private static final Logger GameControllerLogger = LoggerFactory.getLogger(GameController.class);
 	private static final Logger SectionControllerLogger = LoggerFactory.getLogger(SectionController.class);
 	private static final Logger SessionControllerLogger = LoggerFactory.getLogger(SessionController.class);
 	private static final Logger AdministrationControllerLogger = LoggerFactory.getLogger(AddGameController.class);
@@ -29,36 +28,14 @@ public aspect ControllersLoggers {
 	private static final Logger PaymentControllerLogger = LoggerFactory.getLogger(PaymentController.class);
 	private static final Logger CartControllerLogger = LoggerFactory.getLogger(CartController.class);
 	
-	pointcut SportController_getSportGames() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SportController.getSportGames(..));
+	pointcut SectionController_getSectionsForGame() :
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SectionController.getSectionsForGame(..));
 	
-	after() throwing(Exception exception) : SportController_getSportGames(){
-		SportControllerLogger.info("==> Impossible to get games for sport: " + thisJoinPoint.getArgs()[0]);
-		GameControllerLogger.info("==> Exception : " + exception.getMessage());
-		exception.printStackTrace();
-	}
-	
-	pointcut GameController_getTicketsForGame() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.GameController.getTicketsForGame(..));
-	
-	before() : GameController_getTicketsForGame() {
-		GameControllerLogger.info("Getting all tickets for game : " + thisJoinPoint.getArgs()[0]);
-	}
-	
-	after() throwing(Exception exception) : GameController_getTicketsForGame(){
-		GameControllerLogger.info("==> Impossible to get all tickets for game : " + thisJoinPoint.getArgs()[0]);
-		GameControllerLogger.info("==> Exception : " + exception.getMessage());
-		exception.printStackTrace();
-	}
-	
-	pointcut SectionController_getSectionForGame() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SectionController.getSectionForGame(..));
-	
-	before() : SectionController_getSectionForGame() {
+	before() : SectionController_getSectionsForGame() {
 		SectionControllerLogger.info("Getting ticket section : " + thisJoinPoint.getArgs()[1]);
 	}
 	
-	after() throwing(Exception exception) : SectionController_getSectionForGame(){
+	after() throwing(Exception exception) : SectionController_getSectionsForGame(){
 		SportControllerLogger.info("Exception : " + exception.getClass().getSimpleName() + " : la section n'existe pas");
 		exception.printStackTrace();
 	}
@@ -108,15 +85,6 @@ public aspect ControllersLoggers {
 		AdministrationControllerLogger.info("==> Impossible d'ajouter la game : " + gameToAddViewModel.getSport());
 		AdministrationControllerLogger.info("==> Exception : " + exception.getMessage());
 		exception.printStackTrace();
-	}
-	
-	pointcut AdmnistrationController_addTickets_selectSport() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddTicketsController.addTickets_selectSport(..));
-	
-	before() : AdmnistrationController_addTickets_selectSport() {
-		SelectSportViewModel selectSportViewModel = (SelectSportViewModel) thisJoinPoint.getArgs()[0];
-		AdministrationControllerLogger.info("Administration : Add a new game for a sport : " + selectSportViewModel.getSport());
-		AdministrationControllerLogger.info("Ticket is of type : " + selectSportViewModel.getTypeBillet());
 	}
 	
 	pointcut AdmnistrationController_addTickets_general() :
