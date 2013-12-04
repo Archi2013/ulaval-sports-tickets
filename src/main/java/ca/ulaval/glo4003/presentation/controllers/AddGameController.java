@@ -61,7 +61,6 @@ public class AddGameController {
 					gameToAddVM.getDate().getDateTime());
 		} catch (SportDoesntExistException | GameDoesntExistException | GameAlreadyExistException
 				| NoSportForUrlException | TicketAlreadyExistsException | TicketDoesntExistException e) {
-			e.printStackTrace();
 			return new ModelAndView("admin/game-added-data-error");
 		}
 

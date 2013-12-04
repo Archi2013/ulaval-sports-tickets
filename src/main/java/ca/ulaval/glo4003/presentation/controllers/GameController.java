@@ -23,7 +23,7 @@ public class GameController {
 
 	@Inject
 	private QueryGameService gameService;
-	
+
 	@Inject
 	private SportUrlMapper sportUrlMapper;
 
@@ -44,7 +44,6 @@ public class GameController {
 				return mav;
 			}
 		} catch (RuntimeException | NoSportForUrlException | SportDoesntExistException | GameDoesntExistException e) {
-			e.printStackTrace();
 			mav.setViewName("error/404");
 			return mav;
 		}
