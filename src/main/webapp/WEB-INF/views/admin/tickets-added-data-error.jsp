@@ -16,8 +16,8 @@
 
 	<h2>${pageTitle}</h2>
 
-	Une erreur est survenue à l'enregistrement des données. Vérifiez la
-	cohérence de la base de donnée xml et recommencez.
+	<div class="information-block-error-skin margin-25-50">Une erreur est survenue à l'enregistrement des données. Vérifiez la
+	cohérence de la base de donnée xml et recommencez.</div>
 
 	<%@include file="../layout/footer.jsp"%>
 </body>

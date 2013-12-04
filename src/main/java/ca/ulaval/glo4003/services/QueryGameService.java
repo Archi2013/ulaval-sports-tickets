@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.game.GameDao;
 import ca.ulaval.glo4003.domain.game.GameDto;
-import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
 import ca.ulaval.glo4003.domain.tickets.TicketDao;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
-import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.GamesViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.GamesViewModelFactory;
@@ -30,21 +28,13 @@ public class QueryGameService {
 	private TicketDao ticketDao;
 
 	@Inject
-	private SportUrlMapper sportUrlMapper;
-
-	@Inject
 	private GamesViewModelFactory gamesViewModelFactory;
 
-	public GamesViewModel getGamesForSport(String sportUrl) throws SportDoesntExistException, GameDoesntExistException {
-		try {
-			String sportName = sportUrlMapper.getSportName(sportUrl);
-			List<GameDto> games = gameDao.getGamesForSport(sportName);
-			countNumberOfTickets(games);
-			filter.applyFilterOnList(games);
-			return gamesViewModelFactory.createViewModel(sportName, games);
-		} catch (NoSportForUrlException e) {
-			throw new SportDoesntExistException();
-		}
+	public GamesViewModel getGamesForSport(String sportName) throws SportDoesntExistException, GameDoesntExistException {
+		List<GameDto> games = gameDao.getGamesForSport(sportName);
+		countNumberOfTickets(games);
+		filter.applyFilterOnList(games);
+		return gamesViewModelFactory.createViewModel(sportName, games);
 	}
 
 	private void countNumberOfTickets(List<GameDto> games) throws GameDoesntExistException {

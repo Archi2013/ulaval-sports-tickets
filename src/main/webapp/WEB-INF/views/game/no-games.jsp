@@ -13,12 +13,11 @@
 	<%@include file="../layout/header.jsp"%>
 	<%@include file="../layout/menu.jsp"%>
 
-	<h2>${games.sportName}</h2>
+	<h2>${pageTitle}</h2>
 
 	<div class="information-block-error-skin margin-25-50">
 		Aucun match n'est disponible pour ce sport. Vous pouvez cependant
-		rechercher des matchs pour un autre sport en retournant à la <a
-			href="/sport">liste des sports</a>.
+		rechercher des matchs pour un autre sport en retournant à la liste des sports.
 	</div>
 
 	<%@include file="../layout/footer.jsp"%>

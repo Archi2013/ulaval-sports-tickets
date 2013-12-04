@@ -1,11 +1,8 @@
 package ca.ulaval.glo4003.presentation.controllers;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 import junit.framework.Assert;
 
 import org.joda.time.DateTime;
@@ -18,7 +15,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.GameToAddViewModel;
 import ca.ulaval.glo4003.services.CommandGameService;
@@ -41,9 +37,6 @@ public class AddGameControllerTest {
 	@Mock
 	private SportViewService sportService;
 
-	@Mock
-	private User currentUser;
-
 	private GameToAddViewModel gameToAddVM = new GameToAddViewModel();
 
 	@InjectMocks
@@ -62,28 +55,6 @@ public class AddGameControllerTest {
 	}
 
 	@Test
-	public void when_user_is_logged_home_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
-
-		ModelAndView mav = controller.home();
-		ModelMap modelMap = mav.getModelMap();
-
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
-	}
-
-	@Test
-	public void when_user_isnt_logged_home_should_add_connectedUser_at_false() {
-		when(currentUser.isLogged()).thenReturn(false);
-
-		ModelAndView mav = controller.home();
-		ModelMap modelMap = mav.getModelMap();
-
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
-	}
-
-	@Test
 	public void game_returns_the_form_to_add_a_game() {
 		ModelAndView mav = controller.game();
 
@@ -96,28 +67,6 @@ public class AddGameControllerTest {
 		ModelMap modelMap = model.getModelMap();
 
 		Assert.assertTrue(modelMap.containsAttribute("sportsVM"));
-	}
-
-	@Test
-	public void when_user_is_logged_game_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
-
-		ModelAndView mav = controller.game();
-		ModelMap modelMap = mav.getModelMap();
-
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
-	}
-
-	@Test
-	public void when_user_isnt_logged_game_should_add_connectedUser_at_false() {
-		when(currentUser.isLogged()).thenReturn(false);
-
-		ModelAndView mav = controller.game();
-		ModelMap modelMap = mav.getModelMap();
-
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
 	}
 
 	@Test
@@ -143,27 +92,5 @@ public class AddGameControllerTest {
 		ModelAndView mav = controller.addGame(gameToAddVM);
 
 		Assert.assertEquals("admin/game-added-data-error", mav.getViewName());
-	}
-
-	@Test
-	public void when_user_is_logged_addGame_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
-
-		ModelAndView mav = controller.addGame(gameToAddVM);
-		ModelMap modelMap = mav.getModelMap();
-
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
-	}
-
-	@Test
-	public void when_user_isnt_logged_addGame_should_add_connectedUser_at_false() {
-		when(currentUser.isLogged()).thenReturn(false);
-
-		ModelAndView mav = controller.addGame(gameToAddVM);
-		ModelMap modelMap = mav.getModelMap();
-
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
 	}
 }

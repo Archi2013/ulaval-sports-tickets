@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.constants.TicketKind;
-import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
@@ -43,14 +41,9 @@ public class AddTicketsController {
 	@Inject
 	private AdministrationViewService viewService;
 
-	@Autowired
-	private User currentUser;
-
 	@RequestMapping(value = "/billets/choisir-sport", method = RequestMethod.GET)
 	public ModelAndView tickets() {
 		ModelAndView mav = new ModelAndView("admin/addTickets-chooseSport", "command", new SelectSportViewModel());
-
-		manageUserConnection(mav);
 
 		mav.addObject("sportsVM", sportService.getSports());
 		mav.addObject("ticketKinds", TicketKind.getTicketKinds());
@@ -76,8 +69,6 @@ public class AddTicketsController {
 			mav = new ModelAndView("admin/addTickets-Seated", "command", new SeatedTicketsToAddViewModel());
 		}
 
-		manageUserConnection(mav);
-
 		mav.addObject("gameSelectionVM", viewService.getGameSelectionForSport(selectSportVM.getSport()));
 		mav.addObject("sportName", selectSportVM.getSport());
 
@@ -98,8 +89,6 @@ public class AddTicketsController {
 		}
 		mav = new ModelAndView("/admin/tickets-added");
 
-		manageUserConnection(mav);
-
 		return mav;
 	}
 
@@ -118,23 +107,6 @@ public class AddTicketsController {
 		}
 		mav = new ModelAndView("/admin/tickets-added");
 
-		manageUserConnection(mav);
-
 		return mav;
 	}
-
-	private void manageUserConnection(ModelAndView mav) {
-		Boolean connectedUser = currentUser.isLogged();
-
-		addConnectedUserToModelAndView(mav, connectedUser);
-	}
-
-	private void addConnectedUserToModelAndView(ModelAndView mav, Boolean connectedUser) {
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-		} else {
-			mav.addObject("connectedUser", false);
-		}
-	}
-
 }
