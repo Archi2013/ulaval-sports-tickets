@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
+import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.controllers.AddGameController;
 import ca.ulaval.glo4003.presentation.controllers.CartController;
 import ca.ulaval.glo4003.presentation.controllers.GameController;
@@ -122,7 +123,7 @@ public aspect ControllersLoggers {
 	pointcut SearchController_home() :
 		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SearchController.home(..));
 	
-	after() throwing(Exception exception) : SearchController_home(){
+	after() throwing(UserDoesntHaveSavedPreferences exception) : SearchController_home(){
 		SearchControllerLogger.info("l'usager ne possède pas de préférences");
 		exception.printStackTrace();
 	}

@@ -59,7 +59,7 @@ public class SearchController {
 		if (currentUser.isLogged()) {
 			try{
 			ticketSearchVM = userPreferencesService.getUserPreferencesForUser(currentUser);
-			}catch (UserDoesntHaveSavedPreferences e){
+			} catch (UserDoesntHaveSavedPreferences e){
 			}
 		}
 		

@@ -11,7 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class DateTimeWrapperTest {
 	public static final String A_FORMAT = "d MMMM yyyy à HH'h'mm z";
-	public static final String A_DATE = "2 December 1998 à 22h30 EST";
+	public static final String A_DATE = "2 décembre 1998 à 22h30 EST";
 
 	private DateTime dateTime;
 
