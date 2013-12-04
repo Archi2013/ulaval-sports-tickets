@@ -10,10 +10,25 @@
     </layout>
   </appender>
 
+<appender name="FILE" class="org.apache.log4j.FileAppender">
+   <param name="file" value="./ventesTickets.txt"/>
+   <param name="immediateFlush" value="true"/>
+   <param name="threshold" value="debug"/>
+   <param name="append" value="true"/>
+   <layout class="org.apache.log4j.PatternLayout">
+      <param name="conversionPattern" value="%m%n"/>
+   </layout>
+</appender>
+
   <!-- Application Loggers -->
   <logger name="ca.ulaval.glo4003">
     <level value="info" />
   </logger>
+
+    <logger name="TransactionLogger">
+    <level value="info" />
+    <appender-ref ref="FILE"/>
+  </logger> 
 
   <!-- 3rdparty Loggers -->
   <logger name="org.springframework.core">
