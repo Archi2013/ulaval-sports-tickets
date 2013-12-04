@@ -7,7 +7,7 @@
 		<div style="text-align: center;">
 			<input type="submit"
 				class="standard-button-rounded-border orange-button"
-				value="Se connecter" />
+				value="${formButtonName}" />
 		</div>
 	</div>
 </div>

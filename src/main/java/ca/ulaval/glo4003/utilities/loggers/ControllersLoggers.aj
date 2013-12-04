@@ -72,6 +72,18 @@ public aspect ControllersLoggers {
 		exception.printStackTrace();
 	}
 	
+	before() : SessionController_submitSignIn(){
+		SessionControllerLogger.info("Soumission des informations de connexion");
+	}
+	
+	pointcut SessionController_logoutUser() :
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SessionController.logoutUser(..));
+	
+	
+	after() : SessionController_logoutUser(){
+		SessionControllerLogger.info("Usager déconnecté");
+	}
+	
 	pointcut SessionController_registerUser() :
 		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SessionController.registerUser(..));
 	

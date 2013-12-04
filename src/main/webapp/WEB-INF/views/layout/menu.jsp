@@ -20,13 +20,13 @@
 	<c:choose>
 		<c:when test="${currentUser.isLogged()}">
 			<div class="menu-element">
-				<a href="/session/logout"><spring:message
+				<a href="/usager/deconnexion"><spring:message
 						code="label.main-menu.logout" /> ◀</a>
 			</div>
 		</c:when>
 		<c:otherwise>
 			<div class="menu-element">
-				<a href="/session/signin"><spring:message
+				<a href="/usager/connexion"><spring:message
 						code="label.main-menu.login" /> ▷</a>
 			</div>
 		</c:otherwise>

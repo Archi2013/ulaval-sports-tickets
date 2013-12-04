@@ -21,7 +21,7 @@ import ca.ulaval.glo4003.services.UserService;
 
 
 @Controller
-@RequestMapping(value = "/session", method = RequestMethod.GET)
+@RequestMapping(value = "/usager", method = RequestMethod.GET)
 @SessionAttributes({ "currentUser" })
 public class SessionController {
 	
@@ -31,61 +31,45 @@ public class SessionController {
 	@Autowired
 	private User currentUser;
 	
-	@RequestMapping(value = "/signin", method = RequestMethod.GET)
+	@RequestMapping(value = "/connexion", method = RequestMethod.GET)
 	public ModelAndView signIn() {
 		
 		ModelAndView mav = new ModelAndView("session/logged");
-
-		mav.addObject("user", currentUser);
 		
-		Boolean connectedUser = currentUser.isLogged();
-		
-		manageUserConnection(mav);
-		
-		if (!connectedUser) {
+		if (!currentUser.isLogged()) {
 			mav.setViewName("session/signin");
 		}
 		return mav;
 	}
 	
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	@RequestMapping(value = "/inscription", method = RequestMethod.GET)
 	public ModelAndView signUp() {
 		ModelAndView mav = new ModelAndView("session/logged");
 		
-		mav.addObject("user", currentUser);
-		
-		Boolean connectedUser = currentUser.isLogged();
-		
-		manageUserConnection(mav);
-		
-		if (!connectedUser) {
+		if (!currentUser.isLogged()) {
 			mav.setViewName("session/signup");
 		}
 		return mav;
 	}
 	
-	@RequestMapping(value = "/auth", method = RequestMethod.POST)
+	@RequestMapping(value = "/authentification", method = RequestMethod.POST)
 	public ModelAndView submitSignIn(Model model, @RequestParam String usernameParam, @RequestParam String passwordParam){
 		ModelAndView mav = new ModelAndView("session/success");
 		
 		try {
 			UserViewModel userViewModel = userService.signIn(usernameParam, passwordParam);
 			mav.addObject("user", userViewModel); 
-			mav.addObject("connectedUser", true);
 			model.addAttribute("currentUser", currentUser);
 	        return mav;
 		} catch (UserDoesntExistException | UsernameAndPasswordDoesntMatchException e) {
-			mav.addObject("connectedUser", false);
 			mav.setViewName("session/retry");
 			return mav;
 		}
 	}
 	
-	@RequestMapping(value="/save",method = RequestMethod.POST)    
+	@RequestMapping(value="/enregistrer",method = RequestMethod.POST)    
     public ModelAndView registerUser(Model model, @RequestParam String usernameParam, @RequestParam String passwordParam) { 
 		ModelAndView mav = new ModelAndView("session/signin");
-		
-		manageUserConnection(mav);
 		
 		try {
 			userService.signUp(usernameParam, passwordParam);
@@ -96,45 +80,23 @@ public class SessionController {
 		} 
     } 
 	
-	@RequestMapping(value="/logout",method = RequestMethod.GET)    
+	@RequestMapping(value="/deconnexion",method = RequestMethod.GET)    
     public ModelAndView logoutUser(SessionStatus sessionStatus) {
 		userService.logOutCurrentUser(); 
 		sessionStatus.setComplete();
 		
 		ModelAndView mav = new ModelAndView("session/logout");
-		
-		manageUserConnection(mav);
 
         return mav;  
     } 
 	
-	@RequestMapping(value="/current",method = RequestMethod.GET)
+	@RequestMapping(value="/courrant",method = RequestMethod.GET)
 	public ModelAndView showCurrentUser(){
 		ModelAndView mav = new ModelAndView("session/success");
-		
-		Boolean connectedUser = currentUser.isLogged();
-		
-		manageUserConnection(mav);
-		
-		if (!connectedUser) {
+
+		if (!currentUser.isLogged()) {
 			mav.setViewName("session/logout");
 		}
-		mav.addObject("user", currentUser); 
 		return mav;
-	}
-	
-	private void addConnectedUserToModelAndView(ModelAndView mav,
-			Boolean connectedUser) {
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-		} else {
-			mav.addObject("connectedUser", false);
-		}
-	}
-	
-	private void manageUserConnection(ModelAndView mav) {
-		Boolean connectedUser = currentUser.isLogged();
-
-		addConnectedUserToModelAndView(mav, connectedUser);
 	}
 }

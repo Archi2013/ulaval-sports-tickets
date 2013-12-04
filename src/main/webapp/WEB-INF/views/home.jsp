@@ -13,9 +13,9 @@
 	<%@include file="layout/header.jsp"%>
 	<%@include file="layout/menu.jsp"%>
 
-	<c:if test="${fn:length(user.username) > 0}">
+	<c:if test="${currentUser.isLogged()}">
 		<h2>
-			Bienvenue : <span class="normal">${user.username}</span>
+			Bienvenue : <span class="normal">${currentUser.username}</span>
 		</h2>
 	</c:if>
 

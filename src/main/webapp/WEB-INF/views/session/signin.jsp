@@ -14,12 +14,13 @@
 
 	<h2>${pageTitle}</h2>
 
-	<form action="/session/auth" method="post">
+    <c:set var="formButtonName" value="Se connecter" />
+	<form action="/usager/authentification" method="post">
 		<%@ include file="../session/authForm.jsp"%>
 	</form>
 	<div class="text-align-center margin-25">
 		<p class="">Vous n'avez pas encore de compte ?</p>
-		<a href="/session/signup"
+		<a href="/usager/inscription"
 			class="standard-button-round orange-button margin-25">S'inscrire
 			!</a>
 	</div>

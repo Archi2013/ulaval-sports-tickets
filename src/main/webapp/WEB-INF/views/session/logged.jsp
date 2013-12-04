@@ -12,14 +12,12 @@
 	<%@include file="../layout/header.jsp"%>
 	<%@include file="../layout/menu.jsp"%>
 
-	<h2>${pageTitle}
-		<span class="normal">${user.username} !</span>
+	<h2>${pageTitle} <span class="normal">${currentUser.username} !</span>
 	</h2>
 
 	<div class="information-block-error-skin margin-25-50">
 		Vous ne pouvez pas vous connecter et/ou vous enregistrer si vous êtes
 		déjà connecté dans le système. Vous devez vous déconnecté auparavant.
-		Pour le faire, <a href="/session/logout">cliquez ici</a>..
 	</div>
 
 	<%@include file="../layout/footer.jsp"%>

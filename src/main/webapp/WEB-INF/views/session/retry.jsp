@@ -14,7 +14,8 @@
 
 	<h2>${pageTitle}</h2>
 
-	<form action="/session/auth" method="post">
+    <c:set var="formButtonName" value="Se connecter" />
+	<form action="/usager/authentification" method="post">
 		<div class="information-block-error-skin margin-25-50">Mauvaise
 			combinaison de nom d'utilisateur et mot de passe.</div>
 		<%@ include file="../session/authForm.jsp"%>

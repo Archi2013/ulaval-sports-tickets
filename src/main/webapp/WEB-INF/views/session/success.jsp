@@ -13,7 +13,7 @@
 	<%@include file="../layout/menu.jsp"%>
 
 	<h2>${pageTitle},
-		<span class="normal">${user.username}</span>
+		<span class="normal">${currentUser.username}</span>
 	</h2>
 
 	<%@include file="../layout/footer.jsp"%>

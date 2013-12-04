@@ -17,7 +17,6 @@ import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.users.UserAlreadyExistException;
 import ca.ulaval.glo4003.domain.users.UserDoesntExistException;
 import ca.ulaval.glo4003.domain.users.UsernameAndPasswordDoesntMatchException;
-import ca.ulaval.glo4003.presentation.controllers.SessionController;
 import ca.ulaval.glo4003.presentation.viewmodels.UserViewModel;
 import ca.ulaval.glo4003.services.UserService;
 
@@ -63,38 +62,6 @@ public class SessionControllerTest {
 	}
 	
 	@Test
-	public void signIn_should_add_the_currentUser_to_model() {
-
-		ModelAndView mav = controller.signIn();
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("user"));
-		assertSame(currentUser, modelMap.get("user"));
-	}
-	
-	@Test
-	public void when_user_is_logged_signIn_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
-		
-		ModelAndView mav = controller.signIn();
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
-	}
-	
-	@Test
-	public void when_user_isnt_logged_signIn_should_add_connectedUser_at_false() {
-		when(currentUser.isLogged()).thenReturn(false);
-		
-		ModelAndView mav = controller.signIn();
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
-	}
-	
-	@Test
 	public void signUp_should_return_logged_when_currentUser_is_logged() {
 		when(currentUser.isLogged()).thenReturn(true);
 		
@@ -110,38 +77,6 @@ public class SessionControllerTest {
 		ModelAndView mav = controller.signUp();
 		
 		assertEquals("session/signup", mav.getViewName());
-	}
-	
-	@Test
-	public void signUp_should_add_the_currentUser_to_model() {
-
-		ModelAndView mav = controller.signUp();
-		ModelMap modelMap = mav.getModelMap();
-
-		assertTrue(modelMap.containsAttribute("user"));
-		assertSame(currentUser, modelMap.get("user"));
-	}
-	
-	@Test
-	public void when_user_is_logged_signUp_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
-		
-		ModelAndView mav = controller.signUp();
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
-	}
-	
-	@Test
-	public void when_user_isnt_logged_signUp_should_add_connectedUser_at_false() {
-		when(currentUser.isLogged()).thenReturn(false);
-		
-		ModelAndView mav = controller.signUp();
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
 	}
 	
 	@Test
@@ -191,36 +126,11 @@ public class SessionControllerTest {
 	}
 	
 	@Test
-	public void submitSignIn_should_add_connectedUser_at_true() {
-		ModelAndView mav = controller.submitSignIn(model, VALID_USER,VALID_PASSWORD);
-		ModelMap modelMap = mav.getModelMap();
+	public void submitSignIn_should_add_currentUser_to_model_as_attribute_for_session() throws UserDoesntExistException,
+	UsernameAndPasswordDoesntMatchException {
+		controller.submitSignIn(model, VALID_USER,VALID_PASSWORD);
 		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Test
-	public void submitSignIn_should_add_connectedUser_at_false_when_user_dont_exists() throws UserDoesntExistException, UsernameAndPasswordDoesntMatchException {
-		when(userService.signIn(INVALID_USER, INVALID_PASSWORD)).thenThrow(UserDoesntExistException.class);
-		
-		ModelAndView mav = controller.submitSignIn(model, INVALID_USER, INVALID_PASSWORD);
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Test
-	public void submitSignIn_should_add_connectedUser_at_false_when_user_exists_and_credentials_dont_match() throws UserDoesntExistException, UsernameAndPasswordDoesntMatchException {
-		when(userService.signIn(VALID_USER, INVALID_PASSWORD)).thenThrow(UsernameAndPasswordDoesntMatchException.class);
-		
-		ModelAndView mav = controller.submitSignIn(model, VALID_USER, INVALID_PASSWORD);
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
+		verify(model).addAttribute("currentUser", currentUser);
 	}
 	
 	@Test
@@ -247,17 +157,6 @@ public class SessionControllerTest {
 	}
 	
 	@Test
-	public void when_user_is_logged_registerUser_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
-		
-		ModelAndView mav = controller.registerUser(model, VALID_USER,VALID_PASSWORD);
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
-	}
-	
-	@Test
 	public void logoutUser_should_return_logout_when_success() throws UserDoesntExistException,
 	UsernameAndPasswordDoesntMatchException {
 		ModelAndView mav = controller.logoutUser(sessionStatus);
@@ -271,28 +170,6 @@ public class SessionControllerTest {
 		controller.logoutUser(sessionStatus);
 
 		verify(userService).logOutCurrentUser();
-	}
-	
-	@Test
-	public void when_user_is_logged_logoutUser_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
-		
-		ModelAndView mav = controller.logoutUser(sessionStatus);
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
-	}
-	
-	@Test
-	public void when_user_isnt_logged_logoutUser_should_add_connectedUser_at_false() {
-		when(currentUser.isLogged()).thenReturn(false);
-		
-		ModelAndView mav = controller.logoutUser(sessionStatus);
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
 	}
 	
 	@Test
@@ -311,38 +188,5 @@ public class SessionControllerTest {
 		ModelAndView mav = controller.showCurrentUser();
 		
 		assertEquals("session/logout", mav.getViewName());
-	}
-	
-	@Test
-	public void showCurrentUser_should_add_the_currentUser_to_model() {
-
-		ModelAndView mav = controller.showCurrentUser();
-
-		ModelMap modelMap = mav.getModelMap();
-
-		assertTrue(modelMap.containsAttribute("user"));
-		assertSame(currentUser, modelMap.get("user"));
-	}
-	
-	@Test
-	public void when_user_is_logged_showCurrentUser_should_add_connectedUser_at_true() {
-		when(currentUser.isLogged()).thenReturn(true);
-		
-		ModelAndView mav = controller.showCurrentUser();
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertTrue((Boolean) modelMap.get("connectedUser"));
-	}
-	
-	@Test
-	public void when_user_isnt_logged_showCurrentUser_should_add_connectedUser_at_false() {
-		when(currentUser.isLogged()).thenReturn(false);
-		
-		ModelAndView mav = controller.showCurrentUser();
-		ModelMap modelMap = mav.getModelMap();
-		
-		assertTrue(modelMap.containsAttribute("connectedUser"));
-		assertFalse((Boolean) modelMap.get("connectedUser"));
 	}
 }
