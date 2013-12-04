@@ -10,7 +10,6 @@ public abstract class Ticket implements Persistable<TicketDto> {
 	protected double price;
 	protected boolean available;
 
-
 	public Ticket(TicketAssignationState assignationState, double price, boolean available) {
 		this.assignationState = assignationState;
 		this.price = price;
@@ -41,11 +40,6 @@ public abstract class Ticket implements Persistable<TicketDto> {
 
 	public void makeAvailable() {
 		this.available = true;
-	}
-
-	// Tests only
-	void setAssignationState(TicketAssignationState assignationState) {
-		this.assignationState = assignationState;
 	}
 
 	TicketAssignationState getAssignationState() {
