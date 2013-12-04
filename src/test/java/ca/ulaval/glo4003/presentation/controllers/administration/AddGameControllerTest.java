@@ -50,36 +50,6 @@ public class AddGameControllerTest {
 	public void setUp() {
 		gameToAddVM.setDate(AN_INPUT_DATE);
 	}
-
-	@Test
-	public void home_returns_the_home_administration_view() {
-		when(currentUser.isAdmin()).thenReturn(true);
-		when(currentUser.isLogged()).thenReturn(true);
-		
-		ModelAndView mav = controller.home(currentUser);
-
-		Assert.assertEquals("admin/home", mav.getViewName());
-	}
-	
-	@Test
-	public void home_returns_the_home_administration_view_when_not_logged() {
-		when(currentUser.isAdmin()).thenReturn(false);
-		when(currentUser.isLogged()).thenReturn(false);
-		
-		ModelAndView mav = controller.home(currentUser);
-
-		assertTrue(! mav.getViewName().equals("admin/home"));
-	}
-	
-	@Test
-	public void home_returns_the_home_administration_view_when_not_admin() {
-		when(currentUser.isAdmin()).thenReturn(false);
-		when(currentUser.isLogged()).thenReturn(true);
-		
-		ModelAndView mav = controller.home(currentUser);
-
-		assertTrue(! mav.getViewName().equals("admin/home"));
-	}
 	
 	@Test
 	public void game_returns_the_form_to_add_a_game() {
