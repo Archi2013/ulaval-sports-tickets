@@ -213,7 +213,7 @@ public class CartServiceTest {
 	}
 	
 	@Test
-	public void makeTicketsUnavailableToOtherPeople_should_make_tickets_in_cart_unavailable() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException {
+	public void makeTicketsUnavailableToOtherPeople_should_make_tickets_in_cart_unavailable() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, NoTicketsInCartException {
 		Set<SectionForCart> sections = new HashSet<>();
 		
 		when(currentCart.getSections()).thenReturn(sections);
@@ -224,7 +224,7 @@ public class CartServiceTest {
 	}
 	
 	@Test(expected=CartException.class)
-	public void when_GameDoesntExistException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException {
+	public void when_GameDoesntExistException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, NoTicketsInCartException {
 		Set<SectionForCart> sections = new HashSet<>();
 		
 		when(currentCart.getSections()).thenReturn(sections);
@@ -234,7 +234,7 @@ public class CartServiceTest {
 	}
 	
 	@Test(expected=CartException.class)
-	public void when_TicketDoesntExistException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException {
+	public void when_TicketDoesntExistException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, NoTicketsInCartException {
 		Set<SectionForCart> sections = new HashSet<>();
 		
 		when(currentCart.getSections()).thenReturn(sections);
@@ -244,7 +244,7 @@ public class CartServiceTest {
 	}
 	
 	@Test(expected=CartException.class)
-	public void when_SportDoesntExistException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException {
+	public void when_SportDoesntExistException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, NoTicketsInCartException {
 		Set<SectionForCart> sections = new HashSet<>();
 		
 		when(currentCart.getSections()).thenReturn(sections);
@@ -254,7 +254,7 @@ public class CartServiceTest {
 	}
 	
 	@Test(expected=CartException.class)
-	public void when_GameAlreadyExistException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException {
+	public void when_GameAlreadyExistException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, NoTicketsInCartException {
 		Set<SectionForCart> sections = new HashSet<>();
 		
 		when(currentCart.getSections()).thenReturn(sections);
@@ -264,11 +264,18 @@ public class CartServiceTest {
 	}
 	
 	@Test(expected=CartException.class)
-	public void when_TicketAlreadyExistsException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException {
+	public void when_TicketAlreadyExistsException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, NoTicketsInCartException {
 		Set<SectionForCart> sections = new HashSet<>();
 		
 		when(currentCart.getSections()).thenReturn(sections);
 		doThrow(new TicketAlreadyExistsException()).when(ticketService).makeTicketsUnavailable(sections);
+		
+		cartService.makeTicketsUnavailableToOtherPeople();
+	}
+	
+	@Test(expected=CartException.class)
+	public void when_NoTicketsInCartException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, NoTicketsInCartException {
+		when(currentCart.getSections()).thenThrow(new NoTicketsInCartException());
 		
 		cartService.makeTicketsUnavailableToOtherPeople();
 	}
@@ -283,7 +290,7 @@ public class CartServiceTest {
 	}
 	
 	@Test
-	public void getSectionsInCart_should_return_the_sections_in_cart() {
+	public void getSectionsInCart_should_return_the_sections_in_cart() throws NoTicketsInCartException {
 		Set<SectionForCart> sections = new HashSet<>();
 		
 		when(currentCart.getSections()).thenReturn(sections);

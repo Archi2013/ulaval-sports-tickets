@@ -92,7 +92,7 @@ public class CartService {
 	public void makeTicketsUnavailableToOtherPeople() {
 		try {
 			ticketService.makeTicketsUnavailable(currentCart.getSections());
-		} catch (GameDoesntExistException | TicketDoesntExistException | GameAlreadyExistException | TicketAlreadyExistsException | SportDoesntExistException e) {
+		} catch (GameDoesntExistException | TicketDoesntExistException | GameAlreadyExistException | TicketAlreadyExistsException | SportDoesntExistException | NoTicketsInCartException e) {
 			throw new CartException();
 		}
 	}
@@ -101,7 +101,7 @@ public class CartService {
 		return currentCart.getCumulativePrice();
 	}
 
-	public Set<SectionForCart> getSectionsInCart() {
+	public Set<SectionForCart> getSectionsInCart() throws NoTicketsInCartException {
 		return currentCart.getSections();
 	}
 

@@ -23,7 +23,11 @@ public class Cart {
 		return (sections.size() != 0) ? true : false;
 	}
 
-	public Set<SectionForCart> getSections() {
+	public Set<SectionForCart> getSections() throws NoTicketsInCartException {
+		if (!containTickets()) {
+			throw new NoTicketsInCartException();
+		}
+		
 		return sections;
 	}
 
