@@ -10,18 +10,18 @@ import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.cart.SectionForCart;
 import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.SectionForPaymentViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.SectionForCartViewModel;
 import ca.ulaval.glo4003.utilities.Calculator;
 
 @Component
 public class PayableItemsViewModelFactory {
 	
 	@Inject
-	SectionForPaymentViewModelFactory sectionForPaymentViewModelFactory;
+	SectionForCartViewModelFactory sectionForPaymentViewModelFactory;
 
 	public PayableItemsViewModel createViewModel(
 			Set<SectionForCart> sectionFCs, Double cumulativePrice) {
-		List<SectionForPaymentViewModel> sectionForPaymentVMs = new ArrayList<>();
+		List<SectionForCartViewModel> sectionForPaymentVMs = new ArrayList<>();
 		for (SectionForCart sectionFC : sectionFCs) {
 			sectionForPaymentVMs.add(sectionForPaymentViewModelFactory.createViewModel(sectionFC));
 		}

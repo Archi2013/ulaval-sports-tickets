@@ -10,18 +10,18 @@ public class SectionForCartFactory {
 
 	public SectionForCart createSectionForGeneralTickets(String sportName,
 			DateTime gameDate, String sectionName, String opponents,
-			String location, Integer numberOfTicketsToBuy, double price) {
+			String location, Integer numberOfTicketsToBuy, double unitPrice) {
 		return new SectionForCart(sportName, gameDate, sectionName,
 				opponents, location,
-				numberOfTicketsToBuy, price);
+				numberOfTicketsToBuy, unitPrice);
 	}
 
 	public SectionForCart createSectionForWithSeatTickets(String sportName,
 			DateTime gameDate, String sectionName, String opponents,
-			String location, Set<String> selectedSeats, double price) {
+			String location, Set<String> selectedSeats, double unitPrice) {
 		return new SectionForCart(sportName, gameDate, sectionName,
 				opponents, location,
-				selectedSeats, price);
+				selectedSeats, unitPrice);
 	}
 
 }

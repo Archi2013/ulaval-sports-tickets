@@ -31,7 +31,7 @@
 		<form:input path="location" />
 		<br>
 		<form:label path="date">Date de la rencontre(aaaa-mm-jj hh:mm) : </form:label>
-		<form:input path="date" type="date" value="2014-01-01 13:00" />
+		<form:input path="date" type="datetime" value="2014-01-01 13:00" />
 
 		<input type="submit" value="Ajouter"
 			class="standard-button-rounded-border orange-button" />

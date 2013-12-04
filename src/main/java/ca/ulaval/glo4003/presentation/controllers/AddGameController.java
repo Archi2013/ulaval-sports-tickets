@@ -2,7 +2,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
@@ -36,14 +34,9 @@ public class AddGameController {
 	@Inject
 	CommandTicketService ticketService;
 
-	@Autowired
-	private User currentUser;
-
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("admin/home");
-
-		manageUserConnection(mav);
 
 		return mav;
 	}
@@ -51,8 +44,6 @@ public class AddGameController {
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
 	public ModelAndView game() {
 		ModelAndView mav = new ModelAndView("admin/game", "command", new GameToAddViewModel());
-
-		manageUserConnection(mav);
 
 		mav.addObject("sportsVM", sportService.getSports());
 
@@ -62,8 +53,6 @@ public class AddGameController {
 	@RequestMapping(value = "/ajout-match", method = RequestMethod.POST)
 	public ModelAndView addGame(@ModelAttribute("SpringWeb") GameToAddViewModel gameToAddVM) {
 		ModelAndView mav = new ModelAndView("admin/game-added");
-
-		manageUserConnection(mav);
 
 		mav.addObject("game", gameToAddVM);
 
@@ -77,19 +66,5 @@ public class AddGameController {
 		}
 
 		return mav;
-	}
-
-	private void addConnectedUserToModelAndView(ModelAndView mav, Boolean connectedUser) {
-		if (connectedUser) {
-			mav.addObject("connectedUser", true);
-		} else {
-			mav.addObject("connectedUser", false);
-		}
-	}
-
-	private void manageUserConnection(ModelAndView mav) {
-		Boolean connectedUser = currentUser.isLogged();
-
-		addConnectedUserToModelAndView(mav, connectedUser);
 	}
 }

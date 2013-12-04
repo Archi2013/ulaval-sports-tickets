@@ -47,10 +47,11 @@ public class SimpleNode {
 		throw new NoSuchAttributeException();
 	}
 	
-	public void setNodeValue(String nodeName, String nodeValue) {
-		if (subNodes.containsKey(nodeName)) {
-			subNodes.put(nodeName, nodeValue);
+	public void setNodeValue(String nodeName, String nodeValue) throws NoSuchAttributeException {
+		if (!subNodes.containsKey(nodeName)) {
+			throw new NoSuchAttributeException();
 		}
+		subNodes.put(nodeName, nodeValue);
 	}
 
 	public Node toNode(Document document) {
@@ -69,15 +70,8 @@ public class SimpleNode {
 			node.appendChild(sub);
 		}
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof SimpleNode) {
-			SimpleNode s = (SimpleNode)obj;
-			if (s.name == null && this.name == null) {
-				return true;
-			}
-		}
-		return super.equals(obj);
+	
+	public boolean isNull() {
+		return this.name == null;
 	}
 }

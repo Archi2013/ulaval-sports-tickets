@@ -13,10 +13,10 @@ import ca.ulaval.glo4003.domain.cart.SectionForCart;
 import ca.ulaval.glo4003.domain.cart.SectionForCartFactory;
 import ca.ulaval.glo4003.domain.game.GameDao;
 import ca.ulaval.glo4003.domain.game.GameDto;
-import ca.ulaval.glo4003.domain.sections.ISectionRepository;
 import ca.ulaval.glo4003.domain.sections.Section;
 import ca.ulaval.glo4003.domain.sections.SectionDao;
 import ca.ulaval.glo4003.domain.sections.SectionDto;
+import ca.ulaval.glo4003.domain.sections.SectionRepository;
 import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
@@ -38,7 +38,7 @@ public class CartService {
 	private SectionDao sectionDao;
 	
 	@Inject
-	private ISectionRepository sectionRepository;
+	private SectionRepository sectionRepository;
 	
 	@Inject
 	private CommandTicketService ticketService;
@@ -92,20 +92,16 @@ public class CartService {
 	public void makeTicketsUnavailableToOtherPeople() {
 		try {
 			ticketService.makeTicketsUnavailable(currentCart.getSections());
-		} catch (GameDoesntExistException | TicketDoesntExistException | GameAlreadyExistException | TicketAlreadyExistsException | SportDoesntExistException e) {
+		} catch (GameDoesntExistException | TicketDoesntExistException | GameAlreadyExistException | TicketAlreadyExistsException | SportDoesntExistException | NoTicketsInCartException e) {
 			throw new CartException();
 		}
 	}
 	
 	public Double getCumulativePrice() throws NoTicketsInCartException {
-		if (currentCart.containTickets()) {
-			return currentCart.getCumulativePrice();
-		} else {
-			throw new NoTicketsInCartException();
-		}
+		return currentCart.getCumulativePrice();
 	}
 
-	public Set<SectionForCart> getSectionsInCart() {
+	public Set<SectionForCart> getSectionsInCart() throws NoTicketsInCartException {
 		return currentCart.getSections();
 	}
 

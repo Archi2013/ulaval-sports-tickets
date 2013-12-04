@@ -17,7 +17,8 @@
 	<div class="information-block-error-skin margin-25-50">Le nom
 		d'utilisateur est déjà pris !</div>
 
-	<form action="/session/save" method="post">
+    <c:set var="formButtonName" value="S'inscrire" />
+	<form action="/usager/enregistrer" method="post">
 		<%@ include file="../session/authForm.jsp"%>
 	</form>
 

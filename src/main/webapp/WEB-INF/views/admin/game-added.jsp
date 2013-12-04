@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<c:set var="pageTitle" value="Match ajouté" />
+<c:set var="pageTitle" value="Ajout de match" />
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,6 +14,8 @@
 	<%@include file="../layout/menu.jsp"%>
 
 	<h2>${pageTitle}</h2>
+	
+	<div class="information-block-succes-skin margin-25-50">Le match suivant a été ajouté dans le système.</div>
 
 	<div class="vertical-normal-list margin-25">
 		<ul>

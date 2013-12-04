@@ -106,11 +106,9 @@ public class SimpleNodeTest {
 	}
 	
 	@Test
-	public void testEquals() throws Exception {
-		Assert.assertEquals(new SimpleNode(null), emptyNode);
-		Assert.assertEquals(someNode, someNode);
-		Assert.assertNotSame(someNode, createdNode);
-		Assert.assertNotSame(someNode, new Object());
+	public void testIsNull() throws Exception {
+		Assert.assertTrue(emptyNode.isNull());
+		Assert.assertFalse(someNode.isNull());
 	}
 	
 	private SimpleNode createBasicNode() throws Exception {

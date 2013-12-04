@@ -14,7 +14,9 @@
 
 
 	<h2>${pageTitle}</h2>
-	<form action="/session/save" method="post">
+	
+	<c:set var="formButtonName" value="S'inscrire" />
+	<form action="/usager/enregistrer" method="post">
 		<%@ include file="../session/authForm.jsp"%>
 	</form>
 
