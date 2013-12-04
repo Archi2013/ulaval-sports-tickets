@@ -1,5 +1,6 @@
-package ca.ulaval.glo4003.domain.repositories;
+package ca.ulaval.glo4003.domain.sports;
 
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -16,12 +17,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.game.Game;
 import ca.ulaval.glo4003.domain.game.IGameRepository;
-import ca.ulaval.glo4003.domain.sports.PersistableSport;
-import ca.ulaval.glo4003.domain.sports.Sport;
-import ca.ulaval.glo4003.domain.sports.SportDao;
-import ca.ulaval.glo4003.domain.sports.SportDto;
-import ca.ulaval.glo4003.domain.sports.SportFactory;
-import ca.ulaval.glo4003.domain.sports.SportRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportRepositoryTest {
@@ -85,5 +80,14 @@ public class SportRepositoryTest {
 		repository.commit();
 
 		verify(sportDao).add(sportDto);
+	}
+
+	@Test
+	public void after_cache_is_cleared_nothing_is_sent_to_dao_during_commit() throws Exception {
+		repository.get(PARAMETER_SPORT);
+		repository.clearCache();
+		repository.commit();
+
+		verify(sportDao, never()).add(sportDto);
 	}
 }
