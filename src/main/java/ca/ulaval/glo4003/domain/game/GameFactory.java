@@ -15,13 +15,6 @@ public class GameFactory implements IGameFactory {
 		return instantiateGame(new GameDto(opponents, null, null, location), new ArrayList<Ticket>());
 	}
 
-	// @Override
-	// public PersistableGame instantiateGame(String opponents, DateTime
-	// gameDate, String location, List<Ticket> tickets) {
-	// TODO Auto-generated method stub
-	// return null;
-	// }
-
 	@Override
 	public PersistableGame instantiateGame(GameDto data, List<Ticket> tickets) {
 		return new PersistableGame(data.getOpponents(), data.getLocation(), data.getNextTicketNumber(),

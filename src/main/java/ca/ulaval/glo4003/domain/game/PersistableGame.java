@@ -59,11 +59,6 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 		}
 	}
 
-	@Override
-	public void removeTicket(Ticket ticket) {
-		tickets.remove(ticket);
-	}
-
 	private boolean alreadyInTicketList(Ticket ticketToAdd) {
 		for (Ticket ticket : tickets) {
 			if (ticket.isSame(ticketToAdd)) {

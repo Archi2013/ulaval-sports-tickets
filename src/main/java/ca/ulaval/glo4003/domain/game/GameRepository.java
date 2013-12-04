@@ -37,11 +37,6 @@ public class GameRepository implements IGameRepository {
 		numberOfCallsToRepository++;
 		System.out.println("Le repository a ete appele: " + numberOfCallsToRepository);
 		GameDto gameDto = gameDao.get(sport, date);
-		System.out.println("Repository: location: " + gameDto.getLocation());
-		System.out.println("Repository: nextTicketNumber: " + gameDto.getNextTicketNumber());
-		System.out.println("Repository: opponents: " + gameDto.getOpponents());
-		System.out.println("Repository: sportName" + gameDto.getSportName());
-		System.out.println("Repository: gameDate" + gameDto.getGameDate().toString());
 		List<Ticket> tickets = getTicketsForGame(sport, date);
 		PersistableGame game = gameFactory.instantiateGame(gameDto, tickets);
 
@@ -51,7 +46,7 @@ public class GameRepository implements IGameRepository {
 	}
 
 	@Override
-	public List<Game> getAll(String sportName) throws SportDoesntExistException {
+	public List<Game> getAll(String sportName) throws SportDoesntExistException, GameDoesntExistException {
 		numberOfCallsToRepository++;
 		System.out.println("Le repository a ete appele: " + numberOfCallsToRepository);
 		List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
@@ -67,13 +62,9 @@ public class GameRepository implements IGameRepository {
 		return gameList;
 	}
 
-	private List<Ticket> getTicketsForGame(String sport, DateTime date) {
+	private List<Ticket> getTicketsForGame(String sport, DateTime date) throws GameDoesntExistException {
 		List<Ticket> tickets;
-		try {
-			tickets = ticketRepository.getAll(sport, date);
-		} catch (GameDoesntExistException e) {
-			tickets = new ArrayList<>();
-		}
+		tickets = ticketRepository.getAll(sport, date);
 		return tickets;
 	}
 
