@@ -145,7 +145,7 @@ public class XmlDatabaseTest {
 		database.remove(CHEMISE_XPATH);
 		
 		SimpleNode result = database.extractNode(CHEMISE_XPATH);
-		Assert.assertEquals(new SimpleNode(null), result);
+		Assert.assertTrue(result.isNull());
 	}
 	
 	@Test

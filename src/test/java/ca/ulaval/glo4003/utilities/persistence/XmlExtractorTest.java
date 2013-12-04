@@ -166,7 +166,7 @@ public class XmlExtractorTest {
 		extractor.removeParentNode(CHEMISE_XPATH);
 		
 		SimpleNode result = extractor.extractNode(CHEMISE_XPATH);
-		Assert.assertEquals(new SimpleNode(null), result);
+		Assert.assertTrue(result.isNull());
 	}
 	
 	@Test
