@@ -12,6 +12,4 @@ public interface Game {
 
 	void addTicket(Ticket tickets);
 
-	void removeTicket(Ticket ticket);
-
 }

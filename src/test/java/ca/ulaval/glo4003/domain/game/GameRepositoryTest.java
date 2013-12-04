@@ -1,6 +1,9 @@
 package ca.ulaval.glo4003.domain.game;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +83,8 @@ public class GameRepositoryTest {
 	}
 
 	@Test
-	public void if_one_game_is_scheduled_getGamesScheduledForSport_return_one_game() throws SportDoesntExistException {
+	public void if_one_game_is_scheduled_getAll_return_one_game() throws SportDoesntExistException,
+			GameDoesntExistException {
 		when(gameDaoMock.getGamesForSport(A_SPORT)).thenReturn(listWithOneGameDto);
 
 		List<Game> gamesReturned = gameRepository.getAll(A_SPORT);
@@ -90,8 +94,8 @@ public class GameRepositoryTest {
 	}
 
 	@Test
-	public void if_two_games_are_scheduled_getGamesScheduledForSport_return_two_games()
-			throws SportDoesntExistException {
+	public void if_two_games_are_scheduled_getAll_return_two_games() throws SportDoesntExistException,
+			GameDoesntExistException {
 		when(gameDaoMock.getGamesForSport(A_SPORT)).thenReturn(listWithTwoGameDtos);
 
 		List<Game> gamesReturned = gameRepository.getAll(A_SPORT);
@@ -102,14 +106,14 @@ public class GameRepositoryTest {
 	}
 
 	@Test
-	public void getGame_returns_the_game_with_correct_sport_name_and_date() throws GameDoesntExistException {
+	public void get_returns_the_game_with_correct_sport_name_and_date() throws GameDoesntExistException {
 		Game gameReturned = gameRepository.get(A_SPORT, A_DATE);
 
 		Assert.assertSame(existingGameMock1, gameReturned);
 	}
 
 	@Test
-	public void game_returned_by_getGame_is_committed_correctly() throws Exception {
+	public void game_returned_by_get_is_committed_correctly() throws Exception {
 		gameRepository.get(A_SPORT, A_DATE);
 
 		gameRepository.commit();
@@ -119,7 +123,7 @@ public class GameRepositoryTest {
 	}
 
 	@Test
-	public void instantiateNewGame_return_game_instantiated_by_factory() {
+	public void create_return_game_instantiated_by_factory() {
 		when(gameFactoryMock.instantiateGame(AN_OPPONENT, A_LOCATION)).thenReturn(existingGameMock1);
 
 		Game gameReturned = gameRepository.create(AN_OPPONENT, A_LOCATION);
@@ -183,6 +187,18 @@ public class GameRepositoryTest {
 		gameRepository.commit();
 
 		verify(ticketRepository).commit();
+	}
+
+	@Test
+	public void clearCache_purge_repository_lists() throws Exception {
+		when(gameDaoMock.getGamesForSport(A_SPORT)).thenReturn(listWithTwoGameDtos);
+
+		gameRepository.getAll(A_SPORT);
+		gameRepository.clearCache();
+		gameRepository.commit();
+
+		verify(gameDaoMock, never()).update(gameDto1);
+		verify(gameDaoMock, never()).update(gameDto2);
 	}
 
 	private void setUpListsOfDtos() {

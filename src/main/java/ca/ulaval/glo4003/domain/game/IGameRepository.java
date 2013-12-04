@@ -10,7 +10,7 @@ import ca.ulaval.glo4003.utilities.repositories.Repository;
 
 public interface IGameRepository extends Repository {
 
-	List<Game> getAll(String sportName) throws SportDoesntExistException;
+	List<Game> getAll(String sportName) throws SportDoesntExistException, GameDoesntExistException;
 
 	Game get(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
