@@ -4,12 +4,12 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.users.XmlUserPreferencesDao;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
+import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
 
 @Service
 public class UserPreferencesService {

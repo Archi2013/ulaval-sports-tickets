@@ -5,7 +5,6 @@ import org.joda.time.DateTime;
 public class UnassignedTicketState implements TicketAssignationState {
 
 	public UnassignedTicketState() {
-		System.out.println("UnassignedTicketState: initiation");
 	}
 
 	@Override

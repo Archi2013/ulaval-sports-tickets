@@ -18,7 +18,6 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 
 	public PersistableGame(String opponents, String location, long nextTicketNumber,
 			GameScheduleState assignationState, List<Ticket> tickets) {
-		System.out.println("PersistableGame: instantiation avec nextTicketNumber: " + nextTicketNumber);
 		this.opponents = opponents;
 		this.location = location;
 		this.assignationState = assignationState;
@@ -28,7 +27,6 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 
 	@Override
 	public GameDto saveDataInDTO() {
-		System.out.println("PersistableGame: Debut de la sauvegarde");
 		GameDto dto = new GameDto(opponents, null, null, location);
 		assignationState.saveTheScheduleInThisDto(dto);
 		return dto;
@@ -50,9 +48,6 @@ public class PersistableGame implements Game, Persistable<GameDto> {
 	@Override
 	public void addTicket(Ticket ticketToAdd) {
 		if (!alreadyInTicketList(ticketToAdd) && ticketToAdd.isAssignable()) {
-			System.out.println("PersistableGame: le ticket est ajoute avec le numero: " + nextTicketNumber);
-			System.out.println("PersistatbleGame: l'assignation state est de type: "
-					+ assignationState.getClass().getName());
 			assignationState.assignThisTicketToSchedule(ticketToAdd, nextTicketNumber);
 			nextTicketNumber++;
 			tickets.add(ticketToAdd);

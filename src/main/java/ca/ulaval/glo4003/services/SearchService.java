@@ -6,9 +6,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import ca.ulaval.glo4003.domain.search.SectionForSearchDao;
-import ca.ulaval.glo4003.domain.search.SectionForSearchDto;
-import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.utilities.search.SectionForSearchDao;
+import ca.ulaval.glo4003.utilities.search.SectionForSearchDto;
+import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
 
 @Service
 public class SearchService {

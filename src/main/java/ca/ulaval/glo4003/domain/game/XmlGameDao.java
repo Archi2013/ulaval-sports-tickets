@@ -100,7 +100,6 @@ public class XmlGameDao implements GameDao {
 		String xPath = getGameXPathForSportNameAndGameDate(sportName, gameDate);
 		try {
 			long toReturn = database.getMaxValue(xPath, "id") + 1;
-			System.out.println("XmlGameDao: Calcul reussi du nextTicketNumber: " + toReturn);
 			return toReturn;
 		} catch (XPathExpressionException e) {
 			return 0;
@@ -152,11 +151,11 @@ public class XmlGameDao implements GameDao {
 			throw new XmlIntegrityException();
 		}
 	}
-	
+
 	private String getGameXPathForSportNameAndGameDate(String sportName, DateTime gameDate) {
 		return String.format(GAME_XPATH_SPORT_NAME_GAMEDATE, sportName, gameDate.toString(DATE_PATTERN));
 	}
-	
+
 	private SimpleNode getNodeFromXPath(String xPath) throws GameDoesntExistException {
 		try {
 			SimpleNode node = database.extractNode(xPath);

@@ -13,10 +13,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.search.SectionForSearchDao;
-import ca.ulaval.glo4003.domain.search.SectionForSearchDto;
-import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.services.SearchService;
+import ca.ulaval.glo4003.utilities.search.SectionForSearchDao;
+import ca.ulaval.glo4003.utilities.search.SectionForSearchDto;
+import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchServiceTest {

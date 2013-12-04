@@ -16,13 +16,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
-import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.users.UserPreferencesDto;
 import ca.ulaval.glo4003.domain.users.XmlUserPreferencesDao;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
+import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserPreferencesServiceTest {

@@ -17,8 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
-import ca.ulaval.glo4003.domain.search.SectionForSearchDto;
-import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
@@ -27,6 +25,8 @@ import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenc
 import ca.ulaval.glo4003.services.SearchService;
 import ca.ulaval.glo4003.services.UserPreferencesService;
 import ca.ulaval.glo4003.utilities.Constants;
+import ca.ulaval.glo4003.utilities.search.SectionForSearchDto;
+import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchControllerTest {
