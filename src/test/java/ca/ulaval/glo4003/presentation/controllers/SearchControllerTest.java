@@ -17,9 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
-import ca.ulaval.glo4003.domain.search.SectionForSearchDto;
-import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.domain.users.User;
+import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionForSearchViewModelFactory;
@@ -27,9 +26,13 @@ import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenc
 import ca.ulaval.glo4003.services.SearchService;
 import ca.ulaval.glo4003.services.UserPreferencesService;
 import ca.ulaval.glo4003.utilities.Constants;
+import ca.ulaval.glo4003.utilities.search.SectionForSearchDto;
+import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchControllerTest {
+
+	private static final String SEARCH_LIST_SUBVIEW = "search/list";
 
 	private static final String SEARCH_HOME_PAGE = "search/home";
 	
@@ -74,6 +77,26 @@ public class SearchControllerTest {
 		ModelAndView mav = controller.home();
 
 		assertEquals(SEARCH_HOME_PAGE, mav.getViewName());
+	}
+	
+	@Test
+	public void home_should_add_the_currency_to_the_page() {
+		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
+		List<String> selectedSports = new ArrayList<>();
+		List<TicketKind> ticketKinds = new ArrayList<>();
+		ticketSearchVM.selectedSports = selectedSports;
+		ticketSearchVM.selectedTicketKinds = ticketKinds;
+		ticketSearchVM.setLocalGameOnly(true);
+		ticketSearchVM.setDisplayedPeriod(DisplayedPeriod.ALL);
+		
+		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
+		when(currentUser.isLogged()).thenReturn(false);
+		
+		ModelAndView mav = controller.home();
+		ModelMap modelMap = mav.getModelMap();
+
+		assertTrue(modelMap.containsAttribute("currency"));
+		assertSame(Constants.CURRENCY, modelMap.get("currency"));
 	}
 	
 	@Test
@@ -123,6 +146,29 @@ public class SearchControllerTest {
 	}
 	
 	@Test
+	public void when_currentUser_isLogged_home_should_add_a_ticketSearchViewModel_from_userPreferencesService() throws UserDoesntHaveSavedPreferences {
+		TicketSearchPreferenceDto ticketSPDto = mock(TicketSearchPreferenceDto.class);
+		TicketSearchViewModel ticketSearchVM = mock(TicketSearchViewModel.class);
+		List<SectionForSearchDto> sectionDtos = new ArrayList<>();
+		List<SectionForSearchViewModel> sectionVMs = new ArrayList<>();
+		List<String> selectedSports = new ArrayList<>();
+		List<TicketKind> ticketKinds = new ArrayList<>();
+		ticketSearchVM.selectedSports = selectedSports;
+		ticketSearchVM.selectedTicketKinds = ticketKinds;
+		ticketSearchVM.setLocalGameOnly(true);
+		ticketSearchVM.setDisplayedPeriod(DisplayedPeriod.ALL);
+		
+		when(currentUser.isLogged()).thenReturn(true);
+		when(userPreferencesService.getUserPreferencesForUser(currentUser)).thenReturn(ticketSearchVM);
+		
+		ModelAndView mav = controller.home();
+		ModelMap modelMap = mav.getModelMap();
+
+		assertTrue(modelMap.containsAttribute("ticketSearchForm"));
+		assertSame(ticketSearchVM, modelMap.get("ticketSearchForm"));
+	}
+	
+	@Test
 	public void savePreferences_should_set_preferencesSaved_to_true() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
 		List<String> selectedSports = new ArrayList<>();
@@ -145,11 +191,30 @@ public class SearchControllerTest {
 	}
 	
 	@Test
+	public void savePreferences_should_return_the_good_search_home_page() {
+		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
+		List<String> selectedSports = new ArrayList<>();
+		List<TicketKind> ticketKinds = new ArrayList<>();
+		ticketSearchVM.selectedSports = selectedSports;
+		ticketSearchVM.selectedTicketKinds = ticketKinds;
+		ticketSearchVM.setLocalGameOnly(true);
+		ticketSearchVM.setDisplayedPeriod(DisplayedPeriod.ALL);
+		
+		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
+		when(currentUser.isLogged()).thenReturn(false);
+
+		
+		ModelAndView mav = controller.savePreferences(ticketSearchVM);
+
+		assertEquals(SEARCH_HOME_PAGE, mav.getViewName());
+	}
+	
+	@Test
 	public void getList_should_return_the_good_subview() {
 		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
 		
 		ModelAndView mav = controller.getList(ticketSearchVM);
 
-		assertEquals("search/list", mav.getViewName());
+		assertEquals(SEARCH_LIST_SUBVIEW, mav.getViewName());
 	}
 }

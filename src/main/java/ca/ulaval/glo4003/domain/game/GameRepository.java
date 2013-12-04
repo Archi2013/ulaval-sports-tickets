@@ -30,12 +30,8 @@ public class GameRepository implements IGameRepository {
 	private List<Persistable<GameDto>> existingActiveGames = new ArrayList<>();
 	private List<Persistable<GameDto>> newActiveGames = new ArrayList<>();
 
-	int numberOfCallsToRepository = 0;
-
 	@Override
 	public Game get(String sport, DateTime date) throws GameDoesntExistException {
-		numberOfCallsToRepository++;
-		System.out.println("Le repository a ete appele: " + numberOfCallsToRepository);
 		GameDto gameDto = gameDao.get(sport, date);
 		List<Ticket> tickets = getTicketsForGame(sport, date);
 		PersistableGame game = gameFactory.instantiateGame(gameDto, tickets);
@@ -47,8 +43,6 @@ public class GameRepository implements IGameRepository {
 
 	@Override
 	public List<Game> getAll(String sportName) throws SportDoesntExistException, GameDoesntExistException {
-		numberOfCallsToRepository++;
-		System.out.println("Le repository a ete appele: " + numberOfCallsToRepository);
 		List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
 		List<PersistableGame> games = new ArrayList<>();
 		for (GameDto dto : gameDtos) {

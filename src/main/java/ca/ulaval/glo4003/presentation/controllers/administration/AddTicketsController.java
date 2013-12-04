@@ -1,5 +1,3 @@
-package ca.ulaval.glo4003.presentation.controllers.administration;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -50,8 +48,8 @@ public class AddTicketsController {
 	}
 
 	@RequestMapping(value = "/billets", method = RequestMethod.POST)
-	public ModelAndView getAddTicketForm(@ModelAttribute("currentUser")  User currentUser, @ModelAttribute("SpringWeb") SelectSportViewModel selectSportVM,
-			Model model) throws SportDoesntExistException, GameDoesntExistException {
+	public ModelAndView getAddTicketForm(@ModelAttribute("currentUser")  User currentUser, @ModelAttribute("SpringWeb") SelectSportViewModel selectSportVM, Model model)
+			throws SportDoesntExistException, GameDoesntExistException {
 
 		ModelAndView mav;
 
@@ -71,7 +69,6 @@ public class AddTicketsController {
 	public ModelAndView addTickets_general(@ModelAttribute("currentUser")  User currentUser, @ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel viewModel,
 			Model model) throws SportDoesntExistException, GameDoesntExistException, NoSportForUrlException {
 		ModelAndView mav;
-		System.out.println("Date Retournee par la vue: " + viewModel.getGameDate().toString());
 		try {
 			ticketService.addGeneralTickets(viewModel.getSportName(), viewModel.getGameDate().getDateTime(),
 					viewModel.getNumberOfTickets(), Double.parseDouble(viewModel.getPrice()));

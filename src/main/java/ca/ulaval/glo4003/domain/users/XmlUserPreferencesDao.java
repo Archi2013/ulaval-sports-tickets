@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.utilities.persistence.SimpleNode;
 import ca.ulaval.glo4003.utilities.persistence.XmlDatabase;
+import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
 
 @Component
 public class XmlUserPreferencesDao implements UserPreferencesDao {

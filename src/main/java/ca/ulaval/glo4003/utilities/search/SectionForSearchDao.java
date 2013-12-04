@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.search;
+package ca.ulaval.glo4003.utilities.search;
 
 import java.util.List;
 

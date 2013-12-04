@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
-import ca.ulaval.glo4003.domain.search.TicketSearchPreferenceDto;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.utilities.Constants;
+import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
 
 import com.google.common.base.Function;
 

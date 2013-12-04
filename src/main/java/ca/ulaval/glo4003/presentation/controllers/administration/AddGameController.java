@@ -35,7 +35,6 @@ public class AddGameController {
 	@Inject
 	CommandTicketService ticketService;
 
-
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
 	public ModelAndView game(@ModelAttribute("currentUser")  User currentUser) {
 		ModelAndView mav = new ModelAndView("admin/game", "command", new GameToAddViewModel());
@@ -56,7 +55,6 @@ public class AddGameController {
 					gameToAddVM.getDate().getDateTime());
 		} catch (SportDoesntExistException | GameDoesntExistException | GameAlreadyExistException
 				| NoSportForUrlException | TicketAlreadyExistsException | TicketDoesntExistException e) {
-			e.printStackTrace();
 			return new ModelAndView("admin/game-added-data-error");
 		}
 
