@@ -15,26 +15,26 @@
 		<a href="/sports"><spring:message code="label.main-menu.sports" /></a>
 	</div>
 	<div class="menu-element">
-		<a href="/recherche"><spring:message code="label.main-menu.search" /></a>
+		<a href="/recherche"><span class="icon-search"></span> <spring:message code="label.main-menu.search" /></a>
 	</div>
 	<c:choose>
 		<c:when test="${currentUser.isLogged()}">
 			<div class="menu-element">
-				<a href="/usager/deconnexion"><spring:message
-						code="label.main-menu.logout" /> ◀</a>
+				<a href="/usager/deconnexion"><span class="icon-logout"></span> <spring:message
+						code="label.main-menu.logout" /></a>
 			</div>
 		</c:when>
 		<c:otherwise>
 			<div class="menu-element">
-				<a href="/usager/connexion"><spring:message
-						code="label.main-menu.login" /> ▷</a>
+				<a href="/usager/connexion"><span class="icon-login"></span> <spring:message
+						code="label.main-menu.login" /></a>
 			</div>
 		</c:otherwise>
 	</c:choose>
 	<c:choose>
         <c:when test="${currentUser.isLogged()}">
             <div class="menu-element">
-                <a href="/panier"><spring:message code="label.main-menu.cart" /> ⊻</a>
+                <a href="/panier"><span class="icon-cart"></span> </span><spring:message code="label.main-menu.cart" /></a>
             </div>
         </c:when>
     </c:choose>
