@@ -1,6 +1,7 @@
 package ca.ulaval.glo4003.presentation.controllers.administration;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,7 +37,7 @@ public class AddGameController {
 	CommandTicketService ticketService;
 
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
-	public ModelAndView game(@ModelAttribute("currentUser")  User currentUser) {
+	public ModelAndView game(HttpSession session) {
 		ModelAndView mav = new ModelAndView("admin/game", "command", new GameToAddViewModel());
 
 		mav.addObject("sportsVM", sportService.getSports());
@@ -45,7 +46,7 @@ public class AddGameController {
 	}
 
 	@RequestMapping(value = "/ajout-match", method = RequestMethod.POST)
-	public ModelAndView addGame(@ModelAttribute("currentUser")  User currentUser, @ModelAttribute("SpringWeb") GameToAddViewModel gameToAddVM) {
+	public ModelAndView addGame(HttpSession session, @ModelAttribute("SpringWeb") GameToAddViewModel gameToAddVM) {
 		ModelAndView mav = new ModelAndView("admin/game-added");
 
 		mav.addObject("game", gameToAddVM);

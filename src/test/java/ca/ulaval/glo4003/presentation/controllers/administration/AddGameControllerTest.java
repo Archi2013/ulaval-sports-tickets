@@ -3,6 +3,9 @@ package ca.ulaval.glo4003.presentation.controllers.administration;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
+
+import javax.servlet.http.HttpSession;
+
 import junit.framework.Assert;
 
 import org.joda.time.DateTime;
@@ -40,6 +43,9 @@ public class AddGameControllerTest {
 	
 	@Mock
 	private User currentUser;
+	
+	@Mock
+	private HttpSession session;
 
 	private GameToAddViewModel gameToAddVM = new GameToAddViewModel();
 
@@ -49,6 +55,7 @@ public class AddGameControllerTest {
 	@Before
 	public void setUp() {
 		gameToAddVM.setDate(AN_INPUT_DATE);
+		when(session.getAttribute("currentUser")).thenReturn(currentUser);
 	}
 	
 	@Test
@@ -56,7 +63,7 @@ public class AddGameControllerTest {
 		when(currentUser.isAdmin()).thenReturn(true);
 		when(currentUser.isLogged()).thenReturn(true);
 		
-		ModelAndView mav = controller.game(currentUser);
+		ModelAndView mav = controller.game(session);
 
 		Assert.assertEquals("admin/game", mav.getViewName());
 	}
@@ -66,7 +73,7 @@ public class AddGameControllerTest {
 		when(currentUser.isAdmin()).thenReturn(true);
 		when(currentUser.isLogged()).thenReturn(true);
 		
-		ModelAndView model = controller.game(currentUser);
+		ModelAndView model = controller.game(session);
 		ModelMap modelMap = model.getModelMap();
 
 		Assert.assertTrue(modelMap.containsAttribute("sportsVM"));
@@ -77,7 +84,7 @@ public class AddGameControllerTest {
 		when(currentUser.isAdmin()).thenReturn(true);
 		when(currentUser.isLogged()).thenReturn(true);
 		
-		ModelAndView mav = controller.addGame(currentUser, gameToAddVM);
+		ModelAndView mav = controller.addGame(session, gameToAddVM);
 		ModelMap modelMap = mav.getModelMap();
 
 		assertTrue(modelMap.containsAttribute("game"));
@@ -89,7 +96,7 @@ public class AddGameControllerTest {
 		when(currentUser.isAdmin()).thenReturn(true);
 		when(currentUser.isLogged()).thenReturn(true);
 		
-		ModelAndView mav = controller.addGame(currentUser, gameToAddVM);
+		ModelAndView mav = controller.addGame(session, gameToAddVM);
 
 		Assert.assertEquals("admin/game-added", mav.getViewName());
 	}
@@ -101,7 +108,7 @@ public class AddGameControllerTest {
 		
 		doThrow(new SportDoesntExistException()).when(gameService).createNewGame(any(String.class), any(String.class),
 				any(String.class), any(DateTime.class));
-		ModelAndView mav = controller.addGame(currentUser, gameToAddVM);
+		ModelAndView mav = controller.addGame(session, gameToAddVM);
 
 		Assert.assertEquals("admin/game-added-data-error", mav.getViewName());
 	}

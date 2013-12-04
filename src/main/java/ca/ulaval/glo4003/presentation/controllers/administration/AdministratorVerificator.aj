@@ -1,5 +1,7 @@
 package ca.ulaval.glo4003.presentation.controllers.administration;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.users.User;
@@ -14,10 +16,12 @@ public aspect AdministratorVerificator {
 		
  		for(int i = 0; i < args.length; i++){
 	        Object arg = args[i];
-	        if ( arg instanceof User ) {
-	            User user = (User)arg;
+	        if ( arg instanceof HttpSession ) {  	
+	            HttpSession session = (HttpSession)arg;
 	            
-	    		if (user.isAdmin()) {
+	            User user = (User) session.getAttribute("currentUser");
+	            
+	    		if (user != null && user.isAdmin()) {
 	    			return proceed();
 	    		}
 	        }
