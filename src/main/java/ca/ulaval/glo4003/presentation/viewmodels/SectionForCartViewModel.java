@@ -1,7 +1,7 @@
 package ca.ulaval.glo4003.presentation.viewmodels;
 
 
-public class SectionForPaymentViewModel {
+public class SectionForCartViewModel {
 	public Boolean generalAdmission;
 	
 	public Integer numberOfTicketsToBuy;

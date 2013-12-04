@@ -6,13 +6,13 @@ import java.util.List;
 public class PayableItemsViewModel {
 	
 	public String cumulativePrice;
-	public List<SectionForPaymentViewModel> sections;
+	public List<SectionForCartViewModel> sections;
 	
-	public List<SectionForPaymentViewModel> getSections() {
+	public List<SectionForCartViewModel> getSections() {
 		return sections;
 	}
 
-	public void setSections(List<SectionForPaymentViewModel> sections) {
+	public void setSections(List<SectionForCartViewModel> sections) {
 		this.sections = sections;
 	}
 

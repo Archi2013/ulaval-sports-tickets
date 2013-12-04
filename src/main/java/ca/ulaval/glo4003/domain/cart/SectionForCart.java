@@ -18,7 +18,7 @@ public class SectionForCart {
 	private Boolean generalAdmission;
 	private Integer numberOfTicketsToBuy;
 	private Set<String> selectedSeats;
-	private Double price;
+	private Double unitPrice;
 	
 	public SectionForCart(String sportName, DateTime gameDate, String sectionName,
 			String opponents, String location,
@@ -32,12 +32,12 @@ public class SectionForCart {
 		this.opponents = opponents;
 		this.location = location;
 		this.sportName = sportName;
-		this.price = price;
+		this.unitPrice = price;
 	}
 	
 	public SectionForCart(String sportName, DateTime gameDate, String sectionName,
 			String opponents, String location,
-			Set<String> selectedSeats, Double price) {
+			Set<String> selectedSeats, Double unitPrice) {
 		super();
 		this.numberOfTicketsToBuy = selectedSeats.size();
 		this.selectedSeats = selectedSeats;
@@ -50,13 +50,12 @@ public class SectionForCart {
 		this.opponents = opponents;
 		this.location = location;
 		this.sportName = sportName;
-		this.price = price;
+		this.unitPrice = unitPrice;
 	}
 	
 	public void addElements(SectionForCart sectionForCart) {
-		if (getGeneralAdmission()) {
-			this.numberOfTicketsToBuy += sectionForCart.getNumberOfTicketsToBuy();
-		} else {
+		this.numberOfTicketsToBuy += sectionForCart.getNumberOfTicketsToBuy();
+		if (!getGeneralAdmission()) {
 			this.selectedSeats.addAll(sectionForCart.getSelectedSeats());
 		}
 	}
@@ -118,8 +117,8 @@ public class SectionForCart {
 		return selectedSeats;
 	}
 
-	public Double getPrice() {
-		return price;
+	public Double getUnitPrice() {
+		return unitPrice;
 	}
 
 	public Double getSubtotal() {
@@ -127,12 +126,12 @@ public class SectionForCart {
 			return Calculator
 					.calculateCumulativePriceForGeneralAdmission(
 							this.numberOfTicketsToBuy,
-							this.price);
+							this.unitPrice);
 		} else {
 			return Calculator
 					.calculateCumulativePriceForWithSeatAdmission(
 							this.selectedSeats,
-							this.price);
+							this.unitPrice);
 		}
 	}
 }
