@@ -47,7 +47,7 @@ public class AddTicketsController {
 	private User currentUser;
 
 	@RequestMapping(value = "/billets/choisir-sport", method = RequestMethod.GET)
-	public ModelAndView tickets() {
+	public ModelAndView chooseSportAndTicketType() {
 		ModelAndView mav = new ModelAndView("admin/addTickets-chooseSport", "command", new SelectSportViewModel());
 
 		manageUserConnection(mav);
@@ -59,16 +59,10 @@ public class AddTicketsController {
 	}
 
 	@RequestMapping(value = "/billets", method = RequestMethod.POST)
-	public ModelAndView addTickets_selectSport(@ModelAttribute("SpringWeb") SelectSportViewModel selectSportVM,
+	public ModelAndView getAddTicketForm(@ModelAttribute("SpringWeb") SelectSportViewModel selectSportVM,
 			Model model) throws SportDoesntExistException, GameDoesntExistException {
 
 		ModelAndView mav;
-
-		List<GameSelectionViewModel> viewModels = viewService.getGameSelectionForSport(selectSportVM.getSport());
-		System.out.println("Affichage");
-		for (GameSelectionViewModel viewModel : viewModels) {
-			System.out.println("Date du match:" + viewModel.getGameDate());
-		}
 
 		if (selectSportVM.getTypeBillet() == TicketKind.GENERAL_ADMISSION) {
 			mav = new ModelAndView("admin/addTickets-General", "command", new GeneralTicketsToAddViewModel());
