@@ -72,17 +72,15 @@ public class AddTicketsController {
 	public ModelAndView addTickets_general(HttpSession session,
 			@ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel viewModel, Model model)
 			throws SportDoesntExistException, GameDoesntExistException, NoSportForUrlException {
-		ModelAndView mav;
 		try {
 			ticketService.addGeneralTickets(viewModel.getSportName(), viewModel.getGameDate().getDateTime(),
 					viewModel.getNumberOfTickets(), Double.parseDouble(viewModel.getPrice()));
 
 		} catch (GameAlreadyExistException | TicketAlreadyExistsException | TicketDoesntExistException e) {
-			mav = new ModelAndView("/admin/tickets-added-date-error");
+			return new ModelAndView("/admin/tickets-added-date-error");
 		}
-		mav = new ModelAndView("/admin/tickets-added");
 
-		return mav;
+		return new ModelAndView("/admin/tickets-added");
 	}
 
 	@RequestMapping(value = "/ajout-billets-seated", method = RequestMethod.POST)
