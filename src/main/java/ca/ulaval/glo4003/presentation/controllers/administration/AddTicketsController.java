@@ -1,3 +1,5 @@
+package ca.ulaval.glo4003.presentation.controllers.administration;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 

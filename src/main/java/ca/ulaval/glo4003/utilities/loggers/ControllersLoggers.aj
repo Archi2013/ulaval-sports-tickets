@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.controllers.CartController;
-import ca.ulaval.glo4003.presentation.controllers.GameController;
 import ca.ulaval.glo4003.presentation.controllers.PaymentController;
 import ca.ulaval.glo4003.presentation.controllers.SearchController;
 import ca.ulaval.glo4003.presentation.controllers.SectionController;
