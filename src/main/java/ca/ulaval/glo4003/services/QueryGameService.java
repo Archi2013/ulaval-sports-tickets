@@ -30,22 +30,19 @@ public class QueryGameService {
 	@Inject
 	private GamesViewModelFactory gamesViewModelFactory;
 
-	public GamesViewModel getGamesForSport(String sportName) throws SportDoesntExistException, GameDoesntExistException {
+	public GamesViewModel getGamesForSport(String sportName)
+			throws SportDoesntExistException, GameDoesntExistException {
 		List<GameDto> games = gameDao.getGamesForSport(sportName);
 		countNumberOfTickets(games);
 		filter.applyFilterOnList(games);
 		return gamesViewModelFactory.createViewModel(sportName, games);
 	}
 
-	private void countNumberOfTickets(List<GameDto> games) throws GameDoesntExistException {
+	private void countNumberOfTickets(List<GameDto> games)
+			throws GameDoesntExistException {
 		for (GameDto game : games) {
-			try {
-				game.setNumberOfTickets(ticketDao.getAllAvailable(game.getSportName(), game.getGameDate()).size());
-			} catch (Exception e) {
-				System.out.println("SportViewService: La partie du: " + game.getGameDate() + " contre: "
-						+ game.getOpponents() + "A lance une exception");
-				game.setNumberOfTickets(0);
-			}
+			game.setNumberOfTickets(ticketDao.getAllAvailable(
+					game.getSportName(), game.getGameDate()).size());
 		}
 	}
 }

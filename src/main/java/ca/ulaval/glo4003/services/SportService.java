@@ -49,7 +49,8 @@ public class SportService {
 		return sportsViewModelFactory.createViewModel(sports);
 	}
 
-	public GamesViewModel getGamesForSport(String sportUrl) throws SportDoesntExistException, GameDoesntExistException {
+	public GamesViewModel getGamesForSport(String sportUrl)
+			throws SportDoesntExistException, GameDoesntExistException {
 		try {
 			String sportName = sportUrlMapper.getSportName(sportUrl);
 			List<GameDto> games = gameDao.getGamesForSport(sportName);
@@ -61,14 +62,11 @@ public class SportService {
 		}
 	}
 
-	private void countNumberOfTickets(List<GameDto> games) throws GameDoesntExistException {
+	private void countNumberOfTickets(List<GameDto> games)
+			throws GameDoesntExistException {
 		for (GameDto game : games) {
-			try {
-				game.setNumberOfTickets(ticketDao.getAllAvailable(game.getSportName(), game.getGameDate()).size());
-			} catch (Exception e) {
-				game.setNumberOfTickets(0);
-			}
+			game.setNumberOfTickets(ticketDao.getAllAvailable(
+					game.getSportName(), game.getGameDate()).size());
 		}
-
 	}
 }

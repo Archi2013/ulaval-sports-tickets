@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.ulaval.glo4003.domain.users.User;
+import ca.ulaval.glo4003.domain.users.UserPreferencesDoesntExistEcception;
 import ca.ulaval.glo4003.domain.users.XmlUserPreferencesDao;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
@@ -34,7 +35,7 @@ public class XmlUserPreferencesDaoTest {
 	}
 	
 	@Test
-	public void savingUserPreferencesShouldAddItToXml() throws UserDoesntHaveSavedPreferences{
+	public void savingUserPreferencesShouldAddItToXml() throws UserDoesntHaveSavedPreferences, UserPreferencesDoesntExistEcception{
 		
 		String displayedPeriod = "ALL";
 		Boolean localGameOnly = Boolean.FALSE;

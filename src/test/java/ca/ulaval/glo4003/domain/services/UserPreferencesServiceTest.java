@@ -18,6 +18,7 @@ import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.domain.users.UserPreferencesDao;
+import ca.ulaval.glo4003.domain.users.UserPreferencesDoesntExistEcception;
 import ca.ulaval.glo4003.domain.users.UserPreferencesDto;
 import ca.ulaval.glo4003.domain.users.XmlUserPreferencesDao;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
@@ -80,7 +81,7 @@ public class UserPreferencesServiceTest {
 	}
 	
 	@Test
-	public void saveUserPreference_should_create_ticketSearchPrefDto() throws UserDoesntHaveSavedPreferences {
+	public void saveUserPreference_should_create_ticketSearchPrefDto() throws UserDoesntHaveSavedPreferences, UserPreferencesDoesntExistEcception {
 		userPreferencesService.saveUserPreference(currentUser, ticketSearchViewModel);
 		verify(userPreferencesDaoMock).save(currentUser,ticketSPDto);
 	}
