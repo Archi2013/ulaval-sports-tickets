@@ -74,15 +74,14 @@ public class PaymentController {
 			paymentErrorManager.prepareErrorPageToShowNotConnectedUserMessage(mav);
 			return mav;
 		}
-		
-		mav.addObject("currency", Constants.CURRENCY);
 
 		if (result.hasErrors()) {
 			return returnModelAndViewToRetryModeOfPayment(paymentVM);
 		}
-
+		
 		try {
 			mav.addObject("cumulativePrice", getCumulativePriceFR());
+			mav.addObject("currency", Constants.CURRENCY);
 			buyTicketsInCart(paymentVM);
 		} catch (InvalidCreditCardException e) {
 			ModelAndView mavToReturn = returnModelAndViewToRetryModeOfPayment(paymentVM);

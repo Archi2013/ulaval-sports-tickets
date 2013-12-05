@@ -41,13 +41,12 @@
 	                    <td>${section.opponents}</td>
 	                    <td>${section.location}</td>
 	                    <td>${section.numberOfTicketsToBuy}</td>
+	                    <td>${section.sectionName}</td>
 	                    <c:choose>
 	                        <c:when test="${section.generalAdmission}">
-	                            <td>Générale</td>
 	                            <td>Libre</td>
 	                        </c:when>
 	                        <c:otherwise>
-	                            <td>${section.sectionName}</td>
 	                            <td>${section.selectedSeats}</td>
 	                        </c:otherwise>
 	                    </c:choose>
