@@ -218,15 +218,8 @@ public class PaymentControllerTest {
 	
 	@Test
 	public void validate_should_buy_tickets_in_cart() throws InvalidCreditCardException, NoTicketsInCartException {
-		PaymentViewModel paymentVM = new PaymentViewModel();
+		PaymentViewModel paymentVM = getInitializedPaymentViewModel();
 		BindingResult result = mock(BindingResult.class);
-		
-		paymentVM.setCreditCardType(CreditCardType.MISTERCARD);
-		paymentVM.setCreditCardNumber(CREDIT_CARD_NUMBER);
-		paymentVM.setSecurityCode(SECURITY_CODE);
-		paymentVM.setCreditCardUserName(CREDIT_CARD_USER_NAME);
-		paymentVM.setExpirationMonth(EXPIRATION_MONTH);
-		paymentVM.setExpirationYear(EXPIRATION_YEAR);
 		
 		paymentController.validate(paymentVM, result);
 		
@@ -237,15 +230,8 @@ public class PaymentControllerTest {
 	
 	@Test
 	public void when_buyTicketsInCart_and_NoTicketsInCartException_validate_should_use_paymentErrorManager_to_return_modelAndView() throws InvalidCreditCardException, NoTicketsInCartException {
-		PaymentViewModel paymentVM = new PaymentViewModel();
+		PaymentViewModel paymentVM = getInitializedPaymentViewModel();
 		BindingResult result = mock(BindingResult.class);
-		
-		paymentVM.setCreditCardType(CreditCardType.MISTERCARD);
-		paymentVM.setCreditCardNumber(CREDIT_CARD_NUMBER);
-		paymentVM.setSecurityCode(SECURITY_CODE);
-		paymentVM.setCreditCardUserName(CREDIT_CARD_USER_NAME);
-		paymentVM.setExpirationMonth(EXPIRATION_MONTH);
-		paymentVM.setExpirationYear(EXPIRATION_YEAR);
 		
 		NoTicketsInCartException exception = new NoTicketsInCartException();
 		doThrow(exception).when(paymentService).buyTicketsInCart(CreditCardType.MISTERCARD, CREDIT_CARD_NUMBER,
@@ -259,15 +245,8 @@ public class PaymentControllerTest {
 	
 	@Test
 	public void when_InvalidCreditCardException_validate_should_return_mode_of_payment_page() throws InvalidCreditCardException, NoTicketsInCartException {
-		PaymentViewModel paymentVM = new PaymentViewModel();
+		PaymentViewModel paymentVM = getInitializedPaymentViewModel();
 		BindingResult result = mock(BindingResult.class);
-		
-		paymentVM.setCreditCardType(CreditCardType.MISTERCARD);
-		paymentVM.setCreditCardNumber(CREDIT_CARD_NUMBER);
-		paymentVM.setSecurityCode(SECURITY_CODE);
-		paymentVM.setCreditCardUserName(CREDIT_CARD_USER_NAME);
-		paymentVM.setExpirationMonth(EXPIRATION_MONTH);
-		paymentVM.setExpirationYear(EXPIRATION_YEAR);
 
 		doThrow(new InvalidCreditCardException()).when(paymentService).buyTicketsInCart(CreditCardType.MISTERCARD, CREDIT_CARD_NUMBER,
 				SECURITY_CODE, CREDIT_CARD_USER_NAME,
@@ -280,15 +259,8 @@ public class PaymentControllerTest {
 	
 	@Test
 	public void when_InvalidCreditCardException_validate_should_add_an_error_message_to_modelAndView() throws InvalidCreditCardException, NoTicketsInCartException {
-		PaymentViewModel paymentVM = new PaymentViewModel();
+		PaymentViewModel paymentVM = getInitializedPaymentViewModel();
 		BindingResult result = mock(BindingResult.class);
-		
-		paymentVM.setCreditCardType(CreditCardType.MISTERCARD);
-		paymentVM.setCreditCardNumber(CREDIT_CARD_NUMBER);
-		paymentVM.setSecurityCode(SECURITY_CODE);
-		paymentVM.setCreditCardUserName(CREDIT_CARD_USER_NAME);
-		paymentVM.setExpirationMonth(EXPIRATION_MONTH);
-		paymentVM.setExpirationYear(EXPIRATION_YEAR);
 
 		doThrow(new InvalidCreditCardException()).when(paymentService).buyTicketsInCart(CreditCardType.MISTERCARD, CREDIT_CARD_NUMBER,
 				SECURITY_CODE, CREDIT_CARD_USER_NAME,
@@ -297,5 +269,16 @@ public class PaymentControllerTest {
 		ModelAndView mav = paymentController.validate(paymentVM, result);
 		
 		verify(paymentErrorManager).addErrorMessageInvalidCreditCardToModel(mav);
+	}
+	
+	private PaymentViewModel getInitializedPaymentViewModel() {
+		PaymentViewModel paymentVM = new PaymentViewModel();
+		paymentVM.setCreditCardType(CreditCardType.MISTERCARD);
+		paymentVM.setCreditCardNumber(CREDIT_CARD_NUMBER);
+		paymentVM.setSecurityCode(SECURITY_CODE);
+		paymentVM.setCreditCardUserName(CREDIT_CARD_USER_NAME);
+		paymentVM.setExpirationMonth(EXPIRATION_MONTH);
+		paymentVM.setExpirationYear(EXPIRATION_YEAR);
+		return paymentVM;
 	}
 }

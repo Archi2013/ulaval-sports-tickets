@@ -1,10 +1,17 @@
 package ca.ulaval.glo4003.services;
 
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -14,6 +21,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.domain.cart.SectionForCart;
 import ca.ulaval.glo4003.domain.game.Game;
 import ca.ulaval.glo4003.domain.game.IGameRepository;
 import ca.ulaval.glo4003.domain.tickets.ITicketRepository;
@@ -124,5 +132,62 @@ public class CommandTicketServiceTest {
 		ticketService.addSeatedTicket(A_SPORT, A_DATE, A_SECTION, A_SEAT, A_PRICE);
 
 		verify(gameRepository).commit();
+	}
+
+	@Test
+	public void testMakeTicketsUnavailable() throws Exception {
+		Set<SectionForCart> sections = new HashSet<SectionForCart>();
+		ticketService.makeTicketsUnavailable(sections);
+		
+		verify(ticketRepository).commit();
+	}
+	
+	@Test
+	public void testMakeTicketsUnavailable_withOneSectionForCart() throws Exception {
+		Set<SectionForCart> sections = new HashSet<SectionForCart>();
+		sections.add(mock(SectionForCart.class));
+		
+		ticketService.makeTicketsUnavailable(sections);
+		
+		verify(ticketRepository).commit();
+	}
+	
+	@Test
+	public void testMakeTicketsUnavailable_withTicketsForGeneralAdmission() throws Exception {
+		SectionForCart sectionWithGeneralAdmission = mock(SectionForCart.class);
+		when(sectionWithGeneralAdmission.getGeneralAdmission()).thenReturn(true);
+		
+		Set<SectionForCart> sections = new HashSet<SectionForCart>();
+		sections.add(sectionWithGeneralAdmission);
+		
+		List<Ticket> tickets = new ArrayList<Ticket>();
+		tickets.add(mock(Ticket.class));
+		when(ticketRepository.getMultipleGeneralTickets(anyString(), any(DateTime.class), anyInt())).thenReturn(tickets);
+
+		
+		ticketService.makeTicketsUnavailable(sections);
+		
+		verify(ticketRepository).commit();
+	}
+	
+	@Test
+	public void testMakeTicketsUnavailable_withTicketsSelectedSeat() throws Exception {
+		SectionForCart sectionWithSelectedSeat = mock(SectionForCart.class);
+		when(sectionWithSelectedSeat.getGeneralAdmission()).thenReturn(false);
+		
+		Set<SectionForCart> sections = new HashSet<SectionForCart>();
+		sections.add(sectionWithSelectedSeat);
+		
+		Set<String> seats = new HashSet<String>();
+		String aSeat = "aSeat";
+		seats.add(aSeat);
+		when(sectionWithSelectedSeat.getSelectedSeats()).thenReturn(seats);
+		
+		Ticket ticket = mock(Ticket.class);
+		when(ticketRepository.get(anyString(), any(DateTime.class), anyString(), anyString())).thenReturn(ticket);
+		
+		ticketService.makeTicketsUnavailable(sections);
+		
+		verify(ticketRepository).commit();
 	}
 }
