@@ -1,12 +1,6 @@
 package ca.ulaval.glo4003.services;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyListOf;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +29,6 @@ import ca.ulaval.glo4003.utilities.datafilters.GameIsInFutureFilter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportServiceTest {
-	private static final String A_URL = "Url";
 	@Mock
 	private GameIsInFutureFilter filter;
 
@@ -68,12 +61,14 @@ public class SportServiceTest {
 	public void testGetSports() throws Exception {
 		sportService.getSports();
 
-		verify(sportsViewModelFactory, atLeastOnce()).createViewModel(anyListOf(SportDto.class));
+		verify(sportsViewModelFactory, atLeastOnce()).createViewModel(
+				anyListOf(SportDto.class));
 	}
 
 	@Test(expected = SportDoesntExistException.class)
 	public void testGetSports_withSportThatDoesntExist() throws Exception {
-		when(sportUrlMapper.getSportName(anyString())).thenThrow(new NoSportForUrlException());
+		when(sportUrlMapper.getSportName(anyString())).thenThrow(
+				new NoSportForUrlException());
 
 		String sportUrl = anyString();
 		sportService.getGamesForSport(sportUrl);
@@ -85,7 +80,8 @@ public class SportServiceTest {
 
 		sportService.getGamesForSport(sportUrl);
 
-		verify(gamesViewModelFactory, atLeastOnce()).createViewModel(anyString(), anyListOf(GameDto.class));
+		verify(gamesViewModelFactory, atLeastOnce()).createViewModel(
+				anyString(), anyListOf(GameDto.class));
 	}
 
 	@Test(expected = GameDoesntExistException.class)
@@ -93,10 +89,13 @@ public class SportServiceTest {
 		List<GameDto> listWithOneElement = new ArrayList<GameDto>();
 		listWithOneElement.add(mock(GameDto.class));
 
-		when(gameDao.getGamesForSport(anyString())).thenReturn(listWithOneElement);
-		when(ticketDao.getAllAvailable(anyString(), any(DateTime.class))).thenThrow(new GameDoesntExistException());
+		when(gameDao.getGamesForSport(anyString())).thenReturn(
+				listWithOneElement);
+		when(ticketDao.getAllAvailable(anyString(), any(DateTime.class)))
+				.thenThrow(new GameDoesntExistException());
 
-		sportService.getGamesForSport(A_URL);
+		String sportUrl = anyString();
+		sportService.getGamesForSport(sportUrl);
 	}
 
 	@Test
@@ -105,12 +104,13 @@ public class SportServiceTest {
 		listWithOneElement.add(mock(GameDto.class));
 		listWithOneElement.add(mock(GameDto.class));
 
-		when(gameDao.getGamesForSport(anyString())).thenReturn(listWithOneElement);
+		when(gameDao.getGamesForSport(anyString())).thenReturn(
+				listWithOneElement);
 
 		String sportUrl = anyString();
 		sportService.getGamesForSport(sportUrl);
 
-		verify(gamesViewModelFactory, atLeastOnce()).createViewModel(anyString(), anyListOf(GameDto.class));
+		verify(gamesViewModelFactory, atLeastOnce()).createViewModel(
+				anyString(), anyListOf(GameDto.class));
 	}
-
 }

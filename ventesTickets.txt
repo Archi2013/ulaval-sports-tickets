@@ -1,0 +1,297 @@
+Thu Dec 05 15:23:51 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:25:36 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:25:36 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:25:41 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:25:41 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:26:14 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:26:14 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:26:22 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:26:22 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:26:22 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:29:23 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:29:23 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:29:23 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:30:15 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:30:15 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:30:15 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:30:30 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:30:30 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:30:30 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:30:43 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:30:43 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:30:43 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:30:43 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:30:43 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:30:52 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:30:52 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:30:52 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:30:52 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:31:00 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:31:00 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:31:00 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:33:39 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:33:39 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:33:39 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:34:48 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:34:48 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:34:48 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:35:21 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:35:21 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:35:21 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:35:33 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:35:33 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:35:33 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:42:36 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:42:36 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:42:36 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:24 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:24 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:43:24 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:29 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:29 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:43:29 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:30 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:30 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:43:30 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:32 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:32 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:43:32 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:35 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:35 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:43:35 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:40 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:40 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:43:40 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:43 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:43:43 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:43:43 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:44:17 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:44:17 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:44:39 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:44:39 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:44:39 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Ticket aSeat vendus � 0.0
+Total : 0.0
+
+Thu Dec 05 15:45:01 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:45:01 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:48:51 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:48:51 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:48:56 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:48:56 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:48:56 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Ticket aSeat vendus � 0.0
+Total : 0.0
+
+Thu Dec 05 15:49:21 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:49:21 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:49:38 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:49:38 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:52:52 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:52:52 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:53:06 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:53:06 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:53:06 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Ticket  vendus � 0.0
+Total : 0.0
+
+Thu Dec 05 15:54:44 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:54:44 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:54:44 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Ticket  vendus � 0.0
+Total : 0.0
+
+Thu Dec 05 15:54:56 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:54:56 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:54:56 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Ticket aSeat vendus � 0.0
+Total : 0.0
+
+Thu Dec 05 15:57:57 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Total : 0.0
+
+Thu Dec 05 15:57:57 EST 2013 : Vente de tickets d'admission g�n�rale pour le sport null � la date null
+0 tickets vendus � 0.0
+ Total 0.0
+Thu Dec 05 15:57:57 EST 2013 : Vente de tickets s�lectionn�s pour le sport null � la date null
+Ticket aSeat vendus � 0.0
+Total : 0.0
+
