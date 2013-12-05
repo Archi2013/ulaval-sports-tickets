@@ -19,9 +19,8 @@ public class SectionForCart {
 	private Integer numberOfTicketsToBuy;
 	private Set<String> selectedSeats;
 	private Double unitPrice;
-	
-	public SectionForCart(String sportName, DateTime gameDate, String sectionName,
-			String opponents, String location,
+
+	public SectionForCart(String sportName, DateTime gameDate, String sectionName, String opponents, String location,
 			Integer numberOfTicketsToBuy, Double price) {
 		super();
 		this.numberOfTicketsToBuy = numberOfTicketsToBuy;
@@ -34,16 +33,12 @@ public class SectionForCart {
 		this.sportName = sportName;
 		this.unitPrice = price;
 	}
-	
-	public SectionForCart(String sportName, DateTime gameDate, String sectionName,
-			String opponents, String location,
+
+	public SectionForCart(String sportName, DateTime gameDate, String sectionName, String opponents, String location,
 			Set<String> selectedSeats, Double unitPrice) {
 		super();
 		this.numberOfTicketsToBuy = selectedSeats.size();
 		this.selectedSeats = selectedSeats;
-		if (this.selectedSeats == null) {
-			this.selectedSeats = new HashSet<String>();
-		}
 		this.generalAdmission = false;
 		this.sectionName = sectionName;
 		this.gameDate = gameDate;
@@ -52,39 +47,37 @@ public class SectionForCart {
 		this.sportName = sportName;
 		this.unitPrice = unitPrice;
 	}
-	
+
 	public void addElements(SectionForCart sectionForCart) {
 		this.numberOfTicketsToBuy += sectionForCart.getNumberOfTicketsToBuy();
-		if (!getGeneralAdmission()) {
+		if (!generalAdmission) {
 			this.selectedSeats.addAll(sectionForCart.getSelectedSeats());
 		}
 	}
-	
+
 	@Override
-    public boolean equals(Object obj) {
+	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
 		}
 		if (this == obj) {
 			return true;
 		}
-		if ( !(obj instanceof SectionForCart) ) {
+		if (!(obj instanceof SectionForCart)) {
 			return false;
 		}
-        
+
 		SectionForCart other = (SectionForCart) obj;
- 
-        return new EqualsBuilder().append(this.sportName, other.sportName)
-        		.append(this.gameDate, other.gameDate)
-        		.append(this.sectionName, other.sectionName).build();
-    }
-	
+
+		return new EqualsBuilder().append(this.sportName, other.sportName).append(this.gameDate, other.gameDate)
+				.append(this.sectionName, other.sectionName).build();
+	}
+
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(this.sportName)
-				.append(this.gameDate).append(this.sectionName).toHashCode();
+		return new HashCodeBuilder().append(this.sportName).append(this.gameDate).append(this.sectionName).toHashCode();
 	}
-	
+
 	public Boolean getGeneralAdmission() {
 		return generalAdmission;
 	}
@@ -123,15 +116,9 @@ public class SectionForCart {
 
 	public Double getSubtotal() {
 		if (getGeneralAdmission()) {
-			return Calculator
-					.calculateCumulativePriceForGeneralAdmission(
-							this.numberOfTicketsToBuy,
-							this.unitPrice);
+			return Calculator.calculateCumulativePriceForGeneralAdmission(this.numberOfTicketsToBuy, this.unitPrice);
 		} else {
-			return Calculator
-					.calculateCumulativePriceForWithSeatAdmission(
-							this.selectedSeats,
-							this.unitPrice);
+			return Calculator.calculateCumulativePriceForWithSeatAdmission(this.selectedSeats, this.unitPrice);
 		}
 	}
 }

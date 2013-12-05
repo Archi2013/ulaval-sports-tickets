@@ -46,7 +46,6 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 			SimpleNode node = database.extractNode(xPath+"/userPreferences");	
 			return convertNodeToUserPreferences(node);
 		} catch (XPathExpressionException | NoSuchAttributeException e) {
-			System.out.println(e);
 			throw new UserDoesntHaveSavedPreferences();
 		}
 	}
@@ -63,17 +62,17 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 	}
 
 	@Override
-	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) {
+	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) throws UserPreferencesDoesntExistEcception  {
 		SimpleNode simpleNode = convertUserPreferencesToNode(userPreferences);
 		String xPath = String.format(USER_XPATH_ID, currentUser.getUsername());		
+
 		try {
 			if (isUserPreferencesAlreadySaved(xPath)) {
 				database.remove(xPath + "/userPreferences");
 			}
 			database.addNode(xPath, simpleNode);
 		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UserPreferencesDoesntExistEcception();
 		}
 		
 		

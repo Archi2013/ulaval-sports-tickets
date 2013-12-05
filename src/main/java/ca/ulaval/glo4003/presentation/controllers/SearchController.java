@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
 import ca.ulaval.glo4003.domain.users.User;
+import ca.ulaval.glo4003.domain.users.UserPreferencesDoesntExistEcception;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
@@ -74,11 +75,16 @@ public class SearchController {
 	
 	@RequestMapping(value="sauvegarde-preferences", method=RequestMethod.POST)
 	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
-		userPreferencesService.saveUserPreference(currentUser,ticketSearchVM);
-		ModelAndView mav = home();
-		mav.addObject("preferencesSaved", true);
 		
-		return mav;
+		try {
+			userPreferencesService.saveUserPreference(currentUser,ticketSearchVM);
+			ModelAndView mav = home();
+			mav.addObject("preferencesSaved", true);
+			return mav;
+			
+		} catch (UserPreferencesDoesntExistEcception e) {
+			return new ModelAndView("error/404");
+		}
 	}
 	
 	@RequestMapping(value="list", method=RequestMethod.POST)

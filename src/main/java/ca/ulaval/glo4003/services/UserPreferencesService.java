@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.users.User;
+import ca.ulaval.glo4003.domain.users.UserPreferencesDoesntExistEcception;
 import ca.ulaval.glo4003.domain.users.XmlUserPreferencesDao;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
@@ -29,7 +30,7 @@ public class UserPreferencesService {
 				
 	}
 	
-	public void saveUserPreference(User currentUser, TicketSearchViewModel userPreferences){
+	public void saveUserPreference(User currentUser, TicketSearchViewModel userPreferences) throws UserPreferencesDoesntExistEcception{
 		
 		TicketSearchPreferenceDto ticketSearchDto = ticketSearchFactory.createPreferenceDto(
 				userPreferences.getSelectedSports(), userPreferences.getDisplayedPeriod(),
