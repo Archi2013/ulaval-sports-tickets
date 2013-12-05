@@ -5,11 +5,12 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.domain.users.UserPreferencesDoesntExistEcception;
+import ca.ulaval.glo4003.domain.users.UserPreferencesDoesntExistException;
 import ca.ulaval.glo4003.domain.users.XmlUserPreferencesDao;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
+import ca.ulaval.glo4003.services.exceptions.UserPreferencesNotSaved;
 import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
 
 @Service
@@ -30,14 +31,18 @@ public class UserPreferencesService {
 				
 	}
 	
-	public void saveUserPreference(User currentUser, TicketSearchViewModel userPreferences) throws UserPreferencesDoesntExistEcception{
+	public void saveUserPreference(User currentUser, TicketSearchViewModel userPreferences) throws UserPreferencesNotSaved {
 		
 		TicketSearchPreferenceDto ticketSearchDto = ticketSearchFactory.createPreferenceDto(
 				userPreferences.getSelectedSports(), userPreferences.getDisplayedPeriod(),
 				userPreferences.isLocalGameOnly(), userPreferences.getSelectedTicketKinds());	
 		
-		xmlUserPreferencesDao.save(currentUser, ticketSearchDto);
-		xmlUserPreferencesDao.commit();
+		try {
+			xmlUserPreferencesDao.save(currentUser, ticketSearchDto);
+			xmlUserPreferencesDao.commit();
+		} catch (UserPreferencesDoesntExistException e) {
+			throw new UserPreferencesNotSaved();
+		}
 	}
 	
 	

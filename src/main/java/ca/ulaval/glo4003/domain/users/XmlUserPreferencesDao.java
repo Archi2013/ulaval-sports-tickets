@@ -62,7 +62,7 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 	}
 
 	@Override
-	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) throws UserPreferencesDoesntExistEcception  {
+	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) throws UserPreferencesDoesntExistException  {
 		SimpleNode simpleNode = convertUserPreferencesToNode(userPreferences);
 		String xPath = String.format(USER_XPATH_ID, currentUser.getUsername());		
 
@@ -72,7 +72,7 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 			}
 			database.addNode(xPath, simpleNode);
 		} catch (XPathExpressionException e) {
-			throw new UserPreferencesDoesntExistEcception();
+			throw new UserPreferencesDoesntExistException();
 		}
 		
 		

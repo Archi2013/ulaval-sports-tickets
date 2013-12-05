@@ -6,6 +6,8 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +21,7 @@ import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
+import ca.ulaval.glo4003.presentation.controllers.errormanagers.SearchErrorManager;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionForSearchViewModelFactory;
@@ -47,6 +50,9 @@ public class SearchControllerTest {
 	
 	@Mock
 	private User currentUser;
+	
+	@Mock
+	private SearchErrorManager searchErrorManager;
 	
 	@Mock
 	private TicketSearchPreferenceFactory ticketSearchPreferenceFactory;

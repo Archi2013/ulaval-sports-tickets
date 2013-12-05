@@ -17,6 +17,10 @@
 
 	<h2>${pageTitle}</h2>
 
+    <c:if test="${not empty errorMessage}">
+        <div class="information-block-error-skin margin-25-50">${errorMessage}</div>
+    </c:if>
+
 	<section class="search-block">
 		<c:url value="/recherche/sauvegarde-preferences" var="searchAction" />
 		<form:form id="search-form" commandName="ticketSearchForm"
