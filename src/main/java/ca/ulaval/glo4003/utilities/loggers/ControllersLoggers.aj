@@ -2,9 +2,9 @@ package ca.ulaval.glo4003.utilities.loggers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
-import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.controllers.CartController;
 import ca.ulaval.glo4003.presentation.controllers.PaymentController;
 import ca.ulaval.glo4003.presentation.controllers.SearchController;
@@ -16,6 +16,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.GameToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.GeneralTicketsToAddViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SeatedTicketsToAddViewModel;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
+
 
 public aspect ControllersLoggers {
 	
@@ -72,7 +73,7 @@ public aspect ControllersLoggers {
 	
 	
 	pointcut AdmnistrationController_addConnectedUserToModelAndView() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddGameController.addGame(..));
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.administration.AddGameController.addGame(..));
 	
 	before() : AdmnistrationController_addConnectedUserToModelAndView() {
 		GameToAddViewModel gameToAddViewModel = (GameToAddViewModel) thisJoinPoint.getArgs()[0];
@@ -87,7 +88,7 @@ public aspect ControllersLoggers {
 	}
 	
 	pointcut AdmnistrationController_addTickets_general() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddTicketsController.addTickets_general(..));
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.administration.AddTicketsController.addTickets_general(..));
 	
 	before() : AdmnistrationController_addTickets_general() {
 		GeneralTicketsToAddViewModel generalTicketsToAddViewModel = (GeneralTicketsToAddViewModel) thisJoinPoint.getArgs()[0];
@@ -103,7 +104,7 @@ public aspect ControllersLoggers {
 	}
 	
 	pointcut AdmnistrationController_addTickets_seated() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.AddTicketsController.addTickets_seated(..));
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.administration.AddTicketsController.addTickets_seated(..));
 	
 	before() : AdmnistrationController_addTickets_seated() {
 		SeatedTicketsToAddViewModel seatedTicketsToAddViewModel = (SeatedTicketsToAddViewModel) thisJoinPoint.getArgs()[0];
@@ -121,7 +122,7 @@ public aspect ControllersLoggers {
 	pointcut SearchController_home() :
 		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SearchController.home(..));
 	
-	after() throwing(UserDoesntHaveSavedPreferences exception) : SearchController_home(){
+	after() throwing(Exception exception) : SearchController_home(){
 		SearchControllerLogger.info("l'usager ne possède pas de préférences");
 		exception.printStackTrace();
 	}
