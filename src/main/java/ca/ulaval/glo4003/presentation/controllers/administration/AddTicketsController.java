@@ -1,3 +1,5 @@
+package ca.ulaval.glo4003.presentation.controllers.administration;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -48,7 +50,8 @@ public class AddTicketsController {
 	}
 
 	@RequestMapping(value = "/billets", method = RequestMethod.POST)
-	public ModelAndView getAddTicketForm(HttpSession session, @ModelAttribute("SpringWeb") SelectSportViewModel selectSportVM, Model model)
+	public ModelAndView getAddTicketForm(HttpSession session,
+			@ModelAttribute("SpringWeb") SelectSportViewModel selectSportVM, Model model)
 			throws SportDoesntExistException, GameDoesntExistException {
 
 		ModelAndView mav;
@@ -66,8 +69,9 @@ public class AddTicketsController {
 	}
 
 	@RequestMapping(value = "/ajout-billets-general", method = RequestMethod.POST)
-	public ModelAndView addTickets_general(HttpSession session, @ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel viewModel,
-			Model model) throws SportDoesntExistException, GameDoesntExistException, NoSportForUrlException {
+	public ModelAndView addTickets_general(HttpSession session,
+			@ModelAttribute("SpringWeb") GeneralTicketsToAddViewModel viewModel, Model model)
+			throws SportDoesntExistException, GameDoesntExistException, NoSportForUrlException {
 		ModelAndView mav;
 		try {
 			ticketService.addGeneralTickets(viewModel.getSportName(), viewModel.getGameDate().getDateTime(),
@@ -82,8 +86,9 @@ public class AddTicketsController {
 	}
 
 	@RequestMapping(value = "/ajout-billets-seated", method = RequestMethod.POST)
-	public ModelAndView addTickets_seated(HttpSession session, @ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM,
-			Model model) throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
+	public ModelAndView addTickets_seated(HttpSession session,
+			@ModelAttribute("SpringWeb") SeatedTicketsToAddViewModel ticketsToAddVM, Model model)
+			throws SportDoesntExistException, GameDoesntExistException, GameAlreadyExistException,
 			TicketAlreadyExistsException, TicketDoesntExistException, NoSportForUrlException {
 
 		ModelAndView mav;
