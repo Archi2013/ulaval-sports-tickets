@@ -38,7 +38,7 @@ public class UserPreferencesService {
 				userPreferences.isLocalGameOnly(), userPreferences.getSelectedTicketKinds());	
 		
 		try {
-			xmlUserPreferencesDao.save(currentUser, ticketSearchDto);
+			xmlUserPreferencesDao.save(currentUser.getUsername(), ticketSearchDto);
 			xmlUserPreferencesDao.commit();
 		} catch (UserPreferencesDoesntExistException e) {
 			throw new UserPreferencesNotSaved();

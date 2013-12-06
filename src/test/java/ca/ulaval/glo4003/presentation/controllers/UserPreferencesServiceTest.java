@@ -84,6 +84,6 @@ public class UserPreferencesServiceTest {
 	@Test
 	public void saveUserPreference_should_create_ticketSearchPrefDto() throws UserDoesntHaveSavedPreferences, UserPreferencesNotSaved, UserPreferencesDoesntExistException {
 		userPreferencesService.saveUserPreference(currentUser, ticketSearchViewModel);
-		verify(userPreferencesDaoMock).save(currentUser,ticketSPDto);
+		verify(userPreferencesDaoMock).save(USERNAME, ticketSPDto);
 	}
 }

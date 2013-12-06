@@ -11,6 +11,6 @@ public interface UserPreferencesDao {
 	
 	
 	public TicketSearchPreferenceDto get(String username) throws UserDoesntHaveSavedPreferences;
-	public void save(User username, TicketSearchPreferenceDto userPreferences) throws UserPreferencesDoesntExistException;
+	public void save(String username, TicketSearchPreferenceDto userPreferences) throws UserPreferencesDoesntExistException;
 	public void commit();
 }
