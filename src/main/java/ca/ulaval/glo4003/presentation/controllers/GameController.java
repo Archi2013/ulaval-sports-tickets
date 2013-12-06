@@ -14,7 +14,7 @@ import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.GamesViewModel;
-import ca.ulaval.glo4003.services.QueryGameService;
+import ca.ulaval.glo4003.services.GameViewService;
 
 @Controller
 @SessionAttributes({ "currentUser" })
@@ -24,7 +24,7 @@ public class GameController {
 	private static final String ERROR_404_PAGE = "error/404";
 
 	@Inject
-	private QueryGameService gameService;
+	private GameViewService gameViewService;
 
 	@Inject
 	private SportUrlMapper sportUrlMapper;
@@ -35,7 +35,7 @@ public class GameController {
 		ModelAndView mav = new ModelAndView("game/list");
 
 		try {
-			GamesViewModel games = gameService.getGamesForSport(sportUrlMapper.getSportName(sportUrl));
+			GamesViewModel games = gameViewService.getGamesForSport(sportUrlMapper.getSportName(sportUrl));
 			mav.addObject("games", games);
 
 			if (games.hasGames()) {

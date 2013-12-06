@@ -26,7 +26,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.factories.GamesViewModelFactory
 import ca.ulaval.glo4003.utilities.datafilters.GameIsInFutureFilter;
 
 @RunWith(MockitoJUnitRunner.class)
-public class QueryGameServiceTest {
+public class GameViewServiceTest {
 	@Mock
 	private GameIsInFutureFilter filter;
 
@@ -40,7 +40,7 @@ public class QueryGameServiceTest {
 	private TicketDao ticketDao;
 
 	@InjectMocks
-	private QueryGameService queryGameService;
+	private GameViewService queryGameService;
 
 	@Before
 	public void setUp() throws Exception {

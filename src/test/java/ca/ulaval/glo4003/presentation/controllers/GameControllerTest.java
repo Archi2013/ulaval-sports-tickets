@@ -19,7 +19,7 @@ import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.GamesViewModel;
-import ca.ulaval.glo4003.services.QueryGameService;
+import ca.ulaval.glo4003.services.GameViewService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameControllerTest {
@@ -30,7 +30,7 @@ public class GameControllerTest {
 	private static final DateTime GAME_DATE = DateTime.parse(GAME_DATE_STR, DateTimeFormat.forPattern("yyyyMMddHHmmz"));
 
 	@Mock
-	private QueryGameService gameService;
+	private GameViewService gameService;
 
 	@Mock
 	private SportUrlMapper sportUrlMapper;

@@ -16,7 +16,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.factories.GamesViewModelFactory
 import ca.ulaval.glo4003.utilities.datafilters.GameIsInFutureFilter;
 
 @Service
-public class QueryGameService {
+public class GameViewService {
 
 	@Inject
 	private GameIsInFutureFilter filter;
