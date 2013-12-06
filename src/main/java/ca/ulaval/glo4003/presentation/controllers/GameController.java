@@ -18,8 +18,10 @@ import ca.ulaval.glo4003.services.QueryGameService;
 
 @Controller
 @SessionAttributes({ "currentUser" })
-@RequestMapping(value = "/sport/", method = RequestMethod.GET)
+@RequestMapping(value = "/sport/{sportUrl}", method = RequestMethod.GET)
 public class GameController {
+
+	private static final String ERROR_404_PAGE = "error/404";
 
 	@Inject
 	private QueryGameService gameService;
@@ -27,7 +29,7 @@ public class GameController {
 	@Inject
 	private SportUrlMapper sportUrlMapper;
 
-	@RequestMapping(value = "/{sportUrl}/matchs", method = RequestMethod.GET)
+	@RequestMapping(value = "/matchs", method = RequestMethod.GET)
 	public ModelAndView getGamesForSport(@PathVariable String sportUrl) {
 
 		ModelAndView mav = new ModelAndView("game/list");
@@ -44,7 +46,7 @@ public class GameController {
 				return mav;
 			}
 		} catch (RuntimeException | NoSportForUrlException | SportDoesntExistException | GameDoesntExistException e) {
-			mav.setViewName("error/404");
+			mav.setViewName(ERROR_404_PAGE);
 			return mav;
 		}
 	}

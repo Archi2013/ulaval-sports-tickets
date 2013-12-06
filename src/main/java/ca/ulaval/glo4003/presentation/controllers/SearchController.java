@@ -64,9 +64,10 @@ public class SearchController {
 		TicketSearchViewModel ticketSearchVM = ticketSearchPreferenceFactory.createInitialViewModel();
 		
 		if (currentUser.isLogged()) {
-			try{
-			ticketSearchVM = userPreferencesService.getUserPreferencesForUser(currentUser);
+			try {
+				ticketSearchVM = userPreferencesService.getUserPreferencesForUser(currentUser);
 			} catch (UserDoesntHaveSavedPreferences e){
+				ticketSearchVM = ticketSearchPreferenceFactory.createInitialViewModel();
 			}
 		}
 		
@@ -83,7 +84,7 @@ public class SearchController {
 	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
 		ModelAndView mav = home();
 		try {
-			userPreferencesService.saveUserPreference(currentUser,ticketSearchVM);
+			userPreferencesService.saveUserPreference(currentUser, ticketSearchVM);
 			mav.addObject("preferencesSaved", true);
 		} catch (UserPreferencesNotSaved e) {
 			mav.addObject("preferencesSaved", false);
