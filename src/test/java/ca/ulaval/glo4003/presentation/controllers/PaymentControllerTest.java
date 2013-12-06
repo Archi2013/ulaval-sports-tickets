@@ -19,7 +19,7 @@ import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.presentation.controllers.errorhandler.PaymentErrorHandler;
 import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 import ca.ulaval.glo4003.services.CartService;
-import ca.ulaval.glo4003.services.PaymentService;
+import ca.ulaval.glo4003.services.CommandPaymentService;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;
@@ -44,7 +44,7 @@ public class PaymentControllerTest {
 	private static final String VALIDATION_SUCCES_PAGE = "payment/succes";
 	
 	@Mock
-	PaymentService paymentService;
+	CommandPaymentService paymentService;
 	
 	@Mock
 	CartService cartService;

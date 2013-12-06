@@ -6,8 +6,6 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,13 +22,11 @@ import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.controllers.errorhandler.SearchErrorHandler;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionForSearchViewModelFactory;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
-import ca.ulaval.glo4003.services.SearchService;
+import ca.ulaval.glo4003.services.SearchViewService;
 import ca.ulaval.glo4003.services.UserPreferencesService;
 import ca.ulaval.glo4003.services.exceptions.UserPreferencesNotSaved;
 import ca.ulaval.glo4003.utilities.Constants;
-import ca.ulaval.glo4003.utilities.search.SectionForSearchDto;
 import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -44,7 +40,7 @@ public class SearchControllerTest {
 	private Constants constants;
 	
 	@Mock
-	private SearchService searchService;
+	private SearchViewService searchService;
 	
 	@Mock
 	private UserPreferencesService userPreferencesService;
@@ -57,9 +53,6 @@ public class SearchControllerTest {
 	
 	@Mock
 	private TicketSearchPreferenceFactory ticketSearchPreferenceFactory;
-	
-	@Mock
-	private SectionForSearchViewModelFactory sectionForSearchViewModelFactory;
 	
 	@InjectMocks
 	private SearchController controller;
@@ -112,7 +105,6 @@ public class SearchControllerTest {
 	public void home_should_add_a_ticket_list_to_model() {
 		TicketSearchPreferenceDto ticketSPDto = mock(TicketSearchPreferenceDto.class);
 		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
-		List<SectionForSearchDto> sectionDtos = new ArrayList<>();
 		List<SectionForSearchViewModel> sectionVMs = new ArrayList<>();
 		List<String> selectedSports = new ArrayList<>();
 		List<TicketKind> ticketKinds = new ArrayList<>();
@@ -124,8 +116,7 @@ public class SearchControllerTest {
 		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
 		when(currentUser.isLogged()).thenReturn(false);
 		when(ticketSearchPreferenceFactory.createPreferenceDto(selectedSports, DisplayedPeriod.ALL, true, ticketKinds)).thenReturn(ticketSPDto);
-		when(searchService.getSections(ticketSPDto)).thenReturn(sectionDtos);
-		when(sectionForSearchViewModelFactory.createViewModels(sectionDtos)).thenReturn(sectionVMs);
+		when(searchService.getSections(ticketSPDto)).thenReturn(sectionVMs);
 		
 		ModelAndView mav = controller.home();
 		ModelMap modelMap = mav.getModelMap();

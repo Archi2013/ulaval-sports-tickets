@@ -19,9 +19,8 @@ import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
 import ca.ulaval.glo4003.presentation.controllers.errorhandler.SearchErrorHandler;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionForSearchViewModelFactory;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
-import ca.ulaval.glo4003.services.SearchService;
+import ca.ulaval.glo4003.services.SearchViewService;
 import ca.ulaval.glo4003.services.UserPreferencesService;
 import ca.ulaval.glo4003.services.exceptions.UserPreferencesNotSaved;
 import ca.ulaval.glo4003.utilities.Constants;
@@ -38,16 +37,13 @@ public class SearchController {
 	private Constants constants;
 	
 	@Inject
-	private SearchService searchService;
+	private SearchViewService searchService;
 	
 	@Inject
 	private UserPreferencesService userPreferencesService;
 
 	@Inject
 	private TicketSearchPreferenceFactory ticketSearchPreferenceFactory;
-	
-	@Inject
-	private SectionForSearchViewModelFactory sectionForSearchViewModelFactory;
 	
 	@Inject
 	private SearchErrorHandler searchErrorManager;
@@ -116,6 +112,6 @@ public class SearchController {
 		TicketSearchPreferenceDto preferenceDto = ticketSearchPreferenceFactory.createPreferenceDto(
 				ticketSearchVM.getSelectedSports(), ticketSearchVM.getDisplayedPeriod(),
 				ticketSearchVM.isLocalGameOnly(), ticketSearchVM.getSelectedTicketKinds());
-		return sectionForSearchViewModelFactory.createViewModels(searchService.getSections(preferenceDto));
+		return searchService.getSections(preferenceDto);
 	}
 }

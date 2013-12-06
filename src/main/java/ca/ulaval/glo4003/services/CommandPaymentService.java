@@ -11,7 +11,7 @@ import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 
 @Service
-public class PaymentService {
+public class CommandPaymentService {
 
 	@Inject
 	private CreditCardFactory creditCardFactory;
@@ -30,15 +30,11 @@ public class PaymentService {
 					creditCardUserName, expirationMonth,
 					expirationYear);
 			creditCard.pay(cartService.getCumulativePrice());
-			makeTicketsUnavailable();
+			cartService.makeTicketsUnavailableToOtherPeople();
 			cartService.emptyCart();
 		} else {
 			cartService.emptyCart();
 			throw new NoTicketsInCartException();
 		}
-	}
-
-	private void makeTicketsUnavailable() {
-		cartService.makeTicketsUnavailableToOtherPeople();
 	}
 }

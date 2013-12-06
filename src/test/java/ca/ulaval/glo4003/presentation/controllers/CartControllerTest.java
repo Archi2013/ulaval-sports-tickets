@@ -25,7 +25,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModelFactory;
 import ca.ulaval.glo4003.services.CartService;
-import ca.ulaval.glo4003.services.PaymentService;
+import ca.ulaval.glo4003.services.CommandPaymentService;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;

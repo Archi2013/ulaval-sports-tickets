@@ -13,19 +13,23 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.services.SearchService;
+import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionForSearchViewModelFactory;
 import ca.ulaval.glo4003.utilities.search.SectionForSearchDao;
 import ca.ulaval.glo4003.utilities.search.SectionForSearchDto;
 import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SearchServiceTest {
+public class SearchViewServiceTest {
 
 	@Mock
 	private SectionForSearchDao sectionForSearchDao;
 
+	@Mock
+	private SectionForSearchViewModelFactory sectionForSearchViewModelFactory;
+	
 	@InjectMocks
-	private SearchService service;
+	private SearchViewService service;
 
 	@Before
 	public void setUp() {
@@ -35,11 +39,13 @@ public class SearchServiceTest {
 	public void given_a_ticketSearchViewModel_getTickets_should_return_a_ticket_list() {
 		TicketSearchPreferenceDto ticketSPDto = mock(TicketSearchPreferenceDto.class);
 		List<SectionForSearchDto> sectionDtos = new ArrayList<>();
+		List<SectionForSearchViewModel> sectionForSearchVMs = new ArrayList<>();
 		
 		when(sectionForSearchDao.getSections(ticketSPDto)).thenReturn(sectionDtos);
+		when(sectionForSearchViewModelFactory.createViewModels(sectionDtos)).thenReturn(sectionForSearchVMs);
 
-		List<SectionForSearchDto> actual = service.getSections(ticketSPDto);
+		List<SectionForSearchViewModel> actual = service.getSections(ticketSPDto);
 
-		assertSame(sectionDtos, actual);
+		assertSame(sectionForSearchVMs, actual);
 	}
 }

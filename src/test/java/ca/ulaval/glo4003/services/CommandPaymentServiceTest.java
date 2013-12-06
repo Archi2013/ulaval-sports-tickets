@@ -16,11 +16,11 @@ import ca.ulaval.glo4003.domain.payment.CreditCardFactory;
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.payment.MisterCard;
 import ca.ulaval.glo4003.services.CartService;
-import ca.ulaval.glo4003.services.PaymentService;
+import ca.ulaval.glo4003.services.CommandPaymentService;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PaymentServiceTest {
+public class CommandPaymentServiceTest {
 
 	private static final double PRICE = 17.5;
 
@@ -41,7 +41,7 @@ public class PaymentServiceTest {
 	private CartService cartService;
 
 	@InjectMocks
-	private PaymentService paymentService;
+	private CommandPaymentService paymentService;
 
 	@Before
 	public void setUp() throws Exception {
