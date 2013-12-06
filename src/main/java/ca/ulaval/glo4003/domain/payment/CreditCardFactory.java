@@ -8,9 +8,15 @@ import ca.ulaval.glo4003.constants.CreditCardType;
 public class CreditCardFactory {
 
 	public CreditCard createCreditCard(CreditCardType creditCardType,
-			Long creditCardNumber, Integer securityCode,
+			String creditCardNumberString, Integer securityCode,
 			String creditCardUserName, Integer expirationMonth,
 			Integer expirationYear) throws InvalidCreditCardException {
+		Long creditCardNumber = 0L;
+		try {
+			creditCardNumber = new Long(creditCardNumberString);
+		} catch (NumberFormatException e) {
+			throw new InvalidCreditCardException();
+		}
 		if (creditCardType.equals(CreditCardType.MISTERCARD)) {
 			return new MisterCard(creditCardNumber, securityCode,
 					creditCardUserName, expirationMonth, expirationYear);

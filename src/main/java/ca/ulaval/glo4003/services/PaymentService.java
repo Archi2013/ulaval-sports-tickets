@@ -20,7 +20,7 @@ public class PaymentService {
 	private CartService cartService;
 
 	public void buyTicketsInCart(CreditCardType creditCardType,
-			Long creditCardNumber, Integer securityCode,
+			String creditCardNumber, Integer securityCode,
 			String creditCardUserName, Integer expirationMonth,
 			Integer expirationYear) throws InvalidCreditCardException,
 			NoTicketsInCartException {

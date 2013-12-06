@@ -8,7 +8,7 @@ import org.junit.Test;
 import ca.ulaval.glo4003.constants.CreditCardType;
 
 public class CreditCardFactoryTest {
-	static final Long A_CREDIT_CARD_NUMBER = new Long(14578);
+	static final String A_CREDIT_CARD_NUMBER = "14578";
 	static final Integer A_SECURITY_CODE = 1478;
 	static final String A_USER_NAME = "User";
 	static final int EXPIRATION_MONTH = 6;

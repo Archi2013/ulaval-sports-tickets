@@ -17,7 +17,7 @@ public class PaymentViewModel {
 	@NotNull
 	@Min(1000000000000L)
 	@Max(9999999999999999L) // doit être 13 ou 16 chiffres
-	private Long creditCardNumber;
+	private String creditCardNumber;
 
 	@NotNull
 	@Min(100)
@@ -45,11 +45,11 @@ public class PaymentViewModel {
 		this.creditCardType = creditCardType;
 	}
 
-	public Long getCreditCardNumber() {
+	public String getCreditCardNumber() {
 		return creditCardNumber;
 	}
 
-	public void setCreditCardNumber(Long creditCardNumber) {
+	public void setCreditCardNumber(String creditCardNumber) {
 		this.creditCardNumber = creditCardNumber;
 	}
 

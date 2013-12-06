@@ -54,5 +54,5 @@
       </password>
       <admin>false</admin>
     <userPreferences><listTicket>["GENERAL_ADMISSION","WITH_SEAT"]</listTicket><displayedPeriod>SIX_MONTH</displayedPeriod><localGameOnly>false</localGameOnly><sportsName>["Soccer féminin","Rugby féminin"]</sportsName></userPreferences></user>
-  </users>
+  <user><username>yoyo</username><admin>false</admin><password>NZLjYLIAd+vAUIDtGzw1I+cUY8Dgw6SWa1sGiBe2v2rczcBHaewg8t8/xno4/BM5</password></user></users>
 </base>

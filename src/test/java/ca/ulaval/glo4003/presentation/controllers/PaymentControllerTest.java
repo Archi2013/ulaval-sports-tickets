@@ -35,7 +35,7 @@ public class PaymentControllerTest {
 
 	private static final int SECURITY_CODE = 1234;
 
-	private static final long CREDIT_CARD_NUMBER = 12345678901234L;
+	private static final String CREDIT_CARD_NUMBER = "12345678901234";
 
 	private static final Double CUMULATIVE_PRICE = 88.87;
 

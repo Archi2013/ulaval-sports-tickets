@@ -32,7 +32,7 @@ public class PaymentServiceTest {
 
 	private static final int SECURITY_CODE = 1234;
 
-	private static final long CREDIT_CARD_NUMBER = 123456789012345L;
+	private static final String CREDIT_CARD_NUMBER = "123456789012345";
 
 	@Mock
 	private CreditCardFactory creditCardFactory;

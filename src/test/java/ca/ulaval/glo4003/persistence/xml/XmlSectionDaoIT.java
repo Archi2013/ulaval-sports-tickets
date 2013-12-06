@@ -10,6 +10,7 @@ import org.junit.Test;
 import ca.ulaval.glo4003.domain.sections.SectionDto;
 import ca.ulaval.glo4003.domain.sections.XmlSectionDao;
 
+@Ignore
 public class XmlSectionDaoIT {
 
 	private XmlSectionDao sectionDao;
@@ -19,7 +20,6 @@ public class XmlSectionDaoIT {
 		sectionDao = new XmlSectionDao();
 	}
 	
-	@Ignore
 	@Test
 	public void testGetAllSection() throws Exception {
 		Set<String> sections = sectionDao.getAllSections();
