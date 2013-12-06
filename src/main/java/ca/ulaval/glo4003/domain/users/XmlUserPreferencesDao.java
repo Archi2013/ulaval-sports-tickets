@@ -62,9 +62,9 @@ public class XmlUserPreferencesDao implements UserPreferencesDao {
 	}
 
 	@Override
-	public void save(User currentUser, TicketSearchPreferenceDto userPreferences) throws UserPreferencesDoesntExistException  {
+	public void save(String username, TicketSearchPreferenceDto userPreferences) throws UserPreferencesDoesntExistException  {
 		SimpleNode simpleNode = convertUserPreferencesToNode(userPreferences);
-		String xPath = String.format(USER_XPATH_ID, currentUser.getUsername());		
+		String xPath = String.format(USER_XPATH_ID, username);		
 
 		try {
 			if (isUserPreferencesAlreadySaved(xPath)) {
