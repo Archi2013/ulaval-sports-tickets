@@ -32,7 +32,7 @@ public class XmlSectionDaoIT {
 	private static final String GENERAL_SECTION = "Générale";
 	private static final String A_SPORT_NAME = "Football";
 	
-	private static final String FILENAME = "resources/XmlSportDaoIT.xml";
+	private static final String FILENAME = "resources/XmlSectionDaoIT.xml";
 
 	private XmlSportDao sportDao;
 	private XmlGameDao gameDao;
