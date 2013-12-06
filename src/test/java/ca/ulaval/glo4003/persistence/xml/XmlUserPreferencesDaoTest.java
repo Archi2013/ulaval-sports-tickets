@@ -19,19 +19,20 @@ public class XmlUserPreferencesDaoTest {
 	
 	private User currentUser;
 	
+	private static final String USERNAME = "mo";
+
 	@Before
 	public void setUp() throws Exception {
 		
 		xmlUserPreferencesDao = new XmlUserPreferencesDao();
-		
-		currentUser = new User("mo", "test");
+		currentUser = new User(USERNAME, "test");
 		String displayedPeriod = "ONE_WEEK";
 		Boolean localGameOnly = Boolean.TRUE;
 		List<String> listTicket = new ArrayList<String>();
 		List<String> sportsName = new ArrayList<String>();
 		sportsName.add("Football");
 		
-		xmlUserPreferencesDao.save(currentUser,new TicketSearchPreferenceDto(sportsName, displayedPeriod, localGameOnly, listTicket));
+		xmlUserPreferencesDao.save(USERNAME,new TicketSearchPreferenceDto(sportsName, displayedPeriod, localGameOnly, listTicket));
 	}
 	
 	@Test
@@ -42,7 +43,7 @@ public class XmlUserPreferencesDaoTest {
 		List<String> listTicket = new ArrayList<String>();
 		List<String> sportsName = new ArrayList<String>();
 		
-		xmlUserPreferencesDao.save(currentUser ,new TicketSearchPreferenceDto(sportsName, displayedPeriod, localGameOnly, listTicket));
+		xmlUserPreferencesDao.save(USERNAME ,new TicketSearchPreferenceDto(sportsName, displayedPeriod, localGameOnly, listTicket));
 		TicketSearchPreferenceDto ticketSPDto = xmlUserPreferencesDao.get(currentUser.getUsername());
 		System.out.println(ticketSPDto.isLocalGameOnly());
 		Assert.assertEquals(false,ticketSPDto.isLocalGameOnly());
