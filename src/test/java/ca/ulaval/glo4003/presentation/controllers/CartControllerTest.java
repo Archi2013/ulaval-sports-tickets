@@ -19,8 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ca.ulaval.glo4003.constants.CreditCardType;
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.presentation.controllers.errormanagers.CartErrorManager;
-import ca.ulaval.glo4003.presentation.controllers.errormanagers.PaymentErrorManager;
+import ca.ulaval.glo4003.presentation.controllers.errorhandler.CartErrorHandler;
+import ca.ulaval.glo4003.presentation.controllers.errorhandler.PaymentErrorHandler;
 import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModelFactory;
@@ -42,7 +42,7 @@ public class CartControllerTest {
 	private PayableItemsViewModelFactory payableItemsViewModelFactory;
 	
 	@Mock
-	private CartErrorManager cartErrorManager;
+	private CartErrorHandler cartErrorManager;
 	
 	@Mock
 	private User currentUser;

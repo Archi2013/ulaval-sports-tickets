@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.presentation.controllers.errormanagers;
+package ca.ulaval.glo4003.presentation.controllers.errorhandler;
 
 import javax.inject.Inject;
 

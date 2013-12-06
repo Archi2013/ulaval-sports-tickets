@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.presentation.controllers.errormanagers;
+package ca.ulaval.glo4003.presentation.controllers.errorhandler;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -8,7 +8,7 @@ import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 import ca.ulaval.glo4003.services.exceptions.TicketsNotFoundException;
 
 @Component
-public class CartErrorManager extends ErrorMessageAdder {
+public class CartErrorHandler extends ErrorMessageAdder {
 
 	private static final String ERROR_PAGE = "cart/error-page";
 	

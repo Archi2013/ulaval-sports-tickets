@@ -16,7 +16,7 @@ import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
-import ca.ulaval.glo4003.presentation.controllers.errormanagers.SearchErrorManager;
+import ca.ulaval.glo4003.presentation.controllers.errorhandler.SearchErrorHandler;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionForSearchViewModelFactory;
@@ -50,7 +50,7 @@ public class SearchController {
 	private SectionForSearchViewModelFactory sectionForSearchViewModelFactory;
 	
 	@Inject
-	private SearchErrorManager searchErrorManager;
+	private SearchErrorHandler searchErrorManager;
 	
 	@Autowired
 	User currentUser;

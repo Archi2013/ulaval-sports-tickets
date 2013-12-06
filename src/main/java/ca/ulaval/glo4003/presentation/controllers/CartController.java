@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.cart.SectionForCart;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.presentation.controllers.errormanagers.CartErrorManager;
+import ca.ulaval.glo4003.presentation.controllers.errorhandler.CartErrorHandler;
 import ca.ulaval.glo4003.presentation.viewmodels.ChosenGeneralTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.ChosenWithSeatTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
@@ -41,7 +41,7 @@ public class CartController {
 	private PayableItemsViewModelFactory payableItemsViewModelFactory;
 	
 	@Inject
-	private CartErrorManager cartErrorManager;
+	private CartErrorHandler cartErrorManager;
 	
 	@Autowired
 	private User currentUser;
