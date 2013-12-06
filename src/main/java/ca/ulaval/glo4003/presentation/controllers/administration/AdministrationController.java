@@ -10,12 +10,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @SessionAttributes({ "currentUser" })
-public class AdminController {
+@RequestMapping(value = "/admin", method = RequestMethod.GET)
+public class AdministrationController {
 	
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView home(HttpSession session) {
 		ModelAndView mav = new ModelAndView("admin/home");
 		
 		return mav;
+	}
+	
+	@RequestMapping(value = "/sans-autorisation", method = RequestMethod.GET)
+	public String unauthorized() {
+		return "admin/unauthorized";
 	}
 }

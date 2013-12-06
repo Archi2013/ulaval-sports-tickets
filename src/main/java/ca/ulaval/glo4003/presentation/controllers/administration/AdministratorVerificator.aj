@@ -27,6 +27,6 @@ public aspect AdministratorVerificator {
 	        }
 		}
  		
-		return new ModelAndView("redirect:/usager/connexion");
+		return new ModelAndView("redirect:/admin/sans-autorisation");
 	}
 }

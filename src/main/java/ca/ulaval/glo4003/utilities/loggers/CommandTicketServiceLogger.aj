@@ -20,15 +20,15 @@ public aspect CommandTicketServiceLogger {
         Date dateNow = new Date();
         for(SectionForCart sectionFC : sections) {
             if (sectionFC.getGeneralAdmission()) {
-                CommandTicketServiceLogger.info(dateNow.toString()+" : Vente de tickets d'admission générale pour le sport "+sectionFC.getSportName()
-                        + " à la date " + sectionFC.getGameDate()
-                        + "\n"+sectionFC.getNumberOfTicketsToBuy() + " tickets vendus à " + sectionFC.getUnitPrice()
+                CommandTicketServiceLogger.info(dateNow.toString()+" : Vente de tickets d'admission gÃ©nÃ©rale pour le sport "+sectionFC.getSportName()
+                        + " Ã  la date " + sectionFC.getGameDate()
+                        + "\n"+sectionFC.getNumberOfTicketsToBuy() + " tickets vendus Ã  " + sectionFC.getUnitPrice()
                         +"\n Total "+sectionFC.getSubtotal());
             } else {
-                CommandTicketServiceLogger.info(dateNow.toString()+" : Vente de tickets sélectionnés pour le sport "+sectionFC.getSportName() +
-                        " à la date " + sectionFC.getGameDate());
+                CommandTicketServiceLogger.info(dateNow.toString()+" : Vente de tickets sÃ©lectionnÃ©s pour le sport "+sectionFC.getSportName() +
+                        " Ã  la date " + sectionFC.getGameDate());
                 for (String seat : sectionFC.getSelectedSeats()) {
-                    CommandTicketServiceLogger.info("Ticket " + seat +" vendus à " + sectionFC.getUnitPrice());
+                    CommandTicketServiceLogger.info("Ticket " + seat +" vendus Ã  " + sectionFC.getUnitPrice());
                     }
                 CommandTicketServiceLogger.info("Total : "+sectionFC.getSubtotal()+"\n");
             }

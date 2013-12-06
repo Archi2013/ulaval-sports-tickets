@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ca.ulaval.glo4003.domain.users.User;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AdminControllerTest {
+public class AdministrationControllerTest {
 	
 	@Mock
 	private User currentUser;
@@ -27,7 +27,7 @@ public class AdminControllerTest {
 	private HttpSession session;
 	
 	@InjectMocks
-	private AdminController controller;
+	private AdministrationController controller;
 	
 	@Before
 	public void setUp()
