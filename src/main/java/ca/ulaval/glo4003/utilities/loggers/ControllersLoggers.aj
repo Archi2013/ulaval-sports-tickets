@@ -76,12 +76,12 @@ public aspect ControllersLoggers {
 		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.administration.AddGameController.addGame(..));
 	
 	before() : AdmnistrationController_addConnectedUserToModelAndView() {
-		GameToAddViewModel gameToAddViewModel = (GameToAddViewModel) thisJoinPoint.getArgs()[0];
+		GameToAddViewModel gameToAddViewModel = (GameToAddViewModel) thisJoinPoint.getArgs()[1];
 		AdministrationControllerLogger.info("Adminisatration : Add a new game for a sport : " + gameToAddViewModel.getSport());
 	}
 	
 	after() throwing(Exception exception) : AdmnistrationController_addConnectedUserToModelAndView(){
-		GameToAddViewModel gameToAddViewModel = (GameToAddViewModel) thisJoinPoint.getArgs()[0];
+		GameToAddViewModel gameToAddViewModel = (GameToAddViewModel) thisJoinPoint.getArgs()[1];
 		AdministrationControllerLogger.info("==> Impossible d'ajouter la game : " + gameToAddViewModel.getSport());
 		AdministrationControllerLogger.info("==> Exception : " + exception.getMessage());
 		exception.printStackTrace();
@@ -91,13 +91,13 @@ public aspect ControllersLoggers {
 		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.administration.AddTicketsController.addTickets_general(..));
 	
 	before() : AdmnistrationController_addTickets_general() {
-		GeneralTicketsToAddViewModel generalTicketsToAddViewModel = (GeneralTicketsToAddViewModel) thisJoinPoint.getArgs()[0];
+		GeneralTicketsToAddViewModel generalTicketsToAddViewModel = (GeneralTicketsToAddViewModel) thisJoinPoint.getArgs()[1];
 		AdministrationControllerLogger.info("Adminisatration :Adding " + generalTicketsToAddViewModel.getNumberOfTickets() + "new general tickets to game"
 				+ generalTicketsToAddViewModel.getGameDate());
 	}
 	
 	after() throwing(Exception exception) : AdmnistrationController_addTickets_general(){
-		GeneralTicketsToAddViewModel generalTicketsToAddViewModel = (GeneralTicketsToAddViewModel) thisJoinPoint.getArgs()[0];
+		GeneralTicketsToAddViewModel generalTicketsToAddViewModel = (GeneralTicketsToAddViewModel) thisJoinPoint.getArgs()[1];
 		AdministrationControllerLogger.info("Administration : Impossible d'ajouter la game : " + generalTicketsToAddViewModel.getGameDate());
 		AdministrationControllerLogger.info("==> Exception : " + exception.getMessage());
 		exception.printStackTrace();
@@ -107,13 +107,13 @@ public aspect ControllersLoggers {
 		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.administration.AddTicketsController.addTickets_seated(..));
 	
 	before() : AdmnistrationController_addTickets_seated() {
-		SeatedTicketsToAddViewModel seatedTicketsToAddViewModel = (SeatedTicketsToAddViewModel) thisJoinPoint.getArgs()[0];
+		SeatedTicketsToAddViewModel seatedTicketsToAddViewModel = (SeatedTicketsToAddViewModel) thisJoinPoint.getArgs()[1];
 		AdministrationControllerLogger.info("Administration: adding a seated ticket to game on " + seatedTicketsToAddViewModel.getGameDate() + " in seat "
 				+ seatedTicketsToAddViewModel.getSeat() + " of section " + seatedTicketsToAddViewModel.getSection());
 	}
 	
 	after() throwing(Exception exception) : AdmnistrationController_addTickets_seated(){
-		SeatedTicketsToAddViewModel seatedTicketsToAddViewModel = (SeatedTicketsToAddViewModel) thisJoinPoint.getArgs()[0];
+		SeatedTicketsToAddViewModel seatedTicketsToAddViewModel = (SeatedTicketsToAddViewModel) thisJoinPoint.getArgs()[1];
 		AdministrationControllerLogger.info("Administration : Impossible d'ajouter la game : " + seatedTicketsToAddViewModel.getGameDate());
 		AdministrationControllerLogger.info("==> Exception : " + exception.getMessage());
 		exception.printStackTrace();
