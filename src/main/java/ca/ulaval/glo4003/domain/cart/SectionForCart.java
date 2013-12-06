@@ -49,9 +49,11 @@ public class SectionForCart {
 	}
 
 	public void addElements(SectionForCart sectionForCart) {
-		this.numberOfTicketsToBuy += sectionForCart.getNumberOfTicketsToBuy();
-		if (!generalAdmission) {
+		if (this.generalAdmission) {
+			this.numberOfTicketsToBuy += sectionForCart.getNumberOfTicketsToBuy();
+		} else {
 			this.selectedSeats.addAll(sectionForCart.getSelectedSeats());
+			this.numberOfTicketsToBuy = this.selectedSeats.size();
 		}
 	}
 
