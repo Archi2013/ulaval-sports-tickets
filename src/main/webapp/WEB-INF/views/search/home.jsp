@@ -17,10 +17,6 @@
 
 	<h2>${pageTitle}</h2>
 
-    <c:if test="${not empty errorMessage}">
-        <div class="information-block-error-skin margin-25-50">${errorMessage}</div>
-    </c:if>
-
 	<section class="search-block">
 		<c:url value="/recherche/sauvegarde-preferences" var="searchAction" />
 		<form:form id="search-form" commandName="ticketSearchForm"
@@ -66,6 +62,14 @@
 			</c:if>
 		</form:form>
 	</section>
+	
+	<c:if test="${preferencesSaved}">
+        <div class="information-block-succes-skin margin-25-50">Vos préférences de recherche ont été sauvegardées.</div>
+    </c:if>
+    <c:if test="${not empty errorMessage}">
+        <div class="information-block-error-skin margin-25-50">${errorMessage}</div>
+    </c:if>
+	
 	<section id="ajax-table"><%@include file="list.jsp"%></section>
 
 	<%@include file="../utility/javascript-import.jsp"%>

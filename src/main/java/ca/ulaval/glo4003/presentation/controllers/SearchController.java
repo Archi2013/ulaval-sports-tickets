@@ -86,6 +86,7 @@ public class SearchController {
 			userPreferencesService.saveUserPreference(currentUser,ticketSearchVM);
 			mav.addObject("preferencesSaved", true);
 		} catch (UserPreferencesNotSaved e) {
+			mav.addObject("preferencesSaved", false);
 			searchErrorManager.addErrorMessageUserPreferencesNotSaved(mav);
 		}
 		return mav;

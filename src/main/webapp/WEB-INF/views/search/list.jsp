@@ -3,11 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<c:if test="${preferencesSaved}">
-	<div class="information-block-succes-skin margin-25-50">Vos
-		préférences de recherche ont été sauvegardées.</div>
-</c:if>
-
 <table class="standard-table margin-25">
 	<thead>
 		<tr>
