@@ -66,7 +66,7 @@ public class XmlTicketDao implements TicketDao {
 
 	@Override
 	public List<TicketDto> getAll(String sportName, DateTime gameDate) throws GameDoesntExistException {
-		String xPath = String.format(TICKET_XPATH_SPORT, sportName, gameDate);
+		String xPath = String.format(TICKET_XPATH_SPORT, sportName, toString(gameDate));
 		return convertNodesToTickets(xPath);
 
 	}
