@@ -15,22 +15,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
-import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
-import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
 import ca.ulaval.glo4003.services.SportViewService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportControllerTest {
-
-	private static final String SPORT_NAME = "Basketball Féminin";
-	private static final String SPORT_URL = "basketball-feminin";
-
-	@Mock
-	private SportUrlMapper sportUrlMapper;
 
 	@Mock
 	private SportViewService sportService;
@@ -42,8 +32,7 @@ public class SportControllerTest {
 	private SportController controller;
 
 	@Before
-	public void setUp() throws SportDoesntExistException, GameDoesntExistException, NoSportForUrlException {
-		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
+	public void setUp() {
 	}
 
 	@Test

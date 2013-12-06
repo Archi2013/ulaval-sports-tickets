@@ -35,8 +35,7 @@ public class GameController {
 		ModelAndView mav = new ModelAndView("game/list");
 
 		try {
-			String sportName = sportUrlMapper.getSportName(sportUrl);
-			GamesViewModel games = gameService.getGamesForSport(sportName);
+			GamesViewModel games = gameService.getGamesForSport(sportUrlMapper.getSportName(sportUrl));
 			mav.addObject("games", games);
 
 			if (games.hasGames()) {

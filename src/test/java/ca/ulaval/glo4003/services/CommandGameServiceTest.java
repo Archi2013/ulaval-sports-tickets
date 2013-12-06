@@ -15,8 +15,6 @@ import ca.ulaval.glo4003.domain.game.IGameRepository;
 import ca.ulaval.glo4003.domain.game.PersistableGame;
 import ca.ulaval.glo4003.domain.sports.ISportRepository;
 import ca.ulaval.glo4003.domain.sports.PersistableSport;
-import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
-import ca.ulaval.glo4003.services.CommandGameService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandGameServiceTest {
@@ -35,9 +33,6 @@ public class CommandGameServiceTest {
 	@Mock
 	private ISportRepository sportRepositoryMock;
 
-	@Mock
-	private SportUrlMapper sportUrlMapper;
-
 	@InjectMocks
 	private CommandGameService gameService;
 
@@ -45,7 +40,6 @@ public class CommandGameServiceTest {
 	public void setUp() throws Exception {
 		when(sportRepositoryMock.get(A_SPORT_NAME)).thenReturn(sport);
 		when(gameRepositoryMock.create(A_OPPONENT, A_LOCATION)).thenReturn(game);
-		when(sportUrlMapper.getSportName(A_SPORT_NAME)).thenReturn(A_SPORT_NAME);
 	}
 
 	@Test
