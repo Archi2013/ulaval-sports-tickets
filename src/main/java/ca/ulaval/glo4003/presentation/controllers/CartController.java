@@ -117,17 +117,17 @@ public class CartController {
 		return mav;
 	}
 	
-	private void addWithSeatTicketsToCart(ChosenWithSeatTicketsViewModel chosenWithSeatTicketsVM)
-			throws InvalidTicketsException, TicketsNotFoundException {
-		commmandCartService.addWithSeatTicketsToCart(chosenWithSeatTicketsVM.getSportName(),
-				chosenWithSeatTicketsVM.getGameDate(), chosenWithSeatTicketsVM.getSectionName(),
-				chosenWithSeatTicketsVM.getSelectedSeats());
-	}
-	
 	private void addGeneralTicketsToCart(ChosenGeneralTicketsViewModel chosenGeneralTicketsVM)
 			throws InvalidTicketsException, TicketsNotFoundException {
 		commmandCartService.addGeneralTicketsToCart(chosenGeneralTicketsVM.getSportName(),
 				chosenGeneralTicketsVM.getGameDate(), chosenGeneralTicketsVM.getSectionName(),
 				chosenGeneralTicketsVM.getNumberOfTicketsToBuy());
+	}
+	
+	private void addWithSeatTicketsToCart(ChosenWithSeatTicketsViewModel chosenWithSeatTicketsVM)
+			throws InvalidTicketsException, TicketsNotFoundException {
+		commmandCartService.addWithSeatTicketsToCart(chosenWithSeatTicketsVM.getSportName(),
+				chosenWithSeatTicketsVM.getGameDate(), chosenWithSeatTicketsVM.getSectionName(),
+				chosenWithSeatTicketsVM.getSelectedSeats());
 	}
 }

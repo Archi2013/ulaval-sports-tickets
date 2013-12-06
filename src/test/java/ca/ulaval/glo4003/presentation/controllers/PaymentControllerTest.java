@@ -75,7 +75,7 @@ public class PaymentControllerTest {
 	}
 
 	@Test
-	public void when_currentUser_isntLogged_modeOfPayment_should_use_paymentErrorManager_to_return_modelAndView() {
+	public void when_currentUser_isntLogged_modeOfPayment_should_use_paymentErrorHandler_to_return_modelAndView() {
 		when(currentUser.isLogged()).thenReturn(false);
 		
 		ModelAndView mav = paymentController.modeOfPayment();
@@ -95,7 +95,7 @@ public class PaymentControllerTest {
 	}
 	
 	@Test
-	public void when_NoTicketsInCartException_modeOfPayment_should_use_paymentErrorManager_to_return_modelAndView() throws NoTicketsInCartException {
+	public void when_NoTicketsInCartException_modeOfPayment_should_use_paymentErrorHandler_to_return_modelAndView() throws NoTicketsInCartException {
 		NoTicketsInCartException exception = new NoTicketsInCartException();
 		
 		when(queryCartService.getCumulativePrice()).thenThrow(exception);
@@ -143,7 +143,7 @@ public class PaymentControllerTest {
 	}
 	
 	@Test
-	public void when_currentUser_isntLogged_validate_should_use_paymentErrorManager_to_return_modelAndView() {
+	public void when_currentUser_isntLogged_validate_should_use_paymentErrorHandler_to_return_modelAndView() {
 		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
 		BindingResult result = mock(BindingResult.class);
 		
@@ -195,7 +195,7 @@ public class PaymentControllerTest {
 	}
 	
 	@Test
-	public void when_NoTicketsInCartException_validate_should_use_paymentErrorManager_to_return_modelAndView() throws NoTicketsInCartException {
+	public void when_NoTicketsInCartException_validate_should_use_paymentErrorHandler_to_return_modelAndView() throws NoTicketsInCartException {
 		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
 		BindingResult result = mock(BindingResult.class);
 		
@@ -233,7 +233,7 @@ public class PaymentControllerTest {
 	}
 	
 	@Test
-	public void when_buyTicketsInCart_and_NoTicketsInCartException_validate_should_use_paymentErrorManager_to_return_modelAndView() throws InvalidCreditCardException, NoTicketsInCartException {
+	public void when_buyTicketsInCart_and_NoTicketsInCartException_validate_should_use_paymentErrorHandler_to_return_modelAndView() throws InvalidCreditCardException, NoTicketsInCartException {
 		PaymentViewModel paymentVM = getInitializedPaymentViewModel();
 		BindingResult result = mock(BindingResult.class);
 		
