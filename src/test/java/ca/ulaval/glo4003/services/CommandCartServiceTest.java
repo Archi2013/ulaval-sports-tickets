@@ -1,6 +1,5 @@
 package ca.ulaval.glo4003.services;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.HashSet;
@@ -34,9 +33,7 @@ import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 import ca.ulaval.glo4003.services.exceptions.TicketsNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CartServiceTest {
-
-	private static final Double CUMULATIVE_PRICE = 65.78;
+public class CommandCartServiceTest {
 
 	private static final int NUMBER_OF_TICKETS = 99;
 
@@ -73,7 +70,7 @@ public class CartServiceTest {
 	private SectionForCartFactory sectionForCartFactory;
 	
 	@InjectMocks
-	private CartService cartService;
+	private CommandCartService commandCartService;
 	
 	@Test
 	public void given_general_tickets_informations_addGeneralTicketsToCart_should_add_a_sectionForCart_to_cart() throws InvalidTicketsException, TicketsNotFoundException, SectionDoesntExistException, GameDoesntExistException {
@@ -91,7 +88,7 @@ public class CartServiceTest {
 							OPPONENTS, LOCATION,
 							NUMBER_OF_TICKETS_TO_BUY, PRICE)).thenReturn(sectionFC);
 		
-		cartService.addGeneralTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, NUMBER_OF_TICKETS_TO_BUY);
+		commandCartService.addGeneralTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, NUMBER_OF_TICKETS_TO_BUY);
 		
 		verify(currentCart).addSection(sectionFC);
 	}
@@ -103,7 +100,7 @@ public class CartServiceTest {
 		when(sectionRepository.getAvailable(SPORT_NAME, GAME_DATE, SECTION_NAME)).thenReturn(section);
 		when(section.isGeneralAdmission()).thenReturn(false);
 		
-		cartService.addGeneralTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, NUMBER_OF_TICKETS_TO_BUY);
+		commandCartService.addGeneralTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, NUMBER_OF_TICKETS_TO_BUY);
 	}
 	
 	@Test(expected=InvalidTicketsException.class)
@@ -114,7 +111,7 @@ public class CartServiceTest {
 		when(section.isGeneralAdmission()).thenReturn(true);
 		when(section.isValidNumberOfTicketsForGeneralTickets(NUMBER_OF_TICKETS_TO_BUY)).thenReturn(false);
 		
-		cartService.addGeneralTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, NUMBER_OF_TICKETS_TO_BUY);
+		commandCartService.addGeneralTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, NUMBER_OF_TICKETS_TO_BUY);
 	}
 	
 	@Test(expected=TicketsNotFoundException.class)
@@ -126,7 +123,7 @@ public class CartServiceTest {
 		when(section.isValidNumberOfTicketsForGeneralTickets(NUMBER_OF_TICKETS_TO_BUY)).thenReturn(true);
 		when(gameDao.get(SPORT_NAME, GAME_DATE)).thenThrow(new GameDoesntExistException());
 		
-		cartService.addGeneralTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, NUMBER_OF_TICKETS_TO_BUY);
+		commandCartService.addGeneralTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, NUMBER_OF_TICKETS_TO_BUY);
 	}
 	
 	@Test(expected=TicketsNotFoundException.class)
@@ -138,7 +135,7 @@ public class CartServiceTest {
 		when(section.isValidNumberOfTicketsForGeneralTickets(NUMBER_OF_TICKETS_TO_BUY)).thenReturn(true);
 		when(sectionDao.getAvailable(SPORT_NAME, GAME_DATE, SECTION_NAME)).thenThrow(new SectionDoesntExistException());
 		
-		cartService.addGeneralTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, NUMBER_OF_TICKETS_TO_BUY);
+		commandCartService.addGeneralTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, NUMBER_OF_TICKETS_TO_BUY);
 	}
 	
 	@Test
@@ -158,7 +155,7 @@ public class CartServiceTest {
 		when(sectionForCartFactory.createSectionForWithSeatTickets(SPORT_NAME, GAME_DATE, SECTION_NAME,
 						OPPONENTS, LOCATION, selectedSeats, PRICE)).thenReturn(sectionFC);
 		
-		cartService.addWithSeatTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, selectedSeats);
+		commandCartService.addWithSeatTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, selectedSeats);
 		
 		verify(currentCart).addSection(sectionFC);
 	}
@@ -171,7 +168,7 @@ public class CartServiceTest {
 		when(sectionRepository.getAvailable(SPORT_NAME, GAME_DATE, SECTION_NAME)).thenReturn(section);
 		when(section.isGeneralAdmission()).thenReturn(true);
 		
-		cartService.addWithSeatTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, selectedSeats);
+		commandCartService.addWithSeatTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, selectedSeats);
 	}
 	
 	@Test(expected=InvalidTicketsException.class)
@@ -183,7 +180,7 @@ public class CartServiceTest {
 		when(section.isGeneralAdmission()).thenReturn(false);
 		when(section.isValidSelectedSeatsForWithSeatTickets(selectedSeats)).thenReturn(false);
 		
-		cartService.addWithSeatTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, selectedSeats);
+		commandCartService.addWithSeatTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, selectedSeats);
 	}
 	
 	@Test(expected=TicketsNotFoundException.class)
@@ -196,7 +193,7 @@ public class CartServiceTest {
 		when(section.isValidSelectedSeatsForWithSeatTickets(selectedSeats)).thenReturn(true);
 		when(gameDao.get(SPORT_NAME, GAME_DATE)).thenThrow(new GameDoesntExistException());
 		
-		cartService.addWithSeatTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, selectedSeats);
+		commandCartService.addWithSeatTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, selectedSeats);
 	}
 	
 	@Test(expected=TicketsNotFoundException.class)
@@ -209,7 +206,7 @@ public class CartServiceTest {
 		when(section.isValidSelectedSeatsForWithSeatTickets(selectedSeats)).thenReturn(true);
 		when(sectionDao.getAvailable(SPORT_NAME, GAME_DATE, SECTION_NAME)).thenThrow(new SectionDoesntExistException());
 		
-		cartService.addWithSeatTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, selectedSeats);
+		commandCartService.addWithSeatTicketsToCart(SPORT_NAME, GAME_DATE, SECTION_NAME, selectedSeats);
 	}
 	
 	@Test
@@ -218,7 +215,7 @@ public class CartServiceTest {
 		
 		when(currentCart.getSections()).thenReturn(sections);
 		
-		cartService.makeTicketsUnavailableToOtherPeople();
+		commandCartService.makeTicketsUnavailableToOtherPeople();
 		
 		verify(ticketService).makeTicketsUnavailable(sections);
 	}
@@ -230,7 +227,7 @@ public class CartServiceTest {
 		when(currentCart.getSections()).thenReturn(sections);
 		doThrow(new GameDoesntExistException()).when(ticketService).makeTicketsUnavailable(sections);
 		
-		cartService.makeTicketsUnavailableToOtherPeople();
+		commandCartService.makeTicketsUnavailableToOtherPeople();
 	}
 	
 	@Test(expected=CartException.class)
@@ -240,7 +237,7 @@ public class CartServiceTest {
 		when(currentCart.getSections()).thenReturn(sections);
 		doThrow(new TicketDoesntExistException()).when(ticketService).makeTicketsUnavailable(sections);
 		
-		cartService.makeTicketsUnavailableToOtherPeople();
+		commandCartService.makeTicketsUnavailableToOtherPeople();
 	}
 	
 	@Test(expected=CartException.class)
@@ -250,7 +247,7 @@ public class CartServiceTest {
 		when(currentCart.getSections()).thenReturn(sections);
 		doThrow(new SportDoesntExistException()).when(ticketService).makeTicketsUnavailable(sections);
 		
-		cartService.makeTicketsUnavailableToOtherPeople();
+		commandCartService.makeTicketsUnavailableToOtherPeople();
 	}
 	
 	@Test(expected=CartException.class)
@@ -260,7 +257,7 @@ public class CartServiceTest {
 		when(currentCart.getSections()).thenReturn(sections);
 		doThrow(new GameAlreadyExistException()).when(ticketService).makeTicketsUnavailable(sections);
 		
-		cartService.makeTicketsUnavailableToOtherPeople();
+		commandCartService.makeTicketsUnavailableToOtherPeople();
 	}
 	
 	@Test(expected=CartException.class)
@@ -270,61 +267,19 @@ public class CartServiceTest {
 		when(currentCart.getSections()).thenReturn(sections);
 		doThrow(new TicketAlreadyExistsException()).when(ticketService).makeTicketsUnavailable(sections);
 		
-		cartService.makeTicketsUnavailableToOtherPeople();
+		commandCartService.makeTicketsUnavailableToOtherPeople();
 	}
 	
 	@Test(expected=CartException.class)
 	public void when_NoTicketsInCartException_makeTicketsUnavailableToOtherPeople_should_raise_CartException() throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException, NoTicketsInCartException {
 		when(currentCart.getSections()).thenThrow(new NoTicketsInCartException());
 		
-		cartService.makeTicketsUnavailableToOtherPeople();
-	}
-	
-	@Test
-	public void getCumulativePrice_should_return_the_cumulativePrice_of_cart() throws NoTicketsInCartException {
-		when(currentCart.getCumulativePrice()).thenReturn(CUMULATIVE_PRICE);
-		
-		Double actual = cartService.getCumulativePrice();
-		
-		assertEquals(CUMULATIVE_PRICE, actual);
-	}
-	
-	@Test
-	public void getSectionsInCart_should_return_the_sections_in_cart() throws NoTicketsInCartException {
-		Set<SectionForCart> sections = new HashSet<>();
-		
-		when(currentCart.getSections()).thenReturn(sections);
-		
-		Set<SectionForCart> actual = cartService.getSectionsInCart();
-		
-		assertEquals(sections, actual);
-	}
-	
-	@Test
-	public void cartContainsTickets_should_return_true_if_there_are_tickets_in_cart() {
-		boolean expected = true;
-		
-		when(currentCart.containTickets()).thenReturn(expected);
-		
-		boolean actual = cartService.cartContainsTickets();
-		
-		assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void cartContainsTickets_should_return_false_if_there_arent_tickets_in_cart() {
-		boolean expected = false;
-		
-		when(currentCart.containTickets()).thenReturn(expected);
-		
-		boolean actual = cartService.cartContainsTickets();
-		
-		assertEquals(expected, actual);
+		commandCartService.makeTicketsUnavailableToOtherPeople();
 	}
 	
 	@Test
 	public void emptyCart_should_empty_the_cart() {
-		cartService.emptyCart();
+		commandCartService.emptyCart();
 		
 		verify(currentCart).empty();
 	}

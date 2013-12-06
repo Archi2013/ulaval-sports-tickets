@@ -17,8 +17,9 @@ import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.presentation.controllers.errorhandler.PaymentErrorHandler;
 import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
-import ca.ulaval.glo4003.services.CartService;
+import ca.ulaval.glo4003.services.CommandCartService;
 import ca.ulaval.glo4003.services.CommandPaymentService;
+import ca.ulaval.glo4003.services.QueryCartService;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;
@@ -36,10 +37,13 @@ public class PaymentController {
 	CommandPaymentService paymentService;
 	
 	@Inject
-	CartService cartService;
+	CommandCartService commandCartService;
 	
 	@Inject
-	private PaymentErrorHandler paymentErrorManager;
+	QueryCartService queryCartService;
+	
+	@Inject
+	private PaymentErrorHandler paymentErrorHandler;
 	
 	@Autowired
 	private User currentUser;
@@ -49,7 +53,7 @@ public class PaymentController {
 		ModelAndView mav = new ModelAndView(MODE_OF_PAYMENT_PAGE);
 		
 		if (!currentUser.isLogged()) {
-			paymentErrorManager.prepareErrorPageToShowNotConnectedUserMessage(mav);
+			paymentErrorHandler.prepareErrorPageToShowNotConnectedUserMessage(mav);
 			return mav;
 		}
 
@@ -59,7 +63,7 @@ public class PaymentController {
 			mav.addObject("paymentForm", new PaymentViewModel());
 			mav.addObject("creditCardTypes", CreditCardType.getCreditCardTypes());
 		} catch (NoTicketsInCartException e) {
-			paymentErrorManager.prepareErrorPage(mav, e);
+			paymentErrorHandler.prepareErrorPage(mav, e);
 		}
 		
 		return mav;
@@ -71,7 +75,7 @@ public class PaymentController {
 		ModelAndView mav = new ModelAndView(VALIDATION_SUCCES_PAGE);
 
 		if (!currentUser.isLogged()) {
-			paymentErrorManager.prepareErrorPageToShowNotConnectedUserMessage(mav);
+			paymentErrorHandler.prepareErrorPageToShowNotConnectedUserMessage(mav);
 			return mav;
 		}
 
@@ -85,10 +89,10 @@ public class PaymentController {
 			buyTicketsInCart(paymentVM);
 		} catch (InvalidCreditCardException e) {
 			ModelAndView mavToReturn = returnModelAndViewToRetryModeOfPayment(paymentVM);
-			paymentErrorManager.addErrorMessageInvalidCreditCardToModel(mavToReturn);
+			paymentErrorHandler.addErrorMessageInvalidCreditCardToModel(mavToReturn);
 			return mavToReturn;
 		} catch (NoTicketsInCartException e) {
-			paymentErrorManager.prepareErrorPage(mav, e);
+			paymentErrorHandler.prepareErrorPage(mav, e);
 		}
 		
 		return mav;
@@ -107,7 +111,7 @@ public class PaymentController {
 	}
 	
 	private String getCumulativePriceFR() throws NoTicketsInCartException {
-		return Calculator.toPriceFR(cartService.getCumulativePrice());
+		return Calculator.toPriceFR(queryCartService.getCumulativePrice());
 	}
 	
 }

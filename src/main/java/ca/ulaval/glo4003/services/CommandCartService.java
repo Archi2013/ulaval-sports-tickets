@@ -29,7 +29,7 @@ import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 import ca.ulaval.glo4003.services.exceptions.TicketsNotFoundException;
 
 @Service
-public class CartService {
+public class CommandCartService {
 
 	@Inject
 	private GameDao gameDao;
@@ -95,18 +95,6 @@ public class CartService {
 		} catch (GameDoesntExistException | TicketDoesntExistException | GameAlreadyExistException | TicketAlreadyExistsException | SportDoesntExistException | NoTicketsInCartException e) {
 			throw new CartException();
 		}
-	}
-	
-	public Double getCumulativePrice() throws NoTicketsInCartException {
-		return currentCart.getCumulativePrice();
-	}
-
-	public Set<SectionForCart> getSectionsInCart() throws NoTicketsInCartException {
-		return currentCart.getSections();
-	}
-
-	public boolean cartContainsTickets() {
-		return currentCart.containTickets();
 	}
 
 	public void emptyCart() {

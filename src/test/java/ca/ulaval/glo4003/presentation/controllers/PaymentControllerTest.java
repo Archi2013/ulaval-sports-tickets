@@ -18,8 +18,9 @@ import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.presentation.controllers.errorhandler.PaymentErrorHandler;
 import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
-import ca.ulaval.glo4003.services.CartService;
+import ca.ulaval.glo4003.services.CommandCartService;
 import ca.ulaval.glo4003.services.CommandPaymentService;
+import ca.ulaval.glo4003.services.QueryCartService;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;
@@ -47,10 +48,13 @@ public class PaymentControllerTest {
 	CommandPaymentService paymentService;
 	
 	@Mock
-	CartService cartService;
+	CommandCartService commandCartService;
 	
 	@Mock
-	private PaymentErrorHandler paymentErrorManager;
+	QueryCartService queryCartService;
+	
+	@Mock
+	private PaymentErrorHandler paymentErrorHandler;
 	
 	@Mock
 	private User currentUser;
@@ -76,12 +80,12 @@ public class PaymentControllerTest {
 		
 		ModelAndView mav = paymentController.modeOfPayment();
 		
-		verify(paymentErrorManager).prepareErrorPageToShowNotConnectedUserMessage(mav);
+		verify(paymentErrorHandler).prepareErrorPageToShowNotConnectedUserMessage(mav);
 	}
 	
 	@Test
 	public void modeOfPayment_should_add_cumulativePrice_to_modelAndView() throws NoTicketsInCartException {
-		when(cartService.getCumulativePrice()).thenReturn(CUMULATIVE_PRICE);
+		when(queryCartService.getCumulativePrice()).thenReturn(CUMULATIVE_PRICE);
 		
 		ModelAndView mav = paymentController.modeOfPayment();
 		ModelMap modelMap = mav.getModelMap();
@@ -94,11 +98,11 @@ public class PaymentControllerTest {
 	public void when_NoTicketsInCartException_modeOfPayment_should_use_paymentErrorManager_to_return_modelAndView() throws NoTicketsInCartException {
 		NoTicketsInCartException exception = new NoTicketsInCartException();
 		
-		when(cartService.getCumulativePrice()).thenThrow(exception);
+		when(queryCartService.getCumulativePrice()).thenThrow(exception);
 		
 		ModelAndView mav = paymentController.modeOfPayment();
 		
-		verify(paymentErrorManager).prepareErrorPage(mav, exception);
+		verify(paymentErrorHandler).prepareErrorPage(mav, exception);
 	}
 	
 	@Test
@@ -147,7 +151,7 @@ public class PaymentControllerTest {
 		
 		ModelAndView mav = paymentController.validate(paymentVM, result);
 		
-		verify(paymentErrorManager).prepareErrorPageToShowNotConnectedUserMessage(mav);
+		verify(paymentErrorHandler).prepareErrorPageToShowNotConnectedUserMessage(mav);
 	}
 	
 	@Test
@@ -181,7 +185,7 @@ public class PaymentControllerTest {
 		PaymentViewModel paymentVM = mock(PaymentViewModel.class);
 		BindingResult result = mock(BindingResult.class);
 		
-		when(cartService.getCumulativePrice()).thenReturn(CUMULATIVE_PRICE);
+		when(queryCartService.getCumulativePrice()).thenReturn(CUMULATIVE_PRICE);
 		
 		ModelAndView mav = paymentController.validate(paymentVM, result);
 		ModelMap modelMap = mav.getModelMap();
@@ -197,11 +201,11 @@ public class PaymentControllerTest {
 		
 		NoTicketsInCartException exception = new NoTicketsInCartException();
 		
-		when(cartService.getCumulativePrice()).thenThrow(exception);
+		when(queryCartService.getCumulativePrice()).thenThrow(exception);
 		
 		ModelAndView mav = paymentController.validate(paymentVM, result);
 		
-		verify(paymentErrorManager).prepareErrorPage(mav, exception);
+		verify(paymentErrorHandler).prepareErrorPage(mav, exception);
 	}
 	
 	@Test
@@ -240,7 +244,7 @@ public class PaymentControllerTest {
 		
 		ModelAndView mav = paymentController.validate(paymentVM, result);
 		
-		verify(paymentErrorManager).prepareErrorPage(mav, exception);
+		verify(paymentErrorHandler).prepareErrorPage(mav, exception);
 	}
 	
 	@Test
@@ -268,7 +272,7 @@ public class PaymentControllerTest {
 		
 		ModelAndView mav = paymentController.validate(paymentVM, result);
 		
-		verify(paymentErrorManager).addErrorMessageInvalidCreditCardToModel(mav);
+		verify(paymentErrorHandler).addErrorMessageInvalidCreditCardToModel(mav);
 	}
 	
 	private PaymentViewModel getInitializedPaymentViewModel() {

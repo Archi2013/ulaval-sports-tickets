@@ -3,31 +3,22 @@ package ca.ulaval.glo4003.presentation.controllers;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import javax.inject.Inject;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.constants.CreditCardType;
-import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.presentation.controllers.errorhandler.CartErrorHandler;
-import ca.ulaval.glo4003.presentation.controllers.errorhandler.PaymentErrorHandler;
 import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.PaymentViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModelFactory;
-import ca.ulaval.glo4003.services.CartService;
-import ca.ulaval.glo4003.services.CommandPaymentService;
+import ca.ulaval.glo4003.services.CartViewService;
+import ca.ulaval.glo4003.services.CommandCartService;
+import ca.ulaval.glo4003.services.QueryCartService;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
-import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -36,13 +27,16 @@ public class CartControllerTest {
 	private static final String CART_DETAIL_PAGE = "cart/details";
 	
 	@Mock
-	CartService cartService;
+	CommandCartService commmandCartService;
 	
 	@Mock
-	private PayableItemsViewModelFactory payableItemsViewModelFactory;
+	QueryCartService queryCartService;
 	
 	@Mock
-	private CartErrorHandler cartErrorManager;
+	CartViewService cartViewService;
+	
+	@Mock
+	private CartErrorHandler cartErrorHandler;
 	
 	@Mock
 	private User currentUser;
@@ -68,7 +62,7 @@ public class CartControllerTest {
 		
 		ModelAndView mav = cartController.showDetails();
 		
-		verify(cartErrorManager).prepareErrorPageToShowNotConnectedUserMessage(mav);
+		verify(cartErrorHandler).prepareErrorPageToShowNotConnectedUserMessage(mav);
 	}
 	
 	@Test
@@ -81,10 +75,10 @@ public class CartControllerTest {
 	}
 	
 	@Test
-	public void showDetails_should_add_payableItems_to_modelAndView() {
+	public void showDetails_should_add_payableItems_to_modelAndView() throws NoTicketsInCartException {
 		PayableItemsViewModel payableItemsVM = mock(PayableItemsViewModel.class);
 		
-		when(payableItemsViewModelFactory.createViewModel(anySet(), anyDouble())).thenReturn(payableItemsVM);
+		when(cartViewService.getPayableItemsViewModel()).thenReturn(payableItemsVM);
 		
 		ModelAndView mav = cartController.showDetails();
 		ModelMap modelMap = mav.getModelMap();
@@ -97,10 +91,10 @@ public class CartControllerTest {
 	public void when_NoTicketsInCartException_showDetails_should_use_cartErrorManager_to_return_viewModel() throws NoTicketsInCartException {
 		NoTicketsInCartException exception = new NoTicketsInCartException();
 		
-		when(cartService.getSectionsInCart()).thenThrow(exception);
+		when(cartViewService.getPayableItemsViewModel()).thenThrow(exception);
 		
 		ModelAndView mav = cartController.showDetails();
 		
-		verify(cartErrorManager).prepareErrorPage(mav, exception);
+		verify(cartErrorHandler).prepareErrorPage(mav, exception);
 	}
 }

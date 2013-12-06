@@ -49,7 +49,7 @@ public class SearchControllerTest {
 	private User currentUser;
 	
 	@Mock
-	private SearchErrorHandler searchErrorManager;
+	private SearchErrorHandler searchErrorHandler;
 	
 	@Mock
 	private TicketSearchPreferenceFactory ticketSearchPreferenceFactory;
@@ -199,7 +199,7 @@ public class SearchControllerTest {
 	}
 	
 	@Test
-	public void when_UserPreferencesNotSaved_should_use_searchErrorManager() throws UserPreferencesNotSaved {
+	public void when_UserPreferencesNotSaved_should_use_searchErrorHandler() throws UserPreferencesNotSaved {
 		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
 		
 		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
@@ -209,7 +209,7 @@ public class SearchControllerTest {
 		
 		ModelAndView mav = controller.savePreferences(ticketSearchVM);
 		
-		verify(searchErrorManager).addErrorMessageUserPreferencesNotSaved(mav);
+		verify(searchErrorHandler).addErrorMessageUserPreferencesNotSaved(mav);
 	}
 	
 	@Test

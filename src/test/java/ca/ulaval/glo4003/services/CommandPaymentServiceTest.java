@@ -1,8 +1,6 @@
 package ca.ulaval.glo4003.services;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +13,6 @@ import ca.ulaval.glo4003.constants.CreditCardType;
 import ca.ulaval.glo4003.domain.payment.CreditCardFactory;
 import ca.ulaval.glo4003.domain.payment.InvalidCreditCardException;
 import ca.ulaval.glo4003.domain.payment.MisterCard;
-import ca.ulaval.glo4003.services.CartService;
-import ca.ulaval.glo4003.services.CommandPaymentService;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,7 +34,10 @@ public class CommandPaymentServiceTest {
 	private CreditCardFactory creditCardFactory;
 
 	@Mock
-	private CartService cartService;
+	private CommandCartService commandCartService;
+	
+	@Mock
+	private QueryCartService queryCartService;
 
 	@InjectMocks
 	private CommandPaymentService paymentService;
@@ -53,11 +52,11 @@ public class CommandPaymentServiceTest {
 		MisterCard creditCard = mock(MisterCard.class);
 		CreditCardType creditCardType = CreditCardType.MISTERCARD;
 
-		when(cartService.cartContainsTickets()).thenReturn(true);
+		when(queryCartService.cartContainsTickets()).thenReturn(true);
 		when(creditCardFactory.createCreditCard(creditCardType, CREDIT_CARD_NUMBER,
 				SECURITY_CODE, CREDIT_CARD_USERNAME,
 				EXPIRATION_MONTH, EXPIRATION_YEAR)).thenReturn(creditCard);
-		when(cartService.getCumulativePrice()).thenReturn(PRICE);
+		when(queryCartService.getCumulativePrice()).thenReturn(PRICE);
 
 		paymentService.buyTicketsInCart(creditCardType, CREDIT_CARD_NUMBER,
 				SECURITY_CODE, CREDIT_CARD_USERNAME,
@@ -72,17 +71,17 @@ public class CommandPaymentServiceTest {
 		MisterCard creditCard = mock(MisterCard.class);
 		CreditCardType creditCardType = CreditCardType.MISTERCARD;
 
-		when(cartService.cartContainsTickets()).thenReturn(true);
+		when(queryCartService.cartContainsTickets()).thenReturn(true);
 		when(creditCardFactory.createCreditCard(creditCardType, CREDIT_CARD_NUMBER,
 						SECURITY_CODE, CREDIT_CARD_USERNAME,
 						EXPIRATION_MONTH, EXPIRATION_YEAR)).thenReturn(creditCard);
-		when(cartService.getCumulativePrice()).thenReturn(PRICE);
+		when(queryCartService.getCumulativePrice()).thenReturn(PRICE);
 
 		paymentService.buyTicketsInCart(creditCardType, CREDIT_CARD_NUMBER,
 				SECURITY_CODE, CREDIT_CARD_USERNAME,
 				EXPIRATION_MONTH, EXPIRATION_YEAR);
 
-		verify(cartService).makeTicketsUnavailableToOtherPeople();
+		verify(commandCartService).makeTicketsUnavailableToOtherPeople();
 	}
 
 	@Test
@@ -91,17 +90,17 @@ public class CommandPaymentServiceTest {
 		MisterCard creditCard = mock(MisterCard.class);
 		CreditCardType creditCardType = CreditCardType.MISTERCARD;
 
-		when(cartService.cartContainsTickets()).thenReturn(true);
+		when(queryCartService.cartContainsTickets()).thenReturn(true);
 		when(creditCardFactory.createCreditCard(creditCardType, CREDIT_CARD_NUMBER,
 						SECURITY_CODE, CREDIT_CARD_USERNAME,
 						EXPIRATION_MONTH, EXPIRATION_YEAR)).thenReturn(creditCard);
-		when(cartService.getCumulativePrice()).thenReturn(PRICE);
+		when(queryCartService.getCumulativePrice()).thenReturn(PRICE);
 
 		paymentService.buyTicketsInCart(creditCardType, CREDIT_CARD_NUMBER,
 				SECURITY_CODE, CREDIT_CARD_USERNAME,
 				EXPIRATION_MONTH, EXPIRATION_YEAR);
 
-		verify(cartService).emptyCart();
+		verify(commandCartService).emptyCart();
 	}
 
 	@Test(expected = NoTicketsInCartException.class)
@@ -109,13 +108,13 @@ public class CommandPaymentServiceTest {
 			NoTicketsInCartException {
 		CreditCardType creditCardType = CreditCardType.MISTERCARD;
 
-		when(cartService.cartContainsTickets()).thenReturn(false);
+		when(queryCartService.cartContainsTickets()).thenReturn(false);
 
 		paymentService.buyTicketsInCart(creditCardType, CREDIT_CARD_NUMBER,
 				SECURITY_CODE, CREDIT_CARD_USERNAME,
 				EXPIRATION_MONTH, EXPIRATION_YEAR);
 
-		verify(cartService).emptyCart();
+		verify(commandCartService).emptyCart();
 	}
 
 	@Test(expected = NoTicketsInCartException.class)
@@ -123,7 +122,7 @@ public class CommandPaymentServiceTest {
 			throws InvalidCreditCardException, NoTicketsInCartException {
 		CreditCardType creditCardType = CreditCardType.MISTERCARD;
 
-		when(cartService.cartContainsTickets()).thenReturn(false);
+		when(queryCartService.cartContainsTickets()).thenReturn(false);
 
 		paymentService.buyTicketsInCart(creditCardType, CREDIT_CARD_NUMBER,
 				SECURITY_CODE, CREDIT_CARD_USERNAME,

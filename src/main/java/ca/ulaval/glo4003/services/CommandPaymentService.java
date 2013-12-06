@@ -17,23 +17,26 @@ public class CommandPaymentService {
 	private CreditCardFactory creditCardFactory;
 
 	@Inject
-	private CartService cartService;
+	private CommandCartService commandCartService;
+	
+	@Inject
+	private QueryCartService queryCartService;
 
 	public void buyTicketsInCart(CreditCardType creditCardType,
 			String creditCardNumber, Integer securityCode,
 			String creditCardUserName, Integer expirationMonth,
 			Integer expirationYear) throws InvalidCreditCardException,
 			NoTicketsInCartException {
-		if (cartService.cartContainsTickets()) {
+		if (queryCartService.cartContainsTickets()) {
 			CreditCard creditCard = creditCardFactory.createCreditCard(creditCardType,
 					creditCardNumber, securityCode,
 					creditCardUserName, expirationMonth,
 					expirationYear);
-			creditCard.pay(cartService.getCumulativePrice());
-			cartService.makeTicketsUnavailableToOtherPeople();
-			cartService.emptyCart();
+			creditCard.pay(queryCartService.getCumulativePrice());
+			commandCartService.makeTicketsUnavailableToOtherPeople();
+			commandCartService.emptyCart();
 		} else {
-			cartService.emptyCart();
+			commandCartService.emptyCart();
 			throw new NoTicketsInCartException();
 		}
 	}

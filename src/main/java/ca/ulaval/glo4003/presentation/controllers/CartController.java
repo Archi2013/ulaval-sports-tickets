@@ -1,7 +1,5 @@
 package ca.ulaval.glo4003.presentation.controllers;
 
-import java.util.Set;
-
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -14,14 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.cart.SectionForCart;
 import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.presentation.controllers.errorhandler.CartErrorHandler;
 import ca.ulaval.glo4003.presentation.viewmodels.ChosenGeneralTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.ChosenWithSeatTicketsViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.PayableItemsViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.factories.PayableItemsViewModelFactory;
-import ca.ulaval.glo4003.services.CartService;
+import ca.ulaval.glo4003.services.CartViewService;
+import ca.ulaval.glo4003.services.CommandCartService;
+import ca.ulaval.glo4003.services.QueryCartService;
 import ca.ulaval.glo4003.services.exceptions.InvalidTicketsException;
 import ca.ulaval.glo4003.services.exceptions.NoTicketsInCartException;
 import ca.ulaval.glo4003.services.exceptions.TicketsNotFoundException;
@@ -35,13 +32,16 @@ public class CartController {
 	private static final String CART_DETAIL_PAGE = "cart/details";
 	
 	@Inject
-	CartService cartService;
+	CommandCartService commmandCartService;
 	
 	@Inject
-	private PayableItemsViewModelFactory payableItemsViewModelFactory;
+	QueryCartService queryCartService;
 	
 	@Inject
-	private CartErrorHandler cartErrorManager;
+	CartViewService cartViewService;
+	
+	@Inject
+	private CartErrorHandler cartErrorHandler;
 	
 	@Autowired
 	private User currentUser;
@@ -51,15 +51,15 @@ public class CartController {
 		ModelAndView mav = new ModelAndView(CART_DETAIL_PAGE);
 		
 		if (!currentUser.isLogged()) {
-			cartErrorManager.prepareErrorPageToShowNotConnectedUserMessage(mav);
+			cartErrorHandler.prepareErrorPageToShowNotConnectedUserMessage(mav);
 			return mav;
 		}
 		
 		try {
-			mav.addObject("payableItems", getPayableItemsViewModel());
+			mav.addObject("payableItems", cartViewService.getPayableItemsViewModel());
 			mav.addObject("currency", Constants.CURRENCY);
 		} catch (NoTicketsInCartException e) {
-			cartErrorManager.prepareErrorPage(mav, e);
+			cartErrorHandler.prepareErrorPage(mav, e);
 		}
 		
 		return mav;
@@ -71,21 +71,21 @@ public class CartController {
 		ModelAndView mav = new ModelAndView(CART_DETAIL_PAGE);
 
 		if (!currentUser.isLogged()) {
-			cartErrorManager.prepareErrorPageToShowNotConnectedUserMessage(mav);
+			cartErrorHandler.prepareErrorPageToShowNotConnectedUserMessage(mav);
 			return mav;
 		}
 		
 		if (result.hasErrors()) {
-			cartErrorManager.prepareErrorPageToShowTraffickedPageMessage(mav);
+			cartErrorHandler.prepareErrorPageToShowTraffickedPageMessage(mav);
 			return mav;
 		}
 
 		try {
 			addGeneralTicketsToCart(chosenGeneralTicketsVM);
-			mav.addObject("payableItems", getPayableItemsViewModel());
+			mav.addObject("payableItems", cartViewService.getPayableItemsViewModel());
 			mav.addObject("currency", Constants.CURRENCY);
 		} catch (TicketsNotFoundException | InvalidTicketsException | NoTicketsInCartException e) {
-			cartErrorManager.prepareErrorPage(mav, e);
+			cartErrorHandler.prepareErrorPage(mav, e);
 		}
 
 		return mav;
@@ -97,21 +97,21 @@ public class CartController {
 		ModelAndView mav = new ModelAndView(CART_DETAIL_PAGE);
 
 		if (!currentUser.isLogged()) {
-			cartErrorManager.prepareErrorPageToShowNotConnectedUserMessage(mav);
+			cartErrorHandler.prepareErrorPageToShowNotConnectedUserMessage(mav);
 			return mav;
 		}
 		
 		if (result.hasErrors()) {
-			cartErrorManager.prepareErrorPageToShowTraffickedPageMessage(mav);
+			cartErrorHandler.prepareErrorPageToShowTraffickedPageMessage(mav);
 			return mav;
 		}
 
 		try {
 			addWithSeatTicketsToCart(chosenWithSeatTicketsVM);
-			mav.addObject("payableItems", getPayableItemsViewModel());
+			mav.addObject("payableItems", cartViewService.getPayableItemsViewModel());
 			mav.addObject("currency", Constants.CURRENCY);
 		} catch (TicketsNotFoundException | InvalidTicketsException | NoTicketsInCartException e) {
-			cartErrorManager.prepareErrorPage(mav, e);
+			cartErrorHandler.prepareErrorPage(mav, e);
 		}
 
 		return mav;
@@ -119,21 +119,15 @@ public class CartController {
 	
 	private void addWithSeatTicketsToCart(ChosenWithSeatTicketsViewModel chosenWithSeatTicketsVM)
 			throws InvalidTicketsException, TicketsNotFoundException {
-		cartService.addWithSeatTicketsToCart(chosenWithSeatTicketsVM.getSportName(),
+		commmandCartService.addWithSeatTicketsToCart(chosenWithSeatTicketsVM.getSportName(),
 				chosenWithSeatTicketsVM.getGameDate(), chosenWithSeatTicketsVM.getSectionName(),
 				chosenWithSeatTicketsVM.getSelectedSeats());
 	}
 	
 	private void addGeneralTicketsToCart(ChosenGeneralTicketsViewModel chosenGeneralTicketsVM)
 			throws InvalidTicketsException, TicketsNotFoundException {
-		cartService.addGeneralTicketsToCart(chosenGeneralTicketsVM.getSportName(),
+		commmandCartService.addGeneralTicketsToCart(chosenGeneralTicketsVM.getSportName(),
 				chosenGeneralTicketsVM.getGameDate(), chosenGeneralTicketsVM.getSectionName(),
 				chosenGeneralTicketsVM.getNumberOfTicketsToBuy());
-	}
-	
-	public PayableItemsViewModel getPayableItemsViewModel() throws NoTicketsInCartException {
-		Set<SectionForCart> sectionFCs = cartService.getSectionsInCart();
-		Double cumulativePrice = cartService.getCumulativePrice();
-		return payableItemsViewModelFactory.createViewModel(sectionFCs, cumulativePrice);
 	}
 }

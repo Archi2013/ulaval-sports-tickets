@@ -46,7 +46,7 @@ public class SearchController {
 	private TicketSearchPreferenceFactory ticketSearchPreferenceFactory;
 	
 	@Inject
-	private SearchErrorHandler searchErrorManager;
+	private SearchErrorHandler searchErrorHandler;
 	
 	@Autowired
 	User currentUser;
@@ -84,7 +84,7 @@ public class SearchController {
 			mav.addObject("preferencesSaved", true);
 		} catch (UserPreferencesNotSaved e) {
 			mav.addObject("preferencesSaved", false);
-			searchErrorManager.addErrorMessageUserPreferencesNotSaved(mav);
+			searchErrorHandler.addErrorMessageUserPreferencesNotSaved(mav);
 		}
 		return mav;
 	}
