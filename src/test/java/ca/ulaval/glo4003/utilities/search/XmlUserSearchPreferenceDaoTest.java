@@ -24,18 +24,18 @@ public class XmlUserSearchPreferenceDaoTest {
 
 	private static final String FILENAME = "resources/XmlUserPreferencesDaoTest.xml";
 	
-	private XmlUserSearchPreferenceDao xmlUserPreferencesDao;
+	private XmlUserSearchPreferenceDao xmlUserSearchPreferenceDao;
 
 	@Before
 	public void setUp() throws Exception {
 		setUpUser();
 
-		xmlUserPreferencesDao = new XmlUserSearchPreferenceDao(FILENAME);
+		xmlUserSearchPreferenceDao = new XmlUserSearchPreferenceDao(FILENAME);
 
 		List<String> sportsName = new ArrayList<>();
 		sportsName.add("Football");
 
-		xmlUserPreferencesDao.save(A_USER_NAME, new UserSearchPreferenceDto(sportsName, A_DISPLAY_PERIOD, Boolean.TRUE, EMPTY_LIST));
+		xmlUserSearchPreferenceDao.save(A_USER_NAME, new UserSearchPreferenceDto(sportsName, A_DISPLAY_PERIOD, Boolean.TRUE, EMPTY_LIST));
 	}
 
 	private void setUpUser() throws UserAlreadyExistException {
@@ -55,18 +55,18 @@ public class XmlUserSearchPreferenceDaoTest {
 	@Test
 	public void savingUserPreferencesShouldAddItToXml() throws Exception {
 
-		xmlUserPreferencesDao.save(A_USER_NAME, new UserSearchPreferenceDto(EMPTY_LIST, AN_OTHER_DISPLAY_PERIOD, Boolean.FALSE, EMPTY_LIST));
-		UserSearchPreferenceDto ticketSPDto = xmlUserPreferencesDao.get(A_USER_NAME);
+		xmlUserSearchPreferenceDao.save(A_USER_NAME, new UserSearchPreferenceDto(EMPTY_LIST, AN_OTHER_DISPLAY_PERIOD, Boolean.FALSE, EMPTY_LIST));
+		UserSearchPreferenceDto ticketSPDto = xmlUserSearchPreferenceDao.get(A_USER_NAME);
 		Assert.assertEquals(false, ticketSPDto.isLocalGameOnly());
 		Assert.assertEquals(AN_OTHER_DISPLAY_PERIOD, ticketSPDto.getDisplayedPeriod());
 	}
 	
 	@Test
 	public void testCommit() throws Exception {
-		xmlUserPreferencesDao.commit();
-		xmlUserPreferencesDao = new XmlUserSearchPreferenceDao(FILENAME);
+		xmlUserSearchPreferenceDao.commit();
+		xmlUserSearchPreferenceDao = new XmlUserSearchPreferenceDao(FILENAME);
 
-		UserSearchPreferenceDto ticketSPDto = xmlUserPreferencesDao.get(A_USER_NAME);
+		UserSearchPreferenceDto ticketSPDto = xmlUserSearchPreferenceDao.get(A_USER_NAME);
 		Assert.assertEquals(Boolean.TRUE, ticketSPDto.isLocalGameOnly());
 		Assert.assertEquals(A_DISPLAY_PERIOD, ticketSPDto.getDisplayedPeriod());
 	}

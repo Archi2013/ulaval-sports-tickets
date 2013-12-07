@@ -71,7 +71,7 @@ public class SearchController {
 			}
 		}
 		
-		mav.addObject("ticketSearchForm", searchVM);
+		mav.addObject("searchForm", searchVM);
 		
 		mav.addObject("sections", getSectionViewModels(searchVM));
 		
@@ -80,29 +80,29 @@ public class SearchController {
 		return mav;
 	}
 	
-	@RequestMapping(value="sauvegarde-preferences", method=RequestMethod.POST)
-	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") SearchViewModel searchVM) {
+	@RequestMapping(value="sauvegarde-preference", method=RequestMethod.POST)
+	public ModelAndView savePreference(@ModelAttribute("searchForm") SearchViewModel searchVM) {
 		ModelAndView mav = home();
 		try {
 			UserSearchPreferenceDto userSearchPreferenceDto = userSearchPreferenceFactory.createPreferenceDto(searchVM);
 			commandUserSearchPreferenceService.saveUserSearchPreference(currentUser.getUsername(), userSearchPreferenceDto);
-			mav.addObject("preferencesSaved", true);
+			mav.addObject("preferenceSaved", true);
 		} catch (UserSearchPreferenceNotSaved e) {
-			mav.addObject("preferencesSaved", false);
+			mav.addObject("preferenceSaved", false);
 			searchErrorHandler.addErrorMessageUserPreferencesNotSaved(mav);
 		}
 		return mav;
 	}
 	
 	@RequestMapping(value="list", method=RequestMethod.POST)
-    public ModelAndView getList(@ModelAttribute("ticketSearchForm") SearchViewModel searchVM) {
+    public ModelAndView getList(@ModelAttribute("searchForm") SearchViewModel searchVM) {
 		ModelAndView mav = new ModelAndView("search/list");
 		
 		mav.addObject("currency", Constants.CURRENCY);
 		
 		mav.addObject("sections", getSectionViewModels(searchVM));
 		
-		mav.addObject("preferencesSaved", false);
+		mav.addObject("preferenceSaved", false);
 		
 		return mav;
     }
