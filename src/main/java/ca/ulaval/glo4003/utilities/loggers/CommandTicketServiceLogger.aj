@@ -23,7 +23,7 @@ public aspect CommandTicketServiceLogger {
                 CommandTicketServiceLogger.info(dateNow.toString()+" : Vente de tickets d'admission générale pour le sport "+sectionFC.getSportName()
                         + " à la date " + sectionFC.getGameDate()
                         + "\n"+sectionFC.getNumberOfTicketsToBuy() + " tickets vendus à " + sectionFC.getUnitPrice()
-                        +"\n Total "+sectionFC.getSubtotal());
+                        +"\nTotal "+sectionFC.getSubtotal());
             } else {
                 CommandTicketServiceLogger.info(dateNow.toString()+" : Vente de tickets sélectionnés pour le sport "+sectionFC.getSportName() +
                         " à la date " + sectionFC.getGameDate());
