@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.presentation.viewmodels.GameViewModel;
 import ca.ulaval.glo4003.utilities.Constants;
+import ca.ulaval.glo4003.utilities.time.UrlDateTime;
 
 @Component
 public class GameConverter extends AbstractConverter<GameDto, GameViewModel> {
@@ -20,6 +21,7 @@ public class GameConverter extends AbstractConverter<GameDto, GameViewModel> {
 				gameDto.getOpponents(),
 				gameDto.getLocation(),
 				constants.toLongDateTimeFormatFR(gameDto.getGameDate()),
+				new UrlDateTime(gameDto.getGameDate()),
 				gameDto.getNumberOfTickets());
 	}
 }

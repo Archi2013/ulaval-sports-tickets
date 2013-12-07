@@ -21,6 +21,10 @@ import ca.ulaval.glo4003.services.GameViewService;
 @RequestMapping(value = "/sport/{sportUrl}", method = RequestMethod.GET)
 public class GameController {
 
+	private static final String GAME_LIST_PAGE = "game/list";
+
+	private static final String NO_GAMES_PAGE = "game/no-games";
+
 	private static final String ERROR_404_PAGE = "error/404";
 
 	@Inject
@@ -32,7 +36,7 @@ public class GameController {
 	@RequestMapping(value = "/matchs", method = RequestMethod.GET)
 	public ModelAndView getGamesForSport(@PathVariable String sportUrl) {
 
-		ModelAndView mav = new ModelAndView("game/list");
+		ModelAndView mav = new ModelAndView(GAME_LIST_PAGE);
 
 		try {
 			GamesViewModel games = gameViewService.getGamesForSport(sportUrlMapper.getSportName(sportUrl));
@@ -41,7 +45,7 @@ public class GameController {
 			if (games.hasGames()) {
 				return mav;
 			} else {
-				mav.setViewName("game/no-games");
+				mav.setViewName(NO_GAMES_PAGE);
 				return mav;
 			}
 		} catch (RuntimeException | NoSportForUrlException | SportDoesntExistException | GameDoesntExistException e) {

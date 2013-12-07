@@ -1,7 +1,6 @@
 package ca.ulaval.glo4003.utilities.search;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Lists.transform;
+import static com.google.common.collect.Lists.*;
 
 import java.util.List;
 
@@ -21,6 +20,8 @@ import ca.ulaval.glo4003.domain.tickets.TicketTypeUrlMapper;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.utilities.persistence.XmlIntegrityException;
+import ca.ulaval.glo4003.utilities.time.UrlDateTime;
+import ca.ulaval.glo4003.utilities.time.UrlDateTimeFactory;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -40,6 +41,9 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 
 	@Inject
 	SportUrlMapper sportUrlMapper;
+	
+	@Inject
+	UrlDateTimeFactory urlDateTimeFactory;
 
 	@Override
 	public List<SectionForSearchDto> getSections(UserSearchPreferenceDto ticketSearchPreferenceDto) {
@@ -129,7 +133,8 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 	}
 
 	private String createUrl(String sportName, DateTime gameDate, String sectionName) {
+		UrlDateTime urlDateTime = urlDateTimeFactory.create(gameDate);
 		return String.format("/sport/%s/match/%s/billets/%s", sportUrlMapper.getUrl(sportName),
-				gameDate.toString("yyyyMMddHHmmz"), ticketTypeUrlMapper.getUrl(sectionName));
+				urlDateTime.toString(), ticketTypeUrlMapper.getUrl(sectionName));
 	}
 }

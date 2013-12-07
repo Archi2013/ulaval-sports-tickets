@@ -3,7 +3,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 import javax.inject.Inject;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,25 +21,37 @@ import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;
 import ca.ulaval.glo4003.services.SectionService;
 import ca.ulaval.glo4003.utilities.Constants;
 import ca.ulaval.glo4003.utilities.persistence.XmlIntegrityException;
+import ca.ulaval.glo4003.utilities.time.UrlDateTimeFactory;
 
 @Controller
 @SessionAttributes({ "currentUser" })
 @RequestMapping(value = "/sport/{sportNameUrl}/match/{dateString}", method = RequestMethod.GET)
 public class SectionController {
 
+	private static final String SECTION_LIST = "section/list";
+
+	private static final String SECTION_NO_TICKET = "section/no-ticket";
+
+	private static final String ERROR_404_PAGE = "error/404";
+
+	private static final String SECTION_DETAILS_PAGE = "section/details";
+
 	@Inject
 	private SectionService sectionService;
 	
 	@Inject
 	private SportUrlMapper sportUrlMapper;
+	
+	@Inject
+	private UrlDateTimeFactory urlDateTimeFactory;
 
 	@RequestMapping(value = "/billets/{ticketType}", method = RequestMethod.GET)
 	public ModelAndView getSectionDetails(@PathVariable String dateString, @PathVariable String sportNameUrl,
 			@PathVariable String ticketType) {
 		try {
 			String sportName = sportUrlMapper.getSportName(sportNameUrl);
-			DateTime gameDate = DateTime.parse(dateString, DateTimeFormat.forPattern("yyyyMMddHHmmz"));
-			ModelAndView mav = new ModelAndView("section/details");
+			DateTime gameDate = urlDateTimeFactory.create(dateString).getDateTime();
+			ModelAndView mav = new ModelAndView(SECTION_DETAILS_PAGE);
 			mav.addObject("currency", Constants.CURRENCY);
 
 			SectionViewModel section = sectionService.getAvailableSection(sportName, gameDate, ticketType);
@@ -59,7 +70,7 @@ public class SectionController {
 
 			return mav;
 		} catch (SectionDoesntExistException | NoSportForUrlException e) {
-			return new ModelAndView("error/404");
+			return new ModelAndView(ERROR_404_PAGE);
 		}
 	}
 
@@ -67,8 +78,8 @@ public class SectionController {
 	public ModelAndView getSectionsForGame(@PathVariable String dateString, @PathVariable String sportNameUrl) {
 		try {
 			String sportName = sportUrlMapper.getSportName(sportNameUrl);
-			DateTime gameDate = DateTime.parse(dateString, DateTimeFormat.forPattern("yyyyMMddHHmmz"));
-			ModelAndView mav = new ModelAndView("section/list");
+			DateTime gameDate = urlDateTimeFactory.create(dateString).getDateTime();
+			ModelAndView mav = new ModelAndView(SECTION_LIST);
 
 			mav.addObject("currency", Constants.CURRENCY);
 
@@ -77,9 +88,9 @@ public class SectionController {
 			return mav;
 
 		} catch (GameDoesntExistException | NoSportForUrlException e) {
-			return new ModelAndView("error/404");
+			return new ModelAndView(ERROR_404_PAGE);
 		} catch (XmlIntegrityException e) {
-			return new ModelAndView("section/no-ticket");
+			return new ModelAndView(SECTION_NO_TICKET);
 		}
 	}
 }

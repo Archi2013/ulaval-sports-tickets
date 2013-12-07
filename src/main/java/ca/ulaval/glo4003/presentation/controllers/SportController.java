@@ -17,13 +17,13 @@ import ca.ulaval.glo4003.services.SportViewService;
 public class SportController {
 
 	@Inject
-	private SportViewService service;
+	private SportViewService sportViewService;
 
 	@RequestMapping(value = "sports", method = RequestMethod.GET)
 	public ModelAndView getSports() {
 		ModelAndView mav = new ModelAndView("sport/list");
 
-		SportsViewModel sports = service.getSports();
+		SportsViewModel sports = sportViewService.getSports();
 		mav.addObject("sports", sports);
 		return mav;
 	}

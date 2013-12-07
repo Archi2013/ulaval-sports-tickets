@@ -3,8 +3,6 @@ package ca.ulaval.glo4003.presentation.controllers;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,8 +24,6 @@ public class GameControllerTest {
 
 	private static final String SPORT_NAME = "Basketball féminin";
 	private static final String SPORT_URL = "basketball-feminin";
-	private static final String GAME_DATE_STR = "201408241300EDT";
-	private static final DateTime GAME_DATE = DateTime.parse(GAME_DATE_STR, DateTimeFormat.forPattern("yyyyMMddHHmmz"));
 
 	@Mock
 	private GameViewService gameService;
@@ -95,7 +91,6 @@ public class GameControllerTest {
 		assertSame(gamesViewModel, modelMap.get("games"));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void getSportGames_should_redirect_to_404_path_when_NoSportForUrlException() throws Exception {
 		when(sportUrlMapper.getSportName(SPORT_URL)).thenThrow(new NoSportForUrlException());

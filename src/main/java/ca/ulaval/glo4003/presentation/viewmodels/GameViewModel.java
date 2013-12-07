@@ -2,21 +2,34 @@ package ca.ulaval.glo4003.presentation.viewmodels;
 
 import org.joda.time.DateTime;
 
+import ca.ulaval.glo4003.utilities.time.UrlDateTime;
+
 public class GameViewModel {
 	public DateTime gameDate;
 	public String opponents;
 	public String location;
 	public String date;
 	public Integer numberOfTickets;
+	public UrlDateTime urlDateTime;
 
-	public GameViewModel(DateTime gameDate, String opponents, String location, String date, Integer numberOfTickets) {
+	public GameViewModel(DateTime gameDate, String opponents, String location,
+			String date, UrlDateTime urlDateTime, Integer numberOfTickets) {
 		this.gameDate = gameDate;
 		this.opponents = opponents;
 		this.location = location;
 		this.date = date;
 		this.numberOfTickets = numberOfTickets;
+		this.urlDateTime = urlDateTime;
 	}
 
+	public DateTime getGameDate() {
+		return gameDate;
+	}
+
+	public void setGameDate(DateTime gameDate) {
+		this.gameDate = gameDate;
+	}
+	
 	public String getOpponents() {
 		return opponents;
 	}
@@ -49,12 +62,12 @@ public class GameViewModel {
 		this.numberOfTickets = numberOfTickets;
 	}
 
-	public DateTime getGameDate() {
-		return gameDate;
+	public UrlDateTime getUrlDateTime() {
+		return urlDateTime;
 	}
 
-	public void setGameDate(DateTime gameDate) {
-		this.gameDate = gameDate;
+	public void setUrlDateTime(UrlDateTime urlDateTime) {
+		this.urlDateTime = urlDateTime;
 	}
 
 }

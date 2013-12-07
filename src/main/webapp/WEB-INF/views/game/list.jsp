@@ -33,7 +33,7 @@
 						<td>${game.opponents}</td>
 						<td>${game.location}</td>
 						<td>${game.getNumberOfTickets()}</td>
-						<td class="action-column"><a href="match/${game.gameDate.toString('yyyyMMddHHmmz')}/billets"
+						<td class="action-column"><a href="match/${game.urlDateTime}/billets"
 							class="standard-button-round orange-button">Consulter</a></td>
 					</tr>
 				</c:forEach>

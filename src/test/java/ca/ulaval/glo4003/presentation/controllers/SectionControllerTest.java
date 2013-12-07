@@ -3,6 +3,8 @@ package ca.ulaval.glo4003.presentation.controllers;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import javax.inject.Inject;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.junit.Before;
@@ -24,14 +26,16 @@ import ca.ulaval.glo4003.presentation.viewmodels.ChosenWithSeatTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;
 import ca.ulaval.glo4003.services.SectionService;
+import ca.ulaval.glo4003.utilities.time.UrlDateTime;
+import ca.ulaval.glo4003.utilities.time.UrlDateTimeFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SectionControllerTest {
 
 	private static final String SPORT_URL = "football";
 	private static final String SPORT_NAME = "Football";
-	private static final String GAME_DATE_STR = "201408241300EDT";
-	private static final DateTime GAME_DATE = DateTime.parse(GAME_DATE_STR, DateTimeFormat.forPattern("yyyyMMddHHmmz"));
+	private static final String GAME_DATE_STR = "1998-02-28--16-30-EST";
+	private static final DateTime GAME_DATE = DateTime.parse("1998-02-28T16:30:00.000-05:00");
 	private static final String TICKET_TYPE = "GÉNÉRAL:BLEUS";
 
 	@Mock
@@ -40,11 +44,17 @@ public class SectionControllerTest {
 	@Mock
 	private SportUrlMapper sportUrlMapper;
 
+	@Mock
+	private UrlDateTimeFactory urlDateTimeFactory;
+	
 	@InjectMocks
 	private SectionController sectionController;
 
 	@Before
 	public void setUp() {
+		UrlDateTime urlDateTime = mock(UrlDateTime.class);
+		when(urlDateTimeFactory.create(GAME_DATE_STR)).thenReturn(urlDateTime);
+		when(urlDateTime.getDateTime()).thenReturn(GAME_DATE);
 	}
 
 	@Test
