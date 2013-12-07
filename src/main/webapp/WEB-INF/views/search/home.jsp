@@ -18,8 +18,8 @@
 	<h2>${pageTitle}</h2>
 
 	<section class="search-block">
-		<c:url value="/recherche/sauvegarde-preferences" var="searchAction" />
-		<form:form id="search-form" commandName="ticketSearchForm"
+		<c:url value="/recherche/sauvegarde-preference" var="searchAction" />
+		<form:form id="search-form" commandName="searchForm"
 			action="${searchAction}" method="POST">
 			<div class="search-criterion">
 				<h4 class="search-criterion-title">Sport(s)</h4>
@@ -63,7 +63,7 @@
 		</form:form>
 	</section>
 	
-	<c:if test="${preferencesSaved}">
+	<c:if test="${preferenceSaved}">
         <div class="information-block-succes-skin margin-25-50">Vos préférences de recherche ont été sauvegardées.</div>
     </c:if>
     <c:if test="${not empty errorMessage}">

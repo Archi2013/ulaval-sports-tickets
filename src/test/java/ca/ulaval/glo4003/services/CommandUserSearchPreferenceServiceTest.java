@@ -40,7 +40,7 @@ public class CommandUserSearchPreferenceServiceTest {
 	}
 	
 	@Test(expected=UserSearchPreferenceNotSaved.class)
-	public void when_UserPreferencesDoesntExistException_saveUserPreference_should_raise_UserPreferencesNotSaved() throws UserSearchPreferenceDoesntExistException, UserSearchPreferenceNotSaved {
+	public void when_UserSearchPreferenceDoesntExistException_saveUserPreference_should_raise_UserPreferencesNotSaved() throws UserSearchPreferenceDoesntExistException, UserSearchPreferenceNotSaved {
 		UserSearchPreferenceDto userSearchPreferenceDto = mock(UserSearchPreferenceDto.class);
 		
 		doThrow(new UserSearchPreferenceDoesntExistException()).when(userSearchPreferenceDao).save(USERNAME, userSearchPreferenceDto);

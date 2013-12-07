@@ -95,15 +95,15 @@ public class SearchControllerTest {
 	}
 	
 	@Test
-	public void home_should_add_a_ticketSearchForm_to_model() {
+	public void home_should_add_a_searchForm_to_model() {
 		when(userSearchPreferenceFactory.createInitialViewModel()).thenReturn(searchVM);
 		when(currentUser.isLogged()).thenReturn(false);
 		
 		ModelAndView mav = controller.home();
 		ModelMap modelMap = mav.getModelMap();
 
-		assertTrue(modelMap.containsAttribute("ticketSearchForm"));
-		assertSame(searchVM, modelMap.get("ticketSearchForm"));
+		assertTrue(modelMap.containsAttribute("searchForm"));
+		assertSame(searchVM, modelMap.get("searchForm"));
 	}
 	
 	@Test
@@ -132,8 +132,8 @@ public class SearchControllerTest {
 		ModelAndView mav = controller.home();
 		ModelMap modelMap = mav.getModelMap();
 
-		assertTrue(modelMap.containsAttribute("ticketSearchForm"));
-		assertSame(searchVM, modelMap.get("ticketSearchForm"));
+		assertTrue(modelMap.containsAttribute("searchForm"));
+		assertSame(searchVM, modelMap.get("searchForm"));
 	}
 	
 	@Test
@@ -146,36 +146,36 @@ public class SearchControllerTest {
 		ModelAndView mav = controller.home();
 		ModelMap modelMap = mav.getModelMap();
 
-		assertTrue(modelMap.containsAttribute("ticketSearchForm"));
-		assertSame(searchVM, modelMap.get("ticketSearchForm"));
+		assertTrue(modelMap.containsAttribute("searchForm"));
+		assertSame(searchVM, modelMap.get("searchForm"));
 	}
 	
 	@Test
-	public void savePreferences_should_set_preferencesSaved_to_true() {
+	public void savePreference_should_set_preferenceSaved_to_true() {
 		when(userSearchPreferenceFactory.createInitialViewModel()).thenReturn(searchVM);
 		when(currentUser.isLogged()).thenReturn(false);
 
 		
-		ModelAndView mav = controller.savePreferences(searchVM);
+		ModelAndView mav = controller.savePreference(searchVM);
 		ModelMap modelMap = mav.getModelMap();
 		
-		assertTrue(modelMap.containsAttribute("preferencesSaved"));
-		assertTrue((boolean) modelMap.get("preferencesSaved"));
+		assertTrue(modelMap.containsAttribute("preferenceSaved"));
+		assertTrue((boolean) modelMap.get("preferenceSaved"));
 	}
 	
 	@Test
-	public void savePreferences_should_return_the_good_search_home_page() {
+	public void savePreference_should_return_the_good_search_home_page() {
 		when(userSearchPreferenceFactory.createInitialViewModel()).thenReturn(searchVM);
 		when(currentUser.isLogged()).thenReturn(false);
 
 		
-		ModelAndView mav = controller.savePreferences(searchVM);
+		ModelAndView mav = controller.savePreference(searchVM);
 
 		assertEquals(SEARCH_HOME_PAGE, mav.getViewName());
 	}
 	
 	@Test
-	public void when_UserPreferencesNotSaved_should_set_preferencesSaved_to_false() throws UserSearchPreferenceNotSaved {
+	public void when_UserSearchPreferenceNotSaved_should_set_preferenceSaved_to_false() throws UserSearchPreferenceNotSaved {
 		UserSearchPreferenceDto userSearchPreferenceDto = mock(UserSearchPreferenceDto.class);
 		
 		when(userSearchPreferenceFactory.createInitialViewModel()).thenReturn(searchVM);
@@ -185,15 +185,15 @@ public class SearchControllerTest {
 		doThrow(new UserSearchPreferenceNotSaved()).when(commandUserSearchPreferenceService).saveUserSearchPreference(USERNAME, userSearchPreferenceDto);
 
 		
-		ModelAndView mav = controller.savePreferences(searchVM);
+		ModelAndView mav = controller.savePreference(searchVM);
 		ModelMap modelMap = mav.getModelMap();
 		
-		assertTrue(modelMap.containsAttribute("preferencesSaved"));
-		assertFalse((boolean) modelMap.get("preferencesSaved"));
+		assertTrue(modelMap.containsAttribute("preferenceSaved"));
+		assertFalse((boolean) modelMap.get("preferenceSaved"));
 	}
 	
 	@Test
-	public void when_UserPreferencesNotSaved_savePreferences_should_use_searchErrorHandler() throws UserSearchPreferenceNotSaved {
+	public void when_UserSearchPreferenceNotSaved_savePreference_should_use_searchErrorHandler() throws UserSearchPreferenceNotSaved {
 		UserSearchPreferenceDto userSearchPreferenceDto = mock(UserSearchPreferenceDto.class);
 		
 		when(userSearchPreferenceFactory.createInitialViewModel()).thenReturn(searchVM);
@@ -203,7 +203,7 @@ public class SearchControllerTest {
 		doThrow(new UserSearchPreferenceNotSaved()).when(commandUserSearchPreferenceService).saveUserSearchPreference(USERNAME, userSearchPreferenceDto);
 
 		
-		ModelAndView mav = controller.savePreferences(searchVM);
+		ModelAndView mav = controller.savePreference(searchVM);
 		
 		verify(searchErrorHandler).addErrorMessageUserPreferencesNotSaved(mav);
 	}
@@ -216,11 +216,11 @@ public class SearchControllerTest {
 	}
 	
 	@Test
-	public void getList_should_add_preferencesSaved_to_false_to_delete_succes_message() {
+	public void getList_should_add_preferenceSaved_to_false_to_delete_succes_message() {
 		ModelAndView mav = controller.getList(searchVM);
 		ModelMap modelMap = mav.getModelMap();
 		
-		assertTrue(modelMap.containsAttribute("preferencesSaved"));
-		assertFalse((boolean) modelMap.get("preferencesSaved"));
+		assertTrue(modelMap.containsAttribute("preferenceSaved"));
+		assertFalse((boolean) modelMap.get("preferenceSaved"));
 	}
 }

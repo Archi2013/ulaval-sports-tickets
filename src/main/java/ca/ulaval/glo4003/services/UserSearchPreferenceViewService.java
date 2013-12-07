@@ -17,10 +17,10 @@ public class UserSearchPreferenceViewService {
 	UserSearchPreferenceFactory userSearchPreferenceFactory;
 	
 	@Inject
-	UserSearchPreferenceDao userPreferencesDao;
+	UserSearchPreferenceDao userSearchPreferenceDao;
 	
 	public SearchViewModel getSearchViewModelForUser(String username) throws UserDoesntHaveSavedSearchPreference {
-		UserSearchPreferenceDto userSearchPreferenceDto = userPreferencesDao.get(username);	
+		UserSearchPreferenceDto userSearchPreferenceDto = userSearchPreferenceDao.get(username);	
 		SearchViewModel searchVM = userSearchPreferenceFactory.createViewModel(userSearchPreferenceDto);
 		return searchVM;			
 	}
