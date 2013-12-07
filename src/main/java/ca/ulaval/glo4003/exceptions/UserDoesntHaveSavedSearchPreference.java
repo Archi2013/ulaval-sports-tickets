@@ -1,6 +1,6 @@
 package ca.ulaval.glo4003.exceptions;
 
-public class UserDoesntHaveSavedPreferences extends Exception {
+public class UserDoesntHaveSavedSearchPreference extends Exception {
 
 	private static final long serialVersionUID = 1L;
 }

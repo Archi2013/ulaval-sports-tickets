@@ -9,10 +9,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.users.UserPreferencesDao;
-import ca.ulaval.glo4003.domain.users.UserPreferencesDoesntExistException;
-import ca.ulaval.glo4003.services.exceptions.UserPreferencesNotSaved;
-import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.services.exceptions.UserSearchPreferenceNotSaved;
+import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDto;
+import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDoesntExistException;
+import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandUserPreferencesViewServiceTest {
@@ -20,31 +20,31 @@ public class CommandUserPreferencesViewServiceTest {
 	private static final String USERNAME = "north";
 	
 	@Mock
-	UserPreferencesDao userPreferencesDao;
+	UserSearchPreferenceDao userPreferencesDao;
 
 	@InjectMocks
-	private CommandUserPreferencesService commandUserPreferencesService;
+	private CommandUserSearchPreferenceService commandUserPreferencesService;
 
 	@Before
 	public void setUp() {
 	}
 	
 	@Test
-	public void saveUserPreference_should_save_preferences() throws UserPreferencesNotSaved, UserPreferencesDoesntExistException {
-		TicketSearchPreferenceDto ticketSearchPreferenceDto = mock(TicketSearchPreferenceDto.class);
+	public void saveUserPreference_should_save_preferences() throws UserSearchPreferenceNotSaved, UserSearchPreferenceDoesntExistException {
+		UserSearchPreferenceDto ticketSearchPreferenceDto = mock(UserSearchPreferenceDto.class);
 		
-		commandUserPreferencesService.saveUserPreference(USERNAME, ticketSearchPreferenceDto);
+		commandUserPreferencesService.saveUserSearchPreference(USERNAME, ticketSearchPreferenceDto);
 		
 		verify(userPreferencesDao).save(USERNAME, ticketSearchPreferenceDto);
 		verify(userPreferencesDao).commit();
 	}
 	
-	@Test(expected=UserPreferencesNotSaved.class)
-	public void when_UserPreferencesDoesntExistException_saveUserPreference_should_raise_UserPreferencesNotSaved() throws UserPreferencesDoesntExistException, UserPreferencesNotSaved {
-		TicketSearchPreferenceDto ticketSearchPreferenceDto = mock(TicketSearchPreferenceDto.class);
+	@Test(expected=UserSearchPreferenceNotSaved.class)
+	public void when_UserPreferencesDoesntExistException_saveUserPreference_should_raise_UserPreferencesNotSaved() throws UserSearchPreferenceDoesntExistException, UserSearchPreferenceNotSaved {
+		UserSearchPreferenceDto ticketSearchPreferenceDto = mock(UserSearchPreferenceDto.class);
 		
-		doThrow(new UserPreferencesDoesntExistException()).when(userPreferencesDao).save(USERNAME, ticketSearchPreferenceDto);
+		doThrow(new UserSearchPreferenceDoesntExistException()).when(userPreferencesDao).save(USERNAME, ticketSearchPreferenceDto);
 		
-		commandUserPreferencesService.saveUserPreference(USERNAME, ticketSearchPreferenceDto);
+		commandUserPreferencesService.saveUserSearchPreference(USERNAME, ticketSearchPreferenceDto);
 	}
 }

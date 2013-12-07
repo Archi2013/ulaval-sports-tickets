@@ -11,19 +11,19 @@ import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
-import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.SearchViewModel;
 import ca.ulaval.glo4003.utilities.Constants;
-import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDto;
 
 import com.google.common.base.Function;
 
 @Component
-public class TicketSearchPreferenceFactory {
+public class UserSearchPreferenceFactory {
 
 	@Inject
 	private Constants constants;
 
-	public TicketSearchPreferenceDto createPreferenceDto(TicketSearchViewModel ticketSearchVM) {
+	public UserSearchPreferenceDto createPreferenceDto(SearchViewModel ticketSearchVM) {
 		List<String> selectedTicketKindsString = newArrayList();
 		List<TicketKind> selectedTicketKinds = ticketSearchVM.getSelectedTicketKinds();
 		if (selectedTicketKinds != null) {
@@ -34,13 +34,13 @@ public class TicketSearchPreferenceFactory {
 				}
 			});
 		}
-		TicketSearchPreferenceDto ticketSPDto = new TicketSearchPreferenceDto(
+		UserSearchPreferenceDto ticketSPDto = new UserSearchPreferenceDto(
 				ticketSearchVM.getSelectedSports(), ticketSearchVM.getDisplayedPeriod().name(),
 				ticketSearchVM.isLocalGameOnly(), selectedTicketKindsString);
 		return ticketSPDto;
 	}
 	
-	public TicketSearchViewModel createViewModel(TicketSearchPreferenceDto ticketSPDto) {
+	public SearchViewModel createViewModel(UserSearchPreferenceDto ticketSPDto) {
 		DisplayedPeriod displayPeriod = DisplayedPeriod.valueOf(ticketSPDto.getDisplayedPeriod());
 		List<TicketKind> selectedTicketKinds = transform(ticketSPDto.getSelectedTicketKinds(),
 				new Function<String, TicketKind>() {
@@ -53,15 +53,15 @@ public class TicketSearchPreferenceFactory {
 				ticketSPDto.isLocalGameOnly(), selectedTicketKinds);
 	}
 
-	public TicketSearchViewModel createInitialViewModel() {
+	public SearchViewModel createInitialViewModel() {
 		List<DisplayedPeriod> displayedPeriods = DisplayedPeriod.getDisplayedPeriods();
 		return createTicketSearchViewModel(constants.getSportList(), displayedPeriods.get(displayedPeriods.size() - 1),
 				false, TicketKind.getTicketKinds());
 	}
 
-	private TicketSearchViewModel createTicketSearchViewModel(List<String> selectedSports,
+	private SearchViewModel createTicketSearchViewModel(List<String> selectedSports,
 			DisplayedPeriod displayPeriod, Boolean isLocalGameOnly, List<TicketKind> selectedTicketKinds) {
-		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
+		SearchViewModel ticketSearchVM = new SearchViewModel();
 		ticketSearchVM.setSelectedSports(selectedSports);
 		ticketSearchVM.setDisplayedPeriod(displayPeriod);
 		ticketSearchVM.setLocalGameOnly(isLocalGameOnly);

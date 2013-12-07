@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface SectionForSearchDao {
 
-	public List<SectionForSearchDto> getSections(TicketSearchPreferenceDto ticketSearchPreferenceDto);
+	public List<SectionForSearchDto> getSections(UserSearchPreferenceDto ticketSearchPreferenceDto);
 
 }

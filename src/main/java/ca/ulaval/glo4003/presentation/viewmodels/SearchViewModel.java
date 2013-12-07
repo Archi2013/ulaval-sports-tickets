@@ -5,7 +5,7 @@ import java.util.List;
 import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
 
-public class TicketSearchViewModel {
+public class SearchViewModel {
 	public List<String> selectedSports;
 	private DisplayedPeriod displayedPeriod;
 	public boolean localGameOnly;

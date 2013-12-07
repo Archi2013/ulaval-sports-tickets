@@ -17,7 +17,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionForSearchViewModelFactory;
 import ca.ulaval.glo4003.utilities.search.SectionForSearchDao;
 import ca.ulaval.glo4003.utilities.search.SectionForSearchDto;
-import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchViewServiceTest {
@@ -37,7 +37,7 @@ public class SearchViewServiceTest {
 	
 	@Test
 	public void given_a_ticketSearchViewModel_getTickets_should_return_a_ticket_list() {
-		TicketSearchPreferenceDto ticketSPDto = mock(TicketSearchPreferenceDto.class);
+		UserSearchPreferenceDto ticketSPDto = mock(UserSearchPreferenceDto.class);
 		List<SectionForSearchDto> sectionDtos = new ArrayList<>();
 		List<SectionForSearchViewModel> sectionForSearchVMs = new ArrayList<>();
 		

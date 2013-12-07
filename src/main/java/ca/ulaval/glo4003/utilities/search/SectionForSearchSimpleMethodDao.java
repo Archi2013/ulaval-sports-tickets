@@ -42,7 +42,7 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 	SportUrlMapper sportUrlMapper;
 
 	@Override
-	public List<SectionForSearchDto> getSections(TicketSearchPreferenceDto ticketSearchPreferenceDto) {
+	public List<SectionForSearchDto> getSections(UserSearchPreferenceDto ticketSearchPreferenceDto) {
 		List<String> sportNames = ticketSearchPreferenceDto.getSelectedSports();
 		List<SectionForSearchDto> sectionFSDtos = createFullListForSelectedSports(sportNames);
 

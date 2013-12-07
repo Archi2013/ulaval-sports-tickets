@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.users;
+package ca.ulaval.glo4003.utilities.search;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,9 +9,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.domain.users.UserAlreadyExistException;
+import ca.ulaval.glo4003.domain.users.UserDto;
+import ca.ulaval.glo4003.domain.users.XmlUserDao;
+import ca.ulaval.glo4003.utilities.search.XmlUserSearchPreferenceDao;
 
-public class XmlUserPreferencesDaoTest {
+public class XmlUserSearchPreferenceDaoTest {
 
 	private static final String AN_OTHER_DISPLAY_PERIOD = "ALL";
 	private static final ArrayList<String> EMPTY_LIST = new ArrayList<String>();
@@ -21,18 +24,18 @@ public class XmlUserPreferencesDaoTest {
 
 	private static final String FILENAME = "resources/XmlUserPreferencesDaoTest.xml";
 	
-	private XmlUserPreferencesDao xmlUserPreferencesDao;
+	private XmlUserSearchPreferenceDao xmlUserPreferencesDao;
 
 	@Before
 	public void setUp() throws Exception {
 		setUpUser();
 
-		xmlUserPreferencesDao = new XmlUserPreferencesDao(FILENAME);
+		xmlUserPreferencesDao = new XmlUserSearchPreferenceDao(FILENAME);
 
 		List<String> sportsName = new ArrayList<>();
 		sportsName.add("Football");
 
-		xmlUserPreferencesDao.save(A_USER_NAME, new TicketSearchPreferenceDto(sportsName, A_DISPLAY_PERIOD, Boolean.TRUE, EMPTY_LIST));
+		xmlUserPreferencesDao.save(A_USER_NAME, new UserSearchPreferenceDto(sportsName, A_DISPLAY_PERIOD, Boolean.TRUE, EMPTY_LIST));
 	}
 
 	private void setUpUser() throws UserAlreadyExistException {
@@ -52,8 +55,8 @@ public class XmlUserPreferencesDaoTest {
 	@Test
 	public void savingUserPreferencesShouldAddItToXml() throws Exception {
 
-		xmlUserPreferencesDao.save(A_USER_NAME, new TicketSearchPreferenceDto(EMPTY_LIST, AN_OTHER_DISPLAY_PERIOD, Boolean.FALSE, EMPTY_LIST));
-		TicketSearchPreferenceDto ticketSPDto = xmlUserPreferencesDao.get(A_USER_NAME);
+		xmlUserPreferencesDao.save(A_USER_NAME, new UserSearchPreferenceDto(EMPTY_LIST, AN_OTHER_DISPLAY_PERIOD, Boolean.FALSE, EMPTY_LIST));
+		UserSearchPreferenceDto ticketSPDto = xmlUserPreferencesDao.get(A_USER_NAME);
 		Assert.assertEquals(false, ticketSPDto.isLocalGameOnly());
 		Assert.assertEquals(AN_OTHER_DISPLAY_PERIOD, ticketSPDto.getDisplayedPeriod());
 	}
@@ -61,9 +64,9 @@ public class XmlUserPreferencesDaoTest {
 	@Test
 	public void testCommit() throws Exception {
 		xmlUserPreferencesDao.commit();
-		xmlUserPreferencesDao = new XmlUserPreferencesDao(FILENAME);
+		xmlUserPreferencesDao = new XmlUserSearchPreferenceDao(FILENAME);
 
-		TicketSearchPreferenceDto ticketSPDto = xmlUserPreferencesDao.get(A_USER_NAME);
+		UserSearchPreferenceDto ticketSPDto = xmlUserPreferencesDao.get(A_USER_NAME);
 		Assert.assertEquals(Boolean.TRUE, ticketSPDto.isLocalGameOnly());
 		Assert.assertEquals(A_DISPLAY_PERIOD, ticketSPDto.getDisplayedPeriod());
 	}

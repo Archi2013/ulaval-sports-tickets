@@ -20,17 +20,17 @@ import org.springframework.web.servlet.ModelAndView;
 import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
 import ca.ulaval.glo4003.domain.users.User;
-import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedPreferences;
+import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedSearchPreference;
 import ca.ulaval.glo4003.presentation.controllers.errorhandler.SearchErrorHandler;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
-import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
-import ca.ulaval.glo4003.services.CommandUserPreferencesService;
+import ca.ulaval.glo4003.presentation.viewmodels.SearchViewModel;
+import ca.ulaval.glo4003.presentation.viewmodels.factories.UserSearchPreferenceFactory;
+import ca.ulaval.glo4003.services.CommandUserSearchPreferenceService;
 import ca.ulaval.glo4003.services.SearchViewService;
-import ca.ulaval.glo4003.services.UserPreferencesViewService;
-import ca.ulaval.glo4003.services.exceptions.UserPreferencesNotSaved;
+import ca.ulaval.glo4003.services.UserSearchPreferenceViewService;
+import ca.ulaval.glo4003.services.exceptions.UserSearchPreferenceNotSaved;
 import ca.ulaval.glo4003.utilities.Constants;
-import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
+import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchControllerTest {
@@ -48,10 +48,10 @@ public class SearchControllerTest {
 	private SearchViewService searchService;
 	
 	@Mock
-	private UserPreferencesViewService userPreferencesViewService;
+	private UserSearchPreferenceViewService userPreferencesViewService;
 	
 	@Mock
-	private CommandUserPreferencesService commandUserPreferencesService;
+	private CommandUserSearchPreferenceService commandUserPreferencesService;
 	
 	@Mock
 	private User currentUser;
@@ -60,7 +60,7 @@ public class SearchControllerTest {
 	private SearchErrorHandler searchErrorHandler;
 	
 	@Mock
-	private TicketSearchPreferenceFactory ticketSearchPreferenceFactory;
+	private UserSearchPreferenceFactory ticketSearchPreferenceFactory;
 	
 	@InjectMocks
 	private SearchController controller;
@@ -71,7 +71,7 @@ public class SearchControllerTest {
 
 	@Test
 	public void home_should_return_the_good_search_home_page() {
-		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
+		SearchViewModel ticketSearchVM = getTicketSearchViewModel();
 		
 		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
 		when(currentUser.isLogged()).thenReturn(false);
@@ -83,7 +83,7 @@ public class SearchControllerTest {
 	
 	@Test
 	public void home_should_add_the_currency_to_the_page() {
-		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
+		SearchViewModel ticketSearchVM = getTicketSearchViewModel();
 		
 		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
 		when(currentUser.isLogged()).thenReturn(false);
@@ -97,7 +97,7 @@ public class SearchControllerTest {
 	
 	@Test
 	public void home_should_add_a_ticketSearchForm_to_model() {
-		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
+		SearchViewModel ticketSearchVM = getTicketSearchViewModel();
 		
 		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
 		when(currentUser.isLogged()).thenReturn(false);
@@ -111,8 +111,8 @@ public class SearchControllerTest {
 	
 	@Test
 	public void home_should_add_a_ticket_list_to_model() {
-		TicketSearchPreferenceDto ticketSPDto = mock(TicketSearchPreferenceDto.class);
-		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
+		UserSearchPreferenceDto ticketSPDto = mock(UserSearchPreferenceDto.class);
+		SearchViewModel ticketSearchVM = getTicketSearchViewModel();
 		List<SectionForSearchViewModel> sectionVMs = new ArrayList<>();
 		
 		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
@@ -128,12 +128,12 @@ public class SearchControllerTest {
 	}
 	
 	@Test
-	public void when_currentUser_isLogged_home_should_add_a_ticketSearchViewModel_from_userPreferencesService() throws UserDoesntHaveSavedPreferences {
-		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
+	public void when_currentUser_isLogged_home_should_add_a_ticketSearchViewModel_from_userPreferencesService() throws UserDoesntHaveSavedSearchPreference {
+		SearchViewModel ticketSearchVM = getTicketSearchViewModel();
 		
 		when(currentUser.isLogged()).thenReturn(true);
 		when(currentUser.getUsername()).thenReturn(USERNAME);
-		when(userPreferencesViewService.getUserPreferencesForUser(USERNAME)).thenReturn(ticketSearchVM);
+		when(userPreferencesViewService.getSearchViewModelForUser(USERNAME)).thenReturn(ticketSearchVM);
 		
 		ModelAndView mav = controller.home();
 		ModelMap modelMap = mav.getModelMap();
@@ -143,12 +143,12 @@ public class SearchControllerTest {
 	}
 	
 	@Test
-	public void when_currentUser_isLogged_and_UserDoesntHaveSavedPreferences_home_should_add_a_initial_ticketSearchViewModel() throws UserDoesntHaveSavedPreferences {
-		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
+	public void when_currentUser_isLogged_and_UserDoesntHaveSavedPreferences_home_should_add_a_initial_ticketSearchViewModel() throws UserDoesntHaveSavedSearchPreference {
+		SearchViewModel ticketSearchVM = getTicketSearchViewModel();
 		
 		when(currentUser.isLogged()).thenReturn(true);
 		when(currentUser.getUsername()).thenReturn(USERNAME);
-		when(userPreferencesViewService.getUserPreferencesForUser(USERNAME)).thenThrow(new UserDoesntHaveSavedPreferences());
+		when(userPreferencesViewService.getSearchViewModelForUser(USERNAME)).thenThrow(new UserDoesntHaveSavedSearchPreference());
 		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
 		
 		ModelAndView mav = controller.home();
@@ -160,7 +160,7 @@ public class SearchControllerTest {
 	
 	@Test
 	public void savePreferences_should_set_preferencesSaved_to_true() {
-		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
+		SearchViewModel ticketSearchVM = getTicketSearchViewModel();
 		
 		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
 		when(currentUser.isLogged()).thenReturn(false);
@@ -175,7 +175,7 @@ public class SearchControllerTest {
 	
 	@Test
 	public void savePreferences_should_return_the_good_search_home_page() {
-		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
+		SearchViewModel ticketSearchVM = getTicketSearchViewModel();
 		
 		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
 		when(currentUser.isLogged()).thenReturn(false);
@@ -187,15 +187,15 @@ public class SearchControllerTest {
 	}
 	
 	@Test
-	public void when_UserPreferencesNotSaved_should_set_preferencesSaved_to_false() throws UserPreferencesNotSaved {
-		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
-		TicketSearchPreferenceDto ticketSPDto = mock(TicketSearchPreferenceDto.class);
+	public void when_UserPreferencesNotSaved_should_set_preferencesSaved_to_false() throws UserSearchPreferenceNotSaved {
+		SearchViewModel ticketSearchVM = getTicketSearchViewModel();
+		UserSearchPreferenceDto ticketSPDto = mock(UserSearchPreferenceDto.class);
 		
 		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
 		when(currentUser.isLogged()).thenReturn(false);
 		when(currentUser.getUsername()).thenReturn(USERNAME);
 		when(ticketSearchPreferenceFactory.createPreferenceDto(ticketSearchVM)).thenReturn(ticketSPDto);
-		doThrow(new UserPreferencesNotSaved()).when(commandUserPreferencesService).saveUserPreference(USERNAME, ticketSPDto);
+		doThrow(new UserSearchPreferenceNotSaved()).when(commandUserPreferencesService).saveUserSearchPreference(USERNAME, ticketSPDto);
 
 		
 		ModelAndView mav = controller.savePreferences(ticketSearchVM);
@@ -206,15 +206,15 @@ public class SearchControllerTest {
 	}
 	
 	@Test
-	public void when_UserPreferencesNotSaved_should_use_searchErrorHandler() throws UserPreferencesNotSaved {
-		TicketSearchViewModel ticketSearchVM = getTicketSearchViewModel();
-		TicketSearchPreferenceDto ticketSPDto = mock(TicketSearchPreferenceDto.class);
+	public void when_UserPreferencesNotSaved_should_use_searchErrorHandler() throws UserSearchPreferenceNotSaved {
+		SearchViewModel ticketSearchVM = getTicketSearchViewModel();
+		UserSearchPreferenceDto ticketSPDto = mock(UserSearchPreferenceDto.class);
 		
 		when(ticketSearchPreferenceFactory.createInitialViewModel()).thenReturn(ticketSearchVM);
 		when(currentUser.isLogged()).thenReturn(false);
 		when(currentUser.getUsername()).thenReturn(USERNAME);
 		when(ticketSearchPreferenceFactory.createPreferenceDto(ticketSearchVM)).thenReturn(ticketSPDto);
-		doThrow(new UserPreferencesNotSaved()).when(commandUserPreferencesService).saveUserPreference(USERNAME, ticketSPDto);
+		doThrow(new UserSearchPreferenceNotSaved()).when(commandUserPreferencesService).saveUserSearchPreference(USERNAME, ticketSPDto);
 
 		
 		ModelAndView mav = controller.savePreferences(ticketSearchVM);
@@ -224,7 +224,7 @@ public class SearchControllerTest {
 	
 	@Test
 	public void getList_should_return_the_good_subview() {
-		TicketSearchViewModel ticketSearchVM = mock(TicketSearchViewModel.class);
+		SearchViewModel ticketSearchVM = mock(SearchViewModel.class);
 		
 		ModelAndView mav = controller.getList(ticketSearchVM);
 
@@ -233,7 +233,7 @@ public class SearchControllerTest {
 	
 	@Test
 	public void getList_should_add_preferencesSaved_to_false_to_delete_succes_message() {
-		TicketSearchViewModel ticketSearchVM = mock(TicketSearchViewModel.class);
+		SearchViewModel ticketSearchVM = mock(SearchViewModel.class);
 		
 		ModelAndView mav = controller.getList(ticketSearchVM);
 		ModelMap modelMap = mav.getModelMap();
@@ -242,8 +242,8 @@ public class SearchControllerTest {
 		assertFalse((boolean) modelMap.get("preferencesSaved"));
 	}
 	
-	private TicketSearchViewModel getTicketSearchViewModel() {
-		TicketSearchViewModel ticketSearchVM = new TicketSearchViewModel();
+	private SearchViewModel getTicketSearchViewModel() {
+		SearchViewModel ticketSearchVM = new SearchViewModel();
 		List<String> selectedSports = new ArrayList<>();
 		List<TicketKind> ticketKinds = new ArrayList<>();
 		ticketSearchVM.selectedSports = selectedSports;

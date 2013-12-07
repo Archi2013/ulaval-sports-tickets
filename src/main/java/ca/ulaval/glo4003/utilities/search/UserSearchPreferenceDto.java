@@ -1,27 +1,23 @@
-package ca.ulaval.glo4003.domain.users;
+package ca.ulaval.glo4003.utilities.search;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class UserPreferencesDto {
-
-	public String username;
+public class UserSearchPreferenceDto {
 	public List<String> selectedSports;
 	private String displayedPeriod;
-	public boolean localGameOnly;
+	public Boolean localGameOnly;
 	public List<String> selectedTicketKinds;
-	
-	public UserPreferencesDto(String username,List<String> selectedSports,
-			String string, boolean localGameOnly,
+
+	public UserSearchPreferenceDto(List<String> selectedSports,
+			String displayedPeriod, Boolean localGameOnly,
 			List<String> selectedTicketKinds) {
 		super();
 		if (selectedSports == null) {
 			selectedSports = new ArrayList<String>();
 		}
-		this.username=username;
 		this.selectedSports = selectedSports;
-		this.displayedPeriod = string;
+		this.displayedPeriod = displayedPeriod;
 		this.localGameOnly = localGameOnly;
 		if (selectedTicketKinds == null) {
 			selectedTicketKinds = new ArrayList<String>();
@@ -48,7 +44,7 @@ public class UserPreferencesDto {
 		this.displayedPeriod = displayedPeriod;
 	}
 
-	public boolean isLocalGameOnly() {
+	public Boolean isLocalGameOnly() {
 		return localGameOnly;
 	}
 
@@ -66,5 +62,4 @@ public class UserPreferencesDto {
 		}
 		this.selectedTicketKinds = selectedTicketKinds;
 	}
-	
 }
