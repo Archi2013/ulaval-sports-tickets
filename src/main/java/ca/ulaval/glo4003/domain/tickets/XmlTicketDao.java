@@ -13,7 +13,6 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
 import ca.ulaval.glo4003.exceptions.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
@@ -24,6 +23,7 @@ import ca.ulaval.glo4003.utilities.persistence.XmlIntegrityException;
 @Component
 public class XmlTicketDao implements TicketDao {
 
+	private static final ArrayList<TicketDto> EMPTY_LIST = new ArrayList<TicketDto>();
 	public static final String DATE_PATTERN = "yyyy/MM/dd HH:mm z";
 	private static final String TICKETS_XPATH = "/base/tickets";
 	private final static String TICKET_XPATH = TICKETS_XPATH + "/ticket";
@@ -32,7 +32,7 @@ public class XmlTicketDao implements TicketDao {
 	private final static String TICKET_XPATH_ID_AND_SPORT = TICKET_XPATH_ID + "[sportName=\"%s\"][gameDate=\"%s\"]";
 	private final static String TICKET_XPATH_SPORT = TICKET_XPATH + "[sportName=\"%s\"][gameDate=\"%s\"]";
 	private final static String TICKET_XPATH_SPORT_AND_SEAT = TICKET_XPATH_SPORT + "[section=\"%s\"][seat=\"%s\"]";
-	private final static String TICKET_XPATH_AVAILABLE_AND_SPORT = TICKET_XPATH_SPORT + "[available='true']";
+	private final static String TICKET_XPATH_AVAILABLE_AND_SPORT = TICKET_XPATH_SPORT + "[available=\"true\"]";
 	private final static String TICKET_XPATH_SPORT_AND_SECTION = TICKET_XPATH_SPORT + "[section=\"%s\"]";
 
 	private XmlDatabase database;
@@ -59,13 +59,13 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	@Override
-	public List<TicketDto> getAllAvailable(String sportName, DateTime gameDate) throws GameDoesntExistException {
+	public List<TicketDto> getAllAvailable(String sportName, DateTime gameDate) {
 		String xPath = String.format(TICKET_XPATH_AVAILABLE_AND_SPORT, sportName, toString(gameDate));
 		return convertNodesToTickets(xPath);
 	}
 
 	@Override
-	public List<TicketDto> getAll(String sportName, DateTime gameDate) throws GameDoesntExistException {
+	public List<TicketDto> getAll(String sportName, DateTime gameDate) {
 		String xPath = String.format(TICKET_XPATH_SPORT, sportName, toString(gameDate));
 		return convertNodesToTickets(xPath);
 
@@ -88,7 +88,7 @@ public class XmlTicketDao implements TicketDao {
 	}
 
 	@Override
-	public void add(TicketDto ticket) throws TicketAlreadyExistsException, GameDoesntExistException {
+	public void add(TicketDto ticket) throws TicketAlreadyExistsException {
 		if (doesIdExist(ticket)) {
 			throw new TicketAlreadyExistsException();
 		}
@@ -110,7 +110,7 @@ public class XmlTicketDao implements TicketDao {
 		try {
 			database.remove(xPath);
 			add(ticket);
-		} catch (XPathExpressionException | TicketAlreadyExistsException | GameDoesntExistException e) {
+		} catch (XPathExpressionException | TicketAlreadyExistsException e) {
 			throw new XmlIntegrityException(e);
 		}
 	}
@@ -130,11 +130,11 @@ public class XmlTicketDao implements TicketDao {
 		}
 	}
 
-	private List<TicketDto> convertNodesToTickets(String xPath) throws GameDoesntExistException {
+	private List<TicketDto> convertNodesToTickets(String xPath) {
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(xPath);
 			if (nodes.isEmpty()) {
-				throw new GameDoesntExistException();
+				return EMPTY_LIST;
 			}
 			return convertNodesToTickets(nodes);
 		} catch (NoSuchAttributeException | TicketDoesntExistException | XPathExpressionException e) {
