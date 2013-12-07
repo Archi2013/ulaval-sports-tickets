@@ -1,6 +1,7 @@
 package ca.ulaval.glo4003.domain.game;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,12 +14,14 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Component;
 
+import ca.ulaval.glo4003.constants.LocalLocation;
 import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.utilities.persistence.SimpleNode;
 import ca.ulaval.glo4003.utilities.persistence.XmlDatabase;
 import ca.ulaval.glo4003.utilities.persistence.XmlIntegrityException;
+import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDto;
 
 @Component
 public class XmlGameDao implements GameDao {
@@ -43,6 +46,10 @@ public class XmlGameDao implements GameDao {
 	public List<GameDto> getGamesForSport(String sportName) throws SportDoesntExistException {
 		String xPath = String.format(GAME_XPATH_SPORT_NAME, sportName);
 
+		return getGamesFromXpath(xPath);
+	}
+
+	private List<GameDto> getGamesFromXpath(String xPath) {
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(xPath);
 			return convertNodesToGames(nodes);
@@ -133,6 +140,17 @@ public class XmlGameDao implements GameDao {
 		updateNode(node, dto);
 		updateDatabase(xPath, node);
 	}
+	
+	@Override
+	public List<GameDto> getFromUserSearchPreference(UserSearchPreferenceDto userSearchPreference) {
+		String xPath = buildXPathForUserSearchPreference(userSearchPreference);
+		try {
+			List<SimpleNode> nodes = database.extractNodeSet(xPath);
+			return convertNodesToGames(nodes);
+		} catch (XPathExpressionException e) {
+			return new ArrayList<GameDto>();
+		}
+	}
 
 	private void updateDatabase(String oldElementXPath, SimpleNode updatedNode) {
 		try {
@@ -166,5 +184,38 @@ public class XmlGameDao implements GameDao {
 		} catch (XPathExpressionException e) {
 			throw new GameDoesntExistException();
 		}
+	}
+	
+	String buildOrClause(String nodeName, Collection<String> values) {
+		if (values.isEmpty()) {
+			return "[" + nodeName + "=\"\"]";
+		}
+		StringBuilder builder = new StringBuilder();
+		boolean isFirst = true;
+		
+		for(String value : values) {
+			if (isFirst) {
+				isFirst = false;
+			} else {
+				builder.append(" or ");
+			}
+			builder.append(nodeName + "=\"" + value + "\"");
+		}
+		
+		return "[" + builder.toString() + "]";
+	}
+	
+	private String buildXPathForUserSearchPreference(UserSearchPreferenceDto userSearchPreference) {
+		StringBuilder whereClause = new StringBuilder();
+		
+		List<String> sportNames = userSearchPreference.getSelectedSports();
+		whereClause.append(buildOrClause("sportName", sportNames));
+		
+		if (userSearchPreference.isLocalGameOnly()) {
+			String locationClause = buildOrClause("location", LocalLocation.getSet());
+			whereClause.append(locationClause);
+		}
+		
+		return GAME_XPATH + whereClause.toString();
 	}
 }
