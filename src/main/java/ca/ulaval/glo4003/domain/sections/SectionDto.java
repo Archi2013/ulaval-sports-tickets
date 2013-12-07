@@ -5,17 +5,18 @@ import java.util.Set;
 
 public class SectionDto {
 
-	private static final String GENERAL_SECTION = "Générale";
 	private String sectionName;
 	private int numberOfTickets;
 	private double price;
 	private Set<String> seats;
+	private boolean generalAdmission;
 
-	public SectionDto(int numberOfTickets, double price) {
-		this.sectionName = GENERAL_SECTION;
+	public SectionDto(String sectionName, int numberOfTickets, double price) {
+		this.sectionName = sectionName;
 		this.numberOfTickets = numberOfTickets;
 		this.price = price;
 		this.seats = new HashSet<>();
+		this.generalAdmission = true;
 	}
 
 	public SectionDto(String sectionName, int numberOfTickets,
@@ -24,10 +25,11 @@ public class SectionDto {
 		this.numberOfTickets = numberOfTickets;
 		this.price = price;
 		this.seats = seats;
+		this.generalAdmission = false;
 	}
 
 	public boolean isGeneralAdmission() {
-		return sectionName.equals(GENERAL_SECTION);
+		return generalAdmission;
 	}
 
 	public String getSectionName() {

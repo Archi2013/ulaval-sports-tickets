@@ -19,7 +19,7 @@ public aspect CommandTicketServiceLogger {
         Set<SectionForCart> sections = (Set<SectionForCart>) thisJoinPoint.getArgs()[0];
         Date dateNow = new Date();
         for(SectionForCart sectionFC : sections) {
-            if (sectionFC.getGeneralAdmission()) {
+            if (sectionFC.isGeneralAdmission()) {
                 CommandTicketServiceLogger.info(dateNow.toString()+" : Vente de tickets d'admission générale pour le sport "+sectionFC.getSportName()
                         + " à la date " + sectionFC.getGameDate()
                         + "\n"+sectionFC.getNumberOfTicketsToBuy() + " tickets vendus à " + sectionFC.getUnitPrice()

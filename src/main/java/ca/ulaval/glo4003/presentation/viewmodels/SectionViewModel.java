@@ -12,7 +12,7 @@ public class SectionViewModel {
 	private String location;
 	public String url;
 	public Set<String> seats;
-	private Boolean generalAdmission;
+	private boolean generalAdmission;
 
 	public SectionViewModel(String sectionName, int numberOfTickets, String price, String date, String opponents,
 			String location, String url, Set<String> seats, Boolean generalAdmission) {
@@ -27,7 +27,7 @@ public class SectionViewModel {
 		this.generalAdmission = generalAdmission;
 	}
 
-	public Boolean getGeneralAdmission() {
+	public boolean isGeneralAdmission() {
 		return generalAdmission;
 	}
 

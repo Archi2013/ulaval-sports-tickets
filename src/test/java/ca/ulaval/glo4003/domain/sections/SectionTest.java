@@ -1,7 +1,6 @@
 package ca.ulaval.glo4003.domain.sections;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +17,6 @@ public class SectionTest {
 	private static final String A_SEAT = "Seat";
 	private static final String ANOTHER_SEAT = "Seat2";
 
-	private static final int A_NUMBER_SMALLER_THAN_ONE = 0;
 	private static final int A_NUMBER = 20;
 	private static final int A_SMALLER_NUMBER = 15;
 	private static final int A_LARGER_NUMBER = 35;
@@ -39,13 +37,8 @@ public class SectionTest {
 		WRONG_LIST_OF_SEATS = new HashSet<String>();
 		WRONG_LIST_OF_SEATS.add(ANOTHER_SEAT);
 
-		sectionGenerale = new Section(new SectionDto(GENERAL_SECTION, A_NUMBER, 0, null));
+		sectionGenerale = new Section(new SectionDto(GENERAL_SECTION, A_NUMBER, 0));
 		sectionWithSeat = new Section(new SectionDto(SEATED_SECTION, A_LIST_OF_SEATS.size(), 0, A_LIST_OF_SEATS));
-	}
-
-	@Test
-	public void if_sectionName_is_Générale_isGeneralAdmission_return_true() {
-		assertTrue(sectionGenerale.isGeneralAdmission());
 	}
 
 	@Test
@@ -55,21 +48,21 @@ public class SectionTest {
 
 	@Test
 	public void isValidNumberOfTicketsForGeneralTickets_return_true_if_asked_a_smaller_number() {
-		sectionGenerale = new Section(new SectionDto(null, A_NUMBER, 0, null));
+		sectionGenerale = new Section(new SectionDto(GENERAL_SECTION, A_NUMBER, 0));
 
 		assertTrue(sectionGenerale.isValidNumberOfTicketsForGeneralTickets(A_SMALLER_NUMBER));
 	}
 
 	@Test
 	public void isValidNumberOfTicketsForGeneralTickets_return_false_if_asked_a_number_smaller_than_one() {
-		sectionGenerale = new Section(new SectionDto(null, A_NUMBER, 0, null));
+		sectionGenerale = new Section(new SectionDto(GENERAL_SECTION, A_NUMBER, 0));
 
 		assertFalse(sectionGenerale.isValidNumberOfTicketsForGeneralTickets(0));
 	}
 
 	@Test
 	public void isValidNumberOfTicketsForGeneralTickets_return_false_if_asked_a_larger_number() {
-		sectionGenerale = new Section(new SectionDto(null, A_NUMBER, 0, null));
+		sectionGenerale = new Section(new SectionDto(GENERAL_SECTION, A_NUMBER, 0));
 
 		assertFalse(sectionGenerale.isValidNumberOfTicketsForGeneralTickets(A_LARGER_NUMBER));
 	}

@@ -21,8 +21,8 @@ public class SectionRepositoryTest {
 	static final DateTime A_DATE = new DateTime(100);
 	static final String A_SECTION = "Section";
 
-	SectionDto dtoAllTickets = new SectionDto(0, 0);
-	SectionDto dtoAvailableTickets = new SectionDto(0, 0);
+	SectionDto dtoAllTickets = new SectionDto(A_SECTION, 0, 0);
+	SectionDto dtoAvailableTickets = new SectionDto(A_SECTION, 0, 0);
 
 	@Mock
 	Section sectionAllTickets;

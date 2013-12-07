@@ -74,7 +74,7 @@ public class XmlSectionDaoIT {
 		seats.add(GENERAL_SECTION);
 		
 		SectionDto actual = sectionDao.get(A_SPORT_NAME, A_GAME_DATE, GENERAL_SECTION);
-		SectionDto expected = new SectionDto(GENERAL_SECTION, 1, A_PRICE, seats);
+		SectionDto expected = new SectionDto(GENERAL_SECTION, 1, A_PRICE);
 		
 		assertSection(expected, actual);
 	}
@@ -95,7 +95,7 @@ public class XmlSectionDaoIT {
 		seats.add(GENERAL_SECTION);
 		
 		SectionDto actual = sectionDao.getAvailable(A_SPORT_NAME, A_GAME_DATE, GENERAL_SECTION);
-		SectionDto expected = new SectionDto(GENERAL_SECTION, 1, A_PRICE, seats);
+		SectionDto expected = new SectionDto(GENERAL_SECTION, 1, A_PRICE);
 		
 		assertSection(expected, actual);
 	}
@@ -104,12 +104,10 @@ public class XmlSectionDaoIT {
 	public void testGetAll() throws Exception {
 		List<SectionDto> actuals = sectionDao.getAll(A_SPORT_NAME, A_GAME_DATE);
 		
-		Set<String> generalSeats = new HashSet<>();
-		generalSeats.add(GENERAL_SECTION);
 		Set<String> seats = new HashSet<>();
 		seats.add(A_SEAT);
 		
-		SectionDto expected2 = new SectionDto(GENERAL_SECTION, 1, A_PRICE, generalSeats);
+		SectionDto expected2 = new SectionDto(GENERAL_SECTION, 1, A_PRICE);
 		SectionDto expected1 = new SectionDto(SECTION_100, 1, A_PRICE, seats);
 		SectionDto expected0 = new SectionDto(SECTION_200, 1, A_PRICE, seats);
 		
@@ -121,13 +119,11 @@ public class XmlSectionDaoIT {
 	@Test
 	public void testGetAllAvailable() throws Exception {
 		List<SectionDto> actuals = sectionDao.getAllAvailable(A_SPORT_NAME, A_GAME_DATE);
-		
-		Set<String> generalSeats = new HashSet<>();
-		generalSeats.add(GENERAL_SECTION);
+
 		Set<String> seats = new HashSet<>();
 		seats.add(A_SEAT);
 		
-		SectionDto expected2 = new SectionDto(GENERAL_SECTION, 1, A_PRICE, generalSeats);
+		SectionDto expected2 = new SectionDto(GENERAL_SECTION, 1, A_PRICE);
 		SectionDto expected1 = new SectionDto(SECTION_100, 1, A_PRICE, seats);
 		SectionDto expected0 = new SectionDto(SECTION_200, 1, A_PRICE, seats);
 		

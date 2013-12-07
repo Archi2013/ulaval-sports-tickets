@@ -19,6 +19,7 @@ import ca.ulaval.glo4003.utilities.persistence.XmlIntegrityException;
 
 @Component
 public class XmlSectionDao implements SectionDao {
+	private static final String GENERAL_ADMISSION = "Générale";
 	public static final String DATE_PATTERN = "yyyy/MM/dd HH:mm z";
 	private static final String SECTIONS_XPATH = "/base/tickets";
 	private final static String SECTION_XPATH = SECTIONS_XPATH + "/ticket";
@@ -100,7 +101,11 @@ public class XmlSectionDao implements SectionDao {
 				}
 			}
 
-			return new SectionDto(sectionName, numberOfTickets, Double.parseDouble(price), seats);
+			if (sectionName.equals(GENERAL_ADMISSION)) {
+				return new SectionDto(sectionName, numberOfTickets, Double.parseDouble(price));
+			} else {
+				return new SectionDto(sectionName, numberOfTickets, Double.parseDouble(price), seats);
+			}
 		} catch (XPathExpressionException | NoSuchAttributeException e) {
 			throw new XmlIntegrityException(e);
 		}

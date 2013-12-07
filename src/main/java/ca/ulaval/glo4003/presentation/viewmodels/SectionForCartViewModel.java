@@ -15,11 +15,11 @@ public class SectionForCartViewModel {
 	public String location;
 	public String subtotal;
 	
-	public Boolean getGeneralAdmission() {
+	public boolean isGeneralAdmission() {
 		return generalAdmission;
 	}
 	
-	public void setGeneralAdmission(Boolean generalAdmission) {
+	public void setGeneralAdmission(boolean generalAdmission) {
 		this.generalAdmission = generalAdmission;
 	}
 	

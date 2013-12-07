@@ -155,7 +155,7 @@ public class CommandTicketServiceTest {
 	@Test
 	public void testMakeTicketsUnavailable_withTicketsForGeneralAdmission() throws Exception {
 		SectionForCart sectionWithGeneralAdmission = mock(SectionForCart.class);
-		when(sectionWithGeneralAdmission.getGeneralAdmission()).thenReturn(true);
+		when(sectionWithGeneralAdmission.isGeneralAdmission()).thenReturn(true);
 		
 		Set<SectionForCart> sections = new HashSet<SectionForCart>();
 		sections.add(sectionWithGeneralAdmission);
@@ -173,7 +173,7 @@ public class CommandTicketServiceTest {
 	@Test
 	public void testMakeTicketsUnavailable_withTicketsSelectedSeat() throws Exception {
 		SectionForCart sectionWithSelectedSeat = mock(SectionForCart.class);
-		when(sectionWithSelectedSeat.getGeneralAdmission()).thenReturn(false);
+		when(sectionWithSelectedSeat.isGeneralAdmission()).thenReturn(false);
 		
 		Set<SectionForCart> sections = new HashSet<SectionForCart>();
 		sections.add(sectionWithSelectedSeat);

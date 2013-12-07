@@ -295,3 +295,10 @@ Thu Dec 05 15:57:57 EST 2013 : Vente de tickets s�lectionn�s pour le sport n
 Ticket aSeat vendus � 0.0
 Total : 0.0
 
+Sat Dec 07 00:59:30 EST 2013 : Vente de tickets d'admission générale pour le sport Soccer masculin à la date 2014-08-19T16:00:00.000-04:00
+2 tickets vendus à 5.0
+ Total 10.0
+Sat Dec 07 00:59:30 EST 2013 : Vente de tickets sélectionnés pour le sport Football à la date 2014-08-24T13:00:00.000-04:00
+Ticket B-6 vendus à 30.0
+Total : 30.0
+

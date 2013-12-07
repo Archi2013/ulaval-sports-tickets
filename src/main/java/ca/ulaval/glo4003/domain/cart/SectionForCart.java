@@ -15,7 +15,7 @@ public class SectionForCart {
 	private String sectionName;
 	private String opponents;
 	private String location;
-	private Boolean generalAdmission;
+	private boolean generalAdmission;
 	private Integer numberOfTicketsToBuy;
 	private Set<String> selectedSeats;
 	private Double unitPrice;
@@ -80,7 +80,7 @@ public class SectionForCart {
 		return new HashCodeBuilder().append(this.sportName).append(this.gameDate).append(this.sectionName).toHashCode();
 	}
 
-	public Boolean getGeneralAdmission() {
+	public boolean isGeneralAdmission() {
 		return generalAdmission;
 	}
 
@@ -117,7 +117,7 @@ public class SectionForCart {
 	}
 
 	public Double getSubtotal() {
-		if (getGeneralAdmission()) {
+		if (isGeneralAdmission()) {
 			return Calculator.calculateCumulativePriceForGeneralAdmission(this.numberOfTicketsToBuy, this.unitPrice);
 		} else {
 			return Calculator.calculateCumulativePriceForWithSeatAdmission(this.selectedSeats, this.unitPrice);

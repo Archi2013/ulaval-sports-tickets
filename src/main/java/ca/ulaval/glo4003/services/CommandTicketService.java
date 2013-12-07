@@ -51,7 +51,7 @@ public class CommandTicketService {
 
 	public void makeTicketsUnavailable(Set<SectionForCart> sections) throws GameDoesntExistException, TicketDoesntExistException, SportDoesntExistException, GameAlreadyExistException, TicketAlreadyExistsException {
 		for(SectionForCart sectionFC : sections) {
-			if (sectionFC.getGeneralAdmission()) {
+			if (sectionFC.isGeneralAdmission()) {
 				List<Ticket> tickets = ticketRepository
 						.getMultipleGeneralTickets(sectionFC.getSportName(), sectionFC.getGameDate(), sectionFC.getNumberOfTicketsToBuy());
 				for (Ticket ticket : tickets) {

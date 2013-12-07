@@ -3,10 +3,7 @@ package ca.ulaval.glo4003.presentation.controllers;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import javax.inject.Inject;
-
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +14,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
-import ca.ulaval.glo4003.domain.users.User;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
@@ -61,7 +57,7 @@ public class SectionControllerTest {
 	public void getSectionDetails_should_add_the_specified_section_to_model() throws SectionDoesntExistException, NoSportForUrlException {
 		SectionViewModel sectionViewModel = mock(SectionViewModel.class);
 		when(sectionService.getAvailableSection(SPORT_NAME, GAME_DATE, TICKET_TYPE)).thenReturn(sectionViewModel);
-		when(sectionViewModel.getGeneralAdmission()).thenReturn(true);
+		when(sectionViewModel.isGeneralAdmission()).thenReturn(true);
 		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 		
 		ModelAndView mav = sectionController.getSectionDetails(GAME_DATE_STR, SPORT_URL, TICKET_TYPE);
@@ -74,7 +70,7 @@ public class SectionControllerTest {
 	public void getSectionDetails_should_add_a_chosenGeneralTicketsForm_to_model() throws SectionDoesntExistException, NoSportForUrlException {
 		SectionViewModel sectionViewModel = mock(SectionViewModel.class);
 		when(sectionService.getAvailableSection(SPORT_NAME, GAME_DATE, TICKET_TYPE)).thenReturn(sectionViewModel);
-		when(sectionViewModel.getGeneralAdmission()).thenReturn(true);
+		when(sectionViewModel.isGeneralAdmission()).thenReturn(true);
 		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 
 		ChosenGeneralTicketsViewModel chosenGeneralTicketsVM = mock(ChosenGeneralTicketsViewModel.class);
@@ -91,7 +87,7 @@ public class SectionControllerTest {
 	public void getSectionDetails_should_add_a_chosenWithSeatTicketsForm_to_model() throws SectionDoesntExistException, NoSportForUrlException {
 		SectionViewModel sectionViewModel = mock(SectionViewModel.class);
 		when(sectionService.getAvailableSection(SPORT_NAME, GAME_DATE, TICKET_TYPE)).thenReturn(sectionViewModel);
-		when(sectionViewModel.getGeneralAdmission()).thenReturn(false);
+		when(sectionViewModel.isGeneralAdmission()).thenReturn(false);
 		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 
 		ChosenWithSeatTicketsViewModel chosenWithSeatTicketsVM = mock(ChosenWithSeatTicketsViewModel.class);
@@ -108,7 +104,7 @@ public class SectionControllerTest {
 	public void getSectionDetails_should_return_correct_view_path() throws SectionDoesntExistException, NoSportForUrlException {
 		SectionViewModel sectionViewModel = mock(SectionViewModel.class);
 		when(sectionService.getAvailableSection(SPORT_NAME, GAME_DATE, TICKET_TYPE)).thenReturn(sectionViewModel);
-		when(sectionViewModel.getGeneralAdmission()).thenReturn(true);
+		when(sectionViewModel.isGeneralAdmission()).thenReturn(true);
 		when(sportUrlMapper.getSportName(SPORT_URL)).thenReturn(SPORT_NAME);
 
 		ModelAndView mav = sectionController.getSectionDetails(GAME_DATE_STR, SPORT_URL, TICKET_TYPE);

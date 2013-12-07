@@ -22,7 +22,7 @@ public class SectionForCartViewModelFactory {
 	public SectionForCartViewModel createViewModel(SectionForCart sectionFC) {
 		SectionForCartViewModel sectionForCartVM = new SectionForCartViewModel();
 		
-		sectionForCartVM.setGeneralAdmission(sectionFC.getGeneralAdmission());
+		sectionForCartVM.setGeneralAdmission(sectionFC.isGeneralAdmission());
 		
 		sectionForCartVM.setNumberOfTicketsToBuy(sectionFC.getNumberOfTicketsToBuy());
 		sectionForCartVM.setSelectedSeats(toString(sectionFC.getSelectedSeats()));

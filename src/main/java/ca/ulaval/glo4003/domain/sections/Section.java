@@ -4,22 +4,22 @@ import java.util.Set;
 
 public class Section {
 
-	private static final String GENERAL_SECTION = "Générale";
 	private String sectionName;
 	private int numberOfTickets;
 	private double price;
 	private Set<String> seats;
+	private boolean generalAdmission;
 
 	public Section(SectionDto sectionDto) {
-		sectionName = sectionDto.getSectionName();
-		numberOfTickets = sectionDto.getNumberOfTickets();
-		price = sectionDto.getPrice();
-		seats = sectionDto.getSeats();
+		this.sectionName = sectionDto.getSectionName();
+		this.numberOfTickets = sectionDto.getNumberOfTickets();
+		this.price = sectionDto.getPrice();
+		this.seats = sectionDto.getSeats();
+		this.generalAdmission = sectionDto.isGeneralAdmission();
 	}
 
 	public boolean isGeneralAdmission() {
-		boolean generalAdmission = sectionName.equals(GENERAL_SECTION);
-		return generalAdmission;
+		return this.generalAdmission;
 	}
 
 	public Boolean isValidNumberOfTicketsForGeneralTickets(Integer numberOfTicketsToBuy) {

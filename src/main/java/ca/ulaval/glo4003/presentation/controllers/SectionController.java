@@ -58,7 +58,7 @@ public class SectionController {
 
 			mav.addObject("section", section);
 
-			if (section.getGeneralAdmission()) {
+			if (section.isGeneralAdmission()) {
 				ChosenGeneralTicketsViewModel chosenGeneralTicketsVM = sectionService.getChosenGeneralTicketsViewModel(
 						sportName, gameDate, ticketType);
 				mav.addObject("chosenGeneralTicketsForm", chosenGeneralTicketsVM);

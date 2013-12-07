@@ -76,7 +76,7 @@ public class CommandCartServiceTest {
 	public void given_general_tickets_informations_addGeneralTicketsToCart_should_add_a_sectionForCart_to_cart() throws InvalidTicketsException, TicketsNotFoundException, SectionDoesntExistException, GameDoesntExistException {
 		Section section = mock(Section.class);
 		GameDto gameDto = new GameDto(OPPONENTS, GAME_DATE, SPORT_NAME, LOCATION);
-		SectionDto sectionDto = new SectionDto(NUMBER_OF_TICKETS, PRICE);
+		SectionDto sectionDto = new SectionDto(SECTION_NAME, NUMBER_OF_TICKETS, PRICE);
 		SectionForCart sectionFC = mock(SectionForCart.class);
 		
 		when(sectionRepository.getAvailable(SPORT_NAME, GAME_DATE, SECTION_NAME)).thenReturn(section);
