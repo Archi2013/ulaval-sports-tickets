@@ -23,10 +23,9 @@ public class TicketSearchPreferenceFactory {
 	@Inject
 	private Constants constants;
 
-	public TicketSearchPreferenceDto createPreferenceDto(
-			List<String> selectedSports, DisplayedPeriod displayedPeriod,
-			boolean localGameOnly, List<TicketKind> selectedTicketKinds) {
+	public TicketSearchPreferenceDto createPreferenceDto(TicketSearchViewModel ticketSearchVM) {
 		List<String> selectedTicketKindsString = newArrayList();
+		List<TicketKind> selectedTicketKinds = ticketSearchVM.getSelectedTicketKinds();
 		if (selectedTicketKinds != null) {
 			selectedTicketKindsString = transform(selectedTicketKinds, new Function<TicketKind, String>() {
 				@Override
@@ -36,8 +35,8 @@ public class TicketSearchPreferenceFactory {
 			});
 		}
 		TicketSearchPreferenceDto ticketSPDto = new TicketSearchPreferenceDto(
-				selectedSports, displayedPeriod.name(),
-				localGameOnly, selectedTicketKindsString);
+				ticketSearchVM.getSelectedSports(), ticketSearchVM.getDisplayedPeriod().name(),
+				ticketSearchVM.isLocalGameOnly(), selectedTicketKindsString);
 		return ticketSPDto;
 	}
 	

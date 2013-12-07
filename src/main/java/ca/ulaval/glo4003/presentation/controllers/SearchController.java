@@ -20,8 +20,9 @@ import ca.ulaval.glo4003.presentation.controllers.errorhandler.SearchErrorHandle
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.TicketSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.TicketSearchPreferenceFactory;
+import ca.ulaval.glo4003.services.CommandUserPreferencesService;
 import ca.ulaval.glo4003.services.SearchViewService;
-import ca.ulaval.glo4003.services.UserPreferencesService;
+import ca.ulaval.glo4003.services.UserPreferencesViewService;
 import ca.ulaval.glo4003.services.exceptions.UserPreferencesNotSaved;
 import ca.ulaval.glo4003.utilities.Constants;
 import ca.ulaval.glo4003.utilities.search.TicketSearchPreferenceDto;
@@ -40,7 +41,10 @@ public class SearchController {
 	private SearchViewService searchService;
 	
 	@Inject
-	private UserPreferencesService userPreferencesService;
+	private UserPreferencesViewService userPreferencesViewService;
+	
+	@Inject
+	private CommandUserPreferencesService commandUserPreferencesService;
 
 	@Inject
 	private TicketSearchPreferenceFactory ticketSearchPreferenceFactory;
@@ -61,7 +65,7 @@ public class SearchController {
 		
 		if (currentUser.isLogged()) {
 			try {
-				ticketSearchVM = userPreferencesService.getUserPreferencesForUser(currentUser);
+				ticketSearchVM = userPreferencesViewService.getUserPreferencesForUser(currentUser.getUsername());
 			} catch (UserDoesntHaveSavedPreferences e){
 				ticketSearchVM = ticketSearchPreferenceFactory.createInitialViewModel();
 			}
@@ -80,7 +84,8 @@ public class SearchController {
 	public ModelAndView savePreferences(@ModelAttribute("ticketSearchForm") TicketSearchViewModel ticketSearchVM) {
 		ModelAndView mav = home();
 		try {
-			userPreferencesService.saveUserPreference(currentUser, ticketSearchVM);
+			TicketSearchPreferenceDto ticketSearchPreferenceDto = ticketSearchPreferenceFactory.createPreferenceDto(ticketSearchVM);
+			commandUserPreferencesService.saveUserPreference(currentUser.getUsername(), ticketSearchPreferenceDto);
 			mav.addObject("preferencesSaved", true);
 		} catch (UserPreferencesNotSaved e) {
 			mav.addObject("preferencesSaved", false);
@@ -109,9 +114,7 @@ public class SearchController {
 	}
 	
 	private List<SectionForSearchViewModel> getSectionViewModels(TicketSearchViewModel ticketSearchVM) {
-		TicketSearchPreferenceDto preferenceDto = ticketSearchPreferenceFactory.createPreferenceDto(
-				ticketSearchVM.getSelectedSports(), ticketSearchVM.getDisplayedPeriod(),
-				ticketSearchVM.isLocalGameOnly(), ticketSearchVM.getSelectedTicketKinds());
+		TicketSearchPreferenceDto preferenceDto = ticketSearchPreferenceFactory.createPreferenceDto(ticketSearchVM);
 		return searchService.getSections(preferenceDto);
 	}
 }
