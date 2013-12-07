@@ -97,8 +97,6 @@ public class TicketRepository implements ITicketRepository {
 		List<Ticket> ticketsToReturn = new ArrayList<>();
 		for (TicketDto ticket : availableTickets) {
 			Ticket newTicket = factory.createTicket(ticket);
-			// newTicket.assign(ticket.sportName, ticket.gameDate,
-			// ticket.ticketId);
 			ticketsInDao.add(newTicket);
 			ticketsToReturn.add(newTicket);
 		}

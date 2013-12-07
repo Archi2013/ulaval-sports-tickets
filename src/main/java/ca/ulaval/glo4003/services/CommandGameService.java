@@ -33,7 +33,6 @@ public class CommandGameService {
 
 		sport.addGameToCalendar(game, date);
 
-		// gameRepository.commit();
 		sportRepository.commit();
 		sportRepository.clearCache();
 	}

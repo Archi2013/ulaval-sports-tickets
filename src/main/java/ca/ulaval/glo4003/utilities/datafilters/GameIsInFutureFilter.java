@@ -14,8 +14,7 @@ public class GameIsInFutureFilter implements DataFilter<GameDto> {
 	private DateTime currentDate;
 
 	public GameIsInFutureFilter() {
-		this.currentDate = new DateTime(); // Initialise par defaut au temps
-											// courant
+		this.currentDate = new DateTime(); 
 	}
 
 	public GameIsInFutureFilter(DateTime currentDate) {
