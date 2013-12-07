@@ -97,22 +97,22 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 	}
 
 	private List<SectionForSearchDto> createFullListForSelectedSports(List<String> sportNames) {
-		List<SectionForSearchDto> sectionFSDtos = newArrayList();
+		List<SectionForSearchDto> sectionsForSearches = newArrayList();
 
 		try {
 			for (String sportName : sportNames) {
 				List<GameDto> gameDtos = gameDao.getGamesForSport(sportName);
 
-				for (GameDto gameDto : gameDtos) {
+				for (GameDto game : gameDtos) {
 					try {
-						List<SectionDto> sectionDtos = sectionDao.getAllAvailable(gameDto.getSportName(),
-								gameDto.getGameDate());
+						List<SectionDto> sectionDtos = sectionDao.getAllAvailable(game.getSportName(),
+								game.getGameDate());
 
-						for (SectionDto sectionDto : sectionDtos) {
-							String url = createUrl(sportName, gameDto.getGameDate(), sectionDto.getSectionName());
-							SectionForSearchDto sectionFSDto = new SectionForSearchDto(sectionDto, gameDto, sportName,
+						for (SectionDto section : sectionDtos) {
+							String url = createUrl(sportName, game.getGameDate(), section.getSectionName());
+							SectionForSearchDto sectionForSearch = new SectionForSearchDto(section, game, sportName,
 									url);
-							sectionFSDtos.add(sectionFSDto);
+							sectionsForSearches.add(sectionForSearch);
 						}
 					} catch (XmlIntegrityException e) {
 						// TODO s'occuper de la cause de cette exception
@@ -120,11 +120,11 @@ class SectionForSearchSimpleMethodDao implements SectionForSearchDao {
 					}
 				}
 			}
-			return sectionFSDtos;
+			return sectionsForSearches;
 		} catch (SportDoesntExistException | GameDoesntExistException e) {
 			System.out.println("### ==> Plantage durant la recherche de billets");
 			e.printStackTrace();
-			return sectionFSDtos;
+			return sectionsForSearches;
 		}
 	}
 
