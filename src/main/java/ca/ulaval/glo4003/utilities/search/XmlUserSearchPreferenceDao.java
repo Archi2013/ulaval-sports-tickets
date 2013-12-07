@@ -72,9 +72,7 @@ public class XmlUserSearchPreferenceDao implements UserSearchPreferenceDao {
 			database.addNode(xPath, simpleNode);
 		} catch (XPathExpressionException e) {
 			throw new UserSearchPreferenceDoesntExistException();
-		}
-		
-		
+		}	
 	}
 
 	private SimpleNode convertUserPreferencesToNode(UserSearchPreferenceDto userPreferences) {
@@ -88,7 +86,6 @@ public class XmlUserSearchPreferenceDao implements UserSearchPreferenceDao {
 		
 		SimpleNode simpleNode = new SimpleNode("userPreferences", nodes);
 		return simpleNode;
-
 	}
 
 	@Override

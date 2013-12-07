@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.repositories;
+package ca.ulaval.glo4003.domain.tickets;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;

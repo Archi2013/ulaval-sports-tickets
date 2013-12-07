@@ -15,15 +15,15 @@ import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDoesntExistExcepti
 import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDao;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CommandUserPreferencesViewServiceTest {
+public class CommandUserSearchPreferenceServiceTest {
 
 	private static final String USERNAME = "north";
 	
 	@Mock
-	UserSearchPreferenceDao userPreferencesDao;
+	UserSearchPreferenceDao userSearchPreferenceDao;
 
 	@InjectMocks
-	private CommandUserSearchPreferenceService commandUserPreferencesService;
+	private CommandUserSearchPreferenceService commandUserSearchPreferenceService;
 
 	@Before
 	public void setUp() {
@@ -31,20 +31,20 @@ public class CommandUserPreferencesViewServiceTest {
 	
 	@Test
 	public void saveUserPreference_should_save_preferences() throws UserSearchPreferenceNotSaved, UserSearchPreferenceDoesntExistException {
-		UserSearchPreferenceDto ticketSearchPreferenceDto = mock(UserSearchPreferenceDto.class);
+		UserSearchPreferenceDto userSearchPreferenceDto = mock(UserSearchPreferenceDto.class);
 		
-		commandUserPreferencesService.saveUserSearchPreference(USERNAME, ticketSearchPreferenceDto);
+		commandUserSearchPreferenceService.saveUserSearchPreference(USERNAME, userSearchPreferenceDto);
 		
-		verify(userPreferencesDao).save(USERNAME, ticketSearchPreferenceDto);
-		verify(userPreferencesDao).commit();
+		verify(userSearchPreferenceDao).save(USERNAME, userSearchPreferenceDto);
+		verify(userSearchPreferenceDao).commit();
 	}
 	
 	@Test(expected=UserSearchPreferenceNotSaved.class)
 	public void when_UserPreferencesDoesntExistException_saveUserPreference_should_raise_UserPreferencesNotSaved() throws UserSearchPreferenceDoesntExistException, UserSearchPreferenceNotSaved {
-		UserSearchPreferenceDto ticketSearchPreferenceDto = mock(UserSearchPreferenceDto.class);
+		UserSearchPreferenceDto userSearchPreferenceDto = mock(UserSearchPreferenceDto.class);
 		
-		doThrow(new UserSearchPreferenceDoesntExistException()).when(userPreferencesDao).save(USERNAME, ticketSearchPreferenceDto);
+		doThrow(new UserSearchPreferenceDoesntExistException()).when(userSearchPreferenceDao).save(USERNAME, userSearchPreferenceDto);
 		
-		commandUserPreferencesService.saveUserSearchPreference(USERNAME, ticketSearchPreferenceDto);
+		commandUserSearchPreferenceService.saveUserSearchPreference(USERNAME, userSearchPreferenceDto);
 	}
 }

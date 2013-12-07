@@ -13,12 +13,12 @@ import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDao;
 public class CommandUserSearchPreferenceService {
 	
 	@Inject
-	UserSearchPreferenceDao userPreferencesDao;
+	UserSearchPreferenceDao userSearchPreferenceDao;
 	
-	public void saveUserSearchPreference(String username, UserSearchPreferenceDto ticketSearchPreferenceDto) throws UserSearchPreferenceNotSaved {	
+	public void saveUserSearchPreference(String username, UserSearchPreferenceDto userSearchPreferenceDto) throws UserSearchPreferenceNotSaved {	
 		try {
-			userPreferencesDao.save(username, ticketSearchPreferenceDto);
-			userPreferencesDao.commit();
+			userSearchPreferenceDao.save(username, userSearchPreferenceDto);
+			userSearchPreferenceDao.commit();
 		} catch (UserSearchPreferenceDoesntExistException e) {
 			throw new UserSearchPreferenceNotSaved();
 		}

@@ -22,13 +22,13 @@ public class UserSearchPreferenceViewServiceTest {
 	private static final String USERNAME = "Xéha";
 
 	@Mock
-	UserSearchPreferenceFactory ticketSearchPreferenceFactory;
+	UserSearchPreferenceFactory userSearchPreferenceFactory;
 	
 	@Mock
-	UserSearchPreferenceDao userPreferencesDao;
+	UserSearchPreferenceDao userSearchPreferenceDao;
 
 	@InjectMocks
-	private UserSearchPreferenceViewService userPreferencesViewService;
+	private UserSearchPreferenceViewService userSearchPreferenceViewService;
 
 	@Before
 	public void setUp() {
@@ -36,14 +36,14 @@ public class UserSearchPreferenceViewServiceTest {
 
 	@Test
 	public void getUserPreferencesForUser_should_get_ticketSearchPrefDto() throws UserDoesntHaveSavedSearchPreference {
-		SearchViewModel ticketSVM = mock(SearchViewModel.class);
-		UserSearchPreferenceDto ticketSPDto = mock(UserSearchPreferenceDto.class);
+		SearchViewModel searchVM = mock(SearchViewModel.class);
+		UserSearchPreferenceDto userSearchPreferenceDto = mock(UserSearchPreferenceDto.class);
 		
-		when(userPreferencesDao.get(USERNAME)).thenReturn(ticketSPDto);
-		when(ticketSearchPreferenceFactory.createViewModel(ticketSPDto)).thenReturn(ticketSVM);
+		when(userSearchPreferenceDao.get(USERNAME)).thenReturn(userSearchPreferenceDto);
+		when(userSearchPreferenceFactory.createViewModel(userSearchPreferenceDto)).thenReturn(searchVM);
 		
-		SearchViewModel actual = userPreferencesViewService.getSearchViewModelForUser(USERNAME);
+		SearchViewModel actual = userSearchPreferenceViewService.getSearchViewModelForUser(USERNAME);
 		
-		assertEquals(ticketSVM, actual);
+		assertEquals(searchVM, actual);
 	}
 }

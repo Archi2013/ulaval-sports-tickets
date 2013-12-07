@@ -23,9 +23,9 @@ public class UserSearchPreferenceFactory {
 	@Inject
 	private Constants constants;
 
-	public UserSearchPreferenceDto createPreferenceDto(SearchViewModel ticketSearchVM) {
+	public UserSearchPreferenceDto createPreferenceDto(SearchViewModel searchVM) {
 		List<String> selectedTicketKindsString = newArrayList();
-		List<TicketKind> selectedTicketKinds = ticketSearchVM.getSelectedTicketKinds();
+		List<TicketKind> selectedTicketKinds = searchVM.getSelectedTicketKinds();
 		if (selectedTicketKinds != null) {
 			selectedTicketKindsString = transform(selectedTicketKinds, new Function<TicketKind, String>() {
 				@Override
@@ -34,23 +34,23 @@ public class UserSearchPreferenceFactory {
 				}
 			});
 		}
-		UserSearchPreferenceDto ticketSPDto = new UserSearchPreferenceDto(
-				ticketSearchVM.getSelectedSports(), ticketSearchVM.getDisplayedPeriod().name(),
-				ticketSearchVM.isLocalGameOnly(), selectedTicketKindsString);
-		return ticketSPDto;
+		UserSearchPreferenceDto userSearchPreferenceDto = new UserSearchPreferenceDto(
+				searchVM.getSelectedSports(), searchVM.getDisplayedPeriod().name(),
+				searchVM.isLocalGameOnly(), selectedTicketKindsString);
+		return userSearchPreferenceDto;
 	}
 	
-	public SearchViewModel createViewModel(UserSearchPreferenceDto ticketSPDto) {
-		DisplayedPeriod displayPeriod = DisplayedPeriod.valueOf(ticketSPDto.getDisplayedPeriod());
-		List<TicketKind> selectedTicketKinds = transform(ticketSPDto.getSelectedTicketKinds(),
+	public SearchViewModel createViewModel(UserSearchPreferenceDto userSearchPreferenceDto) {
+		DisplayedPeriod displayPeriod = DisplayedPeriod.valueOf(userSearchPreferenceDto.getDisplayedPeriod());
+		List<TicketKind> selectedTicketKinds = transform(userSearchPreferenceDto.getSelectedTicketKinds(),
 				new Function<String, TicketKind>() {
 					@Override
 					public TicketKind apply(String ticketKind) {
 						return TicketKind.valueOf(ticketKind);
 					}
 				});
-		return createTicketSearchViewModel(ticketSPDto.getSelectedSports(), displayPeriod,
-				ticketSPDto.isLocalGameOnly(), selectedTicketKinds);
+		return createTicketSearchViewModel(userSearchPreferenceDto.getSelectedSports(), displayPeriod,
+				userSearchPreferenceDto.isLocalGameOnly(), selectedTicketKinds);
 	}
 
 	public SearchViewModel createInitialViewModel() {
@@ -61,12 +61,12 @@ public class UserSearchPreferenceFactory {
 
 	private SearchViewModel createTicketSearchViewModel(List<String> selectedSports,
 			DisplayedPeriod displayPeriod, Boolean isLocalGameOnly, List<TicketKind> selectedTicketKinds) {
-		SearchViewModel ticketSearchVM = new SearchViewModel();
-		ticketSearchVM.setSelectedSports(selectedSports);
-		ticketSearchVM.setDisplayedPeriod(displayPeriod);
-		ticketSearchVM.setLocalGameOnly(isLocalGameOnly);
-		ticketSearchVM.setSelectedTicketKinds(selectedTicketKinds);
-		return ticketSearchVM;
+		SearchViewModel searchVM = new SearchViewModel();
+		searchVM.setSelectedSports(selectedSports);
+		searchVM.setDisplayedPeriod(displayPeriod);
+		searchVM.setLocalGameOnly(isLocalGameOnly);
+		searchVM.setSelectedTicketKinds(selectedTicketKinds);
+		return searchVM;
 	}
 
 }

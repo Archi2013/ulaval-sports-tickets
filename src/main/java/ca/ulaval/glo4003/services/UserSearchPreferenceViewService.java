@@ -14,14 +14,14 @@ import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDao;
 public class UserSearchPreferenceViewService {
 
 	@Inject
-	UserSearchPreferenceFactory ticketSearchPreferenceFactory;
+	UserSearchPreferenceFactory userSearchPreferenceFactory;
 	
 	@Inject
 	UserSearchPreferenceDao userPreferencesDao;
 	
 	public SearchViewModel getSearchViewModelForUser(String username) throws UserDoesntHaveSavedSearchPreference {
-		UserSearchPreferenceDto ticketSPDto = userPreferencesDao.get(username);	
-		SearchViewModel ticketSearchVModel = ticketSearchPreferenceFactory.createViewModel(ticketSPDto);
-		return ticketSearchVModel;			
+		UserSearchPreferenceDto userSearchPreferenceDto = userPreferencesDao.get(username);	
+		SearchViewModel searchVM = userSearchPreferenceFactory.createViewModel(userSearchPreferenceDto);
+		return searchVM;			
 	}
 }
