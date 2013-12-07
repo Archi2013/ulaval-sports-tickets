@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
+import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDto;
 
 @Repository
 public interface GameDao {
@@ -21,4 +22,6 @@ public interface GameDao {
 	public void commit();
 
 	public void update(GameDto dto) throws GameDoesntExistException;
+
+	public List<GameDto> getFromUserSearchPreference(UserSearchPreferenceDto userSearchPreference);
 }

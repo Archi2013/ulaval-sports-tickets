@@ -127,10 +127,10 @@ public aspect ControllersLoggers {
 		exception.printStackTrace();
 	}
 	
-	pointcut SearchController_savePreferences() :
-		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SearchController.savePreferences(..));
+	pointcut SearchController_savePreference() :
+		execution (public ModelAndView ca.ulaval.glo4003.presentation.controllers.SearchController.savePreference(..));
 	
-	after() : SearchController_savePreferences(){
+	after() : SearchController_savePreference(){
 		SearchControllerLogger.info("préférences de l'usager sauvegardées");
 	}
 	
