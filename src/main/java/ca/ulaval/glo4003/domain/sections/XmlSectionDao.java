@@ -1,6 +1,7 @@
 package ca.ulaval.glo4003.domain.sections;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,9 @@ public class XmlSectionDao implements SectionDao {
 	private final static String SECTION_FOR_GAME_XPATH_SPORT = SECTION_XPATH + "[sportName=\"%s\"][gameDate=\"%s\"]";
 	private final static String SECTION_XPATH_SPORT = SECTION_FOR_GAME_XPATH_SPORT + "[section=\"%s\"]";
 	private final static String SECTION_XPATH_AVAILABLE_SPORT = SECTION_XPATH_SPORT + "[available=\"%s\"]";
+	
+	private final static Set<String> SECTION_CACHE = Collections.synchronizedSet(new HashSet<String>());
+	private final static DateTime LAST_REFRESH = DateTime.now();
 
 	private XmlDatabase database;
 
@@ -113,11 +117,18 @@ public class XmlSectionDao implements SectionDao {
 
 	@Override
 	public Set<String> getAllSections() {
-		try {
-	        return database.distinct(SECTION_XPATH, "section");
-        } catch (XPathExpressionException e) {
-	        throw new XmlIntegrityException();
-        }
+		if (SECTION_CACHE.isEmpty() || timeOutRefresh()) {
+			try {
+				SECTION_CACHE.addAll(database.distinct(SECTION_XPATH, "section"));
+	        } catch (XPathExpressionException e) {
+		        throw new XmlIntegrityException();
+	        }
+		}
+		return SECTION_CACHE;
+	}
+
+	private boolean timeOutRefresh() {
+		return LAST_REFRESH.plusMinutes(5).isBefore(DateTime.now());
 	}
 	
 	@Override
