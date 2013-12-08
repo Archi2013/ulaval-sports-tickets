@@ -12,11 +12,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.ulaval.glo4003.domain.tickets.GeneralTicketDto;
-import ca.ulaval.glo4003.domain.tickets.SeatedTicketDto;
-import ca.ulaval.glo4003.domain.tickets.TicketDto;
-import ca.ulaval.glo4003.domain.tickets.XmlTicketDao;
-import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
 import ca.ulaval.glo4003.exceptions.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
@@ -107,9 +102,10 @@ public class XmlTicketDaoIT {
 		assertTicket(expected5, tickets.get(5));
 	}
 
-	@Test(expected = GameDoesntExistException.class)
-	public void testGetTicketsForInvalidGameShouldThrow() throws Exception {
-		ticketDao.getAllAvailable("INVALIDE", DateTime.now());
+	@Test
+	public void testGetTicketsForInvalidGameReturnNone() throws Exception {
+		List<TicketDto> tickets = ticketDao.getAllAvailable("INVALIDE", DateTime.now());
+		Assert.assertTrue(tickets.isEmpty());
 	}
 
 	@Test
