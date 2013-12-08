@@ -1,6 +1,7 @@
 package ca.ulaval.glo4003.domain.sections;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -130,6 +131,67 @@ public class XmlSectionDaoIT {
 		assertSection(expected0, actuals.get(0));
 		assertSection(expected1, actuals.get(1));
 		assertSection(expected2, actuals.get(2));
+	}
+	
+	@Test
+	public void testGetAllSectionsForTicketKind() throws Exception {
+		List<String> ticketKinds = new ArrayList<>();
+		ticketKinds.add("WITH_SEAT");
+		ticketKinds.add("GENERAL_ADMISSION");
+		
+		List<SectionDto> actuals = sectionDao.getAllSectionsForTicketKind(A_SPORT_NAME, A_GAME_DATE, ticketKinds);
+		
+		Set<String> seats = new HashSet<>();
+		seats.add(A_SEAT);
+		
+		SectionDto expected2 = new SectionDto(GENERAL_SECTION, 1, A_PRICE);
+		SectionDto expected1 = new SectionDto(SECTION_100, 1, A_PRICE, seats);
+		SectionDto expected0 = new SectionDto(SECTION_200, 1, A_PRICE, seats);
+		
+		Assert.assertEquals(3, actuals.size());
+		assertSection(expected0, actuals.get(0));
+		assertSection(expected1, actuals.get(1));
+		assertSection(expected2, actuals.get(2));
+	}
+	
+	@Test
+	public void testGetAllSectionsForTicketKindWithSeat() throws Exception {
+		List<String> ticketKinds = new ArrayList<>();
+		ticketKinds.add("WITH_SEAT");
+		
+		List<SectionDto> actuals = sectionDao.getAllSectionsForTicketKind(A_SPORT_NAME, A_GAME_DATE, ticketKinds);
+		
+		Set<String> seats = new HashSet<>();
+		seats.add(A_SEAT);
+		
+		SectionDto expected1 = new SectionDto(SECTION_100, 1, A_PRICE, seats);
+		SectionDto expected0 = new SectionDto(SECTION_200, 1, A_PRICE, seats);
+		
+		Assert.assertEquals(2, actuals.size());
+		assertSection(expected0, actuals.get(0));
+		assertSection(expected1, actuals.get(1));
+	}
+	
+	@Test
+	public void testGetAllSectionsForTicketKindGeneral() throws Exception {
+		List<String> ticketKinds = new ArrayList<>();
+		ticketKinds.add("GENERAL_ADMISSION");
+		
+		List<SectionDto> actuals = sectionDao.getAllSectionsForTicketKind(A_SPORT_NAME, A_GAME_DATE, ticketKinds);
+		
+		Set<String> seats = new HashSet<>();
+		seats.add(A_SEAT);
+		
+		SectionDto expected = new SectionDto(GENERAL_SECTION, 1, A_PRICE);
+		
+		Assert.assertEquals(1, actuals.size());
+		assertSection(expected, actuals.get(0));
+	}
+	
+	@Test
+	public void testGetAllSectionsForTicketKindNone() throws Exception {
+		List<SectionDto> actuals = sectionDao.getAllSectionsForTicketKind(A_SPORT_NAME, A_GAME_DATE, new ArrayList<String>());
+		Assert.assertTrue(actuals.isEmpty());
 	}
 
 	private void assertSection(SectionDto expected, SectionDto actual) {

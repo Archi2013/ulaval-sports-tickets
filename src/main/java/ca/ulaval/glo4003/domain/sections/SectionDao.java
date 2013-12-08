@@ -19,4 +19,6 @@ public interface SectionDao {
 	public List<SectionDto> getAllAvailable(String sportName, DateTime gameDate) throws GameDoesntExistException;
 
 	public Set<String> getAllSections();
+
+	public List<SectionDto> getAllSectionsForTicketKind(String sportName, DateTime gameDate, List<String> ticketKinds);
 }

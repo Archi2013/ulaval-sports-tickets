@@ -119,11 +119,39 @@ public class XmlSectionDao implements SectionDao {
 	        throw new XmlIntegrityException();
         }
 	}
+	
+	@Override
+	public List<SectionDto> getAllSectionsForTicketKind(String sportName, DateTime gameDate, List<String> ticketKinds) {
+		List<SectionDto> sections = new ArrayList<>();
+		for(String sectionName : getSectionsFromTicketKinds(ticketKinds)) {
+			try {
+				SectionDto found = getAvailable(sportName, gameDate, sectionName);
+				if (found.getNumberOfTickets() > 0) {
+					sections.add(found);
+				}
+			} catch (SectionDoesntExistException e) {
+				// Ignore empty sections
+			}
+		}
+		return sections;
+	}
 
 	private String toString(DateTime date) {
 		if (date == null) {
 			return "";
 		}
 		return date.toString(DATE_PATTERN);
+	}
+
+	private List<String> getSectionsFromTicketKinds(List<String> ticketKinds) {
+		List<String> sections = new ArrayList<>();
+		if (ticketKinds.contains("WITH_SEAT")) {
+			sections.addAll(getAllSections());
+			sections.remove(GENERAL_ADMISSION);
+		}
+		if (ticketKinds.contains("GENERAL_ADMISSION")) {
+			sections.add(GENERAL_ADMISSION);
+		}
+		return sections;
 	}
 }
