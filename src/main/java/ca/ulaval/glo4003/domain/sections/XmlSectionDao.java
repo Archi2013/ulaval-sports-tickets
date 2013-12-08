@@ -30,7 +30,7 @@ public class XmlSectionDao implements SectionDao {
 	private final static String SECTION_XPATH_AVAILABLE_SPORT = SECTION_XPATH_SPORT + "[available=\"%s\"]";
 	
 	private final static Set<String> SECTION_CACHE = Collections.synchronizedSet(new HashSet<String>());
-	private final static DateTime LAST_REFRESH = DateTime.now();
+	private static DateTime LAST_REFRESH = DateTime.now();
 
 	private XmlDatabase database;
 
@@ -118,6 +118,7 @@ public class XmlSectionDao implements SectionDao {
 	@Override
 	public Set<String> getAllSections() {
 		if (SECTION_CACHE.isEmpty() || timeOutRefresh()) {
+			LAST_REFRESH = DateTime.now();
 			try {
 				SECTION_CACHE.addAll(database.distinct(SECTION_XPATH, "section"));
 	        } catch (XPathExpressionException e) {
