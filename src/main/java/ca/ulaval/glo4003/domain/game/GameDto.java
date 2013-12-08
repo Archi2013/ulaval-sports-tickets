@@ -72,4 +72,10 @@ public class GameDto {
 		this.nextTicketNumber = nextTicketNumber;
 	}
 
+	public boolean isBefore(DateTime endDateTime) {
+		if (gameDate == null) {
+			return false;
+		}
+		return gameDate.isBefore(endDateTime);
+	}
 }

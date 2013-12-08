@@ -21,11 +21,14 @@ public class XmlGameDaoIT {
 	private static final String FILENAME = "resources/XmlGameDaoIT.xml";
 	private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormat.forPattern(XmlGameDao.DATE_PATTERN);
 	private static final DateTime SOME_DATE = DateTime.parse("2013/12/12 18:30 EST", DATE_TIME_FORMAT);
-	private static final GameDto GAME_4 = new GameDto("Ottawa", SOME_DATE, "Rugby-Féminin", "Stade TELUS-UL");
-	private static final GameDto GAME_3 = new GameDto("McGill", SOME_DATE, "Soccer-Masculin", "Montréal");
-	private static final GameDto GAME_1 = new GameDto("Dinos de Calgary", SOME_DATE, "Football", "Stade TELUS-UL");
 	private static final DateTime OTHER_DATE = DateTime.parse("2013/11/11 18:30 EST", DATE_TIME_FORMAT);
+	private static final GameDto GAME_1 = new GameDto("Dinos de Calgary", SOME_DATE, "Football", "Stade TELUS-UL");
 	private static final GameDto GAME_2 = new GameDto("Redmen de McGill", OTHER_DATE, "Football", "Stade TELUS-UL");
+	private static final GameDto GAME_3 = new GameDto("McGill", SOME_DATE, "Soccer-Masculin", "Montréal");
+	private static final GameDto GAME_4 = new GameDto("Ottawa", SOME_DATE, "Rugby-Féminin", "Stade TELUS-UL");
+	private static final GameDto GAME_5 = new GameDto("McGill", DateTime.now().plusMonths(7), "Soccer-Masculin", "Montréal");
+	private static final String ALL_PERIOD = "ALL";
+	private static final String SIX_MONTH_PERIOD = "SIX_MONTH";
 
 	private XmlGameDao gameDao;
 
@@ -36,6 +39,7 @@ public class XmlGameDaoIT {
 		gameDao.add(GAME_2);
 		gameDao.add(GAME_3);
 		gameDao.add(GAME_4);
+		gameDao.add(GAME_5);
 	}
 	
 	@After
@@ -130,7 +134,7 @@ public class XmlGameDaoIT {
 	public void testGetFromUserSearchPreferenceLocalOnlyNone() throws Exception {
 		List<String> selectedSports = new ArrayList<>();
 		selectedSports.add(GAME_3.getSportName());
-		UserSearchPreferenceDto userSearchPreference = new UserSearchPreferenceDto(selectedSports, null, true, null);
+		UserSearchPreferenceDto userSearchPreference = new UserSearchPreferenceDto(selectedSports, ALL_PERIOD, true, null);
 		
 		List<GameDto> actuals = gameDao.getFromUserSearchPreference(userSearchPreference);
 		Assert.assertTrue(actuals.isEmpty());
@@ -140,7 +144,7 @@ public class XmlGameDaoIT {
 	public void testGetFromUserSearchPreferenceLocalOnly() throws Exception {
 		List<String> selectedSports = new ArrayList<>();
 		selectedSports.add(GAME_4.getSportName());
-		UserSearchPreferenceDto userSearchPreference = new UserSearchPreferenceDto(selectedSports, null, true, null);
+		UserSearchPreferenceDto userSearchPreference = new UserSearchPreferenceDto(selectedSports, ALL_PERIOD, true, null);
 		
 		List<GameDto> actuals = gameDao.getFromUserSearchPreference(userSearchPreference);
 		GameDto expected = GAME_4;
@@ -152,7 +156,20 @@ public class XmlGameDaoIT {
 	public void testGetFromUserSearchPreference() throws Exception {
 		List<String> selectedSports = new ArrayList<>();
 		selectedSports.add(GAME_3.getSportName());
-		UserSearchPreferenceDto userSearchPreference = new UserSearchPreferenceDto(selectedSports, null, false, null);
+		UserSearchPreferenceDto userSearchPreference = new UserSearchPreferenceDto(selectedSports, ALL_PERIOD, false, null);
+		
+		List<GameDto> actuals = gameDao.getFromUserSearchPreference(userSearchPreference);
+		GameDto expected0 = GAME_3;
+		Assert.assertEquals(2, actuals.size());
+		assertGame(expected0, actuals.get(0));
+		Assert.assertEquals(GAME_5.getOpponents(), actuals.get(1).getOpponents());
+	}
+	
+	@Test
+	public void testGetFromUserSearchPreferenceForPeriod() throws Exception {
+		List<String> selectedSports = new ArrayList<>();
+		selectedSports.add(GAME_3.getSportName());
+		UserSearchPreferenceDto userSearchPreference = new UserSearchPreferenceDto(selectedSports, SIX_MONTH_PERIOD, false, null);
 		
 		List<GameDto> actuals = gameDao.getFromUserSearchPreference(userSearchPreference);
 		GameDto expected = GAME_3;

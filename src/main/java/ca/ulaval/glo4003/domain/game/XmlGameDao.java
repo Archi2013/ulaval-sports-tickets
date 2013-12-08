@@ -14,6 +14,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Component;
 
+import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.LocalLocation;
 import ca.ulaval.glo4003.exceptions.GameAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
@@ -149,9 +150,11 @@ public class XmlGameDao implements GameDao {
 	@Override
 	public List<GameDto> getFromUserSearchPreference(UserSearchPreferenceDto userSearchPreference) {
 		String xPath = buildXPathForUserSearchPreference(userSearchPreference);
+		
 		try {
 			List<SimpleNode> nodes = database.extractNodeSet(xPath);
-			return convertNodesToGames(nodes);
+			List<GameDto> games = convertNodesToGames(nodes);
+			return filteredOutForPeriod(games, userSearchPreference.getDisplayedPeriod());
 		} catch (XPathExpressionException e) {
 			return new ArrayList<GameDto>();
 		}
@@ -177,6 +180,10 @@ public class XmlGameDao implements GameDao {
 		if (values.isEmpty()) {
 			return "[" + nodeName + "=\"\"]";
 		}
+		return "[" + orClause(nodeName, values) + "]";
+	}
+
+	private String orClause(String nodeName, Collection<String> values) {
 		StringBuilder builder = new StringBuilder();
 		boolean isFirst = true;
 		
@@ -188,8 +195,7 @@ public class XmlGameDao implements GameDao {
 			}
 			builder.append(nodeName + "=\"" + value + "\"");
 		}
-		
-		return "[" + builder.toString() + "]";
+		return builder.toString();
 	}
 	
 	private String buildXPathForUserSearchPreference(UserSearchPreferenceDto userSearchPreference) {
@@ -204,5 +210,40 @@ public class XmlGameDao implements GameDao {
 		}
 		
 		return GAME_XPATH + whereClause.toString();
+	}
+	
+	private DateTime calculateEndDateTime(DisplayedPeriod displayedPeriod) {
+		DateTime result = DateTime.now();
+
+		switch (displayedPeriod) {
+		case ONE_DAY:
+			return result.plusDays(1);
+		case ONE_WEEK:
+			return result.plusWeeks(1);
+		case ONE_MONTH:
+			return result.plusMonths(1);
+		case THREE_MONTH:
+			return result.plusMonths(3);
+		case SIX_MONTH:
+			return result.plusMonths(6);
+		case ALL:
+			return result.plusYears(2);
+		default:
+			return result.plusYears(2);
+		}
+	}
+	
+	private List<GameDto> filteredOutForPeriod(List<GameDto> originals, String displayPeriode) {
+		DisplayedPeriod period = DisplayedPeriod.valueOf(displayPeriode);
+		DateTime endDateTime = calculateEndDateTime(period);
+		
+		 List<GameDto> filtered = new ArrayList<>();
+		 for (GameDto game : originals) {
+			 if (game.isBefore(endDateTime)) {
+				 filtered.add(game);
+			 }
+		 }
+		
+		return filtered;
 	}
 }
