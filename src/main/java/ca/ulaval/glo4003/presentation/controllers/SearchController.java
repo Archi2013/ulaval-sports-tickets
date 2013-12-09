@@ -82,12 +82,14 @@ public class SearchController {
 	
 	@RequestMapping(value="sauvegarde-preference", method=RequestMethod.POST)
 	public ModelAndView savePreference(@ModelAttribute("searchForm") SearchViewModel searchVM) {
-		ModelAndView mav = home();
+		ModelAndView mav;
 		try {
 			UserSearchPreferenceDto userSearchPreferenceDto = userSearchPreferenceFactory.createPreferenceDto(searchVM);
 			commandUserSearchPreferenceService.saveUserSearchPreference(currentUser.getUsername(), userSearchPreferenceDto);
+			mav = home();
 			mav.addObject("preferenceSaved", true);
 		} catch (UserSearchPreferenceNotSaved e) {
+			mav = home();
 			mav.addObject("preferenceSaved", false);
 			searchErrorHandler.addErrorMessageUserPreferencesNotSaved(mav);
 		}

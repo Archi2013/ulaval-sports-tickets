@@ -11,7 +11,7 @@
       <password>qyXfrpjMsRkUMkDmWcT0Pd5fBBzH05hykq2p8Gdh5RoDU1WViCpqQmUnFs7tfPth
       </password>
       <admin>true</admin>
-    <userPreferences><listTicket>["GENERAL_ADMISSION","WITH_SEAT"]</listTicket><displayedPeriod>THREE_MONTH</displayedPeriod><localGameOnly>false</localGameOnly><sportsName>["Soccer masculin"]</sportsName></userPreferences></user>
+    <userPreferences><listTicket>["GENERAL_ADMISSION","WITH_SEAT"]</listTicket><displayedPeriod>ALL</displayedPeriod><localGameOnly>false</localGameOnly><sportsName>["Soccer masculin"]</sportsName></userPreferences></user>
     <user>
       <username>pobedard</username>
       <password>pD7AYv5IscXkK7QX7Whu08pXhvDpEWPhG7r/EFxsxRac8CYGfCalFIf/xf5ZRS+I
