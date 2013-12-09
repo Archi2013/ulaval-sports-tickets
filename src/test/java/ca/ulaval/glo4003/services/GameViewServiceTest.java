@@ -10,6 +10,8 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,12 +21,20 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.game.GameDao;
 import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.domain.tickets.TicketDao;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.GamesViewModelFactory;
+import ca.ulaval.glo4003.utilities.datafilters.GameIsInFutureFilter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameViewServiceTest {
 
+	@Mock
+	private GameIsInFutureFilter filter;
+	
+	@Mock
+	private TicketDao ticketDao;
+	
 	@Mock
 	private GameDao gameDao;
 

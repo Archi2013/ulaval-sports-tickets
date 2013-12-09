@@ -51,7 +51,7 @@ public class AdministrationControllerTest {
 	
 	@Test
 	public void home_should_redirect_to_unauthorized_page_when_not_logged() {
-		when(currentUser.isAdmin()).thenReturn(false);
+		when(currentUser.isAdmin()).thenReturn(true);
 		when(currentUser.isLogged()).thenReturn(false);
 		
 		ModelAndView mav = controller.home(session);

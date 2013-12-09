@@ -21,7 +21,7 @@ public aspect AdministratorVerificator {
 	            
 	            User user = (User) session.getAttribute("currentUser");
 	            
-	    		if (user != null && user.isAdmin()) {
+	    		if (user != null && user.isAdmin() && user.isLogged()) {
 	    			return proceed();
 	    		}
 	        }
