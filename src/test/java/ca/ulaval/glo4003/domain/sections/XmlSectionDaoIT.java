@@ -14,14 +14,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.domain.game.XmlGameDao;
-import ca.ulaval.glo4003.domain.sports.SportDto;
 import ca.ulaval.glo4003.domain.sports.XmlSportDao;
-import ca.ulaval.glo4003.domain.tickets.GeneralTicketDto;
-import ca.ulaval.glo4003.domain.tickets.SeatedTicketDto;
 import ca.ulaval.glo4003.domain.tickets.XmlTicketDao;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
+import ca.ulaval.glo4003.game.dto.GameDto;
+import ca.ulaval.glo4003.sections.dto.SectionDto;
+import ca.ulaval.glo4003.sports.dto.SportDto;
+import ca.ulaval.glo4003.tickets.dto.GeneralTicketDto;
+import ca.ulaval.glo4003.tickets.dto.SeatedTicketDto;
 
 public class XmlSectionDaoIT {
 

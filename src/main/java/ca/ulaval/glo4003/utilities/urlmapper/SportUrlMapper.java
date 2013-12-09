@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.sports;
+package ca.ulaval.glo4003.utilities.urlmapper;
 
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 

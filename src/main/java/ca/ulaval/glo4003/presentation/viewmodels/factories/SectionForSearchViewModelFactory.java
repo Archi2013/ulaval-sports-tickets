@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;
-import ca.ulaval.glo4003.utilities.search.SectionForSearchDto;
+import ca.ulaval.glo4003.utilities.search.dto.SectionForSearchDto;
 
 import com.google.common.base.Function;
 

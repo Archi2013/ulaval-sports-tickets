@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.game.dto.GameDto;
 import ca.ulaval.glo4003.utilities.datafilters.GameIsInFutureFilter;
 
 @RunWith(MockitoJUnitRunner.class)

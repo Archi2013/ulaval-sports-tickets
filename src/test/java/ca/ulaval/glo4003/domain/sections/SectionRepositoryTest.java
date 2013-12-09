@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
+import ca.ulaval.glo4003.sections.dto.SectionDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SectionRepositoryTest {

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
@@ -22,6 +21,7 @@ import ca.ulaval.glo4003.services.SectionService;
 import ca.ulaval.glo4003.utilities.Constants;
 import ca.ulaval.glo4003.utilities.persistence.XmlIntegrityException;
 import ca.ulaval.glo4003.utilities.time.UrlDateTimeFactory;
+import ca.ulaval.glo4003.utilities.urlmapper.SportUrlMapper;
 
 @Controller
 @SessionAttributes({ "currentUser" })

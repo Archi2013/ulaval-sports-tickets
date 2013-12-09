@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.sports;
+package ca.ulaval.glo4003.utilities.urlmapper;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
+import ca.ulaval.glo4003.domain.sports.SportDao;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
-import ca.ulaval.glo4003.utilities.urlmapper.UrlMapper;
 
 @Component
 public class SportUrlMapperWithGeneration extends UrlMapper implements SportUrlMapper {

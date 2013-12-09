@@ -1,8 +1,6 @@
 package ca.ulaval.glo4003.domain.tickets;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.*;
 
 import org.joda.time.DateTime;
@@ -12,6 +10,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import ca.ulaval.glo4003.tickets.dto.SeatedTicketDto;
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SeatedTicketTest {

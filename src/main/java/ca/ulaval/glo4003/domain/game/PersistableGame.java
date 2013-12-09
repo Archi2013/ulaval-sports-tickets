@@ -5,6 +5,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import ca.ulaval.glo4003.domain.tickets.Ticket;
+import ca.ulaval.glo4003.game.dto.GameDto;
 import ca.ulaval.glo4003.utilities.persistence.Persistable;
 
 public class PersistableGame implements Game, Persistable<GameDto> {

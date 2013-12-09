@@ -22,6 +22,7 @@ import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.domain.tickets.TicketRepository;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
+import ca.ulaval.glo4003.game.dto.GameDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameRepositoryTest {

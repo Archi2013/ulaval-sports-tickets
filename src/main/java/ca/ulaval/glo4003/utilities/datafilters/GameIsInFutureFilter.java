@@ -6,7 +6,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.game.dto.GameDto;
 
 @Component
 public class GameIsInFutureFilter implements DataFilter<GameDto> {

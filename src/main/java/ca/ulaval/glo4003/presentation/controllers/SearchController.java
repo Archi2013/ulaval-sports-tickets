@@ -25,7 +25,7 @@ import ca.ulaval.glo4003.services.SearchViewService;
 import ca.ulaval.glo4003.services.UserSearchPreferenceViewService;
 import ca.ulaval.glo4003.services.exceptions.UserSearchPreferenceNotSaved;
 import ca.ulaval.glo4003.utilities.Constants;
-import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDto;
+import ca.ulaval.glo4003.utilities.search.dto.UserSearchPreferenceDto;
 
 @Controller
 @SessionAttributes({ "currentUser" })

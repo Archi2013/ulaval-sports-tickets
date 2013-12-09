@@ -1,6 +1,8 @@
 package ca.ulaval.glo4003.domain.tickets;
 
 import ca.ulaval.glo4003.constants.TicketKind;
+import ca.ulaval.glo4003.tickets.dto.GeneralTicketDto;
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
 
 public class GeneralTicket extends Ticket {
 

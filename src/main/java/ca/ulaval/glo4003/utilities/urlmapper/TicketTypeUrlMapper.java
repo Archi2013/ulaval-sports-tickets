@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.tickets;
+package ca.ulaval.glo4003.utilities.urlmapper;
 
 import ca.ulaval.glo4003.exceptions.NoTicketTypeForUrlException;
 

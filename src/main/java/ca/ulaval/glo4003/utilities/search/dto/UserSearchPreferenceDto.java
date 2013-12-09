@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.utilities.search;
+package ca.ulaval.glo4003.utilities.search.dto;
 
 import java.util.ArrayList;
 import java.util.List;

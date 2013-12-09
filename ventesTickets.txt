@@ -302,3 +302,28 @@ Sat Dec 07 00:59:30 EST 2013 : Vente de tickets sélectionnés pour le sport Foo
 Ticket B-6 vendus à 30.0
 Total : 30.0
 
+Sun Dec 08 21:20:40 EST 2013 : Vente de tickets d'admission générale pour le sport Démonstration à la date 2014-01-01T13:00:00.000-05:00
+10 tickets vendus à 10.0
+Total 100.0
+Sun Dec 08 22:18:57 EST 2013 : Vente de tickets d'admission générale pour le sport Démonstration à la date 2014-02-01T13:00:00.000-05:00
+10 tickets vendus à 25.0
+Total 250.0
+Sun Dec 08 22:20:05 EST 2013 : Vente de tickets d'admission générale pour le sport Démonstration à la date 2014-02-01T13:00:00.000-05:00
+10 tickets vendus à 25.0
+Total 250.0
+Sun Dec 08 22:22:53 EST 2013 : Vente de tickets sélectionnés pour le sport Soccer masculin à la date 2014-08-19T16:00:00.000-04:00
+Ticket 10 vendus à 25.0
+Total : 25.0
+
+Sun Dec 08 22:23:27 EST 2013 : Vente de tickets d'admission générale pour le sport Soccer masculin à la date 2014-08-19T16:00:00.000-04:00
+10 tickets vendus à 5.0
+Total 50.0
+Sun Dec 08 22:24:05 EST 2013 : Vente de tickets d'admission générale pour le sport Soccer masculin à la date 2014-10-25T20:00:00.000-04:00
+10 tickets vendus à 5.0
+Total 50.0
+Sun Dec 08 22:24:05 EST 2013 : Vente de tickets d'admission générale pour le sport Soccer masculin à la date 2014-10-20T13:00:00.000-04:00
+5 tickets vendus à 5.0
+Total 25.0
+Sun Dec 08 22:24:56 EST 2013 : Vente de tickets d'admission générale pour le sport Soccer masculin à la date 2014-08-20T13:00:00.000-04:00
+1 tickets vendus à 5.0
+Total 5.0

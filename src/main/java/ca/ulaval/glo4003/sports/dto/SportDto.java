@@ -1,55 +1,52 @@
-package ca.ulaval.glo4003.domain.sports;
+package ca.ulaval.glo4003.sports.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import ca.ulaval.glo4003.domain.game.GameDto;
-
 public class SportDto implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final int A_PRIME_NUMBER = 7;
 	private static final int AN_OTHER_PRIME_NUMBER = 71;
 
 	private String name;
-	private List<GameDto> games;
+
+	// private List<GameDto> games;
 
 	public SportDto() {
 		this.name = "";
-		this.games = new ArrayList<GameDto>();
+		// this.games = new ArrayList<GameDto>();
 	}
 
 	public SportDto(String name) {
 		this.name = name;
-		this.games = new ArrayList<GameDto>();
+		// this.games = new ArrayList<GameDto>();
 	}
 
 	@Override
-    public boolean equals(Object obj) {
+	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
 		}
 		if (this == obj) {
 			return true;
 		}
-		if ( !(obj instanceof SportDto) ) {
+		if (!(obj instanceof SportDto)) {
 			return false;
 		}
-        
+
 		SportDto other = (SportDto) obj;
- 
-        return new EqualsBuilder().append(this.name, other.name).build();
-    }
-	
+
+		return new EqualsBuilder().append(this.name, other.name).build();
+	}
+
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(A_PRIME_NUMBER, AN_OTHER_PRIME_NUMBER).append(this.name).toHashCode();
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -58,7 +55,7 @@ public class SportDto implements Serializable {
 		this.name = name;
 	}
 
-	public List<GameDto> getGames() {
-		return games;
-	}
+	/*
+	 * public List<GameDto> getGames() { return games; }
+	 */
 }

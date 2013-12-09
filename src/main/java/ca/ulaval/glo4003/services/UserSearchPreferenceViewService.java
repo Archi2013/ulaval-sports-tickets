@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedSearchPreference;
 import ca.ulaval.glo4003.presentation.viewmodels.SearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.UserSearchPreferenceFactory;
-import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDto;
 import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDao;
+import ca.ulaval.glo4003.utilities.search.dto.UserSearchPreferenceDto;
 
 @Service
 public class UserSearchPreferenceViewService {

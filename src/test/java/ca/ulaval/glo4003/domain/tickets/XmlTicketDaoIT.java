@@ -15,6 +15,9 @@ import org.junit.Test;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
 import ca.ulaval.glo4003.exceptions.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
+import ca.ulaval.glo4003.tickets.dto.GeneralTicketDto;
+import ca.ulaval.glo4003.tickets.dto.SeatedTicketDto;
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
 
 public class XmlTicketDaoIT {
 

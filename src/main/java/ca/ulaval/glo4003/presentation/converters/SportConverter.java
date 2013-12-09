@@ -4,9 +4,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.sports.SportDto;
-import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
 import ca.ulaval.glo4003.presentation.viewmodels.SportViewModel;
+import ca.ulaval.glo4003.sports.dto.SportDto;
+import ca.ulaval.glo4003.utilities.urlmapper.SportUrlMapper;
 
 @Component
 public class SportConverter extends AbstractConverter<SportDto, SportViewModel> {

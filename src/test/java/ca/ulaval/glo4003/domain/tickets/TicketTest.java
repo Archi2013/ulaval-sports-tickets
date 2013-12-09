@@ -11,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
+
 @RunWith(MockitoJUnitRunner.class)
 public class TicketTest {
 	public static final String A_SPORT = "Sport";

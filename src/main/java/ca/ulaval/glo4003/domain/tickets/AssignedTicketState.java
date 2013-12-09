@@ -2,6 +2,8 @@ package ca.ulaval.glo4003.domain.tickets;
 
 import org.joda.time.DateTime;
 
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
+
 public class AssignedTicketState implements TicketAssignationState {
 
 	private String sportName;

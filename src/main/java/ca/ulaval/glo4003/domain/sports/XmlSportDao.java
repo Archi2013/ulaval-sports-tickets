@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.exceptions.SportAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
+import ca.ulaval.glo4003.sports.dto.SportDto;
 import ca.ulaval.glo4003.utilities.persistence.SimpleNode;
 import ca.ulaval.glo4003.utilities.persistence.XmlDatabase;
 import ca.ulaval.glo4003.utilities.persistence.XmlIntegrityException;

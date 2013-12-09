@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.game.GameDto;
+import ca.ulaval.glo4003.game.dto.GameDto;
 import ca.ulaval.glo4003.presentation.viewmodels.GameViewModel;
 import ca.ulaval.glo4003.utilities.Constants;
 import ca.ulaval.glo4003.utilities.time.UrlDateTime;

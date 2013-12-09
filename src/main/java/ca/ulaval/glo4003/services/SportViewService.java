@@ -7,9 +7,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.sports.SportDao;
-import ca.ulaval.glo4003.domain.sports.SportDto;
 import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SportsViewModelFactory;
+import ca.ulaval.glo4003.sports.dto.SportDto;
 
 @Service
 public class SportViewService {

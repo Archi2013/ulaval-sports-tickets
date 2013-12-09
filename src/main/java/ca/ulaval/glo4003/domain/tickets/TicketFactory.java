@@ -2,6 +2,10 @@ package ca.ulaval.glo4003.domain.tickets;
 
 import org.springframework.stereotype.Component;
 
+import ca.ulaval.glo4003.tickets.dto.GeneralTicketDto;
+import ca.ulaval.glo4003.tickets.dto.SeatedTicketDto;
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
+
 @Component
 public class TicketFactory {
 

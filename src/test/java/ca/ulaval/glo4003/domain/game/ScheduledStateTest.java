@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.tickets.Ticket;
+import ca.ulaval.glo4003.game.dto.GameDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ScheduledStateTest {

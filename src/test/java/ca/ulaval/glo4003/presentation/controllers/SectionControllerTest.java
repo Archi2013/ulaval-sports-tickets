@@ -13,7 +13,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
-import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
@@ -24,6 +23,7 @@ import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;
 import ca.ulaval.glo4003.services.SectionService;
 import ca.ulaval.glo4003.utilities.time.UrlDateTime;
 import ca.ulaval.glo4003.utilities.time.UrlDateTimeFactory;
+import ca.ulaval.glo4003.utilities.urlmapper.SportUrlMapper;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SectionControllerTest {

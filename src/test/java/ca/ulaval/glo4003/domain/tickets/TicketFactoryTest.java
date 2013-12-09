@@ -8,6 +8,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.tickets.dto.GeneralTicketDto;
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
+
 @RunWith(MockitoJUnitRunner.class)
 public class TicketFactoryTest {
 	private static final boolean AVAILABLE = true;

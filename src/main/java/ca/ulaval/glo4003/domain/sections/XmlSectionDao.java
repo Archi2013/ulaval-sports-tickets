@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
+import ca.ulaval.glo4003.sections.dto.SectionDto;
 import ca.ulaval.glo4003.utilities.persistence.SimpleNode;
 import ca.ulaval.glo4003.utilities.persistence.XmlDatabase;
 import ca.ulaval.glo4003.utilities.persistence.XmlIntegrityException;

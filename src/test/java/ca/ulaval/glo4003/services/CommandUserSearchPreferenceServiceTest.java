@@ -10,9 +10,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.services.exceptions.UserSearchPreferenceNotSaved;
-import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDto;
 import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDoesntExistException;
 import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDao;
+import ca.ulaval.glo4003.utilities.search.dto.UserSearchPreferenceDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandUserSearchPreferenceServiceTest {

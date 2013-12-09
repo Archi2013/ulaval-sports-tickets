@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import ca.ulaval.glo4003.exceptions.UserDoesntHaveSavedSearchPreference;
 import ca.ulaval.glo4003.utilities.persistence.SimpleNode;
 import ca.ulaval.glo4003.utilities.persistence.XmlDatabase;
+import ca.ulaval.glo4003.utilities.search.dto.UserSearchPreferenceDto;
 
 @Component
 public class XmlUserSearchPreferenceDao implements UserSearchPreferenceDao {

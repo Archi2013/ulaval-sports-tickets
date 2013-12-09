@@ -1,12 +1,11 @@
 package ca.ulaval.glo4003.presentation.converters;
 
-import static com.google.common.collect.Lists.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ca.ulaval.glo4003.domain.game.GameDto;
-import ca.ulaval.glo4003.domain.sports.SportDto;
-import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
-import ca.ulaval.glo4003.presentation.converters.SportConverter;
 import ca.ulaval.glo4003.presentation.viewmodels.SportViewModel;
+import ca.ulaval.glo4003.sports.dto.SportDto;
+import ca.ulaval.glo4003.utilities.urlmapper.SportUrlMapper;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportConverterTest {
@@ -40,12 +37,15 @@ public class SportConverterTest {
 	@Before
 	public void setUp() {
 		sportDto1 = new SportDto(SPORT_NAME1);
-		sportDto1.getGames().add(new GameDto("", DateTime.now(), "", ""));
-		sportDto1.getGames().add(new GameDto("", DateTime.now().plusDays(3), "", ""));
+		// sportDto1.getGames().add(new GameDto("", DateTime.now(), "", ""));
+		// sportDto1.getGames().add(new GameDto("", DateTime.now().plusDays(3),
+		// "", ""));
 
 		sportDto2 = new SportDto(SPORT_NAME2);
-		sportDto2.getGames().add(new GameDto("", DateTime.now().plusDays(10), "", ""));
-		sportDto2.getGames().add(new GameDto("", DateTime.now().plusDays(1), "", ""));
+		// sportDto2.getGames().add(new GameDto("", DateTime.now().plusDays(10),
+		// "", ""));
+		// sportDto2.getGames().add(new GameDto("", DateTime.now().plusDays(1),
+		// "", ""));
 
 		sportDtos = newArrayList();
 		sportDtos.add(sportDto1);

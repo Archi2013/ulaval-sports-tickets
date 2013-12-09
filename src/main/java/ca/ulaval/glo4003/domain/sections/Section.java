@@ -2,6 +2,8 @@ package ca.ulaval.glo4003.domain.sections;
 
 import java.util.Set;
 
+import ca.ulaval.glo4003.sections.dto.SectionDto;
+
 public class Section {
 
 	private String sectionName;

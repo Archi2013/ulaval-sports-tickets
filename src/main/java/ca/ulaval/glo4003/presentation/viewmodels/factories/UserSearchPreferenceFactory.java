@@ -13,7 +13,7 @@ import ca.ulaval.glo4003.constants.DisplayedPeriod;
 import ca.ulaval.glo4003.constants.TicketKind;
 import ca.ulaval.glo4003.presentation.viewmodels.SearchViewModel;
 import ca.ulaval.glo4003.utilities.Constants;
-import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDto;
+import ca.ulaval.glo4003.utilities.search.dto.UserSearchPreferenceDto;
 
 import com.google.common.base.Function;
 

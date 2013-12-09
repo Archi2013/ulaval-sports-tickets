@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import ca.ulaval.glo4003.exceptions.SportAlreadyExistException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
+import ca.ulaval.glo4003.sports.dto.SportDto;
 
 @Repository
 public interface SportDao {

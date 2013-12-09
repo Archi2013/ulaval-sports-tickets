@@ -8,9 +8,9 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.tickets.AssignedTicketState;
-import ca.ulaval.glo4003.domain.tickets.SeatedTicketDto;
 import ca.ulaval.glo4003.domain.tickets.TicketAssignationState;
-import ca.ulaval.glo4003.domain.tickets.TicketDto;
+import ca.ulaval.glo4003.tickets.dto.SeatedTicketDto;
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AssignedTicketStateTest {

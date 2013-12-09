@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.tickets;
+package ca.ulaval.glo4003.utilities.urlmapper;
 
 import java.util.Set;
 
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.sections.SectionDao;
 import ca.ulaval.glo4003.exceptions.NoTicketTypeForUrlException;
-import ca.ulaval.glo4003.utilities.urlmapper.UrlMapper;
 
 @Component
 public class TicketTypeUrlMapperWithGeneration extends UrlMapper implements TicketTypeUrlMapper {

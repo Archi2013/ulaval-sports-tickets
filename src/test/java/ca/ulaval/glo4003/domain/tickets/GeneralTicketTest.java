@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.constants.TicketKind;
+import ca.ulaval.glo4003.tickets.dto.GeneralTicketDto;
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GeneralTicketTest {

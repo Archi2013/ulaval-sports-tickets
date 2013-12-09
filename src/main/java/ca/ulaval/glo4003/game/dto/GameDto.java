@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.game;
+package ca.ulaval.glo4003.game.dto;
 
 import org.joda.time.DateTime;
 

@@ -12,16 +12,16 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.game.GameDao;
-import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.domain.sections.SectionDao;
-import ca.ulaval.glo4003.domain.sections.SectionDto;
-import ca.ulaval.glo4003.domain.tickets.TicketTypeUrlMapper;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoTicketTypeForUrlException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
+import ca.ulaval.glo4003.game.dto.GameDto;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.ChosenTicketsViewModelFactory;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionViewModelFactory;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionsViewModelFactory;
+import ca.ulaval.glo4003.sections.dto.SectionDto;
+import ca.ulaval.glo4003.utilities.urlmapper.TicketTypeUrlMapper;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SectionServiceTest {

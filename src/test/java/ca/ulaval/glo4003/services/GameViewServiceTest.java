@@ -20,9 +20,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.game.GameDao;
-import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.domain.tickets.TicketDao;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
+import ca.ulaval.glo4003.game.dto.GameDto;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.GamesViewModelFactory;
 import ca.ulaval.glo4003.utilities.datafilters.GameIsInFutureFilter;
 

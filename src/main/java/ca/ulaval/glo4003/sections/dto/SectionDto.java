@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.sections;
+package ca.ulaval.glo4003.sections.dto;
 
 import java.util.HashSet;
 import java.util.Set;

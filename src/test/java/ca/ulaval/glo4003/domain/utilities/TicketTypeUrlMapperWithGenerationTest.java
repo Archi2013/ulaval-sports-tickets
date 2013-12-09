@@ -14,8 +14,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.sections.SectionDao;
-import ca.ulaval.glo4003.domain.tickets.TicketTypeUrlMapperWithGeneration;
 import ca.ulaval.glo4003.exceptions.NoTicketTypeForUrlException;
+import ca.ulaval.glo4003.utilities.urlmapper.TicketTypeUrlMapperWithGeneration;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TicketTypeUrlMapperWithGenerationTest {

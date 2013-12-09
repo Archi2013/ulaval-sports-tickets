@@ -4,11 +4,11 @@ import java.util.HashSet;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.game.GameDto;
-import ca.ulaval.glo4003.domain.sections.SectionDto;
+import ca.ulaval.glo4003.game.dto.GameDto;
 import ca.ulaval.glo4003.presentation.viewmodels.ChosenGeneralTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.ChosenTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.ChosenWithSeatTicketsViewModel;
+import ca.ulaval.glo4003.sections.dto.SectionDto;
 
 @Component
 public class ChosenTicketsViewModelFactory {

@@ -17,6 +17,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.game.Game;
 import ca.ulaval.glo4003.domain.game.IGameRepository;
+import ca.ulaval.glo4003.sports.dto.SportDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportRepositoryTest {

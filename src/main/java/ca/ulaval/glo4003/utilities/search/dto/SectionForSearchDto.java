@@ -1,12 +1,12 @@
-package ca.ulaval.glo4003.utilities.search;
+package ca.ulaval.glo4003.utilities.search.dto;
 
 import java.util.Set;
 
 import org.joda.time.DateTime;
 
 import ca.ulaval.glo4003.constants.LocalLocation;
-import ca.ulaval.glo4003.domain.game.GameDto;
-import ca.ulaval.glo4003.domain.sections.SectionDto;
+import ca.ulaval.glo4003.game.dto.GameDto;
+import ca.ulaval.glo4003.sections.dto.SectionDto;
 
 public class SectionForSearchDto {
 	public String sport;
@@ -18,12 +18,11 @@ public class SectionForSearchDto {
 	public Double price;
 	public String url;
 	public boolean generalAdmission;
-	
+
 	public Set<String> localLocations = LocalLocation.getSet();
-	
-	public SectionForSearchDto(boolean generalAdmission, String sport, String opponents, String location, DateTime date,
-			String section, Integer numberOfTicket,
-			Double price, String url) {
+
+	public SectionForSearchDto(boolean generalAdmission, String sport, String opponents, String location,
+			DateTime date, String section, Integer numberOfTicket, Double price, String url) {
 		super();
 		this.sport = sport;
 		this.opponents = opponents;
@@ -35,20 +34,21 @@ public class SectionForSearchDto {
 		this.url = url;
 		this.generalAdmission = generalAdmission;
 	}
-	
+
 	public SectionForSearchDto(SectionDto sectionDto, GameDto gameDto, String sportName, String url) {
-		this(sectionDto.isGeneralAdmission(), sportName, gameDto.getOpponents(), gameDto.getLocation(), gameDto.getGameDate(), sectionDto.getSectionName(),
-				sectionDto.getNumberOfTickets(), sectionDto.getPrice(), url);
+		this(sectionDto.isGeneralAdmission(), sportName, gameDto.getOpponents(), gameDto.getLocation(), gameDto
+				.getGameDate(), sectionDto.getSectionName(), sectionDto.getNumberOfTickets(), sectionDto.getPrice(),
+				url);
 	}
 
 	public boolean isGeneralAdmission() {
 		return this.generalAdmission;
 	}
-	
+
 	public Boolean isLocalGame() {
 		return this.localLocations.contains(this.location);
 	}
-	
+
 	public String getSport() {
 		return sport;
 	}

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
 import ca.ulaval.glo4003.utilities.persistence.Persistable;
 
 @Repository

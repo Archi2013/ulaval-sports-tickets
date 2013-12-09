@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
+import ca.ulaval.glo4003.sections.dto.SectionDto;
 
 public interface SectionDao {
 

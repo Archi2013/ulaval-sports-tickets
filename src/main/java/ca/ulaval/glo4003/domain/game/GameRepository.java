@@ -15,6 +15,7 @@ import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
 import ca.ulaval.glo4003.exceptions.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
+import ca.ulaval.glo4003.game.dto.GameDto;
 import ca.ulaval.glo4003.utilities.persistence.Persistable;
 
 @Repository

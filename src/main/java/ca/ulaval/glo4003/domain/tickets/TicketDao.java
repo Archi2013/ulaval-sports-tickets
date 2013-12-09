@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
 import ca.ulaval.glo4003.exceptions.TicketAlreadyExistsException;
 import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
 
 @Repository
 public interface TicketDao {

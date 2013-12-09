@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import ca.ulaval.glo4003.domain.tickets.Ticket;
+import ca.ulaval.glo4003.game.dto.GameDto;
 
 @Component
 public class GameFactory implements IGameFactory {

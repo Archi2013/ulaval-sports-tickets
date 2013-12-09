@@ -16,11 +16,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.tickets.Ticket;
 import ca.ulaval.glo4003.domain.tickets.TicketDao;
-import ca.ulaval.glo4003.domain.tickets.TicketDto;
 import ca.ulaval.glo4003.domain.tickets.TicketFactory;
 import ca.ulaval.glo4003.domain.tickets.TicketRepository;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.TicketDoesntExistException;
+import ca.ulaval.glo4003.tickets.dto.TicketDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TicketRepositoryTest {

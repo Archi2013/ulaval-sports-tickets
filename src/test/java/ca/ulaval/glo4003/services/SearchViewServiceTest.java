@@ -16,8 +16,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionForSearchViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionForSearchViewModelFactory;
 import ca.ulaval.glo4003.utilities.search.SectionForSearchDao;
-import ca.ulaval.glo4003.utilities.search.SectionForSearchDto;
-import ca.ulaval.glo4003.utilities.search.UserSearchPreferenceDto;
+import ca.ulaval.glo4003.utilities.search.dto.SectionForSearchDto;
+import ca.ulaval.glo4003.utilities.search.dto.UserSearchPreferenceDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SearchViewServiceTest {

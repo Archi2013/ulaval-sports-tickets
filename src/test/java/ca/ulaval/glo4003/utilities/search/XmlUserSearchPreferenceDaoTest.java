@@ -13,6 +13,7 @@ import ca.ulaval.glo4003.domain.users.UserAlreadyExistException;
 import ca.ulaval.glo4003.domain.users.UserDto;
 import ca.ulaval.glo4003.domain.users.XmlUserDao;
 import ca.ulaval.glo4003.utilities.search.XmlUserSearchPreferenceDao;
+import ca.ulaval.glo4003.utilities.search.dto.UserSearchPreferenceDto;
 
 public class XmlUserSearchPreferenceDaoTest {
 

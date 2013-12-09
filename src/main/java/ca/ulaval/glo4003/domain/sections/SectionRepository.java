@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
+import ca.ulaval.glo4003.sections.dto.SectionDto;
 
 @Repository
 public class SectionRepository {

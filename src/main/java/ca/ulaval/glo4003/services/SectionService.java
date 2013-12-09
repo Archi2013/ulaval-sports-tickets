@@ -8,14 +8,12 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import ca.ulaval.glo4003.domain.game.GameDao;
-import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.domain.sections.SectionDao;
-import ca.ulaval.glo4003.domain.sections.SectionDto;
-import ca.ulaval.glo4003.domain.tickets.TicketTypeUrlMapper;
 import ca.ulaval.glo4003.exceptions.GameDoesntExistException;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 import ca.ulaval.glo4003.exceptions.NoTicketTypeForUrlException;
 import ca.ulaval.glo4003.exceptions.SectionDoesntExistException;
+import ca.ulaval.glo4003.game.dto.GameDto;
 import ca.ulaval.glo4003.presentation.viewmodels.ChosenGeneralTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.ChosenWithSeatTicketsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
@@ -23,6 +21,8 @@ import ca.ulaval.glo4003.presentation.viewmodels.SectionsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.ChosenTicketsViewModelFactory;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionViewModelFactory;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SectionsViewModelFactory;
+import ca.ulaval.glo4003.sections.dto.SectionDto;
+import ca.ulaval.glo4003.utilities.urlmapper.TicketTypeUrlMapper;
 
 @Service
 public class SectionService {

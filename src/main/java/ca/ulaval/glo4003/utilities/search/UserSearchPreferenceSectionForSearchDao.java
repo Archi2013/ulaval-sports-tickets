@@ -9,13 +9,15 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Repository;
 
 import ca.ulaval.glo4003.domain.game.GameDao;
-import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.domain.sections.SectionDao;
-import ca.ulaval.glo4003.domain.sections.SectionDto;
-import ca.ulaval.glo4003.domain.sports.SportUrlMapper;
-import ca.ulaval.glo4003.domain.tickets.TicketTypeUrlMapper;
+import ca.ulaval.glo4003.game.dto.GameDto;
+import ca.ulaval.glo4003.sections.dto.SectionDto;
+import ca.ulaval.glo4003.utilities.search.dto.SectionForSearchDto;
+import ca.ulaval.glo4003.utilities.search.dto.UserSearchPreferenceDto;
 import ca.ulaval.glo4003.utilities.time.UrlDateTime;
 import ca.ulaval.glo4003.utilities.time.UrlDateTimeFactory;
+import ca.ulaval.glo4003.utilities.urlmapper.SportUrlMapper;
+import ca.ulaval.glo4003.utilities.urlmapper.TicketTypeUrlMapper;
 
 @Repository
 class UserSearchPreferenceSectionForSearchDao implements SectionForSearchDao {

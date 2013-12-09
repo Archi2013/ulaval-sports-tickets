@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ca.ulaval.glo4003.sections.dto.SectionDto;
+
 @RunWith(MockitoJUnitRunner.class)
 public class SectionTest {
 	private static final String GENERAL_SECTION = "Générale";

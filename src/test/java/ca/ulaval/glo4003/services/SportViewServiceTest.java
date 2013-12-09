@@ -15,13 +15,13 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ca.ulaval.glo4003.domain.game.GameDao;
-import ca.ulaval.glo4003.domain.game.GameDto;
 import ca.ulaval.glo4003.domain.sports.SportDao;
-import ca.ulaval.glo4003.domain.sports.SportDto;
 import ca.ulaval.glo4003.exceptions.NoSportForUrlException;
 import ca.ulaval.glo4003.exceptions.SportDoesntExistException;
+import ca.ulaval.glo4003.game.dto.GameDto;
 import ca.ulaval.glo4003.presentation.viewmodels.SportsViewModel;
 import ca.ulaval.glo4003.presentation.viewmodels.factories.SportsViewModelFactory;
+import ca.ulaval.glo4003.sports.dto.SportDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SportViewServiceTest {

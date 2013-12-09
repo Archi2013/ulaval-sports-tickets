@@ -8,12 +8,12 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import ca.ulaval.glo4003.domain.game.GameDto;
-import ca.ulaval.glo4003.domain.sections.SectionDto;
-import ca.ulaval.glo4003.domain.tickets.TicketTypeUrlMapper;
+import ca.ulaval.glo4003.game.dto.GameDto;
 import ca.ulaval.glo4003.presentation.viewmodels.SectionViewModel;
+import ca.ulaval.glo4003.sections.dto.SectionDto;
 import ca.ulaval.glo4003.utilities.Calculator;
 import ca.ulaval.glo4003.utilities.Constants;
+import ca.ulaval.glo4003.utilities.urlmapper.TicketTypeUrlMapper;
 
 @Component
 public class SectionViewModelFactory {

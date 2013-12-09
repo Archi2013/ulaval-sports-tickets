@@ -1,4 +1,4 @@
-package ca.ulaval.glo4003.domain.tickets;
+package ca.ulaval.glo4003.tickets.dto;
 
 import org.joda.time.DateTime;
 
