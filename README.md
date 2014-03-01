@@ -48,7 +48,7 @@ Pierre-Olivier Bédard <pierre-olivier.bedard.3@ulaval.ca> <pobed2@gmail.com>
 Mathieu	Béland-Lachance <mathieu.beland-lachance.1@ulaval.ca>   
 Carl Bélanger <carl.belanger.2@ulaval.ca>  
 Mathieu Charest-Durand <mathieu.charest-durand.1@ulaval.ca>  
-Mathieu	Nivelles <mathieunivelles.com> <mathieu.nivelles.1@ulaval.ca>  
+Mathieu	Nivelles [mathieunivelles.com](http://mathieunivelles.com) <mathieu.nivelles.1@ulaval.ca>  
 Dominique Pothier <dominique.pothier.1@ulaval.ca>   
 
 <!--[Documents d'architecture](https://drive.google.com/folderview?id=0B6L1IrGcf14raUk5LURGVnNyTlk&usp=sharing)-->
