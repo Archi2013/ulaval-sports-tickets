@@ -48,9 +48,11 @@ Afin de pouvoir installer et exécuter le projet, il est nécessaire d’insta
 
 ###Clonage et exécution
 Les commandes suivantes sont à entrer dans un Terminal afin de cloner et d’exécuter le projet :
-```git clone -b remise_finale https://github.com/Archi2013/ulaval-sports-tickets.git
+```
+git clone -b remise_finale https://github.com/Archi2013/ulaval-sports-tickets.git
 cd ulaval-sports-tickets/
 mvn jetty:run
+```
 
 Enfin, ouvrir un navigateur web et aller à l’adresse :[http://localhost:8080](http://localhost:8080) .
 
