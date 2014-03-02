@@ -57,7 +57,7 @@ mvn jetty:run
 Enfin, ouvrir un navigateur web et aller à l’adresse :[http://localhost:8080](http://localhost:8080) .
 
 ###Utilisation
-Voir la section idoine dans le rapport 2.
+Voir la section idoine dans le [rapport 2](readme-files/rapport2.pdf).
 
 ##Équipe
 Marc-Olivier Alain <marc-olivier.alain.1@ulaval.ca>  
