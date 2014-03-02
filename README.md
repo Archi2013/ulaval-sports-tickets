@@ -42,6 +42,21 @@ Pour une meilleur compréhension du système, le [rapport 2](readme-files/rappor
 
 ![site du projet de billetterie en ligne du Rouge et Or - équipe Bessice (B6)](readme-files/liste-matchs.png)
 
+##Installation
+###Prérequis
+Afin de pouvoir installer et exécuter le projet, il est nécessaire d’installer Git et Maven sur le poste de travail.
+
+###Clonage et exécution
+Les commandes suivantes sont à entrer dans un Terminal afin de cloner et d’exécuter le projet :
+```git clone -b remise_finale https://github.com/Archi2013/ulaval-sports-tickets.git
+cd ulaval-sports-tickets/
+mvn jetty:run
+
+Enfin, ouvrir un navigateur web et aller à l’adresse :[http://localhost:8080](http://localhost:8080) .
+
+###Utilisation
+Voir la section idoine dans le rapport 2.
+
 ##Équipe
 Marc-Olivier Alain <marc-olivier.alain.1@ulaval.ca>  
 Pierre-Olivier Bédard <pierre-olivier.bedard.3@ulaval.ca> <pobed2@gmail.com>  
